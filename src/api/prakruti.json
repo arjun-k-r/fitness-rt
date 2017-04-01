@@ -1,12 +1,88 @@
 [
     {
-        "balance": [],
+        "balance": [
+            "Avoid overdoing and overstimulation",
+            "Avoid raw, hard, dry, low-fat, cold, processed foods",
+            "Avoid astrigent (dry) and bitter tastes",
+            "Avoid stimulants (e.g. alcohol, black tea, caffeine)",
+            "Drink warm or hot water",
+            "Eat 3 planned meals everyday, making the first and last meal the smallest",
+            "Establish a routine and follow it every day",
+            "Focus on pungent (spicy and oily), salty, sweet, and sour tastes",
+            "Go to bed early and at the same time everyday",
+            "Keep warm during cold periods",
+            "Listen to calm music",
+            "Relaxation and sleep",
+            "Serve cooked, warm, soft, moist, and nourishing meals",
+            "Serve each meal in a peaceful environment, slowly, and savor each bite",
+            "Substitute candies and refined sweeteners with ripe, sweet fruit and natural sweeteners",
+            "Substitute processed dry salty snacks with oily, salty nuts and seeds",
+            "Take a regular massage to moisturize your dry skin, promote circulation, and nourish and tone muscles and nerves",
+            "Walk everyday in nature"
+        ],
+        "daytimes": [
+            "2am-6am",
+            "2pm-6pm"
+        ],
         "description": "",
         "elements": [
             "air",
             "ether"
         ],
-        "imbalance": [],
+        "imbalance": [
+            "Abdominal pain",
+            "Agitated mind",
+            "Anxiety",
+            "Belching",
+            "Bloating",
+            "Breathing difficulties",
+            "Concentration difficulties",
+            "Confusion",
+            "Constipation",
+            "Cracked lips",
+            "Cracked skin",
+            "Coordination difficulties",
+            "Decision making difficulties",
+            "Depression",
+            "Explosive diarrhea",
+            "Eye driness",
+            "Fainting",
+            "Fatigue",
+            "Fear",
+            "Flaky skin",
+            "Gas",
+            "Hallucinations",
+            "Heart palpitations",
+            "Headaches",
+            "Hiccups",
+            "Hyperactivity",
+            "Impulsiveness",
+            "Insecurity",
+            "Insomnia",
+            "Joint stifness",
+            "Lightheadedness",
+            "Low back pain",
+            "Muscle spasms",
+            "Nail bitting",
+            "Nervousness",
+            "Numbness and tingling",
+            "Overthinking",
+            "Rapid and irregular speech (cluttering)",
+            "Restlessness",
+            "Self-defeating",
+            "Sensitive to cold and wind",
+            "Sensitive to loud noises",
+            "Sexual dysfunction",
+            "Sharp pains",
+            "Skin driness",
+            "Skin roughness",
+            "Throat driness",
+            "Throat soreness",
+            "Tremors",
+            "Twitching",
+            "Weight loss",
+            "Worriedness"
+        ],
         "mentalConstituition": {
             "activity": "restlessness, hyperactivity",
             "beliefs": "changing, rebel, erratic",
@@ -24,10 +100,11 @@
             "organisation": "multi-tasking, messy, start many projects without finishing them, easily distracted",
             "sexDrive": "extreme or none, easily excited and satisfied",
             "social": "independent, insecure, nervous in new environments, many casual insignificant acquintances",
-            "stressResponse": "anxious, worried, fearfull, nervous, confused, insecured",
+            "stressResponse": "anxious, worried, fearfull, nervous, confused, insecured, constipated, overwhelmed, hard to focus",
             "temperament": "enthusiastic, lively, spontaneous, like to change, excitable, fun personality, bored easily",
             "talk": "talkative, quick and diffuse speech, good communication skills"
         },
+        "lifetime": "elderly",
         "locations": [
             "small intestine",
             "hollows of bones",
@@ -38,7 +115,7 @@
             "nerve impulse conduction",
             "muscle contraction"
         ],
-        "name": "vata",
+        "name": "Vata",
         "physicalConstituition": {
             "appetite": "poor, irregular, skipping meals without notice",
             "bodyFrame": "thin, lean, skinny, slender, irregular, ectomorphic",
@@ -77,8 +154,444 @@
             "voice": "low volume, hoarse",
             "walk": "fast, small steps"
         },
-        "symptoms": [],
-        "season": "autumn/winter",
-        "time": "elderly"
+        "seasons": [
+            "autumn",
+            "winter"
+        ]
+    },
+    {
+        "balance": [
+            ""
+        ],
+        "daytimes": [
+            "",
+            ""
+        ],
+        "description": "",
+        "elements": [
+            "",
+            ""
+        ],
+        "imbalance": [
+            ""
+        ],
+        "mentalConstituition": {
+            "activity": "",
+            "beliefs": "",
+            "dreams": "",
+            "creativity": "",
+            "decisions": "",
+            "emotions": "",
+            "finances": "",
+            "interests": "",
+            "learning": "",
+            "lifestyle": "",
+            "love": "",
+            "memory": "",
+            "mind": "",
+            "organisation": "",
+            "sexDrive": "",
+            "social": "",
+            "stressResponse": "",
+            "temperament": "",
+            "talk": ""
+        },
+        "lifetime": "",
+        "locations": [
+            ""
+        ],
+        "movement": [
+            ""
+        ],
+        "name": "Pitta",
+        "physicalConstituition": {
+            "appetite": "",
+            "bodyFrame": "",
+            "bodyTemperature": "",
+            "bodyWeight": "",
+            "bones": "t",
+            "bowelMovements": "",
+            "chest": "",
+            "climate": "",
+            "complexion": "",
+            "digestion": "",
+            "eating": "",
+            "eyebrows": "",
+            "eyes": "",
+            "face": "",
+            "fingers": "",
+            "hair": "",
+            "heartbeats": "",
+            "hips": "",
+            "joints": "",
+            "lips": "",
+            "meals": "",
+            "muscles": "",
+            "nails": "",
+            "neck": "",
+            "nose": "",
+            "perspiration": "",
+            "pulse": "",
+            "schedule": "",
+            "shoulders": "",
+            "skin": "",
+            "sleep": "",
+            "stamina": "",
+            "teeth": "",
+            "thirst": "",
+            "voice": "",
+            "walk": ""
+        },
+        "seasons": [
+            ""
+        ]
+    },
+    {
+        "balance": [
+            ""
+        ],
+        "daytimes": [
+            "",
+            ""
+        ],
+        "description": "",
+        "elements": [
+            "",
+            ""
+        ],
+        "imbalance": [
+            ""
+        ],
+        "mentalConstituition": {
+            "activity": "",
+            "beliefs": "",
+            "dreams": "",
+            "creativity": "",
+            "decisions": "",
+            "emotions": "",
+            "finances": "",
+            "interests": "",
+            "learning": "",
+            "lifestyle": "",
+            "love": "",
+            "memory": "",
+            "mind": "",
+            "organisation": "",
+            "sexDrive": "",
+            "social": "",
+            "stressResponse": "",
+            "temperament": "",
+            "talk": ""
+        },
+        "lifetime": "",
+        "locations": [
+            ""
+        ],
+        "movement": [
+            ""
+        ],
+        "name": "Kapha",
+        "physicalConstituition": {
+            "appetite": "",
+            "bodyFrame": "",
+            "bodyTemperature": "",
+            "bodyWeight": "",
+            "bones": "t",
+            "bowelMovements": "",
+            "chest": "",
+            "climate": "",
+            "complexion": "",
+            "digestion": "",
+            "eating": "",
+            "eyebrows": "",
+            "eyes": "",
+            "face": "",
+            "fingers": "",
+            "hair": "",
+            "heartbeats": "",
+            "hips": "",
+            "joints": "",
+            "lips": "",
+            "meals": "",
+            "muscles": "",
+            "nails": "",
+            "neck": "",
+            "nose": "",
+            "perspiration": "",
+            "pulse": "",
+            "schedule": "",
+            "shoulders": "",
+            "skin": "",
+            "sleep": "",
+            "stamina": "",
+            "teeth": "",
+            "thirst": "",
+            "voice": "",
+            "walk": ""
+        },
+        "seasons": [
+            ""
+        ]
+    },
+    {
+        "balance": [
+            ""
+        ],
+        "daytimes": [
+            "",
+            ""
+        ],
+        "description": "",
+        "elements": [
+            "",
+            ""
+        ],
+        "imbalance": [
+            ""
+        ],
+        "mentalConstituition": {
+            "activity": "",
+            "beliefs": "",
+            "dreams": "",
+            "creativity": "",
+            "decisions": "",
+            "emotions": "",
+            "finances": "",
+            "interests": "",
+            "learning": "",
+            "lifestyle": "",
+            "love": "",
+            "memory": "",
+            "mind": "",
+            "organisation": "",
+            "sexDrive": "",
+            "social": "",
+            "stressResponse": "",
+            "temperament": "",
+            "talk": ""
+        },
+        "lifetime": "",
+        "locations": [
+            ""
+        ],
+        "movement": [
+            ""
+        ],
+        "name": "Vata-Pitta",
+        "physicalConstituition": {
+            "appetite": "",
+            "bodyFrame": "",
+            "bodyTemperature": "",
+            "bodyWeight": "",
+            "bones": "t",
+            "bowelMovements": "",
+            "chest": "",
+            "climate": "",
+            "complexion": "",
+            "digestion": "",
+            "eating": "",
+            "eyebrows": "",
+            "eyes": "",
+            "face": "",
+            "fingers": "",
+            "hair": "",
+            "heartbeats": "",
+            "hips": "",
+            "joints": "",
+            "lips": "",
+            "meals": "",
+            "muscles": "",
+            "nails": "",
+            "neck": "",
+            "nose": "",
+            "perspiration": "",
+            "pulse": "",
+            "schedule": "",
+            "shoulders": "",
+            "skin": "",
+            "sleep": "",
+            "stamina": "",
+            "teeth": "",
+            "thirst": "",
+            "voice": "",
+            "walk": ""
+        },
+        "seasons": [
+            ""
+        ]
+    },
+    {
+        "balance": [
+            ""
+        ],
+        "daytimes": [
+            "",
+            ""
+        ],
+        "description": "",
+        "elements": [
+            "",
+            ""
+        ],
+        "imbalance": [
+            ""
+        ],
+        "mentalConstituition": {
+            "activity": "",
+            "beliefs": "",
+            "dreams": "",
+            "creativity": "",
+            "decisions": "",
+            "emotions": "",
+            "finances": "",
+            "interests": "",
+            "learning": "",
+            "lifestyle": "",
+            "love": "",
+            "memory": "",
+            "mind": "",
+            "organisation": "",
+            "sexDrive": "",
+            "social": "",
+            "stressResponse": "",
+            "temperament": "",
+            "talk": ""
+        },
+        "lifetime": "",
+        "locations": [
+            ""
+        ],
+        "movement": [
+            ""
+        ],
+        "name": "Pitta-Kapha",
+        "physicalConstituition": {
+            "appetite": "",
+            "bodyFrame": "",
+            "bodyTemperature": "",
+            "bodyWeight": "",
+            "bones": "t",
+            "bowelMovements": "",
+            "chest": "",
+            "climate": "",
+            "complexion": "",
+            "digestion": "",
+            "eating": "",
+            "eyebrows": "",
+            "eyes": "",
+            "face": "",
+            "fingers": "",
+            "hair": "",
+            "heartbeats": "",
+            "hips": "",
+            "joints": "",
+            "lips": "",
+            "meals": "",
+            "muscles": "",
+            "nails": "",
+            "neck": "",
+            "nose": "",
+            "perspiration": "",
+            "pulse": "",
+            "schedule": "",
+            "shoulders": "",
+            "skin": "",
+            "sleep": "",
+            "stamina": "",
+            "teeth": "",
+            "thirst": "",
+            "voice": "",
+            "walk": ""
+        },
+        "seasons": [
+            ""
+        ]
+    },
+    {
+        "balance": [
+            ""
+        ],
+        "daytimes": [
+            "",
+            ""
+        ],
+        "description": "",
+        "elements": [
+            "",
+            ""
+        ],
+        "imbalance": [
+            ""
+        ],
+        "mentalConstituition": {
+            "activity": "",
+            "beliefs": "",
+            "dreams": "",
+            "creativity": "",
+            "decisions": "",
+            "emotions": "",
+            "finances": "",
+            "interests": "",
+            "learning": "",
+            "lifestyle": "",
+            "love": "",
+            "memory": "",
+            "mind": "",
+            "organisation": "",
+            "sexDrive": "",
+            "social": "",
+            "stressResponse": "",
+            "temperament": "",
+            "talk": ""
+        },
+        "lifetime": "",
+        "locations": [
+            ""
+        ],
+        "movement": [
+            ""
+        ],
+        "name": "Vata-Kapha",
+        "physicalConstituition": {
+            "appetite": "",
+            "bodyFrame": "",
+            "bodyTemperature": "",
+            "bodyWeight": "",
+            "bones": "t",
+            "bowelMovements": "",
+            "chest": "",
+            "climate": "",
+            "complexion": "",
+            "digestion": "",
+            "eating": "",
+            "eyebrows": "",
+            "eyes": "",
+            "face": "",
+            "fingers": "",
+            "hair": "",
+            "heartbeats": "",
+            "hips": "",
+            "joints": "",
+            "lips": "",
+            "meals": "",
+            "muscles": "",
+            "nails": "",
+            "neck": "",
+            "nose": "",
+            "perspiration": "",
+            "pulse": "",
+            "schedule": "",
+            "shoulders": "",
+            "skin": "",
+            "sleep": "",
+            "stamina": "",
+            "teeth": "",
+            "thirst": "",
+            "voice": "",
+            "walk": ""
+        },
+        "seasons": [
+            ""
+        ]
     }
 ]

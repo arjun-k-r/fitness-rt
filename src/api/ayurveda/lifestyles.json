@@ -4,6 +4,456 @@
         "foods": {
             "avoid": [
                 {
+                    "fruits": [
+                        "Dried fruits",
+                        "Apples (raw)",
+                        "Cranberries",
+                        "Dates (dry)",
+                        "Figs (dry)",
+                        "Pears",
+                        "Persimmons",
+                        "Pomegranates",
+                        "Raisins (dry)",
+                        "Prunes (dry)",
+                        "Watermelon"
+                    ],
+                    "vegetables": [
+                        "Dried, froze, or raw vegetables",
+                        "Artichoke",
+                        "Beet greens",
+                        "Bitter melon",
+                        "Broccoli",
+                        "Brussels sprouts",
+                        "Burdock root",
+                        "Cabbage (raw)",
+                        "Cauliflower (raw)",
+                        "Celery",
+                        "Corn (fresh)",
+                        "Dandelion greens",
+                        "Eggplant",
+                        "Horseradish",
+                        "Kale",
+                        "Kohlrabi",
+                        "Mushrooms",
+                        "Olives (green)",
+                        "Onions (raw)",
+                        "Peas (raw)",
+                        "Peppers",
+                        "Potatoes (white)",
+                        "Prickly pear (fruit or leaves)",
+                        "Radishes (raw)",
+                        "Squash (winter)",
+                        "Tomatoes",
+                        "Turnips",
+                        "Wheat grass sprouts"
+                    ],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ],
+            "prefer": [
+                {
+                    "fruits": [
+                        "Sweet fruits",
+                        "Apples (cooked)",
+                        "Applesauce",
+                        "Apricots",
+                        "Avocado",
+                        "Bananas",
+                        "Berries",
+                        "Cherries",
+                        "Coconut",
+                        "Dates (cooked or fresh)",
+                        "Figs (cooked or fresh)",
+                        "Grapefruit",
+                        "Grapes",
+                        "Kiwi",
+                        "Lemons",
+                        "Limes",
+                        "Mangoes",
+                        "Melons",
+                        "Nectarines",
+                        "Oranges",
+                        "Papaya",
+                        "Peaches",
+                        "Pineapple",
+                        "Plums",
+                        "Prunes (cooked or soaked)",
+                        "Raisins (cooked or soaked)",
+                        "Rhubarb",
+                        "Strawberries",
+                        "Tamarind"
+                    ],
+                    "vegetables": [
+                        "Cooked vegetables",
+                        "Asparagus",
+                        "Beets",
+                        "Carrots",
+                        "Cilantro",
+                        "Cucumber",
+                        "Fennel (Anise)",
+                        "Garlic",
+                        "Green beans",
+                        "Leeks",
+                        "Okra",
+                        "Olives (black)",
+                        "Parsnip",
+                        "Peas (cooked)",
+                        "Peppers (hot)",
+                        "Potatoes (sweet)",
+                        "Pumpkin",
+                        "Rutabaga",
+                        "Squash (summer)",
+                        "Taro root",
+                        "Watercress",
+                        "Zucchini"
+                    ],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ],
+            "reduce": [
+                {
+                    "fruits": [],
+                    "vegetables": [
+                        "Cabbage (cooked)",
+                        "Cauliflower",
+                        "Daikon radish",
+                        "Jerusalem artichoke",
+                        "Leafy greens",
+                        "Lettuce",
+                        "Mustard greens",
+                        "Onions (cooked)",
+                        "Parsley",
+                        "Radishes (cooked)",
+                        "Spaghetti squash",
+                        "Spinach",
+                        "Sprouts",
+                        "Turnip greens"
+                    ],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ]
+        },
+        "goals": [
+            {
+                "name": "sleep",
+                "tasks": [
+                    {
+                        "description": "",
+                        "done": false
+                    }
+                ]
+            }
+        ],
+        "name": "vata",
+        "requirements": [
+            "heavy",
+            "moist",
+            "hot"
+        ],
+        "tastes": [
+            "sweet",
+            "salty",
+            "sour"
+        ]
+    },
+    {
+        "description": "",
+        "foods": {
+            "avoid": [
+                {
+                    "fruits": [
+                        "Sour fruits",
+                        "Apples (sour)",
+                        "Apricots (sour)",
+                        "Bananas",
+                        "Berries (sour)",
+                        "Cherries (sour)",
+                        "Cranberries",
+                        "Grapefruit",
+                        "Grapes (green)",
+                        "Kiwi",
+                        "Lemons",
+                        "Mangoes (green)",
+                        "Oranges (sour)",
+                        "Peaches",
+                        "Persimmons",
+                        "Pineapple (sour)",
+                        "Plums (sour)",
+                        "Rhubarb",
+                        "Tamarind"
+                    ],
+                    "vegetables": [
+                        "Pungent vegetables",
+                        "Beet greens",
+                        "Beets (raw)",
+                        "Burdock root",
+                        "Corn (fresh)",
+                        "Daikon radish",
+                        "Eggplant",
+                        "Garlic",
+                        "Horseradish",
+                        "Kohlrabi",
+                        "Leeks",
+                        "Mustard greens",
+                        "Olives (green)",
+                        "Onions (raw)",
+                        "Peppers (hot)",
+                        "Prickly pear (fruit)",
+                        "Radishes (raw)",
+                        "Spinach",
+                        "Tomatoes",
+                        "Turnip greens",
+                        "Turnips",
+                        "Watercress",
+                        "Zucchini"
+                    ],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ],
+            "prefer": [
+                {
+                    "fruits": [
+                        "Sweet fruits",
+                        "Apples (sweet)",
+                        "Applesauce",
+                        "Apricots (sweet)",
+                        "Avocado",
+                        "Berries (sweet)",
+                        "Cherries (sweet)",
+                        "Coconut",
+                        "Dates",
+                        "Figs",
+                        "Grapes (red or purple)",
+                        "Mangoes (ripe)",
+                        "Melons",
+                        "Pears",
+                        "Plums (sweet)",
+                        "Pomegranates",
+                        "Prunes",
+                        "Raisins",
+                        "Watermelon"
+                    ],
+                    "vegetables": [
+                        "Sweet and bitter vegetables",
+                        
+                    ],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ],
+            "reduce": [
+                {
+                    "fruits": [
+                        "Limes",
+                        "Oranges (sweet)",
+                        "Papaya",
+                        "Pineapple (sweet)",
+                        "Strawberries"
+                    ],
+                    "vegetables": [],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ]
+        },
+        "name": "pitta",
+        "requirements": [
+            "light",
+            "dry",
+            "cool"
+        ],
+        "tastes": [
+            "sweet",
+            "bitter",
+            "astrigent"
+        ]
+    },
+    {
+        "description": "",
+        "foods": {
+            "avoid": [
+                {
+                    "fruits": [
+                        "Sour and sweet fruits",
+                        "Avocado",
+                        "Bananas",
+                        "Coconut",
+                        "Dates",
+                        "Figs (fresh)",
+                        "Grapefruit",
+                        "Kiwi",
+                        "Mangoes",
+                        "Melons",
+                        "Oranges",
+                        "Papaya",
+                        "Pineapple",
+                        "Plums",
+                        "Rhubarb",
+                        "Tamarind",
+                        "Watermelon"
+                    ],
+                    "vegetables": [],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ],
+            "prefer": [
+                {
+                    "fruits": [
+                        "Apples",
+                        "Applesauce",
+                        "Apricots",
+                        "Berries",
+                        "Cherries",
+                        "Cranberries",
+                        "Pears",
+                        "Persimmons",
+                        "Pomegranates",
+                        "Prunes",
+                        "Raisins"
+                    ],
+                    "vegetables": [],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ],
+            "reduce": [
+                {
+                    "fruits": [
+                        "Figs (dry)",
+                        "Grapes",
+                        "Lemons",
+                        "Limes",
+                        "Nectarines",
+                        "Peaches",
+                        "Strawberries"
+                    ],
+                    "vegetables": [],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ]
+        },
+        "name": "kapha",
+        "requirements": [
+            "light",
+            "dry",
+            "hot"
+        ],
+        "tastes": [
+            "pungent",
+            "bitter",
+            "astrigent"
+        ]
+    },
+    {
+        "description": "",
+        "foods": {
+            "avoid": [
+                {
                     "fruits": [],
                     "vegetables": [],
                     "grains": [],
@@ -60,71 +510,6 @@
                 }
             ]
         },
-        "goals": [
-            {
-                "name": "sleep",
-                "tasks": [
-                    {
-                        "description": "",
-                        "done": false
-                    }
-                ]
-            }
-        ],
-        "name": "vata",
-        "requirements": [
-            "heavy",
-            "moist",
-            "hot"
-        ],
-        "tastes": [
-            "sweet",
-            "salty",
-            "sour"
-        ]
-    },
-    {
-        "description": "",
-        "foods": {
-            "avoid": [],
-            "prefer": []
-        },
-        "name": "pitta",
-        "requirements": [
-            "light",
-            "dry",
-            "cool"
-        ],
-        "tastes": [
-            "sweet",
-            "bitter",
-            "astrigent"
-        ]
-    },
-    {
-        "description": "",
-        "foods": {
-            "avoid": [],
-            "prefer": []
-        },
-        "name": "kapha",
-        "requirements": [
-            "light",
-            "dry",
-            "hot"
-        ],
-        "tastes": [
-            "pungent",
-            "bitter",
-            "astrigent"
-        ]
-    },
-    {
-        "description": "",
-        "foods": {
-            "avoid": [],
-            "prefer": []
-        },
         "name": "vata-pitta",
         "requirements": [
             "heavy",
@@ -140,8 +525,63 @@
     {
         "description": "",
         "foods": {
-            "avoid": [],
-            "prefer": []
+            "avoid": [
+                {
+                    "fruits": [],
+                    "vegetables": [],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ],
+            "prefer": [
+                {
+                    "fruits": [],
+                    "vegetables": [],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ],
+            "reduce": [
+                {
+                    "fruits": [],
+                    "vegetables": [],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ]
         },
         "name": "pitta-kapha",
         "requirements": [
@@ -158,8 +598,63 @@
     {
         "description": "",
         "foods": {
-            "avoid": [],
-            "prefer": []
+            "avoid": [
+                {
+                    "fruits": [],
+                    "vegetables": [],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ],
+            "prefer": [
+                {
+                    "fruits": [],
+                    "vegetables": [],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ],
+            "reduce": [
+                {
+                    "fruits": [],
+                    "vegetables": [],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ]
         },
         "name": "vata-kapha",
         "requirements": [

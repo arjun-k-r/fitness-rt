@@ -1,0 +1,2522 @@
+[
+    {
+        "offset": 0,
+        "group": "Fruits and Fruit Juices",
+        "name": "Acerola, (west indian cherry), raw",
+        "ndbno": "09001",
+        "ds": "SR"
+    },
+    {
+        "offset": 1,
+        "group": "Fruits and Fruit Juices",
+        "name": "Acerola juice, raw",
+        "ndbno": "09002",
+        "ds": "SR"
+    },
+    {
+        "offset": 2,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, raw, with skin",
+        "ndbno": "09003",
+        "ds": "SR"
+    },
+    {
+        "offset": 3,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, raw, without skin",
+        "ndbno": "09004",
+        "ds": "SR"
+    },
+    {
+        "offset": 4,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, raw, without skin, cooked, boiled",
+        "ndbno": "09005",
+        "ds": "SR"
+    },
+    {
+        "offset": 5,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, raw, without skin, cooked, microwave",
+        "ndbno": "09006",
+        "ds": "SR"
+    },
+    {
+        "offset": 6,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, canned, sweetened, sliced, drained, unheated",
+        "ndbno": "09007",
+        "ds": "SR"
+    },
+    {
+        "offset": 7,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, canned, sweetened, sliced, drained, heated",
+        "ndbno": "09008",
+        "ds": "SR"
+    },
+    {
+        "offset": 8,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, dehydrated (low moisture), sulfured, uncooked",
+        "ndbno": "09009",
+        "ds": "SR"
+    },
+    {
+        "offset": 9,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, dehydrated (low moisture), sulfured, stewed",
+        "ndbno": "09010",
+        "ds": "SR"
+    },
+    {
+        "offset": 10,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, dried, sulfured, uncooked",
+        "ndbno": "09011",
+        "ds": "SR"
+    },
+    {
+        "offset": 11,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, dried, sulfured, stewed, without added sugar",
+        "ndbno": "09012",
+        "ds": "SR"
+    },
+    {
+        "offset": 12,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, dried, sulfured, stewed, with added sugar",
+        "ndbno": "09013",
+        "ds": "SR"
+    },
+    {
+        "offset": 13,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, frozen, unsweetened, unheated",
+        "ndbno": "09014",
+        "ds": "SR"
+    },
+    {
+        "offset": 14,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, frozen, unsweetened, heated",
+        "ndbno": "09015",
+        "ds": "SR"
+    },
+    {
+        "offset": 15,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apple juice, canned or bottled, unsweetened, without added ascorbic acid",
+        "ndbno": "09016",
+        "ds": "SR"
+    },
+    {
+        "offset": 16,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apple juice, frozen concentrate, unsweetened, undiluted, without added ascorbic acid",
+        "ndbno": "09017",
+        "ds": "SR"
+    },
+    {
+        "offset": 17,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apple juice, frozen concentrate, unsweetened, diluted with 3 volume water without added ascorbic acid",
+        "ndbno": "09018",
+        "ds": "SR"
+    },
+    {
+        "offset": 18,
+        "group": "Fruits and Fruit Juices",
+        "name": "Applesauce, canned, unsweetened, without added ascorbic acid (includes USDA commodity)",
+        "ndbno": "09019",
+        "ds": "SR"
+    },
+    {
+        "offset": 19,
+        "group": "Fruits and Fruit Juices",
+        "name": "Applesauce, canned, sweetened, without salt (includes USDA commodity)",
+        "ndbno": "09020",
+        "ds": "SR"
+    },
+    {
+        "offset": 20,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, raw",
+        "ndbno": "09021",
+        "ds": "SR"
+    },
+    {
+        "offset": 21,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, canned, water pack, with skin, solids and liquids",
+        "ndbno": "09022",
+        "ds": "SR"
+    },
+    {
+        "offset": 22,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, canned, water pack, without skin, solids and liquids",
+        "ndbno": "09023",
+        "ds": "SR"
+    },
+    {
+        "offset": 23,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, canned, juice pack, with skin, solids and liquids",
+        "ndbno": "09024",
+        "ds": "SR"
+    },
+    {
+        "offset": 24,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, canned, extra light syrup pack, with skin, solids and liquids",
+        "ndbno": "09025",
+        "ds": "SR"
+    },
+    {
+        "offset": 25,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, canned, light syrup pack, with skin, solids and liquids",
+        "ndbno": "09026",
+        "ds": "SR"
+    },
+    {
+        "offset": 26,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, canned, heavy syrup pack, with skin, solids and liquids",
+        "ndbno": "09027",
+        "ds": "SR"
+    },
+    {
+        "offset": 27,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, canned, heavy syrup pack, without skin, solids and liquids",
+        "ndbno": "09028",
+        "ds": "SR"
+    },
+    {
+        "offset": 28,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, canned, extra heavy syrup pack, without skin, solids and liquids",
+        "ndbno": "09029",
+        "ds": "SR"
+    },
+    {
+        "offset": 29,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, dehydrated (low-moisture), sulfured, uncooked",
+        "ndbno": "09030",
+        "ds": "SR"
+    },
+    {
+        "offset": 30,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, dehydrated (low-moisture), sulfured, stewed",
+        "ndbno": "09031",
+        "ds": "SR"
+    },
+    {
+        "offset": 31,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, dried, sulfured, uncooked",
+        "ndbno": "09032",
+        "ds": "SR"
+    },
+    {
+        "offset": 32,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, dried, sulfured, stewed, without added sugar",
+        "ndbno": "09033",
+        "ds": "SR"
+    },
+    {
+        "offset": 33,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, dried, sulfured, stewed, with added sugar",
+        "ndbno": "09034",
+        "ds": "SR"
+    },
+    {
+        "offset": 34,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, frozen, sweetened",
+        "ndbno": "09035",
+        "ds": "SR"
+    },
+    {
+        "offset": 35,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricot nectar, canned, without added ascorbic acid",
+        "ndbno": "09036",
+        "ds": "SR"
+    },
+    {
+        "offset": 36,
+        "group": "Fruits and Fruit Juices",
+        "name": "Avocados, raw, all commercial varieties",
+        "ndbno": "09037",
+        "ds": "SR"
+    },
+    {
+        "offset": 37,
+        "group": "Fruits and Fruit Juices",
+        "name": "Avocados, raw, California",
+        "ndbno": "09038",
+        "ds": "SR"
+    },
+    {
+        "offset": 38,
+        "group": "Fruits and Fruit Juices",
+        "name": "Avocados, raw, Florida",
+        "ndbno": "09039",
+        "ds": "SR"
+    },
+    {
+        "offset": 39,
+        "group": "Fruits and Fruit Juices",
+        "name": "Bananas, raw",
+        "ndbno": "09040",
+        "ds": "SR"
+    },
+    {
+        "offset": 40,
+        "group": "Fruits and Fruit Juices",
+        "name": "Bananas, dehydrated, or banana powder",
+        "ndbno": "09041",
+        "ds": "SR"
+    },
+    {
+        "offset": 41,
+        "group": "Fruits and Fruit Juices",
+        "name": "Blackberries, raw",
+        "ndbno": "09042",
+        "ds": "SR"
+    },
+    {
+        "offset": 42,
+        "group": "Fruits and Fruit Juices",
+        "name": "Blackberry juice, canned",
+        "ndbno": "09043",
+        "ds": "SR"
+    },
+    {
+        "offset": 43,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, tart, dried, sweetened",
+        "ndbno": "09044",
+        "ds": "SR"
+    },
+    {
+        "offset": 44,
+        "group": "Fruits and Fruit Juices",
+        "name": "Blackberries, canned, heavy syrup, solids and liquids",
+        "ndbno": "09046",
+        "ds": "SR"
+    },
+    {
+        "offset": 45,
+        "group": "Fruits and Fruit Juices",
+        "name": "Blackberries, frozen, unsweetened",
+        "ndbno": "09048",
+        "ds": "SR"
+    },
+    {
+        "offset": 46,
+        "group": "Fruits and Fruit Juices",
+        "name": "Blueberries, raw",
+        "ndbno": "09050",
+        "ds": "SR"
+    },
+    {
+        "offset": 47,
+        "group": "Fruits and Fruit Juices",
+        "name": "Blueberries, canned, heavy syrup, solids and liquids",
+        "ndbno": "09052",
+        "ds": "SR"
+    },
+    {
+        "offset": 48,
+        "group": "Fruits and Fruit Juices",
+        "name": "Blueberries, wild, frozen",
+        "ndbno": "09053",
+        "ds": "SR"
+    },
+    {
+        "offset": 49,
+        "group": "Fruits and Fruit Juices",
+        "name": "Blueberries, frozen, unsweetened",
+        "ndbno": "09054",
+        "ds": "SR"
+    },
+    {
+        "offset": 50,
+        "group": "Fruits and Fruit Juices",
+        "name": "Blueberries, frozen, sweetened",
+        "ndbno": "09055",
+        "ds": "SR"
+    },
+    {
+        "offset": 51,
+        "group": "Fruits and Fruit Juices",
+        "name": "Boysenberries, canned, heavy syrup",
+        "ndbno": "09056",
+        "ds": "SR"
+    },
+    {
+        "offset": 52,
+        "group": "Fruits and Fruit Juices",
+        "name": "Boysenberries, frozen, unsweetened",
+        "ndbno": "09057",
+        "ds": "SR"
+    },
+    {
+        "offset": 53,
+        "group": "Fruits and Fruit Juices",
+        "name": "Breadfruit, raw",
+        "ndbno": "09059",
+        "ds": "SR"
+    },
+    {
+        "offset": 54,
+        "group": "Fruits and Fruit Juices",
+        "name": "Carambola, (starfruit), raw",
+        "ndbno": "09060",
+        "ds": "SR"
+    },
+    {
+        "offset": 55,
+        "group": "Fruits and Fruit Juices",
+        "name": "Carissa, (natal-plum), raw",
+        "ndbno": "09061",
+        "ds": "SR"
+    },
+    {
+        "offset": 56,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherimoya, raw",
+        "ndbno": "09062",
+        "ds": "SR"
+    },
+    {
+        "offset": 57,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sour, red, raw",
+        "ndbno": "09063",
+        "ds": "SR"
+    },
+    {
+        "offset": 58,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sour, red, canned, water pack, solids and liquids (includes USDA commodity red tart cherries, canned)",
+        "ndbno": "09064",
+        "ds": "SR"
+    },
+    {
+        "offset": 59,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sour, red, canned, light syrup pack, solids and liquids",
+        "ndbno": "09065",
+        "ds": "SR"
+    },
+    {
+        "offset": 60,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sour, red, canned, heavy syrup pack, solids and liquids",
+        "ndbno": "09066",
+        "ds": "SR"
+    },
+    {
+        "offset": 61,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sour, red, canned, extra heavy syrup pack, solids and liquids",
+        "ndbno": "09067",
+        "ds": "SR"
+    },
+    {
+        "offset": 62,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sour, red, frozen, unsweetened",
+        "ndbno": "09068",
+        "ds": "SR"
+    },
+    {
+        "offset": 63,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sweet, raw",
+        "ndbno": "09070",
+        "ds": "SR"
+    },
+    {
+        "offset": 64,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sweet, canned, water pack, solids and liquids",
+        "ndbno": "09071",
+        "ds": "SR"
+    },
+    {
+        "offset": 65,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sweet, canned, juice pack, solids and liquids",
+        "ndbno": "09072",
+        "ds": "SR"
+    },
+    {
+        "offset": 66,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sweet, canned, light syrup pack, solids and liquids",
+        "ndbno": "09073",
+        "ds": "SR"
+    },
+    {
+        "offset": 67,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sweet, canned, pitted, heavy syrup pack, solids and liquids",
+        "ndbno": "09074",
+        "ds": "SR"
+    },
+    {
+        "offset": 68,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sweet, canned, extra heavy syrup pack, solids and liquids",
+        "ndbno": "09075",
+        "ds": "SR"
+    },
+    {
+        "offset": 69,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sweet, frozen, sweetened",
+        "ndbno": "09076",
+        "ds": "SR"
+    },
+    {
+        "offset": 70,
+        "group": "Fruits and Fruit Juices",
+        "name": "Crabapples, raw",
+        "ndbno": "09077",
+        "ds": "SR"
+    },
+    {
+        "offset": 71,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cranberries, raw",
+        "ndbno": "09078",
+        "ds": "SR"
+    },
+    {
+        "offset": 72,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cranberries, dried, sweetened",
+        "ndbno": "09079",
+        "ds": "SR"
+    },
+    {
+        "offset": 73,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cranberry sauce, canned, sweetened",
+        "ndbno": "09081",
+        "ds": "SR"
+    },
+    {
+        "offset": 74,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cranberry-orange relish, canned",
+        "ndbno": "09082",
+        "ds": "SR"
+    },
+    {
+        "offset": 75,
+        "group": "Fruits and Fruit Juices",
+        "name": "Currants, european black, raw",
+        "ndbno": "09083",
+        "ds": "SR"
+    },
+    {
+        "offset": 76,
+        "group": "Fruits and Fruit Juices",
+        "name": "Currants, red and white, raw",
+        "ndbno": "09084",
+        "ds": "SR"
+    },
+    {
+        "offset": 77,
+        "group": "Fruits and Fruit Juices",
+        "name": "Currants, zante, dried",
+        "ndbno": "09085",
+        "ds": "SR"
+    },
+    {
+        "offset": 78,
+        "group": "Fruits and Fruit Juices",
+        "name": "Custard-apple, (bullock's-heart), raw",
+        "ndbno": "09086",
+        "ds": "SR"
+    },
+    {
+        "offset": 79,
+        "group": "Fruits and Fruit Juices",
+        "name": "Dates, deglet noor",
+        "ndbno": "09087",
+        "ds": "SR"
+    },
+    {
+        "offset": 80,
+        "group": "Fruits and Fruit Juices",
+        "name": "Elderberries, raw",
+        "ndbno": "09088",
+        "ds": "SR"
+    },
+    {
+        "offset": 81,
+        "group": "Fruits and Fruit Juices",
+        "name": "Figs, raw",
+        "ndbno": "09089",
+        "ds": "SR"
+    },
+    {
+        "offset": 82,
+        "group": "Fruits and Fruit Juices",
+        "name": "Figs, canned, water pack, solids and liquids",
+        "ndbno": "09090",
+        "ds": "SR"
+    },
+    {
+        "offset": 83,
+        "group": "Fruits and Fruit Juices",
+        "name": "Figs, canned, light syrup pack, solids and liquids",
+        "ndbno": "09091",
+        "ds": "SR"
+    },
+    {
+        "offset": 84,
+        "group": "Fruits and Fruit Juices",
+        "name": "Figs, canned, heavy syrup pack, solids and liquids",
+        "ndbno": "09092",
+        "ds": "SR"
+    },
+    {
+        "offset": 85,
+        "group": "Fruits and Fruit Juices",
+        "name": "Figs, canned, extra heavy syrup pack, solids and liquids",
+        "ndbno": "09093",
+        "ds": "SR"
+    },
+    {
+        "offset": 86,
+        "group": "Fruits and Fruit Juices",
+        "name": "Figs, dried, uncooked",
+        "ndbno": "09094",
+        "ds": "SR"
+    },
+    {
+        "offset": 87,
+        "group": "Fruits and Fruit Juices",
+        "name": "Figs, dried, stewed",
+        "ndbno": "09095",
+        "ds": "SR"
+    },
+    {
+        "offset": 88,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit cocktail, (peach and pineapple and pear and grape and cherry), canned, water pack, solids and liquids",
+        "ndbno": "09096",
+        "ds": "SR"
+    },
+    {
+        "offset": 89,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit cocktail, (peach and pineapple and pear and grape and cherry), canned, juice pack, solids and liquids",
+        "ndbno": "09097",
+        "ds": "SR"
+    },
+    {
+        "offset": 90,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit cocktail, (peach and pineapple and pear and grape and cherry), canned, extra light syrup, solids and liquids",
+        "ndbno": "09098",
+        "ds": "SR"
+    },
+    {
+        "offset": 91,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit cocktail, (peach and pineapple and pear and grape and cherry), canned, light syrup, solids and liquids",
+        "ndbno": "09099",
+        "ds": "SR"
+    },
+    {
+        "offset": 92,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit cocktail, (peach and pineapple and pear and grape and cherry), canned, heavy syrup, solids and liquids",
+        "ndbno": "09100",
+        "ds": "SR"
+    },
+    {
+        "offset": 93,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit cocktail, (peach and pineapple and pear and grape and cherry), canned, extra heavy syrup, solids and liquids",
+        "ndbno": "09101",
+        "ds": "SR"
+    },
+    {
+        "offset": 94,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit salad, (peach and pear and apricot and pineapple and cherry), canned, water pack, solids and liquids",
+        "ndbno": "09102",
+        "ds": "SR"
+    },
+    {
+        "offset": 95,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit salad, (peach and pear and apricot and pineapple and cherry), canned, juice pack, solids and liquids",
+        "ndbno": "09103",
+        "ds": "SR"
+    },
+    {
+        "offset": 96,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit salad, (peach and pear and apricot and pineapple and cherry), canned, light syrup, solids and liquids",
+        "ndbno": "09104",
+        "ds": "SR"
+    },
+    {
+        "offset": 97,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit salad, (peach and pear and apricot and pineapple and cherry), canned, heavy syrup, solids and liquids",
+        "ndbno": "09105",
+        "ds": "SR"
+    },
+    {
+        "offset": 98,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit salad, (peach and pear and apricot and pineapple and cherry), canned, extra heavy syrup, solids and liquids",
+        "ndbno": "09106",
+        "ds": "SR"
+    },
+    {
+        "offset": 99,
+        "group": "Fruits and Fruit Juices",
+        "name": "Gooseberries, raw",
+        "ndbno": "09107",
+        "ds": "SR"
+    },
+    {
+        "offset": 100,
+        "group": "Fruits and Fruit Juices",
+        "name": "Gooseberries, canned, light syrup pack, solids and liquids",
+        "ndbno": "09109",
+        "ds": "SR"
+    },
+    {
+        "offset": 101,
+        "group": "Fruits and Fruit Juices",
+        "name": "Goji berries, dried",
+        "ndbno": "09110",
+        "ds": "SR"
+    },
+    {
+        "offset": 102,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit, raw, pink and red and white, all areas",
+        "ndbno": "09111",
+        "ds": "SR"
+    },
+    {
+        "offset": 103,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit, raw, pink and red, all areas",
+        "ndbno": "09112",
+        "ds": "SR"
+    },
+    {
+        "offset": 104,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit, raw, pink and red, California and Arizona",
+        "ndbno": "09113",
+        "ds": "SR"
+    },
+    {
+        "offset": 105,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit, raw, pink and red, Florida",
+        "ndbno": "09114",
+        "ds": "SR"
+    },
+    {
+        "offset": 106,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit, raw, white, all areas",
+        "ndbno": "09116",
+        "ds": "SR"
+    },
+    {
+        "offset": 107,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit, raw, white, California",
+        "ndbno": "09117",
+        "ds": "SR"
+    },
+    {
+        "offset": 108,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit, raw, white, Florida",
+        "ndbno": "09118",
+        "ds": "SR"
+    },
+    {
+        "offset": 109,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit, sections, canned, water pack, solids and liquids",
+        "ndbno": "09119",
+        "ds": "SR"
+    },
+    {
+        "offset": 110,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit, sections, canned, juice pack, solids and liquids",
+        "ndbno": "09120",
+        "ds": "SR"
+    },
+    {
+        "offset": 111,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit, sections, canned, light syrup pack, solids and liquids",
+        "ndbno": "09121",
+        "ds": "SR"
+    },
+    {
+        "offset": 112,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit juice, white, canned or bottled, unsweetened",
+        "ndbno": "09123",
+        "ds": "SR"
+    },
+    {
+        "offset": 113,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit juice, white, canned, sweetened",
+        "ndbno": "09124",
+        "ds": "SR"
+    },
+    {
+        "offset": 114,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit juice, white, frozen concentrate, unsweetened, undiluted",
+        "ndbno": "09125",
+        "ds": "SR"
+    },
+    {
+        "offset": 115,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit juice, white, frozen concentrate, unsweetened, diluted with 3 volume water",
+        "ndbno": "09126",
+        "ds": "SR"
+    },
+    {
+        "offset": 116,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit juice, pink or red, with added calcium",
+        "ndbno": "09127",
+        "ds": "SR"
+    },
+    {
+        "offset": 117,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit juice, white, raw",
+        "ndbno": "09128",
+        "ds": "SR"
+    },
+    {
+        "offset": 118,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapes, muscadine, raw",
+        "ndbno": "09129",
+        "ds": "SR"
+    },
+    {
+        "offset": 119,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grape juice, canned or bottled, unsweetened, with added ascorbic acid",
+        "ndbno": "09130",
+        "ds": "SR"
+    },
+    {
+        "offset": 120,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapes, american type (slip skin), raw",
+        "ndbno": "09131",
+        "ds": "SR"
+    },
+    {
+        "offset": 121,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapes, red or green (European type, such as Thompson seedless), raw",
+        "ndbno": "09132",
+        "ds": "SR"
+    },
+    {
+        "offset": 122,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapes, canned, thompson seedless, water pack, solids and liquids",
+        "ndbno": "09133",
+        "ds": "SR"
+    },
+    {
+        "offset": 123,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapes, canned, thompson seedless, heavy syrup pack, solids and liquids",
+        "ndbno": "09134",
+        "ds": "SR"
+    },
+    {
+        "offset": 124,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grape juice, canned or bottled, unsweetened, without added ascorbic acid",
+        "ndbno": "09135",
+        "ds": "SR"
+    },
+    {
+        "offset": 125,
+        "group": "Fruits and Fruit Juices",
+        "name": "Groundcherries, (cape-gooseberries or poha), raw",
+        "ndbno": "09138",
+        "ds": "SR"
+    },
+    {
+        "offset": 126,
+        "group": "Fruits and Fruit Juices",
+        "name": "Guavas, common, raw",
+        "ndbno": "09139",
+        "ds": "SR"
+    },
+    {
+        "offset": 127,
+        "group": "Fruits and Fruit Juices",
+        "name": "Guavas, strawberry, raw",
+        "ndbno": "09140",
+        "ds": "SR"
+    },
+    {
+        "offset": 128,
+        "group": "Fruits and Fruit Juices",
+        "name": "Guava sauce, cooked",
+        "ndbno": "09143",
+        "ds": "SR"
+    },
+    {
+        "offset": 129,
+        "group": "Fruits and Fruit Juices",
+        "name": "Jackfruit, raw",
+        "ndbno": "09144",
+        "ds": "SR"
+    },
+    {
+        "offset": 130,
+        "group": "Fruits and Fruit Juices",
+        "name": "Java-plum, (jambolan), raw",
+        "ndbno": "09145",
+        "ds": "SR"
+    },
+    {
+        "offset": 131,
+        "group": "Fruits and Fruit Juices",
+        "name": "Jujube, raw",
+        "ndbno": "09146",
+        "ds": "SR"
+    },
+    {
+        "offset": 132,
+        "group": "Fruits and Fruit Juices",
+        "name": "Jujube, Chinese, fresh, dried",
+        "ndbno": "09147",
+        "ds": "SR"
+    },
+    {
+        "offset": 133,
+        "group": "Fruits and Fruit Juices",
+        "name": "Kiwifruit, green, raw",
+        "ndbno": "09148",
+        "ds": "SR"
+    },
+    {
+        "offset": 134,
+        "group": "Fruits and Fruit Juices",
+        "name": "Kumquats, raw",
+        "ndbno": "09149",
+        "ds": "SR"
+    },
+    {
+        "offset": 135,
+        "group": "Fruits and Fruit Juices",
+        "name": "Lemons, raw, without peel",
+        "ndbno": "09150",
+        "ds": "SR"
+    },
+    {
+        "offset": 136,
+        "group": "Fruits and Fruit Juices",
+        "name": "Lemon juice, raw",
+        "ndbno": "09152",
+        "ds": "SR"
+    },
+    {
+        "offset": 137,
+        "group": "Fruits and Fruit Juices",
+        "name": "Lemon juice from concentrate, canned or bottled",
+        "ndbno": "09153",
+        "ds": "SR"
+    },
+    {
+        "offset": 138,
+        "group": "Fruits and Fruit Juices",
+        "name": "Lemon juice, frozen, unsweetened, single strength",
+        "ndbno": "09154",
+        "ds": "SR"
+    },
+    {
+        "offset": 139,
+        "group": "Fruits and Fruit Juices",
+        "name": "Lemon peel, raw",
+        "ndbno": "09156",
+        "ds": "SR"
+    },
+    {
+        "offset": 140,
+        "group": "Fruits and Fruit Juices",
+        "name": "Limes, raw",
+        "ndbno": "09159",
+        "ds": "SR"
+    },
+    {
+        "offset": 141,
+        "group": "Fruits and Fruit Juices",
+        "name": "Lime juice, raw",
+        "ndbno": "09160",
+        "ds": "SR"
+    },
+    {
+        "offset": 142,
+        "group": "Fruits and Fruit Juices",
+        "name": "Lime juice, canned or bottled, unsweetened",
+        "ndbno": "09161",
+        "ds": "SR"
+    },
+    {
+        "offset": 143,
+        "group": "Fruits and Fruit Juices",
+        "name": "Blueberries, dried, sweetened",
+        "ndbno": "09163",
+        "ds": "SR"
+    },
+    {
+        "offset": 144,
+        "group": "Fruits and Fruit Juices",
+        "name": "Litchis, raw",
+        "ndbno": "09164",
+        "ds": "SR"
+    },
+    {
+        "offset": 145,
+        "group": "Fruits and Fruit Juices",
+        "name": "Litchis, dried",
+        "ndbno": "09165",
+        "ds": "SR"
+    },
+    {
+        "offset": 146,
+        "group": "Fruits and Fruit Juices",
+        "name": "Loganberries, frozen",
+        "ndbno": "09167",
+        "ds": "SR"
+    },
+    {
+        "offset": 147,
+        "group": "Fruits and Fruit Juices",
+        "name": "Longans, raw",
+        "ndbno": "09172",
+        "ds": "SR"
+    },
+    {
+        "offset": 148,
+        "group": "Fruits and Fruit Juices",
+        "name": "Longans, dried",
+        "ndbno": "09173",
+        "ds": "SR"
+    },
+    {
+        "offset": 149,
+        "group": "Fruits and Fruit Juices",
+        "name": "Loquats, raw",
+        "ndbno": "09174",
+        "ds": "SR"
+    },
+    {
+        "offset": 150,
+        "group": "Fruits and Fruit Juices",
+        "name": "Mammy-apple, (mamey), raw",
+        "ndbno": "09175",
+        "ds": "SR"
+    },
+    {
+        "offset": 151,
+        "group": "Fruits and Fruit Juices",
+        "name": "Mangos, raw",
+        "ndbno": "09176",
+        "ds": "SR"
+    },
+    {
+        "offset": 152,
+        "group": "Fruits and Fruit Juices",
+        "name": "Mangosteen, canned, syrup pack",
+        "ndbno": "09177",
+        "ds": "SR"
+    },
+    {
+        "offset": 153,
+        "group": "Fruits and Fruit Juices",
+        "name": "Mango, dried, sweetened",
+        "ndbno": "09178",
+        "ds": "SR"
+    },
+    {
+        "offset": 154,
+        "group": "Fruits and Fruit Juices",
+        "name": "Melons, cantaloupe, raw",
+        "ndbno": "09181",
+        "ds": "SR"
+    },
+    {
+        "offset": 155,
+        "group": "Fruits and Fruit Juices",
+        "name": "Melons, casaba, raw",
+        "ndbno": "09183",
+        "ds": "SR"
+    },
+    {
+        "offset": 156,
+        "group": "Fruits and Fruit Juices",
+        "name": "Melons, honeydew, raw",
+        "ndbno": "09184",
+        "ds": "SR"
+    },
+    {
+        "offset": 157,
+        "group": "Fruits and Fruit Juices",
+        "name": "Melon balls, frozen",
+        "ndbno": "09185",
+        "ds": "SR"
+    },
+    {
+        "offset": 158,
+        "group": "Fruits and Fruit Juices",
+        "name": "Mulberries, raw",
+        "ndbno": "09190",
+        "ds": "SR"
+    },
+    {
+        "offset": 159,
+        "group": "Fruits and Fruit Juices",
+        "name": "Nectarines, raw",
+        "ndbno": "09191",
+        "ds": "SR"
+    },
+    {
+        "offset": 160,
+        "group": "Fruits and Fruit Juices",
+        "name": "Oheloberries, raw",
+        "ndbno": "09192",
+        "ds": "SR"
+    },
+    {
+        "offset": 161,
+        "group": "Fruits and Fruit Juices",
+        "name": "Olives, ripe, canned (small-extra large)",
+        "ndbno": "09193",
+        "ds": "SR"
+    },
+    {
+        "offset": 162,
+        "group": "Fruits and Fruit Juices",
+        "name": "Olives, ripe, canned (jumbo-super colossal)",
+        "ndbno": "09194",
+        "ds": "SR"
+    },
+    {
+        "offset": 163,
+        "group": "Fruits and Fruit Juices",
+        "name": "Olives, pickled, canned or bottled, green",
+        "ndbno": "09195",
+        "ds": "SR"
+    },
+    {
+        "offset": 164,
+        "group": "Fruits and Fruit Juices",
+        "name": "Oranges, raw, all commercial varieties",
+        "ndbno": "09200",
+        "ds": "SR"
+    },
+    {
+        "offset": 165,
+        "group": "Fruits and Fruit Juices",
+        "name": "Oranges, raw, California, valencias",
+        "ndbno": "09201",
+        "ds": "SR"
+    },
+    {
+        "offset": 166,
+        "group": "Fruits and Fruit Juices",
+        "name": "Oranges, raw, navels",
+        "ndbno": "09202",
+        "ds": "SR"
+    },
+    {
+        "offset": 167,
+        "group": "Fruits and Fruit Juices",
+        "name": "Oranges, raw, Florida",
+        "ndbno": "09203",
+        "ds": "SR"
+    },
+    {
+        "offset": 168,
+        "group": "Fruits and Fruit Juices",
+        "name": "Oranges, raw, with peel",
+        "ndbno": "09205",
+        "ds": "SR"
+    },
+    {
+        "offset": 169,
+        "group": "Fruits and Fruit Juices",
+        "name": "Orange juice, raw",
+        "ndbno": "09206",
+        "ds": "SR"
+    },
+    {
+        "offset": 170,
+        "group": "Fruits and Fruit Juices",
+        "name": "Orange juice, canned, unsweetened",
+        "ndbno": "09207",
+        "ds": "SR"
+    },
+    {
+        "offset": 171,
+        "group": "Fruits and Fruit Juices",
+        "name": "Orange juice, chilled, includes from concentrate",
+        "ndbno": "09209",
+        "ds": "SR"
+    },
+    {
+        "offset": 172,
+        "group": "Fruits and Fruit Juices",
+        "name": "Orange juice, chilled, includes from concentrate, with added calcium and vitamin D",
+        "ndbno": "09210",
+        "ds": "SR"
+    },
+    {
+        "offset": 173,
+        "group": "Fruits and Fruit Juices",
+        "name": "Orange juice, chilled, includes from concentrate, with added calcium",
+        "ndbno": "09211",
+        "ds": "SR"
+    },
+    {
+        "offset": 174,
+        "group": "Fruits and Fruit Juices",
+        "name": "Orange juice, frozen concentrate, unsweetened, diluted with 3 volume water, with added calcium",
+        "ndbno": "09212",
+        "ds": "SR"
+    },
+    {
+        "offset": 175,
+        "group": "Fruits and Fruit Juices",
+        "name": "Orange juice, frozen concentrate, unsweetened, undiluted, with added calcium",
+        "ndbno": "09213",
+        "ds": "SR"
+    },
+    {
+        "offset": 176,
+        "group": "Fruits and Fruit Juices",
+        "name": "Orange juice, frozen concentrate, unsweetened, undiluted",
+        "ndbno": "09214",
+        "ds": "SR"
+    },
+    {
+        "offset": 177,
+        "group": "Fruits and Fruit Juices",
+        "name": "Orange juice, frozen concentrate, unsweetened, diluted with 3 volume water",
+        "ndbno": "09215",
+        "ds": "SR"
+    },
+    {
+        "offset": 178,
+        "group": "Fruits and Fruit Juices",
+        "name": "Orange peel, raw",
+        "ndbno": "09216",
+        "ds": "SR"
+    },
+    {
+        "offset": 179,
+        "group": "Fruits and Fruit Juices",
+        "name": "Orange-grapefruit juice, canned or bottled, unsweetened",
+        "ndbno": "09217",
+        "ds": "SR"
+    },
+    {
+        "offset": 180,
+        "group": "Fruits and Fruit Juices",
+        "name": "Tangerines, (mandarin oranges), raw",
+        "ndbno": "09218",
+        "ds": "SR"
+    },
+    {
+        "offset": 181,
+        "group": "Fruits and Fruit Juices",
+        "name": "Tangerines, (mandarin oranges), canned, juice pack",
+        "ndbno": "09219",
+        "ds": "SR"
+    },
+    {
+        "offset": 182,
+        "group": "Fruits and Fruit Juices",
+        "name": "Tangerines, (mandarin oranges), canned, light syrup pack",
+        "ndbno": "09220",
+        "ds": "SR"
+    },
+    {
+        "offset": 183,
+        "group": "Fruits and Fruit Juices",
+        "name": "Tangerine juice, raw",
+        "ndbno": "09221",
+        "ds": "SR"
+    },
+    {
+        "offset": 184,
+        "group": "Fruits and Fruit Juices",
+        "name": "Tangerine juice, canned, sweetened",
+        "ndbno": "09223",
+        "ds": "SR"
+    },
+    {
+        "offset": 185,
+        "group": "Fruits and Fruit Juices",
+        "name": "Papayas, raw",
+        "ndbno": "09226",
+        "ds": "SR"
+    },
+    {
+        "offset": 186,
+        "group": "Fruits and Fruit Juices",
+        "name": "Papaya, canned, heavy syrup, drained",
+        "ndbno": "09228",
+        "ds": "SR"
+    },
+    {
+        "offset": 187,
+        "group": "Fruits and Fruit Juices",
+        "name": "Papaya nectar, canned",
+        "ndbno": "09229",
+        "ds": "SR"
+    },
+    {
+        "offset": 188,
+        "group": "Fruits and Fruit Juices",
+        "name": "Passion-fruit, (granadilla), purple, raw",
+        "ndbno": "09231",
+        "ds": "SR"
+    },
+    {
+        "offset": 189,
+        "group": "Fruits and Fruit Juices",
+        "name": "Passion-fruit juice, purple, raw",
+        "ndbno": "09232",
+        "ds": "SR"
+    },
+    {
+        "offset": 190,
+        "group": "Fruits and Fruit Juices",
+        "name": "Passion-fruit juice, yellow, raw",
+        "ndbno": "09233",
+        "ds": "SR"
+    },
+    {
+        "offset": 191,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, yellow, raw",
+        "ndbno": "09236",
+        "ds": "SR"
+    },
+    {
+        "offset": 192,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, canned, water pack, solids and liquids",
+        "ndbno": "09237",
+        "ds": "SR"
+    },
+    {
+        "offset": 193,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, canned, juice pack, solids and liquids",
+        "ndbno": "09238",
+        "ds": "SR"
+    },
+    {
+        "offset": 194,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, canned, extra light syrup, solids and liquids",
+        "ndbno": "09239",
+        "ds": "SR"
+    },
+    {
+        "offset": 195,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, canned, light syrup pack, solids and liquids",
+        "ndbno": "09240",
+        "ds": "SR"
+    },
+    {
+        "offset": 196,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, canned, heavy syrup pack, solids and liquids",
+        "ndbno": "09241",
+        "ds": "SR"
+    },
+    {
+        "offset": 197,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, canned, extra heavy syrup pack, solids and liquids",
+        "ndbno": "09242",
+        "ds": "SR"
+    },
+    {
+        "offset": 198,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, spiced, canned, heavy syrup pack, solids and liquids",
+        "ndbno": "09243",
+        "ds": "SR"
+    },
+    {
+        "offset": 199,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, dehydrated (low-moisture), sulfured, uncooked",
+        "ndbno": "09244",
+        "ds": "SR"
+    },
+    {
+        "offset": 200,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, dehydrated (low-moisture), sulfured, stewed",
+        "ndbno": "09245",
+        "ds": "SR"
+    },
+    {
+        "offset": 201,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, dried, sulfured, uncooked",
+        "ndbno": "09246",
+        "ds": "SR"
+    },
+    {
+        "offset": 202,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, dried, sulfured, stewed, without added sugar",
+        "ndbno": "09247",
+        "ds": "SR"
+    },
+    {
+        "offset": 203,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, dried, sulfured, stewed, with added sugar",
+        "ndbno": "09248",
+        "ds": "SR"
+    },
+    {
+        "offset": 204,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, frozen, sliced, sweetened",
+        "ndbno": "09250",
+        "ds": "SR"
+    },
+    {
+        "offset": 205,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peach nectar, canned, without added ascorbic acid",
+        "ndbno": "09251",
+        "ds": "SR"
+    },
+    {
+        "offset": 206,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, raw",
+        "ndbno": "09252",
+        "ds": "SR"
+    },
+    {
+        "offset": 207,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, canned, water pack, solids and liquids",
+        "ndbno": "09253",
+        "ds": "SR"
+    },
+    {
+        "offset": 208,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, canned, juice pack, solids and liquids",
+        "ndbno": "09254",
+        "ds": "SR"
+    },
+    {
+        "offset": 209,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, canned, extra light syrup pack, solids and liquids",
+        "ndbno": "09255",
+        "ds": "SR"
+    },
+    {
+        "offset": 210,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, canned, light syrup pack, solids and liquids",
+        "ndbno": "09256",
+        "ds": "SR"
+    },
+    {
+        "offset": 211,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, canned, heavy syrup pack, solids and liquids",
+        "ndbno": "09257",
+        "ds": "SR"
+    },
+    {
+        "offset": 212,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, canned, extra heavy syrup pack, solids and liquids",
+        "ndbno": "09258",
+        "ds": "SR"
+    },
+    {
+        "offset": 213,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, dried, sulfured, uncooked",
+        "ndbno": "09259",
+        "ds": "SR"
+    },
+    {
+        "offset": 214,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, dried, sulfured, stewed, without added sugar",
+        "ndbno": "09260",
+        "ds": "SR"
+    },
+    {
+        "offset": 215,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, dried, sulfured, stewed, with added sugar",
+        "ndbno": "09261",
+        "ds": "SR"
+    },
+    {
+        "offset": 216,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pear nectar, canned, without added ascorbic acid",
+        "ndbno": "09262",
+        "ds": "SR"
+    },
+    {
+        "offset": 217,
+        "group": "Fruits and Fruit Juices",
+        "name": "Persimmons, japanese, raw",
+        "ndbno": "09263",
+        "ds": "SR"
+    },
+    {
+        "offset": 218,
+        "group": "Fruits and Fruit Juices",
+        "name": "Persimmons, japanese, dried",
+        "ndbno": "09264",
+        "ds": "SR"
+    },
+    {
+        "offset": 219,
+        "group": "Fruits and Fruit Juices",
+        "name": "Persimmons, native, raw",
+        "ndbno": "09265",
+        "ds": "SR"
+    },
+    {
+        "offset": 220,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple, raw, all varieties",
+        "ndbno": "09266",
+        "ds": "SR"
+    },
+    {
+        "offset": 221,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple, canned, water pack, solids and liquids",
+        "ndbno": "09267",
+        "ds": "SR"
+    },
+    {
+        "offset": 222,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple, canned, juice pack, solids and liquids",
+        "ndbno": "09268",
+        "ds": "SR"
+    },
+    {
+        "offset": 223,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple, canned, light syrup pack, solids and liquids",
+        "ndbno": "09269",
+        "ds": "SR"
+    },
+    {
+        "offset": 224,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple, canned, heavy syrup pack, solids and liquids",
+        "ndbno": "09270",
+        "ds": "SR"
+    },
+    {
+        "offset": 225,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple, canned, extra heavy syrup pack, solids and liquids",
+        "ndbno": "09271",
+        "ds": "SR"
+    },
+    {
+        "offset": 226,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple, frozen, chunks, sweetened",
+        "ndbno": "09272",
+        "ds": "SR"
+    },
+    {
+        "offset": 227,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple juice, canned or bottled, unsweetened, without added ascorbic acid",
+        "ndbno": "09273",
+        "ds": "SR"
+    },
+    {
+        "offset": 228,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple juice, frozen concentrate, unsweetened, undiluted",
+        "ndbno": "09274",
+        "ds": "SR"
+    },
+    {
+        "offset": 229,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple juice, frozen concentrate, unsweetened, diluted with 3 volume water",
+        "ndbno": "09275",
+        "ds": "SR"
+    },
+    {
+        "offset": 230,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pitanga, (surinam-cherry), raw",
+        "ndbno": "09276",
+        "ds": "SR"
+    },
+    {
+        "offset": 231,
+        "group": "Fruits and Fruit Juices",
+        "name": "Plantains, raw",
+        "ndbno": "09277",
+        "ds": "SR"
+    },
+    {
+        "offset": 232,
+        "group": "Fruits and Fruit Juices",
+        "name": "Plantains, cooked",
+        "ndbno": "09278",
+        "ds": "SR"
+    },
+    {
+        "offset": 233,
+        "group": "Fruits and Fruit Juices",
+        "name": "Plums, raw",
+        "ndbno": "09279",
+        "ds": "SR"
+    },
+    {
+        "offset": 234,
+        "group": "Fruits and Fruit Juices",
+        "name": "Plums, canned, purple, water pack, solids and liquids",
+        "ndbno": "09281",
+        "ds": "SR"
+    },
+    {
+        "offset": 235,
+        "group": "Fruits and Fruit Juices",
+        "name": "Plums, canned, purple, juice pack, solids and liquids",
+        "ndbno": "09282",
+        "ds": "SR"
+    },
+    {
+        "offset": 236,
+        "group": "Fruits and Fruit Juices",
+        "name": "Plums, canned, purple, light syrup pack, solids and liquids",
+        "ndbno": "09283",
+        "ds": "SR"
+    },
+    {
+        "offset": 237,
+        "group": "Fruits and Fruit Juices",
+        "name": "Plums, canned, purple, heavy syrup pack, solids and liquids",
+        "ndbno": "09284",
+        "ds": "SR"
+    },
+    {
+        "offset": 238,
+        "group": "Fruits and Fruit Juices",
+        "name": "Plums, canned, purple, extra heavy syrup pack, solids and liquids",
+        "ndbno": "09285",
+        "ds": "SR"
+    },
+    {
+        "offset": 239,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pomegranates, raw",
+        "ndbno": "09286",
+        "ds": "SR"
+    },
+    {
+        "offset": 240,
+        "group": "Fruits and Fruit Juices",
+        "name": "Prickly pears, raw",
+        "ndbno": "09287",
+        "ds": "SR"
+    },
+    {
+        "offset": 241,
+        "group": "Fruits and Fruit Juices",
+        "name": "Prunes, canned, heavy syrup pack, solids and liquids",
+        "ndbno": "09288",
+        "ds": "SR"
+    },
+    {
+        "offset": 242,
+        "group": "Fruits and Fruit Juices",
+        "name": "Prunes, dehydrated (low-moisture), uncooked",
+        "ndbno": "09289",
+        "ds": "SR"
+    },
+    {
+        "offset": 243,
+        "group": "Fruits and Fruit Juices",
+        "name": "Prunes, dehydrated (low-moisture), stewed",
+        "ndbno": "09290",
+        "ds": "SR"
+    },
+    {
+        "offset": 244,
+        "group": "Fruits and Fruit Juices",
+        "name": "Plums, dried (prunes), uncooked",
+        "ndbno": "09291",
+        "ds": "SR"
+    },
+    {
+        "offset": 245,
+        "group": "Fruits and Fruit Juices",
+        "name": "Plums, dried (prunes), stewed, without added sugar",
+        "ndbno": "09292",
+        "ds": "SR"
+    },
+    {
+        "offset": 246,
+        "group": "Fruits and Fruit Juices",
+        "name": "Plums, dried (prunes), stewed, with added sugar",
+        "ndbno": "09293",
+        "ds": "SR"
+    },
+    {
+        "offset": 247,
+        "group": "Fruits and Fruit Juices",
+        "name": "Prune juice, canned",
+        "ndbno": "09294",
+        "ds": "SR"
+    },
+    {
+        "offset": 248,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pummelo, raw",
+        "ndbno": "09295",
+        "ds": "SR"
+    },
+    {
+        "offset": 249,
+        "group": "Fruits and Fruit Juices",
+        "name": "Quinces, raw",
+        "ndbno": "09296",
+        "ds": "SR"
+    },
+    {
+        "offset": 250,
+        "group": "Fruits and Fruit Juices",
+        "name": "Raisins, golden seedless",
+        "ndbno": "09297",
+        "ds": "SR"
+    },
+    {
+        "offset": 251,
+        "group": "Fruits and Fruit Juices",
+        "name": "Raisins, seedless",
+        "ndbno": "09298",
+        "ds": "SR"
+    },
+    {
+        "offset": 252,
+        "group": "Fruits and Fruit Juices",
+        "name": "Raisins, seeded",
+        "ndbno": "09299",
+        "ds": "SR"
+    },
+    {
+        "offset": 253,
+        "group": "Fruits and Fruit Juices",
+        "name": "Rambutan, canned, syrup pack",
+        "ndbno": "09301",
+        "ds": "SR"
+    },
+    {
+        "offset": 254,
+        "group": "Fruits and Fruit Juices",
+        "name": "Raspberries, raw",
+        "ndbno": "09302",
+        "ds": "SR"
+    },
+    {
+        "offset": 255,
+        "group": "Fruits and Fruit Juices",
+        "name": "Raspberries, canned, red, heavy syrup pack, solids and liquids",
+        "ndbno": "09304",
+        "ds": "SR"
+    },
+    {
+        "offset": 256,
+        "group": "Fruits and Fruit Juices",
+        "name": "Raspberries, frozen, red, sweetened",
+        "ndbno": "09306",
+        "ds": "SR"
+    },
+    {
+        "offset": 257,
+        "group": "Fruits and Fruit Juices",
+        "name": "Rhubarb, raw",
+        "ndbno": "09307",
+        "ds": "SR"
+    },
+    {
+        "offset": 258,
+        "group": "Fruits and Fruit Juices",
+        "name": "Rhubarb, frozen, uncooked",
+        "ndbno": "09309",
+        "ds": "SR"
+    },
+    {
+        "offset": 259,
+        "group": "Fruits and Fruit Juices",
+        "name": "Rhubarb, frozen, cooked, with sugar",
+        "ndbno": "09310",
+        "ds": "SR"
+    },
+    {
+        "offset": 260,
+        "group": "Fruits and Fruit Juices",
+        "name": "Roselle, raw",
+        "ndbno": "09311",
+        "ds": "SR"
+    },
+    {
+        "offset": 261,
+        "group": "Fruits and Fruit Juices",
+        "name": "Rose-apples, raw",
+        "ndbno": "09312",
+        "ds": "SR"
+    },
+    {
+        "offset": 262,
+        "group": "Fruits and Fruit Juices",
+        "name": "Sapodilla, raw",
+        "ndbno": "09313",
+        "ds": "SR"
+    },
+    {
+        "offset": 263,
+        "group": "Fruits and Fruit Juices",
+        "name": "Sapote, mamey, raw",
+        "ndbno": "09314",
+        "ds": "SR"
+    },
+    {
+        "offset": 264,
+        "group": "Fruits and Fruit Juices",
+        "name": "Soursop, raw",
+        "ndbno": "09315",
+        "ds": "SR"
+    },
+    {
+        "offset": 265,
+        "group": "Fruits and Fruit Juices",
+        "name": "Strawberries, raw",
+        "ndbno": "09316",
+        "ds": "SR"
+    },
+    {
+        "offset": 266,
+        "group": "Fruits and Fruit Juices",
+        "name": "Strawberries, canned, heavy syrup pack, solids and liquids",
+        "ndbno": "09317",
+        "ds": "SR"
+    },
+    {
+        "offset": 267,
+        "group": "Fruits and Fruit Juices",
+        "name": "Strawberries, frozen, unsweetened",
+        "ndbno": "09318",
+        "ds": "SR"
+    },
+    {
+        "offset": 268,
+        "group": "Fruits and Fruit Juices",
+        "name": "Strawberries, frozen, sweetened, whole",
+        "ndbno": "09319",
+        "ds": "SR"
+    },
+    {
+        "offset": 269,
+        "group": "Fruits and Fruit Juices",
+        "name": "Strawberries, frozen, sweetened, sliced",
+        "ndbno": "09320",
+        "ds": "SR"
+    },
+    {
+        "offset": 270,
+        "group": "Fruits and Fruit Juices",
+        "name": "Sugar-apples, (sweetsop), raw",
+        "ndbno": "09321",
+        "ds": "SR"
+    },
+    {
+        "offset": 271,
+        "group": "Fruits and Fruit Juices",
+        "name": "Tamarinds, raw",
+        "ndbno": "09322",
+        "ds": "SR"
+    },
+    {
+        "offset": 272,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit salad, (pineapple and papaya and banana and guava), tropical, canned, heavy syrup, solids and liquids",
+        "ndbno": "09325",
+        "ds": "SR"
+    },
+    {
+        "offset": 273,
+        "group": "Fruits and Fruit Juices",
+        "name": "Watermelon, raw",
+        "ndbno": "09326",
+        "ds": "SR"
+    },
+    {
+        "offset": 274,
+        "group": "Fruits and Fruit Juices",
+        "name": "Maraschino cherries, canned, drained",
+        "ndbno": "09328",
+        "ds": "SR"
+    },
+    {
+        "offset": 275,
+        "group": "Fruits and Fruit Juices",
+        "name": "Feijoa, raw",
+        "ndbno": "09334",
+        "ds": "SR"
+    },
+    {
+        "offset": 276,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, asian, raw",
+        "ndbno": "09340",
+        "ds": "SR"
+    },
+    {
+        "offset": 277,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit cocktail, canned, heavy syrup, drained",
+        "ndbno": "09351",
+        "ds": "SR"
+    },
+    {
+        "offset": 278,
+        "group": "Fruits and Fruit Juices",
+        "name": "Blueberries, canned, light syrup, drained",
+        "ndbno": "09352",
+        "ds": "SR"
+    },
+    {
+        "offset": 279,
+        "group": "Fruits and Fruit Juices",
+        "name": "Blueberries, wild, canned, heavy syrup, drained",
+        "ndbno": "09353",
+        "ds": "SR"
+    },
+    {
+        "offset": 280,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple, canned, juice pack, drained",
+        "ndbno": "09354",
+        "ds": "SR"
+    },
+    {
+        "offset": 281,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricots, canned, heavy syrup, drained",
+        "ndbno": "09357",
+        "ds": "SR"
+    },
+    {
+        "offset": 282,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sour, canned, water pack, drained",
+        "ndbno": "09362",
+        "ds": "SR"
+    },
+    {
+        "offset": 283,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cherries, sweet, canned, pitted, heavy syrup, drained",
+        "ndbno": "09367",
+        "ds": "SR"
+    },
+    {
+        "offset": 284,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peaches, canned, heavy syrup, drained",
+        "ndbno": "09370",
+        "ds": "SR"
+    },
+    {
+        "offset": 285,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, canned, heavy syrup, drained",
+        "ndbno": "09374",
+        "ds": "SR"
+    },
+    {
+        "offset": 286,
+        "group": "Fruits and Fruit Juices",
+        "name": "Plums, canned, heavy syrup, drained",
+        "ndbno": "09379",
+        "ds": "SR"
+    },
+    {
+        "offset": 287,
+        "group": "Fruits and Fruit Juices",
+        "name": "Tangerines, (mandarin oranges), canned, juice pack, drained",
+        "ndbno": "09383",
+        "ds": "SR"
+    },
+    {
+        "offset": 288,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apple juice, canned or bottled, unsweetened, with added ascorbic acid",
+        "ndbno": "09400",
+        "ds": "SR"
+    },
+    {
+        "offset": 289,
+        "group": "Fruits and Fruit Juices",
+        "name": "Applesauce, canned, unsweetened, with added ascorbic acid",
+        "ndbno": "09401",
+        "ds": "SR"
+    },
+    {
+        "offset": 290,
+        "group": "Fruits and Fruit Juices",
+        "name": "Applesauce, canned, sweetened, with salt",
+        "ndbno": "09402",
+        "ds": "SR"
+    },
+    {
+        "offset": 291,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apricot nectar, canned, with added ascorbic acid",
+        "ndbno": "09403",
+        "ds": "SR"
+    },
+    {
+        "offset": 292,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit juice, pink, raw",
+        "ndbno": "09404",
+        "ds": "SR"
+    },
+    {
+        "offset": 293,
+        "group": "Fruits and Fruit Juices",
+        "name": "Peach nectar, canned, with added ascorbic acid",
+        "ndbno": "09407",
+        "ds": "SR"
+    },
+    {
+        "offset": 294,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pear nectar, canned, with added ascorbic acid",
+        "ndbno": "09408",
+        "ds": "SR"
+    },
+    {
+        "offset": 295,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple juice, canned or bottled, unsweetened, with added ascorbic acid",
+        "ndbno": "09409",
+        "ds": "SR"
+    },
+    {
+        "offset": 296,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apple juice, frozen concentrate, unsweetened, undiluted, with added ascorbic acid",
+        "ndbno": "09410",
+        "ds": "SR"
+    },
+    {
+        "offset": 297,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apple juice, frozen concentrate, unsweetened, diluted with 3 volume water, with added ascorbic acid",
+        "ndbno": "09411",
+        "ds": "SR"
+    },
+    {
+        "offset": 298,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, raw, bartlett",
+        "ndbno": "09412",
+        "ds": "SR"
+    },
+    {
+        "offset": 299,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, raw, red anjou",
+        "ndbno": "09413",
+        "ds": "SR"
+    },
+    {
+        "offset": 300,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, raw, bosc",
+        "ndbno": "09414",
+        "ds": "SR"
+    },
+    {
+        "offset": 301,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pears, raw, green anjou",
+        "ndbno": "09415",
+        "ds": "SR"
+    },
+    {
+        "offset": 302,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grapefruit juice, white, bottled, unsweetened, OCEAN SPRAY",
+        "ndbno": "09416",
+        "ds": "SR"
+    },
+    {
+        "offset": 303,
+        "group": "Fruits and Fruit Juices",
+        "name": "Jackfruit, canned, syrup pack",
+        "ndbno": "09420",
+        "ds": "SR"
+    },
+    {
+        "offset": 304,
+        "group": "Fruits and Fruit Juices",
+        "name": "Dates, medjool",
+        "ndbno": "09421",
+        "ds": "SR"
+    },
+    {
+        "offset": 305,
+        "group": "Fruits and Fruit Juices",
+        "name": "Durian, raw or frozen",
+        "ndbno": "09422",
+        "ds": "SR"
+    },
+    {
+        "offset": 306,
+        "group": "Fruits and Fruit Juices",
+        "name": "Prune puree",
+        "ndbno": "09423",
+        "ds": "SR"
+    },
+    {
+        "offset": 307,
+        "group": "Fruits and Fruit Juices",
+        "name": "Candied fruit",
+        "ndbno": "09426",
+        "ds": "SR"
+    },
+    {
+        "offset": 308,
+        "group": "Fruits and Fruit Juices",
+        "name": "Abiyuch, raw",
+        "ndbno": "09427",
+        "ds": "SR"
+    },
+    {
+        "offset": 309,
+        "group": "Fruits and Fruit Juices",
+        "name": "Rowal, raw",
+        "ndbno": "09428",
+        "ds": "SR"
+    },
+    {
+        "offset": 310,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple, raw, traditional varieties",
+        "ndbno": "09429",
+        "ds": "SR"
+    },
+    {
+        "offset": 311,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple, raw, extra sweet variety",
+        "ndbno": "09430",
+        "ds": "SR"
+    },
+    {
+        "offset": 312,
+        "group": "Fruits and Fruit Juices",
+        "name": "USDA Commodity, mixed fruit (peaches, pears, grapes), canned, light syrup, drained",
+        "ndbno": "09431",
+        "ds": "SR"
+    },
+    {
+        "offset": 313,
+        "group": "Fruits and Fruit Juices",
+        "name": "USDA Commodity, mixed fruit (peaches, pears, grapes), canned, light syrup, solids and liquids",
+        "ndbno": "09432",
+        "ds": "SR"
+    },
+    {
+        "offset": 314,
+        "group": "Fruits and Fruit Juices",
+        "name": "Clementines, raw",
+        "ndbno": "09433",
+        "ds": "SR"
+    },
+    {
+        "offset": 315,
+        "group": "Fruits and Fruit Juices",
+        "name": "Guanabana nectar, canned",
+        "ndbno": "09434",
+        "ds": "SR"
+    },
+    {
+        "offset": 316,
+        "group": "Fruits and Fruit Juices",
+        "name": "Guava nectar, canned, with added ascorbic acid",
+        "ndbno": "09435",
+        "ds": "SR"
+    },
+    {
+        "offset": 317,
+        "group": "Fruits and Fruit Juices",
+        "name": "Mango nectar, canned",
+        "ndbno": "09436",
+        "ds": "SR"
+    },
+    {
+        "offset": 318,
+        "group": "Fruits and Fruit Juices",
+        "name": "Tamarind nectar, canned",
+        "ndbno": "09437",
+        "ds": "SR"
+    },
+    {
+        "offset": 319,
+        "group": "Fruits and Fruit Juices",
+        "name": "USDA Commodity peaches, canned, light syrup, drained",
+        "ndbno": "09438",
+        "ds": "SR"
+    },
+    {
+        "offset": 320,
+        "group": "Fruits and Fruit Juices",
+        "name": "USDA Commodity pears, canned, juice pack, drained",
+        "ndbno": "09439",
+        "ds": "SR"
+    },
+    {
+        "offset": 321,
+        "group": "Fruits and Fruit Juices",
+        "name": "USDA Commodity pears, canned, light syrup, drained",
+        "ndbno": "09440",
+        "ds": "SR"
+    },
+    {
+        "offset": 322,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pomegranate juice, bottled",
+        "ndbno": "09442",
+        "ds": "SR"
+    },
+    {
+        "offset": 323,
+        "group": "Fruits and Fruit Juices",
+        "name": "Juice, apple and grape blend, with added ascorbic acid",
+        "ndbno": "09443",
+        "ds": "SR"
+    },
+    {
+        "offset": 324,
+        "group": "Fruits and Fruit Juices",
+        "name": "Juice, apple, grape and pear blend, with added ascorbic acid and calcium",
+        "ndbno": "09444",
+        "ds": "SR"
+    },
+    {
+        "offset": 325,
+        "group": "Fruits and Fruit Juices",
+        "name": "Plantains, green, fried",
+        "ndbno": "09446",
+        "ds": "SR"
+    },
+    {
+        "offset": 326,
+        "group": "Fruits and Fruit Juices",
+        "name": "Plantains, yellow, fried, Latino restaurant",
+        "ndbno": "09447",
+        "ds": "SR"
+    },
+    {
+        "offset": 327,
+        "group": "Fruits and Fruit Juices",
+        "name": "Nance, canned, syrup, drained",
+        "ndbno": "09448",
+        "ds": "SR"
+    },
+    {
+        "offset": 328,
+        "group": "Fruits and Fruit Juices",
+        "name": "Nance, frozen, unsweetened",
+        "ndbno": "09449",
+        "ds": "SR"
+    },
+    {
+        "offset": 329,
+        "group": "Fruits and Fruit Juices",
+        "name": "Naranjilla (lulo) pulp, frozen, unsweetened",
+        "ndbno": "09450",
+        "ds": "SR"
+    },
+    {
+        "offset": 330,
+        "group": "Fruits and Fruit Juices",
+        "name": "Horned melon (Kiwano)",
+        "ndbno": "09451",
+        "ds": "SR"
+    },
+    {
+        "offset": 331,
+        "group": "Fruits and Fruit Juices",
+        "name": "Orange Pineapple Juice Blend",
+        "ndbno": "09452",
+        "ds": "SR"
+    },
+    {
+        "offset": 332,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, raw, red delicious, with skin",
+        "ndbno": "09500",
+        "ds": "SR"
+    },
+    {
+        "offset": 333,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, raw, golden delicious, with skin",
+        "ndbno": "09501",
+        "ds": "SR"
+    },
+    {
+        "offset": 334,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, raw, granny smith, with skin",
+        "ndbno": "09502",
+        "ds": "SR"
+    },
+    {
+        "offset": 335,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, raw, gala, with skin",
+        "ndbno": "09503",
+        "ds": "SR"
+    },
+    {
+        "offset": 336,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apples, raw, fuji, with skin",
+        "ndbno": "09504",
+        "ds": "SR"
+    },
+    {
+        "offset": 337,
+        "group": "Fruits and Fruit Juices",
+        "name": "Orange juice, chilled, includes from concentrate, with added calcium and vitamins A, D, E",
+        "ndbno": "09506",
+        "ds": "SR"
+    },
+    {
+        "offset": 338,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit juice smoothie, NAKED JUICE, MIGHTY MANGO",
+        "ndbno": "09507",
+        "ds": "SR"
+    },
+    {
+        "offset": 339,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit juice smoothie, NAKED JUICE, GREEN MACHINE",
+        "ndbno": "09508",
+        "ds": "SR"
+    },
+    {
+        "offset": 340,
+        "group": "Fruits and Fruit Juices",
+        "name": "Pineapple juice, canned, not from concentrate, unsweetened, with added vitamins A, C and E",
+        "ndbno": "09510",
+        "ds": "SR"
+    },
+    {
+        "offset": 341,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit juice smoothie, NAKED JUICE, BLUE MACHINE",
+        "ndbno": "09511",
+        "ds": "SR"
+    },
+    {
+        "offset": 342,
+        "group": "Fruits and Fruit Juices",
+        "name": "Grape juice, canned or bottled, unsweetened, with added ascorbic acid and calcium",
+        "ndbno": "09512",
+        "ds": "SR"
+    },
+    {
+        "offset": 343,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit juice smoothie, ODWALLA, ORIGINAL SUPERFOOD",
+        "ndbno": "09513",
+        "ds": "SR"
+    },
+    {
+        "offset": 344,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit juice smoothie, BOLTHOUSE FARMS, BERRY BOOST",
+        "ndbno": "09514",
+        "ds": "SR"
+    },
+    {
+        "offset": 345,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit juice smoothie, BOLTHOUSE FARMS, GREEN GOODNESS",
+        "ndbno": "09515",
+        "ds": "SR"
+    },
+    {
+        "offset": 346,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit juice smoothie, BOLTHOUSE FARMS, strawberry banana",
+        "ndbno": "09516",
+        "ds": "SR"
+    },
+    {
+        "offset": 347,
+        "group": "Fruits and Fruit Juices",
+        "name": "Apple juice, canned or bottled, unsweetened, with added ascorbic acid, calcium, and potassium",
+        "ndbno": "09517",
+        "ds": "SR"
+    },
+    {
+        "offset": 348,
+        "group": "Fruits and Fruit Juices",
+        "name": "Raspberries, frozen, unsweetened",
+        "ndbno": "09518",
+        "ds": "SR"
+    },
+    {
+        "offset": 349,
+        "group": "Fruits and Fruit Juices",
+        "name": "Guava nectar, with sucralose, canned",
+        "ndbno": "09519",
+        "ds": "SR"
+    },
+    {
+        "offset": 350,
+        "group": "Fruits and Fruit Juices",
+        "name": "Kiwifruit, ZESPRI SunGold, raw",
+        "ndbno": "09520",
+        "ds": "SR"
+    },
+    {
+        "offset": 351,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cranberry juice blend, 100% juice, bottled, with added vitamin C and calcium",
+        "ndbno": "09522",
+        "ds": "SR"
+    },
+    {
+        "offset": 352,
+        "group": "Fruits and Fruit Juices",
+        "name": "Lemon juice from concentrate, bottled, CONCORD",
+        "ndbno": "09523",
+        "ds": "SR"
+    },
+    {
+        "offset": 353,
+        "group": "Fruits and Fruit Juices",
+        "name": "Lemon juice from concentrate, bottled, REAL LEMON",
+        "ndbno": "09524",
+        "ds": "SR"
+    },
+    {
+        "offset": 354,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cranberry sauce, whole, canned, OCEAN SPRAY",
+        "ndbno": "09525",
+        "ds": "SR"
+    },
+    {
+        "offset": 355,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cranberry sauce, jellied, canned, OCEAN SPRAY",
+        "ndbno": "09526",
+        "ds": "SR"
+    },
+    {
+        "offset": 356,
+        "group": "Fruits and Fruit Juices",
+        "name": "Ruby Red grapefruit juice blend (grapefruit, grape, apple), OCEAN SPRAY, bottled, with added vitamin C",
+        "ndbno": "09528",
+        "ds": "SR"
+    },
+    {
+        "offset": 357,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit juice smoothie, ODWALLA, strawberry banana",
+        "ndbno": "09530",
+        "ds": "SR"
+    },
+    {
+        "offset": 358,
+        "group": "Fruits and Fruit Juices",
+        "name": "Fruit juice smoothie, NAKED JUICE, strawberry banana",
+        "ndbno": "09531",
+        "ds": "SR"
+    },
+    {
+        "offset": 359,
+        "group": "Fruits and Fruit Juices",
+        "name": "Cranberry juice, unsweetened",
+        "ndbno": "43382",
+        "ds": "SR"
+    }
+]

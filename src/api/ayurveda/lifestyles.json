@@ -1,0 +1,176 @@
+[
+    {
+        "description": "You are thin, slender, with thin bones, proeminent joints, and weak muscles. You body is generally irregular in shapes. You are free of mind, enthusiastic, creative, full of new ideas, flexible, energic, and talkative. You like to dream and have a big imagintation. You are very spontaneous and unpredictable. You think fast, speak fast, walk fast, everything you do is fast and in a rush. You don't like routines and plans, but like to change, like new experiences, new relationships. You are good at starting new things, like projects, but bad are finishing them and being commited to them. In your bad days, you tend to lose weight, forget to eat, be constipated, and catch colds. Also, you may become confused, anxious, worried, scared, hyperctive, overwhelmed, with lack of focus, difficulty in making decisions, and lack of sleep.",
+        "foods": {
+            "avoid": [
+                {
+                    "fruits": [],
+                    "vegetables": [],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ],
+            "prefer": [
+                {
+                    "fruits": [],
+                    "vegetables": [],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ],
+            "reduce": [
+                {
+                    "fruits": [],
+                    "vegetables": [],
+                    "grains": [],
+                    "legumes": [],
+                    "dairy": [],
+                    "meat": [],
+                    "condiments": [],
+                    "nuts": [],
+                    "seeds": [],
+                    "oils": [],
+                    "beverages": [],
+                    "herbal teas": [],
+                    "spices": [],
+                    "sweeteners": [],
+                    "nutrients": []
+                }
+            ]
+        },
+        "goals": [
+            {
+                "name": "sleep",
+                "tasks": [
+                    {
+                        "description": "",
+                        "done": false
+                    }
+                ]
+            }
+        ],
+        "name": "vata",
+        "requirements": [
+            "heavy",
+            "moist",
+            "hot"
+        ],
+        "tastes": [
+            "sweet",
+            "salty",
+            "sour"
+        ]
+    },
+    {
+        "description": "",
+        "foods": {
+            "avoid": [],
+            "prefer": []
+        },
+        "name": "pitta",
+        "requirements": [
+            "light",
+            "dry",
+            "cool"
+        ],
+        "tastes": [
+            "sweet",
+            "bitter",
+            "astrigent"
+        ]
+    },
+    {
+        "description": "",
+        "foods": {
+            "avoid": [],
+            "prefer": []
+        },
+        "name": "kapha",
+        "requirements": [
+            "light",
+            "dry",
+            "hot"
+        ],
+        "tastes": [
+            "pungent",
+            "bitter",
+            "astrigent"
+        ]
+    },
+    {
+        "description": "",
+        "foods": {
+            "avoid": [],
+            "prefer": []
+        },
+        "name": "vata-pitta",
+        "requirements": [
+            "heavy",
+            "moist",
+            "cool"
+        ],
+        "tastes": [
+            "sweet",
+            "astrigent",
+            "sour"
+        ]
+    },
+    {
+        "description": "",
+        "foods": {
+            "avoid": [],
+            "prefer": []
+        },
+        "name": "pitta-kapha",
+        "requirements": [
+            "light",
+            "dry",
+            "cool"
+        ],
+        "tastes": [
+            "pungent",
+            "bitter",
+            "astrigent"
+        ]
+    },
+    {
+        "description": "",
+        "foods": {
+            "avoid": [],
+            "prefer": []
+        },
+        "name": "vata-kapha",
+        "requirements": [
+            "heavy",
+            "moist",
+            "hot"
+        ],
+        "tastes": [
+            "sweet",
+            "bitter",
+            "astrigent"
+        ]
+    }
+]

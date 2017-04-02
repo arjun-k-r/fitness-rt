@@ -1,0 +1,961 @@
+[
+    {
+        "offset": 0,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, breadfruit seeds, raw",
+        "ndbno": "12001",
+        "ds": "SR"
+    },
+    {
+        "offset": 1,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, breadfruit seeds, boiled",
+        "ndbno": "12003",
+        "ds": "SR"
+    },
+    {
+        "offset": 2,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, breadnut tree seeds, raw",
+        "ndbno": "12004",
+        "ds": "SR"
+    },
+    {
+        "offset": 3,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, breadnut tree seeds, dried",
+        "ndbno": "12005",
+        "ds": "SR"
+    },
+    {
+        "offset": 4,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, chia seeds, dried",
+        "ndbno": "12006",
+        "ds": "SR"
+    },
+    {
+        "offset": 5,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, cottonseed flour, partially defatted (glandless)",
+        "ndbno": "12007",
+        "ds": "SR"
+    },
+    {
+        "offset": 6,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, cottonseed flour, low fat (glandless)",
+        "ndbno": "12008",
+        "ds": "SR"
+    },
+    {
+        "offset": 7,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, cottonseed meal, partially defatted (glandless)",
+        "ndbno": "12011",
+        "ds": "SR"
+    },
+    {
+        "offset": 8,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, hemp seed, hulled",
+        "ndbno": "12012",
+        "ds": "SR"
+    },
+    {
+        "offset": 9,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, lotus seeds, dried",
+        "ndbno": "12013",
+        "ds": "SR"
+    },
+    {
+        "offset": 10,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, pumpkin and squash seed kernels, dried",
+        "ndbno": "12014",
+        "ds": "SR"
+    },
+    {
+        "offset": 11,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, pumpkin and squash seed kernels, roasted, without salt",
+        "ndbno": "12016",
+        "ds": "SR"
+    },
+    {
+        "offset": 12,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, safflower seed kernels, dried",
+        "ndbno": "12021",
+        "ds": "SR"
+    },
+    {
+        "offset": 13,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, safflower seed meal, partially defatted",
+        "ndbno": "12022",
+        "ds": "SR"
+    },
+    {
+        "offset": 14,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sesame seeds, whole, dried",
+        "ndbno": "12023",
+        "ds": "SR"
+    },
+    {
+        "offset": 15,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sesame seeds, whole, roasted and toasted",
+        "ndbno": "12024",
+        "ds": "SR"
+    },
+    {
+        "offset": 16,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sesame seed kernels, toasted, without salt added (decorticated)",
+        "ndbno": "12029",
+        "ds": "SR"
+    },
+    {
+        "offset": 17,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sesame flour, partially defatted",
+        "ndbno": "12032",
+        "ds": "SR"
+    },
+    {
+        "offset": 18,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sesame flour, low-fat",
+        "ndbno": "12033",
+        "ds": "SR"
+    },
+    {
+        "offset": 19,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sesame meal, partially defatted",
+        "ndbno": "12034",
+        "ds": "SR"
+    },
+    {
+        "offset": 20,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sunflower seed kernels, dried",
+        "ndbno": "12036",
+        "ds": "SR"
+    },
+    {
+        "offset": 21,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sunflower seed kernels, dry roasted, without salt",
+        "ndbno": "12037",
+        "ds": "SR"
+    },
+    {
+        "offset": 22,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sunflower seed kernels, oil roasted, without salt",
+        "ndbno": "12038",
+        "ds": "SR"
+    },
+    {
+        "offset": 23,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sunflower seed kernels, toasted, without salt",
+        "ndbno": "12039",
+        "ds": "SR"
+    },
+    {
+        "offset": 24,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sunflower seed butter, without salt",
+        "ndbno": "12040",
+        "ds": "SR"
+    },
+    {
+        "offset": 25,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sunflower seed flour, partially defatted",
+        "ndbno": "12041",
+        "ds": "SR"
+    },
+    {
+        "offset": 26,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, acorns, raw",
+        "ndbno": "12058",
+        "ds": "SR"
+    },
+    {
+        "offset": 27,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, acorns, dried",
+        "ndbno": "12059",
+        "ds": "SR"
+    },
+    {
+        "offset": 28,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, acorn flour, full fat",
+        "ndbno": "12060",
+        "ds": "SR"
+    },
+    {
+        "offset": 29,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, almonds",
+        "ndbno": "12061",
+        "ds": "SR"
+    },
+    {
+        "offset": 30,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, almonds, blanched",
+        "ndbno": "12062",
+        "ds": "SR"
+    },
+    {
+        "offset": 31,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, almonds, dry roasted, without salt added",
+        "ndbno": "12063",
+        "ds": "SR"
+    },
+    {
+        "offset": 32,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, almonds, oil roasted, without salt added",
+        "ndbno": "12065",
+        "ds": "SR"
+    },
+    {
+        "offset": 33,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, almond paste",
+        "ndbno": "12071",
+        "ds": "SR"
+    },
+    {
+        "offset": 34,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, beechnuts, dried",
+        "ndbno": "12077",
+        "ds": "SR"
+    },
+    {
+        "offset": 35,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, brazilnuts, dried, unblanched",
+        "ndbno": "12078",
+        "ds": "SR"
+    },
+    {
+        "offset": 36,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, butternuts, dried",
+        "ndbno": "12084",
+        "ds": "SR"
+    },
+    {
+        "offset": 37,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, cashew nuts, dry roasted, without salt added",
+        "ndbno": "12085",
+        "ds": "SR"
+    },
+    {
+        "offset": 38,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, cashew nuts, oil roasted, without salt added",
+        "ndbno": "12086",
+        "ds": "SR"
+    },
+    {
+        "offset": 39,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, cashew nuts, raw",
+        "ndbno": "12087",
+        "ds": "SR"
+    },
+    {
+        "offset": 40,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, cashew butter, plain, without salt added",
+        "ndbno": "12088",
+        "ds": "SR"
+    },
+    {
+        "offset": 41,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, chestnuts, chinese, raw",
+        "ndbno": "12093",
+        "ds": "SR"
+    },
+    {
+        "offset": 42,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, chestnuts, chinese, dried",
+        "ndbno": "12094",
+        "ds": "SR"
+    },
+    {
+        "offset": 43,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, chestnuts, chinese, boiled and steamed",
+        "ndbno": "12095",
+        "ds": "SR"
+    },
+    {
+        "offset": 44,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, chestnuts, chinese, roasted",
+        "ndbno": "12096",
+        "ds": "SR"
+    },
+    {
+        "offset": 45,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, chestnuts, european, raw, unpeeled",
+        "ndbno": "12097",
+        "ds": "SR"
+    },
+    {
+        "offset": 46,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, chestnuts, european, raw, peeled",
+        "ndbno": "12098",
+        "ds": "SR"
+    },
+    {
+        "offset": 47,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, chestnuts, european, dried, unpeeled",
+        "ndbno": "12099",
+        "ds": "SR"
+    },
+    {
+        "offset": 48,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, chestnuts, european, dried, peeled",
+        "ndbno": "12100",
+        "ds": "SR"
+    },
+    {
+        "offset": 49,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, chestnuts, european, boiled and steamed",
+        "ndbno": "12101",
+        "ds": "SR"
+    },
+    {
+        "offset": 50,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, coconut meat, raw",
+        "ndbno": "12104",
+        "ds": "SR"
+    },
+    {
+        "offset": 51,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, coconut meat, dried (desiccated), not sweetened",
+        "ndbno": "12108",
+        "ds": "SR"
+    },
+    {
+        "offset": 52,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, coconut meat, dried (desiccated), sweetened, flaked, packaged",
+        "ndbno": "12109",
+        "ds": "SR"
+    },
+    {
+        "offset": 53,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, coconut meat, dried (desiccated), sweetened, flaked, canned",
+        "ndbno": "12110",
+        "ds": "SR"
+    },
+    {
+        "offset": 54,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, coconut meat, dried (desiccated), toasted",
+        "ndbno": "12114",
+        "ds": "SR"
+    },
+    {
+        "offset": 55,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, coconut cream, raw (liquid expressed from grated meat)",
+        "ndbno": "12115",
+        "ds": "SR"
+    },
+    {
+        "offset": 56,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, coconut cream, canned, sweetened",
+        "ndbno": "12116",
+        "ds": "SR"
+    },
+    {
+        "offset": 57,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, coconut milk, raw (liquid expressed from grated meat and water)",
+        "ndbno": "12117",
+        "ds": "SR"
+    },
+    {
+        "offset": 58,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, coconut milk, canned (liquid expressed from grated meat and water)",
+        "ndbno": "12118",
+        "ds": "SR"
+    },
+    {
+        "offset": 59,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, coconut water (liquid from coconuts)",
+        "ndbno": "12119",
+        "ds": "SR"
+    },
+    {
+        "offset": 60,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, hazelnuts or filberts",
+        "ndbno": "12120",
+        "ds": "SR"
+    },
+    {
+        "offset": 61,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, hazelnuts or filberts, blanched",
+        "ndbno": "12121",
+        "ds": "SR"
+    },
+    {
+        "offset": 62,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, hazelnuts or filberts, dry roasted, without salt added",
+        "ndbno": "12122",
+        "ds": "SR"
+    },
+    {
+        "offset": 63,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, ginkgo nuts, raw",
+        "ndbno": "12127",
+        "ds": "SR"
+    },
+    {
+        "offset": 64,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, ginkgo nuts, dried",
+        "ndbno": "12128",
+        "ds": "SR"
+    },
+    {
+        "offset": 65,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, ginkgo nuts, canned",
+        "ndbno": "12129",
+        "ds": "SR"
+    },
+    {
+        "offset": 66,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, hickorynuts, dried",
+        "ndbno": "12130",
+        "ds": "SR"
+    },
+    {
+        "offset": 67,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, macadamia nuts, raw",
+        "ndbno": "12131",
+        "ds": "SR"
+    },
+    {
+        "offset": 68,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, macadamia nuts, dry roasted, without salt added",
+        "ndbno": "12132",
+        "ds": "SR"
+    },
+    {
+        "offset": 69,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, mixed nuts, dry roasted, with peanuts, without salt added",
+        "ndbno": "12135",
+        "ds": "SR"
+    },
+    {
+        "offset": 70,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, mixed nuts, dry roasted, with peanuts, salt added, PLANTERS pistachio blend",
+        "ndbno": "12136",
+        "ds": "SR"
+    },
+    {
+        "offset": 71,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, mixed nuts, oil roasted, with peanuts, without salt added",
+        "ndbno": "12137",
+        "ds": "SR"
+    },
+    {
+        "offset": 72,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, mixed nuts, oil roasted, without peanuts, without salt added",
+        "ndbno": "12138",
+        "ds": "SR"
+    },
+    {
+        "offset": 73,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, formulated, wheat-based, unflavored, with salt added",
+        "ndbno": "12140",
+        "ds": "SR"
+    },
+    {
+        "offset": 74,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, mixed nuts, dry roasted, with peanuts, salt added, CHOSEN ROASTER",
+        "ndbno": "12141",
+        "ds": "SR"
+    },
+    {
+        "offset": 75,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, pecans",
+        "ndbno": "12142",
+        "ds": "SR"
+    },
+    {
+        "offset": 76,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, pecans, dry roasted, without salt added",
+        "ndbno": "12143",
+        "ds": "SR"
+    },
+    {
+        "offset": 77,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, pecans, oil roasted, without salt added",
+        "ndbno": "12144",
+        "ds": "SR"
+    },
+    {
+        "offset": 78,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, pilinuts, dried",
+        "ndbno": "12145",
+        "ds": "SR"
+    },
+    {
+        "offset": 79,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, pine nuts, dried",
+        "ndbno": "12147",
+        "ds": "SR"
+    },
+    {
+        "offset": 80,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, pine nuts, pinyon, dried",
+        "ndbno": "12149",
+        "ds": "SR"
+    },
+    {
+        "offset": 81,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, pistachio nuts, raw",
+        "ndbno": "12151",
+        "ds": "SR"
+    },
+    {
+        "offset": 82,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, pistachio nuts, dry roasted, without salt added",
+        "ndbno": "12152",
+        "ds": "SR"
+    },
+    {
+        "offset": 83,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, walnuts, black, dried",
+        "ndbno": "12154",
+        "ds": "SR"
+    },
+    {
+        "offset": 84,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, walnuts, english",
+        "ndbno": "12155",
+        "ds": "SR"
+    },
+    {
+        "offset": 85,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, walnuts, glazed",
+        "ndbno": "12156",
+        "ds": "SR"
+    },
+    {
+        "offset": 86,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, walnuts, dry roasted, with salt added",
+        "ndbno": "12157",
+        "ds": "SR"
+    },
+    {
+        "offset": 87,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, breadfruit seeds, roasted",
+        "ndbno": "12158",
+        "ds": "SR"
+    },
+    {
+        "offset": 88,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, cottonseed kernels, roasted (glandless)",
+        "ndbno": "12160",
+        "ds": "SR"
+    },
+    {
+        "offset": 89,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, pumpkin and squash seeds, whole, roasted, without salt",
+        "ndbno": "12163",
+        "ds": "SR"
+    },
+    {
+        "offset": 90,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sesame butter, tahini, from roasted and toasted kernels (most common type)",
+        "ndbno": "12166",
+        "ds": "SR"
+    },
+    {
+        "offset": 91,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, chestnuts, european, roasted",
+        "ndbno": "12167",
+        "ds": "SR"
+    },
+    {
+        "offset": 92,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sesame butter, paste",
+        "ndbno": "12169",
+        "ds": "SR"
+    },
+    {
+        "offset": 93,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sesame flour, high-fat",
+        "ndbno": "12170",
+        "ds": "SR"
+    },
+    {
+        "offset": 94,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sesame butter, tahini, from unroasted kernels (non-chemically removed seed coat)",
+        "ndbno": "12171",
+        "ds": "SR"
+    },
+    {
+        "offset": 95,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, watermelon seed kernels, dried",
+        "ndbno": "12174",
+        "ds": "SR"
+    },
+    {
+        "offset": 96,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, chestnuts, japanese, dried",
+        "ndbno": "12175",
+        "ds": "SR"
+    },
+    {
+        "offset": 97,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, coconut milk, frozen (liquid expressed from grated meat and water)",
+        "ndbno": "12176",
+        "ds": "SR"
+    },
+    {
+        "offset": 98,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, coconut meat, dried (desiccated), creamed",
+        "ndbno": "12177",
+        "ds": "SR"
+    },
+    {
+        "offset": 99,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, coconut meat, dried (desiccated), sweetened, shredded",
+        "ndbno": "12179",
+        "ds": "SR"
+    },
+    {
+        "offset": 100,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sisymbrium sp. seeds, whole, dried",
+        "ndbno": "12193",
+        "ds": "SR"
+    },
+    {
+        "offset": 101,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, almond butter, plain, without salt added",
+        "ndbno": "12195",
+        "ds": "SR"
+    },
+    {
+        "offset": 102,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sesame butter, tahini, from raw and stone ground kernels",
+        "ndbno": "12198",
+        "ds": "SR"
+    },
+    {
+        "offset": 103,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, formulated, wheat-based, all flavors except macadamia, without salt",
+        "ndbno": "12200",
+        "ds": "SR"
+    },
+    {
+        "offset": 104,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sesame seed kernels, dried (decorticated)",
+        "ndbno": "12201",
+        "ds": "SR"
+    },
+    {
+        "offset": 105,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, chestnuts, japanese, raw",
+        "ndbno": "12202",
+        "ds": "SR"
+    },
+    {
+        "offset": 106,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, chestnuts, japanese, boiled and steamed",
+        "ndbno": "12203",
+        "ds": "SR"
+    },
+    {
+        "offset": 107,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, chestnuts, japanese, roasted",
+        "ndbno": "12204",
+        "ds": "SR"
+    },
+    {
+        "offset": 108,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, lotus seeds, raw",
+        "ndbno": "12205",
+        "ds": "SR"
+    },
+    {
+        "offset": 109,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, almonds, honey roasted, unblanched",
+        "ndbno": "12206",
+        "ds": "SR"
+    },
+    {
+        "offset": 110,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, flaxseed",
+        "ndbno": "12220",
+        "ds": "SR"
+    },
+    {
+        "offset": 111,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, pumpkin and squash seed kernels, roasted, with salt added",
+        "ndbno": "12516",
+        "ds": "SR"
+    },
+    {
+        "offset": 112,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sesame seed kernels, toasted, with salt added (decorticated)",
+        "ndbno": "12529",
+        "ds": "SR"
+    },
+    {
+        "offset": 113,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sunflower seed kernels from shell, dry roasted, with salt added",
+        "ndbno": "12536",
+        "ds": "SR"
+    },
+    {
+        "offset": 114,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sunflower seed kernels, dry roasted, with salt added",
+        "ndbno": "12537",
+        "ds": "SR"
+    },
+    {
+        "offset": 115,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sunflower seed kernels, oil roasted, with salt added",
+        "ndbno": "12538",
+        "ds": "SR"
+    },
+    {
+        "offset": 116,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sunflower seed kernels, toasted, with salt added",
+        "ndbno": "12539",
+        "ds": "SR"
+    },
+    {
+        "offset": 117,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sunflower seed butter, with salt added",
+        "ndbno": "12540",
+        "ds": "SR"
+    },
+    {
+        "offset": 118,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, almonds, dry roasted, with salt added",
+        "ndbno": "12563",
+        "ds": "SR"
+    },
+    {
+        "offset": 119,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, almonds, oil roasted, with salt added",
+        "ndbno": "12565",
+        "ds": "SR"
+    },
+    {
+        "offset": 120,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, almonds, oil roasted, with salt added, smoke flavor",
+        "ndbno": "12567",
+        "ds": "SR"
+    },
+    {
+        "offset": 121,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, cashew nuts, dry roasted, with salt added",
+        "ndbno": "12585",
+        "ds": "SR"
+    },
+    {
+        "offset": 122,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, cashew nuts, oil roasted, with salt added",
+        "ndbno": "12586",
+        "ds": "SR"
+    },
+    {
+        "offset": 123,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, cashew butter, plain, with salt added",
+        "ndbno": "12588",
+        "ds": "SR"
+    },
+    {
+        "offset": 124,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, macadamia nuts, dry roasted, with salt added",
+        "ndbno": "12632",
+        "ds": "SR"
+    },
+    {
+        "offset": 125,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, mixed nuts, dry roasted, with peanuts, with salt added",
+        "ndbno": "12635",
+        "ds": "SR"
+    },
+    {
+        "offset": 126,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, mixed nuts, oil roasted, with peanuts, with salt added",
+        "ndbno": "12637",
+        "ds": "SR"
+    },
+    {
+        "offset": 127,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, mixed nuts, oil roasted, without peanuts, with salt added",
+        "ndbno": "12638",
+        "ds": "SR"
+    },
+    {
+        "offset": 128,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, pecans, dry roasted, with salt added",
+        "ndbno": "12643",
+        "ds": "SR"
+    },
+    {
+        "offset": 129,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, pecans, oil roasted, with salt added",
+        "ndbno": "12644",
+        "ds": "SR"
+    },
+    {
+        "offset": 130,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, pistachio nuts, dry roasted, with salt added",
+        "ndbno": "12652",
+        "ds": "SR"
+    },
+    {
+        "offset": 131,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, pumpkin and squash seeds, whole, roasted, with salt added",
+        "ndbno": "12663",
+        "ds": "SR"
+    },
+    {
+        "offset": 132,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, almonds, oil roasted, lightly salted",
+        "ndbno": "12665",
+        "ds": "SR"
+    },
+    {
+        "offset": 133,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, almond butter, plain, with salt added",
+        "ndbno": "12695",
+        "ds": "SR"
+    },
+    {
+        "offset": 134,
+        "group": "Nut and Seed Products",
+        "name": "Seeds, sesame butter, tahini, type of kernels unspecified",
+        "ndbno": "12698",
+        "ds": "SR"
+    },
+    {
+        "offset": 135,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, mixed nuts, oil roasted, with peanuts, lightly salted",
+        "ndbno": "12737",
+        "ds": "SR"
+    },
+    {
+        "offset": 136,
+        "group": "Nut and Seed Products",
+        "name": "Nuts, mixed nuts, oil roasted, without peanuts, lightly salted",
+        "ndbno": "12738",
+        "ds": "SR"
+    }
+]

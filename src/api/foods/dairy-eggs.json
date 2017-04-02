@@ -1,0 +1,1983 @@
+[
+    {
+        "offset": 0,
+        "group": "Dairy and Egg Products",
+        "name": "Butter, salted",
+        "ndbno": "01001",
+        "ds": "SR"
+    },
+    {
+        "offset": 1,
+        "group": "Dairy and Egg Products",
+        "name": "Butter, whipped, with salt",
+        "ndbno": "01002",
+        "ds": "SR"
+    },
+    {
+        "offset": 2,
+        "group": "Dairy and Egg Products",
+        "name": "Butter oil, anhydrous",
+        "ndbno": "01003",
+        "ds": "SR"
+    },
+    {
+        "offset": 3,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, blue",
+        "ndbno": "01004",
+        "ds": "SR"
+    },
+    {
+        "offset": 4,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, brick",
+        "ndbno": "01005",
+        "ds": "SR"
+    },
+    {
+        "offset": 5,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, brie",
+        "ndbno": "01006",
+        "ds": "SR"
+    },
+    {
+        "offset": 6,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, camembert",
+        "ndbno": "01007",
+        "ds": "SR"
+    },
+    {
+        "offset": 7,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, caraway",
+        "ndbno": "01008",
+        "ds": "SR"
+    },
+    {
+        "offset": 8,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cheddar",
+        "ndbno": "01009",
+        "ds": "SR"
+    },
+    {
+        "offset": 9,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cheshire",
+        "ndbno": "01010",
+        "ds": "SR"
+    },
+    {
+        "offset": 10,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, colby",
+        "ndbno": "01011",
+        "ds": "SR"
+    },
+    {
+        "offset": 11,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cottage, creamed, large or small curd",
+        "ndbno": "01012",
+        "ds": "SR"
+    },
+    {
+        "offset": 12,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cottage, creamed, with fruit",
+        "ndbno": "01013",
+        "ds": "SR"
+    },
+    {
+        "offset": 13,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cottage, nonfat, uncreamed, dry, large or small curd",
+        "ndbno": "01014",
+        "ds": "SR"
+    },
+    {
+        "offset": 14,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cottage, lowfat, 2% milkfat",
+        "ndbno": "01015",
+        "ds": "SR"
+    },
+    {
+        "offset": 15,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cottage, lowfat, 1% milkfat",
+        "ndbno": "01016",
+        "ds": "SR"
+    },
+    {
+        "offset": 16,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cream",
+        "ndbno": "01017",
+        "ds": "SR"
+    },
+    {
+        "offset": 17,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, edam",
+        "ndbno": "01018",
+        "ds": "SR"
+    },
+    {
+        "offset": 18,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, feta",
+        "ndbno": "01019",
+        "ds": "SR"
+    },
+    {
+        "offset": 19,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, fontina",
+        "ndbno": "01020",
+        "ds": "SR"
+    },
+    {
+        "offset": 20,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, gjetost",
+        "ndbno": "01021",
+        "ds": "SR"
+    },
+    {
+        "offset": 21,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, gouda",
+        "ndbno": "01022",
+        "ds": "SR"
+    },
+    {
+        "offset": 22,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, gruyere",
+        "ndbno": "01023",
+        "ds": "SR"
+    },
+    {
+        "offset": 23,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, limburger",
+        "ndbno": "01024",
+        "ds": "SR"
+    },
+    {
+        "offset": 24,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, monterey",
+        "ndbno": "01025",
+        "ds": "SR"
+    },
+    {
+        "offset": 25,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, mozzarella, whole milk",
+        "ndbno": "01026",
+        "ds": "SR"
+    },
+    {
+        "offset": 26,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, mozzarella, whole milk, low moisture",
+        "ndbno": "01027",
+        "ds": "SR"
+    },
+    {
+        "offset": 27,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, mozzarella, part skim milk",
+        "ndbno": "01028",
+        "ds": "SR"
+    },
+    {
+        "offset": 28,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, mozzarella, low moisture, part-skim",
+        "ndbno": "01029",
+        "ds": "SR"
+    },
+    {
+        "offset": 29,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, muenster",
+        "ndbno": "01030",
+        "ds": "SR"
+    },
+    {
+        "offset": 30,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, neufchatel",
+        "ndbno": "01031",
+        "ds": "SR"
+    },
+    {
+        "offset": 31,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, parmesan, grated",
+        "ndbno": "01032",
+        "ds": "SR"
+    },
+    {
+        "offset": 32,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, parmesan, hard",
+        "ndbno": "01033",
+        "ds": "SR"
+    },
+    {
+        "offset": 33,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, port de salut",
+        "ndbno": "01034",
+        "ds": "SR"
+    },
+    {
+        "offset": 34,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, provolone",
+        "ndbno": "01035",
+        "ds": "SR"
+    },
+    {
+        "offset": 35,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, ricotta, whole milk",
+        "ndbno": "01036",
+        "ds": "SR"
+    },
+    {
+        "offset": 36,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, ricotta, part skim milk",
+        "ndbno": "01037",
+        "ds": "SR"
+    },
+    {
+        "offset": 37,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, romano",
+        "ndbno": "01038",
+        "ds": "SR"
+    },
+    {
+        "offset": 38,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, roquefort",
+        "ndbno": "01039",
+        "ds": "SR"
+    },
+    {
+        "offset": 39,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, swiss",
+        "ndbno": "01040",
+        "ds": "SR"
+    },
+    {
+        "offset": 40,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, tilsit",
+        "ndbno": "01041",
+        "ds": "SR"
+    },
+    {
+        "offset": 41,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, pasteurized process, American, fortified with vitamin D",
+        "ndbno": "01042",
+        "ds": "SR"
+    },
+    {
+        "offset": 42,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, pasteurized process, pimento",
+        "ndbno": "01043",
+        "ds": "SR"
+    },
+    {
+        "offset": 43,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, pasteurized process, swiss",
+        "ndbno": "01044",
+        "ds": "SR"
+    },
+    {
+        "offset": 44,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese food, cold pack, American",
+        "ndbno": "01045",
+        "ds": "SR"
+    },
+    {
+        "offset": 45,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese food, pasteurized process, American, vitamin D fortified",
+        "ndbno": "01046",
+        "ds": "SR"
+    },
+    {
+        "offset": 46,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese food, pasteurized process, swiss",
+        "ndbno": "01047",
+        "ds": "SR"
+    },
+    {
+        "offset": 47,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese spread, pasteurized process, American",
+        "ndbno": "01048",
+        "ds": "SR"
+    },
+    {
+        "offset": 48,
+        "group": "Dairy and Egg Products",
+        "name": "Cream, fluid, half and half",
+        "ndbno": "01049",
+        "ds": "SR"
+    },
+    {
+        "offset": 49,
+        "group": "Dairy and Egg Products",
+        "name": "Cream, fluid, light (coffee cream or table cream)",
+        "ndbno": "01050",
+        "ds": "SR"
+    },
+    {
+        "offset": 50,
+        "group": "Dairy and Egg Products",
+        "name": "Cream, fluid, light whipping",
+        "ndbno": "01052",
+        "ds": "SR"
+    },
+    {
+        "offset": 51,
+        "group": "Dairy and Egg Products",
+        "name": "Cream, fluid, heavy whipping",
+        "ndbno": "01053",
+        "ds": "SR"
+    },
+    {
+        "offset": 52,
+        "group": "Dairy and Egg Products",
+        "name": "Cream, whipped, cream topping, pressurized",
+        "ndbno": "01054",
+        "ds": "SR"
+    },
+    {
+        "offset": 53,
+        "group": "Dairy and Egg Products",
+        "name": "Cream, sour, reduced fat, cultured",
+        "ndbno": "01055",
+        "ds": "SR"
+    },
+    {
+        "offset": 54,
+        "group": "Dairy and Egg Products",
+        "name": "Cream, sour, cultured",
+        "ndbno": "01056",
+        "ds": "SR"
+    },
+    {
+        "offset": 55,
+        "group": "Dairy and Egg Products",
+        "name": "Eggnog",
+        "ndbno": "01057",
+        "ds": "SR"
+    },
+    {
+        "offset": 56,
+        "group": "Dairy and Egg Products",
+        "name": "Sour dressing, non-butterfat, cultured, filled cream-type",
+        "ndbno": "01058",
+        "ds": "SR"
+    },
+    {
+        "offset": 57,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, filled, fluid, with blend of hydrogenated vegetable oils",
+        "ndbno": "01059",
+        "ds": "SR"
+    },
+    {
+        "offset": 58,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, filled, fluid, with lauric acid oil",
+        "ndbno": "01060",
+        "ds": "SR"
+    },
+    {
+        "offset": 59,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, American, nonfat or fat free",
+        "ndbno": "01061",
+        "ds": "SR"
+    },
+    {
+        "offset": 60,
+        "group": "Dairy and Egg Products",
+        "name": "Cream substitute, liquid, with hydrogenated vegetable oil and soy protein",
+        "ndbno": "01067",
+        "ds": "SR"
+    },
+    {
+        "offset": 61,
+        "group": "Dairy and Egg Products",
+        "name": "Cream substitute, liquid, with lauric acid oil and sodium caseinate",
+        "ndbno": "01068",
+        "ds": "SR"
+    },
+    {
+        "offset": 62,
+        "group": "Dairy and Egg Products",
+        "name": "Cream substitute, powdered",
+        "ndbno": "01069",
+        "ds": "SR"
+    },
+    {
+        "offset": 63,
+        "group": "Dairy and Egg Products",
+        "name": "Dessert topping, powdered",
+        "ndbno": "01070",
+        "ds": "SR"
+    },
+    {
+        "offset": 64,
+        "group": "Dairy and Egg Products",
+        "name": "Dessert topping, powdered, 1.5 ounce prepared with 1/2 cup milk",
+        "ndbno": "01071",
+        "ds": "SR"
+    },
+    {
+        "offset": 65,
+        "group": "Dairy and Egg Products",
+        "name": "Dessert topping, pressurized",
+        "ndbno": "01072",
+        "ds": "SR"
+    },
+    {
+        "offset": 66,
+        "group": "Dairy and Egg Products",
+        "name": "Dessert topping, semi solid, frozen",
+        "ndbno": "01073",
+        "ds": "SR"
+    },
+    {
+        "offset": 67,
+        "group": "Dairy and Egg Products",
+        "name": "Sour cream, imitation, cultured",
+        "ndbno": "01074",
+        "ds": "SR"
+    },
+    {
+        "offset": 68,
+        "group": "Dairy and Egg Products",
+        "name": "Milk substitutes, fluid, with lauric acid oil",
+        "ndbno": "01076",
+        "ds": "SR"
+    },
+    {
+        "offset": 69,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, whole, 3.25% milkfat, with added vitamin D",
+        "ndbno": "01077",
+        "ds": "SR"
+    },
+    {
+        "offset": 70,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, producer, fluid, 3.7% milkfat",
+        "ndbno": "01078",
+        "ds": "SR"
+    },
+    {
+        "offset": 71,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, reduced fat, fluid, 2% milkfat, with added vitamin A and vitamin D",
+        "ndbno": "01079",
+        "ds": "SR"
+    },
+    {
+        "offset": 72,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, reduced fat, fluid, 2% milkfat, with added nonfat milk solids and vitamin A and vitamin D",
+        "ndbno": "01080",
+        "ds": "SR"
+    },
+    {
+        "offset": 73,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, reduced fat, fluid, 2% milkfat, protein fortified, with added vitamin A and vitamin D",
+        "ndbno": "01081",
+        "ds": "SR"
+    },
+    {
+        "offset": 74,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, lowfat, fluid, 1% milkfat, with added vitamin A and vitamin D",
+        "ndbno": "01082",
+        "ds": "SR"
+    },
+    {
+        "offset": 75,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, lowfat, fluid, 1% milkfat, with added nonfat milk solids, vitamin A and vitamin D",
+        "ndbno": "01083",
+        "ds": "SR"
+    },
+    {
+        "offset": 76,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, lowfat, fluid, 1% milkfat, protein fortified, with added vitamin A and vitamin D",
+        "ndbno": "01084",
+        "ds": "SR"
+    },
+    {
+        "offset": 77,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, nonfat, fluid, with added vitamin A and vitamin D (fat free or skim)",
+        "ndbno": "01085",
+        "ds": "SR"
+    },
+    {
+        "offset": 78,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, nonfat, fluid, with added nonfat milk solids, vitamin A and vitamin D (fat free or skim)",
+        "ndbno": "01086",
+        "ds": "SR"
+    },
+    {
+        "offset": 79,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, nonfat, fluid, protein fortified, with added vitamin A and vitamin D (fat free and skim)",
+        "ndbno": "01087",
+        "ds": "SR"
+    },
+    {
+        "offset": 80,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, buttermilk, fluid, cultured, lowfat",
+        "ndbno": "01088",
+        "ds": "SR"
+    },
+    {
+        "offset": 81,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, low sodium, fluid",
+        "ndbno": "01089",
+        "ds": "SR"
+    },
+    {
+        "offset": 82,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, dry, whole, with added vitamin D",
+        "ndbno": "01090",
+        "ds": "SR"
+    },
+    {
+        "offset": 83,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, dry, nonfat, regular, without added vitamin A and vitamin D",
+        "ndbno": "01091",
+        "ds": "SR"
+    },
+    {
+        "offset": 84,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, dry, nonfat, instant, with added vitamin A and vitamin D",
+        "ndbno": "01092",
+        "ds": "SR"
+    },
+    {
+        "offset": 85,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, dry, nonfat, calcium reduced",
+        "ndbno": "01093",
+        "ds": "SR"
+    },
+    {
+        "offset": 86,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, buttermilk, dried",
+        "ndbno": "01094",
+        "ds": "SR"
+    },
+    {
+        "offset": 87,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, canned, condensed, sweetened",
+        "ndbno": "01095",
+        "ds": "SR"
+    },
+    {
+        "offset": 88,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, canned, evaporated, with added vitamin D and without added vitamin A",
+        "ndbno": "01096",
+        "ds": "SR"
+    },
+    {
+        "offset": 89,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, canned, evaporated, nonfat, with added vitamin A and vitamin D",
+        "ndbno": "01097",
+        "ds": "SR"
+    },
+    {
+        "offset": 90,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, chocolate, fluid, commercial, whole, with added vitamin A and vitamin D",
+        "ndbno": "01102",
+        "ds": "SR"
+    },
+    {
+        "offset": 91,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, chocolate, fluid, commercial, reduced fat, with added vitamin A and vitamin D",
+        "ndbno": "01103",
+        "ds": "SR"
+    },
+    {
+        "offset": 92,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, chocolate, lowfat, with added vitamin A and vitamin D",
+        "ndbno": "01104",
+        "ds": "SR"
+    },
+    {
+        "offset": 93,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, chocolate beverage, hot cocoa, homemade",
+        "ndbno": "01105",
+        "ds": "SR"
+    },
+    {
+        "offset": 94,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, goat, fluid, with added vitamin D",
+        "ndbno": "01106",
+        "ds": "SR"
+    },
+    {
+        "offset": 95,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, human, mature, fluid",
+        "ndbno": "01107",
+        "ds": "SR"
+    },
+    {
+        "offset": 96,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, indian buffalo, fluid",
+        "ndbno": "01108",
+        "ds": "SR"
+    },
+    {
+        "offset": 97,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, sheep, fluid",
+        "ndbno": "01109",
+        "ds": "SR"
+    },
+    {
+        "offset": 98,
+        "group": "Dairy and Egg Products",
+        "name": "Milk shakes, thick chocolate",
+        "ndbno": "01110",
+        "ds": "SR"
+    },
+    {
+        "offset": 99,
+        "group": "Dairy and Egg Products",
+        "name": "Milk shakes, thick vanilla",
+        "ndbno": "01111",
+        "ds": "SR"
+    },
+    {
+        "offset": 100,
+        "group": "Dairy and Egg Products",
+        "name": "Whey, acid, fluid",
+        "ndbno": "01112",
+        "ds": "SR"
+    },
+    {
+        "offset": 101,
+        "group": "Dairy and Egg Products",
+        "name": "Whey, acid, dried",
+        "ndbno": "01113",
+        "ds": "SR"
+    },
+    {
+        "offset": 102,
+        "group": "Dairy and Egg Products",
+        "name": "Whey, sweet, fluid",
+        "ndbno": "01114",
+        "ds": "SR"
+    },
+    {
+        "offset": 103,
+        "group": "Dairy and Egg Products",
+        "name": "Whey, sweet, dried",
+        "ndbno": "01115",
+        "ds": "SR"
+    },
+    {
+        "offset": 104,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, plain, whole milk, 8 grams protein per 8 ounce",
+        "ndbno": "01116",
+        "ds": "SR"
+    },
+    {
+        "offset": 105,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, plain, low fat, 12 grams protein per 8 ounce",
+        "ndbno": "01117",
+        "ds": "SR"
+    },
+    {
+        "offset": 106,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, plain, skim milk, 13 grams protein per 8 ounce",
+        "ndbno": "01118",
+        "ds": "SR"
+    },
+    {
+        "offset": 107,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, vanilla, low fat, 11 grams protein per 8 ounce",
+        "ndbno": "01119",
+        "ds": "SR"
+    },
+    {
+        "offset": 108,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, fruit, low fat, 9 grams protein per 8 ounce",
+        "ndbno": "01120",
+        "ds": "SR"
+    },
+    {
+        "offset": 109,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, fruit, low fat, 10 grams protein per 8 ounce",
+        "ndbno": "01121",
+        "ds": "SR"
+    },
+    {
+        "offset": 110,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, fruit, low fat, 11 grams protein per 8 ounce",
+        "ndbno": "01122",
+        "ds": "SR"
+    },
+    {
+        "offset": 111,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, whole, raw, fresh",
+        "ndbno": "01123",
+        "ds": "SR"
+    },
+    {
+        "offset": 112,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, white, raw, fresh",
+        "ndbno": "01124",
+        "ds": "SR"
+    },
+    {
+        "offset": 113,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, yolk, raw, fresh",
+        "ndbno": "01125",
+        "ds": "SR"
+    },
+    {
+        "offset": 114,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, yolk, raw, frozen, pasteurized",
+        "ndbno": "01126",
+        "ds": "SR"
+    },
+    {
+        "offset": 115,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, yolk, raw, frozen, sugared, pasteurized",
+        "ndbno": "01127",
+        "ds": "SR"
+    },
+    {
+        "offset": 116,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, whole, cooked, fried",
+        "ndbno": "01128",
+        "ds": "SR"
+    },
+    {
+        "offset": 117,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, whole, cooked, hard-boiled",
+        "ndbno": "01129",
+        "ds": "SR"
+    },
+    {
+        "offset": 118,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, whole, cooked, omelet",
+        "ndbno": "01130",
+        "ds": "SR"
+    },
+    {
+        "offset": 119,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, whole, cooked, poached",
+        "ndbno": "01131",
+        "ds": "SR"
+    },
+    {
+        "offset": 120,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, whole, cooked, scrambled",
+        "ndbno": "01132",
+        "ds": "SR"
+    },
+    {
+        "offset": 121,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, whole, dried",
+        "ndbno": "01133",
+        "ds": "SR"
+    },
+    {
+        "offset": 122,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, whole, dried, stabilized, glucose reduced",
+        "ndbno": "01134",
+        "ds": "SR"
+    },
+    {
+        "offset": 123,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, white, dried, flakes, stabilized, glucose reduced",
+        "ndbno": "01135",
+        "ds": "SR"
+    },
+    {
+        "offset": 124,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, white, dried, powder, stabilized, glucose reduced",
+        "ndbno": "01136",
+        "ds": "SR"
+    },
+    {
+        "offset": 125,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, yolk, dried",
+        "ndbno": "01137",
+        "ds": "SR"
+    },
+    {
+        "offset": 126,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, duck, whole, fresh, raw",
+        "ndbno": "01138",
+        "ds": "SR"
+    },
+    {
+        "offset": 127,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, goose, whole, fresh, raw",
+        "ndbno": "01139",
+        "ds": "SR"
+    },
+    {
+        "offset": 128,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, quail, whole, fresh, raw",
+        "ndbno": "01140",
+        "ds": "SR"
+    },
+    {
+        "offset": 129,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, turkey, whole, fresh, raw",
+        "ndbno": "01141",
+        "ds": "SR"
+    },
+    {
+        "offset": 130,
+        "group": "Dairy and Egg Products",
+        "name": "Egg substitute, powder",
+        "ndbno": "01144",
+        "ds": "SR"
+    },
+    {
+        "offset": 131,
+        "group": "Dairy and Egg Products",
+        "name": "Butter, without salt",
+        "ndbno": "01145",
+        "ds": "SR"
+    },
+    {
+        "offset": 132,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, parmesan, shredded",
+        "ndbno": "01146",
+        "ds": "SR"
+    },
+    {
+        "offset": 133,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, nonfat, fluid, without added vitamin A and vitamin D (fat free or skim)",
+        "ndbno": "01151",
+        "ds": "SR"
+    },
+    {
+        "offset": 134,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, reduced fat, fluid, 2% milkfat, with added nonfat milk solids, without added vitamin A",
+        "ndbno": "01152",
+        "ds": "SR"
+    },
+    {
+        "offset": 135,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, canned, evaporated, with added vitamin A",
+        "ndbno": "01153",
+        "ds": "SR"
+    },
+    {
+        "offset": 136,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, dry, nonfat, regular, with added vitamin A and vitamin D",
+        "ndbno": "01154",
+        "ds": "SR"
+    },
+    {
+        "offset": 137,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, dry, nonfat, instant, without added vitamin A and vitamin D",
+        "ndbno": "01155",
+        "ds": "SR"
+    },
+    {
+        "offset": 138,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, goat, hard type",
+        "ndbno": "01156",
+        "ds": "SR"
+    },
+    {
+        "offset": 139,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, goat, semisoft type",
+        "ndbno": "01157",
+        "ds": "SR"
+    },
+    {
+        "offset": 140,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, goat, soft type",
+        "ndbno": "01159",
+        "ds": "SR"
+    },
+    {
+        "offset": 141,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, yolk, raw, frozen, salted, pasteurized",
+        "ndbno": "01160",
+        "ds": "SR"
+    },
+    {
+        "offset": 142,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese substitute, mozzarella",
+        "ndbno": "01161",
+        "ds": "SR"
+    },
+    {
+        "offset": 143,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese sauce, prepared from recipe",
+        "ndbno": "01164",
+        "ds": "SR"
+    },
+    {
+        "offset": 144,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, mexican, queso anejo",
+        "ndbno": "01165",
+        "ds": "SR"
+    },
+    {
+        "offset": 145,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, mexican, queso asadero",
+        "ndbno": "01166",
+        "ds": "SR"
+    },
+    {
+        "offset": 146,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, mexican, queso chihuahua",
+        "ndbno": "01167",
+        "ds": "SR"
+    },
+    {
+        "offset": 147,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, low fat, cheddar or colby",
+        "ndbno": "01168",
+        "ds": "SR"
+    },
+    {
+        "offset": 148,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, low-sodium, cheddar or colby",
+        "ndbno": "01169",
+        "ds": "SR"
+    },
+    {
+        "offset": 149,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, whole, raw, frozen, pasteurized",
+        "ndbno": "01171",
+        "ds": "SR"
+    },
+    {
+        "offset": 150,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, white, raw, frozen, pasteurized",
+        "ndbno": "01172",
+        "ds": "SR"
+    },
+    {
+        "offset": 151,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, white, dried",
+        "ndbno": "01173",
+        "ds": "SR"
+    },
+    {
+        "offset": 152,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, reduced fat, fluid, 2% milkfat, without added vitamin A and vitamin D",
+        "ndbno": "01174",
+        "ds": "SR"
+    },
+    {
+        "offset": 153,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, fluid, 1% fat, without added vitamin A and vitamin D",
+        "ndbno": "01175",
+        "ds": "SR"
+    },
+    {
+        "offset": 154,
+        "group": "Dairy and Egg Products",
+        "name": "Sour cream, reduced fat",
+        "ndbno": "01178",
+        "ds": "SR"
+    },
+    {
+        "offset": 155,
+        "group": "Dairy and Egg Products",
+        "name": "Sour cream, light",
+        "ndbno": "01179",
+        "ds": "SR"
+    },
+    {
+        "offset": 156,
+        "group": "Dairy and Egg Products",
+        "name": "Sour cream, fat free",
+        "ndbno": "01180",
+        "ds": "SR"
+    },
+    {
+        "offset": 157,
+        "group": "Dairy and Egg Products",
+        "name": "USDA Commodity, cheese, cheddar, reduced fat",
+        "ndbno": "01182",
+        "ds": "SR"
+    },
+    {
+        "offset": 158,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, vanilla or lemon flavor, nonfat milk, sweetened with low-calorie sweetener",
+        "ndbno": "01184",
+        "ds": "SR"
+    },
+    {
+        "offset": 159,
+        "group": "Dairy and Egg Products",
+        "name": "Parmesan cheese topping, fat free",
+        "ndbno": "01185",
+        "ds": "SR"
+    },
+    {
+        "offset": 160,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cream, fat free",
+        "ndbno": "01186",
+        "ds": "SR"
+    },
+    {
+        "offset": 161,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, chocolate, nonfat milk",
+        "ndbno": "01187",
+        "ds": "SR"
+    },
+    {
+        "offset": 162,
+        "group": "Dairy and Egg Products",
+        "name": "KRAFT CHEEZ WHIZ Pasteurized Process Cheese Sauce",
+        "ndbno": "01188",
+        "ds": "SR"
+    },
+    {
+        "offset": 163,
+        "group": "Dairy and Egg Products",
+        "name": "KRAFT CHEEZ WHIZ LIGHT Pasteurized Process Cheese Product",
+        "ndbno": "01189",
+        "ds": "SR"
+    },
+    {
+        "offset": 164,
+        "group": "Dairy and Egg Products",
+        "name": "KRAFT FREE Singles American Nonfat Pasteurized Process Cheese Product",
+        "ndbno": "01190",
+        "ds": "SR"
+    },
+    {
+        "offset": 165,
+        "group": "Dairy and Egg Products",
+        "name": "KRAFT VELVEETA Pasteurized Process Cheese Spread",
+        "ndbno": "01191",
+        "ds": "SR"
+    },
+    {
+        "offset": 166,
+        "group": "Dairy and Egg Products",
+        "name": "KRAFT VELVEETA LIGHT Reduced Fat Pasteurized Process Cheese Product",
+        "ndbno": "01192",
+        "ds": "SR"
+    },
+    {
+        "offset": 167,
+        "group": "Dairy and Egg Products",
+        "name": "KRAFT BREAKSTONE'S Reduced Fat Sour Cream",
+        "ndbno": "01193",
+        "ds": "SR"
+    },
+    {
+        "offset": 168,
+        "group": "Dairy and Egg Products",
+        "name": "KRAFT BREAKSTONE'S FREE Fat Free Sour Cream",
+        "ndbno": "01194",
+        "ds": "SR"
+    },
+    {
+        "offset": 169,
+        "group": "Dairy and Egg Products",
+        "name": "Cream, half and half, fat free",
+        "ndbno": "01199",
+        "ds": "SR"
+    },
+    {
+        "offset": 170,
+        "group": "Dairy and Egg Products",
+        "name": "Reddi Wip Fat Free Whipped Topping",
+        "ndbno": "01200",
+        "ds": "SR"
+    },
+    {
+        "offset": 171,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, chocolate, fluid, commercial, reduced fat, with added calcium",
+        "ndbno": "01202",
+        "ds": "SR"
+    },
+    {
+        "offset": 172,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, fruit, lowfat, with low calorie sweetener",
+        "ndbno": "01203",
+        "ds": "SR"
+    },
+    {
+        "offset": 173,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, parmesan, dry grated, reduced fat",
+        "ndbno": "01204",
+        "ds": "SR"
+    },
+    {
+        "offset": 174,
+        "group": "Dairy and Egg Products",
+        "name": "Cream substitute, flavored, liquid",
+        "ndbno": "01205",
+        "ds": "SR"
+    },
+    {
+        "offset": 175,
+        "group": "Dairy and Egg Products",
+        "name": "Cream substitute, flavored, powdered",
+        "ndbno": "01206",
+        "ds": "SR"
+    },
+    {
+        "offset": 176,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, provolone, reduced fat",
+        "ndbno": "01208",
+        "ds": "SR"
+    },
+    {
+        "offset": 177,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, Mexican, blend, reduced fat",
+        "ndbno": "01209",
+        "ds": "SR"
+    },
+    {
+        "offset": 178,
+        "group": "Dairy and Egg Products",
+        "name": "Egg Mix, USDA Commodity",
+        "ndbno": "01210",
+        "ds": "SR"
+    },
+    {
+        "offset": 179,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, whole, 3.25% milkfat, without added vitamin A and vitamin D",
+        "ndbno": "01211",
+        "ds": "SR"
+    },
+    {
+        "offset": 180,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, dry, whole, without added vitamin D",
+        "ndbno": "01212",
+        "ds": "SR"
+    },
+    {
+        "offset": 181,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, canned, evaporated, without added vitamin A and vitamin D",
+        "ndbno": "01214",
+        "ds": "SR"
+    },
+    {
+        "offset": 182,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese product, pasteurized process, American, reduced fat, fortified with vitamin D",
+        "ndbno": "01215",
+        "ds": "SR"
+    },
+    {
+        "offset": 183,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, fruit, low fat, 9 grams protein per 8 ounce, fortified with vitamin D",
+        "ndbno": "01216",
+        "ds": "SR"
+    },
+    {
+        "offset": 184,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, fruit, low fat, 10 grams protein per 8 ounce, fortified with vitamin D",
+        "ndbno": "01217",
+        "ds": "SR"
+    },
+    {
+        "offset": 185,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, fruit variety, nonfat, fortified with vitamin D",
+        "ndbno": "01218",
+        "ds": "SR"
+    },
+    {
+        "offset": 186,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, fruit, lowfat, with low calorie sweetener, fortified with vitamin D",
+        "ndbno": "01219",
+        "ds": "SR"
+    },
+    {
+        "offset": 187,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, vanilla, low fat, 11 grams protein per 8 ounce, fortified with vitamin D",
+        "ndbno": "01220",
+        "ds": "SR"
+    },
+    {
+        "offset": 188,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, vanilla or lemon flavor, nonfat milk, sweetened with low-calorie sweetener, fortified with vitamin D",
+        "ndbno": "01221",
+        "ds": "SR"
+    },
+    {
+        "offset": 189,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, chocolate, nonfat milk, fortified with vitamin D",
+        "ndbno": "01222",
+        "ds": "SR"
+    },
+    {
+        "offset": 190,
+        "group": "Dairy and Egg Products",
+        "name": "Protein supplement, milk based, Muscle Milk, powder",
+        "ndbno": "01223",
+        "ds": "SR"
+    },
+    {
+        "offset": 191,
+        "group": "Dairy and Egg Products",
+        "name": "Protein supplement, milk based, Muscle Milk Light, powder",
+        "ndbno": "01224",
+        "ds": "SR"
+    },
+    {
+        "offset": 192,
+        "group": "Dairy and Egg Products",
+        "name": "Dulce de Leche",
+        "ndbno": "01225",
+        "ds": "SR"
+    },
+    {
+        "offset": 193,
+        "group": "Dairy and Egg Products",
+        "name": "Egg substitute, liquid or frozen, fat free",
+        "ndbno": "01226",
+        "ds": "SR"
+    },
+    {
+        "offset": 194,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, dry white, queso seco",
+        "ndbno": "01227",
+        "ds": "SR"
+    },
+    {
+        "offset": 195,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, fresh, queso fresco",
+        "ndbno": "01228",
+        "ds": "SR"
+    },
+    {
+        "offset": 196,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, white, queso blanco",
+        "ndbno": "01229",
+        "ds": "SR"
+    },
+    {
+        "offset": 197,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, buttermilk, fluid, whole",
+        "ndbno": "01230",
+        "ds": "SR"
+    },
+    {
+        "offset": 198,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, vanilla flavor, lowfat milk, sweetened with low calorie sweetener",
+        "ndbno": "01231",
+        "ds": "SR"
+    },
+    {
+        "offset": 199,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, frozen, flavors not chocolate, nonfat milk, with low-calorie sweetener",
+        "ndbno": "01235",
+        "ds": "SR"
+    },
+    {
+        "offset": 200,
+        "group": "Dairy and Egg Products",
+        "name": "Ice cream, soft serve, chocolate",
+        "ndbno": "01236",
+        "ds": "SR"
+    },
+    {
+        "offset": 201,
+        "group": "Dairy and Egg Products",
+        "name": "Ice cream, bar or stick, chocolate covered",
+        "ndbno": "01237",
+        "ds": "SR"
+    },
+    {
+        "offset": 202,
+        "group": "Dairy and Egg Products",
+        "name": "Ice cream sandwich",
+        "ndbno": "01238",
+        "ds": "SR"
+    },
+    {
+        "offset": 203,
+        "group": "Dairy and Egg Products",
+        "name": "Ice cream cookie sandwich",
+        "ndbno": "01239",
+        "ds": "SR"
+    },
+    {
+        "offset": 204,
+        "group": "Dairy and Egg Products",
+        "name": "Ice cream cone, chocolate covered, with nuts, flavors other than chocolate",
+        "ndbno": "01240",
+        "ds": "SR"
+    },
+    {
+        "offset": 205,
+        "group": "Dairy and Egg Products",
+        "name": "Ice cream sandwich, made with light ice cream, vanilla",
+        "ndbno": "01241",
+        "ds": "SR"
+    },
+    {
+        "offset": 206,
+        "group": "Dairy and Egg Products",
+        "name": "Ice cream sandwich, vanilla, light, no sugar added",
+        "ndbno": "01242",
+        "ds": "SR"
+    },
+    {
+        "offset": 207,
+        "group": "Dairy and Egg Products",
+        "name": "Fat free ice cream, no sugar added, flavors other than chocolate",
+        "ndbno": "01243",
+        "ds": "SR"
+    },
+    {
+        "offset": 208,
+        "group": "Dairy and Egg Products",
+        "name": "Milk dessert bar, frozen, made from lowfat milk",
+        "ndbno": "01244",
+        "ds": "SR"
+    },
+    {
+        "offset": 209,
+        "group": "Dairy and Egg Products",
+        "name": "Nutritional supplement for people with diabetes, liquid",
+        "ndbno": "01250",
+        "ds": "SR"
+    },
+    {
+        "offset": 210,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, Mexican blend",
+        "ndbno": "01251",
+        "ds": "SR"
+    },
+    {
+        "offset": 211,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese product, pasteurized process, American, vitamin D fortified",
+        "ndbno": "01252",
+        "ds": "SR"
+    },
+    {
+        "offset": 212,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, pasteurized process, American, without added vitamin D",
+        "ndbno": "01253",
+        "ds": "SR"
+    },
+    {
+        "offset": 213,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese food, pasteurized process, American, without added vitamin D",
+        "ndbno": "01254",
+        "ds": "SR"
+    },
+    {
+        "offset": 214,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, whole, raw, frozen, salted, pasteurized",
+        "ndbno": "01255",
+        "ds": "SR"
+    },
+    {
+        "offset": 215,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, Greek, plain, nonfat",
+        "ndbno": "01256",
+        "ds": "SR"
+    },
+    {
+        "offset": 216,
+        "group": "Dairy and Egg Products",
+        "name": "Egg, white, dried, stabilized, glucose reduced",
+        "ndbno": "01258",
+        "ds": "SR"
+    },
+    {
+        "offset": 217,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese spread, American or Cheddar cheese base, reduced fat",
+        "ndbno": "01259",
+        "ds": "SR"
+    },
+    {
+        "offset": 218,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cheddar, reduced fat",
+        "ndbno": "01260",
+        "ds": "SR"
+    },
+    {
+        "offset": 219,
+        "group": "Dairy and Egg Products",
+        "name": "Ice cream, light, soft serve, chocolate",
+        "ndbno": "01263",
+        "ds": "SR"
+    },
+    {
+        "offset": 220,
+        "group": "Dairy and Egg Products",
+        "name": "Ice cream bar, stick or nugget, with crunch coating",
+        "ndbno": "01264",
+        "ds": "SR"
+    },
+    {
+        "offset": 221,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cheddar, nonfat or fat free",
+        "ndbno": "01265",
+        "ds": "SR"
+    },
+    {
+        "offset": 222,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, Swiss, nonfat or fat free",
+        "ndbno": "01266",
+        "ds": "SR"
+    },
+    {
+        "offset": 223,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, mexican, queso cotija",
+        "ndbno": "01267",
+        "ds": "SR"
+    },
+    {
+        "offset": 224,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cheddar, sharp, sliced",
+        "ndbno": "01270",
+        "ds": "SR"
+    },
+    {
+        "offset": 225,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, mozzarella, low moisture, part-skim, shredded",
+        "ndbno": "01271",
+        "ds": "SR"
+    },
+    {
+        "offset": 226,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, Greek, nonfat, vanilla, CHOBANI",
+        "ndbno": "01275",
+        "ds": "SR"
+    },
+    {
+        "offset": 227,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, Greek, strawberry, DANNON OIKOS",
+        "ndbno": "01276",
+        "ds": "SR"
+    },
+    {
+        "offset": 228,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, Greek, nonfat, vanilla, DANNON OIKOS",
+        "ndbno": "01278",
+        "ds": "SR"
+    },
+    {
+        "offset": 229,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, Greek, nonfat, strawberry, DANNON OIKOS",
+        "ndbno": "01280",
+        "ds": "SR"
+    },
+    {
+        "offset": 230,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, Greek, nonfat, strawberry, CHOBANI",
+        "ndbno": "01281",
+        "ds": "SR"
+    },
+    {
+        "offset": 231,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, Greek, strawberry, lowfat",
+        "ndbno": "01284",
+        "ds": "SR"
+    },
+    {
+        "offset": 232,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, Greek, strawberry, nonfat",
+        "ndbno": "01285",
+        "ds": "SR"
+    },
+    {
+        "offset": 233,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, Greek, vanilla, nonfat",
+        "ndbno": "01286",
+        "ds": "SR"
+    },
+    {
+        "offset": 234,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, Greek, plain, lowfat",
+        "ndbno": "01287",
+        "ds": "SR"
+    },
+    {
+        "offset": 235,
+        "group": "Dairy and Egg Products",
+        "name": "Kefir, lowfat, plain, LIFEWAY",
+        "ndbno": "01289",
+        "ds": "SR"
+    },
+    {
+        "offset": 236,
+        "group": "Dairy and Egg Products",
+        "name": "Kefir, lowfat, strawberry, LIFEWAY",
+        "ndbno": "01290",
+        "ds": "SR"
+    },
+    {
+        "offset": 237,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, evaporated, 2% fat, with added vitamin A and vitamin D",
+        "ndbno": "01291",
+        "ds": "SR"
+    },
+    {
+        "offset": 238,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, chocolate, fat free, with added vitamin A and vitamin D",
+        "ndbno": "01292",
+        "ds": "SR"
+    },
+    {
+        "offset": 239,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, Greek, plain, whole milk",
+        "ndbno": "01293",
+        "ds": "SR"
+    },
+    {
+        "offset": 240,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, Greek, fruit, whole milk",
+        "ndbno": "01294",
+        "ds": "SR"
+    },
+    {
+        "offset": 241,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, vanilla, non-fat",
+        "ndbno": "01295",
+        "ds": "SR"
+    },
+    {
+        "offset": 242,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, Greek, vanilla, lowfat",
+        "ndbno": "01297",
+        "ds": "SR"
+    },
+    {
+        "offset": 243,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, frozen, flavors other than chocolate, lowfat",
+        "ndbno": "01298",
+        "ds": "SR"
+    },
+    {
+        "offset": 244,
+        "group": "Dairy and Egg Products",
+        "name": "Ice cream bar, covered with chocolate and nuts",
+        "ndbno": "01300",
+        "ds": "SR"
+    },
+    {
+        "offset": 245,
+        "group": "Dairy and Egg Products",
+        "name": "Ice cream sundae cone",
+        "ndbno": "01301",
+        "ds": "SR"
+    },
+    {
+        "offset": 246,
+        "group": "Dairy and Egg Products",
+        "name": "Light ice cream, Creamsicle",
+        "ndbno": "01302",
+        "ds": "SR"
+    },
+    {
+        "offset": 247,
+        "group": "Dairy and Egg Products",
+        "name": "Cream, half and half, lowfat",
+        "ndbno": "01303",
+        "ds": "SR"
+    },
+    {
+        "offset": 248,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, chocolate, lowfat, reduced sugar",
+        "ndbno": "01305",
+        "ds": "SR"
+    },
+    {
+        "offset": 249,
+        "group": "Dairy and Egg Products",
+        "name": "Ice cream, lowfat, no sugar added, cone, added peanuts and chocolate sauce",
+        "ndbno": "01306",
+        "ds": "SR"
+    },
+    {
+        "offset": 250,
+        "group": "Dairy and Egg Products",
+        "name": "Imitation cheese, american or cheddar, low cholesterol",
+        "ndbno": "42117",
+        "ds": "SR"
+    },
+    {
+        "offset": 251,
+        "group": "Dairy and Egg Products",
+        "name": "Whipped topping, frozen, low fat",
+        "ndbno": "42135",
+        "ds": "SR"
+    },
+    {
+        "offset": 252,
+        "group": "Dairy and Egg Products",
+        "name": "Cream substitute, powdered, light",
+        "ndbno": "42136",
+        "ds": "SR"
+    },
+    {
+        "offset": 253,
+        "group": "Dairy and Egg Products",
+        "name": "Cream substitute, liquid, light",
+        "ndbno": "42141",
+        "ds": "SR"
+    },
+    {
+        "offset": 254,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, monterey, low fat",
+        "ndbno": "42155",
+        "ds": "SR"
+    },
+    {
+        "offset": 255,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, buttermilk, fluid, cultured, reduced fat",
+        "ndbno": "42189",
+        "ds": "SR"
+    },
+    {
+        "offset": 256,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, pasteurized process, cheddar or American, fat-free",
+        "ndbno": "42205",
+        "ds": "SR"
+    },
+    {
+        "offset": 257,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cottage, lowfat, 1% milkfat, lactose reduced",
+        "ndbno": "42235",
+        "ds": "SR"
+    },
+    {
+        "offset": 258,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese product, pasteurized process, cheddar, reduced fat",
+        "ndbno": "42258",
+        "ds": "SR"
+    },
+    {
+        "offset": 259,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, fluid, nonfat, calcium fortified (fat free or skim)",
+        "ndbno": "42290",
+        "ds": "SR"
+    },
+    {
+        "offset": 260,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, muenster, low fat",
+        "ndbno": "42303",
+        "ds": "SR"
+    },
+    {
+        "offset": 261,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, mozzarella, nonfat",
+        "ndbno": "42304",
+        "ds": "SR"
+    },
+    {
+        "offset": 262,
+        "group": "Dairy and Egg Products",
+        "name": "Beverage, milkshake mix, dry, not chocolate",
+        "ndbno": "43078",
+        "ds": "SR"
+    },
+    {
+        "offset": 263,
+        "group": "Dairy and Egg Products",
+        "name": "Beverage, instant breakfast powder, chocolate, not reconstituted",
+        "ndbno": "43205",
+        "ds": "SR"
+    },
+    {
+        "offset": 264,
+        "group": "Dairy and Egg Products",
+        "name": "Beverage, instant breakfast powder, chocolate, sugar-free, not reconstituted",
+        "ndbno": "43260",
+        "ds": "SR"
+    },
+    {
+        "offset": 265,
+        "group": "Dairy and Egg Products",
+        "name": "Yogurt, fruit variety, nonfat",
+        "ndbno": "43261",
+        "ds": "SR"
+    },
+    {
+        "offset": 266,
+        "group": "Dairy and Egg Products",
+        "name": "Whipped cream substitute, dietetic, made from powdered mix",
+        "ndbno": "43268",
+        "ds": "SR"
+    },
+    {
+        "offset": 267,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cottage, with vegetables",
+        "ndbno": "43273",
+        "ds": "SR"
+    },
+    {
+        "offset": 268,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cream, low fat",
+        "ndbno": "43274",
+        "ds": "SR"
+    },
+    {
+        "offset": 269,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, pasteurized process, American, low fat",
+        "ndbno": "43275",
+        "ds": "SR"
+    },
+    {
+        "offset": 270,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese spread, cream cheese base",
+        "ndbno": "43276",
+        "ds": "SR"
+    },
+    {
+        "offset": 271,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, american cheddar, imitation",
+        "ndbno": "43278",
+        "ds": "SR"
+    },
+    {
+        "offset": 272,
+        "group": "Dairy and Egg Products",
+        "name": "Eggs, scrambled, frozen mixture",
+        "ndbno": "43285",
+        "ds": "SR"
+    },
+    {
+        "offset": 273,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, parmesan, low sodium",
+        "ndbno": "43340",
+        "ds": "SR"
+    },
+    {
+        "offset": 274,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cottage, lowfat, 1% milkfat, no sodium added",
+        "ndbno": "43352",
+        "ds": "SR"
+    },
+    {
+        "offset": 275,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, pasteurized process, swiss, low fat",
+        "ndbno": "43379",
+        "ds": "SR"
+    },
+    {
+        "offset": 276,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, cottage, lowfat, 1% milkfat, with vegetables",
+        "ndbno": "43396",
+        "ds": "SR"
+    },
+    {
+        "offset": 277,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, pasteurized process, cheddar or American, low sodium",
+        "ndbno": "43398",
+        "ds": "SR"
+    },
+    {
+        "offset": 278,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, swiss, low sodium",
+        "ndbno": "43405",
+        "ds": "SR"
+    },
+    {
+        "offset": 279,
+        "group": "Dairy and Egg Products",
+        "name": "Milk, imitation, non-soy",
+        "ndbno": "43543",
+        "ds": "SR"
+    },
+    {
+        "offset": 280,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, swiss, low fat",
+        "ndbno": "43589",
+        "ds": "SR"
+    },
+    {
+        "offset": 281,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese, mozzarella, low sodium",
+        "ndbno": "43597",
+        "ds": "SR"
+    },
+    {
+        "offset": 282,
+        "group": "Dairy and Egg Products",
+        "name": "Cheese food, pasteurized process, American, imitation, without added vitamin D",
+        "ndbno": "44048",
+        "ds": "SR"
+    }
+]

@@ -1,0 +1,1269 @@
+[
+    {
+        "offset": 0,
+        "group": "Cereal Grains and Pasta",
+        "name": "Amaranth grain, uncooked",
+        "ndbno": "20001",
+        "ds": "SR"
+    },
+    {
+        "offset": 1,
+        "group": "Cereal Grains and Pasta",
+        "name": "Amaranth grain, cooked",
+        "ndbno": "20002",
+        "ds": "SR"
+    },
+    {
+        "offset": 2,
+        "group": "Cereal Grains and Pasta",
+        "name": "Arrowroot flour",
+        "ndbno": "20003",
+        "ds": "SR"
+    },
+    {
+        "offset": 3,
+        "group": "Cereal Grains and Pasta",
+        "name": "Barley, hulled",
+        "ndbno": "20004",
+        "ds": "SR"
+    },
+    {
+        "offset": 4,
+        "group": "Cereal Grains and Pasta",
+        "name": "Barley, pearled, raw",
+        "ndbno": "20005",
+        "ds": "SR"
+    },
+    {
+        "offset": 5,
+        "group": "Cereal Grains and Pasta",
+        "name": "Barley, pearled, cooked",
+        "ndbno": "20006",
+        "ds": "SR"
+    },
+    {
+        "offset": 6,
+        "group": "Cereal Grains and Pasta",
+        "name": "Buckwheat",
+        "ndbno": "20008",
+        "ds": "SR"
+    },
+    {
+        "offset": 7,
+        "group": "Cereal Grains and Pasta",
+        "name": "Buckwheat groats, roasted, dry",
+        "ndbno": "20009",
+        "ds": "SR"
+    },
+    {
+        "offset": 8,
+        "group": "Cereal Grains and Pasta",
+        "name": "Buckwheat groats, roasted, cooked",
+        "ndbno": "20010",
+        "ds": "SR"
+    },
+    {
+        "offset": 9,
+        "group": "Cereal Grains and Pasta",
+        "name": "Buckwheat flour, whole-groat",
+        "ndbno": "20011",
+        "ds": "SR"
+    },
+    {
+        "offset": 10,
+        "group": "Cereal Grains and Pasta",
+        "name": "Bulgur, dry",
+        "ndbno": "20012",
+        "ds": "SR"
+    },
+    {
+        "offset": 11,
+        "group": "Cereal Grains and Pasta",
+        "name": "Bulgur, cooked",
+        "ndbno": "20013",
+        "ds": "SR"
+    },
+    {
+        "offset": 12,
+        "group": "Cereal Grains and Pasta",
+        "name": "Corn grain, yellow",
+        "ndbno": "20014",
+        "ds": "SR"
+    },
+    {
+        "offset": 13,
+        "group": "Cereal Grains and Pasta",
+        "name": "Corn bran, crude",
+        "ndbno": "20015",
+        "ds": "SR"
+    },
+    {
+        "offset": 14,
+        "group": "Cereal Grains and Pasta",
+        "name": "Corn flour, whole-grain, yellow",
+        "ndbno": "20016",
+        "ds": "SR"
+    },
+    {
+        "offset": 15,
+        "group": "Cereal Grains and Pasta",
+        "name": "Corn flour, masa, enriched, white",
+        "ndbno": "20017",
+        "ds": "SR"
+    },
+    {
+        "offset": 16,
+        "group": "Cereal Grains and Pasta",
+        "name": "Corn flour, yellow, degermed, unenriched",
+        "ndbno": "20018",
+        "ds": "SR"
+    },
+    {
+        "offset": 17,
+        "group": "Cereal Grains and Pasta",
+        "name": "Corn flour, masa, unenriched, white",
+        "ndbno": "20019",
+        "ds": "SR"
+    },
+    {
+        "offset": 18,
+        "group": "Cereal Grains and Pasta",
+        "name": "Cornmeal, whole-grain, yellow",
+        "ndbno": "20020",
+        "ds": "SR"
+    },
+    {
+        "offset": 19,
+        "group": "Cereal Grains and Pasta",
+        "name": "Cornmeal, degermed, enriched, yellow",
+        "ndbno": "20022",
+        "ds": "SR"
+    },
+    {
+        "offset": 20,
+        "group": "Cereal Grains and Pasta",
+        "name": "Cornmeal, yellow, self-rising, bolted, plain, enriched",
+        "ndbno": "20023",
+        "ds": "SR"
+    },
+    {
+        "offset": 21,
+        "group": "Cereal Grains and Pasta",
+        "name": "Cornmeal, yellow, self-rising, bolted, with wheat flour added, enriched",
+        "ndbno": "20024",
+        "ds": "SR"
+    },
+    {
+        "offset": 22,
+        "group": "Cereal Grains and Pasta",
+        "name": "Cornmeal, yellow, self-rising, degermed, enriched",
+        "ndbno": "20025",
+        "ds": "SR"
+    },
+    {
+        "offset": 23,
+        "group": "Cereal Grains and Pasta",
+        "name": "Cornstarch",
+        "ndbno": "20027",
+        "ds": "SR"
+    },
+    {
+        "offset": 24,
+        "group": "Cereal Grains and Pasta",
+        "name": "Couscous, dry",
+        "ndbno": "20028",
+        "ds": "SR"
+    },
+    {
+        "offset": 25,
+        "group": "Cereal Grains and Pasta",
+        "name": "Couscous, cooked",
+        "ndbno": "20029",
+        "ds": "SR"
+    },
+    {
+        "offset": 26,
+        "group": "Cereal Grains and Pasta",
+        "name": "Hominy, canned, white",
+        "ndbno": "20030",
+        "ds": "SR"
+    },
+    {
+        "offset": 27,
+        "group": "Cereal Grains and Pasta",
+        "name": "Millet, raw",
+        "ndbno": "20031",
+        "ds": "SR"
+    },
+    {
+        "offset": 28,
+        "group": "Cereal Grains and Pasta",
+        "name": "Millet, cooked",
+        "ndbno": "20032",
+        "ds": "SR"
+    },
+    {
+        "offset": 29,
+        "group": "Cereal Grains and Pasta",
+        "name": "Oat bran, raw",
+        "ndbno": "20033",
+        "ds": "SR"
+    },
+    {
+        "offset": 30,
+        "group": "Cereal Grains and Pasta",
+        "name": "Oat bran, cooked",
+        "ndbno": "20034",
+        "ds": "SR"
+    },
+    {
+        "offset": 31,
+        "group": "Cereal Grains and Pasta",
+        "name": "Quinoa, uncooked",
+        "ndbno": "20035",
+        "ds": "SR"
+    },
+    {
+        "offset": 32,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, brown, long-grain, raw",
+        "ndbno": "20036",
+        "ds": "SR"
+    },
+    {
+        "offset": 33,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, brown, long-grain, cooked",
+        "ndbno": "20037",
+        "ds": "SR"
+    },
+    {
+        "offset": 34,
+        "group": "Cereal Grains and Pasta",
+        "name": "Oats",
+        "ndbno": "20038",
+        "ds": "SR"
+    },
+    {
+        "offset": 35,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, brown, medium-grain, raw",
+        "ndbno": "20040",
+        "ds": "SR"
+    },
+    {
+        "offset": 36,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, brown, medium-grain, cooked",
+        "ndbno": "20041",
+        "ds": "SR"
+    },
+    {
+        "offset": 37,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, brown, parboiled, dry, UNCLE BEN'S",
+        "ndbno": "20042",
+        "ds": "SR"
+    },
+    {
+        "offset": 38,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, long-grain, regular, raw, enriched",
+        "ndbno": "20044",
+        "ds": "SR"
+    },
+    {
+        "offset": 39,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, long-grain, regular, enriched, cooked",
+        "ndbno": "20045",
+        "ds": "SR"
+    },
+    {
+        "offset": 40,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, long-grain, parboiled, enriched, dry",
+        "ndbno": "20046",
+        "ds": "SR"
+    },
+    {
+        "offset": 41,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, long-grain, parboiled, enriched, cooked",
+        "ndbno": "20047",
+        "ds": "SR"
+    },
+    {
+        "offset": 42,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, long-grain, precooked or instant, enriched, dry",
+        "ndbno": "20048",
+        "ds": "SR"
+    },
+    {
+        "offset": 43,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, long-grain, precooked or instant, enriched, prepared",
+        "ndbno": "20049",
+        "ds": "SR"
+    },
+    {
+        "offset": 44,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, medium-grain, raw, enriched",
+        "ndbno": "20050",
+        "ds": "SR"
+    },
+    {
+        "offset": 45,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, medium-grain, enriched, cooked",
+        "ndbno": "20051",
+        "ds": "SR"
+    },
+    {
+        "offset": 46,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, short-grain, enriched, uncooked",
+        "ndbno": "20052",
+        "ds": "SR"
+    },
+    {
+        "offset": 47,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, short-grain, enriched, cooked",
+        "ndbno": "20053",
+        "ds": "SR"
+    },
+    {
+        "offset": 48,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, glutinous, unenriched, uncooked",
+        "ndbno": "20054",
+        "ds": "SR"
+    },
+    {
+        "offset": 49,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, glutinous, unenriched, cooked",
+        "ndbno": "20055",
+        "ds": "SR"
+    },
+    {
+        "offset": 50,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, steamed, Chinese restaurant",
+        "ndbno": "20058",
+        "ds": "SR"
+    },
+    {
+        "offset": 51,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice bran, crude",
+        "ndbno": "20060",
+        "ds": "SR"
+    },
+    {
+        "offset": 52,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice flour, white, unenriched",
+        "ndbno": "20061",
+        "ds": "SR"
+    },
+    {
+        "offset": 53,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rye grain",
+        "ndbno": "20062",
+        "ds": "SR"
+    },
+    {
+        "offset": 54,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rye flour, dark",
+        "ndbno": "20063",
+        "ds": "SR"
+    },
+    {
+        "offset": 55,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rye flour, medium",
+        "ndbno": "20064",
+        "ds": "SR"
+    },
+    {
+        "offset": 56,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rye flour, light",
+        "ndbno": "20065",
+        "ds": "SR"
+    },
+    {
+        "offset": 57,
+        "group": "Cereal Grains and Pasta",
+        "name": "Semolina, enriched",
+        "ndbno": "20066",
+        "ds": "SR"
+    },
+    {
+        "offset": 58,
+        "group": "Cereal Grains and Pasta",
+        "name": "Sorghum grain",
+        "ndbno": "20067",
+        "ds": "SR"
+    },
+    {
+        "offset": 59,
+        "group": "Cereal Grains and Pasta",
+        "name": "Tapioca, pearl, dry",
+        "ndbno": "20068",
+        "ds": "SR"
+    },
+    {
+        "offset": 60,
+        "group": "Cereal Grains and Pasta",
+        "name": "Triticale",
+        "ndbno": "20069",
+        "ds": "SR"
+    },
+    {
+        "offset": 61,
+        "group": "Cereal Grains and Pasta",
+        "name": "Triticale flour, whole-grain",
+        "ndbno": "20070",
+        "ds": "SR"
+    },
+    {
+        "offset": 62,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat, hard red spring",
+        "ndbno": "20071",
+        "ds": "SR"
+    },
+    {
+        "offset": 63,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat, hard red winter",
+        "ndbno": "20072",
+        "ds": "SR"
+    },
+    {
+        "offset": 64,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat, soft red winter",
+        "ndbno": "20073",
+        "ds": "SR"
+    },
+    {
+        "offset": 65,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat, hard white",
+        "ndbno": "20074",
+        "ds": "SR"
+    },
+    {
+        "offset": 66,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat, soft white",
+        "ndbno": "20075",
+        "ds": "SR"
+    },
+    {
+        "offset": 67,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat, durum",
+        "ndbno": "20076",
+        "ds": "SR"
+    },
+    {
+        "offset": 68,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat bran, crude",
+        "ndbno": "20077",
+        "ds": "SR"
+    },
+    {
+        "offset": 69,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat germ, crude",
+        "ndbno": "20078",
+        "ds": "SR"
+    },
+    {
+        "offset": 70,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, whole-grain",
+        "ndbno": "20080",
+        "ds": "SR"
+    },
+    {
+        "offset": 71,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white, all-purpose, enriched, bleached",
+        "ndbno": "20081",
+        "ds": "SR"
+    },
+    {
+        "offset": 72,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white, all-purpose, self-rising, enriched",
+        "ndbno": "20082",
+        "ds": "SR"
+    },
+    {
+        "offset": 73,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white, bread, enriched",
+        "ndbno": "20083",
+        "ds": "SR"
+    },
+    {
+        "offset": 74,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white, cake, enriched",
+        "ndbno": "20084",
+        "ds": "SR"
+    },
+    {
+        "offset": 75,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white, tortilla mix, enriched",
+        "ndbno": "20086",
+        "ds": "SR"
+    },
+    {
+        "offset": 76,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat, sprouted",
+        "ndbno": "20087",
+        "ds": "SR"
+    },
+    {
+        "offset": 77,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wild rice, raw",
+        "ndbno": "20088",
+        "ds": "SR"
+    },
+    {
+        "offset": 78,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wild rice, cooked",
+        "ndbno": "20089",
+        "ds": "SR"
+    },
+    {
+        "offset": 79,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice flour, brown",
+        "ndbno": "20090",
+        "ds": "SR"
+    },
+    {
+        "offset": 80,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, gluten-free, corn, dry",
+        "ndbno": "20091",
+        "ds": "SR"
+    },
+    {
+        "offset": 81,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, gluten-free, corn, cooked",
+        "ndbno": "20092",
+        "ds": "SR"
+    },
+    {
+        "offset": 82,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, fresh-refrigerated, plain, as purchased",
+        "ndbno": "20093",
+        "ds": "SR"
+    },
+    {
+        "offset": 83,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, fresh-refrigerated, plain, cooked",
+        "ndbno": "20094",
+        "ds": "SR"
+    },
+    {
+        "offset": 84,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, fresh-refrigerated, spinach, as purchased",
+        "ndbno": "20095",
+        "ds": "SR"
+    },
+    {
+        "offset": 85,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, fresh-refrigerated, spinach, cooked",
+        "ndbno": "20096",
+        "ds": "SR"
+    },
+    {
+        "offset": 86,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, homemade, made with egg, cooked",
+        "ndbno": "20097",
+        "ds": "SR"
+    },
+    {
+        "offset": 87,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, homemade, made without egg, cooked",
+        "ndbno": "20098",
+        "ds": "SR"
+    },
+    {
+        "offset": 88,
+        "group": "Cereal Grains and Pasta",
+        "name": "Macaroni, vegetable, enriched, dry",
+        "ndbno": "20105",
+        "ds": "SR"
+    },
+    {
+        "offset": 89,
+        "group": "Cereal Grains and Pasta",
+        "name": "Macaroni, vegetable, enriched, cooked",
+        "ndbno": "20106",
+        "ds": "SR"
+    },
+    {
+        "offset": 90,
+        "group": "Cereal Grains and Pasta",
+        "name": "Noodles, egg, dry, enriched",
+        "ndbno": "20109",
+        "ds": "SR"
+    },
+    {
+        "offset": 91,
+        "group": "Cereal Grains and Pasta",
+        "name": "Noodles, egg, enriched, cooked",
+        "ndbno": "20110",
+        "ds": "SR"
+    },
+    {
+        "offset": 92,
+        "group": "Cereal Grains and Pasta",
+        "name": "Noodles, egg, spinach, enriched, dry",
+        "ndbno": "20111",
+        "ds": "SR"
+    },
+    {
+        "offset": 93,
+        "group": "Cereal Grains and Pasta",
+        "name": "Noodles, egg, spinach, enriched, cooked",
+        "ndbno": "20112",
+        "ds": "SR"
+    },
+    {
+        "offset": 94,
+        "group": "Cereal Grains and Pasta",
+        "name": "Noodles, chinese, chow mein",
+        "ndbno": "20113",
+        "ds": "SR"
+    },
+    {
+        "offset": 95,
+        "group": "Cereal Grains and Pasta",
+        "name": "Noodles, japanese, soba, dry",
+        "ndbno": "20114",
+        "ds": "SR"
+    },
+    {
+        "offset": 96,
+        "group": "Cereal Grains and Pasta",
+        "name": "Noodles, japanese, soba, cooked",
+        "ndbno": "20115",
+        "ds": "SR"
+    },
+    {
+        "offset": 97,
+        "group": "Cereal Grains and Pasta",
+        "name": "Noodles, japanese, somen, dry",
+        "ndbno": "20116",
+        "ds": "SR"
+    },
+    {
+        "offset": 98,
+        "group": "Cereal Grains and Pasta",
+        "name": "Noodles, japanese, somen, cooked",
+        "ndbno": "20117",
+        "ds": "SR"
+    },
+    {
+        "offset": 99,
+        "group": "Cereal Grains and Pasta",
+        "name": "Noodles, flat, crunchy, Chinese restaurant",
+        "ndbno": "20118",
+        "ds": "SR"
+    },
+    {
+        "offset": 100,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, dry, enriched",
+        "ndbno": "20120",
+        "ds": "SR"
+    },
+    {
+        "offset": 101,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, cooked, enriched, without added salt",
+        "ndbno": "20121",
+        "ds": "SR"
+    },
+    {
+        "offset": 102,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, whole-wheat, dry",
+        "ndbno": "20124",
+        "ds": "SR"
+    },
+    {
+        "offset": 103,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, whole-wheat, cooked",
+        "ndbno": "20125",
+        "ds": "SR"
+    },
+    {
+        "offset": 104,
+        "group": "Cereal Grains and Pasta",
+        "name": "Spaghetti, spinach, dry",
+        "ndbno": "20126",
+        "ds": "SR"
+    },
+    {
+        "offset": 105,
+        "group": "Cereal Grains and Pasta",
+        "name": "Spaghetti, spinach, cooked",
+        "ndbno": "20127",
+        "ds": "SR"
+    },
+    {
+        "offset": 106,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flours, bread, unenriched",
+        "ndbno": "20129",
+        "ds": "SR"
+    },
+    {
+        "offset": 107,
+        "group": "Cereal Grains and Pasta",
+        "name": "Barley flour or meal",
+        "ndbno": "20130",
+        "ds": "SR"
+    },
+    {
+        "offset": 108,
+        "group": "Cereal Grains and Pasta",
+        "name": "Barley malt flour",
+        "ndbno": "20131",
+        "ds": "SR"
+    },
+    {
+        "offset": 109,
+        "group": "Cereal Grains and Pasta",
+        "name": "Oat flour, partially debranned",
+        "ndbno": "20132",
+        "ds": "SR"
+    },
+    {
+        "offset": 110,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice noodles, dry",
+        "ndbno": "20133",
+        "ds": "SR"
+    },
+    {
+        "offset": 111,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice noodles, cooked",
+        "ndbno": "20134",
+        "ds": "SR"
+    },
+    {
+        "offset": 112,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, whole grain, 51% whole wheat, remaining unenriched semolina, dry",
+        "ndbno": "20135",
+        "ds": "SR"
+    },
+    {
+        "offset": 113,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, whole grain, 51% whole wheat, remaining unenriched semolina, cooked",
+        "ndbno": "20136",
+        "ds": "SR"
+    },
+    {
+        "offset": 114,
+        "group": "Cereal Grains and Pasta",
+        "name": "Quinoa, cooked",
+        "ndbno": "20137",
+        "ds": "SR"
+    },
+    {
+        "offset": 115,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat, KAMUT khorasan, uncooked",
+        "ndbno": "20138",
+        "ds": "SR"
+    },
+    {
+        "offset": 116,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat, KAMUT khorasan, cooked",
+        "ndbno": "20139",
+        "ds": "SR"
+    },
+    {
+        "offset": 117,
+        "group": "Cereal Grains and Pasta",
+        "name": "Spelt, uncooked",
+        "ndbno": "20140",
+        "ds": "SR"
+    },
+    {
+        "offset": 118,
+        "group": "Cereal Grains and Pasta",
+        "name": "Spelt, cooked",
+        "ndbno": "20141",
+        "ds": "SR"
+    },
+    {
+        "offset": 119,
+        "group": "Cereal Grains and Pasta",
+        "name": "Teff, uncooked",
+        "ndbno": "20142",
+        "ds": "SR"
+    },
+    {
+        "offset": 120,
+        "group": "Cereal Grains and Pasta",
+        "name": "Teff, cooked",
+        "ndbno": "20143",
+        "ds": "SR"
+    },
+    {
+        "offset": 121,
+        "group": "Cereal Grains and Pasta",
+        "name": "Noodles, egg, cooked, enriched, with added salt",
+        "ndbno": "20310",
+        "ds": "SR"
+    },
+    {
+        "offset": 122,
+        "group": "Cereal Grains and Pasta",
+        "name": "Corn grain, white",
+        "ndbno": "20314",
+        "ds": "SR"
+    },
+    {
+        "offset": 123,
+        "group": "Cereal Grains and Pasta",
+        "name": "Corn flour, whole-grain, blue (harina de maiz morado)",
+        "ndbno": "20315",
+        "ds": "SR"
+    },
+    {
+        "offset": 124,
+        "group": "Cereal Grains and Pasta",
+        "name": "Corn flour, whole-grain, white",
+        "ndbno": "20316",
+        "ds": "SR"
+    },
+    {
+        "offset": 125,
+        "group": "Cereal Grains and Pasta",
+        "name": "Corn flour, yellow, masa, enriched",
+        "ndbno": "20317",
+        "ds": "SR"
+    },
+    {
+        "offset": 126,
+        "group": "Cereal Grains and Pasta",
+        "name": "Cornmeal, whole-grain, white",
+        "ndbno": "20320",
+        "ds": "SR"
+    },
+    {
+        "offset": 127,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, cooked, enriched, with added salt",
+        "ndbno": "20321",
+        "ds": "SR"
+    },
+    {
+        "offset": 128,
+        "group": "Cereal Grains and Pasta",
+        "name": "Cornmeal, degermed, enriched, white",
+        "ndbno": "20322",
+        "ds": "SR"
+    },
+    {
+        "offset": 129,
+        "group": "Cereal Grains and Pasta",
+        "name": "Cornmeal, white, self-rising, bolted, plain, enriched",
+        "ndbno": "20323",
+        "ds": "SR"
+    },
+    {
+        "offset": 130,
+        "group": "Cereal Grains and Pasta",
+        "name": "Cornmeal, white, self-rising, bolted, with wheat flour added, enriched",
+        "ndbno": "20324",
+        "ds": "SR"
+    },
+    {
+        "offset": 131,
+        "group": "Cereal Grains and Pasta",
+        "name": "Cornmeal, white, self-rising, degermed, enriched",
+        "ndbno": "20325",
+        "ds": "SR"
+    },
+    {
+        "offset": 132,
+        "group": "Cereal Grains and Pasta",
+        "name": "Hominy, canned, yellow",
+        "ndbno": "20330",
+        "ds": "SR"
+    },
+    {
+        "offset": 133,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, long-grain, regular, cooked, enriched, with salt",
+        "ndbno": "20345",
+        "ds": "SR"
+    },
+    {
+        "offset": 134,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white, all-purpose, enriched, calcium-fortified",
+        "ndbno": "20381",
+        "ds": "SR"
+    },
+    {
+        "offset": 135,
+        "group": "Cereal Grains and Pasta",
+        "name": "Noodles, egg, dry, unenriched",
+        "ndbno": "20409",
+        "ds": "SR"
+    },
+    {
+        "offset": 136,
+        "group": "Cereal Grains and Pasta",
+        "name": "Noodles, egg, unenriched, cooked, without added salt",
+        "ndbno": "20410",
+        "ds": "SR"
+    },
+    {
+        "offset": 137,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, dry, unenriched",
+        "ndbno": "20420",
+        "ds": "SR"
+    },
+    {
+        "offset": 138,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, cooked, unenriched, without added salt",
+        "ndbno": "20421",
+        "ds": "SR"
+    },
+    {
+        "offset": 139,
+        "group": "Cereal Grains and Pasta",
+        "name": "Cornmeal, degermed, unenriched, yellow",
+        "ndbno": "20422",
+        "ds": "SR"
+    },
+    {
+        "offset": 140,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, long-grain, regular, raw, unenriched",
+        "ndbno": "20444",
+        "ds": "SR"
+    },
+    {
+        "offset": 141,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, long-grain, regular, unenriched, cooked without salt",
+        "ndbno": "20445",
+        "ds": "SR"
+    },
+    {
+        "offset": 142,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, long-grain, parboiled, unenriched, dry",
+        "ndbno": "20446",
+        "ds": "SR"
+    },
+    {
+        "offset": 143,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, long-grain, parboiled, unenriched, cooked",
+        "ndbno": "20447",
+        "ds": "SR"
+    },
+    {
+        "offset": 144,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, medium-grain, raw, unenriched",
+        "ndbno": "20450",
+        "ds": "SR"
+    },
+    {
+        "offset": 145,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, medium-grain, cooked, unenriched",
+        "ndbno": "20451",
+        "ds": "SR"
+    },
+    {
+        "offset": 146,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, short-grain, raw, unenriched",
+        "ndbno": "20452",
+        "ds": "SR"
+    },
+    {
+        "offset": 147,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, short-grain, cooked, unenriched",
+        "ndbno": "20453",
+        "ds": "SR"
+    },
+    {
+        "offset": 148,
+        "group": "Cereal Grains and Pasta",
+        "name": "Semolina, unenriched",
+        "ndbno": "20466",
+        "ds": "SR"
+    },
+    {
+        "offset": 149,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white, all-purpose, unenriched",
+        "ndbno": "20481",
+        "ds": "SR"
+    },
+    {
+        "offset": 150,
+        "group": "Cereal Grains and Pasta",
+        "name": "Noodles, egg, cooked, unenriched, with added salt",
+        "ndbno": "20510",
+        "ds": "SR"
+    },
+    {
+        "offset": 151,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, cooked, unenriched, with added salt",
+        "ndbno": "20521",
+        "ds": "SR"
+    },
+    {
+        "offset": 152,
+        "group": "Cereal Grains and Pasta",
+        "name": "Cornmeal, degermed, unenriched, white",
+        "ndbno": "20522",
+        "ds": "SR"
+    },
+    {
+        "offset": 153,
+        "group": "Cereal Grains and Pasta",
+        "name": "Spaghetti, protein-fortified, cooked, enriched (n x 6.25)",
+        "ndbno": "20523",
+        "ds": "SR"
+    },
+    {
+        "offset": 154,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, white, long-grain, regular, cooked, unenriched, with salt",
+        "ndbno": "20545",
+        "ds": "SR"
+    },
+    {
+        "offset": 155,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white, all-purpose, enriched, unbleached",
+        "ndbno": "20581",
+        "ds": "SR"
+    },
+    {
+        "offset": 156,
+        "group": "Cereal Grains and Pasta",
+        "name": "Spaghetti, protein-fortified, dry, enriched (n x 6.25)",
+        "ndbno": "20622",
+        "ds": "SR"
+    },
+    {
+        "offset": 157,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white (industrial), 9% protein, bleached, enriched",
+        "ndbno": "20623",
+        "ds": "SR"
+    },
+    {
+        "offset": 158,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white (industrial), 9% protein, bleached, unenriched",
+        "ndbno": "20624",
+        "ds": "SR"
+    },
+    {
+        "offset": 159,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white (industrial), 10% protein, bleached, enriched",
+        "ndbno": "20628",
+        "ds": "SR"
+    },
+    {
+        "offset": 160,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white (industrial), 10% protein, bleached, unenriched",
+        "ndbno": "20629",
+        "ds": "SR"
+    },
+    {
+        "offset": 161,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white (industrial), 10% protein, unbleached, enriched",
+        "ndbno": "20630",
+        "ds": "SR"
+    },
+    {
+        "offset": 162,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white (industrial), 11.5% protein, bleached, enriched",
+        "ndbno": "20634",
+        "ds": "SR"
+    },
+    {
+        "offset": 163,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white (industrial), 11.5% protein, bleached, unenriched",
+        "ndbno": "20635",
+        "ds": "SR"
+    },
+    {
+        "offset": 164,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white (industrial), 11.5% protein, unbleached, enriched",
+        "ndbno": "20636",
+        "ds": "SR"
+    },
+    {
+        "offset": 165,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white (industrial), 13% protein, bleached, enriched",
+        "ndbno": "20640",
+        "ds": "SR"
+    },
+    {
+        "offset": 166,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white (industrial), 13% protein, bleached, unenriched",
+        "ndbno": "20641",
+        "ds": "SR"
+    },
+    {
+        "offset": 167,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white (industrial), 15% protein, bleached, enriched",
+        "ndbno": "20645",
+        "ds": "SR"
+    },
+    {
+        "offset": 168,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, white (industrial), 15% protein, bleached, unenriched",
+        "ndbno": "20646",
+        "ds": "SR"
+    },
+    {
+        "offset": 169,
+        "group": "Cereal Grains and Pasta",
+        "name": "Millet flour",
+        "ndbno": "20647",
+        "ds": "SR"
+    },
+    {
+        "offset": 170,
+        "group": "Cereal Grains and Pasta",
+        "name": "Sorghum flour, whole-grain",
+        "ndbno": "20648",
+        "ds": "SR"
+    },
+    {
+        "offset": 171,
+        "group": "Cereal Grains and Pasta",
+        "name": "Wheat flour, whole-grain, soft wheat",
+        "ndbno": "20649",
+        "ds": "SR"
+    },
+    {
+        "offset": 172,
+        "group": "Cereal Grains and Pasta",
+        "name": "Sorghum flour, refined, unenriched",
+        "ndbno": "20650",
+        "ds": "SR"
+    },
+    {
+        "offset": 173,
+        "group": "Cereal Grains and Pasta",
+        "name": "Rice, brown, parboiled, cooked, UNCLE BENS",
+        "ndbno": "20651",
+        "ds": "SR"
+    },
+    {
+        "offset": 174,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, whole grain, 51% whole wheat, remaining enriched semolina, cooked",
+        "ndbno": "20652",
+        "ds": "SR"
+    },
+    {
+        "offset": 175,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, whole grain, 51% whole wheat, remaining enriched semolina, dry",
+        "ndbno": "20653",
+        "ds": "SR"
+    },
+    {
+        "offset": 176,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, gluten-free, brown rice flour, cooked, TINKYADA",
+        "ndbno": "20654",
+        "ds": "SR"
+    },
+    {
+        "offset": 177,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, gluten-free, corn flour and quinoa flour, cooked, ANCIENT HARVEST",
+        "ndbno": "20655",
+        "ds": "SR"
+    },
+    {
+        "offset": 178,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, gluten-free, rice flour and rice bran extract, cooked, DE BOLES",
+        "ndbno": "20656",
+        "ds": "SR"
+    },
+    {
+        "offset": 179,
+        "group": "Cereal Grains and Pasta",
+        "name": "Pasta, gluten-free, corn and rice flour, cooked",
+        "ndbno": "20657",
+        "ds": "SR"
+    },
+    {
+        "offset": 180,
+        "group": "Cereal Grains and Pasta",
+        "name": "Vital wheat gluten",
+        "ndbno": "48052",
+        "ds": "SR"
+    }
+]

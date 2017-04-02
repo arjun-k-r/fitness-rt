@@ -1,0 +1,53 @@
+[
+    {
+        "dosha": "kapha",
+        "elements": [
+            "earth",
+            "water"
+        ],
+        "foodGroups": [
+            
+        ],
+        "name": "sweet"
+    },
+    {
+        "dosha": "pitta-kapha",
+        "elements": [
+            "fire",
+            "earth"
+        ],
+        "name": "sour"
+    },
+    {
+        "dosha": "pitta",
+        "elements": [
+            "fire",
+            "water"
+        ],
+        "name": "salty"
+    },
+    {
+        "dosha": "vata-pitta",
+        "elements": [
+            "air",
+            "fire"
+        ],
+        "name": "pungent"
+    },
+    {
+        "dosha": "vata-kapha",
+        "elements": [
+            "air",
+            "earth"
+        ],
+        "name": "astrigent"
+    },
+    {
+        "dosha": "vata",
+        "elements": [
+            "air",
+            "ether"
+        ],
+        "name": "bitter"
+    }
+]

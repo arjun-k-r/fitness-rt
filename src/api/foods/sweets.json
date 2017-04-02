@@ -1,0 +1,2522 @@
+[
+    {
+        "offset": 0,
+        "group": "Sweets",
+        "name": "SCHIFF,TIGER'S MILK BAR",
+        "ndbno": "19000",
+        "ds": "SR"
+    },
+    {
+        "offset": 1,
+        "group": "Sweets",
+        "name": "Candies, TOBLERONE, milk chocolate with honey and almond nougat",
+        "ndbno": "19001",
+        "ds": "SR"
+    },
+    {
+        "offset": 2,
+        "group": "Sweets",
+        "name": "Snacks, fruit leather, pieces",
+        "ndbno": "19013",
+        "ds": "SR"
+    },
+    {
+        "offset": 3,
+        "group": "Sweets",
+        "name": "Snacks, fruit leather, rolls",
+        "ndbno": "19014",
+        "ds": "SR"
+    },
+    {
+        "offset": 4,
+        "group": "Sweets",
+        "name": "Fruit syrup",
+        "ndbno": "19018",
+        "ds": "SR"
+    },
+    {
+        "offset": 5,
+        "group": "Sweets",
+        "name": "Candies, honey-combed, with peanut butter",
+        "ndbno": "19025",
+        "ds": "SR"
+    },
+    {
+        "offset": 6,
+        "group": "Sweets",
+        "name": "Topping, SMUCKER'S MAGIC SHELL",
+        "ndbno": "19029",
+        "ds": "SR"
+    },
+    {
+        "offset": 7,
+        "group": "Sweets",
+        "name": "Syrup, fruit flavored",
+        "ndbno": "19030",
+        "ds": "SR"
+    },
+    {
+        "offset": 8,
+        "group": "Sweets",
+        "name": "Candies, TOOTSIE ROLL, chocolate-flavor roll",
+        "ndbno": "19064",
+        "ds": "SR"
+    },
+    {
+        "offset": 9,
+        "group": "Sweets",
+        "name": "Candies, ALMOND JOY Candy Bar",
+        "ndbno": "19065",
+        "ds": "SR"
+    },
+    {
+        "offset": 10,
+        "group": "Sweets",
+        "name": "Candies, TWIZZLERS CHERRY BITES",
+        "ndbno": "19067",
+        "ds": "SR"
+    },
+    {
+        "offset": 11,
+        "group": "Sweets",
+        "name": "Candies, NESTLE, BIT-O'-HONEY Candy Chews",
+        "ndbno": "19068",
+        "ds": "SR"
+    },
+    {
+        "offset": 12,
+        "group": "Sweets",
+        "name": "Candies, NESTLE, BUTTERFINGER Bar",
+        "ndbno": "19069",
+        "ds": "SR"
+    },
+    {
+        "offset": 13,
+        "group": "Sweets",
+        "name": "Candies, butterscotch",
+        "ndbno": "19070",
+        "ds": "SR"
+    },
+    {
+        "offset": 14,
+        "group": "Sweets",
+        "name": "Candies, carob, unsweetened",
+        "ndbno": "19071",
+        "ds": "SR"
+    },
+    {
+        "offset": 15,
+        "group": "Sweets",
+        "name": "Candies, caramels",
+        "ndbno": "19074",
+        "ds": "SR"
+    },
+    {
+        "offset": 16,
+        "group": "Sweets",
+        "name": "Candies, CARAMELLO Candy Bar",
+        "ndbno": "19075",
+        "ds": "SR"
+    },
+    {
+        "offset": 17,
+        "group": "Sweets",
+        "name": "Candies, caramels, chocolate-flavor roll",
+        "ndbno": "19076",
+        "ds": "SR"
+    },
+    {
+        "offset": 18,
+        "group": "Sweets",
+        "name": "Baking chocolate, unsweetened, liquid",
+        "ndbno": "19077",
+        "ds": "SR"
+    },
+    {
+        "offset": 19,
+        "group": "Sweets",
+        "name": "Baking chocolate, unsweetened, squares",
+        "ndbno": "19078",
+        "ds": "SR"
+    },
+    {
+        "offset": 20,
+        "group": "Sweets",
+        "name": "Candies, confectioner's coating, yogurt",
+        "ndbno": "19079",
+        "ds": "SR"
+    },
+    {
+        "offset": 21,
+        "group": "Sweets",
+        "name": "Candies, semisweet chocolate",
+        "ndbno": "19080",
+        "ds": "SR"
+    },
+    {
+        "offset": 22,
+        "group": "Sweets",
+        "name": "Candies, sweet chocolate",
+        "ndbno": "19081",
+        "ds": "SR"
+    },
+    {
+        "offset": 23,
+        "group": "Sweets",
+        "name": "Candies, sweet chocolate coated fondant",
+        "ndbno": "19083",
+        "ds": "SR"
+    },
+    {
+        "offset": 24,
+        "group": "Sweets",
+        "name": "Candies, HERSHEY'S GOLDEN ALMOND SOLITAIRES",
+        "ndbno": "19084",
+        "ds": "SR"
+    },
+    {
+        "offset": 25,
+        "group": "Sweets",
+        "name": "Candies, confectioner's coating, butterscotch",
+        "ndbno": "19085",
+        "ds": "SR"
+    },
+    {
+        "offset": 26,
+        "group": "Sweets",
+        "name": "Candies, confectioner's coating, peanut butter",
+        "ndbno": "19086",
+        "ds": "SR"
+    },
+    {
+        "offset": 27,
+        "group": "Sweets",
+        "name": "Candies, white chocolate",
+        "ndbno": "19087",
+        "ds": "SR"
+    },
+    {
+        "offset": 28,
+        "group": "Sweets",
+        "name": "Ice creams, vanilla, light",
+        "ndbno": "19088",
+        "ds": "SR"
+    },
+    {
+        "offset": 29,
+        "group": "Sweets",
+        "name": "Ice creams, vanilla, rich",
+        "ndbno": "19089",
+        "ds": "SR"
+    },
+    {
+        "offset": 30,
+        "group": "Sweets",
+        "name": "Ice creams, french vanilla, soft-serve",
+        "ndbno": "19090",
+        "ds": "SR"
+    },
+    {
+        "offset": 31,
+        "group": "Sweets",
+        "name": "Candies, YORK Peppermint Pattie",
+        "ndbno": "19091",
+        "ds": "SR"
+    },
+    {
+        "offset": 32,
+        "group": "Sweets",
+        "name": "Candies, TWIZZLERS NIBS CHERRY BITS",
+        "ndbno": "19092",
+        "ds": "SR"
+    },
+    {
+        "offset": 33,
+        "group": "Sweets",
+        "name": "Candies, SYMPHONY Milk Chocolate Bar",
+        "ndbno": "19093",
+        "ds": "SR"
+    },
+    {
+        "offset": 34,
+        "group": "Sweets",
+        "name": "Desserts, flan, caramel custard, prepared-from-recipe",
+        "ndbno": "19094",
+        "ds": "SR"
+    },
+    {
+        "offset": 35,
+        "group": "Sweets",
+        "name": "Ice creams, vanilla",
+        "ndbno": "19095",
+        "ds": "SR"
+    },
+    {
+        "offset": 36,
+        "group": "Sweets",
+        "name": "Ice creams, vanilla, light, soft-serve",
+        "ndbno": "19096",
+        "ds": "SR"
+    },
+    {
+        "offset": 37,
+        "group": "Sweets",
+        "name": "Sherbet, orange",
+        "ndbno": "19097",
+        "ds": "SR"
+    },
+    {
+        "offset": 38,
+        "group": "Sweets",
+        "name": "Candies, 5TH AVENUE Candy Bar",
+        "ndbno": "19098",
+        "ds": "SR"
+    },
+    {
+        "offset": 39,
+        "group": "Sweets",
+        "name": "Candies, fondant, prepared-from-recipe",
+        "ndbno": "19099",
+        "ds": "SR"
+    },
+    {
+        "offset": 40,
+        "group": "Sweets",
+        "name": "Candies, fudge, chocolate, prepared-from-recipe",
+        "ndbno": "19100",
+        "ds": "SR"
+    },
+    {
+        "offset": 41,
+        "group": "Sweets",
+        "name": "Candies, fudge, chocolate, with nuts, prepared-from-recipe",
+        "ndbno": "19101",
+        "ds": "SR"
+    },
+    {
+        "offset": 42,
+        "group": "Sweets",
+        "name": "Candies, fudge, peanut butter, prepared-from-recipe",
+        "ndbno": "19102",
+        "ds": "SR"
+    },
+    {
+        "offset": 43,
+        "group": "Sweets",
+        "name": "Candies, fudge, vanilla, prepared-from-recipe",
+        "ndbno": "19103",
+        "ds": "SR"
+    },
+    {
+        "offset": 44,
+        "group": "Sweets",
+        "name": "Candies, fudge, vanilla with nuts",
+        "ndbno": "19104",
+        "ds": "SR"
+    },
+    {
+        "offset": 45,
+        "group": "Sweets",
+        "name": "Candies, NESTLE, GOOBERS Chocolate Covered Peanuts",
+        "ndbno": "19105",
+        "ds": "SR"
+    },
+    {
+        "offset": 46,
+        "group": "Sweets",
+        "name": "Candies, gumdrops, starch jelly pieces",
+        "ndbno": "19106",
+        "ds": "SR"
+    },
+    {
+        "offset": 47,
+        "group": "Sweets",
+        "name": "Candies, hard",
+        "ndbno": "19107",
+        "ds": "SR"
+    },
+    {
+        "offset": 48,
+        "group": "Sweets",
+        "name": "Candies, jellybeans",
+        "ndbno": "19108",
+        "ds": "SR"
+    },
+    {
+        "offset": 49,
+        "group": "Sweets",
+        "name": "Candies, KIT KAT Wafer Bar",
+        "ndbno": "19109",
+        "ds": "SR"
+    },
+    {
+        "offset": 50,
+        "group": "Sweets",
+        "name": "Candies, KRACKEL Chocolate Bar",
+        "ndbno": "19110",
+        "ds": "SR"
+    },
+    {
+        "offset": 51,
+        "group": "Sweets",
+        "name": "Candies, NESTLE, BABY RUTH Bar",
+        "ndbno": "19111",
+        "ds": "SR"
+    },
+    {
+        "offset": 52,
+        "group": "Sweets",
+        "name": "Candies, TWIZZLERS Strawberry Twists Candy",
+        "ndbno": "19112",
+        "ds": "SR"
+    },
+    {
+        "offset": 53,
+        "group": "Sweets",
+        "name": "Syrups, table blends, pancake, with butter",
+        "ndbno": "19113",
+        "ds": "SR"
+    },
+    {
+        "offset": 54,
+        "group": "Sweets",
+        "name": "Ice creams, chocolate, light",
+        "ndbno": "19114",
+        "ds": "SR"
+    },
+    {
+        "offset": 55,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, MARS Almond Bar",
+        "ndbno": "19115",
+        "ds": "SR"
+    },
+    {
+        "offset": 56,
+        "group": "Sweets",
+        "name": "Candies, marshmallows",
+        "ndbno": "19116",
+        "ds": "SR"
+    },
+    {
+        "offset": 57,
+        "group": "Sweets",
+        "name": "Candies, halavah, plain",
+        "ndbno": "19117",
+        "ds": "SR"
+    },
+    {
+        "offset": 58,
+        "group": "Sweets",
+        "name": "Candies, NESTLE, OH HENRY! Bar",
+        "ndbno": "19118",
+        "ds": "SR"
+    },
+    {
+        "offset": 59,
+        "group": "Sweets",
+        "name": "Candies, NESTLE, CHUNKY Bar",
+        "ndbno": "19119",
+        "ds": "SR"
+    },
+    {
+        "offset": 60,
+        "group": "Sweets",
+        "name": "Candies, milk chocolate",
+        "ndbno": "19120",
+        "ds": "SR"
+    },
+    {
+        "offset": 61,
+        "group": "Sweets",
+        "name": "Puddings, banana, dry mix, instant, prepared with 2% milk",
+        "ndbno": "19121",
+        "ds": "SR"
+    },
+    {
+        "offset": 62,
+        "group": "Sweets",
+        "name": "Puddings, banana, dry mix, regular, prepared with 2% milk",
+        "ndbno": "19122",
+        "ds": "SR"
+    },
+    {
+        "offset": 63,
+        "group": "Sweets",
+        "name": "Puddings, chocolate, dry mix, instant, prepared with 2% milk",
+        "ndbno": "19123",
+        "ds": "SR"
+    },
+    {
+        "offset": 64,
+        "group": "Sweets",
+        "name": "Baking chocolate, mexican, squares",
+        "ndbno": "19124",
+        "ds": "SR"
+    },
+    {
+        "offset": 65,
+        "group": "Sweets",
+        "name": "Chocolate-flavored hazelnut spread",
+        "ndbno": "19125",
+        "ds": "SR"
+    },
+    {
+        "offset": 66,
+        "group": "Sweets",
+        "name": "Candies, milk chocolate coated peanuts",
+        "ndbno": "19126",
+        "ds": "SR"
+    },
+    {
+        "offset": 67,
+        "group": "Sweets",
+        "name": "Candies, milk chocolate coated raisins",
+        "ndbno": "19127",
+        "ds": "SR"
+    },
+    {
+        "offset": 68,
+        "group": "Sweets",
+        "name": "Syrups, table blends, pancake, reduced-calorie",
+        "ndbno": "19128",
+        "ds": "SR"
+    },
+    {
+        "offset": 69,
+        "group": "Sweets",
+        "name": "Syrups, table blends, pancake",
+        "ndbno": "19129",
+        "ds": "SR"
+    },
+    {
+        "offset": 70,
+        "group": "Sweets",
+        "name": "Candies, HERSHEY'S POT OF GOLD Almond Bar",
+        "ndbno": "19130",
+        "ds": "SR"
+    },
+    {
+        "offset": 71,
+        "group": "Sweets",
+        "name": "Candies, milk chocolate, with almonds",
+        "ndbno": "19132",
+        "ds": "SR"
+    },
+    {
+        "offset": 72,
+        "group": "Sweets",
+        "name": "Candies, milk chocolate, with rice cereal",
+        "ndbno": "19134",
+        "ds": "SR"
+    },
+    {
+        "offset": 73,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, MILKY WAY Bar",
+        "ndbno": "19135",
+        "ds": "SR"
+    },
+    {
+        "offset": 74,
+        "group": "Sweets",
+        "name": "Candies, HERSHEY'S SKOR Toffee Bar",
+        "ndbno": "19136",
+        "ds": "SR"
+    },
+    {
+        "offset": 75,
+        "group": "Sweets",
+        "name": "Toppings, strawberry",
+        "ndbno": "19137",
+        "ds": "SR"
+    },
+    {
+        "offset": 76,
+        "group": "Sweets",
+        "name": "Candies, truffles, prepared-from-recipe",
+        "ndbno": "19138",
+        "ds": "SR"
+    },
+    {
+        "offset": 77,
+        "group": "Sweets",
+        "name": "Baking chocolate, MARS SNACKFOOD US, M&M's Semisweet Chocolate Mini Baking Bits",
+        "ndbno": "19139",
+        "ds": "SR"
+    },
+    {
+        "offset": 78,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, M&M's Peanut Chocolate Candies",
+        "ndbno": "19140",
+        "ds": "SR"
+    },
+    {
+        "offset": 79,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, M&M's Milk Chocolate Candies",
+        "ndbno": "19141",
+        "ds": "SR"
+    },
+    {
+        "offset": 80,
+        "group": "Sweets",
+        "name": "Candies, MOUNDS Candy Bar",
+        "ndbno": "19142",
+        "ds": "SR"
+    },
+    {
+        "offset": 81,
+        "group": "Sweets",
+        "name": "Candies, MR. GOODBAR Chocolate Bar",
+        "ndbno": "19143",
+        "ds": "SR"
+    },
+    {
+        "offset": 82,
+        "group": "Sweets",
+        "name": "Candies, NESTLE, 100 GRAND Bar",
+        "ndbno": "19144",
+        "ds": "SR"
+    },
+    {
+        "offset": 83,
+        "group": "Sweets",
+        "name": "Candies, NESTLE, CRUNCH Bar and Dessert Topping",
+        "ndbno": "19145",
+        "ds": "SR"
+    },
+    {
+        "offset": 84,
+        "group": "Sweets",
+        "name": "Baking chocolate, MARS SNACKFOOD US, M&M's Milk Chocolate Mini Baking Bits",
+        "ndbno": "19146",
+        "ds": "SR"
+    },
+    {
+        "offset": 85,
+        "group": "Sweets",
+        "name": "Candies, peanut bar",
+        "ndbno": "19147",
+        "ds": "SR"
+    },
+    {
+        "offset": 86,
+        "group": "Sweets",
+        "name": "Candies, peanut brittle, prepared-from-recipe",
+        "ndbno": "19148",
+        "ds": "SR"
+    },
+    {
+        "offset": 87,
+        "group": "Sweets",
+        "name": "Candies, NESTLE, RAISINETS Chocolate Covered Raisins",
+        "ndbno": "19149",
+        "ds": "SR"
+    },
+    {
+        "offset": 88,
+        "group": "Sweets",
+        "name": "Candies, REESE'S Peanut Butter Cups",
+        "ndbno": "19150",
+        "ds": "SR"
+    },
+    {
+        "offset": 89,
+        "group": "Sweets",
+        "name": "Candies, REESE'S PIECES Candy",
+        "ndbno": "19151",
+        "ds": "SR"
+    },
+    {
+        "offset": 90,
+        "group": "Sweets",
+        "name": "Candies, ROLO Caramels in Milk Chocolate",
+        "ndbno": "19152",
+        "ds": "SR"
+    },
+    {
+        "offset": 91,
+        "group": "Sweets",
+        "name": "Candies, NESTLE, AFTER EIGHT Mints",
+        "ndbno": "19153",
+        "ds": "SR"
+    },
+    {
+        "offset": 92,
+        "group": "Sweets",
+        "name": "Candies, sesame crunch",
+        "ndbno": "19154",
+        "ds": "SR"
+    },
+    {
+        "offset": 93,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, SNICKERS Bar",
+        "ndbno": "19155",
+        "ds": "SR"
+    },
+    {
+        "offset": 94,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, STARBURST Fruit Chews, Original fruits",
+        "ndbno": "19156",
+        "ds": "SR"
+    },
+    {
+        "offset": 95,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, M&M's MINIs Milk Chocolate Candies",
+        "ndbno": "19157",
+        "ds": "SR"
+    },
+    {
+        "offset": 96,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, 3 MUSKETEERS Bar",
+        "ndbno": "19159",
+        "ds": "SR"
+    },
+    {
+        "offset": 97,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, TWIX Caramel Cookie Bars",
+        "ndbno": "19160",
+        "ds": "SR"
+    },
+    {
+        "offset": 98,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, TWIX Peanut Butter Cookie Bars",
+        "ndbno": "19161",
+        "ds": "SR"
+    },
+    {
+        "offset": 99,
+        "group": "Sweets",
+        "name": "Candies, WHATCHAMACALLIT Candy Bar",
+        "ndbno": "19162",
+        "ds": "SR"
+    },
+    {
+        "offset": 100,
+        "group": "Sweets",
+        "name": "Chewing gum",
+        "ndbno": "19163",
+        "ds": "SR"
+    },
+    {
+        "offset": 101,
+        "group": "Sweets",
+        "name": "Candies, SPECIAL DARK Chocolate Bar",
+        "ndbno": "19164",
+        "ds": "SR"
+    },
+    {
+        "offset": 102,
+        "group": "Sweets",
+        "name": "Cocoa, dry powder, unsweetened",
+        "ndbno": "19165",
+        "ds": "SR"
+    },
+    {
+        "offset": 103,
+        "group": "Sweets",
+        "name": "Cocoa, dry powder, unsweetened, processed with alkali",
+        "ndbno": "19166",
+        "ds": "SR"
+    },
+    {
+        "offset": 104,
+        "group": "Sweets",
+        "name": "Desserts, egg custard, baked, prepared-from-recipe",
+        "ndbno": "19168",
+        "ds": "SR"
+    },
+    {
+        "offset": 105,
+        "group": "Sweets",
+        "name": "Egg custards, dry mix",
+        "ndbno": "19169",
+        "ds": "SR"
+    },
+    {
+        "offset": 106,
+        "group": "Sweets",
+        "name": "Egg custards, dry mix, prepared with whole milk",
+        "ndbno": "19170",
+        "ds": "SR"
+    },
+    {
+        "offset": 107,
+        "group": "Sweets",
+        "name": "Cocoa, dry powder, unsweetened, HERSHEY'S European Style Cocoa",
+        "ndbno": "19171",
+        "ds": "SR"
+    },
+    {
+        "offset": 108,
+        "group": "Sweets",
+        "name": "Gelatin desserts, dry mix",
+        "ndbno": "19172",
+        "ds": "SR"
+    },
+    {
+        "offset": 109,
+        "group": "Sweets",
+        "name": "Gelatin desserts, dry mix, prepared with water",
+        "ndbno": "19173",
+        "ds": "SR"
+    },
+    {
+        "offset": 110,
+        "group": "Sweets",
+        "name": "Gelatin desserts, dry mix, reduced calorie, with aspartame",
+        "ndbno": "19175",
+        "ds": "SR"
+    },
+    {
+        "offset": 111,
+        "group": "Sweets",
+        "name": "Gelatin desserts, dry mix, reduced calorie, with aspartame, prepared with water",
+        "ndbno": "19176",
+        "ds": "SR"
+    },
+    {
+        "offset": 112,
+        "group": "Sweets",
+        "name": "Gelatins, dry powder, unsweetened",
+        "ndbno": "19177",
+        "ds": "SR"
+    },
+    {
+        "offset": 113,
+        "group": "Sweets",
+        "name": "Candies, YORK BITES",
+        "ndbno": "19181",
+        "ds": "SR"
+    },
+    {
+        "offset": 114,
+        "group": "Sweets",
+        "name": "Desserts, mousse, chocolate, prepared-from-recipe",
+        "ndbno": "19182",
+        "ds": "SR"
+    },
+    {
+        "offset": 115,
+        "group": "Sweets",
+        "name": "Puddings, chocolate, ready-to-eat",
+        "ndbno": "19183",
+        "ds": "SR"
+    },
+    {
+        "offset": 116,
+        "group": "Sweets",
+        "name": "Puddings, chocolate, dry mix, instant",
+        "ndbno": "19184",
+        "ds": "SR"
+    },
+    {
+        "offset": 117,
+        "group": "Sweets",
+        "name": "Puddings, chocolate, dry mix, instant, prepared with whole milk",
+        "ndbno": "19185",
+        "ds": "SR"
+    },
+    {
+        "offset": 118,
+        "group": "Sweets",
+        "name": "Desserts, apple crisp, prepared-from-recipe",
+        "ndbno": "19186",
+        "ds": "SR"
+    },
+    {
+        "offset": 119,
+        "group": "Sweets",
+        "name": "Flan, caramel custard, dry mix",
+        "ndbno": "19187",
+        "ds": "SR"
+    },
+    {
+        "offset": 120,
+        "group": "Sweets",
+        "name": "Puddings, chocolate, dry mix, regular",
+        "ndbno": "19188",
+        "ds": "SR"
+    },
+    {
+        "offset": 121,
+        "group": "Sweets",
+        "name": "Puddings, chocolate, dry mix, regular, prepared with whole milk",
+        "ndbno": "19189",
+        "ds": "SR"
+    },
+    {
+        "offset": 122,
+        "group": "Sweets",
+        "name": "Puddings, chocolate, dry mix, regular, prepared with 2% milk",
+        "ndbno": "19190",
+        "ds": "SR"
+    },
+    {
+        "offset": 123,
+        "group": "Sweets",
+        "name": "Puddings, coconut cream, dry mix, instant, prepared with 2% milk",
+        "ndbno": "19191",
+        "ds": "SR"
+    },
+    {
+        "offset": 124,
+        "group": "Sweets",
+        "name": "Puddings, rice, ready-to-eat",
+        "ndbno": "19193",
+        "ds": "SR"
+    },
+    {
+        "offset": 125,
+        "group": "Sweets",
+        "name": "Puddings, rice, dry mix",
+        "ndbno": "19194",
+        "ds": "SR"
+    },
+    {
+        "offset": 126,
+        "group": "Sweets",
+        "name": "Puddings, rice, dry mix, prepared with whole milk",
+        "ndbno": "19195",
+        "ds": "SR"
+    },
+    {
+        "offset": 127,
+        "group": "Sweets",
+        "name": "Puddings, tapioca, dry mix",
+        "ndbno": "19198",
+        "ds": "SR"
+    },
+    {
+        "offset": 128,
+        "group": "Sweets",
+        "name": "Puddings, tapioca, dry mix, prepared with whole milk",
+        "ndbno": "19199",
+        "ds": "SR"
+    },
+    {
+        "offset": 129,
+        "group": "Sweets",
+        "name": "Puddings, vanilla, ready-to-eat",
+        "ndbno": "19201",
+        "ds": "SR"
+    },
+    {
+        "offset": 130,
+        "group": "Sweets",
+        "name": "Puddings, vanilla, dry mix, instant",
+        "ndbno": "19202",
+        "ds": "SR"
+    },
+    {
+        "offset": 131,
+        "group": "Sweets",
+        "name": "Puddings, vanilla, dry mix, instant, prepared with whole milk",
+        "ndbno": "19203",
+        "ds": "SR"
+    },
+    {
+        "offset": 132,
+        "group": "Sweets",
+        "name": "Puddings, lemon, dry mix, instant, prepared with 2% milk",
+        "ndbno": "19204",
+        "ds": "SR"
+    },
+    {
+        "offset": 133,
+        "group": "Sweets",
+        "name": "Egg custards, dry mix, prepared with 2% milk",
+        "ndbno": "19205",
+        "ds": "SR"
+    },
+    {
+        "offset": 134,
+        "group": "Sweets",
+        "name": "Puddings, vanilla, dry mix, regular",
+        "ndbno": "19206",
+        "ds": "SR"
+    },
+    {
+        "offset": 135,
+        "group": "Sweets",
+        "name": "Puddings, vanilla, dry mix, regular, prepared with whole milk",
+        "ndbno": "19207",
+        "ds": "SR"
+    },
+    {
+        "offset": 136,
+        "group": "Sweets",
+        "name": "Puddings, rice, dry mix, prepared with 2% milk",
+        "ndbno": "19208",
+        "ds": "SR"
+    },
+    {
+        "offset": 137,
+        "group": "Sweets",
+        "name": "Puddings, tapioca, dry mix, prepared with 2% milk",
+        "ndbno": "19209",
+        "ds": "SR"
+    },
+    {
+        "offset": 138,
+        "group": "Sweets",
+        "name": "Puddings, vanilla, dry mix, regular, prepared with 2% milk",
+        "ndbno": "19212",
+        "ds": "SR"
+    },
+    {
+        "offset": 139,
+        "group": "Sweets",
+        "name": "Rennin, chocolate, dry mix, prepared with 2% milk",
+        "ndbno": "19213",
+        "ds": "SR"
+    },
+    {
+        "offset": 140,
+        "group": "Sweets",
+        "name": "Rennin, vanilla, dry mix, prepared with 2% milk",
+        "ndbno": "19214",
+        "ds": "SR"
+    },
+    {
+        "offset": 141,
+        "group": "Sweets",
+        "name": "Candies, praline, prepared-from-recipe",
+        "ndbno": "19216",
+        "ds": "SR"
+    },
+    {
+        "offset": 142,
+        "group": "Sweets",
+        "name": "Frozen novelties, ice type, fruit, no sugar added",
+        "ndbno": "19217",
+        "ds": "SR"
+    },
+    {
+        "offset": 143,
+        "group": "Sweets",
+        "name": "Puddings, tapioca, ready-to-eat",
+        "ndbno": "19218",
+        "ds": "SR"
+    },
+    {
+        "offset": 144,
+        "group": "Sweets",
+        "name": "Puddings, coconut cream, dry mix, regular, prepared with 2% milk",
+        "ndbno": "19219",
+        "ds": "SR"
+    },
+    {
+        "offset": 145,
+        "group": "Sweets",
+        "name": "Desserts, rennin, chocolate, dry mix",
+        "ndbno": "19220",
+        "ds": "SR"
+    },
+    {
+        "offset": 146,
+        "group": "Sweets",
+        "name": "Rennin, chocolate, dry mix, prepared with whole milk",
+        "ndbno": "19221",
+        "ds": "SR"
+    },
+    {
+        "offset": 147,
+        "group": "Sweets",
+        "name": "Desserts, rennin, vanilla, dry mix",
+        "ndbno": "19222",
+        "ds": "SR"
+    },
+    {
+        "offset": 148,
+        "group": "Sweets",
+        "name": "Rennin, vanilla, dry mix, prepared with whole milk",
+        "ndbno": "19223",
+        "ds": "SR"
+    },
+    {
+        "offset": 149,
+        "group": "Sweets",
+        "name": "Desserts, rennin, tablets, unsweetened",
+        "ndbno": "19225",
+        "ds": "SR"
+    },
+    {
+        "offset": 150,
+        "group": "Sweets",
+        "name": "Frostings, chocolate, creamy, ready-to-eat",
+        "ndbno": "19226",
+        "ds": "SR"
+    },
+    {
+        "offset": 151,
+        "group": "Sweets",
+        "name": "Frostings, coconut-nut, ready-to-eat",
+        "ndbno": "19227",
+        "ds": "SR"
+    },
+    {
+        "offset": 152,
+        "group": "Sweets",
+        "name": "Frostings, cream cheese-flavor, ready-to-eat",
+        "ndbno": "19228",
+        "ds": "SR"
+    },
+    {
+        "offset": 153,
+        "group": "Sweets",
+        "name": "Frostings, vanilla, creamy, ready-to-eat",
+        "ndbno": "19230",
+        "ds": "SR"
+    },
+    {
+        "offset": 154,
+        "group": "Sweets",
+        "name": "Flan, caramel custard, dry mix, prepared with 2% milk",
+        "ndbno": "19231",
+        "ds": "SR"
+    },
+    {
+        "offset": 155,
+        "group": "Sweets",
+        "name": "Flan, caramel custard, dry mix, prepared with whole milk",
+        "ndbno": "19232",
+        "ds": "SR"
+    },
+    {
+        "offset": 156,
+        "group": "Sweets",
+        "name": "Puddings, vanilla, ready-to-eat, fat free",
+        "ndbno": "19233",
+        "ds": "SR"
+    },
+    {
+        "offset": 157,
+        "group": "Sweets",
+        "name": "Puddings, tapioca, ready-to-eat, fat free",
+        "ndbno": "19234",
+        "ds": "SR"
+    },
+    {
+        "offset": 158,
+        "group": "Sweets",
+        "name": "Puddings, chocolate, ready-to-eat, fat free",
+        "ndbno": "19235",
+        "ds": "SR"
+    },
+    {
+        "offset": 159,
+        "group": "Sweets",
+        "name": "Candies, HERSHEY'S MILK CHOCOLATE WITH ALMOND BITES",
+        "ndbno": "19236",
+        "ds": "SR"
+    },
+    {
+        "offset": 160,
+        "group": "Sweets",
+        "name": "Candies, REESE'S BITES",
+        "ndbno": "19238",
+        "ds": "SR"
+    },
+    {
+        "offset": 161,
+        "group": "Sweets",
+        "name": "Candies, REESE'S NUTRAGEOUS Candy Bar",
+        "ndbno": "19239",
+        "ds": "SR"
+    },
+    {
+        "offset": 162,
+        "group": "Sweets",
+        "name": "Frostings, chocolate, creamy, dry mix",
+        "ndbno": "19240",
+        "ds": "SR"
+    },
+    {
+        "offset": 163,
+        "group": "Sweets",
+        "name": "Frostings, chocolate, creamy, dry mix, prepared with butter",
+        "ndbno": "19241",
+        "ds": "SR"
+    },
+    {
+        "offset": 164,
+        "group": "Sweets",
+        "name": "Candies, HEATH BITES",
+        "ndbno": "19243",
+        "ds": "SR"
+    },
+    {
+        "offset": 165,
+        "group": "Sweets",
+        "name": "Frostings, vanilla, creamy, dry mix",
+        "ndbno": "19244",
+        "ds": "SR"
+    },
+    {
+        "offset": 166,
+        "group": "Sweets",
+        "name": "Frostings, white, fluffy, dry mix",
+        "ndbno": "19246",
+        "ds": "SR"
+    },
+    {
+        "offset": 167,
+        "group": "Sweets",
+        "name": "Frostings, white, fluffy, dry mix, prepared with water",
+        "ndbno": "19247",
+        "ds": "SR"
+    },
+    {
+        "offset": 168,
+        "group": "Sweets",
+        "name": "Candies, HERSHEY'S, ALMOND JOY BITES",
+        "ndbno": "19248",
+        "ds": "SR"
+    },
+    {
+        "offset": 169,
+        "group": "Sweets",
+        "name": "Candies, HERSHEY, REESESTICKS crispy wafers, peanut butter, milk chocolate",
+        "ndbno": "19249",
+        "ds": "SR"
+    },
+    {
+        "offset": 170,
+        "group": "Sweets",
+        "name": "Candies, HERSHEY, KIT KAT BIG KAT Bar",
+        "ndbno": "19250",
+        "ds": "SR"
+    },
+    {
+        "offset": 171,
+        "group": "Sweets",
+        "name": "Candies, REESE'S, FAST BREAK, milk chocolate peanut butter and soft nougats",
+        "ndbno": "19252",
+        "ds": "SR"
+    },
+    {
+        "offset": 172,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, DOVE Milk Chocolate",
+        "ndbno": "19254",
+        "ds": "SR"
+    },
+    {
+        "offset": 173,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, DOVE Dark Chocolate",
+        "ndbno": "19255",
+        "ds": "SR"
+    },
+    {
+        "offset": 174,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, MILKY WAY Caramels, milk chocolate covered",
+        "ndbno": "19256",
+        "ds": "SR"
+    },
+    {
+        "offset": 175,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, MILKY WAY Caramels. dark chocolate covered",
+        "ndbno": "19258",
+        "ds": "SR"
+    },
+    {
+        "offset": 176,
+        "group": "Sweets",
+        "name": "Ice creams, vanilla, light, no sugar added",
+        "ndbno": "19260",
+        "ds": "SR"
+    },
+    {
+        "offset": 177,
+        "group": "Sweets",
+        "name": "Frozen novelties, fruit and juice bars",
+        "ndbno": "19263",
+        "ds": "SR"
+    },
+    {
+        "offset": 178,
+        "group": "Sweets",
+        "name": "Ice creams, chocolate, light, no sugar added",
+        "ndbno": "19265",
+        "ds": "SR"
+    },
+    {
+        "offset": 179,
+        "group": "Sweets",
+        "name": "Candies, dark chocolate coated coffee beans",
+        "ndbno": "19268",
+        "ds": "SR"
+    },
+    {
+        "offset": 180,
+        "group": "Sweets",
+        "name": "Ice creams, chocolate",
+        "ndbno": "19270",
+        "ds": "SR"
+    },
+    {
+        "offset": 181,
+        "group": "Sweets",
+        "name": "Ice creams, strawberry",
+        "ndbno": "19271",
+        "ds": "SR"
+    },
+    {
+        "offset": 182,
+        "group": "Sweets",
+        "name": "Candies, milk chocolate coated coffee beans",
+        "ndbno": "19279",
+        "ds": "SR"
+    },
+    {
+        "offset": 183,
+        "group": "Sweets",
+        "name": "Frozen novelties, ice type, lime",
+        "ndbno": "19280",
+        "ds": "SR"
+    },
+    {
+        "offset": 184,
+        "group": "Sweets",
+        "name": "Frozen novelties, ice type, italian, restaurant-prepared",
+        "ndbno": "19281",
+        "ds": "SR"
+    },
+    {
+        "offset": 185,
+        "group": "Sweets",
+        "name": "Frozen novelties, ice type, pop",
+        "ndbno": "19283",
+        "ds": "SR"
+    },
+    {
+        "offset": 186,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, M&M's Crispy Chocolate Candies",
+        "ndbno": "19292",
+        "ds": "SR"
+    },
+    {
+        "offset": 187,
+        "group": "Sweets",
+        "name": "Frozen yogurts, vanilla, soft-serve",
+        "ndbno": "19293",
+        "ds": "SR"
+    },
+    {
+        "offset": 188,
+        "group": "Sweets",
+        "name": "Fruit butters, apple",
+        "ndbno": "19294",
+        "ds": "SR"
+    },
+    {
+        "offset": 189,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, SNICKERS MUNCH bar",
+        "ndbno": "19295",
+        "ds": "SR"
+    },
+    {
+        "offset": 190,
+        "group": "Sweets",
+        "name": "Honey",
+        "ndbno": "19296",
+        "ds": "SR"
+    },
+    {
+        "offset": 191,
+        "group": "Sweets",
+        "name": "Jams and preserves",
+        "ndbno": "19297",
+        "ds": "SR"
+    },
+    {
+        "offset": 192,
+        "group": "Sweets",
+        "name": "Jellies",
+        "ndbno": "19300",
+        "ds": "SR"
+    },
+    {
+        "offset": 193,
+        "group": "Sweets",
+        "name": "Candies, fudge, chocolate marshmallow, with nuts, prepared-by-recipe",
+        "ndbno": "19301",
+        "ds": "SR"
+    },
+    {
+        "offset": 194,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, SNICKERS Almond bar",
+        "ndbno": "19302",
+        "ds": "SR"
+    },
+    {
+        "offset": 195,
+        "group": "Sweets",
+        "name": "Marmalade, orange",
+        "ndbno": "19303",
+        "ds": "SR"
+    },
+    {
+        "offset": 196,
+        "group": "Sweets",
+        "name": "Molasses",
+        "ndbno": "19304",
+        "ds": "SR"
+    },
+    {
+        "offset": 197,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, POP'ABLES SNICKERS Brand Bite Size Candies",
+        "ndbno": "19306",
+        "ds": "SR"
+    },
+    {
+        "offset": 198,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, POP'ABLES MILKY WAY Brand Bite Size Candies",
+        "ndbno": "19307",
+        "ds": "SR"
+    },
+    {
+        "offset": 199,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, POP'ABLES 3 MUSKETEERS Brand Bite Size Candies",
+        "ndbno": "19308",
+        "ds": "SR"
+    },
+    {
+        "offset": 200,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, STARBURST Fruit Chews, Fruit and Creme",
+        "ndbno": "19309",
+        "ds": "SR"
+    },
+    {
+        "offset": 201,
+        "group": "Sweets",
+        "name": "Pectin, unsweetened, dry mix",
+        "ndbno": "19310",
+        "ds": "SR"
+    },
+    {
+        "offset": 202,
+        "group": "Sweets",
+        "name": "Pie fillings, apple, canned",
+        "ndbno": "19312",
+        "ds": "SR"
+    },
+    {
+        "offset": 203,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, STARBURST Fruit Chews, Tropical fruits",
+        "ndbno": "19313",
+        "ds": "SR"
+    },
+    {
+        "offset": 204,
+        "group": "Sweets",
+        "name": "Pie fillings, canned, cherry",
+        "ndbno": "19314",
+        "ds": "SR"
+    },
+    {
+        "offset": 205,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, STARBURST Sour Fruit Chews",
+        "ndbno": "19315",
+        "ds": "SR"
+    },
+    {
+        "offset": 206,
+        "group": "Sweets",
+        "name": "Puddings, banana, dry mix, instant",
+        "ndbno": "19318",
+        "ds": "SR"
+    },
+    {
+        "offset": 207,
+        "group": "Sweets",
+        "name": "Puddings, banana, dry mix, instant, prepared with whole milk",
+        "ndbno": "19319",
+        "ds": "SR"
+    },
+    {
+        "offset": 208,
+        "group": "Sweets",
+        "name": "Puddings, banana, dry mix, regular",
+        "ndbno": "19320",
+        "ds": "SR"
+    },
+    {
+        "offset": 209,
+        "group": "Sweets",
+        "name": "Puddings, banana, dry mix, regular, prepared with whole milk",
+        "ndbno": "19321",
+        "ds": "SR"
+    },
+    {
+        "offset": 210,
+        "group": "Sweets",
+        "name": "Puddings, coconut cream, dry mix, instant",
+        "ndbno": "19322",
+        "ds": "SR"
+    },
+    {
+        "offset": 211,
+        "group": "Sweets",
+        "name": "Puddings, coconut cream, dry mix, instant, prepared with whole milk",
+        "ndbno": "19323",
+        "ds": "SR"
+    },
+    {
+        "offset": 212,
+        "group": "Sweets",
+        "name": "Puddings, coconut cream, dry mix, regular",
+        "ndbno": "19324",
+        "ds": "SR"
+    },
+    {
+        "offset": 213,
+        "group": "Sweets",
+        "name": "Puddings, coconut cream, dry mix, regular, prepared with whole milk",
+        "ndbno": "19325",
+        "ds": "SR"
+    },
+    {
+        "offset": 214,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, COCOAVIA Chocolate Bar",
+        "ndbno": "19326",
+        "ds": "SR"
+    },
+    {
+        "offset": 215,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, COCOAVIA Blueberry and Almond Chocolate Bar",
+        "ndbno": "19327",
+        "ds": "SR"
+    },
+    {
+        "offset": 216,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, COCOAVIA Crispy Chocolate Bar",
+        "ndbno": "19328",
+        "ds": "SR"
+    },
+    {
+        "offset": 217,
+        "group": "Sweets",
+        "name": "Puddings, lemon, dry mix, instant",
+        "ndbno": "19330",
+        "ds": "SR"
+    },
+    {
+        "offset": 218,
+        "group": "Sweets",
+        "name": "Puddings, lemon, dry mix, instant, prepared with whole milk",
+        "ndbno": "19331",
+        "ds": "SR"
+    },
+    {
+        "offset": 219,
+        "group": "Sweets",
+        "name": "Puddings, lemon, dry mix, regular",
+        "ndbno": "19332",
+        "ds": "SR"
+    },
+    {
+        "offset": 220,
+        "group": "Sweets",
+        "name": "Pudding, lemon, dry mix, regular, prepared with sugar, egg yolk and water",
+        "ndbno": "19333",
+        "ds": "SR"
+    },
+    {
+        "offset": 221,
+        "group": "Sweets",
+        "name": "Sugars, brown",
+        "ndbno": "19334",
+        "ds": "SR"
+    },
+    {
+        "offset": 222,
+        "group": "Sweets",
+        "name": "Sugars, granulated",
+        "ndbno": "19335",
+        "ds": "SR"
+    },
+    {
+        "offset": 223,
+        "group": "Sweets",
+        "name": "Sugars, powdered",
+        "ndbno": "19336",
+        "ds": "SR"
+    },
+    {
+        "offset": 224,
+        "group": "Sweets",
+        "name": "Sweeteners, tabletop, aspartame, EQUAL, packets",
+        "ndbno": "19337",
+        "ds": "SR"
+    },
+    {
+        "offset": 225,
+        "group": "Sweets",
+        "name": "Sugars, maple",
+        "ndbno": "19340",
+        "ds": "SR"
+    },
+    {
+        "offset": 226,
+        "group": "Sweets",
+        "name": "Syrups, chocolate, HERSHEY'S Genuine Chocolate Flavored Lite Syrup",
+        "ndbno": "19345",
+        "ds": "SR"
+    },
+    {
+        "offset": 227,
+        "group": "Sweets",
+        "name": "Syrups, chocolate, fudge-type",
+        "ndbno": "19348",
+        "ds": "SR"
+    },
+    {
+        "offset": 228,
+        "group": "Sweets",
+        "name": "Syrups, corn, dark",
+        "ndbno": "19349",
+        "ds": "SR"
+    },
+    {
+        "offset": 229,
+        "group": "Sweets",
+        "name": "Syrups, corn, light",
+        "ndbno": "19350",
+        "ds": "SR"
+    },
+    {
+        "offset": 230,
+        "group": "Sweets",
+        "name": "Syrups, corn, high-fructose",
+        "ndbno": "19351",
+        "ds": "SR"
+    },
+    {
+        "offset": 231,
+        "group": "Sweets",
+        "name": "Syrups, malt",
+        "ndbno": "19352",
+        "ds": "SR"
+    },
+    {
+        "offset": 232,
+        "group": "Sweets",
+        "name": "Syrups, maple",
+        "ndbno": "19353",
+        "ds": "SR"
+    },
+    {
+        "offset": 233,
+        "group": "Sweets",
+        "name": "Syrups, sorghum",
+        "ndbno": "19355",
+        "ds": "SR"
+    },
+    {
+        "offset": 234,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, SNICKERS CRUNCHER",
+        "ndbno": "19359",
+        "ds": "SR"
+    },
+    {
+        "offset": 235,
+        "group": "Sweets",
+        "name": "Syrups, table blends, pancake, with 2% maple",
+        "ndbno": "19360",
+        "ds": "SR"
+    },
+    {
+        "offset": 236,
+        "group": "Sweets",
+        "name": "Syrups, table blends, cane and 15% maple",
+        "ndbno": "19361",
+        "ds": "SR"
+    },
+    {
+        "offset": 237,
+        "group": "Sweets",
+        "name": "Syrups, table blends, corn, refiner, and sugar",
+        "ndbno": "19362",
+        "ds": "SR"
+    },
+    {
+        "offset": 238,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, SKITTLES Wild Berry Bite Size Candies",
+        "ndbno": "19363",
+        "ds": "SR"
+    },
+    {
+        "offset": 239,
+        "group": "Sweets",
+        "name": "Toppings, butterscotch or caramel",
+        "ndbno": "19364",
+        "ds": "SR"
+    },
+    {
+        "offset": 240,
+        "group": "Sweets",
+        "name": "Toppings, marshmallow cream",
+        "ndbno": "19365",
+        "ds": "SR"
+    },
+    {
+        "offset": 241,
+        "group": "Sweets",
+        "name": "Toppings, pineapple",
+        "ndbno": "19366",
+        "ds": "SR"
+    },
+    {
+        "offset": 242,
+        "group": "Sweets",
+        "name": "Toppings, nuts in syrup",
+        "ndbno": "19367",
+        "ds": "SR"
+    },
+    {
+        "offset": 243,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, SKITTLES Tropical Bite Size Candies",
+        "ndbno": "19368",
+        "ds": "SR"
+    },
+    {
+        "offset": 244,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, SKITTLES Sours Original",
+        "ndbno": "19369",
+        "ds": "SR"
+    },
+    {
+        "offset": 245,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, SKITTLES Original Bite Size Candies",
+        "ndbno": "19370",
+        "ds": "SR"
+    },
+    {
+        "offset": 246,
+        "group": "Sweets",
+        "name": "Frostings, vanilla, creamy, dry mix, prepared with margarine",
+        "ndbno": "19371",
+        "ds": "SR"
+    },
+    {
+        "offset": 247,
+        "group": "Sweets",
+        "name": "Frostings, chocolate, creamy, dry mix, prepared with margarine",
+        "ndbno": "19372",
+        "ds": "SR"
+    },
+    {
+        "offset": 248,
+        "group": "Sweets",
+        "name": "Frostings, glaze, prepared-from-recipe",
+        "ndbno": "19375",
+        "ds": "SR"
+    },
+    {
+        "offset": 249,
+        "group": "Sweets",
+        "name": "Candies, fudge, chocolate marshmallow, prepared-from-recipe",
+        "ndbno": "19379",
+        "ds": "SR"
+    },
+    {
+        "offset": 250,
+        "group": "Sweets",
+        "name": "Candies, taffy, prepared-from-recipe",
+        "ndbno": "19382",
+        "ds": "SR"
+    },
+    {
+        "offset": 251,
+        "group": "Sweets",
+        "name": "Candies, toffee, prepared-from-recipe",
+        "ndbno": "19383",
+        "ds": "SR"
+    },
+    {
+        "offset": 252,
+        "group": "Sweets",
+        "name": "Candies, divinity, prepared-from-recipe",
+        "ndbno": "19384",
+        "ds": "SR"
+    },
+    {
+        "offset": 253,
+        "group": "Sweets",
+        "name": "Frozen novelties, ice type, pineapple-coconut",
+        "ndbno": "19387",
+        "ds": "SR"
+    },
+    {
+        "offset": 254,
+        "group": "Sweets",
+        "name": "Frozen yogurts, chocolate, soft-serve",
+        "ndbno": "19393",
+        "ds": "SR"
+    },
+    {
+        "offset": 255,
+        "group": "Sweets",
+        "name": "Frostings, glaze, chocolate, prepared-from-recipe, with butter, NFSMI Recipe No. C-32",
+        "ndbno": "19409",
+        "ds": "SR"
+    },
+    {
+        "offset": 256,
+        "group": "Sweets",
+        "name": "Candies, semisweet chocolate, made with butter",
+        "ndbno": "19701",
+        "ds": "SR"
+    },
+    {
+        "offset": 257,
+        "group": "Sweets",
+        "name": "Gelatin desserts, dry mix, with added ascorbic acid, sodium-citrate and salt",
+        "ndbno": "19702",
+        "ds": "SR"
+    },
+    {
+        "offset": 258,
+        "group": "Sweets",
+        "name": "Gelatin desserts, dry mix, reduced calorie, with aspartame, added phosphorus, potassium, sodium, vitamin C",
+        "ndbno": "19703",
+        "ds": "SR"
+    },
+    {
+        "offset": 259,
+        "group": "Sweets",
+        "name": "Gelatin desserts, dry mix, reduced calorie, with aspartame, no added sodium",
+        "ndbno": "19704",
+        "ds": "SR"
+    },
+    {
+        "offset": 260,
+        "group": "Sweets",
+        "name": "Puddings, banana, dry mix, instant, with added oil",
+        "ndbno": "19705",
+        "ds": "SR"
+    },
+    {
+        "offset": 261,
+        "group": "Sweets",
+        "name": "Puddings, banana, dry mix, regular, with added oil",
+        "ndbno": "19706",
+        "ds": "SR"
+    },
+    {
+        "offset": 262,
+        "group": "Sweets",
+        "name": "Puddings, lemon, dry mix, regular, with added oil, potassium, sodium",
+        "ndbno": "19708",
+        "ds": "SR"
+    },
+    {
+        "offset": 263,
+        "group": "Sweets",
+        "name": "Puddings, tapioca, dry mix, with no added salt",
+        "ndbno": "19709",
+        "ds": "SR"
+    },
+    {
+        "offset": 264,
+        "group": "Sweets",
+        "name": "Puddings, vanilla, dry mix, regular, with added oil",
+        "ndbno": "19710",
+        "ds": "SR"
+    },
+    {
+        "offset": 265,
+        "group": "Sweets",
+        "name": "Jams and preserves, apricot",
+        "ndbno": "19719",
+        "ds": "SR"
+    },
+    {
+        "offset": 266,
+        "group": "Sweets",
+        "name": "Syrups, table blends, pancake, with 2% maple, with added potassium",
+        "ndbno": "19720",
+        "ds": "SR"
+    },
+    {
+        "offset": 267,
+        "group": "Sweets",
+        "name": "Frozen novelties, juice type, POPSICLE SCRIBBLERS",
+        "ndbno": "19856",
+        "ds": "SR"
+    },
+    {
+        "offset": 268,
+        "group": "Sweets",
+        "name": "Candies, sugar-coated almonds",
+        "ndbno": "19858",
+        "ds": "SR"
+    },
+    {
+        "offset": 269,
+        "group": "Sweets",
+        "name": "Cocoa, dry powder, hi-fat or breakfast, plain",
+        "ndbno": "19859",
+        "ds": "SR"
+    },
+    {
+        "offset": 270,
+        "group": "Sweets",
+        "name": "Cocoa, dry powder, hi-fat or breakfast, processed with alkali",
+        "ndbno": "19860",
+        "ds": "SR"
+    },
+    {
+        "offset": 271,
+        "group": "Sweets",
+        "name": "Candies, soft fruit and nut squares",
+        "ndbno": "19866",
+        "ds": "SR"
+    },
+    {
+        "offset": 272,
+        "group": "Sweets",
+        "name": "Ice creams, vanilla, fat free",
+        "ndbno": "19867",
+        "ds": "SR"
+    },
+    {
+        "offset": 273,
+        "group": "Sweets",
+        "name": "Sweeteners, tabletop, sucralose, SPLENDA packets",
+        "ndbno": "19868",
+        "ds": "SR"
+    },
+    {
+        "offset": 274,
+        "group": "Sweets",
+        "name": "Frozen novelties, No Sugar Added, FUDGSICLE pops",
+        "ndbno": "19871",
+        "ds": "SR"
+    },
+    {
+        "offset": 275,
+        "group": "Sweets",
+        "name": "Frozen novelties, ice type, sugar free, orange, cherry, and grape POPSICLE pops",
+        "ndbno": "19873",
+        "ds": "SR"
+    },
+    {
+        "offset": 276,
+        "group": "Sweets",
+        "name": "Frozen novelties, KLONDIKE, SLIM-A-BEAR Fudge Bar, 98% fat free, no sugar added",
+        "ndbno": "19874",
+        "ds": "SR"
+    },
+    {
+        "offset": 277,
+        "group": "Sweets",
+        "name": "Ice creams, BREYERS, All Natural Light Vanilla",
+        "ndbno": "19875",
+        "ds": "SR"
+    },
+    {
+        "offset": 278,
+        "group": "Sweets",
+        "name": "Ice creams, BREYERS, All Natural Light French Vanilla",
+        "ndbno": "19876",
+        "ds": "SR"
+    },
+    {
+        "offset": 279,
+        "group": "Sweets",
+        "name": "Ice creams, BREYERS, 98% Fat Free Vanilla",
+        "ndbno": "19877",
+        "ds": "SR"
+    },
+    {
+        "offset": 280,
+        "group": "Sweets",
+        "name": "Ice creams, BREYERS, All Natural Light Vanilla Chocolate Strawberry",
+        "ndbno": "19878",
+        "ds": "SR"
+    },
+    {
+        "offset": 281,
+        "group": "Sweets",
+        "name": "Ice creams, BREYERS, All Natural Light Mint Chocolate Chip",
+        "ndbno": "19879",
+        "ds": "SR"
+    },
+    {
+        "offset": 282,
+        "group": "Sweets",
+        "name": "Ice creams, BREYERS, No Sugar Added, Butter Pecan",
+        "ndbno": "19880",
+        "ds": "SR"
+    },
+    {
+        "offset": 283,
+        "group": "Sweets",
+        "name": "Ice creams, BREYERS, No Sugar Added, French Vanilla",
+        "ndbno": "19881",
+        "ds": "SR"
+    },
+    {
+        "offset": 284,
+        "group": "Sweets",
+        "name": "Ice creams, BREYERS, No Sugar Added, Vanilla",
+        "ndbno": "19882",
+        "ds": "SR"
+    },
+    {
+        "offset": 285,
+        "group": "Sweets",
+        "name": "Ice creams, BREYERS, No Sugar Added, Vanilla Fudge Twirl",
+        "ndbno": "19883",
+        "ds": "SR"
+    },
+    {
+        "offset": 286,
+        "group": "Sweets",
+        "name": "Ice creams, BREYERS, No Sugar Added, Vanilla Chocolate Strawberry",
+        "ndbno": "19884",
+        "ds": "SR"
+    },
+    {
+        "offset": 287,
+        "group": "Sweets",
+        "name": "Frozen novelties, KLONDIKE, SLIM-A-BEAR Chocolate Cone",
+        "ndbno": "19886",
+        "ds": "SR"
+    },
+    {
+        "offset": 288,
+        "group": "Sweets",
+        "name": "Frozen novelties, KLONDIKE, SLIM-A-BEAR Vanilla Sandwich",
+        "ndbno": "19887",
+        "ds": "SR"
+    },
+    {
+        "offset": 289,
+        "group": "Sweets",
+        "name": "Frozen novelties, KLONDIKE, SLIM-A-BEAR, No Sugar Added, Stickless Bar",
+        "ndbno": "19890",
+        "ds": "SR"
+    },
+    {
+        "offset": 290,
+        "group": "Sweets",
+        "name": "Frozen novelties, No Sugar Added CREAMSICLE Pops",
+        "ndbno": "19891",
+        "ds": "SR"
+    },
+    {
+        "offset": 291,
+        "group": "Sweets",
+        "name": "Frozen novelties, Sugar Free, CREAMSICLE Pops",
+        "ndbno": "19892",
+        "ds": "SR"
+    },
+    {
+        "offset": 292,
+        "group": "Sweets",
+        "name": "Ice creams, BREYERS, All Natural Light French Chocolate",
+        "ndbno": "19893",
+        "ds": "SR"
+    },
+    {
+        "offset": 293,
+        "group": "Sweets",
+        "name": "Ice creams, BREYERS, 98% Fat Free Chocolate",
+        "ndbno": "19894",
+        "ds": "SR"
+    },
+    {
+        "offset": 294,
+        "group": "Sweets",
+        "name": "Ice creams, BREYERS, No Sugar Added, Chocolate Caramel",
+        "ndbno": "19895",
+        "ds": "SR"
+    },
+    {
+        "offset": 295,
+        "group": "Sweets",
+        "name": "Candies, REESE's Fast Break, milk chocolate, peanut butter, soft nougats, candy bar",
+        "ndbno": "19896",
+        "ds": "SR"
+    },
+    {
+        "offset": 296,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, COCOAVIA Chocolate Covered Almonds",
+        "ndbno": "19897",
+        "ds": "SR"
+    },
+    {
+        "offset": 297,
+        "group": "Sweets",
+        "name": "Ice creams, regular, low carbohydrate, vanilla",
+        "ndbno": "19898",
+        "ds": "SR"
+    },
+    {
+        "offset": 298,
+        "group": "Sweets",
+        "name": "Ice creams, regular, low carbohydrate, chocolate",
+        "ndbno": "19899",
+        "ds": "SR"
+    },
+    {
+        "offset": 299,
+        "group": "Sweets",
+        "name": "Chocolate, dark, 45- 59% cacao solids",
+        "ndbno": "19902",
+        "ds": "SR"
+    },
+    {
+        "offset": 300,
+        "group": "Sweets",
+        "name": "Chocolate, dark, 60-69% cacao solids",
+        "ndbno": "19903",
+        "ds": "SR"
+    },
+    {
+        "offset": 301,
+        "group": "Sweets",
+        "name": "Chocolate, dark, 70-85% cacao solids",
+        "ndbno": "19904",
+        "ds": "SR"
+    },
+    {
+        "offset": 302,
+        "group": "Sweets",
+        "name": "Candies, chocolate, dark, NFS (45-59% cacao solids 90%; 60-69% cacao solids 5%; 70-85% cacao solids 5%)",
+        "ndbno": "19905",
+        "ds": "SR"
+    },
+    {
+        "offset": 303,
+        "group": "Sweets",
+        "name": "Sweeteners, for baking, brown, contains sugar and sucralose",
+        "ndbno": "19906",
+        "ds": "SR"
+    },
+    {
+        "offset": 304,
+        "group": "Sweets",
+        "name": "Sweeteners, for baking, contains sugar and sucralose",
+        "ndbno": "19907",
+        "ds": "SR"
+    },
+    {
+        "offset": 305,
+        "group": "Sweets",
+        "name": "Sugar, turbinado",
+        "ndbno": "19908",
+        "ds": "SR"
+    },
+    {
+        "offset": 306,
+        "group": "Sweets",
+        "name": "Sweeteners, sugar substitute, granulated, brown",
+        "ndbno": "19909",
+        "ds": "SR"
+    },
+    {
+        "offset": 307,
+        "group": "Sweets",
+        "name": "Candies, crispy bar with peanut butter filling",
+        "ndbno": "19910",
+        "ds": "SR"
+    },
+    {
+        "offset": 308,
+        "group": "Sweets",
+        "name": "Syrup, maple, Canadian",
+        "ndbno": "19911",
+        "ds": "SR"
+    },
+    {
+        "offset": 309,
+        "group": "Sweets",
+        "name": "Sweetener, syrup, agave",
+        "ndbno": "19912",
+        "ds": "SR"
+    },
+    {
+        "offset": 310,
+        "group": "Sweets",
+        "name": "Candies, NESTLE, BUTTERFINGER Crisp",
+        "ndbno": "19913",
+        "ds": "SR"
+    },
+    {
+        "offset": 311,
+        "group": "Sweets",
+        "name": "Candies, M&M MARS 3 MUSKETEERS Truffle Crisp",
+        "ndbno": "19914",
+        "ds": "SR"
+    },
+    {
+        "offset": 312,
+        "group": "Sweets",
+        "name": "Syrups, chocolate, HERSHEY'S Sugar free, Genuine Chocolate Flavored, Lite Syrup",
+        "ndbno": "19916",
+        "ds": "SR"
+    },
+    {
+        "offset": 313,
+        "group": "Sweets",
+        "name": "Candies, M&M MARS Pretzel Chocolate Candies",
+        "ndbno": "19917",
+        "ds": "SR"
+    },
+    {
+        "offset": 314,
+        "group": "Sweets",
+        "name": "Sweetener, herbal extract powder from Stevia leaf",
+        "ndbno": "19918",
+        "ds": "SR"
+    },
+    {
+        "offset": 315,
+        "group": "Sweets",
+        "name": "Candies, fruit snacks, with high vitamin C",
+        "ndbno": "19919",
+        "ds": "SR"
+    },
+    {
+        "offset": 316,
+        "group": "Sweets",
+        "name": "Jams, preserves, marmalades, sweetened with fruit juice",
+        "ndbno": "19920",
+        "ds": "SR"
+    },
+    {
+        "offset": 317,
+        "group": "Sweets",
+        "name": "Candies, Tamarind",
+        "ndbno": "19921",
+        "ds": "SR"
+    },
+    {
+        "offset": 318,
+        "group": "Sweets",
+        "name": "Candies, coconut bar, not chocolate covered",
+        "ndbno": "19922",
+        "ds": "SR"
+    },
+    {
+        "offset": 319,
+        "group": "Sweets",
+        "name": "Candies, HERSHEYS, PAYDAY Bar",
+        "ndbno": "19923",
+        "ds": "SR"
+    },
+    {
+        "offset": 320,
+        "group": "Sweets",
+        "name": "Syrup, NESTLE, chocolate",
+        "ndbno": "19924",
+        "ds": "SR"
+    },
+    {
+        "offset": 321,
+        "group": "Sweets",
+        "name": "Syrups, grenadine",
+        "ndbno": "42040",
+        "ds": "SR"
+    },
+    {
+        "offset": 322,
+        "group": "Sweets",
+        "name": "Pectin, liquid",
+        "ndbno": "42063",
+        "ds": "SR"
+    },
+    {
+        "offset": 323,
+        "group": "Sweets",
+        "name": "Frozen novelties, ice cream type, vanilla ice cream, light, no sugar added, chocolate coated",
+        "ndbno": "42074",
+        "ds": "SR"
+    },
+    {
+        "offset": 324,
+        "group": "Sweets",
+        "name": "Milk dessert, frozen, milk-fat free, chocolate",
+        "ndbno": "42131",
+        "ds": "SR"
+    },
+    {
+        "offset": 325,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, M&M's Peanut Butter Chocolate Candies",
+        "ndbno": "42148",
+        "ds": "SR"
+    },
+    {
+        "offset": 326,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, TWIX chocolate fudge cookie bars",
+        "ndbno": "42183",
+        "ds": "SR"
+    },
+    {
+        "offset": 327,
+        "group": "Sweets",
+        "name": "Frozen yogurts, chocolate, nonfat milk, sweetened without sugar",
+        "ndbno": "42185",
+        "ds": "SR"
+    },
+    {
+        "offset": 328,
+        "group": "Sweets",
+        "name": "Frozen yogurts, chocolate",
+        "ndbno": "42186",
+        "ds": "SR"
+    },
+    {
+        "offset": 329,
+        "group": "Sweets",
+        "name": "Frozen yogurts, flavors other than chocolate",
+        "ndbno": "42187",
+        "ds": "SR"
+    },
+    {
+        "offset": 330,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, MILKY WAY Midnight Bar",
+        "ndbno": "42196",
+        "ds": "SR"
+    },
+    {
+        "offset": 331,
+        "group": "Sweets",
+        "name": "Candies, MARS SNACKFOOD US, M&M's Almond Chocolate Candies",
+        "ndbno": "42227",
+        "ds": "SR"
+    },
+    {
+        "offset": 332,
+        "group": "Sweets",
+        "name": "Gums, seed gums (includes locust bean, guar)",
+        "ndbno": "42281",
+        "ds": "SR"
+    },
+    {
+        "offset": 333,
+        "group": "Sweets",
+        "name": "Syrups, sugar free",
+        "ndbno": "43026",
+        "ds": "SR"
+    },
+    {
+        "offset": 334,
+        "group": "Sweets",
+        "name": "Jellies, no sugar (with sodium saccharin), any flavors",
+        "ndbno": "43027",
+        "ds": "SR"
+    },
+    {
+        "offset": 335,
+        "group": "Sweets",
+        "name": "Jams and preserves, no sugar (with sodium saccharin), any flavor",
+        "ndbno": "43028",
+        "ds": "SR"
+    },
+    {
+        "offset": 336,
+        "group": "Sweets",
+        "name": "Candies, chocolate covered, caramel with nuts",
+        "ndbno": "43031",
+        "ds": "SR"
+    },
+    {
+        "offset": 337,
+        "group": "Sweets",
+        "name": "Candies, nougat, with almonds",
+        "ndbno": "43046",
+        "ds": "SR"
+    },
+    {
+        "offset": 338,
+        "group": "Sweets",
+        "name": "Candies, gum drops, no sugar or low calorie (sorbitol)",
+        "ndbno": "43057",
+        "ds": "SR"
+    },
+    {
+        "offset": 339,
+        "group": "Sweets",
+        "name": "Candies, hard, dietetic or low calorie (sorbitol)",
+        "ndbno": "43058",
+        "ds": "SR"
+    },
+    {
+        "offset": 340,
+        "group": "Sweets",
+        "name": "Candies, chocolate covered, low sugar or low calorie",
+        "ndbno": "43059",
+        "ds": "SR"
+    },
+    {
+        "offset": 341,
+        "group": "Sweets",
+        "name": "Chewing gum, sugarless",
+        "ndbno": "43060",
+        "ds": "SR"
+    },
+    {
+        "offset": 342,
+        "group": "Sweets",
+        "name": "Pie fillings, cherry, low calorie",
+        "ndbno": "43098",
+        "ds": "SR"
+    },
+    {
+        "offset": 343,
+        "group": "Sweets",
+        "name": "Sweeteners, tabletop, saccharin (sodium saccharin)",
+        "ndbno": "43158",
+        "ds": "SR"
+    },
+    {
+        "offset": 344,
+        "group": "Sweets",
+        "name": "Sweeteners, tabletop, fructose, dry, powder",
+        "ndbno": "43216",
+        "ds": "SR"
+    },
+    {
+        "offset": 345,
+        "group": "Sweets",
+        "name": "Frozen novelties, ice cream type, sundae, prepackaged",
+        "ndbno": "43269",
+        "ds": "SR"
+    },
+    {
+        "offset": 346,
+        "group": "Sweets",
+        "name": "Jams, preserves, marmalade, reduced sugar",
+        "ndbno": "43344",
+        "ds": "SR"
+    },
+    {
+        "offset": 347,
+        "group": "Sweets",
+        "name": "Frozen novelties, juice type, orange",
+        "ndbno": "43346",
+        "ds": "SR"
+    },
+    {
+        "offset": 348,
+        "group": "Sweets",
+        "name": "Frozen novelties, juice type, juice with cream",
+        "ndbno": "43450",
+        "ds": "SR"
+    },
+    {
+        "offset": 349,
+        "group": "Sweets",
+        "name": "Frozen novelties, ice cream type, chocolate or caramel covered, with nuts",
+        "ndbno": "43506",
+        "ds": "SR"
+    },
+    {
+        "offset": 350,
+        "group": "Sweets",
+        "name": "Frozen novelties, ice type, pop, with low calorie sweetener",
+        "ndbno": "43514",
+        "ds": "SR"
+    },
+    {
+        "offset": 351,
+        "group": "Sweets",
+        "name": "Ice creams, chocolate, rich",
+        "ndbno": "43541",
+        "ds": "SR"
+    },
+    {
+        "offset": 352,
+        "group": "Sweets",
+        "name": "Sweeteners, tabletop, fructose, liquid",
+        "ndbno": "44018",
+        "ds": "SR"
+    },
+    {
+        "offset": 353,
+        "group": "Sweets",
+        "name": "Puddings, chocolate flavor, low calorie, instant, dry mix",
+        "ndbno": "44061",
+        "ds": "SR"
+    },
+    {
+        "offset": 354,
+        "group": "Sweets",
+        "name": "Jellies, reduced sugar, home preserved",
+        "ndbno": "44110",
+        "ds": "SR"
+    },
+    {
+        "offset": 355,
+        "group": "Sweets",
+        "name": "Pie fillings, blueberry, canned",
+        "ndbno": "44158",
+        "ds": "SR"
+    },
+    {
+        "offset": 356,
+        "group": "Sweets",
+        "name": "Puddings, chocolate flavor, low calorie, regular, dry mix",
+        "ndbno": "44258",
+        "ds": "SR"
+    },
+    {
+        "offset": 357,
+        "group": "Sweets",
+        "name": "Puddings, all flavors except chocolate, low calorie, regular, dry mix",
+        "ndbno": "44259",
+        "ds": "SR"
+    },
+    {
+        "offset": 358,
+        "group": "Sweets",
+        "name": "Puddings, all flavors except chocolate, low calorie, instant, dry mix",
+        "ndbno": "44260",
+        "ds": "SR"
+    },
+    {
+        "offset": 359,
+        "group": "Sweets",
+        "name": "Syrup, Cane",
+        "ndbno": "90480",
+        "ds": "SR"
+    }
+]

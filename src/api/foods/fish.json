@@ -1,0 +1,1857 @@
+[
+    {
+        "offset": 0,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, anchovy, european, raw",
+        "ndbno": "15001",
+        "ds": "SR"
+    },
+    {
+        "offset": 1,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, anchovy, european, canned in oil, drained solids",
+        "ndbno": "15002",
+        "ds": "SR"
+    },
+    {
+        "offset": 2,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, bass, fresh water, mixed species, raw",
+        "ndbno": "15003",
+        "ds": "SR"
+    },
+    {
+        "offset": 3,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, bass, striped, raw",
+        "ndbno": "15004",
+        "ds": "SR"
+    },
+    {
+        "offset": 4,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, bluefish, raw",
+        "ndbno": "15005",
+        "ds": "SR"
+    },
+    {
+        "offset": 5,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, burbot, raw",
+        "ndbno": "15006",
+        "ds": "SR"
+    },
+    {
+        "offset": 6,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, butterfish, raw",
+        "ndbno": "15007",
+        "ds": "SR"
+    },
+    {
+        "offset": 7,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, carp, raw",
+        "ndbno": "15008",
+        "ds": "SR"
+    },
+    {
+        "offset": 8,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, carp, cooked, dry heat",
+        "ndbno": "15009",
+        "ds": "SR"
+    },
+    {
+        "offset": 9,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, catfish, channel, wild, raw",
+        "ndbno": "15010",
+        "ds": "SR"
+    },
+    {
+        "offset": 10,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, catfish, channel, cooked, breaded and fried",
+        "ndbno": "15011",
+        "ds": "SR"
+    },
+    {
+        "offset": 11,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, caviar, black and red, granular",
+        "ndbno": "15012",
+        "ds": "SR"
+    },
+    {
+        "offset": 12,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, cisco, raw",
+        "ndbno": "15013",
+        "ds": "SR"
+    },
+    {
+        "offset": 13,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, cisco, smoked",
+        "ndbno": "15014",
+        "ds": "SR"
+    },
+    {
+        "offset": 14,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, cod, Atlantic, raw",
+        "ndbno": "15015",
+        "ds": "SR"
+    },
+    {
+        "offset": 15,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, cod, Atlantic, cooked, dry heat",
+        "ndbno": "15016",
+        "ds": "SR"
+    },
+    {
+        "offset": 16,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, cod, Atlantic, canned, solids and liquid",
+        "ndbno": "15017",
+        "ds": "SR"
+    },
+    {
+        "offset": 17,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, cod, Atlantic, dried and salted",
+        "ndbno": "15018",
+        "ds": "SR"
+    },
+    {
+        "offset": 18,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, cod, Pacific, raw (may have been previously frozen)",
+        "ndbno": "15019",
+        "ds": "SR"
+    },
+    {
+        "offset": 19,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, croaker, Atlantic, raw",
+        "ndbno": "15020",
+        "ds": "SR"
+    },
+    {
+        "offset": 20,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, croaker, Atlantic, cooked, breaded and fried",
+        "ndbno": "15021",
+        "ds": "SR"
+    },
+    {
+        "offset": 21,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, cusk, raw",
+        "ndbno": "15022",
+        "ds": "SR"
+    },
+    {
+        "offset": 22,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, mahimahi, raw",
+        "ndbno": "15023",
+        "ds": "SR"
+    },
+    {
+        "offset": 23,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, drum, freshwater, raw",
+        "ndbno": "15024",
+        "ds": "SR"
+    },
+    {
+        "offset": 24,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, eel, mixed species, raw",
+        "ndbno": "15025",
+        "ds": "SR"
+    },
+    {
+        "offset": 25,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, eel, mixed species, cooked, dry heat",
+        "ndbno": "15026",
+        "ds": "SR"
+    },
+    {
+        "offset": 26,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, fish sticks, frozen, prepared",
+        "ndbno": "15027",
+        "ds": "SR"
+    },
+    {
+        "offset": 27,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, flatfish (flounder and sole species), raw",
+        "ndbno": "15028",
+        "ds": "SR"
+    },
+    {
+        "offset": 28,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, flatfish (flounder and sole species), cooked, dry heat",
+        "ndbno": "15029",
+        "ds": "SR"
+    },
+    {
+        "offset": 29,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, gefiltefish, commercial, sweet recipe",
+        "ndbno": "15030",
+        "ds": "SR"
+    },
+    {
+        "offset": 30,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, grouper, mixed species, raw",
+        "ndbno": "15031",
+        "ds": "SR"
+    },
+    {
+        "offset": 31,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, grouper, mixed species, cooked, dry heat",
+        "ndbno": "15032",
+        "ds": "SR"
+    },
+    {
+        "offset": 32,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, haddock, raw",
+        "ndbno": "15033",
+        "ds": "SR"
+    },
+    {
+        "offset": 33,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, haddock, cooked, dry heat",
+        "ndbno": "15034",
+        "ds": "SR"
+    },
+    {
+        "offset": 34,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, haddock, smoked",
+        "ndbno": "15035",
+        "ds": "SR"
+    },
+    {
+        "offset": 35,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, halibut, Atlantic and Pacific, raw",
+        "ndbno": "15036",
+        "ds": "SR"
+    },
+    {
+        "offset": 36,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, halibut, Atlantic and Pacific, cooked, dry heat",
+        "ndbno": "15037",
+        "ds": "SR"
+    },
+    {
+        "offset": 37,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, halibut, Greenland, raw",
+        "ndbno": "15038",
+        "ds": "SR"
+    },
+    {
+        "offset": 38,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, herring, Atlantic, raw",
+        "ndbno": "15039",
+        "ds": "SR"
+    },
+    {
+        "offset": 39,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, herring, Atlantic, cooked, dry heat",
+        "ndbno": "15040",
+        "ds": "SR"
+    },
+    {
+        "offset": 40,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, herring, Atlantic, pickled",
+        "ndbno": "15041",
+        "ds": "SR"
+    },
+    {
+        "offset": 41,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, herring, Atlantic, kippered",
+        "ndbno": "15042",
+        "ds": "SR"
+    },
+    {
+        "offset": 42,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, herring, Pacific, raw",
+        "ndbno": "15043",
+        "ds": "SR"
+    },
+    {
+        "offset": 43,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, ling, raw",
+        "ndbno": "15044",
+        "ds": "SR"
+    },
+    {
+        "offset": 44,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, lingcod, raw",
+        "ndbno": "15045",
+        "ds": "SR"
+    },
+    {
+        "offset": 45,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, mackerel, Atlantic, raw",
+        "ndbno": "15046",
+        "ds": "SR"
+    },
+    {
+        "offset": 46,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, mackerel, Atlantic, cooked, dry heat",
+        "ndbno": "15047",
+        "ds": "SR"
+    },
+    {
+        "offset": 47,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, mackerel, jack, canned, drained solids",
+        "ndbno": "15048",
+        "ds": "SR"
+    },
+    {
+        "offset": 48,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, mackerel, king, raw",
+        "ndbno": "15049",
+        "ds": "SR"
+    },
+    {
+        "offset": 49,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, mackerel, Pacific and jack, mixed species, raw",
+        "ndbno": "15050",
+        "ds": "SR"
+    },
+    {
+        "offset": 50,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, mackerel, spanish, raw",
+        "ndbno": "15051",
+        "ds": "SR"
+    },
+    {
+        "offset": 51,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, mackerel, spanish, cooked, dry heat",
+        "ndbno": "15052",
+        "ds": "SR"
+    },
+    {
+        "offset": 52,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, milkfish, raw",
+        "ndbno": "15053",
+        "ds": "SR"
+    },
+    {
+        "offset": 53,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, monkfish, raw",
+        "ndbno": "15054",
+        "ds": "SR"
+    },
+    {
+        "offset": 54,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, mullet, striped, raw",
+        "ndbno": "15055",
+        "ds": "SR"
+    },
+    {
+        "offset": 55,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, mullet, striped, cooked, dry heat",
+        "ndbno": "15056",
+        "ds": "SR"
+    },
+    {
+        "offset": 56,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, ocean perch, Atlantic, raw",
+        "ndbno": "15057",
+        "ds": "SR"
+    },
+    {
+        "offset": 57,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, ocean perch, Atlantic, cooked, dry heat",
+        "ndbno": "15058",
+        "ds": "SR"
+    },
+    {
+        "offset": 58,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, pout, ocean, raw",
+        "ndbno": "15059",
+        "ds": "SR"
+    },
+    {
+        "offset": 59,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, perch, mixed species, raw",
+        "ndbno": "15060",
+        "ds": "SR"
+    },
+    {
+        "offset": 60,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, perch, mixed species, cooked, dry heat",
+        "ndbno": "15061",
+        "ds": "SR"
+    },
+    {
+        "offset": 61,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, pike, northern, raw",
+        "ndbno": "15062",
+        "ds": "SR"
+    },
+    {
+        "offset": 62,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, pike, northern, cooked, dry heat",
+        "ndbno": "15063",
+        "ds": "SR"
+    },
+    {
+        "offset": 63,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, pike, walleye, raw",
+        "ndbno": "15064",
+        "ds": "SR"
+    },
+    {
+        "offset": 64,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, pollock, Atlantic, raw",
+        "ndbno": "15065",
+        "ds": "SR"
+    },
+    {
+        "offset": 65,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, pollock, Alaska, raw (may have been previously frozen)",
+        "ndbno": "15066",
+        "ds": "SR"
+    },
+    {
+        "offset": 66,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, pollock, Alaska, cooked, dry heat (may have been previously frozen)",
+        "ndbno": "15067",
+        "ds": "SR"
+    },
+    {
+        "offset": 67,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, pompano, florida, raw",
+        "ndbno": "15068",
+        "ds": "SR"
+    },
+    {
+        "offset": 68,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, pompano, florida, cooked, dry heat",
+        "ndbno": "15069",
+        "ds": "SR"
+    },
+    {
+        "offset": 69,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, rockfish, Pacific, mixed species, raw",
+        "ndbno": "15070",
+        "ds": "SR"
+    },
+    {
+        "offset": 70,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, rockfish, Pacific, mixed species, cooked, dry heat",
+        "ndbno": "15071",
+        "ds": "SR"
+    },
+    {
+        "offset": 71,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, roe, mixed species, raw",
+        "ndbno": "15072",
+        "ds": "SR"
+    },
+    {
+        "offset": 72,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, roughy, orange, raw",
+        "ndbno": "15073",
+        "ds": "SR"
+    },
+    {
+        "offset": 73,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sablefish, raw",
+        "ndbno": "15074",
+        "ds": "SR"
+    },
+    {
+        "offset": 74,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sablefish, smoked",
+        "ndbno": "15075",
+        "ds": "SR"
+    },
+    {
+        "offset": 75,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, Atlantic, wild, raw",
+        "ndbno": "15076",
+        "ds": "SR"
+    },
+    {
+        "offset": 76,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, chinook, smoked",
+        "ndbno": "15077",
+        "ds": "SR"
+    },
+    {
+        "offset": 77,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, chinook, raw",
+        "ndbno": "15078",
+        "ds": "SR"
+    },
+    {
+        "offset": 78,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, chum, raw",
+        "ndbno": "15079",
+        "ds": "SR"
+    },
+    {
+        "offset": 79,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, chum, canned, drained solids with bone",
+        "ndbno": "15080",
+        "ds": "SR"
+    },
+    {
+        "offset": 80,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, coho, wild, raw",
+        "ndbno": "15081",
+        "ds": "SR"
+    },
+    {
+        "offset": 81,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, coho, wild, cooked, moist heat",
+        "ndbno": "15082",
+        "ds": "SR"
+    },
+    {
+        "offset": 82,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, pink, raw",
+        "ndbno": "15083",
+        "ds": "SR"
+    },
+    {
+        "offset": 83,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, pink, canned, total can contents",
+        "ndbno": "15084",
+        "ds": "SR"
+    },
+    {
+        "offset": 84,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, sockeye, raw",
+        "ndbno": "15085",
+        "ds": "SR"
+    },
+    {
+        "offset": 85,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, sockeye, cooked, dry heat",
+        "ndbno": "15086",
+        "ds": "SR"
+    },
+    {
+        "offset": 86,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, sockeye, canned, drained solids",
+        "ndbno": "15087",
+        "ds": "SR"
+    },
+    {
+        "offset": 87,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sardine, Atlantic, canned in oil, drained solids with bone",
+        "ndbno": "15088",
+        "ds": "SR"
+    },
+    {
+        "offset": 88,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sardine, Pacific, canned in tomato sauce, drained solids with bone",
+        "ndbno": "15089",
+        "ds": "SR"
+    },
+    {
+        "offset": 89,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, scup, raw",
+        "ndbno": "15090",
+        "ds": "SR"
+    },
+    {
+        "offset": 90,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sea bass, mixed species, raw",
+        "ndbno": "15091",
+        "ds": "SR"
+    },
+    {
+        "offset": 91,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sea bass, mixed species, cooked, dry heat",
+        "ndbno": "15092",
+        "ds": "SR"
+    },
+    {
+        "offset": 92,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, seatrout, mixed species, raw",
+        "ndbno": "15093",
+        "ds": "SR"
+    },
+    {
+        "offset": 93,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, shad, american, raw",
+        "ndbno": "15094",
+        "ds": "SR"
+    },
+    {
+        "offset": 94,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, shark, mixed species, raw",
+        "ndbno": "15095",
+        "ds": "SR"
+    },
+    {
+        "offset": 95,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, shark, mixed species, cooked, batter-dipped and fried",
+        "ndbno": "15096",
+        "ds": "SR"
+    },
+    {
+        "offset": 96,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sheepshead, raw",
+        "ndbno": "15097",
+        "ds": "SR"
+    },
+    {
+        "offset": 97,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sheepshead, cooked, dry heat",
+        "ndbno": "15098",
+        "ds": "SR"
+    },
+    {
+        "offset": 98,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, smelt, rainbow, raw",
+        "ndbno": "15099",
+        "ds": "SR"
+    },
+    {
+        "offset": 99,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, smelt, rainbow, cooked, dry heat",
+        "ndbno": "15100",
+        "ds": "SR"
+    },
+    {
+        "offset": 100,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, snapper, mixed species, raw",
+        "ndbno": "15101",
+        "ds": "SR"
+    },
+    {
+        "offset": 101,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, snapper, mixed species, cooked, dry heat",
+        "ndbno": "15102",
+        "ds": "SR"
+    },
+    {
+        "offset": 102,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, spot, raw",
+        "ndbno": "15103",
+        "ds": "SR"
+    },
+    {
+        "offset": 103,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sturgeon, mixed species, raw",
+        "ndbno": "15104",
+        "ds": "SR"
+    },
+    {
+        "offset": 104,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sturgeon, mixed species, cooked, dry heat",
+        "ndbno": "15105",
+        "ds": "SR"
+    },
+    {
+        "offset": 105,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sturgeon, mixed species, smoked",
+        "ndbno": "15106",
+        "ds": "SR"
+    },
+    {
+        "offset": 106,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sucker, white, raw",
+        "ndbno": "15107",
+        "ds": "SR"
+    },
+    {
+        "offset": 107,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sunfish, pumpkin seed, raw",
+        "ndbno": "15108",
+        "ds": "SR"
+    },
+    {
+        "offset": 108,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, surimi",
+        "ndbno": "15109",
+        "ds": "SR"
+    },
+    {
+        "offset": 109,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, swordfish, raw",
+        "ndbno": "15110",
+        "ds": "SR"
+    },
+    {
+        "offset": 110,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, swordfish, cooked, dry heat",
+        "ndbno": "15111",
+        "ds": "SR"
+    },
+    {
+        "offset": 111,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tilefish, raw",
+        "ndbno": "15112",
+        "ds": "SR"
+    },
+    {
+        "offset": 112,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tilefish, cooked, dry heat",
+        "ndbno": "15113",
+        "ds": "SR"
+    },
+    {
+        "offset": 113,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, trout, mixed species, raw",
+        "ndbno": "15114",
+        "ds": "SR"
+    },
+    {
+        "offset": 114,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, trout, rainbow, wild, raw",
+        "ndbno": "15115",
+        "ds": "SR"
+    },
+    {
+        "offset": 115,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, trout, rainbow, wild, cooked, dry heat",
+        "ndbno": "15116",
+        "ds": "SR"
+    },
+    {
+        "offset": 116,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna, fresh, bluefin, raw",
+        "ndbno": "15117",
+        "ds": "SR"
+    },
+    {
+        "offset": 117,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna, fresh, bluefin, cooked, dry heat",
+        "ndbno": "15118",
+        "ds": "SR"
+    },
+    {
+        "offset": 118,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna, light, canned in oil, drained solids",
+        "ndbno": "15119",
+        "ds": "SR"
+    },
+    {
+        "offset": 119,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna, light, canned in water, drained solids",
+        "ndbno": "15121",
+        "ds": "SR"
+    },
+    {
+        "offset": 120,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna, fresh, skipjack, raw",
+        "ndbno": "15123",
+        "ds": "SR"
+    },
+    {
+        "offset": 121,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna, white, canned in oil, drained solids",
+        "ndbno": "15124",
+        "ds": "SR"
+    },
+    {
+        "offset": 122,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna, white, canned in water, drained solids",
+        "ndbno": "15126",
+        "ds": "SR"
+    },
+    {
+        "offset": 123,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna, fresh, yellowfin, raw",
+        "ndbno": "15127",
+        "ds": "SR"
+    },
+    {
+        "offset": 124,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna salad",
+        "ndbno": "15128",
+        "ds": "SR"
+    },
+    {
+        "offset": 125,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, turbot, european, raw",
+        "ndbno": "15129",
+        "ds": "SR"
+    },
+    {
+        "offset": 126,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, whitefish, mixed species, raw",
+        "ndbno": "15130",
+        "ds": "SR"
+    },
+    {
+        "offset": 127,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, whitefish, mixed species, smoked",
+        "ndbno": "15131",
+        "ds": "SR"
+    },
+    {
+        "offset": 128,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, whiting, mixed species, raw",
+        "ndbno": "15132",
+        "ds": "SR"
+    },
+    {
+        "offset": 129,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, whiting, mixed species, cooked, dry heat",
+        "ndbno": "15133",
+        "ds": "SR"
+    },
+    {
+        "offset": 130,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, wolffish, Atlantic, raw",
+        "ndbno": "15134",
+        "ds": "SR"
+    },
+    {
+        "offset": 131,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, yellowtail, mixed species, raw",
+        "ndbno": "15135",
+        "ds": "SR"
+    },
+    {
+        "offset": 132,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crab, alaska king, raw",
+        "ndbno": "15136",
+        "ds": "SR"
+    },
+    {
+        "offset": 133,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crab, alaska king, cooked, moist heat",
+        "ndbno": "15137",
+        "ds": "SR"
+    },
+    {
+        "offset": 134,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crab, alaska king, imitation, made from surimi",
+        "ndbno": "15138",
+        "ds": "SR"
+    },
+    {
+        "offset": 135,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crab, blue, raw",
+        "ndbno": "15139",
+        "ds": "SR"
+    },
+    {
+        "offset": 136,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crab, blue, cooked, moist heat",
+        "ndbno": "15140",
+        "ds": "SR"
+    },
+    {
+        "offset": 137,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crab, blue, canned",
+        "ndbno": "15141",
+        "ds": "SR"
+    },
+    {
+        "offset": 138,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crab, blue, crab cakes, home recipe",
+        "ndbno": "15142",
+        "ds": "SR"
+    },
+    {
+        "offset": 139,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crab, dungeness, raw",
+        "ndbno": "15143",
+        "ds": "SR"
+    },
+    {
+        "offset": 140,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crab, queen, raw",
+        "ndbno": "15144",
+        "ds": "SR"
+    },
+    {
+        "offset": 141,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crayfish, mixed species, wild, raw",
+        "ndbno": "15145",
+        "ds": "SR"
+    },
+    {
+        "offset": 142,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crayfish, mixed species, wild, cooked, moist heat",
+        "ndbno": "15146",
+        "ds": "SR"
+    },
+    {
+        "offset": 143,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, lobster, northern, raw",
+        "ndbno": "15147",
+        "ds": "SR"
+    },
+    {
+        "offset": 144,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, lobster, northern, cooked, moist heat",
+        "ndbno": "15148",
+        "ds": "SR"
+    },
+    {
+        "offset": 145,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, shrimp, mixed species, raw (may have been previously frozen)",
+        "ndbno": "15149",
+        "ds": "SR"
+    },
+    {
+        "offset": 146,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, shrimp, mixed species, cooked, breaded and fried",
+        "ndbno": "15150",
+        "ds": "SR"
+    },
+    {
+        "offset": 147,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, shrimp, mixed species, cooked, moist heat (may have been previously frozen)",
+        "ndbno": "15151",
+        "ds": "SR"
+    },
+    {
+        "offset": 148,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, shrimp, mixed species, canned",
+        "ndbno": "15152",
+        "ds": "SR"
+    },
+    {
+        "offset": 149,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, shrimp, mixed species, imitation, made from surimi",
+        "ndbno": "15153",
+        "ds": "SR"
+    },
+    {
+        "offset": 150,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, spiny lobster, mixed species, raw",
+        "ndbno": "15154",
+        "ds": "SR"
+    },
+    {
+        "offset": 151,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, abalone, mixed species, raw",
+        "ndbno": "15155",
+        "ds": "SR"
+    },
+    {
+        "offset": 152,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, abalone, mixed species, cooked, fried",
+        "ndbno": "15156",
+        "ds": "SR"
+    },
+    {
+        "offset": 153,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, clam, mixed species, raw",
+        "ndbno": "15157",
+        "ds": "SR"
+    },
+    {
+        "offset": 154,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, clam, mixed species, cooked, breaded and fried",
+        "ndbno": "15158",
+        "ds": "SR"
+    },
+    {
+        "offset": 155,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, clam, mixed species, cooked, moist heat",
+        "ndbno": "15159",
+        "ds": "SR"
+    },
+    {
+        "offset": 156,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, clam, mixed species, canned, drained solids",
+        "ndbno": "15160",
+        "ds": "SR"
+    },
+    {
+        "offset": 157,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, clam, mixed species, canned, liquid",
+        "ndbno": "15162",
+        "ds": "SR"
+    },
+    {
+        "offset": 158,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, cuttlefish, mixed species, raw",
+        "ndbno": "15163",
+        "ds": "SR"
+    },
+    {
+        "offset": 159,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, mussel, blue, raw",
+        "ndbno": "15164",
+        "ds": "SR"
+    },
+    {
+        "offset": 160,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, mussel, blue, cooked, moist heat",
+        "ndbno": "15165",
+        "ds": "SR"
+    },
+    {
+        "offset": 161,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, octopus, common, raw",
+        "ndbno": "15166",
+        "ds": "SR"
+    },
+    {
+        "offset": 162,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, oyster, eastern, wild, raw",
+        "ndbno": "15167",
+        "ds": "SR"
+    },
+    {
+        "offset": 163,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, oyster, eastern, cooked, breaded and fried",
+        "ndbno": "15168",
+        "ds": "SR"
+    },
+    {
+        "offset": 164,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, oyster, eastern, wild, cooked, moist heat",
+        "ndbno": "15169",
+        "ds": "SR"
+    },
+    {
+        "offset": 165,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, oyster, eastern, canned",
+        "ndbno": "15170",
+        "ds": "SR"
+    },
+    {
+        "offset": 166,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, oyster, Pacific, raw",
+        "ndbno": "15171",
+        "ds": "SR"
+    },
+    {
+        "offset": 167,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, scallop, mixed species, raw",
+        "ndbno": "15172",
+        "ds": "SR"
+    },
+    {
+        "offset": 168,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, scallop, mixed species, cooked, breaded and fried",
+        "ndbno": "15173",
+        "ds": "SR"
+    },
+    {
+        "offset": 169,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, scallop, mixed species, imitation, made from surimi",
+        "ndbno": "15174",
+        "ds": "SR"
+    },
+    {
+        "offset": 170,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, squid, mixed species, raw",
+        "ndbno": "15175",
+        "ds": "SR"
+    },
+    {
+        "offset": 171,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, squid, mixed species, cooked, fried",
+        "ndbno": "15176",
+        "ds": "SR"
+    },
+    {
+        "offset": 172,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, whelk, unspecified, raw",
+        "ndbno": "15177",
+        "ds": "SR"
+    },
+    {
+        "offset": 173,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, whelk, unspecified, cooked, moist heat",
+        "ndbno": "15178",
+        "ds": "SR"
+    },
+    {
+        "offset": 174,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, chinook, smoked, (lox), regular",
+        "ndbno": "15179",
+        "ds": "SR"
+    },
+    {
+        "offset": 175,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, chum, canned, without salt, drained solids with bone",
+        "ndbno": "15180",
+        "ds": "SR"
+    },
+    {
+        "offset": 176,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, pink, canned, without salt, solids with bone and liquid",
+        "ndbno": "15181",
+        "ds": "SR"
+    },
+    {
+        "offset": 177,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, sockeye, canned, without salt, drained solids with bone",
+        "ndbno": "15182",
+        "ds": "SR"
+    },
+    {
+        "offset": 178,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna, light, canned in oil, without salt, drained solids",
+        "ndbno": "15183",
+        "ds": "SR"
+    },
+    {
+        "offset": 179,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna, light, canned in water, without salt, drained solids",
+        "ndbno": "15184",
+        "ds": "SR"
+    },
+    {
+        "offset": 180,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna, white, canned in oil, without salt, drained solids",
+        "ndbno": "15185",
+        "ds": "SR"
+    },
+    {
+        "offset": 181,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna, white, canned in water, without salt, drained solids",
+        "ndbno": "15186",
+        "ds": "SR"
+    },
+    {
+        "offset": 182,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, bass, freshwater, mixed species, cooked, dry heat",
+        "ndbno": "15187",
+        "ds": "SR"
+    },
+    {
+        "offset": 183,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, bass, striped, cooked, dry heat",
+        "ndbno": "15188",
+        "ds": "SR"
+    },
+    {
+        "offset": 184,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, bluefish, cooked, dry heat",
+        "ndbno": "15189",
+        "ds": "SR"
+    },
+    {
+        "offset": 185,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, burbot, cooked, dry heat",
+        "ndbno": "15190",
+        "ds": "SR"
+    },
+    {
+        "offset": 186,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, butterfish, cooked, dry heat",
+        "ndbno": "15191",
+        "ds": "SR"
+    },
+    {
+        "offset": 187,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, cod, Pacific, cooked, dry heat (may have been previously frozen)",
+        "ndbno": "15192",
+        "ds": "SR"
+    },
+    {
+        "offset": 188,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, cusk, cooked, dry heat",
+        "ndbno": "15193",
+        "ds": "SR"
+    },
+    {
+        "offset": 189,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, mahimahi, cooked, dry heat",
+        "ndbno": "15194",
+        "ds": "SR"
+    },
+    {
+        "offset": 190,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, drum, freshwater, cooked, dry heat",
+        "ndbno": "15195",
+        "ds": "SR"
+    },
+    {
+        "offset": 191,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, halibut, greenland, cooked, dry heat",
+        "ndbno": "15196",
+        "ds": "SR"
+    },
+    {
+        "offset": 192,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, herring, Pacific, cooked, dry heat",
+        "ndbno": "15197",
+        "ds": "SR"
+    },
+    {
+        "offset": 193,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, ling, cooked, dry heat",
+        "ndbno": "15198",
+        "ds": "SR"
+    },
+    {
+        "offset": 194,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, lingcod, cooked, dry heat",
+        "ndbno": "15199",
+        "ds": "SR"
+    },
+    {
+        "offset": 195,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, mackerel, king, cooked, dry heat",
+        "ndbno": "15200",
+        "ds": "SR"
+    },
+    {
+        "offset": 196,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, mackerel, Pacific and jack, mixed species, cooked, dry heat",
+        "ndbno": "15201",
+        "ds": "SR"
+    },
+    {
+        "offset": 197,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, milkfish, cooked, dry heat",
+        "ndbno": "15202",
+        "ds": "SR"
+    },
+    {
+        "offset": 198,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, monkfish, cooked, dry heat",
+        "ndbno": "15203",
+        "ds": "SR"
+    },
+    {
+        "offset": 199,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, pike, walleye, cooked, dry heat",
+        "ndbno": "15204",
+        "ds": "SR"
+    },
+    {
+        "offset": 200,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, pollock, Atlantic, cooked, dry heat",
+        "ndbno": "15205",
+        "ds": "SR"
+    },
+    {
+        "offset": 201,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, pout, ocean, cooked, dry heat",
+        "ndbno": "15206",
+        "ds": "SR"
+    },
+    {
+        "offset": 202,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, roe, mixed species, cooked, dry heat",
+        "ndbno": "15207",
+        "ds": "SR"
+    },
+    {
+        "offset": 203,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sablefish, cooked, dry heat",
+        "ndbno": "15208",
+        "ds": "SR"
+    },
+    {
+        "offset": 204,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, Atlantic, wild, cooked, dry heat",
+        "ndbno": "15209",
+        "ds": "SR"
+    },
+    {
+        "offset": 205,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, chinook, cooked, dry heat",
+        "ndbno": "15210",
+        "ds": "SR"
+    },
+    {
+        "offset": 206,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, chum, cooked, dry heat",
+        "ndbno": "15211",
+        "ds": "SR"
+    },
+    {
+        "offset": 207,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, pink, cooked, dry heat",
+        "ndbno": "15212",
+        "ds": "SR"
+    },
+    {
+        "offset": 208,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, scup, cooked, dry heat",
+        "ndbno": "15213",
+        "ds": "SR"
+    },
+    {
+        "offset": 209,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, seatrout, mixed species, cooked, dry heat",
+        "ndbno": "15214",
+        "ds": "SR"
+    },
+    {
+        "offset": 210,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, shad, american, cooked, dry heat",
+        "ndbno": "15215",
+        "ds": "SR"
+    },
+    {
+        "offset": 211,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, spot, cooked, dry heat",
+        "ndbno": "15216",
+        "ds": "SR"
+    },
+    {
+        "offset": 212,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sucker, white, cooked, dry heat",
+        "ndbno": "15217",
+        "ds": "SR"
+    },
+    {
+        "offset": 213,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, sunfish, pumpkin seed, cooked, dry heat",
+        "ndbno": "15218",
+        "ds": "SR"
+    },
+    {
+        "offset": 214,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, trout, mixed species, cooked, dry heat",
+        "ndbno": "15219",
+        "ds": "SR"
+    },
+    {
+        "offset": 215,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna, skipjack, fresh, cooked, dry heat",
+        "ndbno": "15220",
+        "ds": "SR"
+    },
+    {
+        "offset": 216,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tuna, yellowfin, fresh, cooked, dry heat",
+        "ndbno": "15221",
+        "ds": "SR"
+    },
+    {
+        "offset": 217,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, turbot, european, cooked, dry heat",
+        "ndbno": "15222",
+        "ds": "SR"
+    },
+    {
+        "offset": 218,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, whitefish, mixed species, cooked, dry heat",
+        "ndbno": "15223",
+        "ds": "SR"
+    },
+    {
+        "offset": 219,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, wolffish, Atlantic, cooked, dry heat",
+        "ndbno": "15224",
+        "ds": "SR"
+    },
+    {
+        "offset": 220,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, yellowtail, mixed species, cooked, dry heat",
+        "ndbno": "15225",
+        "ds": "SR"
+    },
+    {
+        "offset": 221,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crab, dungeness, cooked, moist heat",
+        "ndbno": "15226",
+        "ds": "SR"
+    },
+    {
+        "offset": 222,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crab, queen, cooked, moist heat",
+        "ndbno": "15227",
+        "ds": "SR"
+    },
+    {
+        "offset": 223,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, spiny lobster, mixed species, cooked, moist heat",
+        "ndbno": "15228",
+        "ds": "SR"
+    },
+    {
+        "offset": 224,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, cuttlefish, mixed species, cooked, moist heat",
+        "ndbno": "15229",
+        "ds": "SR"
+    },
+    {
+        "offset": 225,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, octopus, common, cooked, moist heat",
+        "ndbno": "15230",
+        "ds": "SR"
+    },
+    {
+        "offset": 226,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, oyster, Pacific, cooked, moist heat",
+        "ndbno": "15231",
+        "ds": "SR"
+    },
+    {
+        "offset": 227,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, roughy, orange, cooked, dry heat",
+        "ndbno": "15232",
+        "ds": "SR"
+    },
+    {
+        "offset": 228,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, catfish, channel, wild, cooked, dry heat",
+        "ndbno": "15233",
+        "ds": "SR"
+    },
+    {
+        "offset": 229,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, catfish, channel, farmed, raw",
+        "ndbno": "15234",
+        "ds": "SR"
+    },
+    {
+        "offset": 230,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, catfish, channel, farmed, cooked, dry heat",
+        "ndbno": "15235",
+        "ds": "SR"
+    },
+    {
+        "offset": 231,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, Atlantic, farmed, raw",
+        "ndbno": "15236",
+        "ds": "SR"
+    },
+    {
+        "offset": 232,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, Atlantic, farmed, cooked, dry heat",
+        "ndbno": "15237",
+        "ds": "SR"
+    },
+    {
+        "offset": 233,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, coho, farmed, raw",
+        "ndbno": "15238",
+        "ds": "SR"
+    },
+    {
+        "offset": 234,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, coho, farmed, cooked, dry heat",
+        "ndbno": "15239",
+        "ds": "SR"
+    },
+    {
+        "offset": 235,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, trout, rainbow, farmed, raw",
+        "ndbno": "15240",
+        "ds": "SR"
+    },
+    {
+        "offset": 236,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, trout, rainbow, farmed, cooked, dry heat",
+        "ndbno": "15241",
+        "ds": "SR"
+    },
+    {
+        "offset": 237,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crayfish, mixed species, farmed, raw",
+        "ndbno": "15242",
+        "ds": "SR"
+    },
+    {
+        "offset": 238,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, crayfish, mixed species, farmed, cooked, moist heat",
+        "ndbno": "15243",
+        "ds": "SR"
+    },
+    {
+        "offset": 239,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, oyster, eastern, wild, cooked, dry heat",
+        "ndbno": "15244",
+        "ds": "SR"
+    },
+    {
+        "offset": 240,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, oyster, eastern, farmed, raw",
+        "ndbno": "15245",
+        "ds": "SR"
+    },
+    {
+        "offset": 241,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, oyster, eastern, farmed, cooked, dry heat",
+        "ndbno": "15246",
+        "ds": "SR"
+    },
+    {
+        "offset": 242,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, coho, wild, cooked, dry heat",
+        "ndbno": "15247",
+        "ds": "SR"
+    },
+    {
+        "offset": 243,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, conch, baked or broiled",
+        "ndbno": "15250",
+        "ds": "SR"
+    },
+    {
+        "offset": 244,
+        "group": "Finfish and Shellfish Products",
+        "name": "USDA Commodity, salmon nuggets, breaded, frozen, heated",
+        "ndbno": "15251",
+        "ds": "SR"
+    },
+    {
+        "offset": 245,
+        "group": "Finfish and Shellfish Products",
+        "name": "USDA Commodity, salmon nuggets, cooked as purchased, unheated",
+        "ndbno": "15252",
+        "ds": "SR"
+    },
+    {
+        "offset": 246,
+        "group": "Finfish and Shellfish Products",
+        "name": "Salmon, sockeye, canned, total can contents",
+        "ndbno": "15253",
+        "ds": "SR"
+    },
+    {
+        "offset": 247,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, salmon, pink, canned, drained solids",
+        "ndbno": "15260",
+        "ds": "SR"
+    },
+    {
+        "offset": 248,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tilapia, raw",
+        "ndbno": "15261",
+        "ds": "SR"
+    },
+    {
+        "offset": 249,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, tilapia, cooked, dry heat",
+        "ndbno": "15262",
+        "ds": "SR"
+    },
+    {
+        "offset": 250,
+        "group": "Finfish and Shellfish Products",
+        "name": "Salmon, sockeye, canned, drained solids, without skin and bones",
+        "ndbno": "15264",
+        "ds": "SR"
+    },
+    {
+        "offset": 251,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, Salmon, pink, canned, drained solids, without skin and bones",
+        "ndbno": "15265",
+        "ds": "SR"
+    },
+    {
+        "offset": 252,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, pollock, Alaska, raw (not previously frozen)",
+        "ndbno": "15266",
+        "ds": "SR"
+    },
+    {
+        "offset": 253,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, pollock, Alaska, cooked (not previously frozen)",
+        "ndbno": "15267",
+        "ds": "SR"
+    },
+    {
+        "offset": 254,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, cod, Pacific, raw (not previously frozen)",
+        "ndbno": "15268",
+        "ds": "SR"
+    },
+    {
+        "offset": 255,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, cod, Pacific, cooked (not previously frozen)",
+        "ndbno": "15269",
+        "ds": "SR"
+    },
+    {
+        "offset": 256,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, shrimp, raw (not previously frozen)",
+        "ndbno": "15270",
+        "ds": "SR"
+    },
+    {
+        "offset": 257,
+        "group": "Finfish and Shellfish Products",
+        "name": "Crustaceans, shrimp, cooked (not previously frozen)",
+        "ndbno": "15271",
+        "ds": "SR"
+    },
+    {
+        "offset": 258,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, trout, brook, raw, New York State",
+        "ndbno": "15274",
+        "ds": "SR"
+    },
+    {
+        "offset": 259,
+        "group": "Finfish and Shellfish Products",
+        "name": "Jellyfish, dried, salted",
+        "ndbno": "43497",
+        "ds": "SR"
+    },
+    {
+        "offset": 260,
+        "group": "Finfish and Shellfish Products",
+        "name": "Frog legs, raw",
+        "ndbno": "80200",
+        "ds": "SR"
+    },
+    {
+        "offset": 261,
+        "group": "Finfish and Shellfish Products",
+        "name": "Fish, mackerel, salted",
+        "ndbno": "83110",
+        "ds": "SR"
+    },
+    {
+        "offset": 262,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, scallop, (bay and sea), cooked, steamed",
+        "ndbno": "90240",
+        "ds": "SR"
+    },
+    {
+        "offset": 263,
+        "group": "Finfish and Shellfish Products",
+        "name": "Mollusks, snail, raw",
+        "ndbno": "90560",
+        "ds": "SR"
+    },
+    {
+        "offset": 264,
+        "group": "Finfish and Shellfish Products",
+        "name": "Turtle, green, raw",
+        "ndbno": "93600",
+        "ds": "SR"
+    }
+]

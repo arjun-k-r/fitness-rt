@@ -1,0 +1,61 @@
+[
+    {
+        "description": "You are thin, slender, with thin bones, proeminent joints, and weak muscles. You body is generally irregular in shapes. You are free of mind, enthusiastic, creative, full of new ideas, flexible, energic, and talkative. You like to dream and have a big imagintation. You are very spontaneous and unpredictable. You think fast, speak fast, walk fast, everything you do is fast and in a rush. You don't like routines and plans, but like to change, like new experiences, new relationships. You are good at starting new things, like projects, but bad are finishing them and being commited to them. In your bad days, you tend to lose weight, forget to eat, be constipated, and catch colds. Also, you may become confused, anxious, worried, scared, hyperctive, overwhelmed, with lack of focus, difficulty in making decisions, and lack of sleep.",
+        "foods": {
+            "avoid": [],
+            "prefer": []
+        },
+        "goals": [
+            {
+                "name": "sleep",
+                "tasks": [
+                    {
+                        "description": "",
+                        "done": false
+                    }
+                ]
+            }
+        ],
+        "name": "Vata"
+    },
+    {
+        "description": "",
+        "foods": {
+            "avoid": [],
+            "prefer": []
+        },
+        "name": "Pitta"
+    },
+    {
+        "description": "",
+        "foods": {
+            "avoid": [],
+            "prefer": []
+        },
+        "name": "Kapha"
+    },
+    {
+        "description": "",
+        "foods": {
+            "avoid": [],
+            "prefer": []
+        },
+        "name": "Vata-Pitta"
+    },
+    {
+        "description": "",
+        "foods": {
+            "avoid": [],
+            "prefer": []
+        },
+        "name": "Pitta-Kapha"
+    },
+    {
+        "description": "",
+        "foods": {
+            "avoid": [],
+            "prefer": []
+        },
+        "name": "Vata-Kapha"
+    }
+]

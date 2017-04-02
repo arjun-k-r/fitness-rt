@@ -1,0 +1,20 @@
+[
+    {
+        "dosha": "vata",
+        "options": [
+            {
+                "name": "Not at all",
+                "value": 0
+            },
+            {
+                "name": "Somewhat",
+                "value": 1
+            },
+            {
+                "name": "Definitely",
+                "value": 2
+            }
+        ],
+        "symptom": "Abdominal pain"
+    }
+]

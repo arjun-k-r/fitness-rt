@@ -239,6 +239,7 @@
             "Frustration",
             "Gastritis",
             "Headaches",
+            "Hemorrhoids",
             "Herpes",
             "Heartburn",
             "High blood pressure",
@@ -254,12 +255,14 @@
             "Judgement errors",
             "Low blood sugar levels",
             "Malabsorption",
+            "Materialistic",
             "Mood swings",
             "Night sweats",
             "Obsessions",
             "Overworking",
             "Perfectionism",
             "Reckless",
+            "Rectal burning",
             "Sarcasm",
             "Seeking conflicts",
             "Sensitive to heat",
@@ -272,6 +275,7 @@
             "Urticaria",
             "Vision difficulties",
             "Weakness",
+            "Yellowish feces and urine",
             "Willful"
         ],
         "mentalConstituition": {
@@ -521,279 +525,6 @@
         "seasons": [
             "late winter",
             "early spring"
-        ]
-    },
-    {
-        "balance": [
-            ""
-        ],
-        "daytimes": [
-            "",
-            ""
-        ],
-        "description": "",
-        "elements": [
-            "",
-            ""
-        ],
-        "foods": {
-            "avoid": [],
-            "prefer": []
-        },
-        "imbalance": [
-            ""
-        ],
-        "mentalConstituition": {
-            "activity": "",
-            "beliefs": "",
-            "dreams": "",
-            "creativity": "",
-            "decisions": "",
-            "emotions": "",
-            "finances": "",
-            "interests": "",
-            "learning": "",
-            "lifestyle": "",
-            "love": "",
-            "memory": "",
-            "mind": "",
-            "organisation": "",
-            "sexDrive": "",
-            "social": "",
-            "stressResponse": "",
-            "temperament": "",
-            "talk": ""
-        },
-        "lifetime": "",
-        "locations": [
-            ""
-        ],
-        "movement": [
-            ""
-        ],
-        "name": "Vata-Pitta",
-        "physicalConstituition": {
-            "appetite": "",
-            "bodyFrame": "",
-            "bodyTemperature": "",
-            "bodyWeight": "",
-            "bones": "t",
-            "elimination": "",
-            "chest": "",
-            "climate": "",
-            "complexion": "",
-            "digestion": "",
-            "eating": "",
-            "eyebrows": "",
-            "eyes": "",
-            "face": "",
-            "fingers": "",
-            "hair": "",
-            "heartbeats": "",
-            "hips": "",
-            "joints": "",
-            "lips": "",
-            "meals": "",
-            "muscles": "",
-            "nails": "",
-            "neck": "",
-            "nose": "",
-            "perspiration": "",
-            "pulse": "",
-            "schedule": "",
-            "shoulders": "",
-            "skin": "",
-            "sleep": "",
-            "stamina": "",
-            "teeth": "",
-            "thirst": "",
-            "voice": "",
-            "walk": ""
-        },
-        "seasons": [
-            ""
-        ]
-    },
-    {
-        "balance": [
-            ""
-        ],
-        "daytimes": [
-            "",
-            ""
-        ],
-        "description": "",
-        "elements": [
-            "",
-            ""
-        ],
-        "foods": {
-            "avoid": [],
-            "prefer": []
-        },
-        "imbalance": [
-            ""
-        ],
-        "mentalConstituition": {
-            "activity": "",
-            "beliefs": "",
-            "dreams": "",
-            "creativity": "",
-            "decisions": "",
-            "emotions": "",
-            "finances": "",
-            "interests": "",
-            "learning": "",
-            "lifestyle": "",
-            "love": "",
-            "memory": "",
-            "mind": "",
-            "organisation": "",
-            "sexDrive": "",
-            "social": "",
-            "stressResponse": "",
-            "temperament": "",
-            "talk": ""
-        },
-        "lifetime": "",
-        "locations": [
-            ""
-        ],
-        "movement": [
-            ""
-        ],
-        "name": "Pitta-Kapha",
-        "physicalConstituition": {
-            "appetite": "",
-            "bodyFrame": "",
-            "bodyTemperature": "",
-            "bodyWeight": "",
-            "bones": "t",
-            "elimination": "",
-            "chest": "",
-            "climate": "",
-            "complexion": "",
-            "digestion": "",
-            "eating": "",
-            "eyebrows": "",
-            "eyes": "",
-            "face": "",
-            "fingers": "",
-            "hair": "",
-            "heartbeats": "",
-            "hips": "",
-            "joints": "",
-            "lips": "",
-            "meals": "",
-            "muscles": "",
-            "nails": "",
-            "neck": "",
-            "nose": "",
-            "perspiration": "",
-            "pulse": "",
-            "schedule": "",
-            "shoulders": "",
-            "skin": "",
-            "sleep": "",
-            "stamina": "",
-            "teeth": "",
-            "thirst": "",
-            "voice": "",
-            "walk": ""
-        },
-        "seasons": [
-            ""
-        ]
-    },
-    {
-        "balance": [
-            ""
-        ],
-        "daytimes": [
-            "",
-            ""
-        ],
-        "description": "",
-        "elements": [
-            "",
-            ""
-        ],
-        "foods": {
-            "avoid": [],
-            "prefer": []
-        },
-        "imbalance": [
-            ""
-        ],
-        "mentalConstituition": {
-            "activity": "",
-            "beliefs": "",
-            "dreams": "",
-            "creativity": "",
-            "decisions": "",
-            "emotions": "",
-            "finances": "",
-            "interests": "",
-            "learning": "",
-            "lifestyle": "",
-            "love": "",
-            "memory": "",
-            "mind": "",
-            "organisation": "",
-            "sexDrive": "",
-            "social": "",
-            "stressResponse": "",
-            "temperament": "",
-            "talk": ""
-        },
-        "lifetime": "",
-        "locations": [
-            ""
-        ],
-        "movement": [
-            ""
-        ],
-        "name": "Vata-Kapha",
-        "physicalConstituition": {
-            "appetite": "",
-            "bodyFrame": "",
-            "bodyTemperature": "",
-            "bodyWeight": "",
-            "bones": "t",
-            "elimination": "",
-            "chest": "",
-            "climate": "",
-            "complexion": "",
-            "digestion": "",
-            "eating": "",
-            "eyebrows": "",
-            "eyes": "",
-            "face": "",
-            "fingers": "",
-            "hair": "",
-            "heartbeats": "",
-            "hips": "",
-            "joints": "",
-            "lips": "",
-            "meals": "",
-            "muscles": "",
-            "nails": "",
-            "neck": "",
-            "nose": "",
-            "perspiration": "",
-            "pulse": "",
-            "schedule": "",
-            "shoulders": "",
-            "skin": "",
-            "sleep": "",
-            "stamina": "",
-            "teeth": "",
-            "thirst": "",
-            "voice": "",
-            "walk": ""
-        },
-        "seasons": [
-            ""
         ]
     }
 ]

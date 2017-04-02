@@ -1,0 +1,19 @@
+[
+    {
+        "name": "Body size",
+        "values": [
+            {
+                "description": "Slim",
+                "value": "vata"
+            },
+            {
+                "description": "Medium",
+                "value": "pitta"
+            },
+            {
+                "description": "Large",
+                "value": "kapha"
+            }
+        ]
+    }
+]

@@ -1,0 +1,130 @@
+{
+    "activityPlan": {
+        // Extra
+        "activities": [
+            {
+                "duration": "",
+                "name": "",
+                "time": "",
+                "type": "intellectual/physical"
+            }
+        ],
+        "schedule": {
+            "monday": [
+                {
+                    "duration": "",
+                    "name": "",
+                    "time": "",
+                    "type": "intellectual/physical"
+                }
+            ],
+            "tuesday": [
+                {
+                    "duration": "",
+                    "name": "",
+                    "time": "",
+                    "type": "intellectual/physical"
+                }
+            ],
+            "wednessday": [
+                {
+                    "duration": "",
+                    "name": "",
+                    "time": "",
+                    "type": "intellectual/physical"
+                }
+            ],
+            "thursday": [
+                {
+                    "duration": "",
+                    "name": "",
+                    "time": "",
+                    "type": "intellectual/physical"
+                }
+            ],
+            "friday": [
+                {
+                    "duration": "",
+                    "name": "",
+                    "time": "",
+                    "type": "intellectual/physical"
+                }
+            ],
+            "saturday": [
+                {
+                    "duration": "",
+                    "name": "",
+                    "time": "",
+                    "type": "intellectual/physical"
+                }
+            ],
+            "sunday": [
+                {
+                    "duration": "",
+                    "name": "",
+                    "time": "",
+                    "type": "intellectual/physical"
+                }
+            ],
+        }
+    },
+    "age": "",
+    "gender": "",
+    "height": "",
+    "imbalance": {
+        "vata": false,
+        "pitta": false,
+        "kapha": false
+    },
+    "mealPlan": {
+        "interval": 4,
+        "meals": [
+            {
+                "eating": {
+                    "silence": true,
+                    "slow": true,
+                    "small": true
+                },
+                "feeling": {
+                    "bloating": false,
+                    "burn": false,
+                    "constipation": false,
+                    "diarrhea": false,
+                    "energy": true,
+                    "gas": false,
+                    "heaviness": false,
+                    "indigestion": false,
+                    "sleepiness": false,
+                    "wellness": true
+                },
+                "foods": [],
+                "hour": "",
+                "nutrition": {}
+            }
+        ],
+        "nutrition": {}
+    },
+    "prakruti": "",
+    "sleepPlan": {
+        "schedule": {
+            "start": "",
+            "stop": ""
+        },
+        "sleeps": [
+            {
+                "efficiency": {
+                    "refreshed": true
+                },
+                "preparation": {
+                    "electronics": false,
+                    "light": false,
+                    "relaxation": true
+                },
+                "start": "",
+                "stop": ""
+            }
+        ],
+    },
+    "vikruti": "",
+    "weight": ""
+}

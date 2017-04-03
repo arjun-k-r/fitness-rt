@@ -82,12 +82,12 @@
             {
                 "eating": {
                     "silence": true,
-                    "slow": true,
+                    "slowly": true,
                     "small": true
                 },
                 "feeling": {
                     "bloating": false,
-                    "burn": false,
+                    "burns": false,
                     "constipation": false,
                     "diarrhea": false,
                     "energy": true,
@@ -98,6 +98,7 @@
                     "wellness": true
                 },
                 "foods": [],
+                "homemade": true,
                 "hour": "",
                 "nutrition": {}
             }

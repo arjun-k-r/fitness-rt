@@ -48,6 +48,7 @@
                         "Wheat grass sprouts"
                     ],
                     "grains": [
+                        "Refined (white) grains",
                         "Barley",
                         "Bread (with yeast)",
                         "Buckwheat",
@@ -70,6 +71,7 @@
                         "Wheat bran"
                     ],
                     "legumes": [
+                        "Canned commercial legumes",
                         "Adzuki beans",
                         "Black beans",
                         "Black-eyed peas",
@@ -88,13 +90,54 @@
                         "Tempeh",
                         "White beans"
                     ],
-                    "dairy": [],
-                    "meat": [],
-                    "condiments": [],
-                    "nuts": [],
-                    "seeds": [],
-                    "oils": [],
-                    "beverages": [],
+                    "dairy&eggs": [
+                        "Pasteurized commercial dairy and eggs",
+                        "Cow's milk (powdered)",
+                        "Goat's milk (powdered)",
+                        "Yogurt (plain, frozen or with fruit)"
+                    ],
+                    "meat": [
+                        "Commercial meat",
+                        "Lamb",
+                        "Pork",
+                        "Rabbit",
+                        "Venison",
+                        "Turkey (white)"
+                    ],
+                    "condiments": [
+                        "Chocolate",
+                        "Horseradish"
+                    ],
+                    "nuts": [
+                        "Peanuts"
+                    ],
+                    "seeds": [
+                        "Popcorn",
+                        "Psyllium"
+                    ],
+                    "oils": [
+                        "Refined oils",
+                        "Flax seed"
+                    ],
+                    "beverages": [
+                        "Commercial beverages",
+                        "Alcohol (hard or red wine)",
+                        "Apple juice",
+                        "Black tea",
+                        "Caffeinated beverages",
+                        "Carbonated drinks",
+                        "Chocolate milk",
+                        "Coffee",
+                        "Cold dairy drinks",
+                        "Cranberry juice",
+                        "Iced tea",
+                        "Icy cold drinks",
+                        "Pear juice",
+                        "Pomegranate juice",
+                        "Prune juice",
+                        "Soy milk (cold)",
+                        "Tomato juice"
+                    ],
                     "herbal teas": [
                         "Alfaalfa",
                         "Barley",
@@ -123,13 +166,13 @@
                         "Maple syrup",
                         "White sugar"
                     ],
-                    "nutrients": [
-                    ]
+                    "nutrients": []
                 }
             ],
             "prefer": [
                 {
                     "fruits": [
+                        "Local and in season fruits",
                         "Sweet fruits",
                         "Apples (cooked)",
                         "Applesauce",
@@ -162,6 +205,7 @@
                     ],
                     "vegetables": [
                         "Cooked vegetables",
+                        "Local and in season vegetables",
                         "Asparagus",
                         "Beets",
                         "Carrots",
@@ -185,6 +229,7 @@
                         "Zucchini"
                     ],
                     "grains": [
+                        "Whole grains",
                         "Durham flour",
                         "Oats (cooked)",
                         "Pancakes",
@@ -195,18 +240,104 @@
                         "Wheat"
                     ],
                     "legumes": [
+                        "Soaked and cooked legumes",
                         "Mung beans",
                         "Mung dal",
                         "Tur dal",
                         "Urad dal"
                     ],
-                    "dairy": [],
-                    "meat": [],
-                    "condiments": [],
-                    "nuts": [],
-                    "seeds": [],
-                    "oils": [],
-                    "beverages": [],
+                    "dairy&eggs": [
+                        "Organic dairy and eggs",
+                        "Butter",
+                        "Cheese (soft)",
+                        "Cottage cheese",
+                        "Cow's milk",
+                        "Eggs",
+                        "Ghee",
+                        "Goat's cheese",
+                        "Goat's milk"
+                    ],
+                    "meat": [
+                        "Organic meat",
+                        "Beef",
+                        "Buffalo",
+                        "Chicken (dark)",
+                        "Duck",
+                        "Fish (freshwater or sea)",
+                        "Salmon",
+                        "Sardines",
+                        "Seafood",
+                        "Shrimp",
+                        "Tuna fish",
+                        "Turkey (dark)"
+                    ],
+                    "condiments": [
+                        "Chutney (mango sweet or mango spicy)",
+                        "Dulse",
+                        "Gomasio",
+                        "Hijki",
+                        "Kelp",
+                        "Ketchup",
+                        "Kombu",
+                        "Lemon",
+                        "Lime",
+                        "Lime pickle",
+                        "Mango pickle",
+                        "Mayonnaise",
+                        "Mustard",
+                        "Pickles",
+                        "Salt",
+                        "Scallions",
+                        "Seaweed",
+                        "Soy sauce",
+                        "Tamari",
+                        "Vinegar"
+                    ],
+                    "nuts": [
+                        "Almonds"
+                    ],
+                    "seeds": [
+                        "Chia",
+                        "Flax",
+                        "Halva",
+                        "Pumpkin",
+                        "Sesame",
+                        "Sunflower",
+                        "Tahini"
+                    ],
+                    "oils": [
+                        "Cold pressed oils",
+                        "Almond",
+                        "Avocado (external)",
+                        "Coconut (external)",
+                        "Ghee",
+                        "Olive",
+                        "Sesame"
+                    ],
+                    "beverages": [
+                        "Water and homemade beverages",
+                        "Almond milk",
+                        "Aloe vera juice",
+                        "Apple cider",
+                        "Apricot juice",
+                        "Berry juice (without cranberry)",
+                        "Carrot juice",
+                        "Chai (hot spiced milk)",
+                        "Cherry juice",
+                        "Grain 'coffee'",
+                        "Grape juice",
+                        "Grapefruit juice",
+                        "Lemonade",
+                        "Mango juice",
+                        "Miso broth",
+                        "Orange juice",
+                        "Papaya juice",
+                        "Peach nectar",
+                        "Pineapple juice",
+                        "Rice milk",
+                        "Sour juices",
+                        "Vegetable bouillon"
+                    ],
                     "herbal teas": [
                         "Ajwan",
                         "Bancha",
@@ -336,13 +467,42 @@
                         "Soy sausages",
                         "Tofu"
                     ],
-                    "dairy": [],
-                    "meat": [],
-                    "condiments": [],
-                    "nuts": [],
+                    "dairy&eggs": [
+                        "Cheese (hard)",
+                        "Ice cream",
+                        "Sour cream",
+                        "Yogurt (diluted or spiced)"
+                    ],
+                    "meat": [
+                        "Chicken (white)"
+                    ],
+                    "condiments": [
+                        "Black pepper",
+                        "Chili peppers",
+                        "Coriander leaves",
+                        "Sprouts"
+                    ],
+                    "nuts": [
+                        "Black nuts",
+                        "Brazil nuts",
+                        "Cashews",
+                        "Charole",
+                        "Coconut",
+                        "Fliberts",
+                        "Hazelnuts",
+                        "Macadamia nuts",
+                        "Pecans",
+                        "Pine nuts",
+                        "Pistachios",
+                        "Walnuts"
+                    ],
                     "seeds": [],
                     "oils": [],
-                    "beverages": [],
+                    "beverages": [
+                        "Alcohol (beer or white wine)",
+                        "Carob",
+                        "Soy milk (hot or well-spiced)"
+                    ],
                     "herbal teas": [
                         "Catnip",
                         "Chicory",
@@ -438,6 +598,7 @@
                         "Zucchini"
                     ],
                     "grains": [
+                        "Refined (white) grains",
                         "Bread (with yeast)",
                         "Buckwheat",
                         "Corn",
@@ -449,19 +610,101 @@
                         "Rye"
                     ],
                     "legumes": [
+                        "Canned commercial legumes",
                         "Miso",
                         "Soy sauce",
                         "Soy sausages",
                         "Tur dal",
                         "Urad dal"
                     ],
-                    "dairy": [],
-                    "meat": [],
-                    "condiments": [],
-                    "nuts": [],
-                    "seeds": [],
-                    "oils": [],
-                    "beverages": [],
+                    "dairy&eggs": [
+                        "Pasteurized commercial dairy and eggs",
+                        "Butter (salted)",
+                        "Buttermilk",
+                        "Cheese (hard)",
+                        "Eggs (yolk)",
+                        "Sour cream",
+                        "Yogurt (plain, frozen or with fruit)"
+                    ],
+                    "meat": [
+                        "Commercial meat",
+                        "Beef",
+                        "Chicken (dark)",
+                        "Duck",
+                        "Fish (sea)",
+                        "Lamb",
+                        "Pork",
+                        "Salmon",
+                        "Sardines",
+                        "Seafood",
+                        "Tuna fish",
+                        "Turkey (white)"
+                    ],
+                    "condiments": [
+                        "Chili peppers",
+                        "Chocolate",
+                        "Chutney (mango and spicy)",
+                        "Gomasio",
+                        "Horseradish",
+                        "Kelp",
+                        "Ketchup",
+                        "Mustard",
+                        "Lemon",
+                        "Lime pickle",
+                        "Mango pickle",
+                        "Mayonnaise",
+                        "Pickles",
+                        "Scallions",
+                        "Soy sauce",
+                        "Vinegar"
+                    ],
+                    "nuts": [
+                        "Almonds (with skin)",
+                        "Black nuts",
+                        "Brazil nuts",
+                        "Cashews",
+                        "Fliberts",
+                        "Hazelnuts",
+                        "Macadamia nuts",
+                        "Peanuts",
+                        "Pecans",
+                        "Pistachios",
+                        "Walnuts"
+                    ],
+                    "seeds": [
+                        "Chia",
+                        "Sesame",
+                        "Tahini"
+                    ],
+                    "oils": [
+                        "Refined oils",
+                        "Almond",
+                        "Apricot",
+                        "Corn",
+                        "Safflower",
+                        "Sesame"
+                    ],
+                    "beverages": [
+                        "Commercial beverages",
+                        "Sour juices",
+                        "Alcohol (hard or red wine or sweet wine)",
+                        "Apple cider",
+                        "Berry juice (sour)",
+                        "Caffeinated beverages",
+                        "Carbonated drinks",
+                        "Carrot juice",
+                        "Cherry juice (sour)",
+                        "Chocolate milk",
+                        "Coffee",
+                        "Cranberry juice",
+                        "Grapefruit juice",
+                        "Iced tea",
+                        "Icy cold drinks",
+                        "Lemonade",
+                        "Papaya juice",
+                        "Pineapple juice",
+                        "Tomato juice"
+                    ],
                     "herbal teas": [
                         "Ajwan",
                         "Basil",
@@ -519,6 +762,7 @@
             "prefer": [
                 {
                     "fruits": [
+                        "Local and in season fruits",
                         "Sweet fruits",
                         "Apples (sweet)",
                         "Applesauce",
@@ -540,6 +784,7 @@
                         "Watermelon"
                     ],
                     "vegetables": [
+                        "Local and in season vegetables",
                         "Sweet and bitter vegetables",
                         "Artichoke",
                         "Asparagus",
@@ -579,9 +824,10 @@
                         "Squash (summer or winter)",
                         "Taro root",
                         "Wheat grass sprouts",
-                        "Zucchini" 
+                        "Zucchini"
                     ],
                     "grains": [
+                        "Whole grains",
                         "Amaranth",
                         "Barley",
                         "Durham flour",
@@ -601,6 +847,7 @@
                         "Wheat bran"
                     ],
                     "legumes": [
+                        "Soaked and cooked legumes",
                         "Adzuki beans",
                         "Black beans",
                         "Chickpeas (garbanzo beans)",
@@ -620,13 +867,78 @@
                         "Tofu",
                         "White beans"
                     ],
-                    "dairy": [],
-                    "meat": [],
-                    "condiments": [],
-                    "nuts": [],
-                    "seeds": [],
-                    "oils": [],
-                    "beverages": [],
+                    "dairy&eggs": [
+                        "Organic dairy and eggs",
+                        "Butter (unsalted)",
+                        "Cheese (soft, not aged, unsalted)",
+                        "Cottage cheese",
+                        "Cow's milk",
+                        "Eggs (albumen or white)",
+                        "Ghee",
+                        "Goat's cheese (soft, unsalted)",
+                        "Goat's milk",
+                        "Ice cream"
+                    ],
+                    "meat": [
+                        "Organic meat",
+                        "Buffalo",
+                        "Chicken (white)",
+                        "Fish (freshwater)",
+                        "Rabbit",
+                        "Turkey (white)",
+                        "Venison"
+                    ],
+                    "condiments": [
+                        "Chutney (mango and sweet)",
+                        "Coriander leaves",
+                        "Sprouts"
+                    ],
+                    "nuts": [
+                        "Almonds (peeled and soaked)",
+                        "Charole",
+                        "Coconut"
+                    ],
+                    "seeds": [
+                        "Flax",
+                        "Halva",
+                        "Popcorn (buttered and unsalted)",
+                        "Psyllium",
+                        "Sunflower"
+                    ],
+                    "oils": [
+                        "Cold pressed oils",
+                        "Avocado (external)",
+                        "Canola",
+                        "Coconut (external)",
+                        "Flax seed",
+                        "Ghee",
+                        "Olive",
+                        "Primrose",
+                        "Soy",
+                        "Sunflower",
+                        "Walnut"
+                    ],
+                    "beverages": [
+                        "Water and homemade beverages",
+                        "Almond milk",
+                        "Aloe vera juice",
+                        "Apple juice",
+                        "Berry juice (sweet)",
+                        "Carob",
+                        "Cherry juice (sweet)",
+                        "Cool dairy drinks",
+                        "Grain 'coffee'",
+                        "Grape juice",
+                        "Mango juice",
+                        "Mixed vegetable juice",
+                        "Peach nectar",
+                        "Pear juice",
+                        "Pomegranate juice",
+                        "Prune juice",
+                        "Rice milk",
+                        "Soy milk",
+                        "Vegetable bouillon"
+                    ],
                     "herbal teas": [
                         "Alfaalfa",
                         "Bancha",
@@ -714,13 +1026,36 @@
                         "Soy flour",
                         "Soy powder"
                     ],
-                    "dairy": [],
-                    "meat": [],
-                    "condiments": [],
-                    "nuts": [],
-                    "seeds": [],
+                    "dairy&eggs": [
+                        "Yogurt (diluted or fresh)"
+                    ],
+                    "meat": [
+                        "Shrimp"
+                    ],
+                    "condiments": [
+                        "Black pepper",
+                        "Dulse",
+                        "Hijki",
+                        "Kombu",
+                        "Lime",
+                        "Salt",
+                        "Seaweed",
+                        "Tamari"
+                    ],
+                    "nuts": [
+                        "Pine nuts"
+                    ],
+                    "seeds": [
+                        "Pumpkin"
+                    ],
                     "oils": [],
-                    "beverages": [],
+                    "beverages": [
+                        "Alcohol (beer or dry white wine)",
+                        "Black tea",
+                        "Chai (hot spiced milk)",
+                        "Miso broth",
+                        "Orange juice"
+                    ],
                     "herbal teas": [],
                     "spices": [
                         "Black pepper",
@@ -797,6 +1132,7 @@
                         "Zucchini"
                     ],
                     "grains": [
+                        "Refined (white) grains",
                         "Bread (with yeast)",
                         "Oats (cooked)",
                         "Pancakes",
@@ -806,6 +1142,7 @@
                         "Wheat"
                     ],
                     "legumes": [
+                        "Canned commercial legumes",
                         "Kidney beans",
                         "Miso",
                         "Soy beans",
@@ -816,13 +1153,102 @@
                         "Tofu (cold)",
                         "Urad dal"
                     ],
-                    "dairy": [],
-                    "meat": [],
-                    "condiments": [],
-                    "nuts": [],
-                    "seeds": [],
-                    "oils": [],
-                    "beverages": [],
+                    "dairy&eggs": [
+                        "Pasteurized commercial dairy and eggs",
+                        "Butter",
+                        "Cheese (hard or soft)",
+                        "Cow's milk",
+                        "Ice cream",
+                        "Sour cream",
+                        "Yogurt (plain, frozen or with fruit)"
+                    ],
+                    "meat": [
+                        "Commercial meat",
+                        "Beef",
+                        "Buffalo",
+                        "Chicken (dark)",
+                        "Duck",
+                        "Fish (sea)",
+                        "Lamb",
+                        "Pork",
+                        "Salmon",
+                        "Sardines",
+                        "Seafood",
+                        "Tuna fish",
+                        "Turkey (dark)"
+                    ],
+                    "condiments": [
+                        "Chocolate",
+                        "Chutney (mango and sweet)",
+                        "Gomasio",
+                        "Kelp",
+                        "Ketchup",
+                        "Lime",
+                        "Lime pickle",
+                        "Mango pickle",
+                        "Mayonnaise",
+                        "Pickles",
+                        "Salt",
+                        "Soy sauce",
+                        "Tamari",
+                        "Vinegar"
+                    ],
+                    "nuts": [
+                        "Almonds",
+                        "Black nuts",
+                        "Brazil nuts",
+                        "Cashews",
+                        "Coconut",
+                        "Fliberts",
+                        "Hazelnuts",
+                        "Macadamia nuts",
+                        "Peanuts",
+                        "Pecans",
+                        "Pine nuts",
+                        "Pistachios",
+                        "Walnuts"
+                    ],
+                    "seeds": [
+                        "Halva",
+                        "Psyllium",
+                        "Sesame",
+                        "Tahini"
+                    ],
+                    "oils": [
+                        "Refined oils",
+                        "Avocado",
+                        "Apricot",
+                        "Coconut",
+                        "Flax seed",
+                        "Olive",
+                        "Primrose",
+                        "Safflower",
+                        "Sesame (internal)",
+                        "Soy",
+                        "Walnut"
+                    ],
+                    "beverages": [
+                        "Commercial beverages",
+                        "Alcohol (hard or beer or sweet wine)",
+                        "Almond milk",
+                        "Caffeinated beverages",
+                        "Carbonated drinks",
+                        "Cherry juice (sour)",
+                        "Chocolate milk",
+                        "Coffee",
+                        "Cold dairy drinks",
+                        "Grapefruit juice",
+                        "Iced tea",
+                        "Icy cold drinks",
+                        "Lemonade",
+                        "Miso broth",
+                        "Orange juice",
+                        "Papaya juice",
+                        "Rice milk",
+                        "Sour juices",
+                        "Soy milk (cold)",
+                        "Tomato juice"
+                    ],
                     "herbal teas": [
                         "Licorice",
                         "Marshmallow",
@@ -849,6 +1275,7 @@
             "prefer": [
                 {
                     "fruits": [
+                        "Local and in season fruits",
                         "Apples",
                         "Applesauce",
                         "Apricots",
@@ -862,6 +1289,7 @@
                         "Raisins"
                     ],
                     "vegetables": [
+                        "Local and in season vegetables",
                         "Pungent and bitter vegetables",
                         "Artichoke",
                         "Asparagus",
@@ -911,6 +1339,7 @@
                         "Wheat grass"
                     ],
                     "grains": [
+                        "Whole grains",
                         "Barley",
                         "Buckwheat",
                         "Corn",
@@ -928,6 +1357,7 @@
                         "Wheat bran"
                     ],
                     "legumes": [
+                        "Soaked and cooked legumes",
                         "Adzuki beans",
                         "Black beans",
                         "Black-eyed peas",
@@ -944,13 +1374,68 @@
                         "Tur dal",
                         "White beans"
                     ],
-                    "dairy": [],
-                    "meat": [],
-                    "condiments": [],
-                    "nuts": [],
-                    "seeds": [],
-                    "oils": [],
-                    "beverages": [],
+                    "dairy&eggs": [
+                        "Organic dairy and eggs",
+                        "Cottage cheese (skim goat's milk)",
+                        "Eggs",
+                        "Goat's milk (skin)",
+                        "Yogurt (diluted or fresh)"
+                    ],
+                    "meat": [
+                        "Organic meat",
+                        "Chicken (white)",
+                        "Fish (freshwater)",
+                        "Rabbit",
+                        "Shrimp",
+                        "Turkey (white)",
+                        "Venison"
+                    ],
+                    "condiments": [
+                        "Black pepper",
+                        "Chili peppers",
+                        "Chutney (mango and spicy)",
+                        "Coriander leaves",
+                        "Horseradish",
+                        "Mustard (without vinegar)",
+                        "Scallions",
+                        "Sprouts"
+                    ],
+                    "nuts": [
+                        "Charole"
+                    ],
+                    "seeds": [
+                        "Chia",
+                        "Popcorn (unbuttered and unsalted)"
+                    ],
+                    "oils": [
+                        "Cold pressed oils",
+                        "Almond",
+                        "Canola",
+                        "Corn",
+                        "Ghee",
+                        "Sesame (external)",
+                        "Sunflower"
+                    ],
+                    "beverages": [
+                        "Water and homemade beverages",
+                        "Aloe vera juice",
+                        "Apple cider",
+                        "Apricot juice",
+                        "Berry juice",
+                        "Black tea (spiced)",
+                        "Carob",
+                        "Carrot juice",
+                        "Cherry juice (sweet)",
+                        "Cranberry juice",
+                        "Grain 'coffee'",
+                        "Grape juice",
+                        "Mango juice",
+                        "Peach nectar",
+                        "Pear juice",
+                        "Pomegranate juice",
+                        "Prune juice",
+                        "Soy milk (hot or well-spiced)"
+                    ],
                     "herbal teas": [
                         "Alfaalfa",
                         "Bancha",
@@ -1066,13 +1551,33 @@
                         "Mung dal",
                         "Tofu (hot)"
                     ],
-                    "dairy": [],
+                    "dairy&eggs": [
+                        "Buttermilk",
+                        "Ghee",
+                        "Goat's cheese (not aged, unsalted)"
+                    ],
                     "meat": [],
-                    "condiments": [],
+                    "condiments": [
+                        "Dulse",
+                        "Hijki",
+                        "Lemon",
+                        "Seaweed"
+                    ],
                     "nuts": [],
-                    "seeds": [],
-                    "oils": [],
-                    "beverages": [],
+                    "seeds": [
+                        "Flax",
+                        "Pumpkin",
+                        "Sunflower"
+                    ],
+                    "oils": [
+                        "Refined oils"
+                    ],
+                    "beverages": [
+                        "Alcohol (dry red or white wine)",
+                        "Apple juice",
+                        "Chai (hot spiced milk)",
+                        "Pineapple juice"
+                    ],
                     "herbal teas": [
                         "Comfrey",
                         "Fennel",
@@ -1120,7 +1625,7 @@
                     "vegetables": [],
                     "grains": [],
                     "legumes": [],
-                    "dairy": [],
+                    "dairy&eggs": [],
                     "meat": [],
                     "condiments": [],
                     "nuts": [],
@@ -1139,7 +1644,7 @@
                     "vegetables": [],
                     "grains": [],
                     "legumes": [],
-                    "dairy": [],
+                    "dairy&eggs": [],
                     "meat": [],
                     "condiments": [],
                     "nuts": [],
@@ -1158,7 +1663,7 @@
                     "vegetables": [],
                     "grains": [],
                     "legumes": [],
-                    "dairy": [],
+                    "dairy&eggs": [],
                     "meat": [],
                     "condiments": [],
                     "nuts": [],
@@ -1193,7 +1698,7 @@
                     "vegetables": [],
                     "grains": [],
                     "legumes": [],
-                    "dairy": [],
+                    "dairy&eggs": [],
                     "meat": [],
                     "condiments": [],
                     "nuts": [],
@@ -1212,7 +1717,7 @@
                     "vegetables": [],
                     "grains": [],
                     "legumes": [],
-                    "dairy": [],
+                    "dairy&eggs": [],
                     "meat": [],
                     "condiments": [],
                     "nuts": [],
@@ -1231,7 +1736,7 @@
                     "vegetables": [],
                     "grains": [],
                     "legumes": [],
-                    "dairy": [],
+                    "dairy&eggs": [],
                     "meat": [],
                     "condiments": [],
                     "nuts": [],
@@ -1266,7 +1771,7 @@
                     "vegetables": [],
                     "grains": [],
                     "legumes": [],
-                    "dairy": [],
+                    "dairy&eggs": [],
                     "meat": [],
                     "condiments": [],
                     "nuts": [],
@@ -1285,7 +1790,7 @@
                     "vegetables": [],
                     "grains": [],
                     "legumes": [],
-                    "dairy": [],
+                    "dairy&eggs": [],
                     "meat": [],
                     "condiments": [],
                     "nuts": [],
@@ -1304,7 +1809,7 @@
                     "vegetables": [],
                     "grains": [],
                     "legumes": [],
-                    "dairy": [],
+                    "dairy&eggs": [],
                     "meat": [],
                     "condiments": [],
                     "nuts": [],

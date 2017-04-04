@@ -1623,8 +1623,7 @@
             "avoid": [
                 {
                     "fruits": [
-                        "Apples (raw)",
-                        "Apples (sour)",
+                        "Apples (raw or sour)",
                         "Apricots (sour)",
                         "Bananas (unripe)",
                         "Berries (sour)",

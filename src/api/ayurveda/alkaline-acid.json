@@ -1,0 +1,291 @@
+[
+    {
+        "name": "Cola",
+        "ph": 2
+    },
+    {
+        "name": "Beer",
+        "ph": 2.5
+    },
+    {
+        "name": "Bacon",
+        "ph": 3
+    },
+    {
+        "name": "Sausage",
+        "ph": 3
+    },
+    {
+        "name": "Processed cheese",
+        "ph": 3
+    },
+    {
+        "name": "Pudding",
+        "ph": 3
+    },
+    {
+        "name": "Fried foods",
+        "ph": 3
+    },
+    {
+        "name": "Sleep depravation",
+        "ph": 3
+    },
+    {
+        "name": "Canned tuna",
+        "ph": 3.5
+    },
+    {
+        "name": "Lobster",
+        "ph": 3.5
+    },
+    {
+        "name": "Ice cream",
+        "ph": 3.5
+    },
+    {
+        "name": "Roasted nuts",
+        "ph": 3.5
+    },
+    {
+        "name": "Hazelnuts",
+        "ph": 3.5
+    },
+    {
+        "name": "Soft drinks",
+        "ph": 3.5
+    },
+    {
+        "name": "Cottonseed oil",
+        "ph": 3.5
+    },
+    {
+        "name": "Palm oil",
+        "ph": 3.5
+    },
+    {
+        "name": "Palm oil",
+        "ph": 3.5
+    },
+    {
+        "name": "Legumes",
+        "ph": 4
+    },
+    {
+        "name": "Snow peas",
+        "ph": 4
+    },
+    {
+        "name": "Tomato sauce",
+        "ph": 4
+    },
+    {
+        "name": "Veal",
+        "ph": 4
+    },
+    {
+        "name": "Buttermilk",
+        "ph": 4
+    },
+    {
+        "name": "Cream cheese",
+        "ph": 4
+    },
+    {
+        "name": "Granola",
+        "ph": 4
+    },
+    {
+        "name": "White bread",
+        "ph": 4
+    },
+    {
+        "name": "Flour tortillas",
+        "ph": 4
+    },
+    {
+        "name": "Artificial sweeteners",
+        "ph": 4
+    },
+    {
+        "name": "White vinegar",
+        "ph": 4
+    },
+    {
+        "name": "Beef",
+        "ph": 4.5
+    }
+    ,
+    {
+        "name": "Pork",
+        "ph": 4.5
+    },
+    {
+        "name": "Mussels",
+        "ph": 4.5
+    },
+    {
+        "name": "Squid",
+        "ph": 4.5
+    },
+    {
+        "name": "Mollusks",
+        "ph": 4.5
+    },
+    {
+        "name": "Goat cheese",
+        "ph": 4.5
+    },
+    {
+        "name": "White pasta",
+        "ph": 4.5
+    },
+    {
+        "name": "Beer",
+        "ph": 4.5
+    },
+    {
+        "name": "Black tea",
+        "ph": 4.5
+    },
+    {
+        "name": "Liqour",
+        "ph": 4.5
+    },
+    {
+        "name": "Coffee",
+        "ph": 4.5
+    },
+    {
+        "name": "Sweetened fruit juices",
+        "ph": 4.5
+    },
+    {
+        "name": "Jams",
+        "ph": 4.5
+    },
+    {
+        "name": "Jellies",
+        "ph": 4.5
+    },
+    {
+        "name": "Pastries from white flour and white sugar",
+        "ph": 4.5
+    },
+    {
+        "name": "White sugar",
+        "ph": 4.5
+    },
+    {
+        "name": "Microwave food",
+        "ph": 4.5
+    },
+    {
+        "name": "Cacao",
+        "ph": 4.5
+    },
+    {
+        "name": "Frozen vegetables",
+        "ph": 5
+    },
+    {
+        "name": "Canned vegetables",
+        "ph": 5
+    },
+    {
+        "name": "Cooked Swiss chard",
+        "ph": 5
+    },
+    {
+        "name": "Navy beans",
+        "ph": 5
+    },
+    {
+        "name": "Wild game",
+        "ph": 5
+    },
+    {
+        "name": "Cottage cheese",
+        "ph": 5
+    },
+    {
+        "name": "Barley",
+        "ph": 5
+    },
+    {
+        "name": "Oat bran",
+        "ph": 5
+    },
+    {
+        "name": "Rice cakes",
+        "ph": 5
+    },
+    {
+        "name": "Wine",
+        "ph": 5
+    },
+    {
+        "name": "Powdered stevia",
+        "ph": 5
+    },
+    {
+        "name": "Liquid stevia",
+        "ph": 5
+    },
+    {
+        "name": "Balsamic vinegar",
+        "ph": 5
+    },
+    {
+        "name": "Cigarettes",
+        "ph": 5
+    },
+    {
+        "name": "Table salt",
+        "ph": 5
+    },
+    {
+        "name": "Pomegranate",
+        "ph": 5.5
+    },
+    {
+        "name": "Chickpeas",
+        "ph": 5.5
+    },
+    {
+        "name": "Lima beans",
+        "ph": 5.5
+    },
+    {
+        "name": "Chicken",
+        "ph": 5.5
+    },
+    {
+        "name": "Turkey",
+        "ph": 5.5
+    },
+    {
+        "name": "Duck",
+        "ph": 5.5
+    },
+    {
+        "name": "Goose",
+        "ph": 5.5
+    },
+    {
+        "name": "Lamb",
+        "ph": 5.5
+    },
+    {
+        "name": "Goat",
+        "ph": 5.5
+    },
+    {
+        "name": "Venison",
+        "ph": 5.5
+    },
+    {
+        "name": "Elk",
+        "ph": 5.5
+    }
+]

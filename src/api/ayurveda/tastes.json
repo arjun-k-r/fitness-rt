@@ -6,7 +6,12 @@
             "water"
         ],
         "foodGroups": [
-            
+            "Dairy",
+            "Fruit",
+            "Grains",
+            "Meat",
+            "Starch",
+            "Sweets"
         ],
         "name": "sweet"
     },
@@ -16,6 +21,11 @@
             "fire",
             "earth"
         ],
+        "foodGroups": [
+            "Alcohol",
+            "Low sugar fruits",
+            "Vinegar"
+        ],
         "name": "sour"
     },
     {
@@ -23,6 +33,9 @@
         "elements": [
             "fire",
             "water"
+        ],
+        "foodGroups": [
+            "High sodium foods"
         ],
         "name": "salty"
     },
@@ -32,6 +45,14 @@
             "air",
             "fire"
         ],
+        "foodGroups": [
+            "Chilli",
+            "Garlic",
+            "Hot spices",
+            "Onion",
+            "Pepper",
+            "Radish"
+        ],
         "name": "pungent"
     },
     {
@@ -39,6 +60,19 @@
         "elements": [
             "air",
             "earth"
+        ],
+        "foodGroups": [
+            "Apples",
+            "Berries",
+            "Cabbage",
+            "Cacao",
+            "Cauliflower",
+            "Grains",
+            "Legumes",
+            "Low water high fiber foods",
+            "Nuts",
+            "Pomegranates",
+            "Tea"
         ],
         "name": "astrigent"
     },
@@ -48,6 +82,10 @@
             "air",
             "ether"
         ],
-        "name": "bitter"
+        "name": "bitter",
+        "foodGroups": [
+            "Herbs and spices",
+            "High fiber vegetables"
+        ],
     }
 ]

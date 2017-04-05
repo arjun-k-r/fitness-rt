@@ -16,7 +16,7 @@
         "ph": 3
     },
     {
-        "name": "Processed cheese",
+        "name": "Cheese (processed)",
         "ph": 3
     },
     {
@@ -32,7 +32,7 @@
         "ph": 3
     },
     {
-        "name": "Canned tuna",
+        "name": "Tuna (canned)",
         "ph": 3.5
     },
     {
@@ -44,7 +44,7 @@
         "ph": 3.5
     },
     {
-        "name": "Roasted nuts",
+        "name": "Nuts (roasted)",
         "ph": 3.5
     },
     {
@@ -57,10 +57,6 @@
     },
     {
         "name": "Cottonseed oil",
-        "ph": 3.5
-    },
-    {
-        "name": "Palm oil",
         "ph": 3.5
     },
     {
@@ -96,7 +92,7 @@
         "ph": 4
     },
     {
-        "name": "White bread",
+        "name": "Bread (white)",
         "ph": 4
     },
     {
@@ -104,18 +100,17 @@
         "ph": 4
     },
     {
-        "name": "Artificial sweeteners",
+        "name": "Sweeteners (artificial)",
         "ph": 4
     },
     {
-        "name": "White vinegar",
+        "name": "Vinegar (white)",
         "ph": 4
     },
     {
         "name": "Beef",
         "ph": 4.5
-    }
-    ,
+    },
     {
         "name": "Pork",
         "ph": 4.5
@@ -133,11 +128,11 @@
         "ph": 4.5
     },
     {
-        "name": "Goat cheese",
+        "name": "Goat's cheese",
         "ph": 4.5
     },
     {
-        "name": "White pasta",
+        "name": "Pasta (white)",
         "ph": 4.5
     },
     {
@@ -157,7 +152,7 @@
         "ph": 4.5
     },
     {
-        "name": "Sweetened fruit juices",
+        "name": "Fruit juices (sweetened)",
         "ph": 4.5
     },
     {
@@ -169,11 +164,11 @@
         "ph": 4.5
     },
     {
-        "name": "Pastries from white flour and white sugar",
+        "name": "Pastries (white flour and white sugar)",
         "ph": 4.5
     },
     {
-        "name": "White sugar",
+        "name": "Sugar (white)",
         "ph": 4.5
     },
     {
@@ -185,15 +180,15 @@
         "ph": 4.5
     },
     {
-        "name": "Frozen vegetables",
+        "name": "Vegetables (canned)",
         "ph": 5
     },
     {
-        "name": "Canned vegetables",
+        "name": "Vegetables (frozen)",
         "ph": 5
     },
     {
-        "name": "Cooked Swiss chard",
+        "name": "Swiss chard (cooked)",
         "ph": 5
     },
     {
@@ -201,7 +196,7 @@
         "ph": 5
     },
     {
-        "name": "Wild game",
+        "name": "Game (wild)",
         "ph": 5
     },
     {
@@ -225,15 +220,15 @@
         "ph": 5
     },
     {
-        "name": "Powdered stevia",
+        "name": "Stevia (powdered)",
         "ph": 5
     },
     {
-        "name": "Liquid stevia",
+        "name": "Stevia (liquid)",
         "ph": 5
     },
     {
-        "name": "Balsamic vinegar",
+        "name": "Vinegar (balsamic)",
         "ph": 5
     },
     {
@@ -241,7 +236,7 @@
         "ph": 5
     },
     {
-        "name": "Table salt",
+        "name": "Salt (table)",
         "ph": 5
     },
     {
@@ -287,5 +282,297 @@
     {
         "name": "Elk",
         "ph": 5.5
+    },
+    {
+        "name": "Cereals (processed)",
+        "ph": 5.5
+    },
+    {
+        "name": "Rice (white)",
+        "ph": 5.5
+    },
+    {
+        "name": "Semolina",
+        "ph": 5.5
+    },
+    {
+        "name": "Wheat bran",
+        "ph": 5.5
+    },
+    {
+        "name": "Flour (white)",
+        "ph": 5.5
+    },
+    {
+        "name": "Wheat flour",
+        "ph": 5.5
+    },
+    {
+        "name": "Brazil nuts",
+        "ph": 5.5
+    },
+    {
+        "name": "Walnuts",
+        "ph": 5.5
+    },
+    {
+        "name": "Pecans",
+        "ph": 5.5
+    },
+    {
+        "name": "Sesame oil",
+        "ph": 5.5
+    },
+    {
+        "name": "Safflour oil",
+        "ph": 5.5
+    },
+    {
+        "name": "Almond oil",
+        "ph": 5.5
+    },
+    {
+        "name": "Water (reverse osmosis filtered)",
+        "ph": 5.5
+    },
+    {
+        "name": "Water (bottled)",
+        "ph": 5.5
+    },
+    {
+        "name": "Sports drinks",
+        "ph": 5.5
+    },
+    {
+        "name": "Sugar (brown)",
+        "ph": 5.5
+    },
+    {
+        "name": "Chocolate",
+        "ph": 5.5
+    },
+    {
+        "name": "Custard (white sugar)",
+        "ph": 5.5
+    },
+    {
+        "name": "Yogurt (sweetened)",
+        "ph": 5.5
+    },
+    {
+        "name": "Tapioca",
+        "ph": 5.5
+    },
+    {
+        "name": "Ketchup",
+        "ph": 5.5
+    },
+    {
+        "name": "Mayonnaise (jar)",
+        "ph": 5.5
+    },
+    {
+        "name": "Mustard",
+        "ph": 5.5
+    },
+    {
+        "name": "Vanilla",
+        "ph": 5.5
+    },
+    {
+        "name": "Pharmaceutical drugs",
+        "ph": 5.5
+    },
+    {
+        "name": "Fruits (dried)",
+        "ph": 6
+    },
+    {
+        "name": "Cranberries (cooked)",
+        "ph": 6
+    },
+    {
+        "name": "Prunes",
+        "ph": 6
+    },
+    {
+        "name": "Black-eyed peas",
+        "ph": 6
+    },
+    {
+        "name": "Potatoes (peeled)",
+        "ph": 6
+    },
+    {
+        "name": "Pickles",
+        "ph": 6
+    },
+    {
+        "name": "Zucchini (cooked)",
+        "ph": 6
+    },
+    {
+        "name": "Fish",
+        "ph": 6
+    },
+    {
+        "name": "Shellfish",
+        "ph": 6
+    },
+    {
+        "name": "Yogurt (plain)",
+        "ph": 6
+    },
+    {
+        "name": "Tortillas",
+        "ph": 6
+    },
+    {
+        "name": "Cream of wheat",
+        "ph": 6
+    },
+    {
+        "name": "Bread (whole grain)",
+        "ph": 6
+    },
+    {
+        "name": "Popcorn (buttered, salted)",
+        "ph": 6
+    },
+    {
+        "name": "Rye",
+        "ph": 6
+    },
+    {
+        "name": "Wheat",
+        "ph": 6
+    },
+    {
+        "name": "Wheat germ",
+        "ph": 6
+    },
+    {
+        "name": "Pistacchios",
+        "ph": 6
+    },
+    {
+        "name": "Pine nuts",
+        "ph": 6
+    },
+    {
+        "name": "Kona coffee",
+        "ph": 6
+    },
+    {
+        "name": "Soy milk",
+        "ph": 6
+    },
+    {
+        "name": "Rice milk",
+        "ph": 6
+    },
+    {
+        "name": "Almond milk",
+        "ph": 6
+    },
+    {
+        "name": "Butter (salted)",
+        "ph": 6
+    },
+    {
+        "name": "Butter (salted)",
+        "ph": 6
+    },
+    {
+        "name": "Pumpkin oil",
+        "ph": 6
+    },
+    {
+        "name": "Grape seed oil",
+        "ph": 6
+    },
+    {
+        "name": "Maple syrup (processed)",
+        "ph": 6
+    },
+    {
+        "name": "Molasses (sulphured)",
+        "ph": 6
+    },
+    {
+        "name": "Gelatin",
+        "ph": 6
+    },
+    {
+        "name": "Hummus",
+        "ph": 6
+    },
+    {
+        "name": "Bananas (green)",
+        "ph": 6.5
+    },
+    {
+        "name": "Plums",
+        "ph": 6.5
+    },
+    {
+        "name": "Green peas (cooked)",
+        "ph": 6.5
+    },
+    {
+        "name": "Horseradish",
+        "ph": 6.5
+    },
+    {
+        "name": "Kidney beans",
+        "ph": 6.5
+    },
+    {
+        "name": "Pinto beans",
+        "ph": 6.5
+    },
+    {
+        "name": "Olives (pickled)",
+        "ph": 6.5
+    },
+    {
+        "name": "Spinach (cooked)",
+        "ph": 6.5
+    },
+    {
+        "name": "Whole eggs (cooked)",
+        "ph": 6.5
+    },
+    {
+        "name": "Egg whites (cooked)",
+        "ph": 6.5
+    },
+    {
+        "name": "Organ meats",
+        "ph": 6.5
+    },
+    {
+        "name": "Dairy (processed)",
+        "ph": 6.5
+    },
+    {
+        "name": "Cheese",
+        "ph": 6.5
+    },
+    {
+        "name": "Oats",
+        "ph": 6.5
+    },
+    {
+        "name": "Buckwheat",
+        "ph": 6.5
+    },
+    {
+        "name": "Corn bread",
+        "ph": 6.5
+    },
+    {
+        "name": "Rice bread",
+        "ph": 6.5
     }
 ]

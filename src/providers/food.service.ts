@@ -109,4 +109,14 @@ export class FoodService {
         return body['list']['item'];
       }).catch((err: any) => Observable.throw(err));
   }
+
+  public getPRAL(food: Food): number {
+    /**
+     * PRAL formula by Dr. Thomas Remer
+     * Determines the pH of food
+     * If PRAL above 0, the food is acidic
+     * If PRAL below 0, the food is alkaline
+     */
+    return 0.49 * food.nutrition.protein.value + 0.037 * food.nutrition.phosphorus.value - 0.021 * food.nutrition.potassium.value - 0.026 * food.nutrition.magnesium.value - 0.013 * food.nutrition.calcium.value;
+  }
 }

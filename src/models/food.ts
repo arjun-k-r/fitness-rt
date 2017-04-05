@@ -22,6 +22,7 @@ export class Food {
         public group: string,
         public nutrition: Nutrition = new Nutrition(),
         public quantity: number = 100,
-        public unit: string = 'g'
+        public unit: string = 'g',
+        public type: string = 'sweet'
     ) {}
 }

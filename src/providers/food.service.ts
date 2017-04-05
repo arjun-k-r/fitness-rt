@@ -35,6 +35,15 @@ export const FOOD_GROUPS: Array<FoodGroup> = [
   new FoodGroup('1100', 'Vegetables and Vegetable Products'),
 ];
 
+const NUTRIENT_MEANS: { fat: number, fiber: number, sodium: number, sugars: number, vitaminC: number, water: number } = {
+  'fat': 30,
+  'fiber': 10,
+  'sodium': 0.1,
+  'sugars': 10,
+  'vitaminC': 0.04,
+  'water': 50
+};
+
 @Injectable()
 export class FoodService {
   private _usdaApiKey: string = '5nW8It7ORsxY212bV5wpleHkblTLbvpFTKVa010U';
@@ -48,6 +57,84 @@ export class FoodService {
     newFood.nutrition.setNutrientValue(usdaFood['nutrients']);
     console.log(newFood);
     return newFood;
+  }
+
+  private _checkAstrigent(food: Food, cooked: boolean): boolean {
+    /**
+     * Tannins
+     * Low water foods
+     * Raw, low sugar plants
+     */
+    let isPlant: boolean = food.group === 'Cereal Grains and Pasta' || food.group === 'Fruits and Fruit Juices' || food.group === 'Legumes and Legume Products' || food.group === 'Spices and Herbs' || food.group === 'Vegetables and Vegetable Products',
+      isRaw: boolean = food.name.toLocaleLowerCase().includes('raw') || !cooked,
+      lowSugar: boolean = food.nutrition.sugars.value <= NUTRIENT_MEANS.sugars,
+      lowWater: boolean = food.nutrition.water.value <= NUTRIENT_MEANS.water;
+    return (isRaw && isPlant && lowSugar) || lowWater;
+  }
+
+  private _checkBitter(food: Food): boolean {
+    /**
+     * Alkalies (high oxygen)
+     * High fiber, low fat, low sodium, and low sugar foods
+     */
+    let highFiber: boolean = food.nutrition.fiber.value >= NUTRIENT_MEANS.fiber,
+      lowFat: boolean = food.nutrition.fats.value <= NUTRIENT_MEANS.fat,
+      lowSodium: boolean = food.nutrition.sodium.value <= NUTRIENT_MEANS.sodium,
+      lowSugar: boolean = food.nutrition.sugars.value <= NUTRIENT_MEANS.sugars;
+    return lowFat && lowSugar && lowSodium && highFiber;
+  }
+
+  private _checkPungent(food: Food): boolean {
+    /**
+     * Acids (high hydrogen)
+     * Spicy foods
+     * Low sugar, low fat, and low sodium
+     */
+    let highVitaminC: boolean = food.nutrition.vitaminC.value >= NUTRIENT_MEANS.vitaminC,
+      isVeggie: boolean = food.group === 'Spices and Herbs' || food.group === 'Vegetables',
+      lowFat: boolean = food.nutrition.fats.value <= NUTRIENT_MEANS.fat,
+      lowSodium: boolean = food.nutrition.sodium.value <= NUTRIENT_MEANS.sodium,
+      lowSugar: boolean = food.nutrition.sugars.value <= NUTRIENT_MEANS.sugars;
+    return (lowFat && lowSodium && lowSugar) || (highVitaminC && isVeggie);
+  }
+
+  private _checkSalty(food: Food): boolean {
+    /**
+     * Fish, seafood, and high sodium foods
+     */
+    let highSodium: boolean = food.nutrition.sodium.value >= NUTRIENT_MEANS.sodium,
+      isSeafood: boolean = food.group === 'Finfish and Shellfish Products';
+    return highSodium || isSeafood;
+  }
+
+  private _checkSour(food: Food, cooked: boolean): boolean {
+    /**
+     * Citrus and fermented foods
+     */
+    let hasAlcohol: boolean = food.nutrition.alcohol.value >= 0,
+      highVitaminC: boolean = food.nutrition.vitaminC.value >= NUTRIENT_MEANS.vitaminC,
+      isFruit: boolean = food.group === 'Fruits and Fruit Juices',
+      isDairy: boolean = food.group === 'Dairy and Egg Products',
+      isRaw: boolean = food.name.toLocaleLowerCase().includes('raw') || !cooked,
+      lowSugar: boolean = food.nutrition.sugars.value <= NUTRIENT_MEANS.sugars,
+      isYogurt: boolean = food.name.toLocaleLowerCase().includes('yogurt')
+    return (isFruit && highVitaminC) || lowSugar && (((isFruit || isDairy || isYogurt) && isRaw) || hasAlcohol);
+  }
+
+  public classifyFood(food: Food, cooked: boolean): void {
+    if (this._checkAstrigent(food, cooked)) {
+      food.type = 'astrigent';
+    } else if (this._checkSalty(food)) {
+      food.type = 'salty'
+    } else if (this._checkPungent(food)) {
+      food.type = 'pungent';
+    } else if (this._checkSour(food, cooked)) {
+      food.type = 'sour';
+    } else if (this._checkBitter(food)) {
+      food.type = 'bitter';
+    } else {
+      food.type = 'sweet';
+    }
   }
 
   public getFoodReports$(foodId: string = ''): Promise<Food> {

@@ -35,9 +35,10 @@ export const FOOD_GROUPS: Array<FoodGroup> = [
   new FoodGroup('1100', 'Vegetables and Vegetable Products'),
 ];
 
-const NUTRIENT_MEANS: { fat: number, fiber: number, sodium: number, sugars: number, vitaminC: number, water: number } = {
+const NUTRIENT_MEANS: { fat: number, fiber: number, lactose: number, sodium: number, sugars: number, vitaminC: number, water: number } = {
   'fat': 30,
   'fiber': 10,
+  'lactose': 3,
   'sodium': 0.1,
   'sugars': 10,
   'vitaminC': 0.04,
@@ -62,69 +63,49 @@ export class FoodService {
   private _checkAstrigent(food: Food, cooked: boolean): boolean {
     /**
      * Tannins
-     * Low water foods
-     * Raw, low sugar plants
+     * Water absorbant
+     * Low fat
      */
-    let isPlant: boolean = food.group === 'Cereal Grains and Pasta' || food.group === 'Fruits and Fruit Juices' || food.group === 'Legumes and Legume Products' || food.group === 'Spices and Herbs' || food.group === 'Vegetables and Vegetable Products',
-      isRaw: boolean = food.name.toLocaleLowerCase().includes('raw') || !cooked,
-      lowSugar: boolean = food.nutrition.sugars.value <= NUTRIENT_MEANS.sugars,
-      lowWater: boolean = food.nutrition.water.value <= NUTRIENT_MEANS.water;
-    return (isRaw && isPlant && lowSugar) || lowWater;
+    return food.nutrition.fats.value <= NUTRIENT_MEANS.fat;
   }
 
   private _checkBitter(food: Food): boolean {
     /**
-     * Alkalies (high oxygen)
-     * High fiber, low fat, low sodium, and low sugar foods
+     * Alkalies
+     * High fiber foods
      */
-    let highFiber: boolean = food.nutrition.fiber.value >= NUTRIENT_MEANS.fiber,
-      lowFat: boolean = food.nutrition.fats.value <= NUTRIENT_MEANS.fat,
-      lowSodium: boolean = food.nutrition.sodium.value <= NUTRIENT_MEANS.sodium,
-      lowSugar: boolean = food.nutrition.sugars.value <= NUTRIENT_MEANS.sugars;
-    return lowFat && lowSugar && lowSodium && highFiber;
+    return food.nutrition.fiber.value >= NUTRIENT_MEANS.fiber;
   }
 
   private _checkPungent(food: Food): boolean {
     /**
-     * Acids (high hydrogen)
+     * Acids
      * Spicy foods
-     * Low sugar, low fat, and low sodium
+     * High vitamin C herbs, spices, and vegetables
      */
-    let highVitaminC: boolean = food.nutrition.vitaminC.value >= NUTRIENT_MEANS.vitaminC,
-      isVeggie: boolean = food.group === 'Spices and Herbs' || food.group === 'Vegetables',
-      lowFat: boolean = food.nutrition.fats.value <= NUTRIENT_MEANS.fat,
-      lowSodium: boolean = food.nutrition.sodium.value <= NUTRIENT_MEANS.sodium,
-      lowSugar: boolean = food.nutrition.sugars.value <= NUTRIENT_MEANS.sugars;
-    return (lowFat && lowSodium && lowSugar) || (highVitaminC && isVeggie);
+    return (food.group === 'Spices and Herbs' || food.group === 'Vegetables') && food.nutrition.vitaminC.value >= NUTRIENT_MEANS.vitaminC;
   }
 
   private _checkSalty(food: Food): boolean {
     /**
      * Fish, seafood, and high sodium foods
      */
-    let highSodium: boolean = food.nutrition.sodium.value >= NUTRIENT_MEANS.sodium,
-      isSeafood: boolean = food.group === 'Finfish and Shellfish Products';
-    return highSodium || isSeafood;
+    return food.nutrition.sodium.value >= NUTRIENT_MEANS.sodium || food.group === 'Finfish and Shellfish Products';
   }
 
   private _checkSour(food: Food, cooked: boolean): boolean {
     /**
      * Citrus and fermented foods
      */
-    let hasAlcohol: boolean = food.nutrition.alcohol.value >= 0,
-      highVitaminC: boolean = food.nutrition.vitaminC.value >= NUTRIENT_MEANS.vitaminC,
-      isFruit: boolean = food.group === 'Fruits and Fruit Juices',
-      isDairy: boolean = food.group === 'Dairy and Egg Products',
-      isRaw: boolean = food.name.toLocaleLowerCase().includes('raw') || !cooked,
-      lowSugar: boolean = food.nutrition.sugars.value <= NUTRIENT_MEANS.sugars,
-      isYogurt: boolean = food.name.toLocaleLowerCase().includes('yogurt')
-    return (isFruit && highVitaminC) || lowSugar && (((isFruit || isDairy || isYogurt) && isRaw) || hasAlcohol);
+    return (food.group === 'Fruits and Fruit Juices' && food.nutrition.sugars.value <= NUTRIENT_MEANS.sugars) || food.nutrition.alcohol.value >= 0 || food.name.toLocaleLowerCase().includes('vinegar') || (food.group === 'Dairy and Egg Products' && food.nutrition.lactose.value < NUTRIENT_MEANS.lactose);
   }
 
   public checkFood(dosha: string, food: Food): boolean {
     /**
      * Vata must avoid raw, dry, dehydrated, frozen, cold, uncooked foods, with caffeine, and alcohol
      */
+
+    return true;
   }
 
   public classifyFood(food: Food, cooked: boolean): void {
@@ -207,8 +188,8 @@ export class FoodService {
     /**
      * PRAL formula by Dr. Thomas Remer
      * Determines the pH of food
-     * If PRAL above 0, the food is acidic
-     * If PRAL below 0, the food is alkaline
+     * If PRAL above 0, the food is acid forming
+     * If PRAL below 0, the food is alkaline forming
      */
     return 0.49 * food.nutrition.protein.value + 0.037 * food.nutrition.phosphorus.value - 0.021 * food.nutrition.potassium.value - 0.026 * food.nutrition.magnesium.value - 0.013 * food.nutrition.calcium.value;
   }

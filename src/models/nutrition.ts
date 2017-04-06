@@ -17,6 +17,7 @@ export class Nutrition {
         public protein: Nutrient = new Nutrient(203, 'Proximates', 'Protein', 'g'),
         public fats: Nutrient = new Nutrient(204, 'Proximates', 'Fats', 'g'),
         public carbs: Nutrient = new Nutrient(205, 'Proximates', 'Carbohydrates', 'g'),
+        public lactose: Nutrient = new Nutrient(213, 'Proximates', 'Lactose', 'g'),
         public fiber: Nutrient = new Nutrient(291, 'Proximates', 'Fiber', 'g'),
         public sugars: Nutrient = new Nutrient(269, 'Proximates', 'Sugars', 'g'),
         public calcium: Nutrient = new Nutrient(301, 'Minerals', 'Calcium', 'mg'),
@@ -82,6 +83,10 @@ export class Nutrition {
 
                 case '205':
                     this.carbs.value = +item.value;
+                    break;
+
+                case '213':
+                    this.lactose.value = +item.value;
                     break;
 
                 case '291':

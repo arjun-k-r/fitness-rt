@@ -5,6 +5,7 @@ export { FitnessPage } from './fitness/fitness';
 export { FoodDetailsPage } from './food-details/food-details';
 export { FoodListPage } from './food-list/food-list';
 export { ForgotPasswordPage } from './forgot-password/forgot-password';
+export { GettingStartedPage } from './getting-started/getting-started';
 export { HealingPage } from './healing/healing';
 export { HomePage } from './home/home';
 export { LifestylePage } from './lifestyle/lifestyle';

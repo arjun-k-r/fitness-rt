@@ -8,6 +8,7 @@ import { Auth, IDetailedError, User, UserDetails } from '@ionic/cloud-angular';
 import { Md5 } from 'ts-md5/dist/md5';
 
 // Pages
+import { GettingStartedPage } from '../getting-started/getting-started';
 import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
 
@@ -80,7 +81,7 @@ export class RegistrationPage {
         this._auth.login('basic', details)
           .then(() => {
             loader.dismiss();
-            this._navCtrl.setRoot(HomePage, { new: true });
+            this._navCtrl.setRoot(GettingStartedPage);
           })
           .catch((err: IDetailedError<Array<string>>) => {
             for (let e of err.details) {

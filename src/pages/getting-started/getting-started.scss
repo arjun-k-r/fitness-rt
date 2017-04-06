@@ -1,0 +1,27 @@
+.slider {
+    .slide__description {
+        color: #60646B;
+        font-size: 14px;
+        line-height: 1.5;
+        padding: 0 5rem;
+    }
+    .slide__description--bold {
+        font-weight: 500;
+        color: #000000;
+    }
+    .slide__image {
+        margin: 2rem 0;
+        max-height: 50%;
+        max-width: 60%;
+    }
+    .slide__title {
+        margin-top: 2rem;
+    }
+    .slide-zoom {
+        height: 100%;
+    }
+    .toolbar-background {
+        background: #fff;
+        border-color: transparent;
+    }
+}

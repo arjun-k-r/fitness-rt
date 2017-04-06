@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Getting started</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-slides class="slider" pager>
+    <ion-slide class="slide" *ngFor="let slide of slides">
+      <ion-toolbar>
+      </ion-toolbar>
+      <img [src]="slide.image" class="slide__image"/>
+      <h2 class="slide__title" [innerHTML]="slide.title"></h2>
+      <p class="slide__description" [innerHTML]="slide.description"></p>
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/icon/favicon.ico" class="slide__image"/>
+      <h2 class="slide-title">Are you ready to take the challenge?</h2>
+      <p class="slide__description">
+        If it were easy, everybody would have done. That is why <b class="slide__description--bold">there is too much sickness in the world</b>. Health is hard, uncomfortable, but pleasing and the way of happiness. I promise you that as soon as you feel the taste of health and wellness, you will never want to go back.
+      </p>
+      <button ion-button large clear icon-right color="primary" (click)="goHome()">
+        Let's begin!
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

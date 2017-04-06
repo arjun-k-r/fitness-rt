@@ -121,6 +121,12 @@ export class FoodService {
     return (isFruit && highVitaminC) || lowSugar && (((isFruit || isDairy || isYogurt) && isRaw) || hasAlcohol);
   }
 
+  public checkFood(dosha: string, food: Food): boolean {
+    /**
+     * Vata must avoid raw, dry, dehydrated, frozen, cold, uncooked foods, with caffeine, and alcohol
+     */
+  }
+
   public classifyFood(food: Food, cooked: boolean): void {
     if (this._checkAstrigent(food, cooked)) {
       food.type = 'astrigent';

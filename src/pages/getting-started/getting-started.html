@@ -8,8 +8,6 @@
 
   <ion-slides class="slider" pager>
     <ion-slide class="slide" *ngFor="let slide of slides">
-      <ion-toolbar>
-      </ion-toolbar>
       <img [src]="slide.image" class="slide__image"/>
       <h2 class="slide__title" [innerHTML]="slide.title"></h2>
       <p class="slide__description" [innerHTML]="slide.description"></p>

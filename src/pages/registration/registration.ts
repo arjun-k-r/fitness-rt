@@ -98,7 +98,7 @@ export class RegistrationPage {
 
   ionViewWillEnter() {
     if (this._auth.isAuthenticated()) {
-      this._navCtrl.setRoot(HomePage);
+      this._navCtrl.setRoot(GettingStartedPage);
     }
   }
 

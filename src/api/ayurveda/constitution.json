@@ -1,0 +1,35 @@
+{
+    "vata": {
+        "physical": [
+            "I am generally thin in all areas of my body (eyebrows, finger, hair, hips, lips, neck, skin, teeth, etc.)",
+            "I have a slender and irregular body frame",
+            "I have difficulties gaining weight and usually store fat only around my waist",
+            "I am taller or shorter than average",
+            "My energy levels fluctuate and usually come in bursts",
+            "My appetite is variable and usually forget to eat",
+            "I become bloated, gassy, or constipated quite easily",
+            "My skin is usually dry",
+            "My hands and feet are cold most of the times",
+            "I have difficulties falling and staying asleep; I can't sleep more than 7 hours",
+            "I prefer dump and warm weather, instead of dry and cold",
+            "I generally prefer hot instead of cold"
+        ],
+        "psychological": [
+            "I have an active imagination and restless mind",
+            "I am very creative and artistic",
+            "I learn quckly, but forget quickly as well",
+            "I easily become 'spaced-out'",
+            "I usually experience anxiety, insecurity, nervousness, and worriness",
+            "I am emotional and moody",
+            "I am full of life and enthusiasm",
+            "I get excited easily",
+            "I perform activities fast most of times and I am always in a rush or on the go",
+            "I speak quickly and gesticulate",
+            "I am usually indecisive",
+            "My walk is fast and in small steps",
+            "I am spontaneous and don't like plans",
+            "I don't have a regular schedule, daily routines, and lifestyle",
+            "I am not an organised person"
+        ]
+    }
+}

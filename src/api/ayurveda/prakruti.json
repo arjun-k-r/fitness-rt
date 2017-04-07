@@ -25,79 +25,6 @@
             "Walk everyday in nature",
             "Wear socks and keep your feet warm when sleeping"
         ],
-        "daytime": "2-6",
-        "description": "You are thin, slender, with thin bones, proeminent joints, and weak muscles. You body is generally irregular in shapes. You are free of mind, enthusiastic, creative, full of new ideas, flexible, energic, and talkative. You like to dream and have a big imagintation. You are very spontaneous and unpredictable. You think fast, speak fast, walk fast, everything you do is fast and in a rush. You don't like routines and plans, but like to change, like new experiences, new relationships. You are good at starting new things, like projects, but bad are finishing them and being commited to them. In your bad days, you tend to lose weight, forget to eat, be constipated, and catch colds. Also, you may become confused, anxious, worried, scared, hyperctive, overwhelmed, with lack of focus, difficulty in making decisions, and lack of sleep.",
-        "elements": [
-            "air",
-            "ether"
-        ],
-        "foods": {
-            "avoid": [],
-            "prefer": []
-        },
-        "imbalance": [
-            "Abdominal pain",
-            "Agitated mind",
-            "Anxiety",
-            "Belching",
-            "Bloating",
-            "Breathing difficulties",
-            "Chest pain",
-            "Concentration difficulties",
-            "Confusion",
-            "Constipation",
-            "Cracked lips",
-            "Cracked skin",
-            "Coordination difficulties",
-            "Decision making difficulties",
-            "Depression",
-            "Digestive problems",
-            "Dry cough",
-            "Explosive diarrhea",
-            "Eye driness",
-            "Fainting",
-            "Fatigue",
-            "Fear",
-            "Flaky skin",
-            "Gas",
-            "Hallucinations",
-            "Heart palpitations",
-            "Headaches",
-            "Hiccups",
-            "High blood pressure",
-            "Hyperactivity",
-            "Impulsiveness",
-            "Infections",
-            "Insecurity",
-            "Insomnia",
-            "Joint pain",
-            "Joint stifness",
-            "Lightheadedness",
-            "Low back pain",
-            "Muscle spasms",
-            "Nail bitting",
-            "Nervousness",
-            "Numbness and tingling",
-            "Overthinking",
-            "Poor circulation",
-            "Rapid and irregular speech (cluttering)",
-            "Restlessness",
-            "Self-defeating",
-            "Sensitive to cold and wind",
-            "Sensitive to loud noises",
-            "Sexual dysfunction",
-            "Sharp pains",
-            "Skin driness",
-            "Skin itching",
-            "Skin roughness",
-            "Spinal pain",
-            "Throat driness",
-            "Throat soreness",
-            "Tremors",
-            "Twitching",
-            "Weight loss",
-            "Worriedness"
-        ],
         "mentalConstituition": {
             "activity": "restlessness, hyperactivity, can't stand still, depressed if not doing something",
             "beliefs": "changing, rebel, erratic",
@@ -120,18 +47,6 @@
             "temperament": "enthusiastic, lively, spontaneous, like to change, excitable, fun personality, bored easily",
             "talk": "talkative, quick and diffuse speech, good communication skills"
         },
-        "lifetime": "elderly",
-        "locations": [
-            "small intestine",
-            "hollows of bones",
-            "empty spaces"
-        ],
-        "movement": [
-            "blood circulation",
-            "nerve impulse conduction",
-            "muscle contraction"
-        ],
-        "name": "Vata",
         "physicalConstituition": {
             "appetite": "poor, irregular, skipping meals without notice",
             "bodyFrame": "thin, lean, skinny, slender, irregular, ectomorphic",
@@ -168,11 +83,7 @@
             "thirst": "irregular",
             "voice": "low volume, hoarse",
             "walk": "fast, small steps"
-        },
-        "seasons": [
-            "autumn",
-            "winter"
-        ]
+        }
     },
     {
         "balance": [
@@ -197,87 +108,6 @@
             "Try water based exercises",
             "Walk everyday in nature in the morning and evening"
         ],
-        "daytime": "10-2",
-        "description": "",
-        "elements": [
-            "fire",
-            "water"
-        ],
-        "foods": {
-            "avoid": [],
-            "prefer": []
-        },
-        "imbalance": [
-            "Acidity",
-            "Acne",
-            "Addictions",
-            "Aggression",
-            "Anemia",
-            "Anger",
-            "Arrogance",
-            "Bad breath",
-            "Bleeding",
-            "Bloodshot eyes",
-            "Boils",
-            "Concentration difficulties",
-            "Confusion",
-            "Conjunctivitis",
-            "Coordination difficulties",
-            "Criticism",
-            "Diarrhea",
-            "Digestive problems",
-            "Disturbing dreams",
-            "Dizziness",
-            "Eczema",
-            "Enragement",
-            "Excessive body heat",
-            "Excessive thirst",
-            "Eye problems",
-            "Fever",
-            "Fitful sleep",
-            "Food allergies",
-            "Frustration",
-            "Gastritis",
-            "Headaches",
-            "Hemorrhoids",
-            "Herpes",
-            "Heartburn",
-            "High blood pressure",
-            "Hostility",
-            "Hot flashes",
-            "Increased appetite",
-            "Inflammation",
-            "Impatience",
-            "Insomnia",
-            "Intolerance",
-            "Irritability",
-            "Jealousy",
-            "Judgement errors",
-            "Low blood sugar levels",
-            "Malabsorption",
-            "Materialistic",
-            "Mood swings",
-            "Night sweats",
-            "Obsessions",
-            "Overworking",
-            "Perfectionism",
-            "Reckless",
-            "Rectal burning",
-            "Sarcasm",
-            "Seeking conflicts",
-            "Sensitive to heat",
-            "Skin problems",
-            "Skin rashes",
-            "Skin redness",
-            "Sour body odor",
-            "Stomach ulcer",
-            "Stubbornness",
-            "Urticaria",
-            "Vision difficulties",
-            "Weakness",
-            "Yellowish feces and urine",
-            "Willful"
-        ],
         "mentalConstituition": {
             "activity": "active, moderate, enjoy exercise, competitive",
             "beliefs": "determined, strong principles, leadership",
@@ -300,20 +130,6 @@
             "temperament": "purposeful, energetic, leader, efficient, perfectionist, courageous, ambitious, analytical, self-confident",
             "talk": "talkative, good speaker, good at argumants and debates, get strict to the point, sarcastic, cutting speech"
         },
-        "lifetime": "adulthood",
-        "locations": [
-            "small intesinte",
-            "digestive fluids",
-            "bladder",
-            "blood"
-        ],
-        "movement": [
-            "cognition",
-            "digestion",
-            "metabolism",
-            "senses"
-        ],
-        "name": "Pitta",
         "physicalConstituition": {
             "appetite": "strong, must eat every 3-4 hours, irritated and angry when hungry",
             "bodyFrame": "average build, athletic, symmetrical, muscular, mesomorphic",
@@ -350,10 +166,7 @@
             "thirst": "excessive",
             "voice": "loud, sharp",
             "walk": "medium pace, determined"
-        },
-        "seasons": [
-            "summer"
-        ]
+        }
     },
     {
         "balance": [
@@ -379,76 +192,6 @@
             "Serve each meal in a peaceful environment, slowly, and savor each bite",
             "Stay active physically, mentally, and emotionally every day"
         ],
-        "daytime": "6-10",
-        "description": "",
-        "elements": [
-            "earth",
-            "water"
-        ],
-        "foods": {
-            "avoid": [],
-            "prefer": []
-        },
-        "imbalance": [
-            "Apathy",
-            "Appetite loss",
-            "Asthma",
-            "Bloating",
-            "Bone brittleness",
-            "Bone pain",
-            "Boredom",
-            "Breathing difficulties",
-            "Bronchitis",
-            "Chills",
-            "Clammy skin",
-            "Concentration difficulties",
-            "Cold",
-            "Cough with flegm",
-            "Depression",
-            "Diabetes",
-            "Dullness",
-            "Edema",
-            "Excess sleep",
-            "Fatigue",
-            "Fever",
-            "Greed",
-            "Infections",
-            "Laziness",
-            "Learning difficulties",
-            "Lethargy",
-            "Low motivation",
-            "Low thyroid function",
-            "Joint pain",
-            "Heaviness after eating",
-            "Heavy limbs",
-            "High blood cholesterol levels",
-            "High blood sugar levels",
-            "Memory problems",
-            "Morning tiredness",
-            "Mucous and congestion in chest",
-            "Mucous and congestion in nose",
-            "Mucous and congestion in sinuses",
-            "Mucous and congestion in throat",
-            "Mucous discharges",
-            "Nausea",
-            "Obesity",
-            "Paleness",
-            "Pneumonia",
-            "Poor circulation",
-            "Possessiveness",
-            "Procrastination",
-            "Sadness",
-            "Sensitive to cold and humidity",
-            "Sleepiness",
-            "Slow metabolism",
-            "Slow reactions",
-            "sluggishness",
-            "Stubbornness",
-            "Swelling",
-            "Water retention",
-            "Weakness",
-            "Weight gain"
-        ],
         "mentalConstituition": {
             "activity": "slow, lethargic, steady",
             "beliefs": "permanent, hard to change",
@@ -471,20 +214,6 @@
             "temperament": "tolerant, calm, peaceful, stable, forgiving, loving, unapealing to change",
             "talk": "slow, steady, limited speech, cautious, retained"
         },
-        "lifetime": "childhood",
-        "locations": [
-            "bones",
-            "chest",
-            "fluids",
-            "muscles",
-            "skin",
-            "stomach"
-        ],
-        "movement": [
-            "mucous",
-            "lymph"
-        ],
-        "name": "Kapha",
         "physicalConstituition": {
             "appetite": "constant, skip meals easily, tolerate hunger and thirst",
             "bodyFrame": "heavy, stocky, round, broad, large, well developed, endomorphic",
@@ -521,10 +250,6 @@
             "thirst": "low, constant",
             "voice": "low pitch, pleasant, harmonious",
             "walk": "slow, graceful, steady step"
-        },
-        "seasons": [
-            "late winter",
-            "early spring"
-        ]
+        }
     }
 ]

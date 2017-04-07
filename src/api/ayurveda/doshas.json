@@ -1,0 +1,240 @@
+[
+    {
+        "daytime": "6-10",
+        "elements": [
+            "earth",
+            "water"
+        ],
+        "lifetime": "childhood",
+        "locations": [
+            "bones",
+            "chest",
+            "fluids",
+            "muscles",
+            "skin",
+            "stomach"
+        ],
+        "movement": [
+            "mucous",
+            "lymph"
+        ],
+        "name": "Kapha",
+        "requirements": [
+            "light",
+            "dry",
+            "hot"
+        ],
+        "seasons": [
+            "winter",
+            "spring"
+        ],
+        "tastes": [
+            "pungent",
+            "bitter",
+            "astrigent"
+        ]
+    },
+    {
+        "daytime": "10-2",
+        "elements": [
+            "fire",
+            "water"
+        ],
+        "lifetime": "adulthood",
+        "locations": [
+            "small intesinte",
+            "digestive fluids",
+            "bladder",
+            "blood"
+        ],
+        "movement": [
+            "cognition",
+            "digestion",
+            "metabolism",
+            "senses"
+        ],
+        "name": "Pitta",
+        "requirements": [
+            "light",
+            "dry",
+            "cool"
+        ],
+        "seasons": [
+            "summer"
+        ],
+        "tastes": [
+            "sweet",
+            "bitter",
+            "astrigent"
+        ]
+    },
+    {
+        "daytime": "2-6",
+        "elements": [
+            "air",
+            "ether"
+        ],
+        "lifetime": "elderly",
+        "locations": [
+            "small intestine",
+            "hollows of bones",
+            "empty spaces"
+        ],
+        "movement": [
+            "blood circulation",
+            "nerve impulse conduction",
+            "muscle contraction"
+        ],
+        "name": "Vata",
+        "requirements": [
+            "heavy",
+            "moist",
+            "hot"
+        ],
+        "seasons": [
+            "autumn",
+            "winter"
+        ],
+        "tastes": [
+            "sweet",
+            "salty",
+            "sour"
+        ]
+    },
+    {
+        "daytime": "6-10",
+        "elements": [
+            "earth",
+            "water"
+        ],
+        "lifetime": "childhood",
+        "locations": [
+            "bones",
+            "chest",
+            "fluids",
+            "muscles",
+            "skin",
+            "stomach"
+        ],
+        "movement": [
+            "mucous",
+            "lymph"
+        ],
+        "name": "Vata-Pitta",
+        "requirements": [
+            "heavy",
+            "moist",
+            "cool"
+        ],
+        "seasons": [
+            "winter",
+            "spring"
+        ],
+        "tastes": [
+            "sweet",
+            "astrigent",
+            "sour"
+        ]
+    },
+    {
+        "daytime": "10-2",
+        "elements": [
+            "fire",
+            "water"
+        ],
+        "lifetime": "adulthood",
+        "locations": [
+            "small intesinte",
+            "digestive fluids",
+            "bladder",
+            "blood"
+        ],
+        "movement": [
+            "cognition",
+            "digestion",
+            "metabolism",
+            "senses"
+        ],
+        "name": "Pitta-Kapha",
+        "requirements": [
+            "light",
+            "dry",
+            "cool"
+        ],
+        "seasons": [
+            "summer"
+        ],
+        "tastes": [
+            "pungent",
+            "bitter",
+            "astrigent"
+        ]
+    },
+    {
+        "daytime": "2-6",
+        "elements": [
+            "air",
+            "ether"
+        ],
+        "lifetime": "elderly",
+        "locations": [
+            "small intestine",
+            "hollows of bones",
+            "empty spaces"
+        ],
+        "movement": [
+            "blood circulation",
+            "nerve impulse conduction",
+            "muscle contraction"
+        ],
+        "name": "Vata-Kapha",
+        "requirements": [
+            "heavy",
+            "moist",
+            "hot"
+        ],
+        "seasons": [
+            "autumn",
+            "winter"
+        ],
+        "tastes": [
+            "sweet",
+            "bitter",
+            "astrigent"
+        ]
+    },
+    {
+        "daytime": "10-2",
+        "elements": [
+            "fire",
+            "water"
+        ],
+        "lifetime": "adulthood",
+        "locations": [
+            "small intesinte",
+            "digestive fluids",
+            "bladder",
+            "blood"
+        ],
+        "movement": [
+            "cognition",
+            "digestion",
+            "metabolism",
+            "senses"
+        ],
+        "name": "Tridosha",
+        "requirements": [
+            "light",
+            "moist",
+            "cool"
+        ],
+        "seasons": [
+            "summer"
+        ],
+        "tastes": [
+            "sweet",
+            "bitter",
+            "astrigent"
+        ]
+    }
+]

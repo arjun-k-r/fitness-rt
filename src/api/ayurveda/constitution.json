@@ -1,9 +1,10 @@
 {
     "vata": {
         "physical": [
+            "I lose weight esil and have difficulties gaining weight",
+            "I usually store fat only around my waist",
             "I am generally thin in all areas of my body (eyebrows, finger, hair, hips, lips, neck, skin, teeth, etc.)",
-            "I have a slender and irregular body frame",
-            "I have difficulties gaining weight and usually store fat only around my waist",
+            "I have a slender, ectomorphic, and irregular body frame",
             "I am taller or shorter than average",
             "My energy levels fluctuate and usually come in bursts",
             "My appetite is variable and usually forget to eat",
@@ -12,24 +13,111 @@
             "My hands and feet are cold most of the times",
             "I have difficulties falling and staying asleep; I can't sleep more than 7 hours",
             "I prefer dump and warm weather, instead of dry and cold",
-            "I generally prefer hot instead of cold"
+            "I generally prefer hot instead of cold",
+            "I don't perspire too much",
+            "My bowel movements are irregular",
+            "I catch colds and infections easily"
         ],
         "psychological": [
             "I have an active imagination and restless mind",
             "I am very creative and artistic",
             "I learn quckly, but forget quickly as well",
-            "I easily become 'spaced-out'",
+            "I have a short attention span and easily become 'spaced-out'",
             "I usually experience anxiety, insecurity, nervousness, and worriness",
             "I am emotional and moody",
             "I am full of life and enthusiasm",
             "I get excited easily",
             "I perform activities fast most of times and I am always in a rush or on the go",
-            "I speak quickly and gesticulate",
+            "I talk a lot, quickly, and gesticulate",
             "I am usually indecisive",
             "My walk is fast and in small steps",
             "I am spontaneous and don't like plans",
             "I don't have a regular schedule, daily routines, and lifestyle",
-            "I am not an organised person"
+            "I am not an organised person",
+            "I have active, dynamic, and colorful dreams",
+            "I enjoy traveling and arts",
+            "I have difficulties saving money",
+            "I usually do more than one thing at once",
+            "I start many project, but rarely finish one"
+        ]
+    },
+    "pitta": {
+        "physical": [
+            "I have a fast metabolism and can lose or gain weight whenever I want",
+            "I store fat evenly over my body",
+            "I have generally sharp or pointed physical features (chine, eyes, nose, teeth, etc.)",
+            "I have a medium build, balanced, athletic, and mesomorphic body frame",
+            "I have regular bowel movements and rarely get constipated; I sometimes experience diarrhea",
+            "My height is average",
+            "I perspire easily and with a strong smell",
+            "My skin is oily and reddish",
+            "I have a strong appetite and can eat large quantities at one meal",
+            "I don't like skipping meals and must eat often",
+            "My eyes have a penetrating gaze and are light colored",
+            "My energy and activity levels are high",
+            "I get tired easily and don't like hot weather",
+            "I prefer cool and cloudy weather, instead of hot and sunny",
+            "My body temperature is high",
+            "I prefer cool foods and drinks instead of hot or spicy"
+            
+        ],
+        "psychological": [
+            "I am a perfectionist",
+            "I am precise and organised",
+            "I am goal oriented and achieve everything I want",
+            "I have a good sense of humor",
+            "I am intelligent, inovative, and like learning new things",
+            "I enjoy being in charge",
+            "I become quite often impatient, irritable, and angry",
+            "I am determined, stubborn, and confident",
+            "I am critical and judgemental with myself and people around me",
+            "I enjoy competitions",
+            "I have a well-defined and planned schedule and lifestyle",
+            "I am focused and hardly get distracted",
+            "I like to spend money on luxuries",
+            "I sleep well and uninterrupted for 6-8 hours"
+        ]
+    },
+    "kapha": {
+        "physical": [
+            "I gain weight easily and have difficulties losing weight",
+            "I store fat around hips and thighs",
+            "I have a slow metabolism",
+            "I have a large, well-developed, and endomorphic body frame",
+            "I am short and stocky or tall and firmly build",
+            "I am generally thick in all areas of my body (eyebrows, finger, hair, hips, lips, neck, skin, teeth, etc.)",
+            "I skip meals easily",
+            "My energy levels are strong and I have good endurance",
+            "I have abundant stamina and strength",
+            "I get easily sick",
+            "I sleep deeply for more than 8 hours and have difficulties waking up",
+            "I prefer dry and hot weather, instead of damp and cold",
+            "I have smooth, soft, oily, and pale skin",
+            "I eat slowly and small quantities",
+            "My appetite is regular and stable",
+            "I have a slow and weak digestion and usually feel heavy after a meal",
+            "My bowel movements are regular and heavy"
+        ],
+        "psychological": [
+            "My actions are slow, deliberate, and pure",
+            "I am patient and calm",
+            "I am a slow learner, but with strong recall",
+            "I have an excelent long-term memory",
+            "I am peaceful, forgiving, loving, and tolerant",
+            "I have low confidence",
+            "I make decisions slowly, methodically, and overthink quite a lot",
+            "I am unapealing to change; I am quite stable in my life",
+            "I like peaceful environments and a relaxed lifestyle",
+            "I am very sentimental and romantic",
+            "I am overprotective with people I care about",
+            "I let others to be in charge",
+            "I am a natural listener and enjoy helping people",
+            "I use to overeat and isolate myself when stressed or sad",
+            "I keep my negative emotions within",
+            "I am lasy most of the times and procrastinate",
+            "I am good in saving money; I spend only on specific requirements, such as food and entertainment",
+            "I get easily depressed",
+            "I enjoy cooking, spending time with my loved ones, and literature"
         ]
     }
 }

@@ -23,7 +23,7 @@ export class FoodDetailsPage {
     private _navParams: NavParams
   ) { }
 
-  ionViewWillEnter() {
+  ionViewWillEnter(): void {
     this._foodSvc.getFoodReports$(this._navParams.get('id')).then((data: Food) => {
       this.food = data;
       this._detectorRef.markForCheck();
@@ -34,7 +34,7 @@ export class FoodDetailsPage {
       })
   }
 
-  ionViewWillUnload() {
+  ionViewWillUnload(): void {
     console.log('Destroying...');
     this._detectorRef.detach();
   }

@@ -73,7 +73,7 @@ export class LoginPage {
       });
   }
 
-  ionViewWillUnload() {
+  ionViewWillUnload(): void {
     console.log('Destroying...');
     this._detectorRef.detach();
   }

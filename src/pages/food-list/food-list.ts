@@ -95,12 +95,12 @@ export class FoodListPage {
     }).present();
   }
 
-  ionViewWillEnter() {
+  ionViewWillEnter(): void {
     this.refreshItems();
     console.log('Entering...');
   }
 
-  ionViewWillUnload() {
+  ionViewWillUnload(): void {
     console.log('Destroying...');
     this._detectorRef.detach();
   }

@@ -48,6 +48,7 @@ import { ErrorMessageComponent } from '../components';
 import {
     AccountPage,
     ActivitySelectPage,
+    ConstitutionPage,
     ExercisePage,
     FitnessPage,
     FoodDetailsPage,
@@ -74,6 +75,7 @@ import { CapitalizePipe } from '../pipes'
 import {
     AlertService,
     AuthValidator,
+    ConstitutionService,
     FoodService,
     NutrientService
 } from '../providers';
@@ -83,6 +85,7 @@ export const thgDeclarations = [
     AccountPage,
     ActivitySelectPage,
     CapitalizePipe,
+    ConstitutionPage,
     ErrorMessageComponent,
     ExercisePage,
     FitnessPage,
@@ -107,6 +110,7 @@ export const thgEntries = [
     MyApp,
     AccountPage,
     ActivitySelectPage,
+    ConstitutionPage,
     ExercisePage,
     FitnessPage,
     FoodDetailsPage,
@@ -141,6 +145,7 @@ export const thgProviders = [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AlertService,
     AuthValidator,
+    ConstitutionService,
     FoodService,
     NutrientService
 ];

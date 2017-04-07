@@ -96,13 +96,13 @@ export class RegistrationPage {
       });
   }
 
-  ionViewWillEnter() {
+  ionViewWillEnter(): void {
     if (this._auth.isAuthenticated()) {
       this._navCtrl.setRoot(GettingStartedPage);
     }
   }
 
-  ionViewWillUnload() {
+  ionViewWillUnload(): void {
     console.log('Destroying...');
     this._detectorRef.detach();
   }

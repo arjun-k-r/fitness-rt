@@ -64,7 +64,7 @@ export class AccountPage {
     this._navCtrl.setRoot(RegistrationPage);
   }
 
-  ionViewWillUnload() {
+  ionViewWillUnload(): void {
     console.log('Destroying...');
     this._detectorRef.detach();
   }

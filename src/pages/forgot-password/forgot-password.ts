@@ -56,7 +56,7 @@ export class ForgotPasswordPage {
       .catch((err: Error) => this._alertSvc.showAlert(err.toString()));
   }
 
-  ionViewWillUnload() {
+  ionViewWillUnload(): void {
     console.log('Destroying...');
     this._detectorRef.detach();
   }

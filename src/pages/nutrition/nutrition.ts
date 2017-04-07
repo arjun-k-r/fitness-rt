@@ -14,7 +14,7 @@ export class NutritionPage {
     private _navCtrl: NavController
   ) { }
 
-  ionViewWillUnload() {
+  ionViewWillUnload(): void {
     console.log('Destroying...');
     this._detectorRef.detach();
   }

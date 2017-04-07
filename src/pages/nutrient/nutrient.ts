@@ -24,12 +24,12 @@ export class NutrientPage {
     private _nutrientSvc: NutrientService
   ) { }
 
-  ionViewWillEnter() {
+  ionViewWillEnter(): void {
     this.nutrient$ = this._nutrientSvc.getNutrient$(this._navParams.get('id'));
     this._detectorRef.markForCheck();
   }
 
-  ionViewWillUnload() {
+  ionViewWillUnload(): void {
     console.log('Destroying...');
     this._detectorRef.detach();
   }

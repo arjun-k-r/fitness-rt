@@ -47,7 +47,7 @@ export class GettingStartedPage {
     this._slider.slideNext();
   }
 
-  ionViewWillUnload() {
+  ionViewWillUnload(): void {
     console.log('Destroying...');
     this._detectorRef.detach();
   }

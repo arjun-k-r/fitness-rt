@@ -1,5 +1,6 @@
 export { AccountPage } from './account/account';
 export { ActivitySelectPage } from './activity-select/activity-select';
+export { ConstitutionPage } from './constitution/constitution';
 export { ExercisePage } from './exercise/exercise';
 export { FitnessPage } from './fitness/fitness';
 export { FoodDetailsPage } from './food-details/food-details';

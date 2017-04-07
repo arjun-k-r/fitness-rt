@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Constitution</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item-group>
+    <ion-item-divider color="secondary">
+      Physical constitution
+    </ion-item-divider>
+    <ion-item *ngFor="let characteristic of (constitutions | async)?.vata.physical; let idx = index">
+      <ion-label>{{ characteristic }}</ion-label>
+      <ion-select (ionChange)="addPoints($event, idx, 'physical')">
+        <ion-option>Not at all</ion-option>
+        <ion-option>Sometimes</ion-option>
+        <ion-option>All the time</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider color="secondary">
+      Psychological constitution
+    </ion-item-divider>
+    <ion-item *ngFor="let characteristic of (constitutions | async)?.vata.psychological; let idx = index">
+      <ion-label>{{ characteristic }}</ion-label>
+      <ion-select (ionChange)="addPoints($event, idx, 'psychological')">
+        <ion-option>Not at all</ion-option>
+        <ion-option>Sometimes</ion-option>
+        <ion-option>All the time</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-item-group>
+
+</ion-content>

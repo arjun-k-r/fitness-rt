@@ -43,9 +43,16 @@
     </ion-row>
   </ion-grid>
 
+  <ion-fab *ngIf="quizProgress > 0" left bottom>
+    <button ion-fab (click)="previousQuiz()"><ion-icon name="arrow-previous"></ion-icon></button>
+  </ion-fab>
 
-  <ion-fab right bottom>
+  <ion-fab *ngIf="quizProgress < 2" right bottom>
     <button ion-fab (click)="nextQuiz()"><ion-icon name="arrow-forward"></ion-icon></button>
+  </ion-fab>
+
+  <ion-fab *ngIf="quizProgress === 2" right bottom>
+    <button ion-fab (click)="finishQuiz()"><ion-icon name="thumbs-up"></ion-icon></button>
   </ion-fab>
 
 </ion-content>

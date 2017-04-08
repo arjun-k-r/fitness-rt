@@ -1,5 +1,6 @@
 // App
 import { Injectable } from '@angular/core';
+import { User } from '@ionic/cloud-angular';
 
 // Firebase
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
@@ -8,13 +9,16 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import * as _ from 'lodash';
 
 // Models
-import { ConstitutionQuiz, ConstitutionScore, IConstitutions } from '../models';
+import { ConstitutionQuiz, ConstitutionScore, IConstitutions, UserProfile } from '../models';
 
 @Injectable()
 export class ConstitutionService {
   private _constitutions: FirebaseObjectObservable<IConstitutions>;
   private _quizPoints: ConstitutionQuiz;
-  constructor(private _af: AngularFire, ) {
+  constructor(
+    private _af: AngularFire,
+    private _user: User
+  ) {
     this._constitutions = _af.database.object('/constitutions');
     this._constitutions.subscribe((constitutions: IConstitutions) => {
       this._quizPoints = new ConstitutionQuiz(
@@ -59,8 +63,9 @@ export class ConstitutionService {
     return this._constitutions;
   }
 
-  public getPrakruti(): string {
-    let totalPoints: number = 0;
+  public savePrakruti(): void {
+    let totalPoints: number = 0,
+      profile: UserProfile = new UserProfile();
 
     for (let dosha in this._quizPoints) {
       /**
@@ -78,32 +83,16 @@ export class ConstitutionService {
       pittaPoints: number = this._quizPoints.pitta.physical.reduce((prev: number, curr: number) => prev + curr) + this._quizPoints.kapha.psychological.reduce((prev: number, curr: number) => prev + curr),
 
       // Get total points for vata dosha
-      vataPoints: number = this._quizPoints.vata.physical.reduce((prev: number, curr: number) => prev + curr) + this._quizPoints.kapha.psychological.reduce((prev: number, curr: number) => prev + curr),
+      vataPoints: number = this._quizPoints.vata.physical.reduce((prev: number, curr: number) => prev + curr) + this._quizPoints.kapha.psychological.reduce((prev: number, curr: number) => prev + curr);
 
-      // Save points as percentages and sort them
-      doshaPints: Array<{ name: string, value: number }> = _.sortBy([
-        {
-          name: 'Kapha',
-          value: Math.floor(kaphaPoints * 100 / totalPoints)
-        },
-        {
-          name: 'Pitta',
-          value: Math.floor(pittaPoints * 100 / totalPoints)
-        },
-        {
-          name: 'Vata',
-          value: Math.floor(vataPoints * 100 / totalPoints)
-        }
-      ], item => item.value);
+      profile.prakruti.kapha = Math.floor(kaphaPoints * 100 / totalPoints);
+      profile.prakruti.pitta = Math.floor(pittaPoints * 100 / totalPoints);
+      profile.prakruti.vata = Math.floor(vataPoints * 100 / totalPoints);
 
-    // Return the most dominant dosha/doshas
-    if (doshaPints[2].value - doshaPints[1].value < 15 && doshaPints[1].value - doshaPints[0].value < 15) {
-      return 'tridosha'
-    } else if (doshaPints[2].value - doshaPints[1].value < 15) {
-      return `${doshaPints[2].name}-${doshaPints[1].name}`
-    } else {
-      return doshaPints[2].name;
-    }
+      console.log(profile);
+
+      this._user.set('profile', profile);
+      this._user.save();
 
   }
 

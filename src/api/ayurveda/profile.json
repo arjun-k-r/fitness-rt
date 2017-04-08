@@ -77,33 +77,26 @@
         "kapha": false
     },
     "mealPlan": {
+        "dailyNutrition": {},
         "interval": 4,
         "meals": [
             {
                 "eating": {
+                    "chewing": true,
                     "silence": true,
-                    "slowly": true,
                     "small": true
                 },
                 "feeling": {
-                    "bloating": false,
-                    "burns": false,
-                    "constipation": false,
-                    "diarrhea": false,
-                    "energy": true,
-                    "gas": false,
-                    "heaviness": false,
-                    "indigestion": false,
-                    "sleepiness": false,
-                    "wellness": true
+                    "gastricDistress": false,
+                    "tiredness": false
                 },
                 "foods": [],
-                "homemade": true,
                 "hour": "",
-                "nutrition": {}
+                "nutrition": {},
+                "organic": true,
+                "pral": 0
             }
-        ],
-        "nutrition": {}
+        ]
     },
     "prakruti": "",
     "sleepPlan": {
@@ -111,21 +104,18 @@
             "start": "",
             "stop": ""
         },
-        "sleeps": [
+        "sleepHabits": [
             {
-                "efficiency": {
-                    "refreshed": true
-                },
                 "preparation": {
                     "electronics": false,
                     "light": false,
                     "relaxation": true
                 },
+                "refreshing": true,
                 "start": "",
                 "stop": ""
             }
         ],
     },
-    "vikruti": "",
     "weight": ""
 }

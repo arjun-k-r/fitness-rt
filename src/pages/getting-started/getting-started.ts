@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component, ViewChild } from
 import { NavController, NavParams, Slides } from 'ionic-angular';
 
 // Pages
-import { HomePage } from '../home/home';
+import { ConstitutionPage } from '../constitution/constitution';
 
 @Component({
   selector: 'page-getting-started',
@@ -39,8 +39,8 @@ export class GettingStartedPage {
     this._detectorRef.markForCheck();
   }
 
-  public goHome(): void {
-    this._navCtrl.setRoot(HomePage, { new: true });
+  public takeQuiz(): void {
+    this._navCtrl.setRoot(ConstitutionPage);
   }
 
   public nextSlide(): void {

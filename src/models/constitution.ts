@@ -1,11 +1,21 @@
 export interface IConstitution {
-    kapha: { physical: Array<string>; psychological: Array<string> };
-    pitta: { physical: Array<string>; psychological: Array<string> };
-    vata: { physical: Array<string>; psychological: Array<string> };
+    physical: Array<string>; 
+    psychological: Array<string>
+}
+
+export interface IConstitutionScore {
+    physical: Array<number>; 
+    psychological: Array<number>
+}
+
+export interface IConstitutions {
+    kapha: IConstitution;
+    pitta: IConstitution;
+    vata: IConstitution;
 }
 
 export interface IConstitutionQuiz {
-    kapha: { physical: Array<number>; psychological: Array<number> };
-    pitta: { physical: Array<number>; psychological: Array<number> };
-    vata: { physical: Array<number>; psychological: Array<number> };
+    kapha: IConstitutionScore;
+    pitta: IConstitutionScore;
+    vata: IConstitutionScore;
 }

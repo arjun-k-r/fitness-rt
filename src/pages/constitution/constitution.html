@@ -1,39 +1,51 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Constitution</ion-title>
+    <ion-title>Constitution Quiz {{ quizProgress + 1 }} of 3</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <ion-item-group>
-    <ion-item-divider color="secondary">
-      Physical constitution
-    </ion-item-divider>
-    <ion-item *ngFor="let characteristic of (constitutions | async)?.vata.physical; let idx = index">
-      <ion-label>{{ characteristic }}</ion-label>
-      <ion-select (ionChange)="addPoints($event, idx, 'physical')">
-        <ion-option>Not at all</ion-option>
-        <ion-option>Sometimes</ion-option>
-        <ion-option>All the time</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-item-group>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-sm-12 col-md-12 col-lg-6 col-xl-6>
+        <ion-item-group>
+          <ion-item-divider color="secondary">
+            Physical constitution
+          </ion-item-divider>
+          <ion-item padding *ngFor="let characteristic of constitutions[quizProgress]?.physical; let idx = index">
+            <ion-label text-wrap>{{ characteristic }}</ion-label>
+            <ion-select (ionChange)="addPoints($event, idx, 'physical')">
+              <ion-option>Not at all</ion-option>
+              <ion-option>A little bit</ion-option>
+              <ion-option>Completely</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-item-group>
+      </ion-col>
+      <ion-col col-sm-12 col-md-12 col-lg-6 col-xl-6>
+        <ion-item-group>
+          <ion-item-divider color="secondary">
+            Psychological constitution
+          </ion-item-divider>
+          <ion-item padding *ngFor="let characteristic of constitutions[quizProgress]?.psychological; let idx = index">
+            <ion-label text-wrap>{{ characteristic }}</ion-label>
+            <ion-select (ionChange)="addPoints($event, idx, 'psychological')">
+              <ion-option>Not at all</ion-option>
+              <ion-option>A little bit</ion-option>
+              <ion-option>Completely</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-item-group>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <ion-item-group>
-    <ion-item-divider color="secondary">
-      Psychological constitution
-    </ion-item-divider>
-    <ion-item *ngFor="let characteristic of (constitutions | async)?.vata.psychological; let idx = index">
-      <ion-label>{{ characteristic }}</ion-label>
-      <ion-select (ionChange)="addPoints($event, idx, 'psychological')">
-        <ion-option>Not at all</ion-option>
-        <ion-option>Sometimes</ion-option>
-        <ion-option>All the time</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-item-group>
+
+  <ion-fab right bottom>
+    <button ion-fab (click)="nextQuiz()"><ion-icon name="arrow-forward"></ion-icon></button>
+  </ion-fab>
 
 </ion-content>

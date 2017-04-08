@@ -9,7 +9,6 @@ import { Md5 } from 'ts-md5/dist/md5';
 
 // Pages
 import { GettingStartedPage } from '../getting-started/getting-started';
-import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
 
 // Providers

@@ -8,29 +8,29 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import * as _ from 'lodash';
 
 // Models
-import { IConstitutions, IConstitutionQuiz } from '../models';
+import { ConstitutionQuiz, ConstitutionScore, IConstitutions } from '../models';
 
 @Injectable()
 export class ConstitutionService {
   private _constitutions: FirebaseObjectObservable<IConstitutions>;
-  private _quizPoints: IConstitutionQuiz;
+  private _quizPoints: ConstitutionQuiz;
   constructor(private _af: AngularFire, ) {
     this._constitutions = _af.database.object('/constitutions');
     this._constitutions.subscribe((constitutions: IConstitutions) => {
-      this._quizPoints = {
-        kapha: {
-          physical: Array(constitutions.kapha.physical.length),
-          psychological: Array(constitutions.kapha.psychological.length)
-        },
-        pitta: {
-          physical: Array(constitutions.pitta.physical.length),
-          psychological: Array(constitutions.pitta.psychological.length)
-        },
-        vata: {
-          physical: Array(constitutions.vata.physical.length),
-          psychological: Array(constitutions.vata.psychological.length)
-        },
-      }
+      this._quizPoints = new ConstitutionQuiz(
+        new ConstitutionScore(
+          Array(constitutions.kapha.physical.length),
+          Array(constitutions.kapha.psychological.length)
+        ),
+        new ConstitutionScore(
+          Array(constitutions.pitta.physical.length),
+          Array(constitutions.pitta.psychological.length)
+        ),
+        new ConstitutionScore(
+          Array(constitutions.vata.physical.length),
+          Array(constitutions.vata.psychological.length)
+        )
+      );
     });
   }
 

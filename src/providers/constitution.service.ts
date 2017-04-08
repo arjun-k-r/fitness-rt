@@ -48,8 +48,16 @@ export class ConstitutionService {
         this._quizPoints[dosha][type][idx] = 1;
         break;
 
-      case 'Completely':
+      case 'Moderately':
         this._quizPoints[dosha][type][idx] = 2;
+        break;
+
+      case 'With few exceptions':
+        this._quizPoints[dosha][type][idx] = 3;
+        break;
+
+      case 'Completely':
+        this._quizPoints[dosha][type][idx] = 4;
         break;
 
       default:
@@ -85,14 +93,14 @@ export class ConstitutionService {
       // Get total points for vata dosha
       vataPoints: number = this._quizPoints.vata.physical.reduce((prev: number, curr: number) => prev + curr) + this._quizPoints.kapha.psychological.reduce((prev: number, curr: number) => prev + curr);
 
-      profile.prakruti.kapha = Math.floor(kaphaPoints * 100 / totalPoints);
-      profile.prakruti.pitta = Math.floor(pittaPoints * 100 / totalPoints);
-      profile.prakruti.vata = Math.floor(vataPoints * 100 / totalPoints);
+    profile.prakruti.kapha = Math.floor(kaphaPoints * 100 / totalPoints);
+    profile.prakruti.pitta = Math.floor(pittaPoints * 100 / totalPoints);
+    profile.prakruti.vata = Math.floor(vataPoints * 100 / totalPoints);
 
-      console.log(profile);
+    console.log(profile);
 
-      this._user.set('profile', profile);
-      this._user.save();
+    this._user.set('profile', profile);
+    this._user.save();
 
   }
 

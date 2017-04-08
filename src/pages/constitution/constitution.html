@@ -20,6 +20,8 @@
             <ion-select (ionChange)="addPoints($event, idx, 'physical')">
               <ion-option>Not at all</ion-option>
               <ion-option>A little bit</ion-option>
+              <ion-option>Moderately</ion-option>
+              <ion-option>With few exceptions</ion-option>
               <ion-option>Completely</ion-option>
             </ion-select>
           </ion-item>
@@ -34,7 +36,9 @@
             <ion-label text-wrap>{{ characteristic }}</ion-label>
             <ion-select (ionChange)="addPoints($event, idx, 'psychological')">
               <ion-option>Not at all</ion-option>
-              <ion-option>A little bit</ion-option>
+              <ion-option>Not really</ion-option>
+              <ion-option>Moderately</ion-option>
+              <ion-option>With few exceptions</ion-option>
               <ion-option>Completely</ion-option>
             </ion-select>
           </ion-item>

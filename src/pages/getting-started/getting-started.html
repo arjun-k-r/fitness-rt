@@ -8,14 +8,11 @@
 
   <ion-slides class="slider" pager>
     <ion-slide class="slide" *ngFor="let slide of slides">
-      <ion-content>
         <img [src]="slide.image" class="slide__image" />
         <h2 class="slide__title" [innerHTML]="slide.title"></h2>
         <p class="slide__description" [innerHTML]="slide.description"></p>
-      </ion-content>
     </ion-slide>
     <ion-slide>
-      <ion-content>
         <img src="assets/img/ica-slidebox-img-4.png" class="slide__image" />
         <h2 class="slide-title">Are you ready to take the challenge?</h2>
         <p class="slide__description">
@@ -27,7 +24,6 @@
         Let's begin!
         <ion-icon name="arrow-round-forward"></ion-icon>
       </button>
-      </ion-content>
     </ion-slide>
   </ion-slides>
 </ion-content>

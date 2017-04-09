@@ -88,9 +88,9 @@ export class ConstitutionService {
       // Get total points for vata dosha
       vataPoints: number = this._quizPoints.vata.physical.reduce((prev: number, curr: number) => prev + curr) + this._quizPoints.kapha.psychological.reduce((prev: number, curr: number) => prev + curr);
 
-    profile.prakruti.kapha = Math.floor(kaphaPoints * 100 / totalPoints);
-    profile.prakruti.pitta = Math.floor(pittaPoints * 100 / totalPoints);
-    profile.prakruti.vata = Math.floor(vataPoints * 100 / totalPoints);
+    profile.prakruti.kapha = Math.floor(kaphaPoints * 100 / (totalPoints || 1));
+    profile.prakruti.pitta = Math.floor(pittaPoints * 100 / (totalPoints || 1));
+    profile.prakruti.vata = Math.floor(vataPoints * 100 / (totalPoints || 1));
 
     console.log(profile);
 

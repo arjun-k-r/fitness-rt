@@ -23,16 +23,16 @@ export class ConstitutionService {
     this._constitutions.subscribe((constitutions: IConstitutions) => {
       this._quizPoints = new ConstitutionQuiz(
         new ConstitutionScore(
-          Array(constitutions.kapha.physical.length),
-          Array(constitutions.kapha.psychological.length)
+          _.fill(Array(constitutions.kapha.physical.length), 0),
+          _.fill(Array(constitutions.kapha.psychological.length), 0)
         ),
         new ConstitutionScore(
-          Array(constitutions.pitta.physical.length),
-          Array(constitutions.pitta.psychological.length)
+          _.fill(Array(constitutions.pitta.physical.length), 0),
+          _.fill(Array(constitutions.pitta.psychological.length), 0)
         ),
         new ConstitutionScore(
-          Array(constitutions.vata.physical.length),
-          Array(constitutions.vata.psychological.length)
+          _.fill(Array(constitutions.vata.physical.length), 0),
+          _.fill(Array(constitutions.vata.psychological.length), 0)
         )
       );
     });
@@ -48,11 +48,11 @@ export class ConstitutionService {
         this._quizPoints[dosha][type][idx] = 1;
         break;
 
-      case 'Moderately':
+      case 'Yes and no':
         this._quizPoints[dosha][type][idx] = 2;
         break;
 
-      case 'With few exceptions':
+      case 'Not completely':
         this._quizPoints[dosha][type][idx] = 3;
         break;
 
@@ -76,12 +76,7 @@ export class ConstitutionService {
       profile: UserProfile = new UserProfile();
 
     for (let dosha in this._quizPoints) {
-      /**
-       * Remove null values and get total possible points
-       */
-      _.compact([this._quizPoints[dosha].physical]);
-      _.compact([this._quizPoints[dosha].psychological]);
-      totalPoints += 2 * (this._quizPoints[dosha].physical.length + this._quizPoints[dosha].psychological.length);
+      totalPoints += 4 * (this._quizPoints[dosha].physical.length + this._quizPoints[dosha].psychological.length);
     };
 
     // Get total points for kapha dosha

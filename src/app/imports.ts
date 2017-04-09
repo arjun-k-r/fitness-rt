@@ -50,7 +50,6 @@ import {
     ActivitySelectPage,
     ConstitutionPage,
     ExercisePage,
-    FitnessPage,
     FoodDetailsPage,
     FoodListPage,
     ForgotPasswordPage,
@@ -63,6 +62,7 @@ import {
     NutrientPage,
     NutritionPage,
     PasswordResetPage,
+    ProfilePage,
     RecipeDetailsPage,
     RecipesPage,
     RegistrationPage
@@ -88,7 +88,6 @@ export const thgDeclarations = [
     ConstitutionPage,
     ErrorMessageComponent,
     ExercisePage,
-    FitnessPage,
     FoodDetailsPage,
     FoodListPage,
     ForgotPasswordPage,
@@ -101,6 +100,7 @@ export const thgDeclarations = [
     NutrientPage,
     NutritionPage,
     PasswordResetPage,
+    ProfilePage,
     RecipeDetailsPage,
     RecipesPage,
     RegistrationPage
@@ -112,7 +112,6 @@ export const thgEntries = [
     ActivitySelectPage,
     ConstitutionPage,
     ExercisePage,
-    FitnessPage,
     FoodDetailsPage,
     FoodListPage,
     ForgotPasswordPage,
@@ -125,6 +124,7 @@ export const thgEntries = [
     NutrientPage,
     NutritionPage,
     PasswordResetPage,
+    ProfilePage,
     RecipeDetailsPage,
     RecipesPage,
     RegistrationPage

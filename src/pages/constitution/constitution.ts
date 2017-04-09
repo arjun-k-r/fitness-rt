@@ -15,9 +15,8 @@ import { ConstitutionService } from '../../providers';
 })
 export class ConstitutionPage {
   public constitutions: Array<IConstitution> = [];
-  public dosha: string = 'vata';
   public prakruti: string;
-  public quizProgress: number = 0;
+  public quizProgress: string = 'vata';
   constructor(
     private _alertCtrl: AlertController,
     private _constitutionSvc: ConstitutionService,
@@ -26,29 +25,19 @@ export class ConstitutionPage {
     private _params: NavParams
   ) { }
 
-  public addPoints(ev: string, idx: number, type: string): void {
-    this._constitutionSvc.addPoints(ev, this.dosha, type, idx);
+  public addPoints(ev: string, dosha: string, type: string, idx: number,): void {
+    this._constitutionSvc.addPoints(ev, dosha, type, idx);
   }
 
   public finishQuiz(): void {
     this._constitutionSvc.savePrakruti();
   }
 
-  public nextQuiz(): void {
-    this.quizProgress++;
-    this.dosha = this.quizProgress === 1 ? 'pitta' : 'kapha';
-  }
-
-  public previousQuiz(): void {
-    this.quizProgress--;
-    this.dosha = this.quizProgress === 1 ? 'pitta' : 'vata';
-  }
-
   ionViewWillEnter(): void {
     let greetAlert = this._alertCtrl.create({
       title: 'You are unique!',
-      subTitle: 'Before we begin, I want to know a little more about you',
-      message: "Please omplete this quiz so I can have an overall image about your constitution",
+      subTitle: 'Please complete this quiz so I can determine your unique constitution',
+      message: 'Advice: Be honest with yourself when making choices',
       buttons: ['Sure']
     });
     greetAlert.present();

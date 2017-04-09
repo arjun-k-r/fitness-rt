@@ -1,22 +1,33 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+// App
+import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { AlertController, NavController, NavParams } from 'ionic-angular';
 
-/*
-  Generated class for the Profile page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-profile',
-  templateUrl: 'profile.html'
+  templateUrl: 'profile.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfilePage {
+  constructor(
+    private _alertCtrl: AlertController,
+    private _detectorRef: ChangeDetectorRef,
+    private _navCtrl: NavController,
+    private _params: NavParams
+  ) {
+    if (!!_params.get('new')) {
+      let greetAlert = this._alertCtrl.create({
+        title: 'Well done!',
+        subTitle: 'Now your ready for the next steps',
+        message: 'Please complete the rest of your information here',
+        buttons: ['Sure']
+      });
+      greetAlert.present();
+    }
+  }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+  ionViewWillUnload(): void {
+    console.log('Destroying...');
+    this._detectorRef.detach();
   }
 
 }

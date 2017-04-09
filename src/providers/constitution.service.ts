@@ -71,7 +71,7 @@ export class ConstitutionService {
     return this._constitutions;
   }
 
-  public savePrakruti(): void {
+  public savePrakruti(): Promise<void> {
     let totalPoints: number = 0,
       profile: UserProfile = new UserProfile();
 
@@ -95,7 +95,7 @@ export class ConstitutionService {
     console.log(profile);
 
     this._user.set('profile', profile);
-    this._user.save();
+    return this._user.save();
 
   }
 

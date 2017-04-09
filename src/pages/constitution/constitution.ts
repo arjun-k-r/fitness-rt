@@ -5,6 +5,9 @@ import { AlertController, NavController, NavParams } from 'ionic-angular';
 // Models
 import { IConstitution, IConstitutions } from '../../models';
 
+// Pages
+import { ProfilePage } from '../profile/profile';
+
 // Providers
 import { ConstitutionService } from '../../providers';
 
@@ -30,7 +33,7 @@ export class ConstitutionPage {
   }
 
   public finishQuiz(): void {
-    this._constitutionSvc.savePrakruti();
+    this._constitutionSvc.savePrakruti().then(() => this._navCtrl.setRoot(ProfilePage, { new: true }))
   }
 
   ionViewWillEnter(): void {

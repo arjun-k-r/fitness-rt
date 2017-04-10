@@ -1,17 +1,13 @@
+// App
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the NutritionService provider.
+// Models
+import { Nutrition } from '../models';
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class NutritionService {
 
-  constructor(public http: Http) {
+  constructor() {
     console.log('Hello NutritionService Provider');
   }
 
@@ -19,5 +15,22 @@ export class NutritionService {
    * TODO: Add requirements methods for each nutrient
    * Tip: Use switch to find the age interval
    */
+
+  private _getAlaDri(age: number): number {
+    switch (age) {
+      case 18:
+        
+        break;
+    
+      default:
+        break;
+    }
+    return 0;
+  }
+
+  public getDri(): Nutrition {
+
+    return new Nutrition();
+  }
 
 }

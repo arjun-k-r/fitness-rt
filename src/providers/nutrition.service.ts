@@ -15,4 +15,9 @@ export class NutritionService {
     console.log('Hello NutritionService Provider');
   }
 
+  /**
+   * TODO: Add requirements methods for each nutrient
+   * Tip: Use switch to find the age interval
+   */
+
 }

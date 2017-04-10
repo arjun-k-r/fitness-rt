@@ -9,28 +9,27 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import * as _ from 'lodash';
 
 // Models
-import { ConstitutionQuiz, ConstitutionScore, IConstitutions, UserProfile } from '../models';
+import { ConstitutionScore, ConstitutionQuiz, DoshaQuizQuestion, DoshaScore, UserProfile } from '../models';
 
 @Injectable()
 export class ConstitutionService {
-  private _constitutions: FirebaseObjectObservable<IConstitutions>;
-  private _quizPoints: ConstitutionQuiz;
+  private _constitutions: ConstitutionQuiz = new ConstitutionQuiz();
+  private _quizPoints: ConstitutionScore;
   constructor(
     private _af: AngularFire,
     private _user: User
   ) {
-    this._constitutions = _af.database.object('/constitutions');
-    this._constitutions.subscribe((constitutions: IConstitutions) => {
-      this._quizPoints = new ConstitutionQuiz(
-        new ConstitutionScore(
+    _af.database.object('/constitutions').subscribe((constitutions: ConstitutionQuiz) => {
+      this._quizPoints = new ConstitutionScore(
+        new DoshaScore(
           _.fill(Array(constitutions.kapha.physical.length), 0),
           _.fill(Array(constitutions.kapha.psychological.length), 0)
         ),
-        new ConstitutionScore(
+        new DoshaScore(
           _.fill(Array(constitutions.pitta.physical.length), 0),
           _.fill(Array(constitutions.pitta.psychological.length), 0)
         ),
-        new ConstitutionScore(
+        new DoshaScore(
           _.fill(Array(constitutions.vata.physical.length), 0),
           _.fill(Array(constitutions.vata.psychological.length), 0)
         )
@@ -67,36 +66,51 @@ export class ConstitutionService {
     console.log(this._quizPoints);
   }
 
-  public getConstitutions(): FirebaseObjectObservable<IConstitutions> {
-    return this._constitutions;
+  public getConstitutionQuiz(): Promise<ConstitutionQuiz> {
+    return new Promise(resolve => {
+      let constitutionQuiz: ConstitutionQuiz = new ConstitutionQuiz();
+      this._af.database.object('/constitutions').subscribe((quiz: ConstitutionQuiz) => {
+        for (let dosha in quiz) {
+          quiz[dosha].physical.forEach((question: string) => constitutionQuiz[dosha].physical.push(new DoshaQuizQuestion(question, '')));
+          quiz[dosha].psychological.forEach((question: string) => constitutionQuiz[dosha].psychological.push(new DoshaQuizQuestion(question, '')));
+        }
+        resolve(constitutionQuiz);
+      });
+    });
+  }
+
+  public getQuizProgress(): FirebaseObjectObservable<ConstitutionQuiz> {
+    return this._af.database.object(`/quiz/${this._user.id}`);
   }
 
   public savePrakruti(): Promise<void> {
-    let totalPoints: number = 0,
-      profile: UserProfile = new UserProfile();
-
-    for (let dosha in this._quizPoints) {
-      totalPoints += 4 * (this._quizPoints[dosha].physical.length + this._quizPoints[dosha].psychological.length);
-    };
+    let profile: UserProfile = new UserProfile();
 
     // Get total points for kapha dosha
-    let kaphaPoints: number = this._quizPoints.kapha.physical.reduce((prev: number, curr: number) => prev + curr) + this._quizPoints.kapha.psychological.reduce((prev: number, curr: number) => prev + curr),
+    let kaphaPoints: number = this._quizPoints.kapha.physical.reduce((prev: number, curr: number) => prev + curr) +     this._quizPoints.kapha.psychological.reduce((prev: number, curr: number) => prev + curr),
 
       // Get total points for pitta dosha
       pittaPoints: number = this._quizPoints.pitta.physical.reduce((prev: number, curr: number) => prev + curr) + this._quizPoints.kapha.psychological.reduce((prev: number, curr: number) => prev + curr),
 
       // Get total points for vata dosha
-      vataPoints: number = this._quizPoints.vata.physical.reduce((prev: number, curr: number) => prev + curr) + this._quizPoints.kapha.psychological.reduce((prev: number, curr: number) => prev + curr);
+      vataPoints: number = this._quizPoints.vata.physical.reduce((prev: number, curr: number) => prev + curr) + this._quizPoints.kapha.psychological.reduce((prev: number, curr: number) => prev + curr),
 
-    profile.prakruti.kapha = Math.floor(kaphaPoints * 100 / (totalPoints || 1));
-    profile.prakruti.pitta = Math.floor(pittaPoints * 100 / (totalPoints || 1));
-    profile.prakruti.vata = Math.floor(vataPoints * 100 / (totalPoints || 1));
+      // Total cumulated points
+      totalPoints: number = kaphaPoints + pittaPoints + vataPoints;
+
+    profile.prakruti.kapha = +(kaphaPoints * 100 / totalPoints).toFixed(2);
+    profile.prakruti.pitta = +(pittaPoints * 100 / totalPoints).toFixed(2);
+    profile.prakruti.vata = +(vataPoints * 100 / totalPoints).toFixed(2);
+    profile.setDosha();
 
     console.log(profile);
 
     this._user.set('profile', profile);
     return this._user.save();
+  }
 
+  public saveQuizProgress(quiz: ConstitutionQuiz): void {
+    this._af.database.object(`/quiz/${this._user.id}`).set(quiz);
   }
 
 }

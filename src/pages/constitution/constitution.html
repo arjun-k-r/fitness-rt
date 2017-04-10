@@ -5,7 +5,7 @@
   </ion-navbar>
 
   <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="quizProgress">
+    <ion-segment [(ngModel)]="quizProgress" (click)="quizPageChange()">
       <ion-segment-button value="vata">
         Part I
       </ion-segment-button>
@@ -31,9 +31,9 @@
             <ion-item-divider color="secondary">
               Physical constitution
             </ion-item-divider>
-            <ion-item padding *ngFor="let characteristic of constitutions[0]?.physical; let idx = index">
-              <ion-label text-wrap>{{ characteristic }}</ion-label>
-              <ion-select (ionChange)="addPoints($event, 'vata', 'physical', idx)">
+            <ion-item padding *ngFor="let question of constitutionQuiz.vata.physical; let idx = index">
+              <ion-label text-wrap>{{ question.description }}</ion-label>
+              <ion-select [(ngModel)]="question.selection" (ionChange)="addPoints($event, 'vata', 'physical', idx)">
                 <ion-option>Not at all</ion-option>
                 <ion-option>A little bit</ion-option>
                 <ion-option>Yes and no</ion-option>
@@ -48,9 +48,9 @@
             <ion-item-divider color="secondary">
               Psychological constitution
             </ion-item-divider>
-            <ion-item padding *ngFor="let characteristic of constitutions[0]?.psychological; let idx = index">
-              <ion-label text-wrap>{{ characteristic }}</ion-label>
-              <ion-select (ionChange)="addPoints($event, 'vata', 'psychological', idx)">
+            <ion-item padding *ngFor="let question of constitutionQuiz.vata.psychological; let idx = index">
+              <ion-label text-wrap>{{ question.description }}</ion-label>
+              <ion-select [(ngModel)]="question.selection" (ionChange)="addPoints($event, 'vata', 'psychological', idx)">
                 <ion-option>Not at all</ion-option>
                 <ion-option>A little bit</ion-option>
                 <ion-option>Yes and no</ion-option>
@@ -72,9 +72,9 @@
             <ion-item-divider color="secondary">
               Physical constitution
             </ion-item-divider>
-            <ion-item padding *ngFor="let characteristic of constitutions[1]?.physical; let idx = index">
-              <ion-label text-wrap>{{ characteristic }}</ion-label>
-              <ion-select (ionChange)="addPoints($event, 'pitta', 'physical', idx)">
+            <ion-item padding *ngFor="let question of constitutionQuiz.pitta.physical; let idx = index">
+              <ion-label text-wrap>{{ question.description }}</ion-label>
+              <ion-select [(ngModel)]="question.selection" (ionChange)="addPoints($event, 'pitta', 'physical', idx)">
                 <ion-option>Not at all</ion-option>
                 <ion-option>A little bit</ion-option>
                 <ion-option>Yes and no</ion-option>
@@ -89,9 +89,9 @@
             <ion-item-divider color="secondary">
               Psychological constitution
             </ion-item-divider>
-            <ion-item padding *ngFor="let characteristic of constitutions[1]?.psychological; let idx = index">
-              <ion-label text-wrap>{{ characteristic }}</ion-label>
-              <ion-select (ionChange)="addPoints($event, 'pitta', 'psychological', idx)">
+            <ion-item padding *ngFor="let question of constitutionQuiz.pitta.psychological; let idx = index">
+              <ion-label text-wrap>{{ question.description }}</ion-label>
+              <ion-select [(ngModel)]="question.selection" (ionChange)="addPoints($event, 'pitta', 'psychological', idx)">
                 <ion-option>Not at all</ion-option>
                 <ion-option>A little bit</ion-option>
                 <ion-option>Yes and no</ion-option>
@@ -113,9 +113,9 @@
             <ion-item-divider color="secondary">
               Physical constitution
             </ion-item-divider>
-            <ion-item padding *ngFor="let characteristic of constitutions[2]?.physical; let idx = index">
-              <ion-label text-wrap>{{ characteristic }}</ion-label>
-              <ion-select (ionChange)="addPoints($event, 'kapha', 'physical', idx)">
+            <ion-item padding *ngFor="let question of constitutionQuiz.kapha.physical; let idx = index">
+              <ion-label text-wrap>{{ question.description }}</ion-label>
+              <ion-select [(ngModel)]="question.selection" (ionChange)="addPoints($event, 'kapha', 'physical', idx)">
                 <ion-option>Not at all</ion-option>
                 <ion-option>A little bit</ion-option>
                 <ion-option>Yes and no</ion-option>
@@ -130,9 +130,9 @@
             <ion-item-divider color="secondary">
               Psychological constitution
             </ion-item-divider>
-            <ion-item padding *ngFor="let characteristic of constitutions[2]?.psychological; let idx = index">
-              <ion-label text-wrap>{{ characteristic }}</ion-label>
-              <ion-select (ionChange)="addPoints($event, 'kapha', 'psychological', idx)">
+            <ion-item padding *ngFor="let question of constitutionQuiz.kapha.psychological; let idx = index">
+              <ion-label text-wrap>{{ question.description }}</ion-label>
+              <ion-select [(ngModel)]="question.selection" (ionChange)="addPoints($event, 'kapha', 'psychological', idx)">
                 <ion-option>Not at all</ion-option>
                 <ion-option>A little bit</ion-option>
                 <ion-option>Yes and no</ion-option>

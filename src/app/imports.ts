@@ -77,7 +77,8 @@ import {
     AuthValidator,
     ConstitutionService,
     FoodService,
-    NutrientService
+    NutrientService,
+    ProfileService
 } from '../providers';
 
 export const thgDeclarations = [
@@ -147,5 +148,6 @@ export const thgProviders = [
     AuthValidator,
     ConstitutionService,
     FoodService,
-    NutrientService
+    NutrientService,
+    ProfileService
 ];

@@ -6,8 +6,12 @@
     <form class="form" [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
       <ion-list no-lines>
         <ion-item class="form__group">
-          <ion-label floating for="username">Username</ion-label>
-          <ion-input type="text" id="username" formControlName="username"></ion-input>
+          <ion-label floating for="firstName">First name</ion-label>
+          <ion-input type="text" id="firstName" formControlName="firstName"></ion-input>
+        </ion-item>
+        <ion-item class="form__group">
+          <ion-label floating for="lastName">Last name</ion-label>
+          <ion-input type="text" id="lastName" formControlName="lastName"></ion-input>
         </ion-item>
         <error-message [control]="username"></error-message>
         <ion-item class="form__group">

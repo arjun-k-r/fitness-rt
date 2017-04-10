@@ -10,6 +10,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 // Pages
 import { GettingStartedPage } from '../getting-started/getting-started';
 import { LoginPage } from '../login/login';
+import { ProfilePage } from '../profile/profile';
 
 // Providers
 import { AlertService, AuthValidator } from '../../providers';
@@ -21,11 +22,12 @@ import { AlertService, AuthValidator } from '../../providers';
 })
 export class RegistrationPage {
   public email: AbstractControl;
+  public firstName: AbstractControl;
+  public lastName: AbstractControl;
   public loginPage: any = LoginPage;
   public password: AbstractControl;
   public passwordConfirm: AbstractControl;
   public registerForm: FormGroup;
-  public username: AbstractControl;
   constructor(
     private _alertSvc: AlertService,
     private _auth: Auth,
@@ -41,26 +43,30 @@ export class RegistrationPage {
         Validators.compose([Validators.required, AuthValidator.emailValidator,
         AuthValidator.noWhiteSpace])
       ],
+      firstName: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(20), AuthValidator.noWhiteSpace])
+      ],
+      lastName: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(20), AuthValidator.noWhiteSpace])
+      ],
       password: [
         '',
         Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(16),
         AuthValidator.passwordValidator, AuthValidator.noWhiteSpace])
       ],
-      passwordConfirm: ['', Validators.required],
-      username: [
-        '',
-        Validators.compose([Validators.required, Validators.maxLength(20),
-        AuthValidator.usernameValidator, AuthValidator.noWhiteSpace])
-      ]
+      passwordConfirm: ['', Validators.required]
     }, { validator: AuthValidator.passwordMatchValidator });
 
     this.email = this.registerForm.get('email');
+    this.firstName = this.registerForm.get('firstName');
+    this.lastName = this.registerForm.get('lastName');
     this.password = this.registerForm.get('password');
     this.passwordConfirm = this.registerForm.get('passwordConfirm');
-    this.username = this.registerForm.get('username');
   }
 
-  public register(form: { username: string, email: string, password: string }): void {
+  public register(form: { email: string, firstName: string, lastName: string, password: string }): void {
     let loader = this._loadCtrl.create({
       content: 'Creating your account...',
       spinner: 'crescent'
@@ -69,10 +75,15 @@ export class RegistrationPage {
     loader.present();
 
     let details: UserDetails = {
+      'custom': {
+        'firstName': form.firstName,
+        'lastName': form.lastName
+      },
       'email': form.email.trim(),
       'image': 'https://www.gravatar.com/avatar/' + Md5.hashStr(form.email.trim()),
+      'name': `${form.firstName.trim()} ${form.lastName.trim()}`,
       'password': form.password.trim(),
-      'username': form.username.trim()
+      'username': `${form.firstName.trim().toLocaleLowerCase()}${form.lastName.trim().toLocaleLowerCase()}`
     };
 
     this._auth.signup(details)
@@ -83,12 +94,14 @@ export class RegistrationPage {
             this._navCtrl.setRoot(GettingStartedPage);
           })
           .catch((err: IDetailedError<Array<string>>) => {
+            loader.dismiss();
             for (let e of err.details) {
               this._alertSvc.showAlert(AuthValidator.getErrorMessage(e, err));
             }
           });
       })
       .catch((err: IDetailedError<Array<string>>) => {
+        loader.dismiss();
         for (let e of err.details) {
           this._alertSvc.showAlert(AuthValidator.getErrorMessage(e, err));
         }
@@ -97,7 +110,7 @@ export class RegistrationPage {
 
   ionViewWillEnter(): void {
     if (this._auth.isAuthenticated()) {
-      this._navCtrl.setRoot(GettingStartedPage);
+      this._navCtrl.setRoot(ProfilePage);
     }
   }
 

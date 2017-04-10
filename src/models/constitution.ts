@@ -1,25 +1,36 @@
 export class ConstitutionQuiz {
     constructor(
-        public kapha: ConstitutionScore = new ConstitutionScore(),
-        public pitta: ConstitutionScore = new ConstitutionScore(),
-        public vata: ConstitutionScore = new ConstitutionScore()
+        public kapha: DoshaQuiz = new DoshaQuiz(),
+        public pitta: DoshaQuiz = new DoshaQuiz(),
+        public vata: DoshaQuiz = new DoshaQuiz()
     ) { }
 }
 
 export class ConstitutionScore {
     constructor(
-        public physical: Array<number> = [],
-        public psychological: Array<number> = []
+        public kapha: DoshaScore = new DoshaScore(),
+        public pitta: DoshaScore = new DoshaScore(),
+        public vata: DoshaScore = new DoshaScore()
     ) { }
 }
 
-export interface IConstitution {
-    physical: Array<string>;
-    psychological: Array<string>
+export class DoshaQuiz {
+    constructor(
+        public physical: Array<DoshaQuizQuestion> = [],
+        public psychological: Array<DoshaQuizQuestion> = []
+    ) { }
 }
 
-export interface IConstitutions {
-    kapha: IConstitution;
-    pitta: IConstitution;
-    vata: IConstitution;
+export class DoshaQuizQuestion {
+    constructor(
+        public description: string,
+        public selection: string
+    ) { }
+}
+
+export class DoshaScore {
+    constructor(
+        public physical: Array<number> = [],
+        public psychological: Array<number> = []
+    ) { }
 }

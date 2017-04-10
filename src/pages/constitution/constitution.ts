@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/
 import { AlertController, NavController, NavParams } from 'ionic-angular';
 
 // Models
-import { IConstitution, IConstitutions } from '../../models';
+import { ConstitutionQuiz } from '../../models';
 
 // Pages
 import { ProfilePage } from '../profile/profile';
@@ -17,7 +17,7 @@ import { ConstitutionService } from '../../providers';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConstitutionPage {
-  public constitutions: Array<IConstitution> = [];
+  public constitutionQuiz: ConstitutionQuiz = new ConstitutionQuiz();
   public prakruti: string;
   public quizProgress: string = 'vata';
   constructor(
@@ -28,12 +28,18 @@ export class ConstitutionPage {
     private _params: NavParams
   ) { }
 
-  public addPoints(ev: string, dosha: string, type: string, idx: number,): void {
+  public addPoints(ev: string, dosha: string, type: string, idx: number): void {
     this._constitutionSvc.addPoints(ev, dosha, type, idx);
+    this._constitutionSvc.saveQuizProgress(this.constitutionQuiz);
+    console.log(this.constitutionQuiz);
   }
 
   public finishQuiz(): void {
     this._constitutionSvc.savePrakruti().then(() => this._navCtrl.setRoot(ProfilePage, { new: true }))
+  }
+
+  public quizPageChange(): void {
+    this._detectorRef.markForCheck();
   }
 
   ionViewWillEnter(): void {
@@ -45,10 +51,8 @@ export class ConstitutionPage {
     });
     greetAlert.present();
 
-    this._constitutionSvc.getConstitutions().subscribe((constitutions: IConstitutions) => {
-      this.constitutions.push(constitutions.vata);
-      this.constitutions.push(constitutions.pitta);
-      this.constitutions.push(constitutions.kapha);
+    this._constitutionSvc.getConstitutionQuiz().then((constitutionQuiz: ConstitutionQuiz) => {
+      this.constitutionQuiz = Object.assign({}, constitutionQuiz);
       this._detectorRef.markForCheck();
     });
   }

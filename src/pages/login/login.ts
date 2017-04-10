@@ -67,6 +67,7 @@ export class LoginPage {
         this._navCtrl.setRoot(HomePage);
       })
       .catch((err: IDetailedError<Array<string>>) => {
+        loader.dismiss();
         for (let e of err.details) {
           this._alertSvc.showAlert(AuthValidator.getErrorMessage(e, err));
         }

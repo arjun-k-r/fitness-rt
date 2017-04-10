@@ -11,6 +11,7 @@ export class UserProfile {
     constructor(
         public activityPlan: ActivityPlan = new ActivityPlan(),
         public age: number = 0,
+        public dosha: string = '',
         public gender: string = '',
         public height: number = 0,
         public imbalance: { kapha: boolean, pitta: boolean, vata: boolean } = {
@@ -24,7 +25,7 @@ export class UserProfile {
         public weight: number = 0
     ) { }
 
-    public getDosha(): string {
+    public setDosha(): void {
         let doshaPints: Array<{ name: string, value: number }> = _.sortBy([
             {
                 name: 'Kapha',
@@ -41,12 +42,12 @@ export class UserProfile {
         ], item => item.value);
 
         // Return the most dominant dosha/doshas
-        if (doshaPints[2].value - doshaPints[1].value < 15 && doshaPints[1].value - doshaPints[0].value < 15) {
-            return 'tridosha'
-        } else if (doshaPints[2].value - doshaPints[1].value < 15) {
-            return `${doshaPints[2].name}-${doshaPints[1].name}`
+        if (doshaPints[2].value - doshaPints[1].value <= 20 && doshaPints[2].value - doshaPints[0].value <= 20) {
+            this.dosha = 'tridosha'
+        } else if (doshaPints[2].value - doshaPints[1].value <= 20) {
+            this.dosha = `${doshaPints[2].name}-${doshaPints[1].name}`
         } else {
-            return doshaPints[2].name;
+            this.dosha = doshaPints[2].name;
         }
     }
 }

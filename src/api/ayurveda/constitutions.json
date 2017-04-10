@@ -30,8 +30,8 @@
             "I have poor and scanty perspiration with less odor",
             "I have narrow and slope downard shoulders",
             "I have a dry, thin, rough, cold, and cracked skin",
-            "I have an irregular, interrupted, and light sleep; I wake up easily, have difficulties falling and staying a sleep, and can't sleep more than 7 hours",
-            "I have irregular energy levels wich come in short bursts; I am very active and fast, but tire and overexert easily",
+            "I have an irregular and light sleep and have difficulties falling and staying a sleep (< 7 hours)",
+            "I have only short energy bursts; I am very active and fast, but tire and overexert easily",
             "I have crooked and irregular teeth with thin gums",
             "I have irregular thirst",
             "I have a low volume and hoarse voice",
@@ -40,7 +40,7 @@
         "psychological": [
             "I am restless, hyperactive, easily bored, and can't stand still",
             "I am rebel, erratic, and changing",
-            "I have active, restless, and dynamic dreams; I am flying, jumping, dancing, running, searching, and constantly moving in my dreams and sometimes have nightmares",
+            "I have active, restless, and dynamic dreams and tendency to nightmares",
             "I am artistic, creative, and full of new ideas",
             "I am insecure and indecisive",
             "I spend money quite easily and have difficulties saving money",
@@ -52,9 +52,9 @@
             "I have an irregular and unscheduled lifestyle",
             "I get excited easily",
             "I have many casual and insignificant relationships",
-            "I have tendency to anxiety, confusion, fear, malnutrition, nervousness, and worriness, especially when stressed",
+            "I have tendency to anxiety, confusion, fear, malnutrition, nervousness, and worriness during stress",
             "I am enthusiastic, lively, and spontaneous",
-            "I am talkative with a quick and diffuse speach; I gesticulate while talking and people have troubles understanding me"
+            "I have a quick and diffuse speach and people have difficulties understanding me"
         ]
     },
     "pitta": {
@@ -88,7 +88,7 @@
             "I have an excesive perspiration with strong odor",
             "I have medium-sized shoulders",
             "I have a warm, smooth, rosy, sensitive, and shiny skin, with moles and freckles",
-            "I have an uninterrupred and balanced sleep; I don't need more than 8 hours of sleep",
+            "I have an uninterrupred and balanced sleep (6-8 hours)",
             "I have moderate energy levels",
             "I have regular and yellowish teeth with soft and tender gums",
             "I have excesive thirst",
@@ -110,9 +110,9 @@
             "I have a well planned and scheduled lifestyle",
             "I am passionate and vigurous",
             "I have only work-related and goal-oriented relationships",
-            "I have tendency to aggression, anger, arrogance, criticism, diarrhea, impatiance, indigestion, irritability, jealousy, judgement, malabsorption, and stubburness, especially when stressed",
+            "I have tendency to aggression, anger, criticism, diarrhea, impatiance, indigestion, irritability, and stubburness during stress",
             "I am ambitious, courageous, efficient, and purposeful; I am a born leader and entrepreneur",
-            "I am talkative, good at arguments and debates, and a generally good speaker; I get strict to the point and tend to become sarcastic"
+            "I am good at arguments and debates, and a generally good speaker; I get strict to the point and tend to become sarcastic"
         ]
     },
     "kapha": {
@@ -146,7 +146,7 @@
             "I have a moderate perspiration with pleasant odor",
             "I have broad, firm, and developed shoulders",
             "I have an oily, thick, smooth, soft, cool, pale, moist, and lustrous skin",
-            "I have a sound and prolonged sleep; I need more than 8 hours of sleep and have difficulties waking up",
+            "I have a sound and prolonged sleep and have difficulties waking up (> 8 hours)",
             "I have good and long-lasting energy levels",
             "I have strong teeth with healthy gums",
             "I have a low and constant thirst",
@@ -168,7 +168,7 @@
             "I have a fixed and non-changing lifestyle",
             "I am full of affection and love",
             "I have long-lasting and sincere relationships",
-            "I have tendency to attachment, being in a rut, congestions, cry, depression, greed, infections, lasiness, nausea, overeating, solitude, stagnation, and withdrwal especially when stressed",
+            "I have tendency to congestions, depression, greed, infections, lasiness, nausea, overeating, stagnation, and withdrwal during stress",
             "I am tolerant, calm, peaceful, stable, forgiving, loving, and unapealing to change",
             "I have a slow, steady, and limited speech; I am retained and talk cautiously"
         ]

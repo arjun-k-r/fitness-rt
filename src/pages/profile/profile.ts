@@ -3,8 +3,11 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { User } from '@ionic/cloud-angular';
 
+// Firebase
+import { FirebaseObjectObservable } from 'angularfire2'
+
 // Models
-import { UserProfile } from '../../models';
+import { Dosha, UserProfile } from '../../models';
 
 // Providers
 import { ProfileService } from '../../providers';
@@ -15,7 +18,9 @@ import { ProfileService } from '../../providers';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfilePage {
+  public constitution: FirebaseObjectObservable<Dosha>;
   public profile: UserProfile;
+  public profilePage: string = 'status';
   constructor(
     private _alertCtrl: AlertController,
     private _detectorRef: ChangeDetectorRef,
@@ -36,11 +41,16 @@ export class ProfilePage {
     this.profile = Object.assign({}, this._user.get('profile', new UserProfile()));
   }
 
+  public profilePageChange(): void {
+    this._detectorRef.markForCheck();
+  }
+
   public saveProfile(): void {
     this._profileSvc.saveProfile(this.profile);
   }
 
   ionViewWillEnter(): void {
+    this.constitution = this._profileSvc.getConstitution();
     this._detectorRef.markForCheck();
   }
 

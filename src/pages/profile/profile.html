@@ -5,64 +5,178 @@
         </button>
         <ion-title>Profile</ion-title>
     </ion-navbar>
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="profilePage" (click)="profilePageChange()">
+            <ion-segment-button value="status">
+                Status
+            </ion-segment-button>
+            <ion-segment-button value="constitution">
+                Constitution
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
-    <ion-grid>
-        <ion-row>
-            <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
-                <h2 text-center>Vata</h2>
-                <p text-center>{{ profile.prakruti.vata }}%</p>
-            </ion-col>
-            <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
-                <h2 text-center>Pitta</h2>
-                <p text-center>{{ profile.prakruti.pitta }}%</p>
-            </ion-col>
-            <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
-                <h2 text-center>Kapha</h2>
-                <p text-center>{{ profile.prakruti.kapha }}%</p>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-    <ion-list>
-        <ion-item>
-            <ion-label fixed>Age (years)</ion-label>
-            <ion-input type="number" [(ngModel)]="profile.age"></ion-input>
-        </ion-item>
-        <ion-item>
-            Constitution
-            <ion-note item-right>{{ profile.dosha }}</ion-note>
-        </ion-item>
-        <ion-item>
-            <ion-label>Gender</ion-label>
-            <ion-select [(ngModel)]="profile.gender">
-                <ion-option value="male">Male</ion-option>
-                <ion-option value="female">Female</ion-option>
-            </ion-select>
-        </ion-item>
-        <ion-item *ngIf="profile.gender === 'female'">
-            <ion-label>Pregnant</ion-label>
-            <ion-select [(ngModel)]="profile.pregnant">
-                <ion-option value="true">Yes</ion-option>
-                <ion-option value="false">No</ion-option>
-            </ion-select>
-        </ion-item>
-        <ion-item *ngIf="profile.gender === 'female'">
-            <ion-label>Lactating</ion-label>
-            <ion-select [(ngModel)]="profile.lactating">
-                <ion-option value="true">Yes</ion-option>
-                <ion-option value="false">No</ion-option>
-            </ion-select>
-        </ion-item>
-        <ion-item>
-            <ion-label fixed>Height (cm)</ion-label>
-            <ion-input type="number" [(ngModel)]="profile.height"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label fixed>Weight (kg)</ion-label>
-            <ion-input type="number" [(ngModel)]="profile.weight"></ion-input>
-        </ion-item>
-    </ion-list>
-    <button (click)="saveProfile()" ion-button block>Save</button>
+    <div [ngSwitch]="profilePage">
+        <!-- Start of segment one -->
+        <div *ngSwitchCase="'status'">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
+                        <h2 text-center>Vata</h2>
+                        <p text-center>{{ profile.prakruti.vata }}%</p>
+                    </ion-col>
+                    <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
+                        <h2 text-center>Pitta</h2>
+                        <p text-center>{{ profile.prakruti.pitta }}%</p>
+                    </ion-col>
+                    <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
+                        <h2 text-center>Kapha</h2>
+                        <p text-center>{{ profile.prakruti.kapha }}%</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-list>
+                <ion-item text-wrap>
+                    <ion-label fixed>Age (years)</ion-label>
+                    <ion-input type="number" [(ngModel)]="profile.age"></ion-input>
+                </ion-item>
+                <ion-item text-wrap>
+                    Constitution
+                    <ion-note item-right>{{ profile.dosha }}</ion-note>
+                </ion-item>
+                <ion-item text-wrap>
+                    <ion-label>Gender</ion-label>
+                    <ion-select [(ngModel)]="profile.gender">
+                        <ion-option value="male">Male</ion-option>
+                        <ion-option value="female">Female</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item *ngIf="profile.gender === 'female'">
+                    <ion-label>Pregnant</ion-label>
+                    <ion-select [(ngModel)]="profile.pregnant">
+                        <ion-option value="true">Yes</ion-option>
+                        <ion-option value="false">No</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item *ngIf="profile.gender === 'female'">
+                    <ion-label>Lactating</ion-label>
+                    <ion-select [(ngModel)]="profile.lactating">
+                        <ion-option value="true">Yes</ion-option>
+                        <ion-option value="false">No</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item text-wrap>
+                    <ion-label fixed>Height (cm)</ion-label>
+                    <ion-input type="number" [(ngModel)]="profile.height"></ion-input>
+                </ion-item>
+                <ion-item text-wrap>
+                    <ion-label fixed>Weight (kg)</ion-label>
+                    <ion-input type="number" [(ngModel)]="profile.weight"></ion-input>
+                </ion-item>
+            </ion-list>
+            <button (click)="saveProfile()" ion-button block>Save</button>
+        </div>
+
+        <div *ngSwitchCase="'constitution'">
+            <h2>Overview</h2>
+            <p>In Ayurvedic philosophy, the five elements combine in pairs to form three dynamic forces or interactions called doshas. Dosha means "that which changes." It is a word derived from the root dus, which is equivalent to the English prefix 'dys', such as in dysfunction, dystrophy, etc. In this sense, dosha can be regarded as a fault, mistake, error, or a transgression against the cosmic rhythm. The doshas are constantly moving in dynamic balance, one with the others. Doshas are required for the life to happen. In Ayurveda, dosha is also known as the governing principles as every living thing in nature is characterized by the dosha. <br/>The three active doshas are called Vata, Pitta and Kapha.</p>
+            <h2>The Vata Constitution</h2>
+            <p>{{ ( constitution | async )?.overview }}</p>
+            <ion-list>
+                <ion-item-divider>
+                    Body movements
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.bodyMovements }}
+                </ion-item>
+                <ion-item-divider>
+                    Characteristics
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.characteristics }}
+                </ion-item>
+                <ion-item-divider>
+                    Day time
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.dayTimes }}
+                </ion-item>
+                <ion-item-divider>
+                    Elements
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.elements }}
+                </ion-item>
+                <ion-item-divider>
+                    Finances
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.finances }}
+                </ion-item>
+                <ion-item-divider>
+                    Imbalance
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.imbalance }}
+                </ion-item>
+                <ion-item-divider>
+                    Life time
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.lifeTime }}
+                </ion-item>
+                <ion-item-divider>
+                    Locations
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.locations }}
+                </ion-item>
+                <ion-item-divider>
+                    Mental patterns
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.mentalPatterns }}
+                </ion-item>
+                <ion-item-divider>
+                    Pacifying
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.pacifying }}
+                </ion-item>
+                <ion-item-divider>
+                    Personality
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.personality }}
+                </ion-item>
+                <ion-item-divider>
+                    Physical patterns
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.physicalPatterns }}
+                </ion-item>
+                <ion-item-divider>
+                    Physiological patterns
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.physiologicalPatterns }}
+                </ion-item>
+                <ion-item-divider>
+                    Seasons
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.seasons }}
+                </ion-item>
+                <ion-item-divider>
+                    Tastes
+                </ion-item-divider>
+                <ion-item text-wrap>
+                   {{ ( constitution | async )?.tastes }}
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
 </ion-content>

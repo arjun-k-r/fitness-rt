@@ -6,7 +6,7 @@ import { User } from '@ionic/cloud-angular';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 // Models
-import { UserProfile } from '../models';
+import { Dosha, UserProfile } from '../models';
 
 @Injectable()
 export class ProfileService {
@@ -21,6 +21,10 @@ export class ProfileService {
     } else {
       return Math.floor(9.247 * weight + 3.098 * height - 4.33 * age + 447.593);
     }
+  }
+
+  public getConstitution(dosha: string = 'vata'): FirebaseObjectObservable<Dosha> {
+    return this._af.database.object(`/doshas/${dosha}`);
   }
 
   public saveProfile(profile: UserProfile): void {

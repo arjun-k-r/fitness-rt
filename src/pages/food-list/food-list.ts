@@ -9,7 +9,7 @@ import { Food, FoodGroup } from '../../models';
 import { FoodDetailsPage } from '../food-details/food-details';
 
 // Providers
-import { FOOD_GROUPS, FoodService } from '../../providers';
+import { FOOD_GROUPS, FoodDataService } from '../../providers';
 
 @Component({
   selector: 'page-food-list',
@@ -27,7 +27,7 @@ export class FoodListPage {
   constructor(
     private _alertCtrl: AlertController,
     private _detectorRef: ChangeDetectorRef,
-    private _foodSvc: FoodService
+    private _foodDataSvc: FoodDataService
   ) { }
 
   public clearSearch(ev): void {
@@ -44,7 +44,7 @@ export class FoodListPage {
 
     setTimeout(() => {
       this.start += 50;
-      this._foodSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
+      this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
         .subscribe((data: Array<Food>) => {
           this.foods.push(...data);
           this._detectorRef.markForCheck();
@@ -56,7 +56,7 @@ export class FoodListPage {
   public refreshItems(): void {
     console.log(this.searchQuery);
     this.start = 0;
-    this._foodSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
+    this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
       .subscribe((data: Array<Food>) => {
         setTimeout(() => {
           this.foods = [...data];

@@ -11,7 +11,6 @@ interface ValidationResult {
 @Injectable()
 export class AuthValidator {
     static emailValidator(control: AbstractControl): ValidationResult {
-        console.log(EMAIL_REGEX.test(control.value));
         return EMAIL_REGEX.test(control.value) ? null : { 'invalidEmailAddress': true };
     }
 

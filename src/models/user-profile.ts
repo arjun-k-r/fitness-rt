@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 // Models
 import { ActivityPlan } from './activity-plan';
 import { MealPlan } from './meal-plan';
+import { Nutrition } from './nutrition';
 import { Prakruti } from './prakruti';
 import { SleepPlan } from './sleep-plan'
 
@@ -19,8 +20,11 @@ export class UserProfile {
             pitta: false,
             vata: false
         },
+        public lactating: boolean = false,
         public mealPlan: MealPlan = new MealPlan(),
         public prakruti: Prakruti = new Prakruti(),
+        public pregnant: boolean = false,
+        public requirements: Nutrition = new Nutrition(),
         public sleepPlan: SleepPlan = new SleepPlan(),
         public weight: number = 0
     ) { }

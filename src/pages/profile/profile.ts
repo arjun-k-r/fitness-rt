@@ -15,7 +15,7 @@ import { ProfileService } from '../../providers';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfilePage {
-  public profile: UserProfile = new UserProfile();
+  public profile: UserProfile;
   constructor(
     private _alertCtrl: AlertController,
     private _detectorRef: ChangeDetectorRef,
@@ -33,10 +33,14 @@ export class ProfilePage {
       });
       greetAlert.present();
     }
+    this.profile = Object.assign({}, this._user.get('profile', new UserProfile()));
+  }
+
+  public saveProfile(): void {
+    this._profileSvc.saveProfile(this.profile);
   }
 
   ionViewWillEnter(): void {
-    this.profile = this._user.get('profile', new UserProfile());
     this._detectorRef.markForCheck();
   }
 

@@ -76,7 +76,7 @@ import {
     AlertService,
     AuthValidator,
     ConstitutionService,
-    FoodService,
+    FoodDataService,
     NutrientService,
     ProfileService
 } from '../providers';
@@ -147,7 +147,7 @@ export const thgProviders = [
     AlertService,
     AuthValidator,
     ConstitutionService,
-    FoodService,
+    FoodDataService,
     NutrientService,
     ProfileService
 ];

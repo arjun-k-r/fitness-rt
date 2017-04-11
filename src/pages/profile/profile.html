@@ -9,7 +9,60 @@
 
 
 <ion-content padding>
-    <pre>
-        {{ profile | json }}
-    </pre>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
+                <h2 text-center>Vata</h2>
+                <p text-center>{{ profile.prakruti.vata }}%</p>
+            </ion-col>
+            <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
+                <h2 text-center>Pitta</h2>
+                <p text-center>{{ profile.prakruti.pitta }}%</p>
+            </ion-col>
+            <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
+                <h2 text-center>Kapha</h2>
+                <p text-center>{{ profile.prakruti.kapha }}%</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-list>
+        <ion-item>
+            <ion-label fixed>Age (years)</ion-label>
+            <ion-input type="number" [(ngModel)]="profile.age"></ion-input>
+        </ion-item>
+        <ion-item>
+            Constitution
+            <ion-note item-right>{{ profile.dosha }}</ion-note>
+        </ion-item>
+        <ion-item>
+            <ion-label>Gender</ion-label>
+            <ion-select [(ngModel)]="profile.gender">
+                <ion-option value="male">Male</ion-option>
+                <ion-option value="female">Female</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item *ngIf="profile.gender === 'female'">
+            <ion-label>Pregnant</ion-label>
+            <ion-select [(ngModel)]="profile.pregnant">
+                <ion-option value="true">Yes</ion-option>
+                <ion-option value="false">No</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item *ngIf="profile.gender === 'female'">
+            <ion-label>Lactating</ion-label>
+            <ion-select [(ngModel)]="profile.lactating">
+                <ion-option value="true">Yes</ion-option>
+                <ion-option value="false">No</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Height (cm)</ion-label>
+            <ion-input type="number" [(ngModel)]="profile.height"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Weight (kg)</ion-label>
+            <ion-input type="number" [(ngModel)]="profile.weight"></ion-input>
+        </ion-item>
+    </ion-list>
+    <button (click)="saveProfile()" ion-button block>Save</button>
 </ion-content>

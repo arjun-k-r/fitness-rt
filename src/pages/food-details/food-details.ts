@@ -6,7 +6,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Food } from '../../models';
 
 // Providers
-import { FoodService } from '../../providers';
+import { FoodDataService } from '../../providers';
 
 @Component({
   selector: 'page-food-details',
@@ -18,13 +18,13 @@ export class FoodDetailsPage {
   //public foodNutrition: Array<Nutrient> = [];
   constructor(
     private _detectorRef: ChangeDetectorRef,
-    private _foodSvc: FoodService,
+    private _foodDataSvc: FoodDataService,
     private _navCtrl: NavController,
     private _navParams: NavParams
   ) { }
 
   ionViewWillEnter(): void {
-    this._foodSvc.getFoodReports$(this._navParams.get('id')).then((data: Food) => {
+    this._foodDataSvc.getFoodReports$(this._navParams.get('id')).then((data: Food) => {
       this.food = data;
       this._detectorRef.markForCheck();
      // this.foodNutrition = <Array<Nutrient>>_.values(this.food.nutrition);

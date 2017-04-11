@@ -1,244 +1,56 @@
-[
-    {
-        "daytime": "6-10",
-        "elements": [
-            "earth",
-            "water"
-        ],
-        "emotions": [],
-        "lifetime": "childhood",
-        "locations": [
-            "bones",
-            "chest",
-            "fluids",
-            "muscles",
-            "skin",
-            "stomach"
-        ],
-        "movement": [
-            "mucous",
-            "lymph"
-        ],
-        "name": "Kapha",
-        "requirements": [
-            "light",
-            "dry",
-            "hot"
-        ],
-        "seasons": [
-            "winter",
-            "spring"
-        ],
-        "summary": "You are enthusiastic, lively, energetic, and creative. You are a born artist. You are spontaneous, changing, and always in a rush. You eat, talk, and walk quickly. You have a lot of energy, but for brief periods of time. You have an irregular and unscheduled lifestyle and don't like plans. You like to travel, new relationships, and new experiences. You are narrow in all areas of your body and have always had difficulties gaining weight. You most often forget to eat and have tendency to malnutrition and constipation. You have cold hands and feet and don't like cold in general. When you're stressed, you become anxious, confused, constipated, fearful, nervous, overwhelmed, and worried. You have an agitated and poor sleep. I have poor attention span and long-term memory. Briefly, you are unpredictable.",
-        "tastes": [
-            "pungent",
-            "bitter",
-            "astrigent"
-        ]
+{
+    "vata": {
+        "bodyMovements": "Blood circulation, breathing, muscles contractions, nerve impulses",
+        "characteristics": "Cold, dry, dynamic, fast, light",
+        "dayTimes": "2am-6am, 2pm-6pm",
+        "elements": "Air and ether",
+        "finances": "Earn money quickly and spend quickly",
+        "imbalance": "Anxiety, confusion, constipation, fear, lack of focus, nervousness, overwhelm, pain, tremors, worry",
+        "lifeTime": "Old age",
+        "locations": "Colon, hips, thighs, ears, bones, large intestine, pelvic cavity, and skin",
+        "mentalPatterns": "Short memory, quick learning and understanding, low willpower, mental instability, low confidence, poor reasoning",
+        "overview": "Vata is a force conceptually made up of elements ether and air. The proportions of ether and air determine how active Vata is. The amount of ether (space) affects the ability of the air to gain momentum. If unrestricted, as in ocean, air can gain momentum and become forceful such as a hurricane. Vata means wind, to move, flow, direct the processes of, or command. Vata enables the other two doshas to be expressive. Vata also governs such feelings and emotions as freshness, nervousness, fear, anxiety, pain, tremors, and spasms. The primary seat or location of the Vata in the body is the colon.",
+        "pacifying": "Heavy, moist, hot",
+        "personality": "Artistic, creative, dynamic, enthusiastic, erratic, inspiring, irregular, joyful",
+        "physicalPatterns": "Underdeveloped, flat chest, visible veins, visible muscle tendons, brown complexion, cold, dry, rought, and cracked skin, too tall or too short, thin frame, proeminent joints and bones, poor muscle development, scanty and curly hair, sunken, small, dry, and active eyes, rought and birttle nails, narrow face, thin lips, irregular nose",
+        "physiologicalPatterns": "Irregular bowel movements, variable digestion and appetite, difficulties falling and staying asleep, less perspiration, cold hands and feet, feeling cold",
+        "seasons": "Autumn, winter",
+        "tastes": "Sweet, salty, sour"
     },
-    {
-        "daytime": "10-2",
-        "elements": [
-            "fire",
-            "water"
-        ],
-        "lifetime": "adulthood",
-        "locations": [
-            "small intesinte",
-            "digestive fluids",
-            "bladder",
-            "blood"
-        ],
-        "movement": [
-            "cognition",
-            "digestion",
-            "metabolism",
-            "senses"
-        ],
-        "name": "Pitta",
-        "requirements": [
-            "light",
-            "dry",
-            "cool"
-        ],
-        "seasons": [
-            "summer"
-        ],
-        "summary": "You are intuitive, wise, strategic, confident, and disciplined. You are a born leader and entrepreneur. You are calculated in everything you do and have a well-defined lifestyle and schedule. You are determined, ambitious, and never stop until you achieve what you want. You like being in control and can't stand people telling you what to do. You are frustrated with people who always complain and are lasy. You are self-critical, perfectionist, and judgmental with people around you. You are sharp, symmetrical, and moderate in all areas of your body. You are athletic, active, and enjoy working out. You have an engaging smile and penetrating eyes. You have clear vision on what you want and hardly lose your focus. You have a high metabolism, good digestion, and must eat often, or else you get angry and irritated. You have a tendency to diarrhea and acid reflux. You don't like anything that is hot and spicy. You sleep well, uninterrupted for no more than 8 hours. When you're stressed, you become angry, arrogant, fourious, intolerant, and violent. You enjoy competition. Briefly, you are on fire.",
-        "tastes": [
-            "sweet",
-            "bitter",
-            "astrigent"
-        ]
+    "pitta": {
+        "bodyMovements": "",
+        "characteristics": "",
+        "dayTimes": "10pm-2am, 10am-2pm",
+        "elements": "Fire and water",
+        "finances": "",
+        "imbalance": "",
+        "lifeTime": "Adulthood",
+        "locations": "",
+        "mentalPatterns": "",
+        "overview": "",
+        "pacifying": "Light, dry, cool",
+        "personality": "",
+        "physicalPatterns": "",
+        "physiologicalPatterns": "",
+        "seasons": "Summer",
+        "tastes": "Sweet, bitter, astrigent"
     },
-    {
-        "daytime": "2-6",
-        "elements": [
-            "air",
-            "ether"
-        ],
-        "lifetime": "elderly",
-        "locations": [
-            "small intestine",
-            "hollows of bones",
-            "empty spaces"
-        ],
-        "movement": [
-            "blood circulation",
-            "nerve impulse conduction",
-            "muscle contraction"
-        ],
-        "name": "Vata",
-        "requirements": [
-            "heavy",
-            "moist",
-            "hot"
-        ],
-        "seasons": [
-            "autumn",
-            "winter"
-        ],
-        "tastes": [
-            "sweet",
-            "salty",
-            "sour"
-        ]
-    },
-    {
-        "daytime": "6-10",
-        "elements": [
-            "earth",
-            "water"
-        ],
-        "lifetime": "childhood",
-        "locations": [
-            "bones",
-            "chest",
-            "fluids",
-            "muscles",
-            "skin",
-            "stomach"
-        ],
-        "movement": [
-            "mucous",
-            "lymph"
-        ],
-        "name": "Vata-Pitta",
-        "requirements": [
-            "heavy",
-            "moist",
-            "cool"
-        ],
-        "seasons": [
-            "winter",
-            "spring"
-        ],
-        "tastes": [
-            "sweet",
-            "astrigent",
-            "sour"
-        ]
-    },
-    {
-        "daytime": "10-2",
-        "elements": [
-            "fire",
-            "water"
-        ],
-        "lifetime": "adulthood",
-        "locations": [
-            "small intesinte",
-            "digestive fluids",
-            "bladder",
-            "blood"
-        ],
-        "movement": [
-            "cognition",
-            "digestion",
-            "metabolism",
-            "senses"
-        ],
-        "name": "Pitta-Kapha",
-        "requirements": [
-            "light",
-            "dry",
-            "cool"
-        ],
-        "seasons": [
-            "summer"
-        ],
-        "summary": "You are peaceful, loving, relaxed, calm, and tolerant. You are a born listener and advisor. You have big hard and love everybody around you, especially your family and close ones. You can become overprotective sometimes. You don't like being in charge. You are stable, consistent, and don't like to change. You enjoy warm, dry, peaceful, comfortable, and silent environments. You hardly get angry. You are pleasant, have a warm voice, and it is a pleasure for people to be around you. You are thick, round, large, and dense in all areas of your body. You have difficulties losing weight. You have a poor metabolism and digestion and tend to feel heavy after meals. You sleep very deep and sound for more than 8 hours and find it hard to get out of bed. You are lasy and like to procrastinate. You are a slow learner, but with very good recall and long-term memory. You tend to become congested and sick quite often. You don't like humidity. When stressed, you isolate yourself, keep all negative emotions within and tend to overeat. Briefly, you are soft.",
-        "tastes": [
-            "pungent",
-            "bitter",
-            "astrigent"
-        ]
-    },
-    {
-        "daytime": "2-6",
-        "elements": [
-            "air",
-            "ether"
-        ],
-        "lifetime": "elderly",
-        "locations": [
-            "small intestine",
-            "hollows of bones",
-            "empty spaces"
-        ],
-        "movement": [
-            "blood circulation",
-            "nerve impulse conduction",
-            "muscle contraction"
-        ],
-        "name": "Vata-Kapha",
-        "requirements": [
-            "heavy",
-            "moist",
-            "hot"
-        ],
-        "seasons": [
-            "autumn",
-            "winter"
-        ],
-        "tastes": [
-            "sweet",
-            "bitter",
-            "astrigent"
-        ]
-    },
-    {
-        "daytime": "10-2",
-        "elements": [
-            "fire",
-            "water"
-        ],
-        "lifetime": "adulthood",
-        "locations": [
-            "small intesinte",
-            "digestive fluids",
-            "bladder",
-            "blood"
-        ],
-        "movement": [
-            "cognition",
-            "digestion",
-            "metabolism",
-            "senses"
-        ],
-        "name": "Tridosha",
-        "requirements": [
-            "light",
-            "moist",
-            "cool"
-        ],
-        "seasons": [
-            "summer"
-        ],
-        "tastes": [
-            "sweet",
-            "bitter",
-            "astrigent"
-        ]
+    "kapha": {
+        "bodyMovements": "",
+        "characteristics": "",
+        "dayTimes": "6am-10am, 6pm-10pm",
+        "elements": "Earth and water",
+        "finances": "",
+        "imbalance": "",
+        "lifeTime": "Childhood",
+        "locations": "",
+        "mentalPatterns": "",
+        "overview": "",
+        "pacifying": "Light, dry, hot",
+        "personality": "",
+        "physicalPatterns": "",
+        "physiologicalPatterns": "",
+        "seasons": "Winter, spring",
+        "tastes": "Pungent, bitter, astrigent"
     }
-]
+}

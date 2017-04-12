@@ -1,0 +1,2 @@
+## Overview
+Pitta, made up of Fire and Water, expresses as the body's metabolic system. It governs digestion, absorption, assimilation, nutrition, metabolism and body temperature. In balance, pitta promotes understanding and intelligence. Out of balance, pitta arouses anger, hatred and jealousy.

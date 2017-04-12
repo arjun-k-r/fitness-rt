@@ -33,10 +33,10 @@ During lifetime, vata energy increases as we age, hence, the skin becomes dry an
 People with vata constitution are generally physically underdeveloped, tend to be underweight, skinny, with thin body frames, and are taller or shorter than average people. Their general feature are: flat and sunken chests, visible bones, joints, muscle tendons, and veins, brown complexion, cold, cracked, dry, and rough skin, curly and scanty hair, thin eyelishes and eyebrows, active, dry, and small eyes, brittle and rough nails, cold hands and feet. 
 
 ### Physiology
-People with vata constitution have a variable appetite and digestion. They tend towards astringent foods like salad and vegetables, although they are balanced by sweet, sour and salty tastes. They have a poor elimination (bowel movements, perspiration, urine).
+People with vata constitution have a variable appetite and digestion. They tend towards astringent foods like salad and vegetables, although they are balanced by sweet, sour and salty tastes. They have a poor elimination (bowel movements, perspiration, urine). They have difficulties falling and staying asleep, can't sleep more than 7 hours, and their dreams are active, agitated, dynamic, with tendency to nightmares.
 
 ### Psychological patterns
-People with vata constitution are alert, restless, and very active. They are always in a rush and on the go. They walk, talk, and think fast, but are easily fatigued. They have less willpower and often feel unstable and ungrounded. They have less tolerance, confidence and boldness. They have tendency to mood changes. They have a short memory and tend to forget as fast as they learn.
+People with vata constitution are alert, restless, and very active. They are always in a rush and on the go. They walk, talk, and think fast, but are easily fatigued. They have less willpower and often feel unstable and ungrounded. They have less tolerance, confidence and boldness. They have tendency to mood changes. They have a short memory and tend to forget as fast as they learn. 
 
 ### Qualities
 Vata promotes creativity, enthusiasm, flexibility, and rapid thinking.

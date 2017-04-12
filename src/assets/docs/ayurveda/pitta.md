@@ -19,7 +19,7 @@ Pitta energy is increased by its qualities ('Like increases like') and, thus, be
 When pitta energy is high, it accumulates in its body locations. Generally, people with pitta constitution tend to become agitated, aggressive with tendency towards anger, hate, and jealousy. They may also notice symptoms as: skin rashes, burning sensation, ulceration, fever, inflammations or irritations such as conjunctivitis, colitis, or sore throats. Their common type of diseases are fire based (e.g. fever, inflammation, and jaundice).
 
 ### Location
-pitta resides in the small intestine, stomach, liver, spleen, pancreas, blood, eyes, and sweat.
+Pitta resides in the small intestine, stomach, liver, spleen, pancreas, blood, eyes, and sweat.
 
 ### Management
 People with pitta constitution are ambitious people who generally like to be leaders. They appreciate material prosperity and tend to be moderately well-off financially. They enjoy exhibiting their wealth and luxurious possessions. They always achieve their goals and take their projects to conclusion.
@@ -28,10 +28,10 @@ People with pitta constitution are ambitious people who generally like to be lea
 During lifetime, pitta energy is most abundant during adulthood. During the year, pitta energy is most abundant around summer. During the day, pitta energy is most intense between 10 and 2. When pitta energy is intense, it tends to become out of balance and it is advised to decrease it with opposite qualities.
 
 ### Physical patterns
-People with pitta constitution are generally medium developed, athletic, with medium body frames, and average height. Their general feature are: medium chest, medium prominence of bones, veins, and muscle tendons, medium developed muscles, coppery, yellowish, reddish or fair complexion, soft and warm skin with less wrinckles than vata, but with moles and freckles, warm hands and feet, thin, silky, red or brownish hair with tendency towards premature graying and balding, gray, green or cooper-brown and sharp eyes with medium proeminent eyeballs, soft nails, sharp nose with tendency towards reddish tip. 
+People with pitta constitution are generally medium developed, athletic, with medium body frames, and average height. Their general features are: medium chest, medium prominence of bones, veins, and muscle tendons, medium developed muscles, coppery, yellowish, reddish or fair complexion, soft and warm skin with less wrinckles than vata, but with moles and freckles, warm hands and feet, thin, silky, red or brownish hair with tendency towards premature graying and balding, gray, green or cooper-brown and sharp eyes with medium proeminent eyeballs, soft nails, sharp nose with tendency towards reddish tip. 
 
 ### Physiology
-People with pitta constitution have a strong metabolism, good digestion, and strong appetites. They tend to eat and drink large quantities at one meal. They tend towards hot spices and cold drinks, although they are balanced by sweet, bitter and astringent tastes, which are also balancing. They have excessive and regular elimination (bowel movements, perspiration, urine). They have a good, regular, and uninterrupted sleep, usually between 6 and 8 hours. They have a high body temperature.
+People with pitta constitution have a strong metabolism, good digestion, and strong appetites. They tend to eat and drink large quantities at one meal. They tend towards hot spices and cold drinks, although they are balanced by sweet, bitter and astringent tastes. They have excessive and regular elimination (bowel movements, perspiration, urine). They have a good, regular, and uninterrupted sleep, usually between 6 and 8 hours. They have a high body temperature.
 
 ### Psychological patterns
 People with pitta constitution are alert, have a good power of comprehension, are very intelligent and sharp, and are good orators. They have emotional tendencies toward hate, anger and jealousy.

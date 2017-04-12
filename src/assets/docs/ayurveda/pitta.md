@@ -25,7 +25,7 @@ Pitta resides in the small intestine, stomach, liver, spleen, pancreas, blood, e
 People with pitta constitution are ambitious people who generally like to be leaders. They appreciate material prosperity and tend to be moderately well-off financially. They enjoy exhibiting their wealth and luxurious possessions. They always achieve their goals and take their projects to conclusion.
 
 ### Occurance
-During lifetime, pitta energy is most abundant during adulthood. During the year, pitta energy is most abundant around summer. During the day, pitta energy is most intense between 10 and 2. When pitta energy is intense, it tends to become out of balance and it is advised to decrease it with opposite qualities.
+During lifetime, pitta energy is most abundant during teenage years and adulthood. During the year, pitta energy is most abundant around summer. During the day, pitta energy is most intense between 10 and 2. When pitta energy is intense, it tends to become out of balance and it is advised to decrease it with opposite qualities.
 
 ### Physical patterns
 People with pitta constitution are generally medium developed, athletic, with medium body frames, and average height. Their general features are: medium chest, medium prominence of bones, veins, and muscle tendons, medium developed muscles, coppery, yellowish, reddish or fair complexion, soft and warm skin with less wrinckles than vata, but with moles and freckles, warm hands and feet, thin, silky, red or brownish hair with tendency towards premature graying and balding, gray, green or cooper-brown and sharp eyes with medium proeminent eyeballs, soft nails, sharp nose with tendency towards reddish tip. 

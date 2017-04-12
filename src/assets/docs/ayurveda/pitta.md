@@ -7,7 +7,7 @@ Pitta governs digestion, absorption, assimilation, nutrition, metabolism, body t
 
 ## Pitta constitution
 ### Balance
-The most important way to balance pitta energy is to stabilise and 'ground' its dynamism and motion. Regular routines and relaxation are the key factors that balance pitta. Excess pitta energy is balanced by warmth, moisture, oiliness, and heaviness.
+The most important way to balance pitta energy is to cool down its 'boiling' and firy nature. Relaxation and staying cool are the key factors that balance pitta. Excess pitta energy is balanced by coolness, lightness, and driness, .
 
 ### Characteristics
 Pitta is defined as acidic, agitating, fluid, hot, light, mobile, oily, penetrating, sharp, and transformation.

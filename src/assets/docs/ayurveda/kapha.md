@@ -37,7 +37,7 @@ People with kapha constitution have a slow metabolism and digestion, and regular
 People with kapha constitution are generally healthy, happy and peaceful. They are tolerant, calm, forgiving, loving, have slow comprehension, but with complete recall and long-term memory. They have sweet, loving dispositions, and are stable and grounded. They have emotional tendencies toward greed, attachment, envy and possessiveness.
 
 ### Qualities
-Kapha promotes strength, endurance, and stamina.
+Kapha promotes strength, endurance, and lubrication.
 
 ## Recomendations
 - Get plenty of exercise

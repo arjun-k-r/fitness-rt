@@ -16,7 +16,7 @@ Kapha is defined as cold, dense, heavy, dull, moist, soft, sticky, stable, and s
 Kapha energy is increased by its qualities ('Like increases like') and, thus, becomes imbalanced. Heaviness, moisture, static, and humidity imbalance kapha.
 
 ### Imbalance signs
-When kapha energy is high, it accumulates in its body locations. Generally, people with kapha constitution tend to become agitated, aggressive with tendency towards anger, hate, and jealousy. They may also notice symptoms as: sluggishness, excess weight, diabetes, water retention, and headaches. Their common type of diseases are water based (e.g. flu, sinus congestion, and other diseases involving mucous).
+When kapha energy is high, it accumulates in its body locations. Generally, people with kapha constitution have tendency towards lethargy, attachment, withdrawal, and depression. They may also notice symptoms as: sluggishness, excess weight, diabetes, water retention, and headaches. Their common type of diseases are water based (e.g. flu, sinus congestion, and other diseases involving mucous).
 
 ### Location
 Kapha resides in the chest, throat, lungs, head, lymph, fatty tissue, connective tissue, ligaments, and tendons.

@@ -9,6 +9,9 @@ import { FirebaseObjectObservable } from 'angularfire2'
 // Models
 import { Dosha, UserProfile } from '../../models';
 
+// Pages
+import { DoshaDetailsPage } from '../dosha-details/dosha-details';
+
 // Providers
 import { ProfileService } from '../../providers';
 
@@ -19,8 +22,8 @@ import { ProfileService } from '../../providers';
 })
 export class ProfilePage {
   public constitution: FirebaseObjectObservable<Dosha>;
+  public doshaDetails: any = DoshaDetailsPage;
   public profile: UserProfile;
-  public profilePage: string = 'status';
   constructor(
     private _alertCtrl: AlertController,
     private _detectorRef: ChangeDetectorRef,
@@ -39,10 +42,6 @@ export class ProfilePage {
       greetAlert.present();
     }
     this.profile = Object.assign({}, this._user.get('profile', new UserProfile()));
-  }
-
-  public profilePageChange(): void {
-    this._detectorRef.markForCheck();
   }
 
   public saveProfile(): void {

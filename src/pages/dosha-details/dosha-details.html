@@ -1,0 +1,62 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ dosha }}</ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="details">
+      <ion-segment-button value="about">
+        About
+      </ion-segment-button>
+      <ion-segment-button value="recommendations">
+        Recommendations
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div [ngSwitch]="details">
+    <div *ngSwitchCase="'about'">
+      <h2>Overview</h2>
+      <p>In Ayurvedic philosophy, the five elements combine in pairs to form three dynamic forces or interactions called doshas.
+        Dosha means "that which changes." It is a word derived from the root dus, which is equivalent to the English prefix
+        'dys', such as in dysfunction, dystrophy, etc. In this sense, dosha can be regarded as a fault, mistake, error, or
+        a transgression against the cosmic rhythm. The doshas are constantly moving in dynamic balance, one with the others.
+        Doshas are required for the life to happen. In Ayurveda, dosha is also known as the governing principles as every
+        living thing in nature is characterized by the dosha. <br/>The three active doshas are called Vata, Pitta and Kapha.</p>
+      <h2>The {{ dosha }} constitution summary</h2>
+      <p>{{ (doshaDetails | async)?.overview }}</p>
+      <h2>Balance</h2>
+      <p>{{ (doshaDetails | async)?.balance }}</p>
+      <h2>Characteristics</h2>
+      <p>{{ (doshaDetails | async)?.characteristics }}</p>
+      <h2>Imbalance factors</h2>
+      <p>{{ (doshaDetails | async)?.imbalanceFactors }}</p>
+      <h2>Imbalance signs</h2>
+      <p>{{ (doshaDetails | async)?.imbalanceSigns }}</p>
+      <h2>Location</h2>
+      <p>{{ (doshaDetails | async)?.location }}</p>
+      <h2>Management</h2>
+      <p>{{ (doshaDetails | async)?.management }}</p>
+      <h2>Occurence</h2>
+      <p>{{ (doshaDetails | async)?.occurence }}</p>
+      <h2>Physical patterns</h2>
+      <p>{{ (doshaDetails | async)?.physicalPatterns }}</p>
+      <h2>Physiology</h2>
+      <p>{{ (doshaDetails | async)?.physiology }}</p>
+      <h2>Psychological patterns</h2>
+      <p>{{ (doshaDetails | async)?.psychologicalPatterns }}</p>
+      <h2>Qualities</h2>
+      <p>{{ (doshaDetails | async)?.qualities }}</p>
+    </div>
+
+    <ion-list *ngSwitchCase="'recommendations'">
+      <ion-item *ngFor="let tip of (doshaDetails | async)?.recommendations">
+        {{ tip }}
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>

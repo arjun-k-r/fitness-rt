@@ -2,44 +2,43 @@
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
 
+// Firebase
+import { FirebaseObjectObservable } from 'angularfire2';
+
 // Models
-import { Food } from '../../models';
+import { Dosha } from '../../models';
 
 // Providers
-import { FoodDataService } from '../../providers';
+import { AyurvedicService } from '../../providers';
 
 @Component({
-  selector: 'page-food-details',
-  templateUrl: 'food-details.html',
+  selector: 'page-dosha-details',
+  templateUrl: 'dosha-details.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FoodDetailsPage {
-  public food: Food;
-  //public foodNutrition: Array<Nutrient> = [];
+export class DoshaDetailsPage {
+  public details: string = 'about';
+  public dosha: string;
+  public doshaDetails: FirebaseObjectObservable<Dosha>;
   constructor(
+    private _ayurvedicSvc: AyurvedicService,
     private _detectorRef: ChangeDetectorRef,
-    private _foodDataSvc: FoodDataService,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
     private _params: NavParams
-  ) { }
+  ) {
+    this.dosha = _params.get('dosha');
+  }
 
   ionViewWillEnter(): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Loading...',
-      spinner: 'crescent'
+      spinner: 'crescent',
+      duration: 500
     });
-
     loader.present();
-    this._foodDataSvc.getFoodReports$(this._params.get('id')).then((data: Food) => {
-      this.food = data;
-      loader.dismiss();
-      this._detectorRef.markForCheck();
-     // this.foodNutrition = <Array<Nutrient>>_.values(this.food.nutrition);
-    }).catch((err: Error) => {
-        console.log(err);
-        this._navCtrl.pop();
-      })
+    this.doshaDetails = this._ayurvedicSvc.getDoshaDetails(this.dosha);
+    this._detectorRef.markForCheck();
   }
 
   ionViewWillUnload(): void {

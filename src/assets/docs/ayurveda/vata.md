@@ -1,18 +1,12 @@
 ## Overview
-In the physical body, vata--composed of Space and Air--is the subtle energy associated with movement. Vata provides the essential motion for all bodily processes and is extremely vital for health. It governs breathing, blinking, muscle and tissue movement, pulsation of the heart, and all movements in the cytoplasm and cell membranes. In balance, vata promotes creativity and flexibility. Out of balance, vata produces fear and anxiety.
-
-Vata is a force conceptually made up of elements ether and air. The proportions of ether and air determine how active Vata is. The amount of ether (space) affects the ability of the air to gain momentum. If unrestricted, as in ocean, air can gain momentum and become forceful such as a hurricane.
-
-Vata means "wind, to move, flow, direct the processes of, or command." Vata enables the other two doshas to be expressive. The actions of Vata are drying, cooling, light, agitating, and moving.
-
-Vata governs breathing, blinking of the eyelids, movements in the muscles and tissues, pulsations in the heart, all expansion and contraction, the movements of cytoplasm and the cell membranes, and the movement of the single impulses in nerve cells. Vata also governs such feelings and emotions as freshness, nervousness, fear, anxiety, pain, tremors, and spasms. The primary seat or location of the Vata in the body is the colon. It also resides in the hips, thighs, ears, bones, large intestine, pelvic cavity, and skin. It  is related to the touch sensation. If the body develops an excess of vata, it will accumulate in these areas.
+Vata is a force created from the combination of Space and Air. It is the energy that provides the motion required for all functions to be maintained in the body. In balance, vata promotes creativity and flexibility. When out of balance, vata promotes fear and anxiety.
 
 ## Vata constitution
 ### Balance
 The most important way to balance vata energy is to stabilise and 'ground' its dynamism and motion. Regular routines and relaxation are the key factors that balance vata. Excess vata energy is balanced by warmth, moisture, oiliness, and heaviness.
 
 ### Characteristics
-Vata is defined as clear, cold, dispersing, dry, dynamic, irregular, light, rough, and subtle,
+Vata is defined as clear, cold, dispersing, dry, dynamic, irregular, light, rough, and subtle.
 
 ### Imbalance factors
 Vata energy is increased by its qualities ('Like increases like') and, thus, becomes imbalanced. Traveling, loud noises, constant stimulation, lack of rest, drugs, sugar, alcohol, cold, and cold foods imbalance vata. Like the wind, vata types have a hard time becoming and staying grounded. Routine is difficult but essential if vata is to be lowered and controlled.
@@ -26,7 +20,7 @@ Vata resides in the colon, as well as the brain, ears, bones, joints, skin and t
 ### Management
 People with vata constitution earn money quickly, but also spend it quickly, hence, they tend to be poor. They are not good planners, have bad organisational skills, and tend to be messy in their work. They are very initiative in starting new projects, but have problems with finishing them.
 
-### Occurance
+### Occurence
 During lifetime, vata energy increases as we age, hence, the skin becomes dry and with wrinckled. During the year, vata energy is most abundant in autumn and during season transititions. During the day, vata energy is most intense between 2 and 6. When vata energy is intense, it tends to become out of balance and it is advised to decrease it with opposite qualities.
 
 ### Physical patterns
@@ -41,7 +35,7 @@ People with vata constitution are alert, restless, and very active. They are alw
 ### Qualities
 Vata promotes creativity, enthusiasm, flexibility, and rapid thinking.
 
-## Recomendations
+## Recommendations
 - Keep warm
 - Keep calm
 - Avoid raw foods

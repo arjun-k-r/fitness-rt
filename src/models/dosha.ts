@@ -1,20 +1,16 @@
 export class Dosha {
     constructor(
-        public bodyMovements: string = '',
+        public balance: string = '',
         public characteristics: string = '',
-        public dayTimes: string = '',
-        public elements: string = '',
-        public finances: string = '',
-        public imbalance: string = '',
-        public lifeTime: string = '',
-        public locations: string = '',
-        public mentalPatterns: string = '',
+        public imbalanceFactors: string = '',
+        public imbalanceSigns: string = '',
+        public location: string = '',
+        public management: string = '',
+        public occurence: string = '',
         public overview: string = '',
-        public pacifying: string = '',
-        public personality: string = '',
         public physicalPatterns: string = '',
-        public physiologicalPatterns: string = '',
-        public seasons: string = '',
-        public tastes: string = ''
+        public psychologicalPatterns: string = '',
+        public qualities: string = '',
+        public recommendations: Array<string> = []
     ) {}
 }

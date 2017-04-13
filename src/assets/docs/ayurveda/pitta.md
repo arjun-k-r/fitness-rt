@@ -1,13 +1,9 @@
 ## Overview
-Pitta, made up of Fire and Water, expresses as the body's metabolic system. It governs digestion, absorption, assimilation, nutrition, metabolism and body temperature. In balance, pitta promotes understanding and intelligence. Out of balance, pitta arouses anger, hatred and jealousy.
-
-Pitta is a force created by the dynamic interplay of water and fire. These forces represent transformation. They cannot change into each other, but they modulate or control each other and are vitally required for the life processes to occur. (For example, too much fire and too little water will result in the boiling away of the water. Too much water will result in the fire being put out.)
-
-Pitta governs digestion, absorption, assimilation, nutrition, metabolism, body temperature, skin coloration, the luster of the eyes, intelligence, and understanding. Psychologically, pitta arouses anger, hate, and jealousy. The small intestine, stomach, sweat glands, blood, fat, eyes, and skin are the seats of Pitta.
+Pitta is a force created from the combination of Fire and Water. It is the energy that maintains all metabolic functions (e.g. digestion, absorption, assimilation, nutrition, metabolism, and body temperature). In balance, pitta promotes understanding and intelligence. When out of balance, pitta promotes anger, hatred, and jealousy.
 
 ## Pitta constitution
 ### Balance
-The most important way to balance pitta energy is to cool down its 'boiling' and firy nature. Relaxation and staying cool are the key factors that balance pitta. Excess pitta energy is balanced by coolness, lightness, and driness, .
+The most important way to balance pitta energy is to cool down its 'boiling' and firy nature. Relaxation and staying cool are the key factors that balance pitta. Excess pitta energy is balanced by coolness, lightness, and driness.
 
 ### Characteristics
 Pitta is defined as acidic, agitating, fluid, hot, light, mobile, oily, penetrating, sharp, and transformation.
@@ -19,12 +15,12 @@ Pitta energy is increased by its qualities ('Like increases like') and, thus, be
 When pitta energy is high, it accumulates in its body locations. Generally, people with pitta constitution tend to become agitated, aggressive with tendency towards anger, hate, and jealousy. They may also notice symptoms as: skin rashes, burning sensation, ulceration, fever, inflammations or irritations such as conjunctivitis, colitis, or sore throats. Their common type of diseases are fire based (e.g. fever, inflammation, and jaundice).
 
 ### Location
-Pitta resides in the small intestine, stomach, liver, spleen, pancreas, blood, eyes, and sweat.
+Pitta resides in the small intestine, liver, spleen, pancreas, blood, eyes, and sweat.
 
 ### Management
 People with pitta constitution are ambitious people who generally like to be leaders. They appreciate material prosperity and tend to be moderately well-off financially. They enjoy exhibiting their wealth and luxurious possessions. They always achieve their goals and take their projects to conclusion.
 
-### Occurance
+### Occurence
 During lifetime, pitta energy is most abundant during teenage years and adulthood. During the year, pitta energy is most abundant around summer. During the day, pitta energy is most intense between 10 and 2. When pitta energy is intense, it tends to become out of balance and it is advised to decrease it with opposite qualities.
 
 ### Physical patterns
@@ -39,7 +35,7 @@ People with pitta constitution are alert, have a good power of comprehension, ar
 ### Qualities
 Pitta promotes courage, enlightenment, joy, mental perception, and willpower.
 
-## Recomendations
+## Reccomendations
 - Avoid excessive heat
 - Avoid excessive oil
 - Avoid excessive steam

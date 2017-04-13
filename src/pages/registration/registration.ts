@@ -1,7 +1,7 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingController, NavController } from 'ionic-angular';
+import { Loading, LoadingController, NavController } from 'ionic-angular';
 import { Auth, IDetailedError, User, UserDetails } from '@ionic/cloud-angular';
 
 // Vendor
@@ -67,7 +67,7 @@ export class RegistrationPage {
   }
 
   public register(form: { email: string, firstName: string, lastName: string, password: string }): void {
-    let loader = this._loadCtrl.create({
+    let loader: Loading = this._loadCtrl.create({
       content: 'Creating your account...',
       spinner: 'crescent'
     });

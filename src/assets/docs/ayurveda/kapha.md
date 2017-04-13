@@ -1,9 +1,5 @@
 ## Overview
-Kapha is formed from Earth and Water and is the energy that forms the body's structure--bones, muscles, tendons--and provides the "glue" that holds the cells together. Kapha supplies the water for all bodily parts and systems. It lubricates joints, moisturizes the skin, and maintains immunity. In balance, kapha is expressed as love, calmness and forgiveness. Out of balance, it leads to attachment, greed and envy.
-
-Kapha is a force created by the dynamic interplay of water and fire. These forces represent transformation. They cannot change into each other, but they modulate or control each other and are vitally required for the life processes to occur. (For example, too much fire and too little water will result in the boiling away of the water. Too much water will result in the fire being put out.)
-
-Kapha governs digestion, absorption, assimilation, nutrition, metabolism, body temperature, skin coloration, the luster of the eyes, intelligence, and understanding. Psychologically, kapha arouses anger, hate, and jealousy. The small intestine, stomach, sweat glands, blood, fat, eyes, and skin are the seats of Kapha.
+Kapha is a force created from the combination of Earth and Water. It is the energy that provides structure to our body (e.g. bones, muscles, and tendons) and the water required by all organ systems and functions (e.g. immune system, skin moisture, joint lubrication). In balance, kapha promotes strength, love, calmness, and forgiveness. When out of balance, kapha promotes attachment, greed, and envy.
 
 ## Kapha constitution
 ### Balance
@@ -19,12 +15,12 @@ Kapha energy is increased by its qualities ('Like increases like') and, thus, be
 When kapha energy is high, it accumulates in its body locations. Generally, people with kapha constitution have tendency towards lethargy, attachment, withdrawal, and depression. They may also notice symptoms as: sluggishness, excess weight, diabetes, water retention, and headaches. Their common type of diseases are water based (e.g. flu, sinus congestion, and other diseases involving mucous).
 
 ### Location
-Kapha resides in the chest, throat, lungs, head, lymph, fatty tissue, connective tissue, ligaments, and tendons.
+Kapha resides in the stomach, chest, throat, lungs, head, lymph, fatty tissue, connective tissue, ligaments, and tendons.
 
 ### Management
 People with kapha constitution are lasy and have difficulties taking action. They earn money and are good at holding on to it and tend to be wealthy. They are very good procrastinators.
 
-### Occurance
+### Occurence
 During lifetime, kapha energy is most abundant during childhood. During the year, kapha energy is most abundant during winter and spring. During the day, kapha energy is most intense between 6 and 10. When kapha energy is intense, it tends to become out of balance and it is advised to decrease it with opposite qualities.
 
 ### Physical patterns
@@ -37,9 +33,9 @@ People with kapha constitution have a slow metabolism and digestion, and regular
 People with kapha constitution are generally healthy, happy and peaceful. They are tolerant, calm, forgiving, loving, have slow comprehension, but with complete recall and long-term memory. They have sweet, loving dispositions, and are stable and grounded. They have emotional tendencies toward greed, attachment, envy and possessiveness.
 
 ### Qualities
-Kapha promotes strength, endurance, and lubrication.
+Kapha promotes strength, love, forgivness, and calmness.
 
-## Recomendations
+## Recommendations
 - Get plenty of exercise
 - Avoid heavy foods
 - Keep active

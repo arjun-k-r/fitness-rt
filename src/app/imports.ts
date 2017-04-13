@@ -78,6 +78,7 @@ import {
     AuthValidator,
     AyurvedicService,
     ConstitutionService,
+    FitnessService,
     FoodDataService,
     NutrientService,
     ProfileService
@@ -152,6 +153,7 @@ export const thgProviders = [
     AuthValidator,
     AyurvedicService,
     ConstitutionService,
+    FitnessService,
     FoodDataService,
     NutrientService,
     ProfileService

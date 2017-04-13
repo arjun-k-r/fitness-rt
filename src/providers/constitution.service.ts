@@ -11,12 +11,15 @@ import * as _ from 'lodash';
 // Models
 import { ConstitutionScore, ConstitutionQuiz, DoshaQuizQuestion, DoshaScore, UserProfile } from '../models';
 
+// Providers
+import { AyurvedicService } from './ayurvedic.service';
+
 @Injectable()
 export class ConstitutionService {
-  private _constitutions: ConstitutionQuiz = new ConstitutionQuiz();
   private _quizPoints: ConstitutionScore;
   constructor(
     private _af: AngularFire,
+    private _ayurvedicSvc: AyurvedicService,
     private _user: User
   ) {
     _af.database.object('/constitutions').subscribe((constitutions: ConstitutionQuiz) => {
@@ -101,7 +104,7 @@ export class ConstitutionService {
     profile.prakruti.kapha = +(kaphaPoints * 100 / totalPoints).toFixed(2);
     profile.prakruti.pitta = +(pittaPoints * 100 / totalPoints).toFixed(2);
     profile.prakruti.vata = +(vataPoints * 100 / totalPoints).toFixed(2);
-    profile.setDosha();
+    profile.constitution = this._ayurvedicSvc.getConstitution(profile.prakruti);
 
     console.log(profile);
 

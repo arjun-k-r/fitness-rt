@@ -13,7 +13,7 @@ import { Dosha, UserProfile } from '../../models';
 import { DoshaDetailsPage } from '../dosha-details/dosha-details';
 
 // Providers
-import { ProfileService } from '../../providers';
+import { FitnessService, ProfileService } from '../../providers';
 
 @Component({
   selector: 'page-profile',
@@ -21,12 +21,14 @@ import { ProfileService } from '../../providers';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfilePage {
-  public constitution: FirebaseObjectObservable<Dosha>;
   public doshaDetails: any = DoshaDetailsPage;
+  public idealBodyFat: number;
+  public idealWeight: number;
   public profile: UserProfile;
   constructor(
     private _alertCtrl: AlertController,
     private _detectorRef: ChangeDetectorRef,
+    private _fitSvc: FitnessService,
     private _navCtrl: NavController,
     private _params: NavParams,
     private _profileSvc: ProfileService,
@@ -41,15 +43,26 @@ export class ProfilePage {
       });
       greetAlert.present();
     }
+
     this.profile = Object.assign({}, this._user.get('profile', new UserProfile()));
+
+    if (this.profile.gender) {
+      this.idealBodyFat = _fitSvc.getIdealBodyFat(this.profile.gender);
+      if (this.profile.height && this.profile.weight) {
+        this.idealWeight = _fitSvc.getIdealWeight(this.profile.gender, this.profile.height, this.profile.weight);
+      }
+    }
   }
 
   public saveProfile(): void {
+    this.profile.bmr = this._fitSvc.getBmr(this.profile.age, this.profile.gender, this.profile.height, this.profile.weight);
+    this.profile.bodyFat = this._fitSvc.getBodyFat(this.profile.age, this.profile.gender, this.profile.height, this.profile.hips, this.profile.neck, this.profile.waist);
+    this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.profile.gender);
+    this.idealWeight = this._fitSvc.getIdealWeight(this.profile.gender, this.profile.height, this.profile.weight);
     this._profileSvc.saveProfile(this.profile);
   }
 
   ionViewWillEnter(): void {
-    this.constitution = this._profileSvc.getConstitution();
     this._detectorRef.markForCheck();
   }
 
@@ -57,5 +70,4 @@ export class ProfilePage {
     console.log('Destroying...');
     this._detectorRef.detach();
   }
-
 }

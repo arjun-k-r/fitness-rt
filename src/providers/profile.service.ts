@@ -6,25 +6,13 @@ import { User } from '@ionic/cloud-angular';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 // Models
-import { Dosha, UserProfile } from '../models';
+import { UserProfile } from '../models';
 
 @Injectable()
 export class ProfileService {
   private _profile: FirebaseObjectObservable<UserProfile>;
   constructor(private _af: AngularFire, private _user: User) {
     this._profile = _af.database.object(`/profiles/${_user.id}`);
-  }
-
-  public getBmr(age: number, gender: string, height: number, weight: number): number {
-    if (gender === 'male') {
-      return Math.floor(13.397 * weight + 4.799 * height - 5.677 * age + 88.362);
-    } else {
-      return Math.floor(9.247 * weight + 3.098 * height - 4.33 * age + 447.593);
-    }
-  }
-
-  public getConstitution(dosha: string = 'vata'): FirebaseObjectObservable<Dosha> {
-    return this._af.database.object(`/doshas/${dosha}`);
   }
 
   public saveProfile(profile: UserProfile): void {

@@ -34,6 +34,22 @@
             Constitution
             <ion-note item-right>{{ profile.dosha }}</ion-note>
         </ion-item>
+        <ion-item *ngIf="profile.bmr" text-wrap>
+            BMR
+            <ion-note item-right>{{ profile.bmr }} kcal/day</ion-note>
+        </ion-item>
+        <ion-item *ngIf="profile.bodyFat" text-wrap>
+            Body fat
+            <ion-note item-right>{{ profile.bodyFat }}%</ion-note>
+        </ion-item>
+        <ion-item *ngIf="idealBodyFat" text-wrap>
+            Ideal body fat
+            <ion-note item-right>{{ idealBodyFat }}%</ion-note>
+        </ion-item>
+        <ion-item *ngIf="idealWeight" text-wrap>
+            Ideal weight
+            <ion-note item-right>{{ idealWeight }} kg</ion-note>
+        </ion-item>
         <ion-item text-wrap>
             <ion-label>Gender</ion-label>
             <ion-select [(ngModel)]="profile.gender">
@@ -62,6 +78,18 @@
         <ion-item text-wrap>
             <ion-label fixed>Weight (kg)</ion-label>
             <ion-input type="number" [(ngModel)]="profile.weight"></ion-input>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-label fixed>Waist (cm)</ion-label>
+            <ion-input type="number" [(ngModel)]="profile.waist"></ion-input>
+        </ion-item>
+        <ion-item text-wrap>
+            <ion-label fixed>Neck (cm)</ion-label>
+            <ion-input type="number" [(ngModel)]="profile.neck"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="profile.gender === 'female'" text-wrap>
+            <ion-label fixed>Hips (cm)</ion-label>
+            <ion-input type="number" [(ngModel)]="profile.hips"></ion-input>
         </ion-item>
     </ion-list>
     <button (click)="saveProfile()" ion-button block>Save</button>

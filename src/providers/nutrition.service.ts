@@ -6,12 +6,12 @@ import { User } from '@ionic/cloud';
 import { Nutrition, UserProfile } from '../models';
 
 // Providers
-import { ProfileService } from './profile.service';
+import { FitnessService } from './fitness.service';
 
 @Injectable()
 export class NutritionService {
 
-  constructor(private _profileSvc: ProfileService, private _user: User) {
+  constructor(private _fitSvc: FitnessService, private _user: User) {
   }
 
   /**
@@ -32,7 +32,7 @@ export class NutritionService {
   }
 
   public getDri(age: number, gender: string, height: number, lactating: boolean, pregnant: boolean, weight: number): Nutrition {
-    let bmr: number = this._profileSvc.getBmr(age, gender, height, weight),
+    let bmr: number = this._fitSvc.getBmr(age, gender, height, weight),
     requirements: Nutrition = new Nutrition();
 
     requirements.omega3.value = this._getOmega3Dri(age, bmr, gender, lactating, pregnant, weight);

@@ -1,6 +1,3 @@
-// Lodash
-import * as _ from 'lodash';
-
 // Models
 import { ActivityPlan } from './activity-plan';
 import { MealPlan } from './meal-plan';
@@ -12,9 +9,12 @@ export class UserProfile {
     constructor(
         public activityPlan: ActivityPlan = new ActivityPlan(),
         public age: number = 0,
-        public dosha: string = '',
+        public bmr: number = 1800,
+        public bodyFat: number = 10,
+        public constitution: string = 'Vata',
         public gender: string = '',
         public height: number = 0,
+        public hips: number = 80,
         public imbalance: { kapha: boolean, pitta: boolean, vata: boolean } = {
             kapha: false,
             pitta: false,
@@ -22,36 +22,12 @@ export class UserProfile {
         },
         public lactating: boolean = false,
         public mealPlan: MealPlan = new MealPlan(),
+        public neck: number = 30,
         public prakruti: Prakruti = new Prakruti(),
         public pregnant: boolean = false,
         public requirements: Nutrition = new Nutrition(),
         public sleepPlan: SleepPlan = new SleepPlan(),
+        public waist: number = 70,
         public weight: number = 0
     ) { }
-
-    public setDosha(): void {
-        let doshaPints: Array<{ name: string, value: number }> = _.sortBy([
-            {
-                name: 'Kapha',
-                value: this.prakruti.kapha
-            },
-            {
-                name: 'Pitta',
-                value: this.prakruti.pitta
-            },
-            {
-                name: 'Vata',
-                value: this.prakruti.vata
-            }
-        ], item => item.value);
-
-        // Return the most dominant dosha/doshas
-        if (doshaPints[2].value - doshaPints[1].value <= 20 && doshaPints[2].value - doshaPints[0].value <= 20) {
-            this.dosha = 'tridosha'
-        } else if (doshaPints[2].value - doshaPints[1].value <= 20) {
-            this.dosha = `${doshaPints[2].name}-${doshaPints[1].name}`
-        } else {
-            this.dosha = doshaPints[2].name;
-        }
-    }
 }

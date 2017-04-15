@@ -73,6 +73,10 @@ export class FoodDataService {
           food.nutrition.carbs.value = +item.value;
           break;
 
+        case '209':
+          food.nutrition.starch.value = +item.value;
+          break;
+
         case '213':
           food.nutrition.lactose.value = +item.value;
           break;
@@ -182,19 +186,23 @@ export class FoodDataService {
           break;
 
         case '618':
-          food.nutrition.omega3.value = +item.value;
+          food.nutrition.ala.value = +item.value;
           break;
 
         case '619':
-          food.nutrition.omega6.value = +item.value;
+          food.nutrition.la.value = +item.value;
+          break;
+
+        case '621':
+          food.nutrition.dha.value = +item.value;
+          break;
+
+        case '629':
+          food.nutrition.epa.value = +item.value;
           break;
 
         case '605':
           food.nutrition.transFat.value = +item.value;
-          break;
-
-        case '601':
-          food.nutrition.cholesterol.value = +item.value;
           break;
 
         case '501':
@@ -235,6 +243,14 @@ export class FoodDataService {
 
         case '512':
           food.nutrition.histidine.value = +item.value;
+          break;
+
+        case '262':
+          food.nutrition.caffeine.value = +item.value;
+          break;
+
+        case '221':
+          food.nutrition.alcohol.value = +item.value;
           break;
 
         default:

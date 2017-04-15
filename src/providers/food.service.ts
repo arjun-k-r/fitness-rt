@@ -4,11 +4,27 @@ import { Injectable } from '@angular/core';
 // Models
 import { Food } from '../models';
 
-const NUTRIENT_MEANS: { fat: number, fiber: number, lactose: number, sodium: number, sugars: number, vitaminC: number, water: number } = {
+/**
+ * TODO: Make XHTTP Request via Nodejs for each nutrient and calculate the average of 
+ */
+
+const NUTRIENT_MEANS: { 
+  fat: number,
+  fiber: number,
+  lactose: number,
+  protein: number,
+  sodium: number,
+  starch: number,
+  sugars: number, 
+  vitaminC: number,
+  water: number
+} = {
   'fat': 30,
   'fiber': 10,
   'lactose': 3,
+  'protein': 20,
   'sodium': 0.1,
+  'starch': 3,
   'sugars': 10,
   'vitaminC': 0.04,
   'water': 50

@@ -44,6 +44,10 @@
     <ion-item-group>
         <ion-item-divider>Essential amino acids</ion-item-divider>
         <ion-item>
+            Arginine
+            <ion-note item-right>{{ (food)?.nutrition.arginine?.value }}{{ (food)?.nutrition.arginine?.unit }}</ion-note>
+        </ion-item>
+        <ion-item>
             Histidine
             <ion-note item-right>{{ (food)?.nutrition.histidine?.value }}{{ (food)?.nutrition.histidine?.unit }}</ion-note>
         </ion-item>
@@ -177,12 +181,20 @@
     <ion-item-group>
         <ion-item-divider>Essential fatty acids</ion-item-divider>
         <ion-item>
-            Omega-3 (alpha-Linolenic acid)
-            <ion-note item-right>{{ (food)?.nutrition.omega3?.value }}{{ (food)?.nutrition.omega3?.unit }}</ion-note>
+            Omega-3 (ALA)
+            <ion-note item-right>{{ (food)?.nutrition.ala?.value }}{{ (food)?.nutrition.ala?.unit }}</ion-note>
         </ion-item>
         <ion-item>
-            Omega-6 (Linoleic acid)
-            <ion-note item-right>{{ (food)?.nutrition.omega6?.value }}{{ (food)?.nutrition.omega6?.unit }}</ion-note>
+            Omega-3 (DHA)
+            <ion-note item-right>{{ (food)?.nutrition.dha?.value }}{{ (food)?.nutrition.dha?.unit }}</ion-note>
+        </ion-item>
+        <ion-item>
+            Omega-3 (EPA)
+            <ion-note item-right>{{ (food)?.nutrition.epa?.value }}{{ (food)?.nutrition.epa?.unit }}</ion-note>
+        </ion-item>
+        <ion-item>
+            Omega-6 (LA)
+            <ion-note item-right>{{ (food)?.nutrition.la?.value }}{{ (food)?.nutrition.la?.unit }}</ion-note>
         </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -194,10 +206,6 @@
         <ion-item>
             Caffeine
             <ion-note item-right>{{ (food)?.nutrition.caffeine?.value }}{{ (food)?.nutrition.caffeine?.unit }}</ion-note>
-        </ion-item>
-        <ion-item>
-            Saturated fat
-            <ion-note item-right>{{ (food)?.nutrition.satFat?.value }}{{ (food)?.nutrition.satFat?.unit }}</ion-note>
         </ion-item>
         <ion-item>
             Trans fat

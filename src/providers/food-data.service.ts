@@ -7,29 +7,29 @@ import { Observable } from 'rxjs/Rx';
 import { Food, FoodGroup, INdbFood } from '../models';
 
 export const FOOD_GROUPS: Array<FoodGroup> = [
-  //new FoodGroup('', 'All foods'),
-  //new FoodGroup('3500', 'American Indian/Alaska Native Foods'),
-  //new FoodGroup('0300', 'Baby Foods'),
-  //new FoodGroup('1800', 'Baked Products'),
+  new FoodGroup('', 'All foods'),
+  new FoodGroup('3500', 'American Indian/Alaska Native Foods'),
+  new FoodGroup('0300', 'Baby Foods'),
+  new FoodGroup('1800', 'Baked Products'),
   new FoodGroup('1300', 'Beef Products'),
   new FoodGroup('1400', 'Beverages'),
-  //new FoodGroup('0800', 'Breakfast Cereals'),
+  new FoodGroup('0800', 'Breakfast Cereals'),
   new FoodGroup('2000', 'Cereal Grains and Pasta'),
   new FoodGroup('0100', 'Dairy and Egg Products'),
-  //new FoodGroup('2100', 'Fast Foods'),
+  new FoodGroup('2100', 'Fast Foods'),
   new FoodGroup('0400', 'Fats and Oils'),
   new FoodGroup('1500', 'Finfish and Shellfish Products'),
   new FoodGroup('0900', 'Fruits and Fruit Juices'),
   new FoodGroup('1700', 'Lamb, Veal, and Game Products'),
   new FoodGroup('1600', 'Legumes and Legume Products'),
-  //new FoodGroup('2200', 'Meals, Entrees, and Side Dishes'),
+  new FoodGroup('2200', 'Meals, Entrees, and Side Dishes'),
   new FoodGroup('1200', 'Nut and Seed Products'),
   new FoodGroup('1000', 'Pork Products'),
   new FoodGroup('0500', 'Poultry Products'),
-  //new FoodGroup('3600', 'Restaurant Foods'),
-  //new FoodGroup('0700', 'Sausages and Luncheon Meats'),
-  //new FoodGroup('2500', 'Snacks'),
-  //new FoodGroup('0600', 'Soups, Sauces, and Gravies'),
+  new FoodGroup('3600', 'Restaurant Foods'),
+  new FoodGroup('0700', 'Sausages and Luncheon Meats'),
+  new FoodGroup('2500', 'Snacks'),
+  new FoodGroup('0600', 'Soups, Sauces, and Gravies'),
   new FoodGroup('0200', 'Spices and Herbs'),
   new FoodGroup('1900', 'Sweets'),
   new FoodGroup('1100', 'Vegetables and Vegetable Products'),
@@ -291,7 +291,7 @@ export class FoodDataService {
     });
   }
 
-  public getFoods$(searhQuery: string = '', start: number = 0, limit: number = 100, foodGroupId: string = '1100'): Observable<Array<Food>> {
+  public getFoods$(searhQuery: string = '', start: number = 0, limit: number = 100, foodGroupId: string = ''): Observable<Array<Food>> {
     let headers: Headers = new Headers({ 'Content-Type': 'application/json' }),
       options: RequestOptions = new RequestOptions(),
       params: URLSearchParams = new URLSearchParams();

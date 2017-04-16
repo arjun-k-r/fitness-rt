@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { Modal, ModalController, NavController, NavParams } from 'ionic-angular';
 
 // Models
-import { Meal } from '../../models';
+import { Food, Meal } from '../../models';
 
 // Pages
 import { MealSelectPage } from '../meal-select/meal-select';
@@ -19,7 +19,6 @@ import { MealService } from '../../providers';
 export class MealDetailsPage {
   public meal: Meal;
   public mealDetails: string = 'items';
-  public mealSelectModal: Modal;
   constructor(
     private _detectorRef: ChangeDetectorRef,
     private _modalCtrl: ModalController,
@@ -27,16 +26,16 @@ export class MealDetailsPage {
     private _params: NavParams
   ) {
     this.meal = <Meal>_params.get('meal');
-    this.mealSelectModal = this._modalCtrl.create(MealSelectPage);
-
     _detectorRef.markForCheck();
   }
 
   public addFoodItems(): void {
-    this.mealSelectModal.present();
-    this.mealSelectModal.onDidDismiss((data: Array<Meal>) => {
-      console.log(data);
-    })
+    let mealSelectModal: Modal = this._modalCtrl.create(MealSelectPage);
+    mealSelectModal.present();
+    mealSelectModal.onDidDismiss((items: Array<Food>) => {
+      this.meal.foods.push(...items);
+      this._detectorRef.markForCheck();
+    });
   }
 
   ionViewWillUnload(): void {

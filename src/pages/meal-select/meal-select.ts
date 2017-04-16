@@ -114,4 +114,5 @@ export class MealSelectPage {
     console.log('Destroying...');
     this._detectorRef.detach();
   }
+  
 }

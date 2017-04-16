@@ -6,7 +6,7 @@ import { User } from '@ionic/cloud-angular';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 // Models
-import { UserProfile } from '../models';
+import { ActivitySchedule, UserProfile } from '../models';
 
 @Injectable()
 export class ProfileService {
@@ -15,8 +15,12 @@ export class ProfileService {
     this._profile = _af.database.object(`/profiles/${_user.id}`);
   }
 
+  public getProfile(): UserProfile {
+    return <UserProfile>this._user.get('profile', new UserProfile());
+  }
+
   public saveProfile(profile: UserProfile): void {
-    console.log(profile);
+    profile.activitySchedule = new ActivitySchedule();
     this._user.set('profile', profile);
     this._user.save();
     this._profile.set(profile);

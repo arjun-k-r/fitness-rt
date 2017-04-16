@@ -12,15 +12,15 @@
     <ion-grid>
         <ion-row>
             <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
-                <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Vata' }" text-center color="secondary">Vata</h2>
+                <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Vata' }" text-center ion-text color="secondary">Vata</h2>
                 <p text-center>{{ profile.prakruti.vata }}%</p>
             </ion-col>
             <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
-                <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Pitta' }" text-center color="secondary">Pitta</h2>
+                <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Pitta' }" text-center ion-text color="secondary">Pitta</h2>
                 <p text-center>{{ profile.prakruti.pitta }}%</p>
             </ion-col>
             <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
-                <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Kapha' }" text-center color="secondary">Kapha</h2>
+                <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Kapha' }" text-center ion-text color="secondary">Kapha</h2>
                 <p text-center>{{ profile.prakruti.kapha }}%</p>
             </ion-col>
         </ion-row>
@@ -32,7 +32,7 @@
         </ion-item>
         <ion-item text-wrap>
             Constitution
-            <ion-note item-right>{{ profile.dosha }}</ion-note>
+            <ion-note item-right>{{ profile.constitution }}</ion-note>
         </ion-item>
         <ion-item *ngIf="profile.bmr" text-wrap>
             BMR

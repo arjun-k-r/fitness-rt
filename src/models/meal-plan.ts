@@ -13,15 +13,16 @@ export class Meal {
             tiredness: false
         },
         public foods: Array<Food> = [],
-        public hour: number = 0,
         public nutrition: Nutrition = new Nutrition(),
         public organic: boolean = true,
-        public pral: number = 0
+        public pral: number = 0,
+        public time: string = '07:00'
     ) { }
 }
 
 export class MealPlan {
     constructor(
+        public breakfastTime: string = '07:00',
         public dailyNutrition: Nutrition = new Nutrition(),
 
         // Hours between meals

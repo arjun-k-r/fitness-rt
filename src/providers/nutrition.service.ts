@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '@ionic/cloud';
 
 // Models
-import { Nutrition, UserProfile } from '../models';
+import { Nutrition } from '../models';
 
 // Providers
 import { DRIService } from './dri.service';

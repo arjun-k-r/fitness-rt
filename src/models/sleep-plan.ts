@@ -13,13 +13,13 @@ export class SleepPlan {
     constructor(
         public schedule: {
             // Go to bed hour
-            start: number,
+            start: string,
 
             // Wake up hour
-            stop: number
+            stop: string
         } = {
-            start: 9,
-            stop: 5
+            start: '21:00',
+            stop: '05:00'
         },
 
         // Sleep monitoring

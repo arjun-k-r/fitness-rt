@@ -1,5 +1,5 @@
 // Models
-import { ActivityPlan } from './activity-plan';
+import { ActivitySchedule } from './activity-plan';
 import { MealPlan } from './meal-plan';
 import { Nutrition } from './nutrition';
 import { Prakruti } from './prakruti';
@@ -7,7 +7,7 @@ import { SleepPlan } from './sleep-plan'
 
 export class UserProfile {
     constructor(
-        public activityPlan: ActivityPlan = new ActivityPlan(),
+        public activitySchedule: ActivitySchedule = new ActivitySchedule(),
         public age: number = 0,
         public bmr: number = 1800,
         public bodyFat: number = 10,

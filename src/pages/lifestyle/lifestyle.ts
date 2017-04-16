@@ -1,22 +1,30 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+// App
+import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 
-/*
-  Generated class for the Lifestyle page.
+// Models
+import { UserProfile } from '../../models'
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+// Providers
+import { ProfileService } from "../../providers";
+
 @Component({
   selector: 'page-lifestyle',
-  templateUrl: 'lifestyle.html'
+  templateUrl: 'lifestyle.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LifestylePage {
+  public profile: UserProfile;
+  public schedule: string = 'sleep';
+  constructor(private _detectorRef: ChangeDetectorRef, private _profileSvc: ProfileService) {
+    this.profile = _profileSvc.getProfile();
+  }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  public saveLifestyle(): void {
+  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LifestylePage');
+  ionViewWillUnload(): void {
+    console.log('Destroying...');
+    this._detectorRef.detach();
   }
 
 }

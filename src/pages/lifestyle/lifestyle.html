@@ -5,10 +5,130 @@
         </button>
         <ion-title>Lifestyle</ion-title>
     </ion-navbar>
-
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="schedule">
+            <ion-segment-button value="sleep">
+                <ion-icon name="moon"></ion-icon>
+            </ion-segment-button>
+            <ion-segment-button value="nutrition">
+                <ion-icon name="restaurant"></ion-icon>
+            </ion-segment-button>
+            <ion-segment-button value="exercise">
+                <ion-icon name="bicycle"></ion-icon>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
+    <div [ngSwitch]="schedule">
+        <!-- Start of segment one -->
+        <ion-list *ngSwitchCase="'sleep'">
+            <ion-item>
+                <ion-label floating>Bed time</ion-label>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.sleepPlan.schedule.start"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Wake up time</ion-label>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.sleepPlan.schedule.end"></ion-datetime>
+            </ion-item>
+        </ion-list>
+        <!-- End of segment one -->
 
+        <!-- Start of segment one -->
+        <ion-list *ngSwitchCase="'nutrition'">
+            <ion-item>
+                <ion-label floating>Breakfast time</ion-label>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.mealPlan.breakfastTime"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Interval</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.mealPlan.interval"></ion-input>
+            </ion-item>
+        </ion-list>
+        <!-- End of segment one -->
+
+        <!-- Start of segment one -->
+        <ion-list *ngSwitchCase="'exercise'">
+            <ion-list-header>
+                Monday
+            </ion-list-header>
+            <ion-item>
+                <ion-label>Workout</ion-label>
+                <ion-checkbox [(ngModel)]="profile.activitySchedule.monday.workout.performed"></ion-checkbox>
+            </ion-item>
+            <ion-item *ngIf="profile.activitySchedule.monday.workout.performed">
+                <ion-label floating>Workout time</ion-label>
+                <ion-input type="number"[(ngModel)]="profile.activitySchedule.monday.workout.time"></ion-input>
+            </ion-item>
+            <ion-list-header>
+                Tuesday
+            </ion-list-header>
+            <ion-item>
+                <ion-label>Workout</ion-label>
+                <ion-checkbox [(ngModel)]="profile.activitySchedule.tuesday.workout.performed"></ion-checkbox>
+            </ion-item>
+            <ion-item *ngIf="profile.activitySchedule.tuesday.workout.performed">
+                <ion-label floating>Workout time</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.activitySchedule.tuesday.workout.time"></ion-input>
+            </ion-item>
+            <ion-list-header>
+                Wednesday
+            </ion-list-header>
+            <ion-item>
+                <ion-label>Workout</ion-label>
+                <ion-checkbox [(ngModel)]="profile.activitySchedule.wednesday.workout.performed"></ion-checkbox>
+            </ion-item>
+            <ion-item *ngIf="profile.activitySchedule.wednesday.workout.performed">
+                <ion-label floating>Workout time</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.activitySchedule.wednesday.workout.time"></ion-input>
+            </ion-item>
+            <ion-list-header>
+                Thursday
+            </ion-list-header>
+            <ion-item>
+                <ion-label>Workout</ion-label>
+                <ion-checkbox [(ngModel)]="profile.activitySchedule.thursday.workout.performed"></ion-checkbox>
+            </ion-item>
+            <ion-item *ngIf="profile.activitySchedule.thursday.workout.performed">
+                <ion-label floating>Workout time</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.activitySchedule.thursday.workout.time"></ion-input>
+            </ion-item>
+            <ion-list-header>
+                Friday
+            </ion-list-header>
+            <ion-item>
+                <ion-label>Workout</ion-label>
+                <ion-checkbox [(ngModel)]="profile.activitySchedule.friday.workout.performed"></ion-checkbox>
+            </ion-item>
+            <ion-item *ngIf="profile.activitySchedule.friday.workout.performed">
+                <ion-label floating>Workout time</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.activitySchedule.friday.workout.time"></ion-input>
+            </ion-item>
+            <ion-list-header>
+                Saturday
+            </ion-list-header>
+            <ion-item>
+                <ion-label>Workout</ion-label>
+                <ion-checkbox [(ngModel)]="profile.activitySchedule.saturday.workout.performed"></ion-checkbox>
+            </ion-item>
+            <ion-item *ngIf="profile.activitySchedule.saturday.workout.performed">
+                <ion-label floating>Workout time</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.activitySchedule.saturday.workout.time"></ion-input>
+            </ion-item>
+            <ion-list-header>
+                Sunday
+            </ion-list-header>
+            <ion-item>
+                <ion-label>Workout</ion-label>
+                <ion-checkbox [(ngModel)]="profile.activitySchedule.sunday.workout.performed"></ion-checkbox>
+            </ion-item>
+            <ion-item *ngIf="profile.activitySchedule.sunday.workout.performed">
+                <ion-label floating>Workout time</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.activitySchedule.sunday.workout.time"></ion-input>
+            </ion-item>
+        </ion-list>
+        <!-- End of segment one -->
+    </div>
 </ion-content>

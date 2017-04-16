@@ -1,7 +1,6 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
-import { User } from '@ionic/cloud-angular';
 
 // Firebase
 import { FirebaseObjectObservable } from 'angularfire2'
@@ -31,8 +30,7 @@ export class ProfilePage {
     private _fitSvc: FitnessService,
     private _navCtrl: NavController,
     private _params: NavParams,
-    private _profileSvc: ProfileService,
-    private _user: User
+    private _profileSvc: ProfileService
   ) {
     if (!!_params.get('new')) {
       let greetAlert = this._alertCtrl.create({
@@ -44,7 +42,7 @@ export class ProfilePage {
       greetAlert.present();
     }
 
-    this.profile = Object.assign({}, this._user.get('profile', new UserProfile()));
+    this.profile = _profileSvc.getProfile();
 
     if (this.profile.gender) {
       this.idealBodyFat = _fitSvc.getIdealBodyFat(this.profile.gender);

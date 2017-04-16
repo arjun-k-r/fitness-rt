@@ -16,17 +16,19 @@ export class Meal {
         public nutrition: Nutrition = new Nutrition(),
         public organic: boolean = true,
         public pral: number = 0,
-        public time: string = '07:00'
+        public quantity: number = 100,
+        public time: string = '06:00'
     ) { }
 }
 
 export class MealPlan {
     constructor(
-        public breakfastTime: string = '07:00',
+        public breakfastTime: string = '06:00',
         public dailyNutrition: Nutrition = new Nutrition(),
+        public date: string = '',
 
         // Hours between meals
-        public interval: number = 0,
+        public interval: number = 6,
         public meals: Array<Meal> = []
     ) {}
 }

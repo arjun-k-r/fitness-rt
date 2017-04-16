@@ -16,15 +16,15 @@
 <ion-content padding>
     <ion-grid>
         <ion-row>
-            <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
+            <ion-col>
                 <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Vata' }" text-center ion-text color="secondary">Vata</h2>
                 <p text-center>{{ profile.prakruti.vata }}%</p>
             </ion-col>
-            <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
+            <ion-col>
                 <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Pitta' }" text-center ion-text color="secondary">Pitta</h2>
                 <p text-center>{{ profile.prakruti.pitta }}%</p>
             </ion-col>
-            <ion-col col-sm-12 col-md-12 col-lg-4 col-xl-4>
+            <ion-col>
                 <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Kapha' }" text-center ion-text color="secondary">Kapha</h2>
                 <p text-center>{{ profile.prakruti.kapha }}%</p>
             </ion-col>
@@ -37,23 +37,23 @@
         </ion-item>
         <ion-item text-wrap>
             Constitution
-            <ion-note item-right>{{ profile.constitution }}</ion-note>
+            <p item-content>{{ profile.constitution }}</p>
         </ion-item>
         <ion-item *ngIf="profile.bmr" text-wrap>
             BMR
-            <ion-note item-right>{{ profile.bmr }} kcal/day</ion-note>
+            <p item-content>{{ profile.bmr }} kcal/day</p>
         </ion-item>
         <ion-item *ngIf="profile.bodyFat" text-wrap>
             Body fat
-            <ion-note item-right>{{ profile.bodyFat }}%</ion-note>
+            <p item-content>{{ profile.bodyFat }}%</p>
         </ion-item>
         <ion-item *ngIf="idealBodyFat" text-wrap>
             Ideal body fat
-            <ion-note item-right>{{ idealBodyFat }}%</ion-note>
+            <p item-content>{{ idealBodyFat }}%</p>
         </ion-item>
         <ion-item *ngIf="idealWeight" text-wrap>
             Ideal weight
-            <ion-note item-right>{{ idealWeight }} kg</ion-note>
+            <p item-content>{{ idealWeight }} kg</p>
         </ion-item>
         <ion-item text-wrap>
             <ion-label>Gender</ion-label>

@@ -15,6 +15,7 @@ import {
     HealingPage,
     HomePage,
     LifestylePage,
+    MealPlanPage,
     NutritionPage,
     RecipesPage,
     RegistrationPage
@@ -46,8 +47,9 @@ export class MyApp {
         this.pages = [
             { title: 'Home', component: HomePage, icon: 'home' },
             { title: 'Profile', component: ProfilePage, icon: 'body' },
-            { title: 'Lifestyle', component: LifestylePage, icon: 'clock' },
+            { title: 'Lifestyle', component: LifestylePage, icon: 'calendar' },
             { title: 'Exercise', component: ExercisePage, icon: 'bicycle' },
+            { title: 'Meal plan', component: MealPlanPage, icon: 'clock' },
             { title: 'Nutrition', component: NutritionPage, icon: 'nutrition' },
             { title: 'Healing', component: HealingPage, icon: 'heart' },
             { title: 'Foods', component: FoodListPage, icon: 'basket' },

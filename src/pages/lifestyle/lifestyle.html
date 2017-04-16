@@ -31,7 +31,7 @@
 
 <ion-content padding>
     <div [ngSwitch]="schedule">
-        <!-- Start of segment one -->
+        <!-- Start of segment -->
         <ion-list *ngSwitchCase="'sleep'">
             <ion-item>
                 <ion-label floating>Bed time</ion-label>
@@ -42,9 +42,9 @@
                 <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.sleepPlan.schedule.end"></ion-datetime>
             </ion-item>
         </ion-list>
-        <!-- End of segment one -->
+        <!-- End of segment -->
 
-        <!-- Start of segment one -->
+        <!-- Start of segment -->
         <ion-list *ngSwitchCase="'nutrition'">
             <ion-item>
                 <ion-label floating>Breakfast time</ion-label>
@@ -55,9 +55,9 @@
                 <ion-input type="number" [(ngModel)]="profile.mealPlan.interval"></ion-input>
             </ion-item>
         </ion-list>
-        <!-- End of segment one -->
+        <!-- End of segment -->
 
-        <!-- Start of segment one -->
+        <!-- Start of segment -->
         <ion-list *ngSwitchCase="'exercise'">
             <ion-list-header>
                 Monday
@@ -144,9 +144,9 @@
                 <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.activitySchedule.sunday.workout.time"></ion-datetime>
             </ion-item>
         </ion-list>
-        <!-- End of segment one -->
+        <!-- End of segment -->
 
-        <!-- Start of segment one -->
+        <!-- Start of segment -->
         <ion-list *ngSwitchCase="'work'">
             <ion-item>
                 <ion-label floating>Work time</ion-label>
@@ -157,6 +157,6 @@
                 <ion-input type="number" [(ngModel)]="workDuration"></ion-input>
             </ion-item>
         </ion-list>
-        <!-- End of segment one -->
+        <!-- End of segment -->
     </div>
 </ion-content>

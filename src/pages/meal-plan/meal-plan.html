@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Meal plan</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item-group *ngFor="let meal of mealPlan.meals; let i = index">
+    <ion-item-divider color="secondary">Meal {{ i + 1 }}</ion-item-divider>
+    <ion-item>
+      Time
+      <p item-content>{{ meal.time }}</p>
+    </ion-item>
+    <ion-item>
+      PRAL
+      <p item-content>{{ meal.pral }}</p>
+    </ion-item>
+    <a ion-item [navPush]="detailsPage" [navParams]="{ meal: meal }">Nutrition</a>
+  </ion-item-group>
+
+</ion-content>

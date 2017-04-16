@@ -18,7 +18,7 @@ export class SleepPlan {
             // Wake up hour
             stop: string
         } = {
-            start: '21:00',
+            start: '21:30',
             stop: '05:00'
         },
 

@@ -59,6 +59,8 @@ import {
     HomePage,
     LifestylePage,
     LoginPage,
+    MealDetailsPage,
+    MealPlanPage,
     MealSelectPage,
     NutrientPage,
     NutritionPage,
@@ -81,6 +83,7 @@ import {
     DRIService,
     FitnessService,
     FoodDataService,
+    MealService,
     NutrientService,
     ProfileService
 } from '../providers';
@@ -102,6 +105,8 @@ export const thgDeclarations = [
     HomePage,
     LifestylePage,
     LoginPage,
+    MealDetailsPage,
+    MealPlanPage,
     MealSelectPage,
     NutrientPage,
     NutritionPage,
@@ -127,6 +132,8 @@ export const thgEntries = [
     HomePage,
     LifestylePage,
     LoginPage,
+    MealDetailsPage,
+    MealPlanPage,
     MealSelectPage,
     NutrientPage,
     NutritionPage,
@@ -157,6 +164,7 @@ export const thgProviders = [
     DRIService,
     FitnessService,
     FoodDataService,
+    MealService,
     NutrientService,
     ProfileService
 ];

@@ -11,6 +11,8 @@ export { HealingPage } from './healing/healing';
 export { HomePage } from './home/home';
 export { LifestylePage } from './lifestyle/lifestyle';
 export { LoginPage } from './login/login';
+export { MealDetailsPage } from './meal-details/meal-details';
+export { MealPlanPage } from './meal-plan/meal-plan';
 export { MealSelectPage } from './meal-select/meal-select';
 export { NutrientPage } from './nutrient/nutrient';
 export { NutritionPage } from './nutrition/nutrition';

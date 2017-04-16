@@ -1,30 +1,31 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
-import { AlertController, InfiniteScroll, ViewController } from 'ionic-angular';
+import { Alert, AlertController, InfiniteScroll, Loading, LoadingController, ViewController } from 'ionic-angular';
 
 // Models
-import { Food, FoodGroup } from '../../models';
+import { IUsdaFood, FoodGroup } from '../../models';
 
 // Providers
 import { FOOD_GROUPS, FoodDataService } from '../../providers';
 
 @Component({
-  selector: 'page-meal-select',
-  templateUrl: 'meal-select.html',
+  selector: 'page-food-select',
+  templateUrl: 'food-select.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MealSelectPage {
-  public foods: Array<Food>;
+export class FoodSelectPage {
+  public foods: Array<IUsdaFood>;
   public groups: Array<FoodGroup> = [...FOOD_GROUPS];
   public limit: number = 50;
   public searchQuery: string = '';
   public selectedGroup: FoodGroup = this.groups[0];
-  public selectedFoods: Array<Food> = [];
+  public selectedFoods: Array<IUsdaFood> = [];
   public start: number;
   constructor(
     private _alertCtrl: AlertController,
     private _detectorRef: ChangeDetectorRef,
     private _foodDataSvc: FoodDataService,
+    private _loadCtrl: LoadingController,
     private _viewCtrl: ViewController
   ) { }
 
@@ -47,7 +48,7 @@ export class MealSelectPage {
     setTimeout(() => {
       this.start += 50;
       this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
-        .subscribe((data: Array<Food>) => {
+        .subscribe((data: Array<IUsdaFood>) => {
           this.foods.push(...data);
           this._detectorRef.markForCheck();
         });
@@ -56,12 +57,18 @@ export class MealSelectPage {
   }
 
   public refreshItems(): void {
-    console.log(this.searchQuery);
+    let loader: Loading = this._loadCtrl.create({
+      content: 'Loading...',
+      spinner: 'crescent'
+    });
+
+    loader.present();
     this.start = 0;
     this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
-      .subscribe((data: Array<Food>) => {
+      .subscribe((data: Array<IUsdaFood>) => {
         setTimeout(() => {
           this.foods = [...data];
+          loader.dismiss();
           this._detectorRef.markForCheck();
         }, 2000);
       }, (err: { status: string, message: string }) => {
@@ -97,7 +104,7 @@ export class MealSelectPage {
     }).present();
   }
 
-  public toggleItem(food: Food): void {
+  public toggleItem(food: IUsdaFood): void {
     if (this.selectedFoods.indexOf(food) === -1) {
       this.selectedFoods.push(food);
     } else {
@@ -114,5 +121,5 @@ export class MealSelectPage {
     console.log('Destroying...');
     this._detectorRef.detach();
   }
-  
+
 }

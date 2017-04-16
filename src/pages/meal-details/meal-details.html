@@ -26,13 +26,15 @@
         <!-- Start of segment -->
         <div *ngSwitchCase="'items'">
             <ion-list>
-                <ion-item *ngFor="let item of meal.foods">
-                    {{ item.name }}
+                <ion-item *ngFor="let item of meal.mealItems; let i = index">
+                    <ion-icon color="danger" name="trash" item-left (click)="removeItem(i)"></ion-icon>
+                    <ion-label text-wrap>{{ item.name }}</ion-label>
+                    <p item-content (click)="changeServings(item)">{{ item.servings }} servings</p>
                 </ion-item>
 
             </ion-list>
             <ion-fab bottom right>
-                <button ion-fab (click)="addFoodItems()"><ion-icon name="add"></ion-icon></button>
+                <button ion-fab (click)="addMealItems()"><ion-icon name="add"></ion-icon></button>
             </ion-fab>
         </div>
         <!-- End of segment -->

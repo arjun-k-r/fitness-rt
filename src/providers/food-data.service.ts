@@ -4,7 +4,7 @@ import { Http, URLSearchParams, Response, RequestOptions, Headers } from '@angul
 import { Observable } from 'rxjs/Rx';
 
 // Models
-import { Food, FoodGroup, INdbFood } from '../models';
+import { Food, FoodGroup, INdbFood, IUsdaFood } from '../models';
 
 export const FOOD_GROUPS: Array<FoodGroup> = [
   new FoodGroup('', 'All foods'),
@@ -44,7 +44,7 @@ export class FoodDataService {
   constructor(private _http: Http) { }
 
   private _serializeFood(usdaFood: any): Food {
-    let newFood: Food = new Food(usdaFood['ndbno'], usdaFood['name'], usdaFood['fg']);
+    let newFood: Food = new Food(usdaFood['fg'], usdaFood['name'], usdaFood['ndbno']);
     this._setNutrientValue(usdaFood['nutrients'], newFood);
     console.log(newFood);
     return newFood;
@@ -291,7 +291,7 @@ export class FoodDataService {
     });
   }
 
-  public getFoods$(searhQuery: string = '', start: number = 0, limit: number = 100, foodGroupId: string = ''): Observable<Array<Food>> {
+  public getFoods$(searhQuery: string = '', start: number = 0, limit: number = 100, foodGroupId: string = ''): Observable<Array<IUsdaFood>> {
     let headers: Headers = new Headers({ 'Content-Type': 'application/json' }),
       options: RequestOptions = new RequestOptions(),
       params: URLSearchParams = new URLSearchParams();

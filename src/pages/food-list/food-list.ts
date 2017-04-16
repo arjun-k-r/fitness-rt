@@ -1,9 +1,9 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
-import { AlertController, InfiniteScroll } from 'ionic-angular';
+import { AlertController, InfiniteScroll, Loading, LoadingController } from 'ionic-angular';
 
 // Models
-import { Food, FoodGroup } from '../../models';
+import { IUsdaFood, FoodGroup } from '../../models';
 
 // Pages
 import { FoodDetailsPage } from '../food-details/food-details';
@@ -18,7 +18,7 @@ import { FOOD_GROUPS, FoodDataService } from '../../providers';
 })
 export class FoodListPage {
   public detailsPage: any = FoodDetailsPage;
-  public foods: Array<Food>;
+  public foods: Array<IUsdaFood>;
   public groups: Array<FoodGroup> = [...FOOD_GROUPS];
   public limit: number = 50;
   public searchQuery: string = '';
@@ -27,7 +27,8 @@ export class FoodListPage {
   constructor(
     private _alertCtrl: AlertController,
     private _detectorRef: ChangeDetectorRef,
-    private _foodDataSvc: FoodDataService
+    private _foodDataSvc: FoodDataService,
+    private _loadCtrl: LoadingController
   ) { }
 
   public clearSearch(ev): void {
@@ -45,7 +46,7 @@ export class FoodListPage {
     setTimeout(() => {
       this.start += 50;
       this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
-        .subscribe((data: Array<Food>) => {
+        .subscribe((data: Array<IUsdaFood>) => {
           this.foods.push(...data);
           this._detectorRef.markForCheck();
         });
@@ -54,12 +55,18 @@ export class FoodListPage {
   }
 
   public refreshItems(): void {
-    console.log(this.searchQuery);
+    let loader: Loading = this._loadCtrl.create({
+      content: 'Loading...',
+      spinner: 'crescent'
+    });
+
+    loader.present();
     this.start = 0;
     this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
-      .subscribe((data: Array<Food>) => {
+      .subscribe((data: Array<IUsdaFood>) => {
         setTimeout(() => {
           this.foods = [...data];
+          loader.dismiss();
           this._detectorRef.markForCheck();
         }, 2000);
       }, (err: {status: string, message: string}) => {

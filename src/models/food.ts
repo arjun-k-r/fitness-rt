@@ -8,6 +8,13 @@ export interface INdbFood {
     value: string;
 }
 
+export interface IUsdaFood {
+    ds: string;
+    group: string;
+    name: string;
+    ndbno: string;
+}
+
 export class FoodGroup {
     constructor(
         public id: string,
@@ -17,9 +24,9 @@ export class FoodGroup {
 
 export class Food {
     constructor(
-        public ndbno: string,
-        public name: string,
-        public group: string,
+        public group: string = '',
+        public name: string = '',
+        public ndbno: string = '',
         public nutrition: Nutrition = new Nutrition(),
         public quantity: number = 100,
         public unit: string = 'g',

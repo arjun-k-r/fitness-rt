@@ -1,6 +1,21 @@
 import { Food } from './food';
 import { Nutrition } from './nutrition';
 
+export class MealFoodItem extends Food {
+    constructor(
+        public ndbno: string = '',
+        public name: string = '',
+        public group: string = '',
+        public nutrition: Nutrition = new Nutrition(),
+        public quantity: number = 100,
+        public servings: number = 1,
+        public unit: string = 'g',
+        public type: string = 'sweet'
+    ) {
+        super(ndbno, name, group, nutrition, quantity, unit, type);
+    }
+}
+
 export class Meal {
     constructor(
         public eating: { chewing: boolean, silence: boolean, small: boolean } = {
@@ -12,7 +27,7 @@ export class Meal {
             gastricDistress: false,
             tiredness: false
         },
-        public foods: Array<Food> = [],
+        public mealItems: Array<MealFoodItem> = [],
         public nutrition: Nutrition = new Nutrition(),
         public organic: boolean = true,
         public pral: number = 0,

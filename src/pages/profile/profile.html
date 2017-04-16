@@ -4,6 +4,11 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>Profile</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="saveProfile()">
+                <ion-icon name="sync"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
@@ -92,5 +97,4 @@
             <ion-input type="number" [(ngModel)]="profile.hips"></ion-input>
         </ion-item>
     </ion-list>
-    <button (click)="saveProfile()" ion-button block>Save</button>
 </ion-content>

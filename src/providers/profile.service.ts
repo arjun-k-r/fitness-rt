@@ -20,7 +20,6 @@ export class ProfileService {
   }
 
   public saveProfile(profile: UserProfile): void {
-    profile.activitySchedule = new ActivitySchedule();
     this._user.set('profile', profile);
     this._user.save();
     this._profile.set(profile);

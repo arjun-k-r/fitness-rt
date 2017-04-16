@@ -20,6 +20,15 @@ export class LifestylePage {
   }
 
   public saveLifestyle(): void {
+    this._profileSvc.saveProfile(this.profile);
+  }
+
+  public schedulePageChange(): void {
+    this._detectorRef.markForCheck();
+  }
+
+  ionViewWillEnter(): void {
+    this._detectorRef.markForCheck();
   }
 
   ionViewWillUnload(): void {

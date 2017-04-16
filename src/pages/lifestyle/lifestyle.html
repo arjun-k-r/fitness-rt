@@ -4,9 +4,14 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>Lifestyle</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="saveLifestyle()">
+                <ion-icon name="sync"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
     <ion-toolbar no-border-top>
-        <ion-segment [(ngModel)]="schedule">
+        <ion-segment [(ngModel)]="schedule"  (click)="schedulePageChange()">
             <ion-segment-button value="sleep">
                 <ion-icon name="moon"></ion-icon>
             </ion-segment-button>
@@ -60,7 +65,7 @@
             </ion-item>
             <ion-item *ngIf="profile.activitySchedule.monday.workout.performed">
                 <ion-label floating>Workout time</ion-label>
-                <ion-input type="number"[(ngModel)]="profile.activitySchedule.monday.workout.time"></ion-input>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.activitySchedule.monday.workout.time"></ion-datetime>
             </ion-item>
             <ion-list-header>
                 Tuesday
@@ -71,7 +76,7 @@
             </ion-item>
             <ion-item *ngIf="profile.activitySchedule.tuesday.workout.performed">
                 <ion-label floating>Workout time</ion-label>
-                <ion-input type="number" [(ngModel)]="profile.activitySchedule.tuesday.workout.time"></ion-input>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.activitySchedule.tuesday.workout.time"></ion-datetime>
             </ion-item>
             <ion-list-header>
                 Wednesday
@@ -82,7 +87,7 @@
             </ion-item>
             <ion-item *ngIf="profile.activitySchedule.wednesday.workout.performed">
                 <ion-label floating>Workout time</ion-label>
-                <ion-input type="number" [(ngModel)]="profile.activitySchedule.wednesday.workout.time"></ion-input>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.activitySchedule.wednesday.workout.time"></ion-datetime>
             </ion-item>
             <ion-list-header>
                 Thursday
@@ -93,7 +98,7 @@
             </ion-item>
             <ion-item *ngIf="profile.activitySchedule.thursday.workout.performed">
                 <ion-label floating>Workout time</ion-label>
-                <ion-input type="number" [(ngModel)]="profile.activitySchedule.thursday.workout.time"></ion-input>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.activitySchedule.thursday.workout.time"></ion-datetime>
             </ion-item>
             <ion-list-header>
                 Friday
@@ -104,7 +109,7 @@
             </ion-item>
             <ion-item *ngIf="profile.activitySchedule.friday.workout.performed">
                 <ion-label floating>Workout time</ion-label>
-                <ion-input type="number" [(ngModel)]="profile.activitySchedule.friday.workout.time"></ion-input>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.activitySchedule.friday.workout.time"></ion-datetime>
             </ion-item>
             <ion-list-header>
                 Saturday
@@ -115,7 +120,7 @@
             </ion-item>
             <ion-item *ngIf="profile.activitySchedule.saturday.workout.performed">
                 <ion-label floating>Workout time</ion-label>
-                <ion-input type="number" [(ngModel)]="profile.activitySchedule.saturday.workout.time"></ion-input>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.activitySchedule.saturday.workout.time"></ion-datetime>
             </ion-item>
             <ion-list-header>
                 Sunday
@@ -126,7 +131,7 @@
             </ion-item>
             <ion-item *ngIf="profile.activitySchedule.sunday.workout.performed">
                 <ion-label floating>Workout time</ion-label>
-                <ion-input type="number" [(ngModel)]="profile.activitySchedule.sunday.workout.time"></ion-input>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.activitySchedule.sunday.workout.time"></ion-datetime>
             </ion-item>
         </ion-list>
         <!-- End of segment one -->

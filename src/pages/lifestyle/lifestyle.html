@@ -21,6 +21,9 @@
             <ion-segment-button value="exercise">
                 <ion-icon name="bicycle"></ion-icon>
             </ion-segment-button>
+            <ion-segment-button value="work">
+                <ion-icon name="briefcase"></ion-icon>
+            </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
 </ion-header>
@@ -62,6 +65,7 @@
             <ion-item>
                 <ion-label>Workout</ion-label>
                 <ion-checkbox [(ngModel)]="profile.activitySchedule.monday.workout.performed"></ion-checkbox>
+                <ion-note item-right>{{ profile.activitySchedule.monday.workout.performed ? 'Performed' : 'Not performed' }}</ion-note>
             </ion-item>
             <ion-item *ngIf="profile.activitySchedule.monday.workout.performed">
                 <ion-label floating>Workout time</ion-label>
@@ -73,6 +77,7 @@
             <ion-item>
                 <ion-label>Workout</ion-label>
                 <ion-checkbox [(ngModel)]="profile.activitySchedule.tuesday.workout.performed"></ion-checkbox>
+                <ion-note item-right>{{ profile.activitySchedule.tuesday.workout.performed ? 'Performed' : 'Not performed' }}</ion-note>
             </ion-item>
             <ion-item *ngIf="profile.activitySchedule.tuesday.workout.performed">
                 <ion-label floating>Workout time</ion-label>
@@ -84,6 +89,7 @@
             <ion-item>
                 <ion-label>Workout</ion-label>
                 <ion-checkbox [(ngModel)]="profile.activitySchedule.wednesday.workout.performed"></ion-checkbox>
+                <ion-note item-right>{{ profile.activitySchedule.wednesday.workout.performed ? 'Performed' : 'Not performed' }}</ion-note>
             </ion-item>
             <ion-item *ngIf="profile.activitySchedule.wednesday.workout.performed">
                 <ion-label floating>Workout time</ion-label>
@@ -95,6 +101,7 @@
             <ion-item>
                 <ion-label>Workout</ion-label>
                 <ion-checkbox [(ngModel)]="profile.activitySchedule.thursday.workout.performed"></ion-checkbox>
+                <ion-note item-right>{{ profile.activitySchedule.thursday.workout.performed ? 'Performed' : 'Not performed' }}</ion-note>
             </ion-item>
             <ion-item *ngIf="profile.activitySchedule.thursday.workout.performed">
                 <ion-label floating>Workout time</ion-label>
@@ -106,6 +113,7 @@
             <ion-item>
                 <ion-label>Workout</ion-label>
                 <ion-checkbox [(ngModel)]="profile.activitySchedule.friday.workout.performed"></ion-checkbox>
+                <ion-note item-right>{{ profile.activitySchedule.friday.workout.performed ? 'Performed' : 'Not performed' }}</ion-note>
             </ion-item>
             <ion-item *ngIf="profile.activitySchedule.friday.workout.performed">
                 <ion-label floating>Workout time</ion-label>
@@ -117,6 +125,7 @@
             <ion-item>
                 <ion-label>Workout</ion-label>
                 <ion-checkbox [(ngModel)]="profile.activitySchedule.saturday.workout.performed"></ion-checkbox>
+                <ion-note item-right>{{ profile.activitySchedule.saturday.workout.performed ? 'Performed' : 'Not performed' }}</ion-note>
             </ion-item>
             <ion-item *ngIf="profile.activitySchedule.saturday.workout.performed">
                 <ion-label floating>Workout time</ion-label>
@@ -128,10 +137,24 @@
             <ion-item>
                 <ion-label>Workout</ion-label>
                 <ion-checkbox [(ngModel)]="profile.activitySchedule.sunday.workout.performed"></ion-checkbox>
+                <ion-note item-right>{{ profile.activitySchedule.sunday.workout.performed ? 'Performed' : 'Not performed' }}</ion-note>
             </ion-item>
             <ion-item *ngIf="profile.activitySchedule.sunday.workout.performed">
                 <ion-label floating>Workout time</ion-label>
                 <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.activitySchedule.sunday.workout.time"></ion-datetime>
+            </ion-item>
+        </ion-list>
+        <!-- End of segment one -->
+
+        <!-- Start of segment one -->
+        <ion-list *ngSwitchCase="'work'">
+            <ion-item>
+                <ion-label floating>Work time</ion-label>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="workTime"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Duration</ion-label>
+                <ion-input type="number" [(ngModel)]="workDuration"></ion-input>
             </ion-item>
         </ion-list>
         <!-- End of segment one -->

@@ -19,6 +19,14 @@ export class LifestylePage {
     this.profile = _profileSvc.getProfile();
   }
 
+  /**
+   * TODO
+   * Get meals by constitution (serving hours, number, recommended interval)
+   * Make sleep, eating, and activity plan check methods and warnings
+   * (e.g. sleep must be before 10, must workout at least 3 times per week, meal interval and breakfast must suite the constitution)
+   * 
+   */
+
   public saveLifestyle(): void {
     this._profileSvc.saveProfile(this.profile);
   }

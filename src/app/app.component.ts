@@ -12,12 +12,10 @@ import {
     ExercisePage,
     ProfilePage,
     FoodListPage,
-    HealingPage,
     HomePage,
     LifestylePage,
     MealPlanPage,
     NutritionPage,
-    RecipesPage,
     RegistrationPage
 } from '../pages';
 
@@ -51,9 +49,7 @@ export class MyApp {
             { title: 'Exercise', component: ExercisePage, icon: 'bicycle' },
             { title: 'Meal plan', component: MealPlanPage, icon: 'clock' },
             { title: 'Nutrition', component: NutritionPage, icon: 'nutrition' },
-            { title: 'Healing', component: HealingPage, icon: 'heart' },
             { title: 'Foods', component: FoodListPage, icon: 'basket' },
-            { title: 'Recipes', component: RecipesPage, icon: 'restaurant' },
             { title: 'Account', component: AccountPage, icon: 'person' }
         ];
 

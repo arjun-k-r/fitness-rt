@@ -55,19 +55,15 @@ import {
     FoodListPage,
     ForgotPasswordPage,
     GettingStartedPage,
-    HealingPage,
     HomePage,
     LifestylePage,
     LoginPage,
     MealDetailsPage,
     MealPlanPage,
     FoodSelectPage,
-    NutrientPage,
     NutritionPage,
     PasswordResetPage,
     ProfilePage,
-    RecipeDetailsPage,
-    RecipesPage,
     RegistrationPage
 } from '../pages';
 
@@ -84,7 +80,6 @@ import {
     FitnessService,
     FoodDataService,
     MealService,
-    NutrientService,
     ProfileService
 } from '../providers';
 
@@ -101,19 +96,15 @@ export const thgDeclarations = [
     FoodListPage,
     ForgotPasswordPage,
     GettingStartedPage,
-    HealingPage,
     HomePage,
     LifestylePage,
     LoginPage,
     MealDetailsPage,
     MealPlanPage,
     FoodSelectPage,
-    NutrientPage,
     NutritionPage,
     PasswordResetPage,
     ProfilePage,
-    RecipeDetailsPage,
-    RecipesPage,
     RegistrationPage
 ];
 
@@ -128,19 +119,15 @@ export const thgEntries = [
     FoodListPage,
     ForgotPasswordPage,
     GettingStartedPage,
-    HealingPage,
     HomePage,
     LifestylePage,
     LoginPage,
     MealDetailsPage,
     MealPlanPage,
     FoodSelectPage,
-    NutrientPage,
     NutritionPage,
     PasswordResetPage,
     ProfilePage,
-    RecipeDetailsPage,
-    RecipesPage,
     RegistrationPage
 ];
 
@@ -165,6 +152,5 @@ export const thgProviders = [
     FitnessService,
     FoodDataService,
     MealService,
-    NutrientService,
     ProfileService
 ];

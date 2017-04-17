@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { Alert, AlertController, InfiniteScroll, Loading, LoadingController, ViewController } from 'ionic-angular';
 
 // Models
-import { IUsdaFood, FoodGroup } from '../../models';
+import { IFoodSearchResult, FoodGroup } from '../../models';
 
 // Providers
 import { FOOD_GROUPS, FoodDataService } from '../../providers';
@@ -14,12 +14,12 @@ import { FOOD_GROUPS, FoodDataService } from '../../providers';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoodSelectPage {
-  public foods: Array<IUsdaFood>;
+  public foods: Array<IFoodSearchResult>;
   public groups: Array<FoodGroup> = [...FOOD_GROUPS];
   public limit: number = 50;
   public searchQuery: string = '';
   public selectedGroup: FoodGroup = this.groups[0];
-  public selectedFoods: Array<IUsdaFood> = [];
+  public selectedFoods: Array<IFoodSearchResult> = [];
   public start: number;
   constructor(
     private _alertCtrl: AlertController,
@@ -48,7 +48,7 @@ export class FoodSelectPage {
     setTimeout(() => {
       this.start += 50;
       this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
-        .subscribe((data: Array<IUsdaFood>) => {
+        .subscribe((data: Array<IFoodSearchResult>) => {
           this.foods.push(...data);
           this._detectorRef.markForCheck();
         });
@@ -65,7 +65,7 @@ export class FoodSelectPage {
     loader.present();
     this.start = 0;
     this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
-      .subscribe((data: Array<IUsdaFood>) => {
+      .subscribe((data: Array<IFoodSearchResult>) => {
         setTimeout(() => {
           this.foods = [...data];
           loader.dismiss();
@@ -104,7 +104,7 @@ export class FoodSelectPage {
     }).present();
   }
 
-  public toggleItem(food: IUsdaFood): void {
+  public toggleItem(food: IFoodSearchResult): void {
     if (this.selectedFoods.indexOf(food) === -1) {
       this.selectedFoods.push(food);
     } else {

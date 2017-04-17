@@ -4,7 +4,7 @@ import { Http, URLSearchParams, Response, RequestOptions, Headers } from '@angul
 import { Observable } from 'rxjs/Rx';
 
 // Models
-import { Food, FoodGroup, INdbFood, IUsdaFood } from '../models';
+import { Food, FoodGroup, IFoodReportNutrient, IFoodReportSearchResult, IFoodSearchResult } from '../models';
 
 export const FOOD_GROUPS: Array<FoodGroup> = [
   new FoodGroup('', 'All foods'),
@@ -43,214 +43,214 @@ export class FoodDataService {
   private _foodNutritionUrl: string = 'https://api.nal.usda.gov/ndb/reports/';
   constructor(private _http: Http) { }
 
-  private _serializeFood(usdaFood: any): Food {
-    let newFood: Food = new Food(usdaFood['fg'], usdaFood['name'], usdaFood['ndbno']);
-    this._setNutrientValue(usdaFood['nutrients'], newFood);
+  private _serializeFood(foodReport: IFoodReportSearchResult): Food {
+    let newFood: Food = new Food(foodReport.fg, foodReport.name, foodReport.ndbno);
+    this._setNutrientValue(foodReport['nutrients'], newFood);
     console.log(newFood);
     return newFood;
   }
 
-  private _setNutrientValue(nutrients: Array<INdbFood>, food: Food): void {
-    nutrients.forEach((item: INdbFood) => {
-      switch (item.nutrient_id.toString()) {
+  private _setNutrientValue(nutrients: Array<IFoodReportNutrient>, food: Food): void {
+    nutrients.forEach((nutrient: IFoodReportNutrient) => {
+      switch (nutrient.nutrient_id.toString()) {
         case '255':
-          food.nutrition.water.value = +item.value;
+          food.nutrition.water.value = +nutrient.value;
           break;
 
         case '208':
-          food.nutrition.energy.value = +item.value;
+          food.nutrition.energy.value = +nutrient.value;
           break;
 
         case '203':
-          food.nutrition.protein.value = +item.value;
+          food.nutrition.protein.value = +nutrient.value;
           break;
 
         case '204':
-          food.nutrition.fats.value = +item.value;
+          food.nutrition.fats.value = +nutrient.value;
           break;
 
         case '205':
-          food.nutrition.carbs.value = +item.value;
+          food.nutrition.carbs.value = +nutrient.value;
           break;
 
         case '209':
-          food.nutrition.starch.value = +item.value;
+          food.nutrition.starch.value = +nutrient.value;
           break;
 
         case '213':
-          food.nutrition.lactose.value = +item.value;
+          food.nutrition.lactose.value = +nutrient.value;
           break;
 
         case '291':
-          food.nutrition.fiber.value = +item.value;
+          food.nutrition.fiber.value = +nutrient.value;
           break;
 
         case '269':
-          food.nutrition.sugars.value = +item.value;
+          food.nutrition.sugars.value = +nutrient.value;
           break;
 
         case '301':
-          food.nutrition.calcium.value = +item.value;
+          food.nutrition.calcium.value = +nutrient.value;
           break;
 
         case '303':
-          food.nutrition.iron.value = +item.value;
+          food.nutrition.iron.value = +nutrient.value;
           break;
 
         case '304':
-          food.nutrition.magnesium.value = +item.value;
+          food.nutrition.magnesium.value = +nutrient.value;
           break;
 
         case '305':
-          food.nutrition.phosphorus.value = +item.value;
+          food.nutrition.phosphorus.value = +nutrient.value;
           break;
 
         case '306':
-          food.nutrition.potassium.value = +item.value;
+          food.nutrition.potassium.value = +nutrient.value;
           break;
 
         case '307':
-          food.nutrition.sodium.value = +item.value;
+          food.nutrition.sodium.value = +nutrient.value;
           break;
 
         case '309':
-          food.nutrition.zinc.value = +item.value;
+          food.nutrition.zinc.value = +nutrient.value;
           break;
 
         case '312':
-          food.nutrition.copper.value = +item.value;
+          food.nutrition.copper.value = +nutrient.value;
           break;
 
         case '315':
-          food.nutrition.manganese.value = +item.value;
+          food.nutrition.manganese.value = +nutrient.value;
           break;
 
         case '317':
-          food.nutrition.selenium.value = +item.value;
+          food.nutrition.selenium.value = +nutrient.value;
           break;
 
         case '401':
-          food.nutrition.vitaminC.value = +item.value;
+          food.nutrition.vitaminC.value = +nutrient.value;
           break;
 
         case '404':
-          food.nutrition.vitaminB1.value = +item.value;
+          food.nutrition.vitaminB1.value = +nutrient.value;
           break;
 
         case '405':
-          food.nutrition.vitaminB2.value = +item.value;
+          food.nutrition.vitaminB2.value = +nutrient.value;
           break;
 
         case '406':
-          food.nutrition.vitaminB3.value = +item.value;
+          food.nutrition.vitaminB3.value = +nutrient.value;
           break;
 
         case '410':
-          food.nutrition.vitaminB5.value = +item.value;
+          food.nutrition.vitaminB5.value = +nutrient.value;
           break;
 
         case '415':
-          food.nutrition.vitaminB5.value = +item.value;
+          food.nutrition.vitaminB5.value = +nutrient.value;
           break;
 
         case '417':
-          food.nutrition.vitaminB9.value = +item.value;
+          food.nutrition.vitaminB9.value = +nutrient.value;
           break;
 
         case '421':
-          food.nutrition.choline.value = +item.value;
+          food.nutrition.choline.value = +nutrient.value;
           break;
 
         case '418':
-          food.nutrition.vitaminB12.value = +item.value;
+          food.nutrition.vitaminB12.value = +nutrient.value;
           break;
 
         case '320':
-          food.nutrition.vitaminA.value = +item.value;
+          food.nutrition.vitaminA.value = +nutrient.value;
           break;
 
         case '323':
-          food.nutrition.vitaminE.value = +item.value;
+          food.nutrition.vitaminE.value = +nutrient.value;
           break;
 
         case '328':
-          food.nutrition.vitaminD.value = +item.value;
+          food.nutrition.vitaminD.value = +nutrient.value;
           break;
 
         case '430':
-          food.nutrition.vitaminK.value = +item.value;
+          food.nutrition.vitaminK.value = +nutrient.value;
           break;
 
         case '606':
-          food.nutrition.satFat.value = +item.value;
+          food.nutrition.satFat.value = +nutrient.value;
           break;
 
         case '618':
-          food.nutrition.ala.value = +item.value;
+          food.nutrition.ala.value = +nutrient.value;
           break;
 
         case '619':
-          food.nutrition.la.value = +item.value;
+          food.nutrition.la.value = +nutrient.value;
           break;
 
         case '621':
-          food.nutrition.dha.value = +item.value;
+          food.nutrition.dha.value = +nutrient.value;
           break;
 
         case '629':
-          food.nutrition.epa.value = +item.value;
+          food.nutrition.epa.value = +nutrient.value;
           break;
 
         case '605':
-          food.nutrition.transFat.value = +item.value;
+          food.nutrition.transFat.value = +nutrient.value;
           break;
 
         case '501':
-          food.nutrition.tryptophan.value = +item.value;
+          food.nutrition.tryptophan.value = +nutrient.value;
           break;
 
         case '502':
-          food.nutrition.threonine.value = +item.value;
+          food.nutrition.threonine.value = +nutrient.value;
           break;
 
         case '503':
-          food.nutrition.isoleucine.value = +item.value;
+          food.nutrition.isoleucine.value = +nutrient.value;
           break;
 
         case '504':
-          food.nutrition.leucine.value = +item.value;
+          food.nutrition.leucine.value = +nutrient.value;
           break;
 
         case '505':
-          food.nutrition.lysine.value = +item.value;
+          food.nutrition.lysine.value = +nutrient.value;
           break;
 
         case '506':
-          food.nutrition.methionine.value = +item.value;
+          food.nutrition.methionine.value = +nutrient.value;
           break;
 
         case '508':
-          food.nutrition.phenylalanine.value = +item.value;
+          food.nutrition.phenylalanine.value = +nutrient.value;
           break;
 
         case '510':
-          food.nutrition.valine.value = +item.value;
+          food.nutrition.valine.value = +nutrient.value;
           break;
 
         case '511':
-          food.nutrition.arginine.value = +item.value;
+          food.nutrition.arginine.value = +nutrient.value;
           break;
 
         case '512':
-          food.nutrition.histidine.value = +item.value;
+          food.nutrition.histidine.value = +nutrient.value;
           break;
 
         case '262':
-          food.nutrition.caffeine.value = +item.value;
+          food.nutrition.caffeine.value = +nutrient.value;
           break;
 
         case '221':
-          food.nutrition.alcohol.value = +item.value;
+          food.nutrition.alcohol.value = +nutrient.value;
           break;
 
         default:
@@ -291,7 +291,7 @@ export class FoodDataService {
     });
   }
 
-  public getFoods$(searhQuery: string = '', start: number = 0, limit: number = 100, foodGroupId: string = ''): Observable<Array<IUsdaFood>> {
+  public getFoods$(searhQuery: string = '', start: number = 0, limit: number = 100, foodGroupId: string = ''): Observable<Array<IFoodSearchResult>> {
     let headers: Headers = new Headers({ 'Content-Type': 'application/json' }),
       options: RequestOptions = new RequestOptions(),
       params: URLSearchParams = new URLSearchParams();

@@ -6,10 +6,10 @@ export class AlertService {
 
   constructor(private _alertCtrl: AlertController) {}
 
-  public showAlert(message: string): void {
+  public showAlert(message: string, subTitle: string = "This doesn't seem to be right", title: string = 'Uhh ohh...'): void {
     let alertOpts: AlertOptions = {
-      title: 'Uhh ohh,',
-      subTitle: 'Something went wrong',
+      title: title,
+      subTitle: subTitle,
       message: message,
       buttons: ['OK']
     };

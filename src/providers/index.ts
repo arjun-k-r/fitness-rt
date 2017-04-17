@@ -6,5 +6,4 @@ export { DRIService } from './dri.service';
 export { FitnessService } from './fitness.service';
 export { FOOD_GROUPS, FoodDataService } from './food-data.service';
 export { MealService } from './meal.service';
-export { NutrientService } from './nutrient.service';
 export { ProfileService } from './profile.service';

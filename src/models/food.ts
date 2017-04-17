@@ -1,6 +1,6 @@
 import { Nutrition } from './nutrition';
 
-export interface INdbFood {
+export interface IFoodReportNutrient {
     group: string;
     nutrient_id: string | number;
     name: string;
@@ -8,7 +8,20 @@ export interface INdbFood {
     value: string;
 }
 
-export interface IUsdaFood {
+export interface IFoodReportSearchResult {
+     // Data source
+    ds: string;
+    // Food group
+    fg: string;
+    // Food name
+    name: string;
+    // Database id
+    ndbno: string;
+    // Food nutritional values
+    nutrients: Array<IFoodReportNutrient>;
+}
+
+export interface IFoodSearchResult {
     ds: string;
     group: string;
     name: string;
@@ -30,6 +43,7 @@ export class Food {
         public nutrition: Nutrition = new Nutrition(),
         public quantity: number = 100,
         public unit: string = 'g',
-        public type: string = 'sweet'
+        public taste: string = 'sweet',
+        public type: string = 'starch'
     ) {}
 }

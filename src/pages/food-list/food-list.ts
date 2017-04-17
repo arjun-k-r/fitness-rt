@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { AlertController, InfiniteScroll, Loading, LoadingController } from 'ionic-angular';
 
 // Models
-import { IUsdaFood, FoodGroup } from '../../models';
+import { IFoodSearchResult, FoodGroup } from '../../models';
 
 // Pages
 import { FoodDetailsPage } from '../food-details/food-details';
@@ -18,7 +18,7 @@ import { FOOD_GROUPS, FoodDataService } from '../../providers';
 })
 export class FoodListPage {
   public detailsPage: any = FoodDetailsPage;
-  public foods: Array<IUsdaFood>;
+  public foods: Array<IFoodSearchResult>;
   public groups: Array<FoodGroup> = [...FOOD_GROUPS];
   public limit: number = 50;
   public searchQuery: string = '';
@@ -46,7 +46,7 @@ export class FoodListPage {
     setTimeout(() => {
       this.start += 50;
       this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
-        .subscribe((data: Array<IUsdaFood>) => {
+        .subscribe((data: Array<IFoodSearchResult>) => {
           this.foods.push(...data);
           this._detectorRef.markForCheck();
         });
@@ -63,7 +63,7 @@ export class FoodListPage {
     loader.present();
     this.start = 0;
     this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
-      .subscribe((data: Array<IUsdaFood>) => {
+      .subscribe((data: Array<IFoodSearchResult>) => {
         setTimeout(() => {
           this.foods = [...data];
           loader.dismiss();

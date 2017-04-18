@@ -1,28 +1,19 @@
+// App
 import { Injectable } from '@angular/core';
 import { User } from '@ionic/cloud-angular';
 import { Observable } from 'rxjs/Observable';
 
-// Firebase
+// Third-party
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
-
-// Lodash
 import * as _ from 'lodash';
 
 // Models
-import { Food, IFoodSearchResult, Meal, MealFoodItem, MealPlan, Nutrition, UserProfile } from '../models';
+import { Food, IFoodSearchResult, Meal, MealFoodItem, MealPlan, MealWarning, Nutrition, UserProfile } from '../models';
 
 // Providers
 import { FoodDataService } from './food-data.service';
 import { FoodService } from './food.service';
 import { ProfileService } from './profile.service';
-
-class FoodCombiningMessage {
-  constructor(
-    public isGood: boolean,
-    public message: string,
-    public moreInfo: string
-  ) { }
-}
 
 @Injectable()
 export class MealService {
@@ -33,18 +24,15 @@ export class MealService {
     private _foodDataSvc: FoodDataService,
     private _profileSvc: ProfileService,
     private _user: User
-  ) {
-    this._mealPlan = _af.database.object(`/meal-plans/${_user.id}/${new Date().getDay()}`);
-  }
+  ) { this._mealPlan = _af.database.object(`/meal-plans/${_user.id}/${new Date().getDay()}`); }
 
   /**
    * Verifies if the food items in a meal are well combined
    * @param {Array} foodItems The food items to check
-   * @returns Returns a list of warnings if there are wrong combinations
+   * @returns {Array} Returns a list of warnings if there are wrong combinations
    */
-  private _checkCombining(foodItems: Array<MealFoodItem>): Array<FoodCombiningMessage> {
+  private _checkCombining(foodItems: Array<MealFoodItem>): Array<MealWarning> {
     let acidFruits: Array<MealFoodItem> = [],
-      combiningMessages: Array<FoodCombiningMessage> = [],
       fats: Array<MealFoodItem> = [],
       hasAcids: boolean = false,
       hasFluids: boolean = false,
@@ -55,11 +43,13 @@ export class MealService {
       starches: Array<MealFoodItem> = [],
       subAcidFruits: Array<MealFoodItem> = [],
       sweetFruits: Array<MealFoodItem> = [],
-      veggies: Array<MealFoodItem> = [];
+      veggies: Array<MealFoodItem> = [],
+      warnings: Array<MealWarning> = [];
 
     foodItems.forEach((item: MealFoodItem) => {
       this._foodSvc.clasifyFoodType(item);
 
+      // Classify the food items by their type
       switch (item.type) {
         case 'acid':
           hasAcids = true;
@@ -116,18 +106,30 @@ export class MealService {
 
     /**
      * Rule #1
-     * Not Starch-Acids
+     * Not Starch-Protein
      */
-    if (!!starches.length && hasAcids) {
-      combiningMessages.push(new FoodCombiningMessage(false, 'No starch and acid at the same meal!', 'Starch digestion requires alkaline medium, whereas acid digestion require acid medium.'));
+    if (!!starches.length && !!proteins.length) {
+      warnings.push(
+        new MealWarning(
+          false,
+          'No starch and protein at the same meal!',
+          'Starch digestion requires alkaline medium, whereas protein digestion require acid medium.'
+        )
+      );
     }
 
     /**
      * Rule #2
-     * Not Starch-Protein
+     * Not Starch-Acid
      */
-    if (!!starches.length && !!proteins.length) {
-      combiningMessages.push(new FoodCombiningMessage(false, 'No starch and protein at the same meal!', 'Starch digestion requires alkaline medium, whereas protein digestion require acid medium.'));
+    if (!!starches.length && hasAcids) {
+      warnings.push(
+        new MealWarning(
+          false,
+          'No starch and acid at the same meal!',
+          'Starch digestion requires alkaline medium, whereas acid digestion require acid medium.'
+        )
+      );
     }
 
     /**
@@ -135,7 +137,13 @@ export class MealService {
      * Not Protein-Protein of different families
      */
     if (proteins.length > 1 && proteins[0].group !== proteins[1].group) {
-      combiningMessages.push(new FoodCombiningMessage(false, 'No more than one type of protein at the same meal!', 'Each kind of protein requires different digestive secretion timings and preparations'));
+      warnings.push(
+        new MealWarning(
+          false,
+          'No more than one type of protein at the same meal!',
+          'Each kind of protein requires different digestive secretion timings and preparations'
+        )
+      );
     }
 
     /**
@@ -143,66 +151,128 @@ export class MealService {
      * Not Acid-Protein
      */
     if (hasAcids && !!proteins.length) {
-      combiningMessages.push(new FoodCombiningMessage(false, 'No acid and protein at the same meal!', 'Pepsin, the enzyme required for protein digestion, is inhibited or destroyed by excess stomach acidity'));
+      warnings.push(
+        new MealWarning(
+          false,
+          'No acid and protein at the same meal!',
+          'Pepsin, the enzyme required for protein digestion, is inhibited or destroyed by excess stomach acidity'
+        )
+      );
     }
 
     /**
      * Rule #5
-     * Not Fats-Protein
+     * Not Fat-Protein
      */
     if (!!fats.length && !!proteins.length) {
-      combiningMessages.push(new FoodCombiningMessage(false, 'No fat and protein at the same meal!', 'Fat inhibits gastric juice secretion and slow down digestion. Hence, fats also inhibit pepsin secretion, the enzyme required for protein digestion'));
+      warnings.push(
+        new MealWarning(
+          false,
+          'No fat and protein at the same meal!',
+          'Fat inhibits gastric juice secretion and slow down digestion. Hence, fats also inhibit pepsin secretion, the enzyme required for protein digestion'
+        )
+      );
     }
 
     /**
      * Rule #6
-     * Not Sweets-Protein
+     * Not Sugar-Protein
      */
     if ((hasSugars || !!sweetFruits) && !!proteins.length) {
-      combiningMessages.push(new FoodCombiningMessage(false, 'No sweets and protein at the same meal!', 'Sugars do not undergo any sort of digestion in the mout or stomach, but only a brief digestion (30 minutes) in the small intestine. Protein holds sugars in the stomach (4 hours) and makes them ferment. Sugars also inhibit gastric juice secretion.'));
+      warnings.push(
+        new MealWarning(
+          false,
+          'No sweets and protein at the same meal!',
+          'Sugars do not undergo any sort of digestion in the mout or stomach, but only a brief digestion (30 minutes) in the small intestine. Protein holds sugars in the stomach (4 hours) and makes them ferment. Sugars also inhibit gastric juice secretion.'
+        )
+      );
     }
 
     /**
      * Rule #6
-     * Not Sweets-Starch
+     * Not Sugar-Starch
      */
     if ((hasSugars || !!sweetFruits) && !!starches.length) {
-      combiningMessages.push(new FoodCombiningMessage(false, 'No sweets and starch at the same meal!', 'Sugars do not undergo any sort of digestion in the mout or stomach, but only a brief digestion (30 minutes) in the small intestine. Starch holds sugars in the stomach (2 hours) and makes them ferment. Sugars also inhibit ptyalin secretion, the enzyme from saliva required for starch digestion.'));
+      warnings.push(
+        new MealWarning(
+          false,
+          'No sweets and starch at the same meal!',
+          'Sugars do not undergo any sort of digestion in the mouth or stomach, but only a brief digestion (30 minutes) in the small intestine. Starch holds sugars in the stomach (2 hours) and makes them ferment. Sugars also inhibit ptyalin secretion, the enzyme from saliva required for starch digestion.'
+        )
+      );
     }
 
     /**
      * Rule #7
-     * Melons alone
+     * Melon alone
      */
-    if (hasMelon) {
-      combiningMessages.push(new FoodCombiningMessage(false, 'Melons go alone or stay alone', 'Melons do not undergo any sort of digestion in the mout or stomach, but only a brief digestion (10 minutes) in the small intestine. Any other food would hold melons in the stomach and makes them to ferment.'));
+    if (hasMelon && foodItems.length > 1) {
+      warnings.push(
+        new MealWarning(
+          false,
+          'Melons go alone or stay alone',
+          'Melons do not undergo any sort of digestion in the mouth or stomach, but only a brief digestion (10 minutes) in the small intestine. Any other food would hold melons in the stomach and make them ferment.'
+        )
+      );
     }
 
     /**
      * Rule #8
      * Milk alone
      */
-    if (hasMilk) {
-      combiningMessages.push(new FoodCombiningMessage(false, 'Milk goes alone or stays alone!', ''));
+    if (hasMilk && foodItems.length > 1) {
+      warnings.push(
+        new MealWarning(
+          false,
+          'Milk goes alone or stays alone!',
+          "Humans are the only species that drink another species' milk, even after infancy. Milk forms curds in the stomach which further suround particles of food, inhibiting the action of gastric juices upon them and preventing, thus, their digestion."
+        )
+      );
     }
 
     /**
      * Rule #9
-     * Not Fluids
+     * Fluids alone
      */
-    if (hasFluids) {
-      combiningMessages.push(new FoodCombiningMessage(false, 'No fluids after or during meals!', ''));
+    if (hasFluids && foodItems.length > 1) {
+      warnings.push(
+        new MealWarning(
+          false,
+          'No fluids after or during meals!',
+          'Fluids dilute the gastric juices required for digestion.'
+        )
+      );
     }
 
     /**
      * Rule #10
-     * Not Acid fruit-Sweet fruit
+     * Fruits alone
      */
-    if (!!acidFruits.length && !!sweetFruits.length) {
-      combiningMessages.push(new FoodCombiningMessage(false, 'No acid fruit and sweet fruit at the same meal!', ''));
+    if ((!!acidFruits.length && acidFruits.length > foodItems.length) || (!!subAcidFruits.length && subAcidFruits.length > foodItems.length) || (!!sweetFruits.length && sweetFruits.length > foodItems.length)) {
+      warnings.push(
+        new MealWarning(
+          false,
+          'Fruits go alone or stay alone!',
+          'Fruits undergo a brief digestion (30-60 minutes) in the small intestine. Any other food would hold fruit in the stomach and make them ferment.'
+        )
+      );
     }
 
-    return combiningMessages;
+    /**
+     * Rule #11
+     * Not Acid fruits - Sweet fruits
+     */
+    if (!!acidFruits.length && !!sweetFruits.length) {
+      warnings.push(
+        new MealWarning(
+          false,
+          'No acid fruit and sweet fruit at the same meal!',
+          'Sweet fruit do not undergo any sort of digestion in the mouth or stomach, but only a brief digestion (30 minutes) in the small intestine. Acid fruit hold sweet fruit in the stomach and make them ferment. The sugar from sweet fruit also inhibit ptyalin secretion, the enzyme from saliva required for acid digestion.'
+        )
+      );
+    }
+
+    return warnings;
   }
 
   /**
@@ -212,16 +282,14 @@ export class MealService {
     let profile: UserProfile = this._profileSvc.getProfile(),
       breakfastTime: number = +profile.mealPlan.breakfastTime.split(':')[0],
       meals: Array<Meal> = [],
-      mealTime: number = breakfastTime,
       newMeal: Meal,
       sleepTime: number = +profile.sleepPlan.schedule.start.split(':')[0];
 
-    do {
+    for (let mealTime = breakfastTime; mealTime < sleepTime - 2; mealTime += +profile.mealPlan.interval) {
       newMeal = new Meal();
       newMeal.time = mealTime < 10 ? `0${mealTime}:00` : `${mealTime}:00`;
       meals.push(newMeal);
-      mealTime += +profile.mealPlan.interval;
-    } while (mealTime <= sleepTime - 4);
+    }
 
     return meals;
   }
@@ -229,7 +297,7 @@ export class MealService {
   /**
    * Verifies if there are tastes not suitable for the users constitution
    * @param {Array} foodItems The food items to check
-   * @returns Returns a list of recomendations if there are wrong tastes
+   * @returns {boolean} Returns a list of recomendations if there are wrong tastes
    */
   private _checkTastes(foodItems: Array<MealFoodItem>): boolean {
     /**

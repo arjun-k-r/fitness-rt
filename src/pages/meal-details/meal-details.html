@@ -11,6 +11,9 @@
             <ion-segment-button value="warnings">
                 <ion-icon name="warning"></ion-icon>
             </ion-segment-button>
+            <ion-segment-button value="serving">
+                <ion-icon name="done-all"></ion-icon>
+            </ion-segment-button>
             <ion-segment-button value="nutrition">
                 <ion-icon name="nutrition"></ion-icon>
             </ion-segment-button>
@@ -36,6 +39,57 @@
             <ion-fab bottom right>
                 <button ion-fab (click)="addMealItems()"><ion-icon name="add"></ion-icon></button>
             </ion-fab>
+        </div>
+        <!-- End of segment -->
+
+        <!-- Start of segment -->
+        <div *ngSwitchCase="'serving'">
+            <ion-list>
+                <ion-item-header>
+                    Before serving my meal
+                </ion-item-header>
+                <ion-item>
+                    <ion-label>Am I truly hungry?</ion-label>
+                    <ion-checkbox [(ngModel)]="meal.serving.hunger"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Am I in a bad mood?</ion-label>
+                    <ion-checkbox [(ngModel)]="meal.serving.badMood"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Am I in dis-ease?</ion-label>
+                    <ion-checkbox [(ngModel)]="meal.serving.disEase"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Am I grateful for this meal?</ion-label>
+                    <ion-checkbox [(ngModel)]="meal.serving.gratitude"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Am I in a peaceful environment?</ion-label>
+                    <ion-checkbox [(ngModel)]="meal.serving.silence"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Am I going to work after my meal?</ion-label>
+                    <ion-checkbox [(ngModel)]="meal.serving.beforeWork"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Am I going to eat slowly and chew my food properly?</ion-label>
+                    <ion-checkbox [(ngModel)]="meal.serving.chewing"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Am I going to overeat?</ion-label>
+                    <ion-checkbox [(ngModel)]="meal.serving.overeating"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Is my meal entirely organic?</ion-label>
+                    <ion-checkbox [(ngModel)]="meal.serving.organic"></ion-checkbox>
+                </ion-item>
+            </ion-list>
+        </div>
+        <!-- End of segment -->
+
+        <!-- Start of segment -->
+        <div *ngSwitchCase="'warnings'">
         </div>
         <!-- End of segment -->
 

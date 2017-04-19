@@ -13,6 +13,7 @@ const NUTRIENT_MEANS: {
   sodium: number,
   starch: number,
   sugars: number,
+  vitaminC: number,
   water: number
 } = {
     'carbs': 10,
@@ -23,6 +24,7 @@ const NUTRIENT_MEANS: {
     'sodium': 1000,
     'starch': 3,
     'sugars': 11,
+    'vitaminC': 30,
     'water': 50
   };
 
@@ -36,7 +38,7 @@ export class FoodService {
    * @returns {boolean} Returns true if the food is an acid fruit
    */
   private _checkAcidFruit(food: Food): boolean {
-    return food.name.toLocaleLowerCase().includes('tomato') || (food.group === 'Fruits and Fruit Juices' && food.nutrition.sugars.value < (NUTRIENT_MEANS.sugars - 1));
+    return food.name.toLocaleLowerCase().includes('tomato') || (food.group === 'Fruits and Fruit Juices' && food.nutrition.sugars.value < (NUTRIENT_MEANS.sugars - 1) && food.nutrition.vitaminC.value > NUTRIENT_MEANS.vitaminC);
   }
 
   /**
@@ -126,7 +128,7 @@ export class FoodService {
    * @returns {boolean} Returns true if the food is sour
    */
   private _checkSour(food: Food): boolean {
-    return (this._checkAcidFruit(food) && !(this._checkSubAcidFruit(food) || this._checkSweetFruit(food))) || food.nutrition.alcohol.value > 0 || food.name.toLocaleLowerCase().includes('vinegar') || (food.group === 'Dairy and Egg Products' && food.nutrition.lactose.value < NUTRIENT_MEANS.lactose);
+    return this._checkAcidFruit(food) || food.nutrition.alcohol.value > 0 || food.name.toLocaleLowerCase().includes('vinegar') || (food.group === 'Dairy and Egg Products' && food.nutrition.lactose.value < NUTRIENT_MEANS.lactose);
   }
 
   /**
@@ -144,7 +146,7 @@ export class FoodService {
    * @returns {boolean} Returns true if the food is a sub-acid fruit
    */
   private _checkSubAcidFruit(food: Food): boolean {
-    return food.group === 'Fruits and Fruit Juices' && (food.nutrition.sugars.value <= (NUTRIENT_MEANS.sugars + 1) || food.nutrition.sugars.value >= (NUTRIENT_MEANS.sugars - 1));
+    return food.group === 'Fruits and Fruit Juices' && (food.nutrition.sugars.value <= (NUTRIENT_MEANS.sugars + 1) && food.nutrition.sugars.value >= (NUTRIENT_MEANS.sugars - 1));
   }
 
   /**

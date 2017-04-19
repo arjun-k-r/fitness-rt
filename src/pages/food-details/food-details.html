@@ -12,7 +12,7 @@
             <p item-content>{{ (food)?.group }}</p>
         </ion-item>
         <ion-item>
-            Taste
+            Tastes
             <p item-content>
                 <span *ngFor="let taste of (food)?.tastes; let l = last">{{ l ? taste : taste + ', '}}</span>
             </p>

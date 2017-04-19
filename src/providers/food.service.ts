@@ -14,6 +14,7 @@ const NUTRIENT_MEANS: {
   starch: number,
   sugars: number,
   vitaminC: number,
+  vitaminK: number,
   water: number
 } = {
     'carbs': 10,
@@ -25,6 +26,7 @@ const NUTRIENT_MEANS: {
     'starch': 3,
     'sugars': 11,
     'vitaminC': 30,
+    'vitaminK': 125,
     'water': 50
   };
 
@@ -33,7 +35,8 @@ export class FoodService {
   constructor() { }
 
   /**
-   * Verifies if food is an acid fruit (low sugar)
+   * Verifies if food is an acid fruit
+   * @description A fruit is an acid if it is low in sugar and high in vitamin C
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is an acid fruit
    */
@@ -43,6 +46,7 @@ export class FoodService {
 
   /**
    * Verifies if food has astrigent taste (e.g. tannins, absorbs water, or low fat)
+   * @description A food is astrigent if it contains tannins and if it is high in fiber, low in sugars, and low in fat (absorbs water)
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is astrigent
    */
@@ -51,16 +55,18 @@ export class FoodService {
   }
 
   /**
-   * Verifies if food has bitter taste (e.g. alkalies or high fiber)
+   * Verifies if food has bitter taste
+   * @description A food is bitter if it is a leafy green (high in vitamin K), herb, or spice
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is bitter
    */
   private _checkBitter(food: Food): boolean {
-    return (food.group === 'Spices and Herbs' || food.group === 'Vegetables and Vegetable Products') && food.nutrition.fiber.value >= NUTRIENT_MEANS.fiber;
+    return (food.group === 'Spices and Herbs' || food.group === 'Vegetables and Vegetable Products') && food.nutrition.vitaminK.value >= NUTRIENT_MEANS.vitaminK;
   }
 
   /**
-   * Verifies if food is a fatty food (high fat)
+   * Verifies if food is a fatty food
+   * @description A food is fatty if it has high fat content
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is a fatty food
    */
@@ -96,7 +102,8 @@ export class FoodService {
   }
 
   /**
-   * Verifies if food is a protein food (high protein or animal product)
+   * Verifies if food is a protein food
+   * @description A food is a protein if it has high protein content or if it is an animal product
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is a protein food
    */
@@ -105,7 +112,8 @@ export class FoodService {
   }
 
   /**
-   * Verifies if food has pungent taste (e.g. acids, spicy, or high vitamin C herbs, spices, and leafy greens)
+   * Verifies if food has pungent taste
+   * @description A food is pungent if it is hot and spicy
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is pungent
    */
@@ -114,7 +122,8 @@ export class FoodService {
   }
 
   /**
-   * Verifies if food has salty taste (e.g. fish, seafood, or high sodium)
+   * Verifies if food has salty taste
+   * @description A food is salty if it has high sodium content, typically a seafood
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is salty
    */
@@ -124,6 +133,7 @@ export class FoodService {
 
   /**
    * Verifies if food has sour taste (e.g. citrus or fermented)
+   * @description A food is sour if it is a an acid fruit, alcool, or fermented food
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is sour
    */
@@ -132,7 +142,8 @@ export class FoodService {
   }
 
   /**
-   * Verifies if food is a starchy food (high starch)
+   * Verifies if food is a starchy food
+   * @description A food is starchy if it has hhigh carbohydrate or starch content
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is a starchy food
    */
@@ -151,6 +162,7 @@ export class FoodService {
 
   /**
    * Verifies if food is a sugar
+   * @description A food is a sugar or sweet if it has high sugar content
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is a sugar
    */
@@ -159,7 +171,8 @@ export class FoodService {
   }
 
   /**
-   * Verifies if food is a sweet fruit (high sugar)
+   * Verifies if food is a sweet fruit
+   * @description A fruit is sweet if it has high sugar content
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is a sweet fruit
    */
@@ -169,6 +182,7 @@ export class FoodService {
 
   /**
    * Verifies if food is a non-starch
+   * @description A food is non-starchy typically if it is a vegetable
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is a non-starch
    */

@@ -1,6 +1,6 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
-import { Alert, AlertController, InfiniteScroll, Loading, LoadingController, ViewController } from 'ionic-angular';
+import { AlertController, InfiniteScroll, Loading, LoadingController, ViewController } from 'ionic-angular';
 
 // Models
 import { IFoodSearchResult, FoodGroup } from '../../models';

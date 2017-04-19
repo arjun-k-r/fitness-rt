@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 
 // Third-party
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
-import * as _ from 'lodash';
 
 // Models
 import { Food, IFoodSearchResult, Meal, MealFoodItem, MealPlan, MealWarning, Nutrition, UserProfile } from '../models';

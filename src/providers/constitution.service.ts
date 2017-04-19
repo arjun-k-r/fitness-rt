@@ -9,9 +9,6 @@ import * as _ from 'lodash';
 // Models
 import { Constitution, ConstitutionQuizQuestion, ConstitutionQuizCharacterstic, Dosha, UserProfile } from '../models';
 
-// Providers
-import { AyurvedicService } from './ayurvedic.service';
-
 @Injectable()
 export class ConstitutionService {
   constructor(

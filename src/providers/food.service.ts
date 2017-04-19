@@ -41,7 +41,7 @@ export class FoodService {
    * @returns {boolean} Returns true if the food is an acid fruit
    */
   private _checkAcidFruit(food: Food): boolean {
-    return food.name.toLocaleLowerCase().includes('tomato') || (food.group === 'Fruits and Fruit Juices' && food.nutrition.sugars.value < (NUTRIENT_MEANS.sugars - 1) && food.nutrition.vitaminC.value > NUTRIENT_MEANS.vitaminC);
+    return food.name.toLocaleLowerCase().includes('tomato') || (food.group === 'Fruits and Fruit Juices' && ((food.nutrition.sugars.value < (NUTRIENT_MEANS.sugars - 1) && food.nutrition.vitaminC.value > NUTRIENT_MEANS.vitaminC) || food.nutrition.sugars.value === 0));
   }
 
   /**

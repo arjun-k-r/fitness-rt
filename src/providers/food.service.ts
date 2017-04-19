@@ -27,7 +27,7 @@ const NUTRIENT_MEANS: {
     'sugars': 11,
     'vitaminC': 30,
     'vitaminK': 125,
-    'water': 50
+    'water': 10
   };
 
 @Injectable()
@@ -45,13 +45,13 @@ export class FoodService {
   }
 
   /**
-   * Verifies if food has astrigent taste (e.g. tannins, absorbs water, or low fat)
-   * @description A food is astrigent if it contains tannins and if it is high in fiber, low in sugars, and low in fat (absorbs water)
+   * Verifies if food has astrigent taste
+   * @description A food is astrigent if it is raw and contains tannins and if it is high in fiber, and low in fat (absorbs water)
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is astrigent
    */
   private _checkAstrigent(food: Food): boolean {
-    return (food.group === 'Fruits and Fruit Juices' || food.group === 'Legumes and Legume Products' || food.group === 'Spices and Herbs' || food.group === 'Vegetables and Vegetable Products') && food.nutrition.fats.value < NUTRIENT_MEANS.fat && food.nutrition.sugars.value < (NUTRIENT_MEANS.sugars - 1) && food.nutrition.fiber.value > NUTRIENT_MEANS.fiber;
+    return ((food.group === 'Fruits and Fruit Juices' || food.group === 'Legumes and Legume Products' || food.group === 'Spices and Herbs' || food.group === 'Vegetables and Vegetable Products') && food.nutrition.fats.value < NUTRIENT_MEANS.fat && food.nutrition.fiber.value > NUTRIENT_MEANS.fiber) || ((food.name.toLocaleLowerCase().includes('raw') || food.name.toLocaleLowerCase().includes('dried') || food.name.toLocaleLowerCase().includes('dry') || food.name.toLocaleLowerCase().includes('dehydrated')) && !(food.name.toLocaleLowerCase().includes('cooked') || food.name.toLocaleLowerCase().includes('stewed')));
   }
 
   /**
@@ -113,12 +113,12 @@ export class FoodService {
 
   /**
    * Verifies if food has pungent taste
-   * @description A food is pungent if it is hot and spicy
+   * @description A food is pungent if it contains sulfur or capsacin (hot and spicy)
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is pungent
    */
   private _checkPungent(food: Food): boolean {
-    return food.group === 'Spices and Herbs' || food.name.toLocaleLowerCase().includes('cayenne') || food.name.toLocaleLowerCase().includes('hot') || food.name.toLocaleLowerCase().includes('chilli') || food.name.toLocaleLowerCase().includes('garlic') || food.name.toLocaleLowerCase().includes('onion');
+    return food.group === 'Spices and Herbs' || food.name.toLocaleLowerCase().includes('cayenne') || food.name.toLocaleLowerCase().includes('hot') || food.name.toLocaleLowerCase().includes('chilli') || food.name.toLocaleLowerCase().includes('garlic') || food.name.toLocaleLowerCase().includes('onion') || food.name.toLocaleLowerCase().includes('radish') || food.name.toLocaleLowerCase().includes('mustard') || food.name.toLocaleLowerCase().includes('turnip');
   }
 
   /**
@@ -199,16 +199,14 @@ export class FoodService {
       food.tastes.push('Salty')
     } else if (this._checkSour(food)) {
       food.tastes.push('Sour')
+    } else if (this._checkBitter(food)) {
+      food.tastes.push('Bitter');
     } else {
       food.tastes.push('Sweet')
     }
 
     if (this._checkPungent(food)) {
       food.tastes.push('Pungent')
-    }
-
-    if (this._checkBitter(food)) {
-      food.tastes.push('Bitter');
     }
 
     if (this._checkAstrigent(food)) {

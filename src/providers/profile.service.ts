@@ -6,7 +6,7 @@ import { User } from '@ionic/cloud-angular';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 // Models
-import { ActivitySchedule, UserProfile } from '../models';
+import { UserProfile } from '../models';
 
 @Injectable()
 export class ProfileService {

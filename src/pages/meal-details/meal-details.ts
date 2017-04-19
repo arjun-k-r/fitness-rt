@@ -40,7 +40,6 @@ export class MealDetailsPage {
         console.log(this.meal.mealItems);
         this._detectorRef.markForCheck();
       });
-
     });
   }
 

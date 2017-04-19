@@ -4,151 +4,22 @@
     <ion-title>Constitution Quiz</ion-title>
   </ion-navbar>
 
-  <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="quizProgress" (click)="quizPageChange()">
-      <ion-segment-button value="vata">
-        Part I
-      </ion-segment-button>
-      <ion-segment-button value="pitta">
-        Part II
-      </ion-segment-button>
-      <ion-segment-button value="kapha">
-        Part III
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-
 </ion-header>
 
 
-<ion-content>
-  <div [ngSwitch]="quizProgress">
-    <!-- Start of segment -->
-    <ion-grid *ngSwitchCase="'vata'">
-      <ion-row>
-        <ion-col col-sm-12 col-md-12 col-lg-6 col-xl-6>
-          <ion-item-group>
-            <ion-item-divider color="secondary">
-              Physical constitution
-            </ion-item-divider>
-            <ion-item padding *ngFor="let question of constitutionQuiz.vata.physical; let idx = index">
-              <ion-label text-wrap>{{ question.description }}</ion-label>
-              <ion-select [(ngModel)]="question.selection" (ionChange)="addPoints($event, 'vata', 'physical', idx)">
-                <ion-option>Not at all</ion-option>
-                <ion-option>A little bit</ion-option>
-                <ion-option>Yes and no</ion-option>
-                <ion-option>Not completely</ion-option>
-                <ion-option>Completely</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-item-group>
-        </ion-col>
-        <ion-col col-sm-12 col-md-12 col-lg-6 col-xl-6>
-          <ion-item-group>
-            <ion-item-divider color="secondary">
-              Psychological constitution
-            </ion-item-divider>
-            <ion-item padding *ngFor="let question of constitutionQuiz.vata.psychological; let idx = index">
-              <ion-label text-wrap>{{ question.description }}</ion-label>
-              <ion-select [(ngModel)]="question.selection" (ionChange)="addPoints($event, 'vata', 'psychological', idx)">
-                <ion-option>Not at all</ion-option>
-                <ion-option>A little bit</ion-option>
-                <ion-option>Yes and no</ion-option>
-                <ion-option>Not completely</ion-option>
-                <ion-option>Completely</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-item-group>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <!-- End of segment -->
+<ion-content padding>
 
-    <!-- Start of segment -->
-    <ion-grid *ngSwitchCase="'pitta'">
-      <ion-row>
-        <ion-col col-sm-12 col-md-12 col-lg-6 col-xl-6>
-          <ion-item-group>
-            <ion-item-divider color="secondary">
-              Physical constitution
-            </ion-item-divider>
-            <ion-item padding *ngFor="let question of constitutionQuiz.pitta.physical; let idx = index">
-              <ion-label text-wrap>{{ question.description }}</ion-label>
-              <ion-select [(ngModel)]="question.selection" (ionChange)="addPoints($event, 'pitta', 'physical', idx)">
-                <ion-option>Not at all</ion-option>
-                <ion-option>A little bit</ion-option>
-                <ion-option>Yes and no</ion-option>
-                <ion-option>Not completely</ion-option>
-                <ion-option>Completely</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-item-group>
-        </ion-col>
-        <ion-col col-sm-12 col-md-12 col-lg-6 col-xl-6>
-          <ion-item-group>
-            <ion-item-divider color="secondary">
-              Psychological constitution
-            </ion-item-divider>
-            <ion-item padding *ngFor="let question of constitutionQuiz.pitta.psychological; let idx = index">
-              <ion-label text-wrap>{{ question.description }}</ion-label>
-              <ion-select [(ngModel)]="question.selection" (ionChange)="addPoints($event, 'pitta', 'psychological', idx)">
-                <ion-option>Not at all</ion-option>
-                <ion-option>A little bit</ion-option>
-                <ion-option>Yes and no</ion-option>
-                <ion-option>Not completely</ion-option>
-                <ion-option>Completely</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-item-group>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <!-- End of segment -->
+  <ion-list radio-group *ngFor="let question of constitutionQuestions; let qIdx = index">
+    <ion-list-header>
+      {{ question.observation }}
+    </ion-list-header>
 
-    <!-- Start of segment -->
-    <ion-grid *ngSwitchCase="'kapha'">
-      <ion-row>
-        <ion-col col-sm-12 col-md-12 col-lg-6 col-xl-6>
-          <ion-item-group>
-            <ion-item-divider color="secondary">
-              Physical constitution
-            </ion-item-divider>
-            <ion-item padding *ngFor="let question of constitutionQuiz.kapha.physical; let idx = index">
-              <ion-label text-wrap>{{ question.description }}</ion-label>
-              <ion-select [(ngModel)]="question.selection" (ionChange)="addPoints($event, 'kapha', 'physical', idx)">
-                <ion-option>Not at all</ion-option>
-                <ion-option>A little bit</ion-option>
-                <ion-option>Yes and no</ion-option>
-                <ion-option>Not completely</ion-option>
-                <ion-option>Completely</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-item-group>
-        </ion-col>
-        <ion-col col-sm-12 col-md-12 col-lg-6 col-xl-6>
-          <ion-item-group>
-            <ion-item-divider color="secondary">
-              Psychological constitution
-            </ion-item-divider>
-            <ion-item padding *ngFor="let question of constitutionQuiz.kapha.psychological; let idx = index">
-              <ion-label text-wrap>{{ question.description }}</ion-label>
-              <ion-select [(ngModel)]="question.selection" (ionChange)="addPoints($event, 'kapha', 'psychological', idx)">
-                <ion-option>Not at all</ion-option>
-                <ion-option>A little bit</ion-option>
-                <ion-option>Yes and no</ion-option>
-                <ion-option>Not completely</ion-option>
-                <ion-option>Completely</ion-option>
-              </ion-select>
-            </ion-item>
-          </ion-item-group>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <!-- End of segment -->
-  </div>
+    <ion-item *ngFor="let c of question.characteristics">
+      <ion-label text-wrap>{{ c.description }}</ion-label>
+      <ion-radio (ionSelect)="checkCharacteristic(c, qIdx)" [checked]="c.checked" [value]="c.dosha"></ion-radio>
+    </ion-item>
+  </ion-list>
 
-  <ion-fab *ngIf="quizProgress === 'kapha'" right bottom>
-    <button ion-fab (click)="finishQuiz()"><ion-icon name="arrow-round-forward"></ion-icon></button>
-  </ion-fab>
+  <button ion-button full (click)="finishQuiz()">Finish quiz</button>
 
 </ion-content>

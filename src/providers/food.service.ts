@@ -217,7 +217,7 @@ export class FoodService {
       food.type = 'melon';
     } else if (this._checkMilk(food)) {
       food.type = 'milk';
-    }else if (this._checkProtein(food)) {
+    } else if (this._checkProtein(food)) {
       food.type = 'protein';
     } else if (this._checkStarch(food)) {
       food.type = 'starch';

@@ -1,11 +1,12 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 
 // Models
 import { UserProfile } from '../../models'
 
 // Providers
-import { ProfileService } from "../../providers";
+import { AlertService, ProfileService } from "../../providers";
 
 @Component({
   selector: 'page-lifestyle',
@@ -15,8 +16,16 @@ import { ProfileService } from "../../providers";
 export class LifestylePage {
   public profile: UserProfile;
   public schedule: string = 'sleep';
-  constructor(private _detectorRef: ChangeDetectorRef, private _profileSvc: ProfileService) {
+  constructor(
+    private _alertSvc: AlertService,
+    private _detectorRef: ChangeDetectorRef,
+    private _params: NavParams,
+    private _profileSvc: ProfileService
+  ) {
     this.profile = _profileSvc.getProfile();
+    if (!!_params.get('new')) {
+      this._alertSvc.showAlert('We need to establish soome lifestyle routines to follow every day', 'Please plan your schedule', 'Step 3');
+    }
   }
 
   /**

@@ -18,15 +18,15 @@
         <ion-row>
             <ion-col>
                 <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Vata' }" text-center ion-text color="secondary">Vata</h2>
-                <p text-center>{{ profile.prakruti.vata }}%</p>
+                <p text-center>{{ profile?.constitution.vata }}%</p>
             </ion-col>
             <ion-col>
                 <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Pitta' }" text-center ion-text color="secondary">Pitta</h2>
-                <p text-center>{{ profile.prakruti.pitta }}%</p>
+                <p text-center>{{ profile?.constitution.pitta }}%</p>
             </ion-col>
             <ion-col>
                 <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Kapha' }" text-center ion-text color="secondary">Kapha</h2>
-                <p text-center>{{ profile.prakruti.kapha }}%</p>
+                <p text-center>{{ profile?.constitution.kapha }}%</p>
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -37,7 +37,7 @@
         </ion-item>
         <ion-item text-wrap>
             Constitution
-            <p item-content>{{ profile.constitution }}</p>
+            <p item-content>{{ profile.dosha }}</p>
         </ion-item>
         <ion-item *ngIf="profile.bmr" text-wrap>
             BMR

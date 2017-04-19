@@ -1,5 +1,6 @@
 // Models
-import { ActivitySchedule } from './activity-plan';
+import { ActivityPlan } from './activity-plan';
+import { Constitution } from './constitution';
 import { MealPlan } from './meal-plan';
 import { Nutrition } from './nutrition';
 import { Prakruti } from './prakruti';
@@ -7,11 +8,12 @@ import { SleepPlan } from './sleep-plan'
 
 export class UserProfile {
     constructor(
-        public activitySchedule: ActivitySchedule = new ActivitySchedule(),
+        public activityPlan: ActivityPlan = new ActivityPlan(),
         public age: number = 0,
         public bmr: number = 1800,
         public bodyFat: number = 10,
-        public constitution: string = 'Vata',
+        public constitution: Constitution = new Constitution(),
+        public dosha: string = 'Vata',
         public gender: string = '',
         public height: number = 0,
         public hips: number = 80,
@@ -23,7 +25,6 @@ export class UserProfile {
         public lactating: boolean = false,
         public mealPlan: MealPlan = new MealPlan(),
         public neck: number = 30,
-        public prakruti: Prakruti = new Prakruti(),
         public pregnant: boolean = false,
         public requirements: Nutrition = new Nutrition(),
         public sleepPlan: SleepPlan = new SleepPlan(),

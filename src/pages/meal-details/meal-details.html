@@ -44,10 +44,11 @@
 
         <!-- Start of segment -->
         <div *ngSwitchCase="'serving'">
+            
             <ion-list>
-                <ion-item-header>
+                <ion-list-header>
                     Before serving my meal
-                </ion-item-header>
+                </ion-list-header>
                 <ion-item>
                     <ion-label>Am I truly hungry?</ion-label>
                     <ion-checkbox [(ngModel)]="meal.serving.hunger"></ion-checkbox>

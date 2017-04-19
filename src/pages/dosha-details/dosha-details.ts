@@ -2,14 +2,14 @@
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
 
-// Firebase
+// Third-party
 import { FirebaseObjectObservable } from 'angularfire2';
 
 // Models
 import { Dosha } from '../../models';
 
 // Providers
-import { AyurvedicService } from '../../providers';
+import { ConstitutionService } from '../../providers';
 
 @Component({
   selector: 'page-dosha-details',
@@ -21,7 +21,7 @@ export class DoshaDetailsPage {
   public dosha: string;
   public doshaDetails: FirebaseObjectObservable<Dosha>;
   constructor(
-    private _ayurvedicSvc: AyurvedicService,
+    private _constitutionSvc: ConstitutionService,
     private _detectorRef: ChangeDetectorRef,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
@@ -37,7 +37,7 @@ export class DoshaDetailsPage {
       duration: 500
     });
     loader.present();
-    this.doshaDetails = this._ayurvedicSvc.getDoshaDetails(this.dosha);
+    this.doshaDetails = this._constitutionSvc.getDoshaDetails(this.dosha);
     this._detectorRef.markForCheck();
   }
 

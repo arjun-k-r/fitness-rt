@@ -1,8 +1,8 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
-import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
-// Firebase
+// Third-party
 import { FirebaseObjectObservable } from 'angularfire2'
 
 // Models
@@ -10,9 +10,10 @@ import { Dosha, UserProfile } from '../../models';
 
 // Pages
 import { DoshaDetailsPage } from '../dosha-details/dosha-details';
+import { LifestylePage } from '../lifestyle/lifestyle';
 
 // Providers
-import { FitnessService, ProfileService } from '../../providers';
+import { AlertService, FitnessService, ProfileService } from '../../providers';
 
 @Component({
   selector: 'page-profile',
@@ -25,7 +26,7 @@ export class ProfilePage {
   public idealWeight: number;
   public profile: UserProfile;
   constructor(
-    private _alertCtrl: AlertController,
+    private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _fitSvc: FitnessService,
     private _navCtrl: NavController,
@@ -33,13 +34,7 @@ export class ProfilePage {
     private _profileSvc: ProfileService
   ) {
     if (!!_params.get('new')) {
-      let greetAlert = this._alertCtrl.create({
-        title: 'Well done!',
-        subTitle: 'Now your ready for the next steps',
-        message: 'Please complete the rest of your information here',
-        buttons: ['Sure']
-      });
-      greetAlert.present();
+      this._alertSvc.showAlert('We need to know a little more about your physical constitution', 'Please complete the following form', 'Step 2');
     }
 
     this.profile = _profileSvc.getProfile();
@@ -58,6 +53,10 @@ export class ProfilePage {
     this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.profile.gender);
     this.idealWeight = this._fitSvc.getIdealWeight(this.profile.gender, this.profile.height, this.profile.weight);
     this._profileSvc.saveProfile(this.profile);
+    
+    if (!!this._params.get('new')) {
+      this._navCtrl.setRoot(LifestylePage, { new: true });
+    }
   }
 
   ionViewWillEnter(): void {

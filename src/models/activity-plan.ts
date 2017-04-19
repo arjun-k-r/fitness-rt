@@ -1,56 +1,37 @@
+/**
+ * Class representing a performed activity
+ * @class
+ * @classdesc Representss the day to day performed physical or intelectual activities
+ */
 export class Activity {
+    /**
+     * @constructor
+     * @param duration - The duration of activity
+     * @param name - The name of activity
+     * @param time - The time activity has started
+     * @param type - The type of activity (mental or physical)
+     */
     constructor(
-        // Duration of activity
         public duration: number,
-
-        // Name of activity
         public name: string,
-
-        // Time activity has started
         public time: string,
-
-        // Intellectual or physical
         public type: string
     ) { }
 }
 
+/**
+ * Class representing an activity plan
+ * @class
+ * @classdesc Schedules the time invested for different types of activities, such as work, physical, and intellectual exercise
+ */
 export class ActivityPlan {
+    /**
+     * @constructor
+     * @param dailyDuration - The time invested in a specific type of activities every day in minutes
+     * @param timesPerWeek - The number of days during the week a specific type of activities are maintained
+     */
     constructor(
-        public activities: Array<Activity> = [],
-        public workout: Workout = new Workout(30, 'Calisthenics', '08:30', 'Strength', false)
+        public dailyDuration: number = 120,
+        public timesPerWeek: number = 7
     ) { }
 }
-
-export class ActivitySchedule {
-    constructor(
-        public monday: ActivityPlan = new ActivityPlan(),
-        public tuesday: ActivityPlan = new ActivityPlan(),
-        public wednesday: ActivityPlan = new ActivityPlan(),
-        public thursday: ActivityPlan = new ActivityPlan(),
-        public friday: ActivityPlan = new ActivityPlan(),
-        public saturday: ActivityPlan = new ActivityPlan(),
-        public sunday: ActivityPlan = new ActivityPlan()
-    ) { }
-}
-
-export class Workout extends Activity {
-    constructor(
-        // Duration of activity
-        public duration: number,
-
-        // Name of activity
-        public name: string,
-
-        // Time activity has started
-        public time: string,
-
-        // Intellectual or physical
-        public type: string,
-
-        // Indicates if workout is perfoermed in a day
-        public performed: boolean
-    ) {
-        super(duration, name, time, type);
-    }
-}
-

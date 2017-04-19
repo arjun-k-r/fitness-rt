@@ -74,7 +74,6 @@ import { CapitalizePipe } from '../pipes'
 import {
     AlertService,
     AuthValidator,
-    AyurvedicService,
     ConstitutionService,
     DRIService,
     FitnessService,
@@ -146,7 +145,6 @@ export const thgProviders = [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AlertService,
     AuthValidator,
-    AyurvedicService,
     ConstitutionService,
     DRIService,
     FitnessService,

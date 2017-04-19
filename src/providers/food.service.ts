@@ -219,7 +219,9 @@ export class FoodService {
    * @param {Food} food The food to clasify
    */
   public clasifyFoodType(food: Food): void {
-    food.type = 'Veggie';
+    if (this._checkNonStarch(food)) {
+      food.type = 'Veggie';
+    }
 
     if (this._checkSour(food)) {
       food.type = 'Acid';

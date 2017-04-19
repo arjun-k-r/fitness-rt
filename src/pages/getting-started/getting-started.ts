@@ -1,6 +1,6 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { NavController, Slides } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 // Pages
 import { ConstitutionPage } from '../constitution/constitution';
@@ -11,7 +11,6 @@ import { ConstitutionPage } from '../constitution/constitution';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GettingStartedPage {
-  @ViewChild(Slides) private _slider: Slides;
   constructor(
     private _detectorRef: ChangeDetectorRef,
     private _navCtrl: NavController

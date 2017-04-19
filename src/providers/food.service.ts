@@ -13,7 +13,6 @@ const NUTRIENT_MEANS: {
   sodium: number,
   starch: number,
   sugars: number,
-  vitaminC: number,
   water: number
 } = {
     'carbs': 10,
@@ -21,10 +20,9 @@ const NUTRIENT_MEANS: {
     'fiber': 10,
     'lactose': 3,
     'protein': 20,
-    'sodium': 0.1,
+    'sodium': 1000,
     'starch': 3,
     'sugars': 11,
-    'vitaminC': 0.04,
     'water': 50
   };
 
@@ -38,7 +36,7 @@ export class FoodService {
    * @returns {boolean} Returns true if the food is an acid fruit
    */
   private _checkAcidFruit(food: Food): boolean {
-    return food.name.toLocaleLowerCase().includes('tomato') || (food.group === 'Fruits and Fruit Juices' && food.nutrition.sugars.value < NUTRIENT_MEANS.sugars - 1);
+    return food.name.toLocaleLowerCase().includes('tomato') || (food.group === 'Fruits and Fruit Juices' && food.nutrition.sugars.value < (NUTRIENT_MEANS.sugars - 1));
   }
 
   /**
@@ -47,7 +45,7 @@ export class FoodService {
    * @returns {boolean} Returns true if the food is astrigent
    */
   private _checkAstrigent(food: Food): boolean {
-    return (food.group === 'Fruits and Fruit Juices' || food.group === 'Legumes and Legume Products' || food.group === 'Spices and Herbs' || food.group === 'Vegetables and Vegetable Products') && food.nutrition.fats.value < NUTRIENT_MEANS.fat;
+    return (food.group === 'Fruits and Fruit Juices' || food.group === 'Legumes and Legume Products' || food.group === 'Spices and Herbs' || food.group === 'Vegetables and Vegetable Products') && food.nutrition.fats.value < NUTRIENT_MEANS.fat && food.nutrition.sugars.value < (NUTRIENT_MEANS.sugars - 1) && food.nutrition.fiber.value > NUTRIENT_MEANS.fiber;
   }
 
   /**
@@ -110,7 +108,7 @@ export class FoodService {
    * @returns {boolean} Returns true if the food is pungent
    */
   private _checkPungent(food: Food): boolean {
-    return (food.group === 'Spices and Herbs' || food.group === 'Vegetables and Vegetable Products') && food.nutrition.vitaminC.value >= NUTRIENT_MEANS.vitaminC;
+    return food.group === 'Spices and Herbs' || food.name.toLocaleLowerCase().includes('cayenne') || food.name.toLocaleLowerCase().includes('hot') || food.name.toLocaleLowerCase().includes('chilli') || food.name.toLocaleLowerCase().includes('garlic') || food.name.toLocaleLowerCase().includes('onion');
   }
 
   /**
@@ -128,7 +126,7 @@ export class FoodService {
    * @returns {boolean} Returns true if the food is sour
    */
   private _checkSour(food: Food): boolean {
-    return this._checkAcidFruit(food) || food.nutrition.alcohol.value >= 0 || food.name.toLocaleLowerCase().includes('vinegar') || (food.group === 'Dairy and Egg Products' && food.nutrition.lactose.value < NUTRIENT_MEANS.lactose);
+    return (this._checkAcidFruit(food) && !(this._checkSubAcidFruit(food) || this._checkSweetFruit(food))) || food.nutrition.alcohol.value > 0 || food.name.toLocaleLowerCase().includes('vinegar') || (food.group === 'Dairy and Egg Products' && food.nutrition.lactose.value < NUTRIENT_MEANS.lactose);
   }
 
   /**
@@ -137,11 +135,7 @@ export class FoodService {
    * @returns {boolean} Returns true if the food is a starchy food
    */
   private _checkStarch(food: Food): boolean {
-    if (food.nutrition.hasOwnProperty('starch')) {
-      return food.nutrition.starch.value > NUTRIENT_MEANS.starch;
-    } else {
-      return food.group === 'Legumes and Legume Products' || food.group === 'Cereal Grains and Pasta' || (food.group === 'Vegetables and Vegetable Products' && food.nutrition.carbs.value > NUTRIENT_MEANS.carbs);
-    }
+    return (food.nutrition.starch.value > NUTRIENT_MEANS.starch) || (food.group === 'Legumes and Legume Products' || food.group === 'Cereal Grains and Pasta' || (food.group === 'Vegetables and Vegetable Products' && food.nutrition.carbs.value > NUTRIENT_MEANS.carbs));
   }
 
   /**
@@ -150,7 +144,7 @@ export class FoodService {
    * @returns {boolean} Returns true if the food is a sub-acid fruit
    */
   private _checkSubAcidFruit(food: Food): boolean {
-    return food.group === 'Fruits and Fruit Juices' && (food.nutrition.sugars.value <= NUTRIENT_MEANS.sugars + 1 || food.nutrition.sugars.value >= NUTRIENT_MEANS.sugars - 1);
+    return food.group === 'Fruits and Fruit Juices' && (food.nutrition.sugars.value <= (NUTRIENT_MEANS.sugars + 1) || food.nutrition.sugars.value >= (NUTRIENT_MEANS.sugars - 1));
   }
 
   /**
@@ -159,7 +153,7 @@ export class FoodService {
    * @returns {boolean} Returns true if the food is a sugar
    */
   private _checkSugar(food: Food): boolean {
-    return food.group === 'Sweets' || food.nutrition.sugars.value > NUTRIENT_MEANS.sugars + 1;
+    return food.group === 'Sweets' || food.nutrition.sugars.value > (NUTRIENT_MEANS.sugars + 1);
   }
 
   /**
@@ -168,7 +162,7 @@ export class FoodService {
    * @returns {boolean} Returns true if the food is a sweet fruit
    */
   private _checkSweetFruit(food: Food): boolean {
-    return food.group === 'Fruits and Fruit Juices' && food.nutrition.sugars.value > NUTRIENT_MEANS.sugars + 1;
+    return food.group === 'Fruits and Fruit Juices' && food.nutrition.sugars.value > (NUTRIENT_MEANS.sugars + 1);
   }
 
   /**
@@ -184,19 +178,25 @@ export class FoodService {
    * Clasifies the food by its taste
    * @param {Food} food The food to clasify
    */
-  public classifyFoodTaste(food: Food): void {
-    if (this._checkAstrigent(food)) {
-      food.taste = 'astrigent';
-    } else if (this._checkSalty(food)) {
-      food.taste = 'salty'
-    } else if (this._checkPungent(food)) {
-      food.taste = 'pungent';
+  public checkFoodTastes(food: Food): void {
+    if (this._checkSalty(food)) {
+      food.tastes.push('Salty')
     } else if (this._checkSour(food)) {
-      food.taste = 'sour';
-    } else if (this._checkBitter(food)) {
-      food.taste = 'bitter';
+      food.tastes.push('Sour')
     } else {
-      food.taste = 'sweet';
+      food.tastes.push('Sweet')
+    }
+
+    if (this._checkPungent(food)) {
+      food.tastes.push('Pungent')
+    }
+
+    if (this._checkBitter(food)) {
+      food.tastes.push('Bitter');
+    }
+
+    if (this._checkAstrigent(food)) {
+      food.tastes.push('Astrigent');
     }
   }
 
@@ -205,40 +205,60 @@ export class FoodService {
    * @param {Food} food The food to clasify
    */
   public clasifyFoodType(food: Food): void {
+    food.type = 'Veggie';
+
     if (this._checkSour(food)) {
-      food.type = 'acid';
-    } else if (this._checkAcidFruit(food)) {
-      food.type = 'acid fruit';
-    } else if (this._checkFat(food)) {
-      food.type = 'fat';
-    } else if (this._checkFluid(food)) {
-      food.type = 'fluid';
-    } else if (this._checkMelon(food)) {
-      food.type = 'melon';
-    } else if (this._checkMilk(food)) {
-      food.type = 'milk';
-    } else if (this._checkProtein(food)) {
-      food.type = 'protein';
-    } else if (this._checkStarch(food)) {
-      food.type = 'starch';
-    } else if (this._checkSubAcidFruit(food)) {
-      food.type = 'sub-acid fruit';
-    } else if (this._checkSugar(food)) {
-      food.type = 'sugar';
-    } else if (this._checkSweetFruit(food)) {
-      food.type = 'sweet fruit';
-    } else {
-      food.type = 'veggie';
+      food.type = 'Acid';
+    }
+
+    if (this._checkAcidFruit(food)) {
+      food.type = 'Acid fruit';
+    }
+
+    if (this._checkFat(food)) {
+      food.type = 'Fat';
+    }
+
+    if (this._checkFluid(food)) {
+      food.type = 'Fluid';
+    }
+
+    if (this._checkMelon(food)) {
+      food.type = 'Melon';
+    }
+
+    if (this._checkMilk(food)) {
+      food.type = 'Milk';
+    }
+
+    if (this._checkProtein(food)) {
+      food.type = 'Protein';
+    }
+
+    if (this._checkStarch(food)) {
+      food.type = 'Starch';
+    }
+
+    if (this._checkSubAcidFruit(food)) {
+      food.type = 'Sub-acid fruit';
+    }
+
+    if (this._checkSugar(food)) {
+      food.type = 'Sugar';
+    }
+
+    if (this._checkSweetFruit(food)) {
+      food.type = 'Sweet fruit';
     }
   }
 
   /**
    * The PRAL formula designed by Dr. Thomas Remer
-   * Determines the food impact on the body's pH levels
+   * @description Determines the food impact on the body's pH levels (abode 0 is acidic and below 0 is alkaline forming)
    * @param {Food} food The food to check
-   * @returns Returns the PRAL value of the food (above 0 is acidic and below 0 is alkaline forming)
+   * @returns {void}
    */
-  public getPRAL(food: Food): number {
-    return 0.49 * food.nutrition.protein.value + 0.037 * food.nutrition.phosphorus.value - 0.021 * food.nutrition.potassium.value - 0.026 * food.nutrition.magnesium.value - 0.013 * food.nutrition.calcium.value;
+  public setPRAL(food: Food): void {
+    food.pral = +(0.49 * food.nutrition.protein.value + 0.037 * food.nutrition.phosphorus.value - 0.021 * food.nutrition.potassium.value - 0.026 * food.nutrition.magnesium.value - 0.013 * food.nutrition.calcium.value).toFixed(2);
   }
 }

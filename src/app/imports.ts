@@ -78,6 +78,7 @@ import {
     DRIService,
     FitnessService,
     FoodDataService,
+    FoodService,
     MealService,
     ProfileService
 } from '../providers';
@@ -149,6 +150,7 @@ export const thgProviders = [
     DRIService,
     FitnessService,
     FoodDataService,
+    FoodService,
     MealService,
     ProfileService
 ];

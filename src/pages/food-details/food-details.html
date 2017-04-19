@@ -1,9 +1,7 @@
 <ion-header>
-
     <ion-navbar>
         <ion-title>{{ (food)?.name }}</ion-title>
     </ion-navbar>
-
 </ion-header>
 
 <ion-content padding>
@@ -14,6 +12,20 @@
             <p item-content>{{ (food)?.group }}</p>
         </ion-item>
         <ion-item>
+            Taste
+            <p item-content>
+                <span *ngFor="let taste of (food)?.tastes; let l = last">{{ l ? taste : taste + ', '}}</span>
+            </p>
+        </ion-item>
+        <ion-item>
+            Type
+            <p item-content>{{ (food)?.type }}</p>
+        </ion-item>
+        <ion-item>
+            PRAL
+            <p item-content>{{ (food)?.pral }}</p>
+        </ion-item>
+        <ion-item>
             Energy
             <p item-content>{{ (food)?.nutrition.energy?.value }}{{ (food)?.nutrition.energy?.unit }}</p>
         </ion-item>
@@ -22,6 +34,7 @@
             <p item-content>{{ (food)?.quantity }}{{ (food)?.unit }}</p>
         </ion-item>
     </ion-item-group>
+
     <ion-item-group>
         <ion-item-divider>Macronutrients</ion-item-divider>
         <ion-item>
@@ -37,10 +50,15 @@
             <p item-content>{{ (food)?.nutrition.carbs?.value }}{{ (food)?.nutrition.carbs?.unit }}</p>
         </ion-item>
         <ion-item>
+            Fiber
+            <p item-content>{{ (food)?.nutrition.fiber?.value }}{{ (food)?.nutrition.fiber?.unit }}</p>
+        </ion-item>
+        <ion-item>
             Water
             <p item-content>{{ (food)?.nutrition.water?.value }}{{ (food)?.nutrition.water?.unit }}</p>
         </ion-item>
     </ion-item-group>
+
     <ion-item-group>
         <ion-item-divider>Essential amino acids</ion-item-divider>
         <ion-item>
@@ -80,6 +98,7 @@
             <p item-content>{{ (food)?.nutrition.tryptophan?.value }}{{ (food)?.nutrition.tryptophan?.unit }}</p>
         </ion-item>
     </ion-item-group>
+
     <ion-item-group>
         <ion-item-divider>Essential vitamins</ion-item-divider>
         <ion-item>
@@ -135,6 +154,7 @@
             <p item-content>{{ (food)?.nutrition.vitaminK?.value }}{{ (food)?.nutrition.vitaminK?.unit }}</p>
         </ion-item>
     </ion-item-group>
+
     <ion-item-group>
         <ion-item-divider>Essential minerals</ion-item-divider>
         <ion-item>
@@ -178,6 +198,7 @@
             <p item-content>{{ (food)?.nutrition.zinc?.value }}{{ (food)?.nutrition.zinc?.unit }}</p>
         </ion-item>
     </ion-item-group>
+
     <ion-item-group>
         <ion-item-divider>Essential fatty acids</ion-item-divider>
         <ion-item>
@@ -197,6 +218,7 @@
             <p item-content>{{ (food)?.nutrition.la?.value }}{{ (food)?.nutrition.la?.unit }}</p>
         </ion-item>
     </ion-item-group>
+
     <ion-item-group>
         <ion-item-divider>Non-essential nutrients</ion-item-divider>
         <ion-item>
@@ -216,14 +238,4 @@
             <p item-content>{{ (food)?.nutrition.sugars?.value }}{{ (food)?.nutrition.sugars?.unit }}</p>
         </ion-item>
     </ion-item-group>
-
-    <!--
-        <ion-item-group>
-        <ion-item-divider>Nutrition</ion-item-divider>
-        <ion-item *ngFor="let item of foodNutrition">
-            {{ item.name }}
-            <p item-content>{{ item.value }}{{ item.unit }}</p>
-        </ion-item>
-    </ion-item-group>
-    -->
 </ion-content>

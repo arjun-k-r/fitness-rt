@@ -6,7 +6,7 @@ import { Loading, LoadingController, NavController, NavParams } from 'ionic-angu
 import { Food } from '../../models';
 
 // Providers
-import { FoodDataService } from '../../providers';
+import { AlertService, FoodDataService } from '../../providers';
 
 @Component({
   selector: 'page-food-details',
@@ -15,8 +15,8 @@ import { FoodDataService } from '../../providers';
 })
 export class FoodDetailsPage {
   public food: Food;
-  //public foodNutrition: Array<Nutrient> = [];
   constructor(
+    private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _foodDataSvc: FoodDataService,
     private _loadCtrl: LoadingController,
@@ -35,9 +35,9 @@ export class FoodDetailsPage {
       this.food = data;
       loader.dismiss();
       this._detectorRef.markForCheck();
-     // this.foodNutrition = <Array<Nutrient>>_.values(this.food.nutrition);
     }).catch((err: Error) => {
-        console.log(err);
+        this._alertSvc.showAlert(err.toString());
+        loader.dismiss();
         this._navCtrl.pop();
       })
   }

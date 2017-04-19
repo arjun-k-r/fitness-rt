@@ -6,6 +6,9 @@ import { Observable } from 'rxjs/Rx';
 // Models
 import { Food, FoodGroup, IFoodReportNutrient, IFoodReportSearchResult, IFoodSearchResult } from '../models';
 
+// Providers
+import { FoodService } from './food.service';
+
 export const FOOD_GROUPS: Array<FoodGroup> = [
   new FoodGroup('', 'All foods'),
   new FoodGroup('3500', 'American Indian/Alaska Native Foods'),
@@ -41,11 +44,14 @@ export class FoodDataService {
   private _usdaSource: string = 'Standard+Reference';
   private _foodListUrl: string = 'https://api.nal.usda.gov/ndb/search/';
   private _foodNutritionUrl: string = 'https://api.nal.usda.gov/ndb/reports/';
-  constructor(private _http: Http) { }
+  constructor(private _foodSvc: FoodService, private _http: Http) { }
 
   private _serializeFood(foodReport: IFoodReportSearchResult): Food {
     let newFood: Food = new Food(foodReport.fg, foodReport.name, foodReport.ndbno);
     this._setNutrientValue(foodReport['nutrients'], newFood);
+    this._foodSvc.clasifyFoodType(newFood);
+    this._foodSvc.checkFoodTastes(newFood);
+    this._foodSvc.setPRAL(newFood);
     console.log(newFood);
     return newFood;
   }

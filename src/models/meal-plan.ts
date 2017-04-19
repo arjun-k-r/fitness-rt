@@ -34,20 +34,24 @@ export class MealFoodItem extends Food {
      * @param {Nutrition} nutrition - The food nutritional values
      * @param {number} quantity - The quantity of food (e.g. 100 food units)
      * @param {number} servings - The number of same food items
-     * @param {string} unit - The unit of measure (e.g. grams)
+     * @param {Array} tastes - The tastes a food contains
      * @param {string} type - The type of food based on dominant nutrient content (e.g. protein, starch, fat, sugar, acid, etc.)
+     * @param {string} unit - The unit of measure (e.g. grams)
      */
     constructor(
         public ndbno: string = '',
         public name: string = '',
         public group: string = '',
         public nutrition: Nutrition = new Nutrition(),
+        public pral: number = 0,
         public quantity: number = 100,
         public servings: number = 1,
-        public unit: string = 'g',
-        public type: string = 'sweet'
+        public tastes: Array<string> = [],
+        public type: string = 'sweet',
+        public unit: string = 'g'
+        
     ) {
-        super(ndbno, name, group, nutrition, quantity, unit, type);
+        super(ndbno, name, group, nutrition, pral, quantity, tastes, type, unit);
     }
 }
 

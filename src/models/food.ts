@@ -41,9 +41,10 @@ export class Food {
         public name: string = '',
         public ndbno: string = '',
         public nutrition: Nutrition = new Nutrition(),
+        public pral: number = 0,
         public quantity: number = 100,
-        public unit: string = 'g',
-        public taste: string = 'sweet',
-        public type: string = 'starch'
+        public tastes: Array<string> = [],
+        public type: string = 'starch',
+        public unit: string = 'g'
     ) {}
 }

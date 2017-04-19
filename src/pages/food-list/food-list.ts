@@ -9,7 +9,7 @@ import { IFoodSearchResult, FoodGroup } from '../../models';
 import { FoodDetailsPage } from '../food-details/food-details';
 
 // Providers
-import { FOOD_GROUPS, FoodDataService } from '../../providers';
+import { AlertService, FOOD_GROUPS, FoodDataService } from '../../providers';
 
 @Component({
   selector: 'page-food-list',
@@ -26,6 +26,7 @@ export class FoodListPage {
   public start: number;
   constructor(
     private _alertCtrl: AlertController,
+    private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _foodDataSvc: FoodDataService,
     private _loadCtrl: LoadingController
@@ -70,11 +71,8 @@ export class FoodListPage {
           this._detectorRef.markForCheck();
         }, 2000);
       }, (err: {status: string, message: string}) => {
-        this._alertCtrl.create({
-          title: `Ooops! Error ${err.status}!`,
-          message: err.message,
-          buttons: ['Got it!']
-        }).present();
+        loader.dismiss();
+        this._alertSvc.showAlert(err.message, '', `Ooops! Error ${err.status}!`);
       });
   }
 

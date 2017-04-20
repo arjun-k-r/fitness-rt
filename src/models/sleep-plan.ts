@@ -1,28 +1,16 @@
-export class SleepHabit {
+export class Sleep {
     constructor(
-        public preparation: { electronics: boolean, light: boolean, relaxation: boolean } = {
-            electronics: false,
-            light: false,
-            relaxation: true
-        },
-        public refreshing: boolean = true,
+        public bedTime: string = '10:00',
+        public electronics: boolean = true,
+        public relax: boolean = false,
+        public wakeUpTime: string = '05:30'
     ) { }
 }
 
 export class SleepPlan {
     constructor(
-        public schedule: {
-            // Go to bed hour
-            start: string,
-
-            // Wake up hour
-            stop: string
-        } = {
-            start: '21:30',
-            stop: '05:00'
-        },
-
-        // Sleep monitoring
-        public sleepHabits: Array<SleepHabit> = []
+        public bedTime: string = '10:00',
+        public respected: number = 0,
+        public wakeUpTime: string = '05:30'
     ) { }
 }

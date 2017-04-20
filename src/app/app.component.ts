@@ -16,7 +16,8 @@ import {
     LifestylePage,
     MealPlanPage,
     NutritionPage,
-    RegistrationPage
+    RegistrationPage,
+    SleepPlanPage
 } from '../pages';
 
 export interface IPageLink {
@@ -44,9 +45,10 @@ export class MyApp {
         this._initializeApp();
         this.pages = [
             { title: 'Home', component: HomePage, icon: 'home' },
-            { title: 'Profile', component: ProfilePage, icon: 'body' },
+            { title: 'Profile', component: ProfilePage, icon: 'happy' },
             { title: 'Lifestyle', component: LifestylePage, icon: 'calendar' },
-            { title: 'Exercise', component: ExercisePage, icon: 'bicycle' },
+            { title: 'Sleep plan', component: SleepPlanPage, icon: 'moon' },
+            { title: 'Activity plan', component: ExercisePage, icon: 'body' },
             { title: 'Meal plan', component: MealPlanPage, icon: 'clock' },
             { title: 'Nutrition', component: NutritionPage, icon: 'nutrition' },
             { title: 'Foods', component: FoodListPage, icon: 'basket' },

@@ -17,3 +17,4 @@ export { NutritionPage } from './nutrition/nutrition';
 export { PasswordResetPage } from './password-reset/password-reset';
 export { ProfilePage } from './profile/profile';
 export { RegistrationPage } from './registration/registration';
+export { SleepPlanPage } from './sleep-plan/sleep-plan';

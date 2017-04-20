@@ -7,3 +7,4 @@ export { FoodService } from './food.service';
 export { FOOD_GROUPS, FoodDataService } from './food-data.service';
 export { MealService } from './meal.service';
 export { ProfileService } from './profile.service';
+export { SleepService } from './sleep.service';

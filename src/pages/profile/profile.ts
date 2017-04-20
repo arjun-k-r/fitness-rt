@@ -49,6 +49,7 @@ export class ProfilePage {
     this.profile.bodyFat = this._fitSvc.getBodyFat(this.profile.age, this.profile.gender, this.profile.height, this.profile.hips, this.profile.neck, this.profile.waist);
     this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.profile.gender);
     this.idealWeight = this._fitSvc.getIdealWeight(this.profile.gender, this.profile.height, this.profile.weight);
+
     this._profileSvc.saveProfile(this.profile);
     
     if (!!this._params.get('new')) {

@@ -282,9 +282,9 @@ export class MealService {
       breakfastTime: number = +profile.mealPlan.breakfastTime.split(':')[0],
       meals: Array<Meal> = [],
       newMeal: Meal,
-      sleepTime: number = +profile.sleepPlan.schedule.start.split(':')[0];
+      bedTime: number = +profile.sleepPlan.bedTime.split(':')[0];
 
-    for (let mealTime = breakfastTime; mealTime < sleepTime - 2; mealTime += +profile.mealPlan.interval) {
+    for (let mealTime = breakfastTime; mealTime < bedTime - 2; mealTime += +profile.mealPlan.interval) {
       newMeal = new Meal();
       newMeal.time = mealTime < 10 ? `0${mealTime}:00` : `${mealTime}:00`;
       meals.push(newMeal);
@@ -354,8 +354,8 @@ export class MealService {
    */
   public setupMeals(meals: Array<Meal>): Array<Meal> {
     let profile: UserProfile = this._profileSvc.getProfile(),
+      bedTime: number = +profile.sleepPlan.bedTime.split(':')[0],
       mealTime: number = +meals[0].time.split(':')[0],
-      sleepTime: number = +profile.sleepPlan.schedule.start.split(':')[0],
       dinnerTime: number;
 
     meals.forEach((meal: Meal) => {
@@ -365,7 +365,7 @@ export class MealService {
 
     dinnerTime = +meals[meals.length - 1].time.split(':')[0];
 
-    if (dinnerTime + 4 <= sleepTime - 4) {
+    if (dinnerTime + 4 <= bedTime - 4) {
       let newMeal: Meal = new Meal();
       newMeal.time = `${dinnerTime + 4}:00`;
       meals.push(newMeal);

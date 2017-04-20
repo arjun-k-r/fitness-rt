@@ -11,7 +11,7 @@
         </ion-buttons>
     </ion-navbar>
     <ion-toolbar no-border-top>
-        <ion-segment [(ngModel)]="schedule"  (click)="schedulePageChange()">
+        <ion-segment [(ngModel)]="plan" (click)="planPageChange()">
             <ion-segment-button value="sleep">
                 <ion-icon name="moon"></ion-icon>
             </ion-segment-button>
@@ -28,10 +28,112 @@
     </ion-toolbar>
 </ion-header>
 
-
 <ion-content padding>
+    <div [ngSwitch]="plan">
+        <ion-list *ngSwitchCase="'sleep'">
+            <ion-item>
+                <ion-label floating>Bed time</ion-label>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.sleepPlan.bedTime" (ionChange)="setWakeUptime()"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Wake up time</ion-label>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.sleepPlan.wakeUpTime" (ionChange)="setBedtime()"></ion-datetime>
+            </ion-item>
+            <ion-list-header>
+                Recommendations
+            </ion-list-header>
+            <ion-item>
+                <h2>Routine</h2>
+                <p text-wrap>The body's internal clock (circadian rhythm) is set up by sunlight and by precise sleep routine.</p>
+                <p item-content>Every day</p>
+            </ion-item>
+            <ion-item>
+                <h2>Bed time</h2>
+                <p text-wrap>Between 10:00pm and 02:00, vata energy is abundant and the adrenal glands release hormones</p>
+                <p item-content>10:00 pm</p>
+            </ion-item>
+            <ion-item>
+                <h2>Wake up time</h2>
+                <p text-wrap>We need to catch 4-5 complete 90-minute REM sleep cycles (07:30 hours).</p>
+                <p item-content>05:30 am</p>
+            </ion-item>
+            <ion-item>
+                <h2>Disconnect</h2>
+                <p text-wrap>Electronics before emit blue light, which is similar to sunlight and disrupts the body's circadian rhythm.</p>
+                <p item-content>09:00 pm</p>
+            </ion-item>
+            <ion-item>
+                <h2>Relax</h2>
+                <p text-wrap>Stressing before bedtime keeps you alert and prevents you from falling asleep.</p>
+                <p item-content>08:00 pm</p>
+            </ion-item>
+            <ion-item>
+                <h2>No fluids</h2>
+                <p text-wrap>Fluids will make you need go to the bathroom.</p>
+                <p item-content>08:00 pm</p>
+            </ion-item>
+            <ion-item>
+                <h2>No stimulants</h2>
+                <p text-wrap>Stimulants like caffeine and alcohol will keep you alert and it takes 6 hours for the body to completely metabolise them.</p>
+                <p item-content>04:00 pm</p>
+            </ion-item>
+        </ion-list>
+        <ion-list *ngSwitchCase="'nutrition'">
+            <ion-item>
+                <ion-label floating>Breakfast time</ion-label>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.mealPlan.breakfastTime"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Interval</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.mealPlan.interval"></ion-input>
+                <ion-note item-right>hours</ion-note>
+            </ion-item>
+            <ion-list-header>
+                Recommendations
+            </ion-list-header>
+            <ion-item>
+                <h2>Interval</h2>
+                <p text-wrap>A regular healthy meal digestion requires 4 hours</p>
+                <p item-content>4 hours</p>
+            </ion-item>
+        </ion-list>
+        <ion-list *ngSwitchCase="'exercise'">
+            <ion-item>
+                <h2>Recommended high intensity workout</h2>
+                <p text-wrap>Have a high intensity workout routine at least 5 times per week to eliminate toxic accumulations through CO2 and perspiration.</p>
+                <p item-content>5 times per week</p>
+            </ion-item>
+            <ion-item>
+                <h2>Recommended leisure physical activity</h2>
+                <p text-wrap>Move constantly everyday to eliminate toxic accumulations through CO2 and stay alert physically and mentally.</p>
+                <p item-content>Every day</p>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Times per week</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.activityPlan.timesPerWeek"></ion-input>
+            </ion-item>
+            <ion-item>
+                <h2>Recommended high intensity workout duration</h2>
+                <p text-wrap>Have a 45 minute high intensity workout 45 minutes per day to prevent heart damage.</p>
+                <p item-content>45 minutes</p>
+            </ion-item>
+            <ion-item>
+                <h2>Recommended daily physical activity</h2>
+                <p text-wrap>Move constantly, but don't exhaust yourself</p>
+                <p item-content>120 minutes</p>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Minutes per day</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.activityPlan.dailyDuration"></ion-input>
+                <ion-note item-right>minutes</ion-note>
+            </ion-item>
+        </ion-list>
+    </div>
+</ion-content>
+
+<!--
     <div [ngSwitch]="schedule">
-        <!-- Start of segment -->
+        
         <ion-list *ngSwitchCase="'sleep'">
             <ion-item>
                 <ion-label floating>Bed time</ion-label>
@@ -42,9 +144,9 @@
                 <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.sleepPlan.schedule.end"></ion-datetime>
             </ion-item>
         </ion-list>
-        <!-- End of segment -->
+        
 
-        <!-- Start of segment -->
+        
         <ion-list *ngSwitchCase="'nutrition'">
             <ion-item>
                 <ion-label floating>Breakfast time</ion-label>
@@ -55,9 +157,9 @@
                 <ion-input type="number" [(ngModel)]="profile.mealPlan.interval"></ion-input>
             </ion-item>
         </ion-list>
-        <!-- End of segment -->
+        
 
-        <!-- Start of segment -->
+        
         <ion-list *ngSwitchCase="'exercise'">
             <ion-item>
                 <ion-label floating>Time per day (minutes)</ion-label>
@@ -68,9 +170,9 @@
                 <ion-input type="number" [(ngModel)]="profile.activityPlan.timesPerWeek"></ion-input>
             </ion-item>
         </ion-list>
-        <!-- End of segment -->
+        
 
-        <!-- Start of segment -->
+        
         <ion-list *ngSwitchCase="'work'">
             <ion-item>
                 <ion-label floating>Work time</ion-label>
@@ -81,6 +183,6 @@
                 <ion-input type="number" [(ngModel)]="workDuration"></ion-input>
             </ion-item>
         </ion-list>
-        <!-- End of segment -->
+        
     </div>
-</ion-content>
+    -->

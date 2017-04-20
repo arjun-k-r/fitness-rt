@@ -6,7 +6,7 @@ import { NavParams } from 'ionic-angular';
 import { UserProfile } from '../../models'
 
 // Providers
-import { AlertService, ProfileService } from "../../providers";
+import { AlertService, ProfileService, SleepService } from "../../providers";
 
 @Component({
   selector: 'page-lifestyle',
@@ -15,12 +15,13 @@ import { AlertService, ProfileService } from "../../providers";
 })
 export class LifestylePage {
   public profile: UserProfile;
-  public schedule: string = 'sleep';
+  public plan: string = 'sleep';
   constructor(
     private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _params: NavParams,
-    private _profileSvc: ProfileService
+    private _profileSvc: ProfileService,
+    private _sleepSvc: SleepService
   ) {
     this.profile = _profileSvc.getProfile();
     if (!!_params.get('new')) {
@@ -35,12 +36,23 @@ export class LifestylePage {
    * (e.g. sleep must be before 10, must workout at least 3 times per week, meal interval and breakfast must suite the constitution)
    * 
    */
+  public planPageChange(): void {
+    this._detectorRef.markForCheck();
+  }
 
   public saveLifestyle(): void {
     this._profileSvc.saveProfile(this.profile);
   }
 
-  public schedulePageChange(): void {
+  public setBedtime(): void {
+    this.profile.sleepPlan.bedTime = this._sleepSvc.getBedtime(this.profile.sleepPlan.wakeUpTime);
+    this._detectorRef.detectChanges();
+    this._detectorRef.markForCheck();
+  }
+
+  public setWakeUptime(): void {
+    this.profile.sleepPlan.wakeUpTime = this._sleepSvc.getBedtime(this.profile.sleepPlan.bedTime);
+    this._detectorRef.detectChanges();
     this._detectorRef.markForCheck();
   }
 

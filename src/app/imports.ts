@@ -64,7 +64,8 @@ import {
     NutritionPage,
     PasswordResetPage,
     ProfilePage,
-    RegistrationPage
+    RegistrationPage,
+    SleepPlanPage
 } from '../pages';
 
 // Pipes
@@ -80,7 +81,8 @@ import {
     FoodDataService,
     FoodService,
     MealService,
-    ProfileService
+    ProfileService,
+    SleepService
 } from '../providers';
 
 export const thgDeclarations = [
@@ -105,7 +107,8 @@ export const thgDeclarations = [
     NutritionPage,
     PasswordResetPage,
     ProfilePage,
-    RegistrationPage
+    RegistrationPage,
+    SleepPlanPage
 ];
 
 export const thgEntries = [
@@ -128,7 +131,8 @@ export const thgEntries = [
     NutritionPage,
     PasswordResetPage,
     ProfilePage,
-    RegistrationPage
+    RegistrationPage,
+    SleepPlanPage
 ];
 
 export const thgImports = [
@@ -152,5 +156,6 @@ export const thgProviders = [
     FoodDataService,
     FoodService,
     MealService,
-    ProfileService
+    ProfileService,
+    SleepService
 ];

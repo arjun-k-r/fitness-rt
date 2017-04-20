@@ -7,7 +7,7 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import * as _ from 'lodash';
 
 // Models
-import { Constitution, ConstitutionQuizQuestion, ConstitutionQuizCharacterstic, Dosha, UserProfile } from '../models';
+import { ConstitutionQuizQuestion, ConstitutionQuizCharacterstic, Dosha, UserProfile } from '../models';
 
 @Injectable()
 export class ConstitutionService {

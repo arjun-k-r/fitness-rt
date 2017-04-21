@@ -1,8 +1,8 @@
 export { AccountPage } from './account/account';
+export { ActivityPlanPage } from './activity-plan/activity-plan';
 export { ActivitySelectPage } from './activity-select/activity-select';
 export { ConstitutionPage } from './constitution/constitution';
 export { DoshaDetailsPage } from './dosha-details/dosha-details'
-export { ExercisePage } from './exercise/exercise';
 export { FoodDetailsPage } from './food-details/food-details';
 export { FoodListPage } from './food-list/food-list';
 export { ForgotPasswordPage } from './forgot-password/forgot-password';

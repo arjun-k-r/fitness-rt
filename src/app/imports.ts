@@ -47,10 +47,10 @@ import { ErrorMessageComponent } from '../components';
 // Pages
 import {
     AccountPage,
+    ActivityPlanPage,
     ActivitySelectPage,
     ConstitutionPage,
     DoshaDetailsPage,
-    ExercisePage,
     FoodDetailsPage,
     FoodListPage,
     ForgotPasswordPage,
@@ -90,12 +90,12 @@ import {
 export const thgDeclarations = [
     MyApp,
     AccountPage,
+    ActivityPlanPage,
     ActivitySelectPage,
     CapitalizePipe,
     ConstitutionPage,
     DoshaDetailsPage,
     ErrorMessageComponent,
-    ExercisePage,
     FoodDetailsPage,
     FoodListPage,
     ForgotPasswordPage,
@@ -116,11 +116,10 @@ export const thgDeclarations = [
 export const thgEntries = [
     MyApp,
     AccountPage,
+    ActivityPlanPage,
     ActivitySelectPage,
     ConstitutionPage,
     DoshaDetailsPage,
-    ExercisePage,
-    FoodDetailsPage,
     FoodListPage,
     ForgotPasswordPage,
     GettingStartedPage,

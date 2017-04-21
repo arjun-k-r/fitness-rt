@@ -21,9 +21,14 @@
             <ion-segment-button value="exercise">
                 <ion-icon name="bicycle"></ion-icon>
             </ion-segment-button>
-            <ion-segment-button value="work">
-                <ion-icon name="briefcase"></ion-icon>
+            <ion-segment-button value="study">
+                <ion-icon name="book"></ion-icon>
             </ion-segment-button>
+            <!--
+            <ion-segment-button value="constitution">
+                <ion-icon name="finger-print"></ion-icon>
+            </ion-segment-button>
+            -->
         </ion-segment>
     </ion-toolbar>
 </ion-header>
@@ -77,6 +82,11 @@
                 <p text-wrap>Moderate intake of alcohol, caffeine, tea, etc. requires aprox. 6 hours to be completely metabolised.</p>
                 <p item-content>04:00 pm</p>
             </ion-item>
+            <ion-item>
+                <h2>Temperature</h2>
+                <p text-wrap></p>
+                <p item-content>19 C</p>
+            </ion-item>
         </ion-list>
         <ion-list *ngSwitchCase="'nutrition'">
             <ion-item>
@@ -92,21 +102,66 @@
                 Guidelines
             </ion-list-header>
             <ion-item>
+                <h2>Routine</h2>
+                <p text-wrap>The body needs to know how to prepare the digestion process and use energy.</p>
+                <p item-content>Every day</p>
+            </ion-item>
+            <ion-item>
+                <h2>Gratitude</h2>
+                <p text-wrap>Be grateful for every meal you have. Other people have died of hunger.</p>
+            </ion-item>
+            <ion-item>
                 <h2>Interval</h2>
                 <p text-wrap>A regular healthy meal digestion requires 4 hours</p>
                 <p item-content>4 hours</p>
             </ion-item>
             <ion-item>
-                <h2>Chewing</h2>
-                <p text-wrap>A regular healthy meal digestion requires 4 hours</p>
-                <p item-content>32 times</p>
+                <h2>Organic</h2>
+                <p text-wrap>Real whole food, with least intervention, and with complete nutritional values (food provides information, not just calories).</p>
             </ion-item>
             <ion-item>
-                <h2>Eat slowly</h2>
-                <p text-wrap>A regular healthy meal digestion requires 4 hours</p>
+                <h2>Size</h2>
+                <p text-wrap>80% stomach capacity (20% for digestive juices). Overeting causes indigestion.</p>
+                <p item-content>750 g</p>
+            </ion-item>
+            <ion-item>
+                <h2>Meal food variety</h2>
+                <p text-wrap>The less complex the meal, the easier and optimal.</p>
+                <p item-content>4 foods</p>
+            </ion-item>
+            <ion-item>
+                <h2>Chewing</h2>
+                <p text-wrap>Mastication and insalivation are the first digestion processes</p>
+                <p item-content>32 times (30 seconds)</p>
+            </ion-item>
+            <ion-item>
+                <h2>Slowly</h2>
+                <p text-wrap>Prevents you from overeating and helps you enjoy your food and chew correctly</p>
+                <p item-content>30 minutes</p>
+            </ion-item>
+            <ion-item>
+                <h2>Calm</h2>
+                <p text-wrap>Physical, emotional, or mental stress causes stress on your digestive system and, thus, indigestion and damage.</p>
+            </ion-item>
+            <ion-item>
+                <h2>Silence</h2>
+                <p text-wrap>Talking and noise makes you agitated and stressed.</p>
+            </ion-item>
+            <ion-item>
+                <h2>Distractions</h2>
+                <p text-wrap>Don't watch television, don't work, don't use your phone etc. Focus on your meal and eating. Where focus goes, energy flows.</p>
+            </ion-item>
+            <ion-item>
+                <h2>Combining</h2>
+                <p text-wrap>Combine foods properly by hygienic means and enzymatic activities for proper digestion.</p>
             </ion-item>
         </ion-list>
         <ion-list *ngSwitchCase="'exercise'">
+            <ion-item>
+                <ion-label floating>Daily intellectual exercise</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.activityPlan.dailyStudying"></ion-input>
+                <ion-note item-right>minutes</ion-note>
+            </ion-item>
             <ion-item>
                 <ion-label floating>Daily physical exercise</ion-label>
                 <ion-input type="number" [(ngModel)]="profile.activityPlan.dailyExercise"></ion-input>
@@ -121,18 +176,18 @@
                 Guidelines
             </ion-list-header>
             <ion-item>
-                <h2>Moving</h2>
-                <p text-wrap>Move constantly everyday to eliminate toxic accumulations through CO2 and stay alert physically and mentally.</p>
-                <p item-content>Every day</p>
+                <h2>Routine</h2>
+                <p text-wrap>Move constantly everyday to maintain energy levels, keep blood moving, and stay alert physically and mentally.</p>
+                <p item-content>240 minutes</p>
             </ion-item>
             <ion-item>
                 <h2>Breathing</h2>
-                <p text-wrap>Focus on breathing properly through your nose and completely, not shallow. Oxygen is the most important nutrient and the key to energy, whereas CO2 is the main toxin elimination source.</p>
+                <p text-wrap>Learn to always breath correctly and completely through your nose. Oxygen is the most important nutrient and the key to energy, whereas CO2 is the main toxin elimination source.</p>
                 <p item-content>Every day</p>
             </ion-item>
             <ion-item>
                 <h2>Warmup</h2>
-                <p text-wrap>Warmup actively before every intense exercise, not only to prepare your skeletal muscle, but your cardiac muscles as ell (increase heart rate).</p>
+                <p text-wrap>Prepare your skeletal muscles and cardiac muscles (increase heart rate).</p>
                 <p item-content>5 minutes</p>
             </ion-item>
             <ion-item>
@@ -141,22 +196,17 @@
             </ion-item>
             <ion-item>
                 <h2>High intensity interval training (HIIT)</h2>
-                <p text-wrap>Have a high intensity interval training routine at least 5 times per week to eliminate toxic accumulations through CO2 and perspiration and burn energy storages.</p>
+                <p text-wrap>Eliminate toxins through perspiration, burn energy storages, cardiovascular support, increase endurance, preserve muscle tissue, and increase metabolism.</p>
                 <p item-content>5 times per week</p>
             </ion-item>
             <ion-item>
                 <h2>HIIT duration</h2>
-                <p text-wrap>Have a 45 minute high intensity workout 45 minutes per day to prevent heart damage.</p>
+                <p text-wrap>Too much intense exercise at once damages the heart.</p>
                 <p item-content>45 minutes</p>
             </ion-item>
             <ion-item>
-                <h2>HIIT breaks</h2>
+                <h2>HIIT breaks and sets</h2>
                 <p text-wrap>Maintain heart rate stable in an aerobic state.</p>
-                <p item-content>30-60 seconds</p>
-            </ion-item>
-            <ion-item>
-                <h2>HIIT sets</h2>
-                <p text-wrap>Maintain heart rate stable in an aerobic state and not force your heart.</p>
                 <p item-content>30-60 seconds</p>
             </ion-item>
             <ion-item>
@@ -164,6 +214,31 @@
                 <p text-wrap>"Walking is man's best medicine." - Hippocrates</p>
                 <p item-content>90 minutes</p>
             </ion-item>
+            <ion-item>
+                <h2>Recovery</h2>
+                <p text-wrap>The muscles need to rest to recover and become stronger.</p>
+                <p item-content>Every day</p>
+            </ion-item>
         </ion-list>
+         <ion-list *ngSwitchCase="'study'">
+            <ion-item>
+                <ion-label floating>Daily intellectual exercise</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.activityPlan.dailyStudying"></ion-input>
+                <ion-note item-right>minutes</ion-note>
+            </ion-item>
+            <ion-list-header>
+                Guidelines
+            </ion-list-header>
+            <ion-item>
+                <h2>Routine</h2>
+                <p text-wrap>Develop yourself and learn something new everyday.</p>
+                <p item-content>240 minutes</p>
+            </ion-item>
+            <ion-item>
+                <h2>Relaxation</h2>
+                <p text-wrap>the brain requires relaxation to cultivate the new information.</p>
+                <p item-content>Every day</p>
+            </ion-item>
+         </ion-list>
     </div>
 </ion-content>

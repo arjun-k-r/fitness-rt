@@ -6,10 +6,10 @@
 export class Activity {
     /**
      * @constructor
-     * @param duration - The duration of activity
-     * @param name - The name of activity
-     * @param time - The time activity has started
-     * @param type - The type of activity (mental or physical)
+     * @param {number} duration - The duration of activity
+     * @param {string} name - The name of activity
+     * @param {string} time - The time activity has started
+     * @param {string} type - The type of activity (mental or physical)
      */
     constructor(
         public duration: number,
@@ -27,11 +27,13 @@ export class Activity {
 export class ActivityPlan {
     /**
      * @constructor
-     * @param dailyExercise - The duration of physical exercise per day in minutes
-     * @param weeklyIntenseExercise - The number of days during the week of performed intense exercise
+     * @param {number} dailyExercise - The duration of physical exercise per day in minutes
+     * @param {number} dailyStudying - The duration of intellectual exercise per day in minutes
+     * @param {number} weeklyIntenseExercise - The number of days during the week of performed intense exercise
      */
     constructor(
-        public dailyExercise: number = 120,
+        public dailyExercise: number = 240,
+        public dailyStudying: number = 240,
         public weeklyIntenseExercise: number = 7
     ) { }
 }

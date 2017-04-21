@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { NavController, NavParams } from 'ionic-angular';
 
 // Models
-import { ActivityPlan, UserProfile } from '../../models';
+import { UserProfile } from '../../models';
 
 // Pages
 import { DoshaDetailsPage } from '../dosha-details/dosha-details';

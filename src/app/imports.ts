@@ -80,6 +80,8 @@ import {
     FitnessService,
     FoodDataService,
     FoodService,
+    FoodTasteService,
+    FoodTypeService,
     MealService,
     ProfileService,
     SleepService
@@ -155,6 +157,8 @@ export const thgProviders = [
     FitnessService,
     FoodDataService,
     FoodService,
+    FoodTasteService,
+    FoodTypeService,
     MealService,
     ProfileService,
     SleepService

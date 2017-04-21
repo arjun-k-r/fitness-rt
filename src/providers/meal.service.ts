@@ -46,9 +46,8 @@ export class MealService {
       warnings: Array<MealWarning> = [];
 
     foodItems.forEach((item: MealFoodItem) => {
-      this._foodSvc.clasifyFoodType(item);
 
-      // Classify the food items by their type
+      // Check the food type
       switch (item.type) {
         case 'acid':
           hasAcids = true;
@@ -295,6 +294,7 @@ export class MealService {
 
   /**
    * Verifies if there are tastes not suitable for the users constitution
+   * @ignore
    * @param {Array} foodItems The food items to check
    * @returns {boolean} Returns a list of recomendations if there are wrong tastes
    */

@@ -27,11 +27,11 @@ export class Activity {
 export class ActivityPlan {
     /**
      * @constructor
-     * @param dailyDuration - The time invested in a specific type of activities every day in minutes
-     * @param timesPerWeek - The number of days during the week a specific type of activities are maintained
+     * @param dailyExercise - The duration of physical exercise per day in minutes
+     * @param weeklyIntenseExercise - The number of days during the week of performed intense exercise
      */
     constructor(
-        public dailyDuration: number = 120,
-        public timesPerWeek: number = 7
+        public dailyExercise: number = 120,
+        public weeklyIntenseExercise: number = 7
     ) { }
 }

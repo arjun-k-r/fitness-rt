@@ -40,7 +40,7 @@
                 <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.sleepPlan.wakeUpTime" (ionChange)="setBedtime()"></ion-datetime>
             </ion-item>
             <ion-list-header>
-                Recommendations
+                Guidelines
             </ion-list-header>
             <ion-item>
                 <h2>Routine</h2>
@@ -89,100 +89,81 @@
                 <ion-note item-right>hours</ion-note>
             </ion-item>
             <ion-list-header>
-                Recommendations
+                Guidelines
             </ion-list-header>
             <ion-item>
                 <h2>Interval</h2>
                 <p text-wrap>A regular healthy meal digestion requires 4 hours</p>
                 <p item-content>4 hours</p>
             </ion-item>
+            <ion-item>
+                <h2>Chewing</h2>
+                <p text-wrap>A regular healthy meal digestion requires 4 hours</p>
+                <p item-content>32 times</p>
+            </ion-item>
+            <ion-item>
+                <h2>Eat slowly</h2>
+                <p text-wrap>A regular healthy meal digestion requires 4 hours</p>
+            </ion-item>
         </ion-list>
         <ion-list *ngSwitchCase="'exercise'">
             <ion-item>
-                <h2>Recommended high intensity workout</h2>
-                <p text-wrap>Have a high intensity workout routine at least 5 times per week to eliminate toxic accumulations through CO2 and perspiration.</p>
-                <p item-content>5 times per week</p>
+                <ion-label floating>Daily physical exercise</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.activityPlan.dailyExercise"></ion-input>
+                <ion-note item-right>minutes</ion-note>
             </ion-item>
             <ion-item>
-                <h2>Recommended leisure physical activity</h2>
+                <ion-label floating>Weekly intense exercise</ion-label>
+                <ion-input type="number" [(ngModel)]="profile.activityPlan.weeklyIntenseExercise"></ion-input>
+                <ion-note item-right>times</ion-note>
+            </ion-item>
+            <ion-list-header>
+                Guidelines
+            </ion-list-header>
+            <ion-item>
+                <h2>Moving</h2>
                 <p text-wrap>Move constantly everyday to eliminate toxic accumulations through CO2 and stay alert physically and mentally.</p>
                 <p item-content>Every day</p>
             </ion-item>
             <ion-item>
-                <ion-label floating>Times per week</ion-label>
-                <ion-input type="number" [(ngModel)]="profile.activityPlan.timesPerWeek"></ion-input>
+                <h2>Breathing</h2>
+                <p text-wrap>Focus on breathing properly through your nose and completely, not shallow. Oxygen is the most important nutrient and the key to energy, whereas CO2 is the main toxin elimination source.</p>
+                <p item-content>Every day</p>
             </ion-item>
             <ion-item>
-                <h2>Recommended high intensity workout duration</h2>
+                <h2>Warmup</h2>
+                <p text-wrap>Warmup actively before every intense exercise, not only to prepare your skeletal muscle, but your cardiac muscles as ell (increase heart rate).</p>
+                <p item-content>5 minutes</p>
+            </ion-item>
+            <ion-item>
+                <h2>Start slowly</h2>
+                <p text-wrap>Move constantly everyday to eliminate toxic accumulations through CO2 and stay alert physically and mentally.</p>
+            </ion-item>
+            <ion-item>
+                <h2>High intensity interval training (HIIT)</h2>
+                <p text-wrap>Have a high intensity interval training routine at least 5 times per week to eliminate toxic accumulations through CO2 and perspiration and burn energy storages.</p>
+                <p item-content>5 times per week</p>
+            </ion-item>
+            <ion-item>
+                <h2>HIIT duration</h2>
                 <p text-wrap>Have a 45 minute high intensity workout 45 minutes per day to prevent heart damage.</p>
                 <p item-content>45 minutes</p>
             </ion-item>
             <ion-item>
-                <h2>Recommended daily physical activity</h2>
-                <p text-wrap>Move constantly, but don't exhaust yourself</p>
-                <p item-content>120 minutes</p>
+                <h2>HIIT breaks</h2>
+                <p text-wrap>Maintain heart rate stable in an aerobic state.</p>
+                <p item-content>30-60 seconds</p>
             </ion-item>
             <ion-item>
-                <ion-label floating>Minutes per day</ion-label>
-                <ion-input type="number" [(ngModel)]="profile.activityPlan.dailyDuration"></ion-input>
-                <ion-note item-right>minutes</ion-note>
+                <h2>HIIT sets</h2>
+                <p text-wrap>Maintain heart rate stable in an aerobic state and not force your heart.</p>
+                <p item-content>30-60 seconds</p>
+            </ion-item>
+            <ion-item>
+                <h2>Walking</h2>
+                <p text-wrap>"Walking is man's best medicine." - Hippocrates</p>
+                <p item-content>90 minutes</p>
             </ion-item>
         </ion-list>
     </div>
 </ion-content>
-
-<!--
-    <div [ngSwitch]="schedule">
-        
-        <ion-list *ngSwitchCase="'sleep'">
-            <ion-item>
-                <ion-label floating>Bed time</ion-label>
-                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.sleepPlan.schedule.start"></ion-datetime>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>Wake up time</ion-label>
-                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.sleepPlan.schedule.end"></ion-datetime>
-            </ion-item>
-        </ion-list>
-        
-
-        
-        <ion-list *ngSwitchCase="'nutrition'">
-            <ion-item>
-                <ion-label floating>Breakfast time</ion-label>
-                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.mealPlan.breakfastTime"></ion-datetime>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>Interval</ion-label>
-                <ion-input type="number" [(ngModel)]="profile.mealPlan.interval"></ion-input>
-            </ion-item>
-        </ion-list>
-        
-
-        
-        <ion-list *ngSwitchCase="'exercise'">
-            <ion-item>
-                <ion-label floating>Time per day (minutes)</ion-label>
-                <ion-input type="number" [(ngModel)]="profile.activityPlan.dailyDuration"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>Times per week</ion-label>
-                <ion-input type="number" [(ngModel)]="profile.activityPlan.timesPerWeek"></ion-input>
-            </ion-item>
-        </ion-list>
-        
-
-        
-        <ion-list *ngSwitchCase="'work'">
-            <ion-item>
-                <ion-label floating>Work time</ion-label>
-                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="workTime"></ion-datetime>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>Duration</ion-label>
-                <ion-input type="number" [(ngModel)]="workDuration"></ion-input>
-            </ion-item>
-        </ion-list>
-        
-    </div>
-    -->

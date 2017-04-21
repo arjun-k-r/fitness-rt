@@ -2,270 +2,244 @@
 import { Injectable } from '@angular/core';
 
 // Models
-import { Food } from '../models';
+import { Food, IFoodReportNutrient, NUTRIENT_THRESHOLDS } from '../models';
 
-const NUTRIENT_MEANS: {
-  carbs: number,
-  fat: number,
-  fiber: number,
-  lactose: number,
-  protein: number,
-  sodium: number,
-  starch: number,
-  sugars: number,
-  vitaminC: number,
-  vitaminK: number,
-  water: number
-} = {
-    'carbs': 10,
-    'fat': 10,
-    'fiber': 10,
-    'lactose': 3,
-    'protein': 20,
-    'sodium': 1000,
-    'starch': 3,
-    'sugars': 11,
-    'vitaminC': 30,
-    'vitaminK': 125,
-    'water': 10
-  };
+// Providers
+import { FoodTypeService } from './food-type.service';
+import { FoodTasteService } from './food-taste.service';
 
 @Injectable()
 export class FoodService {
-  constructor() { }
+  constructor(private _foodTypeSvc: FoodTypeService, private _tasteSvc: FoodTasteService) { }
 
   /**
-   * Verifies if food is an acid fruit
-   * @description A fruit is an acid if it is low in sugar and high in vitamin C
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is an acid fruit
+   * Classifies the food by tastes and nutritional values
+   * @description Each food has specific tastes (sweet, sour, bitter, salty, punger, astrigent) and
+   * has dominant nutrients (protein, starch, sugar, etc.)
+   * @param {Food} food - The food to classify
+   * @returns {void}
    */
-  private _checkAcidFruit(food: Food): boolean {
-    return food.name.toLocaleLowerCase().includes('tomato') || (food.group === 'Fruits and Fruit Juices' && ((food.nutrition.sugars.value < (NUTRIENT_MEANS.sugars - 1) && food.nutrition.vitaminC.value > NUTRIENT_MEANS.vitaminC) || food.nutrition.sugars.value === 0));
+  public classifyFood(food: Food): void {
+    this._foodTypeSvc.classifyByType(food);
+
+    // TODO: Is uncertain
+    this._tasteSvc.classifyByTaste(food);
   }
 
   /**
-   * Verifies if food has astrigent taste
-   * @description A food is astrigent if it is raw and contains tannins and if it is high in fiber, and low in fat (absorbs water)
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is astrigent
+   * Sets the nutritional value of the food to a specific formats
+   * @description When the food report is fetched from the USDA Databse it has a very complex value and needs to be mapped to a simpler format
+   * @param {Array} nutrients - The list of nutrients
+   * @param {Food} food - The food to add the nutritional values to
+   * @returns {void}
    */
-  private _checkAstrigent(food: Food): boolean {
-    return ((food.group === 'Fruits and Fruit Juices' || food.group === 'Legumes and Legume Products' || food.group === 'Spices and Herbs' || food.group === 'Vegetables and Vegetable Products') && food.nutrition.fats.value < NUTRIENT_MEANS.fat && food.nutrition.fiber.value > NUTRIENT_MEANS.fiber) || ((food.name.toLocaleLowerCase().includes('raw') || food.name.toLocaleLowerCase().includes('dried') || food.name.toLocaleLowerCase().includes('dry') || food.name.toLocaleLowerCase().includes('dehydrated')) && !(food.name.toLocaleLowerCase().includes('cooked') || food.name.toLocaleLowerCase().includes('stewed')));
-  }
+  public setNutrientValue(nutrients: Array<IFoodReportNutrient>, food: Food): void {
+    nutrients.forEach((nutrient: IFoodReportNutrient) => {
+      switch (nutrient.nutrient_id.toString()) {
+        case '255':
+          food.nutrition.water.value = +nutrient.value;
+          break;
 
-  /**
-   * Verifies if food has bitter taste
-   * @description A food is bitter if it is a leafy green (high in vitamin K), herb, or spice
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is bitter
-   */
-  private _checkBitter(food: Food): boolean {
-    return (food.group === 'Spices and Herbs' || food.group === 'Vegetables and Vegetable Products') && food.nutrition.vitaminK.value >= NUTRIENT_MEANS.vitaminK;
-  }
+        case '208':
+          food.nutrition.energy.value = +nutrient.value;
+          break;
 
-  /**
-   * Verifies if food is a fatty food
-   * @description A food is fatty if it has high fat content
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is a fatty food
-   */
-  private _checkFat(food: Food): boolean {
-    return food.nutrition.fats.value >= NUTRIENT_MEANS.fat;
-  }
+        case '203':
+          food.nutrition.protein.value = +nutrient.value;
+          break;
 
-  /**
-   * Verifies if food is a fluid
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is a fluid
-   */
-  private _checkFluid(food: Food): boolean {
-    return food.group === 'Beverages';
-  }
+        case '204':
+          food.nutrition.fats.value = +nutrient.value;
+          break;
 
-  /**
-   * Verifies if food is a melon
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is a melon
-   */
-  private _checkMelon(food: Food): boolean {
-    return food.name.toLocaleLowerCase().includes('melon');
-  }
+        case '205':
+          food.nutrition.carbs.value = +nutrient.value;
+          break;
 
-  /**
-   * Verifies if food is milk
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is milk
-   */
-  private _checkMilk(food: Food): boolean {
-    return food.name.toLocaleLowerCase().includes('milk');
-  }
+        case '209':
+          food.nutrition.starch.value = +nutrient.value;
+          break;
 
-  /**
-   * Verifies if food is a protein food
-   * @description A food is a protein if it has high protein content or if it is an animal product
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is a protein food
-   */
-  private _checkProtein(food: Food): boolean {
-    return food.nutrition.protein.value >= NUTRIENT_MEANS.protein || food.group === 'Beef Products' || food.group === 'Dairy and Egg Products' || food.group === 'Finfish and Shellfish Products' || food.group === 'Lamb, Veal, and Game Products' || food.group === 'Pork Products' || food.group === 'Poultry Products' || food.group === 'Sausages and Luncheon Meats';
-  }
+        case '213':
+          food.nutrition.lactose.value = +nutrient.value;
+          break;
 
-  /**
-   * Verifies if food has pungent taste
-   * @description A food is pungent if it contains sulfur or capsacin (hot and spicy)
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is pungent
-   */
-  private _checkPungent(food: Food): boolean {
-    return food.group === 'Spices and Herbs' || food.name.toLocaleLowerCase().includes('cayenne') || food.name.toLocaleLowerCase().includes('hot') || food.name.toLocaleLowerCase().includes('chilli') || food.name.toLocaleLowerCase().includes('garlic') || food.name.toLocaleLowerCase().includes('onion') || food.name.toLocaleLowerCase().includes('radish') || food.name.toLocaleLowerCase().includes('mustard') || food.name.toLocaleLowerCase().includes('turnip');
-  }
+        case '291':
+          food.nutrition.fiber.value = +nutrient.value;
+          break;
 
-  /**
-   * Verifies if food has salty taste
-   * @description A food is salty if it has high sodium content, typically a seafood
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is salty
-   */
-  private _checkSalty(food: Food): boolean {
-    return food.nutrition.sodium.value >= NUTRIENT_MEANS.sodium || food.group === 'Finfish and Shellfish Products';
-  }
+        case '269':
+          food.nutrition.sugars.value = +nutrient.value;
+          break;
 
-  /**
-   * Verifies if food has sour taste (e.g. citrus or fermented)
-   * @description A food is sour if it is a an acid fruit, alcool, or fermented food
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is sour
-   */
-  private _checkSour(food: Food): boolean {
-    return this._checkAcidFruit(food) || food.nutrition.alcohol.value > 0 || food.name.toLocaleLowerCase().includes('vinegar') || (food.group === 'Dairy and Egg Products' && food.nutrition.lactose.value < NUTRIENT_MEANS.lactose);
-  }
+        case '301':
+          food.nutrition.calcium.value = +nutrient.value;
+          break;
 
-  /**
-   * Verifies if food is a starchy food
-   * @description A food is starchy if it has hhigh carbohydrate or starch content
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is a starchy food
-   */
-  private _checkStarch(food: Food): boolean {
-    return (food.nutrition.starch.value > NUTRIENT_MEANS.starch) || (food.group === 'Legumes and Legume Products' || food.group === 'Cereal Grains and Pasta' || (food.group === 'Vegetables and Vegetable Products' && food.nutrition.carbs.value > NUTRIENT_MEANS.carbs));
-  }
+        case '303':
+          food.nutrition.iron.value = +nutrient.value;
+          break;
 
-  /**
-   * Verifies if food is a sub-acid fruit (medium sugar)
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is a sub-acid fruit
-   */
-  private _checkSubAcidFruit(food: Food): boolean {
-    return food.group === 'Fruits and Fruit Juices' && (food.nutrition.sugars.value <= (NUTRIENT_MEANS.sugars + 1) && food.nutrition.sugars.value >= (NUTRIENT_MEANS.sugars - 1));
-  }
+        case '304':
+          food.nutrition.magnesium.value = +nutrient.value;
+          break;
 
-  /**
-   * Verifies if food is a sugar
-   * @description A food is a sugar or sweet if it has high sugar content
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is a sugar
-   */
-  private _checkSugar(food: Food): boolean {
-    return food.group === 'Sweets' || food.nutrition.sugars.value > (NUTRIENT_MEANS.sugars + 1);
-  }
+        case '305':
+          food.nutrition.phosphorus.value = +nutrient.value;
+          break;
 
-  /**
-   * Verifies if food is a sweet fruit
-   * @description A fruit is sweet if it has high sugar content
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is a sweet fruit
-   */
-  private _checkSweetFruit(food: Food): boolean {
-    return food.group === 'Fruits and Fruit Juices' && food.nutrition.sugars.value > (NUTRIENT_MEANS.sugars + 1);
-  }
+        case '306':
+          food.nutrition.potassium.value = +nutrient.value;
+          break;
 
-  /**
-   * Verifies if food is a non-starch
-   * @description A food is non-starchy typically if it is a vegetable
-   * @param {Food} food The food to clasify
-   * @returns {boolean} Returns true if the food is a non-starch
-   */
-  private _checkNonStarch(food: Food): boolean {
-    return (food.group === 'Vegetables and Vegetable Products' && food.nutrition.carbs.value < NUTRIENT_MEANS.carbs) || food.group === 'Spices and Herbs';
-  }
+        case '307':
+          food.nutrition.sodium.value = +nutrient.value;
+          break;
 
-  /**
-   * Clasifies the food by its taste
-   * @param {Food} food The food to clasify
-   */
-  public checkFoodTastes(food: Food): void {
-    if (this._checkSalty(food)) {
-      food.tastes.push('Salty')
-    } else if (this._checkSour(food)) {
-      food.tastes.push('Sour')
-    } else if (this._checkBitter(food)) {
-      food.tastes.push('Bitter');
-    } else {
-      food.tastes.push('Sweet')
-    }
+        case '309':
+          food.nutrition.zinc.value = +nutrient.value;
+          break;
 
-    if (this._checkPungent(food)) {
-      food.tastes.push('Pungent')
-    }
+        case '312':
+          food.nutrition.copper.value = +nutrient.value;
+          break;
 
-    if (this._checkAstrigent(food)) {
-      food.tastes.push('Astrigent');
-    }
-  }
+        case '315':
+          food.nutrition.manganese.value = +nutrient.value;
+          break;
 
-  /**
-   * Clasifies the food by its nutritional values
-   * @param {Food} food The food to clasify
-   */
-  public clasifyFoodType(food: Food): void {
-    if (this._checkNonStarch(food)) {
-      food.type = 'Veggie';
-    }
+        case '317':
+          food.nutrition.selenium.value = +nutrient.value;
+          break;
 
-    if (this._checkSour(food)) {
-      food.type = 'Acid';
-    }
+        case '401':
+          food.nutrition.vitaminC.value = +nutrient.value;
+          break;
 
-    if (this._checkAcidFruit(food)) {
-      food.type = 'Acid fruit';
-    }
+        case '404':
+          food.nutrition.vitaminB1.value = +nutrient.value;
+          break;
 
-    if (this._checkFat(food)) {
-      food.type = 'Fat';
-    }
+        case '405':
+          food.nutrition.vitaminB2.value = +nutrient.value;
+          break;
 
-    if (this._checkFluid(food)) {
-      food.type = 'Fluid';
-    }
+        case '406':
+          food.nutrition.vitaminB3.value = +nutrient.value;
+          break;
 
-    if (this._checkMelon(food)) {
-      food.type = 'Melon';
-    }
+        case '410':
+          food.nutrition.vitaminB5.value = +nutrient.value;
+          break;
 
-    if (this._checkMilk(food)) {
-      food.type = 'Milk';
-    }
+        case '415':
+          food.nutrition.vitaminB5.value = +nutrient.value;
+          break;
 
-    if (this._checkProtein(food)) {
-      food.type = 'Protein';
-    }
+        case '417':
+          food.nutrition.vitaminB9.value = +nutrient.value;
+          break;
 
-    if (this._checkStarch(food)) {
-      food.type = 'Starch';
-    }
+        case '421':
+          food.nutrition.choline.value = +nutrient.value;
+          break;
 
-    if (this._checkSubAcidFruit(food)) {
-      food.type = 'Sub-acid fruit';
-    }
+        case '418':
+          food.nutrition.vitaminB12.value = +nutrient.value;
+          break;
 
-    if (this._checkSugar(food)) {
-      food.type = 'Sugar';
-    }
+        case '320':
+          food.nutrition.vitaminA.value = +nutrient.value;
+          break;
 
-    if (this._checkSweetFruit(food)) {
-      food.type = 'Sweet fruit';
-    }
+        case '323':
+          food.nutrition.vitaminE.value = +nutrient.value;
+          break;
+
+        case '328':
+          food.nutrition.vitaminD.value = +nutrient.value;
+          break;
+
+        case '430':
+          food.nutrition.vitaminK.value = +nutrient.value;
+          break;
+
+        case '606':
+          food.nutrition.satFat.value = +nutrient.value;
+          break;
+
+        case '618':
+          food.nutrition.ala.value = +nutrient.value;
+          break;
+
+        case '619':
+          food.nutrition.la.value = +nutrient.value;
+          break;
+
+        case '621':
+          food.nutrition.dha.value = +nutrient.value;
+          break;
+
+        case '629':
+          food.nutrition.epa.value = +nutrient.value;
+          break;
+
+        case '605':
+          food.nutrition.transFat.value = +nutrient.value;
+          break;
+
+        case '501':
+          food.nutrition.tryptophan.value = +nutrient.value;
+          break;
+
+        case '502':
+          food.nutrition.threonine.value = +nutrient.value;
+          break;
+
+        case '503':
+          food.nutrition.isoleucine.value = +nutrient.value;
+          break;
+
+        case '504':
+          food.nutrition.leucine.value = +nutrient.value;
+          break;
+
+        case '505':
+          food.nutrition.lysine.value = +nutrient.value;
+          break;
+
+        case '506':
+          food.nutrition.methionine.value = +nutrient.value;
+          break;
+
+        case '508':
+          food.nutrition.phenylalanine.value = +nutrient.value;
+          break;
+
+        case '510':
+          food.nutrition.valine.value = +nutrient.value;
+          break;
+
+        case '511':
+          food.nutrition.arginine.value = +nutrient.value;
+          break;
+
+        case '512':
+          food.nutrition.histidine.value = +nutrient.value;
+          break;
+
+        case '262':
+          food.nutrition.caffeine.value = +nutrient.value;
+          break;
+
+        case '221':
+          food.nutrition.alcohol.value = +nutrient.value;
+          break;
+
+        default:
+          break;
+      }
+    });
   }
 
   /**

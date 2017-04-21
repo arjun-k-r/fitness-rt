@@ -14,7 +14,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-searchbar debounce="2000" placeholder="Search foods" [(ngModel)]="searchQuery" (ionInput)="refreshItems()" (ionCancel)="clearSearch($event)">
   </ion-searchbar>
   <ion-list>

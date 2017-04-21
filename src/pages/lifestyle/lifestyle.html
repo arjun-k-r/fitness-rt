@@ -38,7 +38,7 @@
         <ion-list *ngSwitchCase="'sleep'">
             <ion-item>
                 <ion-label floating>Bed time</ion-label>
-                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.sleepPlan.bedTime" (ionChange)="setWakeUptime()"></ion-datetime>
+                <ion-datetime displayFormat="HH:mm" pickerFormat="HH:mm" [(ngModel)]="profile.sleepPlan.bedTime" (ionChange)="setWakeUptime()"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label floating>Wake up time</ion-label>

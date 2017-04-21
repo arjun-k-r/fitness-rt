@@ -338,6 +338,14 @@ export class MealService {
     });
   }
 
+  public saveMealPlanMeals(mealPlan: MealPlan): void {
+    console.log(mealPlan);
+    this._mealPlan.update({
+      date: new Date().getDay(),
+      meals: mealPlan.meals
+    });
+  }
+
   /**
    * Gets the nutritional values of each selected food
    * @param {Array} items The selected food

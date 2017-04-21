@@ -2,6 +2,11 @@
 
     <ion-navbar>
         <ion-title>Meal details</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="saveMeal()">
+                <ion-icon name="sync"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
     <ion-toolbar>
         <ion-segment [(ngModel)]="mealDetails">

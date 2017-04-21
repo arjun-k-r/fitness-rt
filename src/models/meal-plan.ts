@@ -67,14 +67,6 @@ export class MealPlan {
     ) {}
 }
 
-export class MealWarning {
-  constructor(
-    public isGood: boolean,
-    public message: string,
-    public moreInfo: string
-  ) { }
-}
-
 export class MealServing {
     constructor(
         public badMood: boolean = true,
@@ -87,4 +79,12 @@ export class MealServing {
         public overeating: boolean = false,
         public silence: boolean = true
     ) {}
+}
+
+export class MealWarning {
+  constructor(
+    public isGood: boolean,
+    public message: string,
+    public moreInfo: string
+  ) { }
 }

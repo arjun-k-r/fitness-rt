@@ -6,7 +6,7 @@ import { NavParams } from 'ionic-angular';
 import { UserProfile } from '../../models'
 
 // Providers
-import { AlertService, ProfileService, SleepService } from "../../providers";
+import { AlertService, ProfileService, SleepService } from '../../providers';
 
 @Component({
   selector: 'page-lifestyle',
@@ -64,5 +64,5 @@ export class LifestylePage {
     console.log('Destroying...');
     this._detectorRef.detach();
   }
-
+  
 }

@@ -20,11 +20,11 @@ export class SleepService {
   public getBedtime(wakeUpTime: string): string {
     let wakeTimeItems = wakeUpTime.split(':'),
       hhWake = +wakeTimeItems[0],
-      mmWake = +wakeTimeItems[1];
+      mmWake = +wakeTimeItems[1].split(' ')[0];
 
     return moment({ 'hours': hhWake, 'minutes': mmWake })
       .subtract({ 'hours': 7, 'minutes': 30 })
-      .format('hh:mm');
+      .format('hh:mm a');
   }
 
   /**
@@ -36,11 +36,11 @@ export class SleepService {
   public getWakeUptime(bedTime: string): string {
     let bedTimeItems = bedTime.split(':'),
       hhSleep = +bedTime[0] + 12,
-      mmSleep = +bedTime[1];
+      mmSleep = +bedTime[1].split(' ')[0];
 
     return moment({ 'hours': hhSleep, 'minutes': mmSleep })
       .add({ 'hours': 7, 'minutes': 30 })
-      .format('hh:mm');
+      .format('hh:mm a');
   }
 
 }

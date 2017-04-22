@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { Alert, AlertController, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
 
 // Models
-import { IFoodSearchResult, MealFoodItem, Meal, MealPlan } from '../../models';
+import { IFoodSearchResult, MealFoodItem, Meal } from '../../models';
 
 // Pages
 import { FoodSelectPage } from '../food-select/food-select';
@@ -19,7 +19,6 @@ import { MealService } from '../../providers';
 export class MealDetailsPage {
   public meal: Meal;
   public mealIdx: number;
-  public mealPlan: MealPlan;
   public mealDetails: string = 'items';
   constructor(
     private _alertCtrl: AlertController,
@@ -30,8 +29,7 @@ export class MealDetailsPage {
     private _params: NavParams
   ) {
     this.mealIdx = <number>_params.get('mealIdx');
-    this.mealPlan = <MealPlan>_params.get('mealPlan');
-    this.meal = this.mealPlan.meals[this.mealIdx];
+    this.meal = <Meal>_params.get('meal');
     _detectorRef.markForCheck();
   }
 
@@ -80,8 +78,7 @@ export class MealDetailsPage {
   }
 
   public saveMeal(): void {
-    this.mealPlan[this.mealIdx] = this.meal;
-    this._mealSvc.saveMealPlanMeals(this.mealPlan);
+    this._mealSvc.saveMeal(this.mealIdx, this.meal);
   }
 
   ionViewWillUnload(): void {

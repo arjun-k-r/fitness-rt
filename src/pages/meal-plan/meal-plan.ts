@@ -1,5 +1,6 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 // Models
 import { MealPlan } from '../../models';
@@ -17,20 +18,16 @@ import { MealService } from '../../providers';
 })
 export class MealPlanPage {
   public detailsPage: any = MealDetailsPage;
-  public mealPlan: MealPlan = new MealPlan();
+  public mealPlan: Observable<MealPlan>;
   constructor(private _detectorRef: ChangeDetectorRef, private _mealSvc: MealService) { }
 
   ionViewWillEnter(): void {
-    this._mealSvc.getMealPlan().then((mealPlan: MealPlan) => {
-      this.mealPlan = mealPlan;
-      console.log(this.mealPlan);
-      this._detectorRef.markForCheck();
-    });
+    this.mealPlan = this._mealSvc.getMealPlan();
+    this._detectorRef.markForCheck();
   }
 
   ionViewWillUnload(): void {
     console.log('Destroying...');
     this._detectorRef.detach();
   }
-
 }

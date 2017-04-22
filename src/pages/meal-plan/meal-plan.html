@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-item-group *ngFor="let meal of mealPlan.meals; let i = index">
+  <ion-item-group *ngFor="let meal of (mealPlan | async)?.meals; let i = index">
     <ion-item-divider color="secondary">Meal {{ i + 1 }}</ion-item-divider>
     <ion-item>
       Time
@@ -24,13 +24,13 @@
     </ion-item>
     <ion-item>
       Warnings
-      <p item-content>{{ meal.warnings?.length }} warnings</p>
+      <p item-content>{{ meal.warnings?.length || 0 }} warnings</p>
     </ion-item>
     <ion-item>
       Foods
       <p item-content>{{ meal.mealItems?.length }} items</p>
     </ion-item>
-    <button ion-item [navPush]="detailsPage" [navParams]="{ mealPlan: mealPlan, mealIdx: i }">
+    <button ion-item [navPush]="detailsPage" [navParams]="{ meal: meal, mealIdx: i }">
       More details
       <ion-note item-right><ion-icon name="arrow-forward"></ion-icon></ion-note>
     </button>

@@ -2,9 +2,11 @@
 import { Injectable } from '@angular/core';
 import { User } from '@ionic/cloud-angular';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/operator/map';
 
 // Third-party
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import * as moment from 'moment';
 
 // Models
 import { Food, IFoodSearchResult, Meal, MealFoodItem, MealPlan, MealWarning, Nutrition, UserProfile } from '../models';
@@ -13,6 +15,8 @@ import { Food, IFoodSearchResult, Meal, MealFoodItem, MealPlan, MealWarning, Nut
 import { FoodDataService } from './food-data.service';
 import { FoodService } from './food.service';
 import { ProfileService } from './profile.service';
+
+const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class MealService {
@@ -23,7 +27,9 @@ export class MealService {
     private _foodDataSvc: FoodDataService,
     private _profileSvc: ProfileService,
     private _user: User
-  ) { this._mealPlan = _af.database.object(`/meal-plans/${_user.id}/${new Date().getDay()}`); }
+  ) {
+    this._mealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY}`);
+  }
 
   /**
    * Verifies if the food items in a meal are well combined
@@ -274,25 +280,6 @@ export class MealService {
   }
 
   /**
-   * @returns {Array} Returns the planned meals for the day by breakfast time and sleep time.
-   */
-  private _getMeals(): Array<Meal> {
-    let profile: UserProfile = this._profileSvc.getProfile(),
-      breakfastTime: number = +profile.mealPlan.breakfastTime.split(':')[0],
-      meals: Array<Meal> = [],
-      newMeal: Meal,
-      bedTime: number = +profile.sleepPlan.bedTime.split(':')[0];
-
-    for (let mealTime = breakfastTime; mealTime < bedTime - 2; mealTime += +profile.mealPlan.interval) {
-      newMeal = new Meal();
-      newMeal.time = mealTime < 10 ? `0${mealTime}:00` : `${mealTime}:00`;
-      meals.push(newMeal);
-    }
-
-    return meals;
-  }
-
-  /**
    * Verifies if there are tastes not suitable for the users constitution
    * @ignore
    * @param {Array} foodItems The food items to check
@@ -304,6 +291,56 @@ export class MealService {
      */
 
     return true;
+  }
+
+  /**
+   * @returns {Array} Returns the planned meals for the day by breakfast time and sleep time.
+   */
+  private _getMeals(): Array<Meal> {
+    let profile: UserProfile = this._profileSvc.getProfile(),
+      breakfastTime: number = +profile.mealPlan.breakfastTime.split(':')[0],
+      meals: Array<Meal> = [],
+      mealTime: number = 0,
+      newMeal: Meal,
+      bedTime: number = +profile.sleepPlan.bedTime.split(':')[0] + 12;
+
+    // As long as the last meal is 2 hours before sleep
+    while (mealTime < bedTime - 6) {
+      newMeal = new Meal();
+      newMeal.time = moment({ 'hours': breakfastTime, 'minutes': 0 })
+        .add({ 'hours': mealTime, 'minutes': 0 })
+        .format('hh:mm a');
+      meals.push(newMeal);
+      mealTime += +profile.mealPlan.interval
+    }
+
+    return meals;
+  }
+
+
+  /**
+   * Reorganises the meals if the breakfast time is changed
+   * @param {Array} meals The meals to reaorganise
+   * @returns {Array} Returns the reaorganised meals
+   */
+  private _setupMeals(meals: Array<Meal>): Array<Meal> {
+    let bedTime: number = +this._profileSvc.getProfile().sleepPlan.bedTime.split(':')[0] + 12,
+      lastMealTime = +meals[meals.length - 1].time.split(':')[0],
+      mealInterval: number = +this._profileSvc.getProfile().mealPlan.interval,
+      mealTime: number = mealInterval,
+      newMeal: Meal;
+
+    // As long as the last meal is 2 hours before sleep
+    while (mealTime < bedTime - 6) {
+      newMeal = new Meal();
+      newMeal.time = moment({ 'hours': lastMealTime, 'minutes': 0 })
+        .add({ 'hours': mealTime, 'minutes': 0 })
+        .format('hh:mm a');
+      meals.push(newMeal);
+      mealTime += mealInterval;
+    }
+
+    return meals;
   }
 
   /**
@@ -325,24 +362,31 @@ export class MealService {
     return nutrition;
   }
 
+  public getMeal(mealIdx: number): FirebaseObjectObservable<Meal> {
+    return this._af.database.object(`/meal-plans/${this._user.id}/${CURRENT_DAY}/meals/${mealIdx}`)
+  }
+
   /**
-   * @returns {Promise} Returns the current day meal.
+   * @returns {Observable} Returns the current day meal.
    */
-  public getMealPlan(): Promise<MealPlan> {
-    return new Promise(resolve => {
-      this._mealPlan.subscribe((mealPlan: MealPlan) => {
-        let newMealPlan: MealPlan = mealPlan || new MealPlan();
-        newMealPlan.meals = this._getMeals();
-        resolve(newMealPlan);
-      });
+  public getMealPlan(): Observable<MealPlan> {
+    return this._mealPlan.map((mealPlan: MealPlan) => {
+      let newMealPlan: MealPlan = mealPlan || new MealPlan();
+      newMealPlan.meals = mealPlan.meals ? this._setupMeals(mealPlan.meals) : this._getMeals();
+      return newMealPlan;
     });
   }
 
-  public saveMealPlanMeals(mealPlan: MealPlan): void {
-    console.log(mealPlan);
-    this._mealPlan.update({
-      date: new Date().getDay(),
-      meals: mealPlan.meals
+  public saveMeal(mealIdx: number, meal: Meal): void {
+    this.getMeal(mealIdx).update({
+      distress: meal.distress,
+      mealItems: meal.mealItems,
+      nutrition: meal.nutrition,
+      pral: meal.pral,
+      quantity: meal.quantity,
+      serving: meal.serving,
+      time: meal.time,
+      warnings: meal.warnings
     });
   }
 
@@ -354,32 +398,4 @@ export class MealService {
   public serializeMealItems(items: Array<IFoodSearchResult>): Observable<MealFoodItem> {
     return new Observable(observer => items.forEach((item: IFoodSearchResult) => this._foodDataSvc.getFoodReports$(item.ndbno).then((food: Food) => observer.next(new MealFoodItem(food.group, food.name, food.ndbno)))));
   }
-
-  /**
-   * Reorganises the meals if the breakfast time is changed
-   * @param {Array} meals The meals to reaorganise
-   * @returns {Array} Returns the reaorganised meals
-   */
-  public setupMeals(meals: Array<Meal>): Array<Meal> {
-    let profile: UserProfile = this._profileSvc.getProfile(),
-      bedTime: number = +profile.sleepPlan.bedTime.split(':')[0],
-      mealTime: number = +meals[0].time.split(':')[0],
-      dinnerTime: number;
-
-    meals.forEach((meal: Meal) => {
-      meal.time = mealTime < 10 ? `0${mealTime}:00` : `${mealTime}:00`;
-      mealTime += +profile.mealPlan.interval;
-    });
-
-    dinnerTime = +meals[meals.length - 1].time.split(':')[0];
-
-    if (dinnerTime + 4 <= bedTime - 4) {
-      let newMeal: Meal = new Meal();
-      newMeal.time = `${dinnerTime + 4}:00`;
-      meals.push(newMeal);
-    }
-
-    return meals;
-  }
-
 }

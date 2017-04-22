@@ -4,7 +4,7 @@ import { Http, URLSearchParams, Response, RequestOptions, Headers } from '@angul
 import { Observable } from 'rxjs/Rx';
 
 // Models
-import { Food, FoodGroup, IFoodReportNutrient, IFoodReportSearchResult, IFoodSearchResult } from '../models';
+import { Food, FoodGroup, IFoodReportSearchResult, IFoodSearchResult } from '../models';
 
 // Providers
 import { FoodService } from './food.service';

@@ -8,13 +8,13 @@ import { Nutrition } from './nutrition';
  */
 export class Meal {
     constructor(
-        public distress: boolean = false,
+        public distress: boolean = true,
         public mealItems: Array<MealFoodItem> = [],
         public nutrition: Nutrition = new Nutrition(),
         public pral: number = 0,
-        public quantity: number = 100,
+        public quantity: number = 0,
         public serving: MealServing = new MealServing(),
-        public time: string = '06:00',
+        public time: string = '',
         public warnings: Array<MealWarning> = []
     ) { }
 }
@@ -57,7 +57,7 @@ export class MealFoodItem extends Food {
 
 export class MealPlan {
     constructor(
-        public breakfastTime: string = '06:00',
+        public breakfastTime: string = '06:00 am',
         public dailyNutrition: Nutrition = new Nutrition(),
         public date: string = '',
 

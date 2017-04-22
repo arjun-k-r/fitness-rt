@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 // Models
-import { Food, IFoodReportNutrient, NUTRIENT_THRESHOLDS } from '../models';
+import { Food, IFoodReportNutrient } from '../models';
 
 // Providers
 import { FoodTypeService } from './food-type.service';

@@ -38,11 +38,11 @@
         <ion-list *ngSwitchCase="'sleep'">
             <ion-item>
                 <ion-label floating>Bed time</ion-label>
-                <ion-datetime displayFormat="HH:mm" pickerFormat="HH:mm" [(ngModel)]="profile.sleepPlan.bedTime" (ionChange)="setWakeUptime()"></ion-datetime>
+                <ion-datetime displayFormat="h:mm a" pickerFormat="h mm a" [(ngModel)]="profile.sleepPlan.bedTime" (ionChange)="setWakeUptime()"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label floating>Wake up time</ion-label>
-                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.sleepPlan.wakeUpTime" (ionChange)="setBedtime()"></ion-datetime>
+                <ion-datetime displayFormat="h:mm a" pickerFormat="h mm a" [(ngModel)]="profile.sleepPlan.wakeUpTime" (ionChange)="setBedtime()"></ion-datetime>
             </ion-item>
             <ion-list-header>
                 Guidelines
@@ -91,7 +91,7 @@
         <ion-list *ngSwitchCase="'nutrition'">
             <ion-item>
                 <ion-label floating>Breakfast time</ion-label>
-                <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="profile.mealPlan.breakfastTime"></ion-datetime>
+                <ion-datetime displayFormat="h:mm a" pickerFormat="h mm a" [(ngModel)]="profile.mealPlan.breakfastTime"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label floating>Interval</ion-label>

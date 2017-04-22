@@ -3,13 +3,13 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { Alert, AlertController, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
 
 // Models
-import { IFoodSearchResult, MealFoodItem, Meal } from '../../models';
+import { IFoodSearchResult, MealFoodItem, Meal, MealWarning } from '../../models';
 
 // Pages
 import { FoodSelectPage } from '../food-select/food-select';
 
 // Providers
-import { MealService } from '../../providers';
+import { AlertService, MealService } from '../../providers';
 
 @Component({
   selector: 'page-meal-details',
@@ -22,6 +22,7 @@ export class MealDetailsPage {
   public mealDetails: string = 'items';
   constructor(
     private _alertCtrl: AlertController,
+    private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _mealSvc: MealService,
     private _modalCtrl: ModalController,
@@ -41,6 +42,17 @@ export class MealDetailsPage {
         this.meal.mealItems.push(item);
         console.log(this.meal.mealItems);
         this._detectorRef.markForCheck();
+      }, error => {
+        console.log(error);
+      }, () => {
+        this._mealSvc.checkMeal(this.meal).then((isGood: boolean) => {
+          this._alertSvc.showAlert('Keep up the good work!', 'You did a perfect food combination!', 'Well done!');
+        }).catch((warnings: Array<MealWarning>) => {
+          this.meal.warnings = [...warnings];
+          console.log(this.meal);
+          this._alertSvc.showAlert('Please check the warnings', 'Wrong food combinations', 'Oh oh...');
+          this._detectorRef.markForCheck();
+        });
       });
     });
   }

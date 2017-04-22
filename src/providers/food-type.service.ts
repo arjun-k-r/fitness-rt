@@ -47,7 +47,7 @@ export class FoodTypeService {
   }
 
   /**
-   * Verifies if food is milk
+   * Verifies if food is milk sweet
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is milk
    */
@@ -123,7 +123,7 @@ export class FoodTypeService {
    * @returns {boolean} Returns true if the food is an acid
    */
   public checkAcid(food: Food): boolean {
-    let isFermented: boolean = food.group === 'Dairy and Egg Products' && food.nutrition.lactose.value < NUTRIENT_THRESHOLDS.lactose;
+    let isFermented: boolean = food.group === 'Dairy and Egg Products' && (food.nutrition.lactose.value < NUTRIENT_THRESHOLDS.lactose || food.name.toLocaleLowerCase().includes('sour'));
     
     return this._checkAcidFruit(food) || food.nutrition.alcohol.value > 0 || food.name.toLocaleLowerCase().includes('vinegar') || isFermented;
   }
@@ -157,7 +157,7 @@ export class FoodTypeService {
       food.type = 'Melon';
     }
 
-    if (this._checkMilk(food)) {
+    if (this._checkMilk(food) && !this.checkAcid(food)) {
       food.type = 'Milk';
     }
 

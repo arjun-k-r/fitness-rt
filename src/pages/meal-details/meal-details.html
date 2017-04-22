@@ -48,8 +48,20 @@
         <!-- End of segment -->
 
         <!-- Start of segment -->
+        <div *ngSwitchCase="'warnings'">
+            <ion-list>
+                <ion-item *ngFor="let warning of meal.warnings">
+                    <ion-icon color="danger" name="warning" item-left></ion-icon>
+                    <h2 text-wrap>{{ warning.message }}</h2>
+                    <p text-wrap>{{ warning.moreInfo }} servings</p>
+                </ion-item>
+            </ion-list>
+        </div>
+        <!-- End of segment -->
+
+        <!-- Start of segment -->
         <div *ngSwitchCase="'serving'">
-            
+
             <ion-list>
                 <ion-list-header>
                     Before serving my meal

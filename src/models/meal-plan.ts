@@ -47,7 +47,7 @@ export class MealFoodItem extends Food {
         public quantity: number = 100,
         public servings: number = 1,
         public tastes: Array<string> = [],
-        public type: string = 'sweet',
+        public type: string = '',
         public unit: string = 'g'
         
     ) {
@@ -83,7 +83,6 @@ export class MealServing {
 
 export class MealWarning {
   constructor(
-    public isGood: boolean,
     public message: string,
     public moreInfo: string
   ) { }

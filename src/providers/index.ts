@@ -3,6 +3,7 @@ export { AuthValidator } from './auth-validator';
 export { ConstitutionService } from './constitution.service';
 export { DRIService } from './dri.service';
 export { FitnessService } from './fitness.service';
+export { FoodCombiningService } from './food-combining.service';
 export { FoodService } from './food.service';
 export { FoodTasteService } from './food-taste.service';
 export { FoodTypeService } from './food-type.service';

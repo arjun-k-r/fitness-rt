@@ -30,6 +30,11 @@
       Foods
       <p item-content>{{ meal.mealItems?.length }} items</p>
     </ion-item>
+    <ion-item>
+      <ion-label text-wrap>No gastric distress after meal (burping, bloating, constipation, diarrhea, gas, heaviness, indigestion, nausea, tiredness,
+        vomiting)</ion-label>
+      <ion-checkbox [(ngModel)]="meal.distress"></ion-checkbox>
+    </ion-item>
     <button ion-item [navPush]="detailsPage" [navParams]="{ meal: meal, mealIdx: i }">
       More details
       <ion-note item-right><ion-icon name="arrow-forward"></ion-icon></ion-note>

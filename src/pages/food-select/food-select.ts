@@ -43,14 +43,18 @@ export class FoodSelectPage {
   }
 
   public loadMore(ev: InfiniteScroll) {
-    console.log('Begin async operation');
-
     setTimeout(() => {
       this.start += 50;
       this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
         .subscribe((data: Array<IFoodSearchResult>) => {
           this.foods.push(...data);
           this._detectorRef.markForCheck();
+        }, (err: { status: string, message: string }) => {
+          this._alertCtrl.create({
+            title: `Ooops! Error ${err.status}!`,
+            message: err.message,
+            buttons: ['Got it!']
+          }).present();
         });
       ev.complete();
     }, 500);
@@ -72,6 +76,7 @@ export class FoodSelectPage {
           this._detectorRef.markForCheck();
         }, 2000);
       }, (err: { status: string, message: string }) => {
+        loader.dismiss();
         this._alertCtrl.create({
           title: `Ooops! Error ${err.status}!`,
           message: err.message,

@@ -34,6 +34,29 @@ export class MealDetailsPage {
     _detectorRef.markForCheck();
   }
 
+  /**
+   * Update the meal whenever changes occur
+   * @returns {void}
+   */
+  private _updateMealDetails(): void {
+    this.meal.nutrition = this._mealSvc.getMealNutrition(this.meal.mealItems);
+    this.meal.pral = this._mealSvc.getMealPral(this.meal.mealItems);
+    this.meal.quantity = this._mealSvc.getMealSize(this.meal.mealItems);
+
+    this._mealSvc.checkMeal(this.meal).then((isGood: boolean) => {
+      this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy meal!', 'Well done!');
+    }).catch((warnings: Array<MealWarning>) => {
+      this.meal.warnings = [...warnings];
+      console.log(this.meal);
+      this._alertSvc.showAlert('Please check the warnings', 'This meal seems to be unhealthy and damaging for your digestive system', 'Oh oh...');
+      this._detectorRef.markForCheck();
+    });
+  }
+
+  /**
+   * Adds new food items to the meal
+   * @returns {void}
+   */
   public addMealItems(): void {
     let mealSelectModal: Modal = this._modalCtrl.create(FoodSelectPage);
     mealSelectModal.present();
@@ -48,32 +71,36 @@ export class MealDetailsPage {
         console.log(error);
       }, () => {
 
-        // Update meal nutrition and details
-        this.meal.nutrition = this._mealSvc.getMealNutrition(this.meal.mealItems);
-        this.meal.pral = this._mealSvc.getMealPral(this.meal.mealItems);
-        this.meal.quantity = this._mealSvc.getMealSize(this.meal.mealItems);
-
-        // Check the meal
-        this._mealSvc.checkMeal(this.meal).then((isGood: boolean) => {
-          this._alertSvc.showAlert('Keep up the good work!', 'You did a perfect food combination!', 'Well done!');
-        }).catch((warnings: Array<MealWarning>) => {
-          this.meal.warnings = [...warnings];
-          console.log(this.meal);
-          this._alertSvc.showAlert('Please check the warnings', 'Wrong food combinations', 'Oh oh...');
-          this._detectorRef.markForCheck();
-        });
+        // Update the meal details
+        this._updateMealDetails();
       });
     });
   }
 
+  /**
+   * Updates the food item quantity and nutrients to the new serving size and calls meal update method afterwards
+   * @param {MealFoodItem} foodItem - The food item to update
+   * @returns {void}
+   */
+  private _changeItemQuantity(foodItem: MealFoodItem): void {
+    this._mealSvc.changeQuantities(foodItem);
+    this._updateMealDetails();
+  }
+
+  /**
+   * Shows a a modal dialog to change the number of servings of a food item
+   * @description A single serving is 100g. A meal may contain more than 100g of a food item
+   * @param {MealFoodItem} item - The food item the change servings
+   * @returns {void}
+   */
   public changeServings(item: MealFoodItem): void {
     let alert: Alert = this._alertCtrl.create({
       title: 'Servings',
-      subTitle: item.name.toString(),
+      subTitle: `${item.name.toString()} (${item.quantity.toString()}${item.unit.toString()})`,
       inputs: [
         {
           name: 'servings',
-          placeholder: 'Units',
+          placeholder: 'Servings x 100g',
           type: 'number'
         }
       ],
@@ -86,6 +113,7 @@ export class MealDetailsPage {
           text: 'Done',
           handler: data => {
             item.servings = +data.servings;
+            this._changeItemQuantity(item);
             this._detectorRef.markForCheck();
           }
         }
@@ -94,14 +122,28 @@ export class MealDetailsPage {
     alert.present();
   }
 
+  /**
+   * Removes food item from the meal and calls meal update method afterwards
+   * @param idx - The index of the food item to remove
+   * @returns {void}
+   */
   public removeItem(idx: number): void {
     this.meal.mealItems.splice(idx, 1);
+    this._updateMealDetails();
   }
 
+  /**
+   * Saves the meal to Firebase Database
+   * @returns {void}
+   */
   public saveMeal(): void {
     this._mealSvc.saveMeal(this.mealIdx, this.meal);
   }
 
+  /**
+   * App lifecycle method
+   * @description This method is called each time the root page changes (component is destroyed)
+   */
   ionViewWillUnload(): void {
     console.log('Destroying...');
     this._detectorRef.detach();

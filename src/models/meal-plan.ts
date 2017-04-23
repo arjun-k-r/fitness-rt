@@ -69,15 +69,15 @@ export class MealPlan {
 
 export class MealServing {
     constructor(
-        public badMood: boolean = true,
-        public beforeWork: boolean = false,
-        public chewing: boolean = true,
-        public disEase: boolean = false,
-        public gratitude: boolean = true,
-        public hunger: boolean = true,
-        public organic: boolean = true,
-        public overeating: boolean = false,
-        public silence: boolean = true
+        public chewing: boolean = false,
+        public goodMood: boolean = false,
+        public gratitude: boolean = false,
+        public hunger: boolean = false,
+        public noDisEase: boolean = false,
+        public noStress: boolean = false,
+        public organic: boolean = false,
+        public silence: boolean = false,
+        public slowlyEating: boolean = false
     ) {}
 }
 

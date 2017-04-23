@@ -8,9 +8,10 @@ import 'rxjs/operator/map';
 // Third-party
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import * as moment from 'moment';
+import * as _ from 'lodash';
 
 // Models
-import { Food, IFoodSearchResult, Meal, MealFoodItem, MealPlan, MealWarning, Nutrition, UserProfile } from '../models';
+import { Food, IFoodSearchResult, Meal, MealFoodItem, MealPlan, MealServing, MealWarning, Nutrition, UserProfile } from '../models';
 
 // Providers
 import { FoodCombiningService } from './food-combining.service';
@@ -48,6 +49,26 @@ export class MealService {
   }
 
   /**
+   * Verifies if each meal serving preparation todo is checked and respected
+   * @description A complete healthy digestion and nutrient absorption requires healthy eating habits. How you eat is as important as what you eat
+   * @param serving - The meal serving todo's
+   * @returns {MealWarning} Returns a warning to make the user create healthy eating habits
+   */
+  private _checkMealServing(serving: MealServing): MealWarning {
+    let warning: MealWarning;
+    _.values(serving).forEach((todo: boolean) => {
+      if (!todo) {
+        warning = new MealWarning(
+          'The meal serving preparations were not checked',
+          'A complete healthy digestion and nutrient absorption requires healthy eating habits. How you eat is as important as what you eat'
+        );
+      }
+    });
+
+    return warning;
+  }
+
+  /**
    * Verifies if the meal is too big for normal digestion
    * @param {number} size - The size of the meal
    * @returns {MealWarning} Returns warning if the meal is too big
@@ -57,20 +78,6 @@ export class MealService {
       'The meal is to large!',
       "The meal most be 80% of your stomach's capacity (900 g). The rest of the 20% is required for digestive juices."
     ) : null;
-  }
-
-  /**
-   * Verifies if there are tastes not suitable for the users constitution
-   * @ignore
-   * @param {Array} foodItems The food items to check
-   * @returns {boolean} Returns a list of recomendations if there are wrong tastes
-   */
-  private _checkTastes(foodItems: Array<MealFoodItem>): boolean {
-    /**
-     * Vata must avoid raw, dry, dehydrated, frozen, cold, uncooked foods, with caffeine, and alcohol
-     */
-
-    return true;
   }
 
   /**
@@ -96,7 +103,6 @@ export class MealService {
 
     return meals;
   }
-
 
   /**
    * Reorganises the meals if the breakfast time is changed
@@ -124,23 +130,45 @@ export class MealService {
   }
 
   /**
+   * Updates the food item quantity and nutrients to the new serving size
+   * @param {MealFoodItem} foodItem - The food item to update
+   * @returns {void}
+   */
+  public changeQuantities(foodItem: MealFoodItem): void {
+    // Reset the food details to their default state before changing
+    let initialRatio: number = foodItem.quantity / 100;
+    foodItem.quantity *= (+foodItem.servings / initialRatio);
+
+    for (let nutrientKey in foodItem.nutrition) {
+      foodItem.nutrition[nutrientKey].value *= (+foodItem.servings / initialRatio);
+    }
+  }
+
+  /**
   * Verifies if a meal is proper
   * @param {Meal} meal The meal to check
   * @returns {Promise} Returns the resolved meal with its flags set
   */
   public checkMeal(meal: Meal): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      let mealSizeWarning: MealWarning = this._checkMealSize(meal.quantity),
-        mealPralWarning: MealWarning = this._checkMealPral(meal.pral);
+      let mealPralWarning: MealWarning = this._checkMealPral(meal.pral),
+      mealServingWarning: MealWarning = this._checkMealServing(meal.serving),
+      mealSizeWarning: MealWarning = this._checkMealSize(meal.quantity);
+        
       meal.warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
+
+      if (!!mealPralWarning) {
+        meal.warnings.push(mealPralWarning);
+      }
+
+      if (!!mealServingWarning) {
+        meal.warnings.push(mealServingWarning);
+      }
 
       if (!!mealSizeWarning) {
         meal.warnings.push(mealSizeWarning);
       }
 
-      if (!!mealPralWarning) {
-        meal.warnings.push(mealPralWarning);
-      }
       if (!meal.warnings.length) {
         resolve(true);
       } else {

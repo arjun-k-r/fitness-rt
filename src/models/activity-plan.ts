@@ -7,12 +7,14 @@ export class Activity {
     /**
      * @constructor
      * @param {number} duration - The duration of activity
+     * @param {number} met - The metabolic equivalent of the activity
      * @param {string} name - The name of activity
      * @param {string} time - The time activity has started
      * @param {string} type - The type of activity (mental or physical)
      */
     constructor(
         public duration: number,
+        public met: number,
         public name: string,
         public time: string,
         public type: string

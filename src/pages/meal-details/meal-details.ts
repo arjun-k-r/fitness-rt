@@ -38,6 +38,8 @@ export class MealDetailsPage {
     let mealSelectModal: Modal = this._modalCtrl.create(FoodSelectPage);
     mealSelectModal.present();
     mealSelectModal.onDidDismiss((items: Array<IFoodSearchResult>) => {
+
+      // Request Food report for each item
       this._mealSvc.serializeMealItems(items).subscribe((item: MealFoodItem) => {
         this.meal.mealItems.push(item);
         console.log(this.meal.mealItems);
@@ -45,6 +47,13 @@ export class MealDetailsPage {
       }, error => {
         console.log(error);
       }, () => {
+
+        // Update meal nutrition and details
+        this.meal.nutrition = this._mealSvc.getMealNutrition(this.meal.mealItems);
+        this.meal.pral = this._mealSvc.getMealPral(this.meal.mealItems);
+        this.meal.quantity = this._mealSvc.getMealSize(this.meal.mealItems);
+
+        // Check the meal
         this._mealSvc.checkMeal(this.meal).then((isGood: boolean) => {
           this._alertSvc.showAlert('Keep up the good work!', 'You did a perfect food combination!', 'Well done!');
         }).catch((warnings: Array<MealWarning>) => {

@@ -35,6 +35,31 @@ export class MealService {
   }
 
   /**
+   * Verifies if the meal is alkaline forming
+   * @description Acid forming meals are inflammatory and the root of all diseases. The PRAL value must remain, at least, below 1.
+   * @param {number} size - The size of the meal
+   * @returns {MealWarning} Returns warning if the meal is acid forming
+   */
+  private _checkMealPral(pral: number): MealWarning {
+    return pral >= 1 ? new MealWarning(
+      'The meal is acid forming',
+      'Acid forming food and meals cause inflammation, which is the root of all diseases. Try adding some alkaline forming foods, like green vegetables, with PRAL below 0'
+    ) : null;
+  }
+
+  /**
+   * Verifies if the meal is too big for normal digestion
+   * @param {number} size - The size of the meal
+   * @returns {MealWarning} Returns warning if the meal is too big
+   */
+  private _checkMealSize(size: number): MealWarning {
+    return size > 750 ? new MealWarning(
+      'The meal is to large!',
+      "The meal most be 80% of your stomach's capacity (900 g). The rest of the 20% is required for digestive juices."
+    ) : null;
+  }
+
+  /**
    * Verifies if there are tastes not suitable for the users constitution
    * @ignore
    * @param {Array} foodItems The food items to check
@@ -105,7 +130,17 @@ export class MealService {
   */
   public checkMeal(meal: Meal): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      meal.warnings = this._combiningSvc.checkCombining(meal.mealItems);
+      let mealSizeWarning: MealWarning = this._checkMealSize(meal.quantity),
+        mealPralWarning: MealWarning = this._checkMealPral(meal.pral);
+      meal.warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
+
+      if (!!mealSizeWarning) {
+        meal.warnings.push(mealSizeWarning);
+      }
+
+      if (!!mealPralWarning) {
+        meal.warnings.push(mealPralWarning);
+      }
       if (!meal.warnings.length) {
         resolve(true);
       } else {
@@ -115,19 +150,42 @@ export class MealService {
     //this._checkTastes(meal.mealItems);
   }
 
-  public getMealNutrition(items: Array<MealFoodItem>): Nutrition {
-    let nutrition: Nutrition = new Nutrition();
-    items.forEach((item: MealFoodItem) => {
-
-    });
-    return nutrition;
-  }
-
+  /**
+   * Gets a specific meal from the meal plan
+   * @param {number} mealIdx - The index of the meal in the meal plan
+   * @returns {FirebaseObjectObservable} Returns an object observable that publishes the meal
+   */
   public getMeal(mealIdx: number): FirebaseObjectObservable<Meal> {
     return this._af.database.object(`/meal-plans/${this._user.id}/${CURRENT_DAY}/meals/${mealIdx}`)
   }
 
   /**
+   * Calculates the meal nutritional values based on the food items
+   * @description Each user has specific daily nutrition requirements (DRI)
+   * We must know how much (%) of the requirements a meal fulfills
+   * @param {Array} items - The food items of the meal
+   */
+  public getMealNutrition(items: Array<MealFoodItem>): Nutrition {
+    let nutrition: Nutrition = new Nutrition(),
+      requirements: Nutrition = this._profileSvc.getProfile().requirements;
+    items.forEach((item: MealFoodItem) => {
+
+      // Sum the nutrients for each food item
+      for (let nutrientKey in item.nutrition) {
+        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
+      }
+    });
+
+    // Establish the meal's nutritional value, based on the user's nutritional requirements (%)
+    for (let nutrientKey in nutrition) {
+      nutrition[nutrientKey].value = Math.round((nutrition[nutrientKey].value * 100) / (requirements[nutrientKey].value || 1));
+    }
+
+    return nutrition;
+  }
+
+  /**
+   * Gets the user's meal plan and verifies the meals
    * @returns {Observable} Returns the current day meal.
    */
   public getMealPlan(): Observable<MealPlan> {
@@ -136,6 +194,24 @@ export class MealService {
       newMealPlan.meals = mealPlan.meals ? this._setupMeals(mealPlan.meals) : this._getMeals();
       return newMealPlan;
     });
+  }
+
+  /**
+   * Gets the alkalinity of a meal, based on the alkalinity of each item
+   * @param {Array} items - The food items of the meal
+   * @returns {number} Returns the pral of the meal
+   */
+  public getMealPral(items: Array<MealFoodItem>): number {
+    return items.reduce((acc: number, item: MealFoodItem) => acc + item.pral, 0);
+  }
+
+  /**
+   * Gets the size of the meal
+   * @param {Array} items - The food items of the meal
+   * @returns {number} Returns the quantity in grams of the meal
+   */
+  public getMealSize(items: Array<MealFoodItem>): number {
+    return items.reduce((acc: number, item: MealFoodItem) => acc + item.quantity, 0);
   }
 
   public saveMeal(mealIdx: number, meal: Meal): void {

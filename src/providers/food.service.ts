@@ -244,7 +244,7 @@ export class FoodService {
 
   /**
    * The PRAL formula designed by Dr. Thomas Remer
-   * @description Determines the food impact on the body's pH levels (abode 0 is acidic and below 0 is alkaline forming)
+   * @description Determines the food impact on the body's pH levels (above 0 is acidic and below 0 is alkaline forming)
    * @param {Food} food The food to check
    * @returns {void}
    */

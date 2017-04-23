@@ -10,7 +10,7 @@ import { DoshaDetailsPage } from '../dosha-details/dosha-details';
 import { LifestylePage } from '../lifestyle/lifestyle';
 
 // Providers
-import { AlertService, FitnessService, ProfileService } from '../../providers';
+import { AlertService, FitnessService, NutritionService, ProfileService } from '../../providers';
 
 @Component({
   selector: 'page-profile',
@@ -27,6 +27,7 @@ export class ProfilePage {
     private _detectorRef: ChangeDetectorRef,
     private _fitSvc: FitnessService,
     private _navCtrl: NavController,
+    private _nutritionSvc: NutritionService,
     private _params: NavParams,
     private _profileSvc: ProfileService
   ) {
@@ -49,8 +50,9 @@ export class ProfilePage {
     this.profile.bodyFat = this._fitSvc.getBodyFat(this.profile.age, this.profile.gender, this.profile.height, this.profile.hips, this.profile.neck, this.profile.waist);
     this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.profile.gender);
     this.idealWeight = this._fitSvc.getIdealWeight(this.profile.gender, this.profile.height, this.profile.weight);
+    this.profile.requirements = this._nutritionSvc.getDri(this.profile.age, this.profile.bmr, this.profile.gender, this.profile.height, this.profile.lactating, this.profile.pregnant, this.profile.weight);
     this._profileSvc.saveProfile(this.profile);
-    
+
     if (!!this._params.get('new')) {
       this._navCtrl.setRoot(LifestylePage, { new: true });
     }

@@ -1,6 +1,5 @@
 // App
 import { Injectable } from '@angular/core';
-import { User } from '@ionic/cloud';
 
 // Models
 import { Nutrition } from '../models';
@@ -12,19 +11,18 @@ import { FitnessService } from './fitness.service';
 @Injectable()
 export class NutritionService {
 
-  constructor(private _driSvc: DRIService, private _fitSvc: FitnessService, private _user: User) {
+  constructor(private _driSvc: DRIService, private _fitSvc: FitnessService) {
   }
 
-  public getDri(age: number, gender: string, height: number, lactating: boolean, pregnant: boolean, weight: number): Nutrition {
-    let bmr: number = this._fitSvc.getBmr(age, gender, height, weight),
-    requirements: Nutrition = new Nutrition();
+  public getDri(age: number, bmr: number, gender: string, height: number, lactating: boolean, pregnant: boolean, weight: number): Nutrition {
+    let requirements: Nutrition = new Nutrition();
 
     requirements.ala.value = this._driSvc.getALADri(bmr);
     requirements.alcohol.value = this._driSvc.getAlcoholDri(age);
     requirements.arginine.value = this._driSvc.getArginineDri(age, gender, lactating, pregnant, weight);
     requirements.caffeine.value = this._driSvc.getCaffeine(age);
     requirements.calcium.value = this._driSvc.getCalciumDri(age, gender, lactating, pregnant);
-    requirements.carbs.value - this._driSvc.getCarbDri(bmr);
+    requirements.carbs.value = this._driSvc.getCarbDri(bmr);
     requirements.choline.value = this._driSvc.getCholineDri(age, gender, lactating, pregnant);
     requirements.copper.value = this._driSvc.getCopperDri(age, gender, lactating, pregnant);
     requirements.dha.value = this._driSvc.getDHADri(bmr);
@@ -63,6 +61,7 @@ export class NutritionService {
     requirements.vitaminD.value = this._driSvc.getVitaminDDri(age, gender, lactating, pregnant);
     requirements.vitaminE.value = this._driSvc.getVitaminEDri(age, gender, lactating, pregnant);
     requirements.vitaminK.value = this._driSvc.getVitaminKDri(age, gender, lactating, pregnant);
+    requirements.water.value = this._driSvc.getWater(bmr);
     requirements.zinc.value = this._driSvc.getZincDri(age, gender, lactating, pregnant);
 
     return requirements;

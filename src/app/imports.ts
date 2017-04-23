@@ -47,6 +47,7 @@ import { ErrorMessageComponent } from '../components';
 // Pages
 import {
     AccountPage,
+    ActivityDetailsPage,
     ActivityPlanPage,
     ActivitySelectPage,
     ConstitutionPage,
@@ -73,6 +74,7 @@ import { CapitalizePipe } from '../pipes'
 
 // Providers
 import {
+    ActivityService,
     AlertService,
     AuthValidator,
     ConstitutionService,
@@ -84,6 +86,7 @@ import {
     FoodTasteService,
     FoodTypeService,
     MealService,
+    NutritionService,
     ProfileService,
     SleepService
 } from '../providers';
@@ -91,6 +94,7 @@ import {
 export const thgDeclarations = [
     MyApp,
     AccountPage,
+    ActivityDetailsPage,
     ActivityPlanPage,
     ActivitySelectPage,
     CapitalizePipe,
@@ -117,6 +121,7 @@ export const thgDeclarations = [
 export const thgEntries = [
     MyApp,
     AccountPage,
+    ActivityDetailsPage,
     ActivityPlanPage,
     ActivitySelectPage,
     ConstitutionPage,
@@ -150,6 +155,7 @@ export const thgProviders = [
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    ActivityService,
     AlertService,
     AuthValidator,
     ConstitutionService,
@@ -161,6 +167,7 @@ export const thgProviders = [
     FoodTasteService,
     FoodTypeService,
     MealService,
+    NutritionService,
     ProfileService,
     SleepService
 ];

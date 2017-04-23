@@ -1,5 +1,6 @@
 export { AccountPage } from './account/account';
 export { ActivityPlanPage } from './activity-plan/activity-plan';
+export { ActivityDetailsPage } from './activity-details/activity-details';
 export { ActivitySelectPage } from './activity-select/activity-select';
 export { ConstitutionPage } from './constitution/constitution';
 export { DoshaDetailsPage } from './dosha-details/dosha-details'

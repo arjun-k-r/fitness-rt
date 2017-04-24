@@ -3,9 +3,6 @@ import { Injectable } from '@angular/core';
 // Third-party
 import * as moment from 'moment';
 
-// Models
-import { SleepPlan } from '../models'
-
 @Injectable()
 export class SleepService {
 
@@ -35,8 +32,8 @@ export class SleepService {
    */
   public getWakeUptime(bedTime: string): string {
     let bedTimeItems = bedTime.split(':'),
-      hhSleep = +bedTime[0] + 12,
-      mmSleep = +bedTime[1].split(' ')[0];
+      hhSleep = +bedTimeItems[0] + 12,
+      mmSleep = +bedTimeItems[1].split(' ')[0];
 
     return moment({ 'hours': hhSleep, 'minutes': mmSleep })
       .add({ 'hours': 7, 'minutes': 30 })

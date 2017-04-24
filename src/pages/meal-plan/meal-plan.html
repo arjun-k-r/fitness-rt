@@ -9,31 +9,22 @@
 
 <ion-content>
   <ion-item-group *ngFor="let meal of (mealPlan | async)?.meals; let i = index">
-    <ion-item-divider color="secondary">Meal {{ i + 1 }}</ion-item-divider>
-    <ion-item>
-      Time
-      <p item-content>{{ meal.time }}</p>
-    </ion-item>
+    <ion-item-divider color="secondary">{{ meal.time }}</ion-item-divider>
     <ion-item>
       PRAL
-      <p item-content>{{ meal.pral }}</p>
+      <p item-content ion-text color="{{ meal.pral > 0 ? danger : secondary }}">{{ meal.pral }}</p>
     </ion-item>
     <ion-item>
       Size
-      <p item-content>{{ meal.quantity }} g</p>
+      <p item-content ion-text color="{{ meal.quantity > 750 ? danger : secondary }}">{{ meal.quantity }} g</p>
     </ion-item>
     <ion-item>
       Warnings
-      <p item-content>{{ meal.warnings?.length || 0 }} warnings</p>
+      <p item-content ion-text color="{{ meal.warnings?.length ? danger : secondary }}">{{ meal.warnings?.length || 0 }} warnings</p>
     </ion-item>
     <ion-item>
       Foods
-      <p item-content>{{ meal.mealItems?.length }} items</p>
-    </ion-item>
-    <ion-item>
-      <ion-label text-wrap>No gastric distress after meal (burping, bloating, constipation, diarrhea, gas, heaviness, indigestion, nausea, tiredness,
-        vomiting)</ion-label>
-      <ion-checkbox [(ngModel)]="meal.distress"></ion-checkbox>
+      <p item-content ion-text color="{{ meal.mealItems?.length > 6 ? danger : secondary }}">{{ meal.mealItems?.length }} items</p>
     </ion-item>
     <button ion-item [navPush]="detailsPage" [navParams]="{ meal: meal, mealIdx: i }">
       More details

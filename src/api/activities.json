@@ -273,5 +273,10 @@
         "met": 2.5,
         "name": "Cooking or food preparation, walking",
         "type": "Physical"
+    },
+    {
+        "met":  0.95,
+        "name": "Sleeping",
+        "type": "None"
     }
 ]

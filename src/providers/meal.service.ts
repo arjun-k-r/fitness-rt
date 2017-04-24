@@ -36,6 +36,18 @@ export class MealService {
   }
 
   /**
+   * Verifies if the meal is too complex for digestion (has more than 6 food items)
+   * @param {Array} foodItems - The food items of the meal
+   * @returns {MealWarning} Returns warning if the meal is too complex
+   */
+  private _checkMealComplexity(foodItems: Array<MealFoodItem>): MealWarning {
+    return foodItems.length > 6 ? new MealWarning(
+      'The meal is too complex!',
+      'More than 6 food items in a signle meal makes it complex and difficult to digest, as it requires many types of enzymes, gastric juices, and timings.'
+    ) : null;
+  }
+
+  /**
    * Verifies if the meal is alkaline forming
    * @description Acid forming meals are inflammatory and the root of all diseases. The PRAL value must remain, at least, below 1.
    * @param {number} size - The size of the meal
@@ -75,9 +87,18 @@ export class MealService {
    */
   private _checkMealSize(size: number): MealWarning {
     return size > 750 ? new MealWarning(
-      'The meal is to large!',
+      'The meal is too large!',
       "The meal most be 80% of your stomach's capacity (900 g). The rest of the 20% is required for digestive juices."
     ) : null;
+  }
+
+  /**
+   * Increments the meal tastes by one for each food item containing a specific taste
+   * @description According to Ayurveda, a balanced meal contains all six tastes in order to completely nourish and satisfy the body.
+   * @param {Meal} meal - The meal to check
+   */
+  private _checkMealTastes(meal: Meal): void {
+    meal.mealItems.forEach((item: MealFoodItem) => item.tastes.forEach((taste: string) => meal.tastes[taste.toLocaleLowerCase()]++));
   }
 
   /**
@@ -151,11 +172,18 @@ export class MealService {
   */
   public checkMeal(meal: Meal): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      let mealPralWarning: MealWarning = this._checkMealPral(meal.pral),
+      let mealComplexityWarning: MealWarning = this._checkMealComplexity(meal.mealItems),
+      mealPralWarning: MealWarning = this._checkMealPral(meal.pral),
       mealServingWarning: MealWarning = this._checkMealServing(meal.serving),
       mealSizeWarning: MealWarning = this._checkMealSize(meal.quantity);
         
       meal.warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
+
+      this._checkMealTastes(meal);
+
+      if (!!mealComplexityWarning) {
+        meal.warnings.push(mealComplexityWarning);
+      }
 
       if (!!mealPralWarning) {
         meal.warnings.push(mealPralWarning);
@@ -175,7 +203,6 @@ export class MealService {
         reject(meal.warnings);
       }
     });
-    //this._checkTastes(meal.mealItems);
   }
 
   /**
@@ -225,12 +252,12 @@ export class MealService {
   }
 
   /**
-   * Gets the alkalinity of a meal, based on the alkalinity of each item
+   * Gets the alkalinity of a meal, based on the impact of each food item quantity and pral value
    * @param {Array} items - The food items of the meal
    * @returns {number} Returns the pral of the meal
    */
   public getMealPral(items: Array<MealFoodItem>): number {
-    return items.reduce((acc: number, item: MealFoodItem) => acc + item.pral, 0);
+    return +(items.reduce((acc: number, item: MealFoodItem) => acc + (item.pral * item.servings), 0)).toFixed(2);
   }
 
   /**
@@ -244,14 +271,18 @@ export class MealService {
 
   public saveMeal(mealIdx: number, meal: Meal): void {
     this.getMeal(mealIdx).update({
-      distress: meal.distress,
+      isCold: meal.isCold,
+      isRaw: meal.isRaw,
       mealItems: meal.mealItems,
       nutrition: meal.nutrition,
       pral: meal.pral,
       quantity: meal.quantity,
       serving: meal.serving,
+      tastes: meal.tastes,
       time: meal.time,
-      warnings: meal.warnings
+      type: meal.type,
+      warnings: meal.warnings,
+      wasNourishing: meal.wasNourishing
     });
   }
 

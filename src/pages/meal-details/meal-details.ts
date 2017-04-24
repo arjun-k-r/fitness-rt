@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { Alert, AlertController, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
 
 // Models
-import { IFoodSearchResult, MealFoodItem, Meal, MealWarning } from '../../models';
+import { IFoodSearchResult, MEAL_TYPES, Meal, MealFoodItem, MealWarning } from '../../models';
 
 // Pages
 import { FoodSelectPage } from '../food-select/food-select';
@@ -19,7 +19,8 @@ import { AlertService, MealService } from '../../providers';
 export class MealDetailsPage {
   public meal: Meal;
   public mealIdx: number;
-  public mealDetails: string = 'items';
+  public mealDetails: string = 'details';
+  public mealTypes: Array<string> = [...MEAL_TYPES];
   constructor(
     private _alertCtrl: AlertController,
     private _alertSvc: AlertService,
@@ -148,5 +149,4 @@ export class MealDetailsPage {
     console.log('Destroying...');
     this._detectorRef.detach();
   }
-
 }

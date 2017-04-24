@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 // Models
-import { Food, IFoodSearchResult, Meal, MealFoodItem, MealPlan, MealWarning, Nutrition, UserProfile } from '../models';
+import { MealFoodItem, MealWarning } from '../models';
 
 /**
  * TODOs: There seem to be some exceptions in combining

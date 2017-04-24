@@ -1,6 +1,24 @@
 import { Food } from './food';
 import { Nutrition } from './nutrition';
 
+export const MEAL_TYPES: Array<string> = ['Beverages meal', 'Fruit meal', 'Melons meal', 'Milk meal', 'Starch meal', 'Protein meal'];
+
+/**
+ * Class representing the tastes within a meal offered by the meal food items
+ * @class
+ * @classdesc According to Ayurveda, a balanced meal contains all six tastes in order to completely nourish and satisfy the body. 
+ */
+export class MealTastes {
+    constructor(
+        public sweet: number = 0,
+        public sour: number = 0,
+        public salty: number = 0,
+        public pungent: number = 0,
+        public astrigent: number = 0,
+        public bitter: number = 0
+    ) { }
+}
+
 /**
  * Class representing a meal
  * @class
@@ -8,14 +26,18 @@ import { Nutrition } from './nutrition';
  */
 export class Meal {
     constructor(
-        public distress: boolean = true,
+        public isCold: boolean = true,
+        public isRaw: boolean = true,
         public mealItems: Array<MealFoodItem> = [],
         public nutrition: Nutrition = new Nutrition(),
         public pral: number = 0,
         public quantity: number = 0,
         public serving: MealServing = new MealServing(),
+        public tastes: MealTastes = new MealTastes(),
         public time: string = '',
-        public warnings: Array<MealWarning> = []
+        public type: string = '',
+        public warnings: Array<MealWarning> = [],
+        public wasNourishing: boolean = false
     ) { }
 }
 
@@ -49,7 +71,7 @@ export class MealFoodItem extends Food {
         public tastes: Array<string> = [],
         public type: string = '',
         public unit: string = 'g'
-        
+
     ) {
         super(ndbno, name, group, nutrition, pral, quantity, tastes, type, unit);
     }
@@ -64,7 +86,7 @@ export class MealPlan {
         // Hours between meals
         public interval: number = 6,
         public meals: Array<Meal> = []
-    ) {}
+    ) { }
 }
 
 export class MealServing {
@@ -78,12 +100,12 @@ export class MealServing {
         public organic: boolean = false,
         public silence: boolean = false,
         public slowlyEating: boolean = false
-    ) {}
+    ) { }
 }
 
 export class MealWarning {
-  constructor(
-    public message: string,
-    public moreInfo: string
-  ) { }
+    constructor(
+        public message: string,
+        public moreInfo: string
+    ) { }
 }

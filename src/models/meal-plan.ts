@@ -1,7 +1,7 @@
 import { Food } from './food';
 import { Nutrition } from './nutrition';
 
-export const MEAL_TYPES: Array<string> = ['Beverages meal', 'Fruit meal', 'Melons meal', 'Milk meal', 'Starch meal', 'Protein meal'];
+export const MEAL_TYPES: Array<string> = ['Beverages meal', 'Melons meal', 'Fruit meal', 'Starch meal', 'Protein meal'];
 
 /**
  * Class representing the tastes within a meal offered by the meal food items

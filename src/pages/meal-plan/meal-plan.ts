@@ -1,6 +1,7 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Loading, LoadingController } from 'ionic-angular';
 
 // Models
 import { MealPlan } from '../../models';
@@ -19,9 +20,16 @@ import { MealService } from '../../providers';
 export class MealPlanPage {
   public detailsPage: any = MealDetailsPage;
   public mealPlan: Observable<MealPlan>;
-  constructor(private _detectorRef: ChangeDetectorRef, private _mealSvc: MealService) { }
+  constructor(private _detectorRef: ChangeDetectorRef, private _mealSvc: MealService, private _loadCtrl: LoadingController) { }
 
   ionViewWillEnter(): void {
+    let loader: Loading = this._loadCtrl.create({
+      content: 'Loading...',
+      spinner: 'crescent',
+      duration: 1000
+    });
+
+    loader.present();
     this.mealPlan = this._mealSvc.getMealPlan();
     this._detectorRef.markForCheck();
   }

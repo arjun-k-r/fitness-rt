@@ -126,25 +126,88 @@ export class MealService {
   }
 
   /**
-   * Reorganises the meals if the breakfast time is changed
+   * Organises the meal timing
+   * @description Meals need to be timed by the previous meal digestion duration
+   * 1. Fluids need at least 30 minutes to pass through the intestines
+   * 2. Melons require 30 minutes of digestion ()
+   * 3. Fruits require 30-60 minutes of digestion
+   * 4. Starch requires 2 hours of digestion
+   * 5. Protein requires 4 hours of digestion
    * @param {Array} meals The meals to reaorganise
    * @returns {Array} Returns the reaorganised meals
    */
   private _setupMeals(meals: Array<Meal>): Array<Meal> {
     let bedTime: number = +this._profileSvc.getProfile().sleepPlan.bedTime.split(':')[0] + 12,
-      lastMealTime = +meals[meals.length - 1].time.split(':')[0],
+      currMealHour: number,
+      currMealMinutes: number,
+      currMealTimeItems: Array<string>,
+      lastMealType: string,
+      lastMealHour: number,
+      lastMealMinutes: number,
+      lastMealTimeItems: Array<string>,
       mealInterval: number = +this._profileSvc.getProfile().mealPlan.interval,
-      mealTime: number = mealInterval,
+      mealHour: number,
+      mealMinutes: number,
       newMeal: Meal;
 
-    // As long as the last meal is 2 hours before sleep
-    while (mealTime < bedTime - 6) {
-      newMeal = new Meal();
-      newMeal.time = moment({ 'hours': lastMealTime, 'minutes': 0 })
-        .add({ 'hours': mealTime, 'minutes': 0 })
+    for (let i = 0; i < meals.length - 2; i++) {
+      currMealTimeItems = meals[i].time.split(':');
+      currMealHour = +currMealTimeItems[0];
+      currMealMinutes = +currMealTimeItems[1].split(' ')[0];
+
+      if (meals[i].type === 'Beverages meal' || meals[i].type === 'Melons meal') {
+        mealHour = 0;
+        mealMinutes = 30;
+      } else if (meals[i].type === 'Fruit meal') {
+        mealHour = 1;
+        mealMinutes = 0;
+      } else if (meals[i].type === 'Starch meal') {
+        mealHour = 2;
+        mealMinutes = 0;
+      } else if (meals[i].type === 'Protein meal') {
+        mealHour = 4;
+        mealMinutes = 0;
+      } else {
+        mealHour = mealInterval;
+        mealMinutes = 0;
+      }
+
+      meals[i + 1].time = moment({ 'hours': currMealHour, 'minutes': currMealMinutes })
+        .add({ 'hours': mealHour, 'minutes': mealMinutes })
         .format('hh:mm a');
+    }
+
+    lastMealTimeItems = meals[meals.length - 1].time.split(':');
+    lastMealType = meals[meals.length - 1].type;
+    lastMealHour = +lastMealTimeItems[0];
+    lastMealMinutes = +lastMealTimeItems[1].split(' ')[0];
+
+    if (lastMealType === 'Beverages meal' || lastMealType === 'Melons meal') {
+      mealHour = 0;
+      mealMinutes = 30;
+    } else if (lastMealType === 'Fruit meal') {
+      mealHour = 1;
+      mealMinutes = 0;
+    } else if (lastMealType === 'Starch meal') {
+      mealHour = 2;
+      mealMinutes = 0;
+    } else if (lastMealType === 'Protein meal') {
+      mealHour = 4;
+      mealMinutes = 0;
+    } else {
+      mealHour = mealInterval;
+      mealMinutes = 0;
+    }
+
+    // As long as the last meal is 4 hours before sleep
+    while (mealHour < bedTime - 8) {
+      newMeal = new Meal();
+      newMeal.time = moment({ 'hours': lastMealHour, 'minutes': lastMealMinutes })
+        .add({ 'hours': mealHour, 'minutes': mealMinutes })
+        .format('hh:mm a');
+
       meals.push(newMeal);
-      mealTime += mealInterval;
+      mealHour += mealInterval;
     }
 
     return meals;
@@ -173,10 +236,10 @@ export class MealService {
   public checkMeal(meal: Meal): Promise<boolean> {
     return new Promise((resolve, reject) => {
       let mealComplexityWarning: MealWarning = this._checkMealComplexity(meal.mealItems),
-      mealPralWarning: MealWarning = this._checkMealPral(meal.pral),
-      mealServingWarning: MealWarning = this._checkMealServing(meal.serving),
-      mealSizeWarning: MealWarning = this._checkMealSize(meal.quantity);
-        
+        mealPralWarning: MealWarning = this._checkMealPral(meal.pral),
+        mealServingWarning: MealWarning = this._checkMealServing(meal.serving),
+        mealSizeWarning: MealWarning = this._checkMealSize(meal.quantity);
+
       meal.warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
 
       this._checkMealTastes(meal);

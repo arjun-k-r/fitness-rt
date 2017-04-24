@@ -42,15 +42,15 @@
                     <ion-label text-wrap>Nourishing for me (No abdominal cramps, burping, bloating, constipation, diarrhea, gas, heaviness, indigestion,
                         nausea, tiredness, vomiting)
                     </ion-label>
-                    <ion-checkbox [(ngModel)]="meal.wasNourishing"></ion-checkbox>
+                    <ion-toggle [(ngModel)]="meal.wasNourishing"></ion-toggle>
                 </ion-item>
                 <ion-item>
                     <ion-label text-wrap>Served cold</ion-label>
-                    <ion-checkbox [(ngModel)]="meal.isCold"></ion-checkbox>
+                    <ion-toggle [(ngModel)]="meal.isCold"></ion-toggle>
                 </ion-item>
                 <ion-item>
                     <ion-label text-wrap>Served raw</ion-label>
-                    <ion-checkbox [(ngModel)]="meal.isRaw"></ion-checkbox>
+                    <ion-toggle [(ngModel)]="meal.isRaw"></ion-toggle>
                 </ion-item>
                 <ion-item text-wrap>
                     <ion-label>Type</ion-label>

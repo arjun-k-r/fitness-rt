@@ -9,22 +9,26 @@
 
 <ion-content>
   <ion-item-group *ngFor="let meal of (mealPlan | async)?.meals; let i = index">
-    <ion-item-divider color="secondary">{{ meal.time }}</ion-item-divider>
+    <ion-item-divider color="primary">{{ meal.time }}</ion-item-divider>
     <ion-item>
-      PRAL
-      <p item-content ion-text color="{{ meal.pral > 0 ? danger : secondary }}">{{ meal.pral }}</p>
+      pH
+      <p item-content ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
     </ion-item>
     <ion-item>
       Size
-      <p item-content ion-text color="{{ meal.quantity > 750 ? danger : secondary }}">{{ meal.quantity }} g</p>
+      <p item-content ion-text color="{{ meal.quantity > 750 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
     </ion-item>
     <ion-item>
       Warnings
-      <p item-content ion-text color="{{ meal.warnings?.length ? danger : secondary }}">{{ meal.warnings?.length || 0 }} warnings</p>
+      <p item-content ion-text color="{{ meal.warnings?.length ? 'danger' : 'secondary' }}">{{ meal.warnings?.length || 0 }} warnings</p>
+    </ion-item>
+    <ion-item>
+      Type
+      <p item-content>{{ meal.type}}</p>
     </ion-item>
     <ion-item>
       Foods
-      <p item-content ion-text color="{{ meal.mealItems?.length > 6 ? danger : secondary }}">{{ meal.mealItems?.length }} items</p>
+      <p item-content>{{ meal.mealItems?.length }} items</p>
     </ion-item>
     <button ion-item [navPush]="detailsPage" [navParams]="{ meal: meal, mealIdx: i }">
       More details

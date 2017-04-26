@@ -11,5 +11,4 @@ export { FoodTypeService } from './food-type.service';
 export { FOOD_GROUPS, FoodDataService } from './food-data.service';
 export { MealService } from './meal.service';
 export { NutritionService } from './nutrition.service';
-export { ProfileService } from './profile.service';
 export { SleepService } from './sleep.service';

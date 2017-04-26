@@ -10,7 +10,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 // Pages
 import { GettingStartedPage } from '../getting-started/getting-started';
 import { LoginPage } from '../login/login';
-import { ProfilePage } from '../profile/profile';
+import { FitnessPage } from '../fitness/fitness';
 
 // Providers
 import { AlertService, AuthValidator } from '../../providers';
@@ -110,7 +110,7 @@ export class RegistrationPage {
 
   ionViewWillEnter(): void {
     if (this._auth.isAuthenticated()) {
-      this._navCtrl.setRoot(ProfilePage);
+      this._navCtrl.setRoot(FitnessPage);
     }
   }
 

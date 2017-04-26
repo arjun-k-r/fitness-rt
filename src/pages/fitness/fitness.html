@@ -14,6 +14,7 @@
 
 
 <ion-content padding>
+    <!--
     <ion-grid>
         <ion-row>
             <ion-col>
@@ -30,15 +31,18 @@
             </ion-col>
         </ion-row>
     </ion-grid>
+    -->
     <ion-list>
         <ion-item text-wrap>
             <ion-label fixed>Age (years)</ion-label>
             <ion-input type="number" [(ngModel)]="profile.age"></ion-input>
         </ion-item>
+        <!--
         <ion-item text-wrap>
             Constitution
             <p item-content>{{ profile.dosha }}</p>
         </ion-item>
+        -->
         <ion-item *ngIf="profile.bmr" text-wrap>
             BMR
             <p item-content>{{ profile.bmr }} kcal/day</p>

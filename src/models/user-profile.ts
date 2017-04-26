@@ -7,7 +7,6 @@ import { SleepPlan } from './sleep-plan'
 
 export class UserProfile {
     constructor(
-        public activityPlan: ActivityPlan = new ActivityPlan(),
         public age: number = 0,
         public bmr: number = 1800,
         public bodyFat: number = 10,
@@ -22,11 +21,9 @@ export class UserProfile {
             vata: false
         },
         public lactating: boolean = false,
-        public mealPlan: MealPlan = new MealPlan(),
         public neck: number = 30,
         public pregnant: boolean = false,
         public requirements: Nutrition = new Nutrition(),
-        public sleepPlan: SleepPlan = new SleepPlan(),
         public waist: number = 70,
         public weight: number = 0
     ) { }

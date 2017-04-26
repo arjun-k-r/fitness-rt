@@ -20,7 +20,12 @@ import { MealService } from '../../providers';
 export class MealPlanPage {
   public detailsPage: any = MealDetailsPage;
   public mealPlan: Observable<MealPlan>;
+  public mealPlanDetails: string = 'meals';
   constructor(private _detectorRef: ChangeDetectorRef, private _mealSvc: MealService, private _loadCtrl: LoadingController) { }
+
+  public segmentChange(): void {
+    this._detectorRef.markForCheck();
+  }
 
   ionViewWillEnter(): void {
     let loader: Loading = this._loadCtrl.create({

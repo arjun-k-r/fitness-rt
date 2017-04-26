@@ -7,17 +7,17 @@ import { UserProfile } from '../../models';
 
 // Pages
 import { DoshaDetailsPage } from '../dosha-details/dosha-details';
-import { LifestylePage } from '../lifestyle/lifestyle';
+import { SleepPlanPage } from '../sleep-plan/sleep-plan';
 
 // Providers
-import { AlertService, FitnessService, NutritionService, ProfileService } from '../../providers';
+import { AlertService, FitnessService, NutritionService } from '../../providers';
 
 @Component({
-  selector: 'page-profile',
-  templateUrl: 'profile.html',
+  selector: 'page-fitness',
+  templateUrl: 'fitness.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfilePage {
+export class FitnessPage {
   public doshaDetails: any = DoshaDetailsPage;
   public idealBodyFat: number;
   public idealWeight: number;
@@ -28,14 +28,13 @@ export class ProfilePage {
     private _fitSvc: FitnessService,
     private _navCtrl: NavController,
     private _nutritionSvc: NutritionService,
-    private _params: NavParams,
-    private _profileSvc: ProfileService
+    private _params: NavParams
   ) {
     if (!!_params.get('new')) {
       this._alertSvc.showAlert('We need to know a little more about your physical constitution', 'Please complete the following form', 'Step 2');
     }
 
-    this.profile = _profileSvc.getProfile();
+    this.profile = _fitSvc.getProfile();
 
     if (this.profile.gender) {
       this.idealBodyFat = _fitSvc.getIdealBodyFat(this.profile.gender);
@@ -51,10 +50,11 @@ export class ProfilePage {
     this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.profile.gender);
     this.idealWeight = this._fitSvc.getIdealWeight(this.profile.gender, this.profile.height, this.profile.weight);
     this.profile.requirements = this._nutritionSvc.getDri(this.profile.age, this.profile.bmr, this.profile.gender, this.profile.height, this.profile.lactating, this.profile.pregnant, this.profile.weight);
-    this._profileSvc.saveProfile(this.profile);
+
+    this._fitSvc.saveProfile(this.profile);
 
     if (!!this._params.get('new')) {
-      this._navCtrl.setRoot(LifestylePage, { new: true });
+      this._navCtrl.setRoot(SleepPlanPage, { new: true });
     }
   }
 

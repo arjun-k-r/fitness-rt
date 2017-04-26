@@ -1,18 +1,79 @@
-<!--
-  Generated template for the ActivityPlan page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>ActivityPlan</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Activity plan</ion-title>
   </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="activityPlanDetails" (click)="segmentChange()">
+      <ion-segment-button value="physical">
+        <ion-icon name="bicycle"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="intellectual">
+        <ion-icon name="book"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="guidelines">
+        <ion-icon name="bookmarks"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
 
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
+  <div [ngSwitch]="activityPlanDetails">
+    <ion-list *ngSwitchCase="'physical'">
 
+    </ion-list>
+    <ion-list *ngSwitchCase="'guidelines'">
+      <ion-item>
+        <h2>Routine</h2>
+        <p text-wrap>Move constantly everyday to maintain energy levels, keep blood moving, and stay alert physically and mentally.</p>
+        <p item-content>240 minutes</p>
+      </ion-item>
+      <ion-item>
+        <h2>Breathing</h2>
+        <p text-wrap>Learn to always breath correctly and completely through your nose. Oxygen is the most important nutrient and the
+          key to energy, whereas CO2 is the main toxin elimination source.</p>
+        <p item-content>Every day</p>
+      </ion-item>
+      <ion-item>
+        <h2>Warmup</h2>
+        <p text-wrap>Prepare your skeletal muscles and cardiac muscles (increase heart rate).</p>
+        <p item-content>5 minutes</p>
+      </ion-item>
+      <ion-item>
+        <h2>Start slowly</h2>
+        <p text-wrap>Move constantly everyday to eliminate toxic accumulations through CO2 and stay alert physically and mentally.</p>
+      </ion-item>
+      <ion-item>
+        <h2>High intensity interval training (HIIT)</h2>
+        <p text-wrap>Eliminate toxins through perspiration, burn energy storages, cardiovascular support, increase endurance, preserve
+          muscle tissue, and increase metabolism.</p>
+        <p item-content>5 times per week</p>
+      </ion-item>
+      <ion-item>
+        <h2>HIIT duration</h2>
+        <p text-wrap>Too much intense exercise at once damages the heart.</p>
+        <p item-content>45 minutes</p>
+      </ion-item>
+      <ion-item>
+        <h2>HIIT breaks and sets</h2>
+        <p text-wrap>Maintain heart rate stable in an aerobic state.</p>
+        <p item-content>30-60 seconds</p>
+      </ion-item>
+      <ion-item>
+        <h2>Walking</h2>
+        <p text-wrap>"Walking is man's best medicine." - Hippocrates</p>
+        <p item-content>90 minutes</p>
+      </ion-item>
+      <ion-item>
+        <h2>Recovery</h2>
+        <p text-wrap>The muscles need to rest to recover and become stronger.</p>
+        <p item-content>Every day</p>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

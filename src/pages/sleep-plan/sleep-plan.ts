@@ -1,22 +1,47 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+// App
+import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 
-/*
-  Generated class for the SleepPlan page.
+// Models
+import { SleepHabit, SleepPlan } from '../../models';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+// Providers
+import { SleepService } from '../../providers';
+
 @Component({
   selector: 'page-sleep-plan',
-  templateUrl: 'sleep-plan.html'
+  templateUrl: 'sleep-plan.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SleepPlanPage {
+  public sleepPlan: SleepPlan;
+  public sleepPlanDetails: string = 'sleep';
+  constructor(
+    private _detectorRef: ChangeDetectorRef,
+    private _sleepSvc: SleepService
+  ) { }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SleepPlanPage');
+  public segmentChange(): void {
+    this._detectorRef.markForCheck();
   }
 
+  public setBedtime(): void {
+    this.sleepPlan.bedTime = this._sleepSvc.getBedtime(this.sleepPlan.wakeUpTime);
+    this._detectorRef.detectChanges();
+    this._detectorRef.markForCheck();
+  }
+
+  public setWakeUptime(): void {
+    this.sleepPlan.wakeUpTime = this._sleepSvc.getWakeUptime(this.sleepPlan.bedTime);
+    this._detectorRef.detectChanges();
+    this._detectorRef.markForCheck();
+  }
+
+  ionViewWillEnter(): void {
+    this._sleepSvc.getSleepPlan().subscribe((sleepPlan: SleepPlan) => this.sleepPlan = sleepPlan);
+  }
+
+  ionViewWillUnload(): void {
+    console.log('Destroying...');
+    this._detectorRef.detach();
+  }
 }

@@ -12,10 +12,8 @@ import {
     ActivityPlanPage,
     FoodListPage,
     HomePage,
-    LifestylePage,
     MealPlanPage,
-    NutritionPage,
-    ProfilePage,
+    FitnessPage,
     RegistrationPage,
     SleepPlanPage
 } from '../pages';
@@ -33,7 +31,6 @@ export class MyApp {
     @ViewChild(Nav) private _nav: Nav;
     public pages: Array<IPageLink>;
     public rootPage: any = RegistrationPage;
-
     constructor(
         private _alertCtrl: AlertController,
         private _deploy: Deploy,
@@ -45,12 +42,10 @@ export class MyApp {
         this._initializeApp();
         this.pages = [
             { title: 'Home', component: HomePage, icon: 'home' },
-            { title: 'Profile', component: ProfilePage, icon: 'happy' },
-            { title: 'Lifestyle', component: LifestylePage, icon: 'calendar' },
-            { title: 'Sleep plan', component: SleepPlanPage, icon: 'moon' },
-            { title: 'Activity plan', component: ActivityPlanPage, icon: 'body' },
-            { title: 'Meal plan', component: MealPlanPage, icon: 'clock' },
-            { title: 'Nutrition', component: NutritionPage, icon: 'nutrition' },
+            { title: 'Fitness', component: FitnessPage, icon: 'happy' },
+            { title: 'Sleep', component: SleepPlanPage, icon: 'moon' },
+            { title: 'Exercise', component: ActivityPlanPage, icon: 'body' },
+            { title: 'Nutrition', component: MealPlanPage, icon: 'clock' },
             { title: 'Foods', component: FoodListPage, icon: 'basket' },
             { title: 'Account', component: AccountPage, icon: 'person' }
         ];

@@ -5,10 +5,80 @@
         </button>
         <ion-title>Sleep plan</ion-title>
     </ion-navbar>
+    <ion-toolbar>
+        <ion-segment [(ngModel)]="sleepPlanDetails" (click)="segmentChange()">
+            <ion-segment-button value="sleep">
+                <ion-icon name="clock"></ion-icon>
+            </ion-segment-button>
+            <ion-segment-button value="plan">
+                <ion-icon name="calendar"></ion-icon>
+            </ion-segment-button>
+            <ion-segment-button value="guidelines">
+                <ion-icon name="bookmarks"></ion-icon>
+            </ion-segment-button>
+        </ion-segment>
+
+    </ion-toolbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <div [ngSwitch]="sleepPlanDetails">
+        <ion-list *ngSwitchCase="'plan'">
+            <pre>
+            {{ sleepPlan | json }}
+            </pre>
+            <ion-item>
+                <ion-label floating>Bed time</ion-label>
+                <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="sleepPlan.bedTime" (ionChange)="setWakeUptime()"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Wake up time</ion-label>
+                <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="sleepPlan.wakeUpTime" (ionChange)="setBedtime()"></ion-datetime>
+            </ion-item>
+        </ion-list>
+        <ion-list *ngSwitchCase="'guidelines'">
+            <ion-item>
+                <h2>Routine</h2>
+                <p text-wrap>The body's internal clock (circadian rhythm) is set up by sunlight and by precise sleep routine.</p>
+                <p item-content>Every day</p>
+            </ion-item>
+            <ion-item>
+                <h2>Bed time</h2>
+                <p text-wrap>Between 10:00pm and 02:00, vata energy is abundant and the adrenal glands release hormones</p>
+                <p item-content>10:00 pm</p>
+            </ion-item>
+            <ion-item>
+                <h2>Wake up time</h2>
+                <p text-wrap>We need to catch 4-5 complete 90-minute REM sleep cycles (07:30 hours).</p>
+                <p item-content>05:30 am</p>
+            </ion-item>
+            <ion-item>
+                <h2>Disconnect</h2>
+                <p text-wrap>Electronics emit blue light similar to sunlight. This disrupts the body's internal clock.</p>
+                <p item-content>09:00 pm</p>
+            </ion-item>
+            <ion-item>
+                <h2>Relax</h2>
+                <p text-wrap>Stressing before sleep keeps you alert and prevents you from falling asleep.</p>
+                <p item-content>08:00 pm</p>
+            </ion-item>
+            <ion-item>
+                <h2>No fluids</h2>
+                <p text-wrap>Fluids will make you need go to the bathroom during the night and disrupt the sleep cycles.</p>
+                <p item-content>08:00 pm</p>
+            </ion-item>
+            <ion-item>
+                <h2>No stimulants</h2>
+                <p text-wrap>Moderate intake of alcohol, caffeine, tea, etc. requires aprox. 6 hours to be completely metabolised.</p>
+                <p item-content>04:00 pm</p>
+            </ion-item>
+            <ion-item>
+                <h2>Temperature</h2>
+                <p text-wrap></p>
+                <p item-content>19 C</p>
+            </ion-item>
+        </ion-list>
+    </div>
 </ion-content>

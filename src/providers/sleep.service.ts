@@ -1,12 +1,29 @@
+// App
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import { User } from '@ionic/cloud-angular';
+import 'rxjs/operator/map';
 
 // Third-party
+import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import * as moment from 'moment';
+import * as _ from 'lodash';
+
+// Models
+import { SleepPlan } from '../models';
+
+const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class SleepService {
-
-  constructor() {}
+  private _sleepPlan: FirebaseObjectObservable<SleepPlan>;
+  constructor(
+    private _af: AngularFire,
+    private _user: User
+  ) {
+    this._sleepPlan = _af.database.object(`/sleep-plan/${_user.id}/${CURRENT_DAY}`);
+  }
 
   /**
    * Establishes the proper bed time by the wake up time
@@ -17,11 +34,15 @@ export class SleepService {
   public getBedtime(wakeUpTime: string): string {
     let wakeTimeItems = wakeUpTime.split(':'),
       hhWake = +wakeTimeItems[0],
-      mmWake = +wakeTimeItems[1].split(' ')[0];
+      mmWake = +wakeTimeItems[1];
 
     return moment({ 'hours': hhWake, 'minutes': mmWake })
       .subtract({ 'hours': 7, 'minutes': 30 })
-      .format('hh:mm a');
+      .format('HH:mm');
+  }
+
+  public getSleepPlan(): Observable<SleepPlan> {
+    return new Observable((observer: Observer<SleepPlan>) => this._sleepPlan.subscribe((sleepPlan: SleepPlan) => observer.next(sleepPlan['$value'] === null ?  new SleepPlan() : sleepPlan)));
   }
 
   /**
@@ -32,12 +53,12 @@ export class SleepService {
    */
   public getWakeUptime(bedTime: string): string {
     let bedTimeItems = bedTime.split(':'),
-      hhSleep = +bedTimeItems[0] + 12,
-      mmSleep = +bedTimeItems[1].split(' ')[0];
+      hhSleep = +bedTimeItems[0],
+      mmSleep = +bedTimeItems[1];
 
     return moment({ 'hours': hhSleep, 'minutes': mmSleep })
       .add({ 'hours': 7, 'minutes': 30 })
-      .format('hh:mm a');
+      .format('HH:mm');
   }
 
 }

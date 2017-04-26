@@ -1,22 +1,22 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+// App
+import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 
-/*
-  Generated class for the ActivityPlan page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-activity-plan',
-  templateUrl: 'activity-plan.html'
+  templateUrl: 'activity-plan.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActivityPlanPage {
+  public activityPlanDetails: string = 'guidelines';
+  constructor(private _detectorRef: ChangeDetectorRef) { }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  public segmentChange(): void {
+    this._detectorRef.markForCheck();
+  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ActivityPlanPage');
+  ionViewWillUnload(): void {
+    console.log('Destroying...');
+    this._detectorRef.detach();
   }
 
 }

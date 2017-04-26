@@ -141,6 +141,10 @@ export class MealDetailsPage {
     this._mealSvc.saveMeal(this.mealIdx, this.meal);
   }
 
+  public segmentChange(): void {
+    this._detectorRef.markForCheck();
+  }
+
   /**
    * App lifecycle method
    * @description This method is called each time the root page changes (component is destroyed)

@@ -10,7 +10,7 @@ export class Activity {
      * @param {number} met - The metabolic equivalent of the activity
      * @param {string} name - The name of activity
      * @param {string} time - The time activity has started
-     * @param {string} type - The type of activity (mental or physical)
+     * @param {string} type - The type of activity (intellectual or physical)
      */
     constructor(
         public duration: number,
@@ -24,18 +24,18 @@ export class Activity {
 /**
  * Class representing an activity plan
  * @class
- * @classdesc Schedules the time invested for different types of activities, such as work, physical, and intellectual exercise
+ * @classdesc Monitors the physical and intellectual activities in a single day
  */
 export class ActivityPlan {
     /**
      * @constructor
-     * @param {number} dailyExercise - The duration of physical exercise per day in minutes
-     * @param {number} dailyStudying - The duration of intellectual exercise per day in minutes
-     * @param {number} weeklyIntenseExercise - The number of days during the week of performed intense exercise
+     * @param {Array} activities - Total activities performed per day
+     * @param {number} intellectualEffort - The duration of intellectual exercise per day in minutes
+     * @param {number} physicalEffort - The duration of physical exercise per day in minutes
      */
     constructor(
-        public dailyExercise: number = 240,
-        public dailyStudying: number = 240,
-        public weeklyIntenseExercise: number = 7
+        public activities: Array<Activity> = [],
+        public intellectualEffort: number = 0,
+        public physicalEffort: number = 0
     ) { }
 }

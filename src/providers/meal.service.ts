@@ -1,8 +1,8 @@
 // App
 import { Injectable } from '@angular/core';
-import { User } from '@ionic/cloud-angular';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
+import { User } from '@ionic/cloud-angular';
 import 'rxjs/operator/map';
 
 // Third-party
@@ -14,10 +14,10 @@ import * as _ from 'lodash';
 import { Food, IFoodSearchResult, Meal, MealFoodItem, MealPlan, MealServing, MealWarning, Nutrition, UserProfile } from '../models';
 
 // Providers
+import { FitnessService } from './fitness.service'
 import { FoodCombiningService } from './food-combining.service';
 import { FoodDataService } from './food-data.service';
 import { FoodService } from './food.service';
-import { ProfileService } from './profile.service';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 
@@ -27,9 +27,9 @@ export class MealService {
   constructor(
     private _af: AngularFire,
     private _combiningSvc: FoodCombiningService,
+    private _fitSvc: FitnessService,
     private _foodSvc: FoodService,
     private _foodDataSvc: FoodDataService,
-    private _profileSvc: ProfileService,
     private _user: User
   ) {
     this._mealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY}`);
@@ -105,7 +105,8 @@ export class MealService {
    * @returns {Array} Returns the planned meals for the day by breakfast time and sleep time.
    */
   private _getMeals(): Array<Meal> {
-    let profile: UserProfile = this._profileSvc.getProfile(),
+    /*
+    let profile: UserProfile = this._fitSvc.getProfile(),
       breakfastTime: number = +profile.mealPlan.breakfastTime.split(':')[0],
       meals: Array<Meal> = [],
       mealTime: number = 0,
@@ -123,6 +124,8 @@ export class MealService {
     }
 
     return meals;
+    */
+    return [];
   }
 
   /**
@@ -137,7 +140,8 @@ export class MealService {
    * @returns {Array} Returns the reaorganised meals
    */
   private _setupMeals(meals: Array<Meal>): Array<Meal> {
-    let bedTime: number = +this._profileSvc.getProfile().sleepPlan.bedTime.split(':')[0] + 12,
+    /*
+    let bedTime: number = +this._fitSvc.getProfile().sleepPlan.bedTime.split(':')[0] + 12,
       currMealHour: number,
       currMealMinutes: number,
       currMealTimeItems: Array<string>,
@@ -145,7 +149,7 @@ export class MealService {
       lastMealHour: number,
       lastMealMinutes: number,
       lastMealTimeItems: Array<string>,
-      mealInterval: number = +this._profileSvc.getProfile().mealPlan.interval,
+      mealInterval: number = +this._fitSvc.getProfile().mealPlan.interval,
       mealHour: number,
       mealMinutes: number,
       newMeal: Meal;
@@ -211,6 +215,9 @@ export class MealService {
     }
 
     return meals;
+    */
+
+    return [];
   }
 
   /**
@@ -285,7 +292,7 @@ export class MealService {
    */
   public getMealNutrition(items: Array<MealFoodItem>): Nutrition {
     let nutrition: Nutrition = new Nutrition(),
-      requirements: Nutrition = this._profileSvc.getProfile().requirements;
+      requirements: Nutrition = this._fitSvc.getProfile().requirements;
     items.forEach((item: MealFoodItem) => {
 
       // Sum the nutrients for each food item

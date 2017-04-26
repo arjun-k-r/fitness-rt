@@ -1,9 +1,19 @@
+// App
 import { Injectable } from '@angular/core';
+import { User } from '@ionic/cloud-angular';
+
+// Firebase
+import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+
+// Models
+import { UserProfile } from '../models';
 
 @Injectable()
 export class FitnessService {
-
-  constructor() {}
+  private _profile: FirebaseObjectObservable<UserProfile>;
+  constructor(private _af: AngularFire, private _user: User) {
+    this._profile = _af.database.object(`/profiles/${_user.id}`);
+  }
 
   public getBmr(age: number, gender: string, height: number, weight: number): number {
     if (gender === 'male') {
@@ -28,6 +38,16 @@ export class FitnessService {
   public getIdealWeight(gender: string, height: number, weight: number): number {
     let extraInch: number = (height * 0.394) % 12;
     return gender === 'male' ? Math.round(52 + 1.9 * extraInch) : Math.round(49 + 1.7 * extraInch);
+  }
+
+  public getProfile(): UserProfile {
+    return <UserProfile>this._user.get('profile', new UserProfile());
+  }
+
+  public saveProfile(profile: UserProfile): void {
+    this._user.set('profile', profile);
+    this._user.save();
+    this._profile.set(profile);
   }
 
 }

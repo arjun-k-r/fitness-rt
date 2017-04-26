@@ -6,7 +6,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { ConstitutionQuizCharacterstic, ConstitutionQuizQuestion } from '../../models';
 
 // Pages
-import { ProfilePage } from '../profile/profile';
+import { FitnessPage } from '../fitness/fitness';
 
 // Providers
 import { AlertService, ConstitutionService } from '../../providers';
@@ -32,7 +32,7 @@ export class ConstitutionPage {
   }
 
   public finishQuiz(): void {
-    this._constitutionSvc.saveConstitution(this.constitutionQuestions).then(() => this._navCtrl.setRoot(ProfilePage, { new: true }))
+    this._constitutionSvc.saveConstitution(this.constitutionQuestions).then(() => this._navCtrl.setRoot(FitnessPage, { new: true }))
   }
 
   ionViewWillEnter(): void {

@@ -9,7 +9,7 @@
         </ion-buttons>
     </ion-navbar>
     <ion-toolbar>
-        <ion-segment [(ngModel)]="mealDetails">
+        <ion-segment [(ngModel)]="mealDetails" (click)="segmentChange()">
             <ion-segment-button value="details">
                 <ion-icon name="book"></ion-icon>
             </ion-segment-button>

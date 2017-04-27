@@ -4,40 +4,64 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>Sleep plan</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="saveSleep()">
+                <ion-icon name="sync"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
     <ion-toolbar>
         <ion-segment [(ngModel)]="sleepPlanDetails" (click)="segmentChange()">
             <ion-segment-button value="sleep">
                 <ion-icon name="clock"></ion-icon>
             </ion-segment-button>
-            <ion-segment-button value="plan">
-                <ion-icon name="calendar"></ion-icon>
+            <ion-segment-button value="warnings">
+                <ion-icon name="warning"></ion-icon>
             </ion-segment-button>
             <ion-segment-button value="guidelines">
                 <ion-icon name="bookmarks"></ion-icon>
             </ion-segment-button>
         </ion-segment>
-
     </ion-toolbar>
-
 </ion-header>
-
 
 <ion-content padding>
     <div [ngSwitch]="sleepPlanDetails">
-        <ion-list *ngSwitchCase="'plan'">
-            <pre>
-            {{ sleepPlan | json }}
-            </pre>
+
+        <!-- Start of segment -->
+        <ion-list *ngSwitchCase="'sleep'">
             <ion-item>
                 <ion-label floating>Bed time</ion-label>
-                <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="sleepPlan.bedTime" (ionChange)="setWakeUptime()"></ion-datetime>
+                <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="currentSleep.bedTime" (ionChange)="setWakeUptime()"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label floating>Wake up time</ion-label>
-                <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="sleepPlan.wakeUpTime" (ionChange)="setBedtime()"></ion-datetime>
+                <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="currentSleep.wakeUpTime" (ionChange)="setBedtime()"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label>No electronics before bed</ion-label>
+                <ion-checkbox [(ngModel)]="currentSleep.noElectronics"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+                <ion-label>Relaxation before bed</ion-label>
+                <ion-checkbox [(ngModel)]="currentSleep.relaxation"></ion-checkbox>
             </ion-item>
         </ion-list>
+        <!-- End of segment -->
+
+        <!-- Start of segment -->
+        <div *ngSwitchCase="'warnings'">
+            <ion-list>
+                <ion-item *ngFor="let warning of currentSleep.warnings">
+                    <ion-icon color="danger" name="warning" item-left></ion-icon>
+                    <h2 text-wrap>{{ warning.message }}</h2>
+                    <p text-wrap>{{ warning.moreInfo }} servings</p>
+                </ion-item>
+            </ion-list>
+        </div>
+        <!-- End of segment -->
+
+        <!-- Start of segment -->
         <ion-list *ngSwitchCase="'guidelines'">
             <ion-item>
                 <h2>Routine</h2>
@@ -80,5 +104,6 @@
                 <p item-content>19 C</p>
             </ion-item>
         </ion-list>
+        <!-- End of segment -->
     </div>
 </ion-content>

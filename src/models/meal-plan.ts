@@ -1,5 +1,6 @@
 import { Food } from './food';
 import { Nutrition } from './nutrition';
+import { WarningMessage } from './warning-message';
 
 export const MEAL_TYPES: Array<string> = ['Beverages meal', 'Melons meal', 'Fruit meal', 'Starch meal', 'Protein meal'];
 
@@ -36,7 +37,7 @@ export class Meal {
         public tastes: MealTastes = new MealTastes(),
         public time: string = '',
         public type: string = '',
-        public warnings: Array<MealWarning> = [],
+        public warnings: Array<WarningMessage> = [],
         public wasNourishing: boolean = false
     ) { }
 }
@@ -100,12 +101,5 @@ export class MealServing {
         public organic: boolean = false,
         public silence: boolean = false,
         public slowlyEating: boolean = false
-    ) { }
-}
-
-export class MealWarning {
-    constructor(
-        public message: string,
-        public moreInfo: string
     ) { }
 }

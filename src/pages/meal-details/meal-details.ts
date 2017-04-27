@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { Alert, AlertController, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
 
 // Models
-import { IFoodSearchResult, MEAL_TYPES, Meal, MealFoodItem, MealWarning } from '../../models';
+import { IFoodSearchResult, MEAL_TYPES, Meal, MealFoodItem, WarningMessage } from '../../models';
 
 // Pages
 import { FoodSelectPage } from '../food-select/food-select';
@@ -46,7 +46,7 @@ export class MealDetailsPage {
 
     this._mealSvc.checkMeal(this.meal).then((isGood: boolean) => {
       this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy meal!', 'Well done!');
-    }).catch((warnings: Array<MealWarning>) => {
+    }).catch((warnings: Array<WarningMessage>) => {
       this.meal.warnings = [...warnings];
       console.log(this.meal);
       this._alertSvc.showAlert('Please check the warnings', 'This meal seems to be unhealthy and damaging for your digestive system', 'Oh oh...');

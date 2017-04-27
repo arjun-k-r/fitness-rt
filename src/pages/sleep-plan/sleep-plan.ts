@@ -2,10 +2,10 @@
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 
 // Models
-import { SleepHabit, SleepPlan } from '../../models';
+import { SleepHabit, SleepPlan, WarningMessage } from '../../models';
 
 // Providers
-import { SleepService } from '../../providers';
+import { AlertService, SleepService } from '../../providers';
 
 @Component({
   selector: 'page-sleep-plan',
@@ -13,31 +13,49 @@ import { SleepService } from '../../providers';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SleepPlanPage {
+  public currentSleep: SleepHabit = new SleepHabit();
   public sleepPlan: SleepPlan;
   public sleepPlanDetails: string = 'sleep';
   constructor(
+    private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _sleepSvc: SleepService
   ) { }
+
+  public saveSleep(): void {
+    this._sleepSvc.saveSleep(this.sleepPlan, this.currentSleep).then((isGood: boolean) => {
+      this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy sleep habit!', 'Well done!');
+    }).catch((warnings: Array<WarningMessage>) => {
+      this.currentSleep.warnings = [...warnings];
+      console.log(this.currentSleep);
+      this._alertSvc.showAlert('Please check the warnings', 'Your sleepng habit seems to be unhealthy', 'Oh oh...');
+      this._detectorRef.markForCheck();
+    });;
+  }
 
   public segmentChange(): void {
     this._detectorRef.markForCheck();
   }
 
   public setBedtime(): void {
-    this.sleepPlan.bedTime = this._sleepSvc.getBedtime(this.sleepPlan.wakeUpTime);
+    this.currentSleep.bedTime = this._sleepSvc.getBedtime(this.currentSleep.wakeUpTime);
     this._detectorRef.detectChanges();
     this._detectorRef.markForCheck();
   }
 
   public setWakeUptime(): void {
-    this.sleepPlan.wakeUpTime = this._sleepSvc.getWakeUptime(this.sleepPlan.bedTime);
+    this.currentSleep.wakeUpTime = this._sleepSvc.getWakeUptime(this.currentSleep.bedTime);
     this._detectorRef.detectChanges();
     this._detectorRef.markForCheck();
   }
 
   ionViewWillEnter(): void {
-    this._sleepSvc.getSleepPlan().subscribe((sleepPlan: SleepPlan) => this.sleepPlan = sleepPlan);
+    this._sleepSvc.getSleepPlan().subscribe((sleepPlan: SleepPlan) => {
+      this.sleepPlan = sleepPlan;
+      this.currentSleep = this._sleepSvc.getCurrentSleep(this.sleepPlan);
+      this._detectorRef.markForCheck();
+      this._detectorRef.markForCheck();
+    });
   }
 
   ionViewWillUnload(): void {

@@ -11,7 +11,7 @@ import * as moment from 'moment';
 import * as _ from 'lodash';
 
 // Models
-import { Food, IFoodSearchResult, Meal, MealFoodItem, MealPlan, MealServing, MealWarning, Nutrition, UserProfile } from '../models';
+import { Food, IFoodSearchResult, Meal, MealFoodItem, MealPlan, MealServing, WarningMessage, Nutrition, UserProfile } from '../models';
 
 // Providers
 import { FitnessService } from './fitness.service'
@@ -38,10 +38,10 @@ export class MealService {
   /**
    * Verifies if the meal is too complex for digestion (has more than 6 food items)
    * @param {Array} foodItems - The food items of the meal
-   * @returns {MealWarning} Returns warning if the meal is too complex
+   * @returns {WarningMessage} Returns warning if the meal is too complex
    */
-  private _checkMealComplexity(foodItems: Array<MealFoodItem>): MealWarning {
-    return foodItems.length > 6 ? new MealWarning(
+  private _checkMealComplexity(foodItems: Array<MealFoodItem>): WarningMessage {
+    return foodItems.length > 6 ? new WarningMessage(
       'The meal is too complex!',
       'More than 6 food items in a signle meal makes it complex and difficult to digest, as it requires many types of enzymes, gastric juices, and timings.'
     ) : null;
@@ -51,10 +51,10 @@ export class MealService {
    * Verifies if the meal is alkaline forming
    * @description Acid forming meals are inflammatory and the root of all diseases. The PRAL value must remain, at least, below 1.
    * @param {number} size - The size of the meal
-   * @returns {MealWarning} Returns warning if the meal is acid forming
+   * @returns {WarningMessage} Returns warning if the meal is acid forming
    */
-  private _checkMealPral(pral: number): MealWarning {
-    return pral >= 1 ? new MealWarning(
+  private _checkMealPral(pral: number): WarningMessage {
+    return pral >= 1 ? new WarningMessage(
       'The meal is acid forming',
       'Acid forming food and meals cause inflammation, which is the root of all diseases. Try adding some alkaline forming foods, like green vegetables, with PRAL below 0'
     ) : null;
@@ -64,13 +64,13 @@ export class MealService {
    * Verifies if each meal serving preparation todo is checked and respected
    * @description A complete healthy digestion and nutrient absorption requires healthy eating habits. How you eat is as important as what you eat
    * @param serving - The meal serving todo's
-   * @returns {MealWarning} Returns a warning to make the user create healthy eating habits
+   * @returns {WarningMessage} Returns a warning to make the user create healthy eating habits
    */
-  private _checkMealServing(serving: MealServing): MealWarning {
-    let warning: MealWarning;
+  private _checkMealServing(serving: MealServing): WarningMessage {
+    let warning: WarningMessage;
     _.values(serving).forEach((todo: boolean) => {
       if (!todo) {
-        warning = new MealWarning(
+        warning = new WarningMessage(
           'The meal serving preparations were not checked',
           'A complete healthy digestion and nutrient absorption requires healthy eating habits. How you eat is as important as what you eat'
         );
@@ -83,10 +83,10 @@ export class MealService {
   /**
    * Verifies if the meal is too big for normal digestion
    * @param {number} size - The size of the meal
-   * @returns {MealWarning} Returns warning if the meal is too big
+   * @returns {WarningMessage} Returns warning if the meal is too big
    */
-  private _checkMealSize(size: number): MealWarning {
-    return size > 750 ? new MealWarning(
+  private _checkMealSize(size: number): WarningMessage {
+    return size > 750 ? new WarningMessage(
       'The meal is too large!',
       "The meal most be 80% of your stomach's capacity (900 g). The rest of the 20% is required for digestive juices."
     ) : null;
@@ -238,14 +238,14 @@ export class MealService {
   /**
   * Verifies if a meal is proper
   * @param {Meal} meal The meal to check
-  * @returns {Promise} Returns the resolved meal with its flags set
+  * @returns {Promise} Returns confirmation if the meal is or not healthy
   */
   public checkMeal(meal: Meal): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      let mealComplexityWarning: MealWarning = this._checkMealComplexity(meal.mealItems),
-        mealPralWarning: MealWarning = this._checkMealPral(meal.pral),
-        mealServingWarning: MealWarning = this._checkMealServing(meal.serving),
-        mealSizeWarning: MealWarning = this._checkMealSize(meal.quantity);
+      let mealComplexityWarning: WarningMessage = this._checkMealComplexity(meal.mealItems),
+        mealPralWarning: WarningMessage = this._checkMealPral(meal.pral),
+        mealServingWarning: WarningMessage = this._checkMealServing(meal.serving),
+        mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity);
 
       meal.warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
 

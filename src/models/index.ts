@@ -7,3 +7,4 @@ export { INutrientDetails } from './nutrient';
 export { NUTRIENT_THRESHOLDS } from './nutrient-thresholds'
 export { Nutrition, Nutrient } from './nutrition';
 export { UserProfile } from './user-profile';
+export { WarningMessage } from './warning-message';

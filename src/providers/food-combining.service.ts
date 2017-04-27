@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 // Models
-import { MealFoodItem, MealWarning } from '../models';
+import { MealFoodItem, WarningMessage } from '../models';
 
 /**
  * TODOs: There seem to be some exceptions in combining
@@ -23,7 +23,7 @@ export class FoodCombiningService {
    * @param {Array} foodItems The food items to check
    * @returns {Array} Returns a list of warnings if there are wrong combinations
    */
-  public checkCombining(foodItems: Array<MealFoodItem>): Array<MealWarning> {
+  public checkCombining(foodItems: Array<MealFoodItem>): Array<WarningMessage> {
     let acidFruits: Array<MealFoodItem> = [],
       fats: Array<MealFoodItem> = [],
       hasAcids: boolean = false,
@@ -36,7 +36,7 @@ export class FoodCombiningService {
       subAcidFruits: Array<MealFoodItem> = [],
       sweetFruits: Array<MealFoodItem> = [],
       veggies: Array<MealFoodItem> = [],
-      warnings: Array<MealWarning> = [];
+      warnings: Array<WarningMessage> = [];
 
     foodItems.forEach((item: MealFoodItem) => {
 
@@ -102,7 +102,7 @@ export class FoodCombiningService {
      */
     if (!!starches.length && !!proteins.length) {
       warnings.push(
-        new MealWarning(
+        new WarningMessage(
           'No starch and protein at the same meal!',
           'Starch digestion requires alkaline medium, whereas protein digestion require acid medium.'
         )
@@ -115,7 +115,7 @@ export class FoodCombiningService {
      */
     if (!!starches.length && hasAcids) {
       warnings.push(
-        new MealWarning(
+        new WarningMessage(
           'No starch and acid at the same meal!',
           'Starch digestion requires alkaline medium, whereas acid digestion require acid medium.'
         )
@@ -128,7 +128,7 @@ export class FoodCombiningService {
      */
     if (proteins.length > 1 && proteins[0].group !== proteins[1].group) {
       warnings.push(
-        new MealWarning(
+        new WarningMessage(
           'No more than one type of protein at the same meal!',
           'Each kind of protein requires different digestive secretion timings and preparations'
         )
@@ -141,7 +141,7 @@ export class FoodCombiningService {
      */
     if (hasAcids && !!proteins.length) {
       warnings.push(
-        new MealWarning(
+        new WarningMessage(
           'No acid and protein at the same meal!',
           'Pepsin, the enzyme required for protein digestion, is inhibited or destroyed by excess stomach acidity'
         )
@@ -154,7 +154,7 @@ export class FoodCombiningService {
      */
     if (!!fats.length && !!proteins.length) {
       warnings.push(
-        new MealWarning(
+        new WarningMessage(
           'No fat and protein at the same meal!',
           'Fat inhibits gastric juice secretion and slow down digestion. Hence, fats also inhibit pepsin secretion, the enzyme required for protein digestion'
         )
@@ -167,7 +167,7 @@ export class FoodCombiningService {
      */
     if ((hasSugars || !!sweetFruits.length) && !!proteins.length) {
       warnings.push(
-        new MealWarning(
+        new WarningMessage(
           'No sweets and protein at the same meal!',
           'Sugars do not undergo any sort of digestion in the mout or stomach, but only a brief digestion (30 minutes) in the small intestine. Protein holds sugars in the stomach (4 hours) and makes them ferment. Sugars also inhibit gastric juice secretion.'
         )
@@ -180,7 +180,7 @@ export class FoodCombiningService {
      */
     if ((hasSugars || !!sweetFruits.length) && !!starches.length) {
       warnings.push(
-        new MealWarning(
+        new WarningMessage(
           'No sweets and starch at the same meal!',
           'Sugars do not undergo any sort of digestion in the mouth or stomach, but only a brief digestion (30 minutes) in the small intestine. Starch holds sugars in the stomach (2 hours) and makes them ferment. Sugars also inhibit ptyalin secretion, the enzyme from saliva required for starch digestion.'
         )
@@ -193,7 +193,7 @@ export class FoodCombiningService {
      */
     if (hasMelon && foodItems.length > 1) {
       warnings.push(
-        new MealWarning(
+        new WarningMessage(
           'Melons go alone or stay alone',
           'Melons do not undergo any sort of digestion in the mouth or stomach, but only a brief digestion (10 minutes) in the small intestine. Any other food would hold melons in the stomach and make them ferment.'
         )
@@ -206,7 +206,7 @@ export class FoodCombiningService {
      */
     if (hasMilk && foodItems.length > 1) {
       warnings.push(
-        new MealWarning(
+        new WarningMessage(
           'Milk goes alone or stays alone!',
           "Humans are the only species that drink another species' milk, even after infancy. Milk forms curds in the stomach which further suround particles of food, inhibiting the action of gastric juices upon them and preventing, thus, their digestion."
         )
@@ -219,7 +219,7 @@ export class FoodCombiningService {
      */
     if (hasFluids && foodItems.length > 1) {
       warnings.push(
-        new MealWarning(
+        new WarningMessage(
           'No fluids after or during meals!',
           'Fluids dilute the gastric juices required for digestion.'
         )
@@ -232,7 +232,7 @@ export class FoodCombiningService {
      */
     if ((!!acidFruits.length && acidFruits.length > foodItems.length) || (!!subAcidFruits.length && subAcidFruits.length > foodItems.length) || (!!sweetFruits.length && sweetFruits.length > foodItems.length)) {
       warnings.push(
-        new MealWarning(
+        new WarningMessage(
           'Fruits go alone or stay alone!',
           'Fruits undergo a brief digestion (30-60 minutes) in the small intestine. Any other food would hold fruit in the stomach and make them ferment.'
         )
@@ -245,7 +245,7 @@ export class FoodCombiningService {
      */
     if (!!acidFruits.length && !!sweetFruits.length) {
       warnings.push(
-        new MealWarning(
+        new WarningMessage(
           'No acid fruit and sweet fruit at the same meal!',
           'Sweet fruit do not undergo any sort of digestion in the mouth or stomach, but only a brief digestion (30 minutes) in the small intestine. Acid fruit hold sweet fruit in the stomach and make them ferment. The sugar from sweet fruit also inhibit ptyalin secretion, the enzyme from saliva required for acid digestion.'
         )

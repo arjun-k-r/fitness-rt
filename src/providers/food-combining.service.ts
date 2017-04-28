@@ -158,8 +158,10 @@ export class FoodCombiningService {
     /**
      * Rule #5
      * Not Fat-Protein
+     * 
+     * !Watch out for protein fats: they are classified both as protein and fats
      */
-    if (!!fats.length && !!proteins.length) {
+    if (!!fats.length && !!proteins.length && fats.length !== proteinFats.length && proteins.length !== proteinFats.length) {
       warnings.push(
         new WarningMessage(
           'No fat and protein at the same meal!',

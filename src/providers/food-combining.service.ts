@@ -71,6 +71,7 @@ export class FoodCombiningService {
         case 'Protein-Fat':
           proteins.push(item);
           proteinFats.push(item);
+          fats.push(item);
           break;
 
         case 'Starch':

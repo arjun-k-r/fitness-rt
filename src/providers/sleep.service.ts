@@ -39,6 +39,83 @@ export class SleepService {
   }
 
   /**
+   * Verifies if the sleep was long enough
+   * @desc We need to catch 4-5 complete 90-minute REM sleep cycles (07:30 hours).
+   * @param {SleepHabit} sleep - The sleep habit to check
+   * @returns {WarningMessage} Returns a warning if something is wrong
+   */
+  private _checkDuration(sleep: SleepHabit): WarningMessage {
+    return moment(sleep.wakeUpTime, 'hours').subtract(moment(sleep.bedTime, 'hours').hours(), 'hours').hours() < 6 ? new WarningMessage(
+      'We need at least 6 hours of sleep every night',
+      'There are two tyes of sleep: REM (rapid eye movement or deep sleep) and non-REM (light sleep). The transition between these two types of sleep is a 90-minute cycle. We need to wake up during one of these transitions in order to feel refreshed and energized, more precisely after 4-5 complete cycles (07:30 hours).'
+    ) : null;
+  }
+
+  /**
+   * Verifies if there were any electronics (blue light exposure) used before bedtime
+   * @desc Electornics emit blue light, which is preceived as sunlight by the body and disrupts the circadian rhythm (internal clock)
+   * @param {SleepHabit} sleep - The sleep habit to check
+   * @returns {WarningMessage} Returns a warning if something is wrong
+   */
+  private _checkElectronics(sleep: SleepHabit): WarningMessage {
+    return !sleep.noElectronics ? new WarningMessage(
+      'No electronics 1 hours before bed',
+      'Electornics emit blue light, which is preceived as sunlight by the body and disrupts the circadian rhythm (internal clock). This will keep you from falling asleep and your sleep will be unrefreshing.'
+    ) : null;
+  }
+
+  /**
+   * Verifies if there were any electronics (blue light exposure) used before bedtime
+   * @desc Electornics emit blue light, which is preceived as sunlight by the body and disrupts the circadian rhythm (internal clock)
+   * @param {SleepPlan} sleepPlan - The sleep plan to check
+   * @returns {WarningMessage} Returns a warning if something is wrong
+   */
+  private _checkOscillation(sleepPlan: SleepPlan): WarningMessage {
+    let currDayBedtime: number = moment(sleepPlan.sleepPattern[0].bedTime, 'hours').hours(),
+        prevBedtime: number,
+        prevDaySleep: SleepHabit;
+
+      sleepPlan.sleepOscillation = sleepPlan.sleepPattern.reduce((acc: number, currHabit: SleepHabit, currIdx: number) => {
+        if (currIdx < 6) {
+          prevDaySleep = sleepPlan.sleepPattern[currIdx + 1];
+          prevBedtime = moment((!!prevDaySleep ? prevDaySleep.bedTime : currDayBedtime), 'hours').hours();
+          return acc += moment(currHabit.bedTime, 'hours').subtract(prevBedtime, 'hours').hours();
+        }
+      }, 0);
+
+    return (sleepPlan.sleepOscillation > 1 || sleepPlan.sleepOscillation < -1) ? new WarningMessage(
+      'You need to respect your sleep routine',
+      "Going to bed and waking up at the same hour every day teaches your bed to set up its circadian rhythm (internal clock). All metabolic processes function according to the body's internal clock."
+    ) : null;
+  }
+
+  /**
+   * Verifies if there was relaxation (no working or stress) before bed time
+   * @desc Sleep preparation routine is as important as sleeping itself. Working or stressing before bedtime will make your body secrete stress hormones, which will keep you alert and keep you from falling asleep. You will also feel unrefreshed in the morning.
+   * @param {SleepHabit} sleep - The sleep habit to check
+   * @returns {WarningMessage} Returns a warning if something is wrong
+   */
+  private _checkRelaxation(sleep: SleepHabit): WarningMessage {
+    return !sleep.noElectronics ? new WarningMessage(
+      'You need to relax before bed',
+      'Sleep preparation routine is as important as sleeping itself. Working or stressing before bedtime will make your body secrete stress hormones, which will keep you alert and keep you from falling asleep. You will also feel unrefreshed in the morning.'
+    ) : null;
+  }
+
+  /**
+   * Verifies if there were stimulants consumed before bed
+   * @desc Stimulants (e.g. coffee, black tea, green tea, alcohol, tobacco etc.), as their name suggests, stimulate blood flow throughout the body and keep you alert both mentally and physically.
+   * @param {SleepHabit} sleep - The sleep habit to check
+   * @returns {WarningMessage} Returns a warning if something is wrong
+   */
+  private _checkStimulants(sleep: SleepHabit): WarningMessage {
+    return !sleep.noStimulants ? new WarningMessage(
+      'You need to avoid stimulants at least 6 hours before bed',
+      'Stimulants (e.g. coffee, black tea, green tea, alcohol, tobacco etc.), as their name suggests, stimulate blood flow throughout the body and keep you alert both mentally and physically.'
+    ) : null;
+  }
+
+  /**
    * Verifies if the sleep plan is healthy
    * @param {SleepPlan} sleepPlan - The sleep plan to verify
    * @returns {Promise} Returns confirmation if the sleep is healthy or not
@@ -47,12 +124,18 @@ export class SleepService {
     return new Promise((resolve, reject) => {
       let currentSleep: SleepHabit = sleepPlan.sleepPattern[0],
         sleepBedtimeWarning: WarningMessage = this._checkBedtime(currentSleep),
-        sleepElectronicsWarning: WarningMessage,
-        sleepOscillationWarning: WarningMessage,
-        sleepRelaxationWarning: WarningMessage;
+        sleepDurationWarning: WarningMessage = this._checkDuration(currentSleep),
+        sleepElectronicsWarning: WarningMessage = this._checkElectronics(currentSleep),
+        sleepOscillationWarning: WarningMessage = this._checkOscillation(sleepPlan),
+        sleepRelaxationWarning: WarningMessage = this._checkRelaxation(currentSleep),
+        sleepStimulantsWarning: WarningMessage = this._checkStimulants(currentSleep);
 
       if (!!sleepBedtimeWarning) {
         currentSleep.warnings.push(sleepBedtimeWarning);
+      }
+
+      if (!!sleepDurationWarning) {
+        currentSleep.warnings.push(sleepDurationWarning);
       }
 
       if (!!sleepElectronicsWarning) {
@@ -67,8 +150,22 @@ export class SleepService {
         currentSleep.warnings.push(sleepRelaxationWarning);
       }
 
+      if (!!sleepStimulantsWarning) {
+        currentSleep.warnings.push(sleepStimulantsWarning);
+      }
+
+      if (!!sleepBedtimeWarning || !!sleepDurationWarning) {
+        sleepPlan.poorSleep++;
+      }
+
+      if (!!sleepElectronicsWarning || !!sleepOscillationWarning || !!sleepRelaxationWarning || !!sleepStimulantsWarning) {
+        sleepPlan.notRefreshing++;
+      }
+
       if (!currentSleep.warnings.length) {
         resolve(true);
+        sleepPlan.notRefreshing = 0;
+        sleepPlan.poorSleep = 0;
       } else {
         reject(currentSleep.warnings);
       }
@@ -132,17 +229,6 @@ export class SleepService {
   public saveSleep(sleepPlan: SleepPlan, sleepHabit: SleepHabit): Promise<boolean> {
     return new Promise((resolve, reject) => {
       sleepPlan.sleepPattern[0] = sleepHabit;
-      let currBedtime: number = moment(sleepPlan.sleepPattern[0].bedTime, 'hours').hours(),
-        prevBedtime: number,
-        prevSleep: SleepHabit;
-
-      sleepPlan.sleepOscillation = sleepPlan.sleepPattern.reduce((acc: number, currHabit: SleepHabit, currIdx: number) => {
-        if (currIdx < 6) {
-          prevSleep = sleepPlan.sleepPattern[currIdx + 1];
-          prevBedtime = moment((!!prevSleep ? prevSleep.bedTime : currBedtime), 'hours').hours();
-          return acc += moment(currHabit.bedTime, 'hours').subtract(prevBedtime, 'hours').hours();
-        }
-      }, 0);
 
       this._checkSleep(sleepPlan).then((isGood: boolean) => {
         this._sleepPlan.update({

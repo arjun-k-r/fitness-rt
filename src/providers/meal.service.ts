@@ -102,10 +102,220 @@ export class MealService {
   }
 
   /**
+   * Updates the food item quantity and nutrients to the new serving size
+   * @param {MealFoodItem} foodItem - The food item to update
+   * @returns {void}
+   */
+  public changeQuantities(foodItem: MealFoodItem): void {
+    // Reset the food details to their default state before changing
+    let initialRatio: number = foodItem.quantity / 100;
+    foodItem.quantity *= (+foodItem.servings / initialRatio);
+
+    for (let nutrientKey in foodItem.nutrition) {
+      foodItem.nutrition[nutrientKey].value *= (+foodItem.servings / initialRatio);
+    }
+  }
+
+  /**
+  * Verifies if a meal is proper
+  * @param {Meal} meal The meal to check
+  * @returns {Promise} Returns confirmation if the meal is or not healthy
+  */
+  public checkMeal(meal: Meal): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      let mealComplexityWarning: WarningMessage = this._checkMealComplexity(meal.mealItems),
+        mealPralWarning: WarningMessage = this._checkMealPral(meal.pral),
+        mealServingWarning: WarningMessage = this._checkMealServing(meal.serving),
+        mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity);
+
+      meal.warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
+
+      this._checkMealTastes(meal);
+
+      if (!!mealComplexityWarning) {
+        meal.warnings.push(mealComplexityWarning);
+      }
+
+      if (!!mealPralWarning) {
+        meal.warnings.push(mealPralWarning);
+      }
+
+      if (!!mealServingWarning) {
+        meal.warnings.push(mealServingWarning);
+      }
+
+      if (!!mealSizeWarning) {
+        meal.warnings.push(mealSizeWarning);
+      }
+
+      if (!meal.warnings.length) {
+        resolve(true);
+      } else {
+        reject(meal.warnings);
+      }
+    });
+  }
+
+  /**
+   * Verifies if the meal serving time is proper
+   * @description Meals need to be timed by the previous meal digestion duration
+   * 1. Fluids need at least 30 minutes to pass through the intestines
+   * 2. Melons require 30 minutes of digestion ()
+   * 3. Fruits require 30-60 minutes of digestion
+   * 4. Starch requires 2 hours of digestion
+   * 5. Protein requires 4 hours of digestion
+   * @param {number} mealIdx - The index of the meal in the current day meal plan meals
+   * @param {Array} meals - The current day meals
+   * @returns {Promise} Returns confirmation if the meal time is fine or a warning if not
+   */
+  private checkMealHour(mealIdx: number, meals: Array<Meal>): Promise<WarningMessage | boolean> {
+    return new Promise((resolve, reject) => {
+      if (mealIdx !== 0) {
+        meals[mealIdx - 1].mealItems.every((item: MealFoodItem) => {
+          if (item.type.toLocaleLowerCase().includes('protein')) {
+
+            return true;
+          } else if (item.type === 'Starch') {
+
+            return true;
+          } else if (item.type.toLocaleLowerCase().includes('fruit')) {
+
+            return true;
+          } else if (item.type === 'Melon') {
+
+            return true;
+          } else if (item.type === 'Fluid') {
+            
+            return true;
+          }
+        });
+      }
+    });
+  }
+
+  /**
+   * Gets a specific meal from the meal plan
+   * @param {number} mealIdx - The index of the meal in the meal plan
+   * @returns {FirebaseObjectObservable} Returns an object observable that publishes the meal
+   */
+  public getMeal(mealIdx: number): FirebaseObjectObservable<Meal> {
+    return this._af.database.object(`/meal-plans/${this._user.id}/${CURRENT_DAY}/meals/${mealIdx}`)
+  }
+
+  /**
+   * Calculates the meal nutritional values based on the food items
+   * @description Each user has specific daily nutrition requirements (DRI)
+   * We must know how much (%) of the requirements a meal fulfills
+   * @param {Array} items - The food items of the meal
+   */
+  public getMealNutrition(items: Array<MealFoodItem>): Nutrition {
+    let nutrition: Nutrition = new Nutrition(),
+      requirements: Nutrition = this._fitSvc.getProfile().requirements;
+    items.forEach((item: MealFoodItem) => {
+
+      // Sum the nutrients for each food item
+      for (let nutrientKey in item.nutrition) {
+        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
+      }
+    });
+
+    // Establish the meal's nutritional value, based on the user's nutritional requirements (%)
+    for (let nutrientKey in nutrition) {
+      nutrition[nutrientKey].value = Math.round((nutrition[nutrientKey].value * 100) / (requirements[nutrientKey].value || 1));
+    }
+
+    return nutrition;
+  }
+
+  /**
+   * Gets the user's meal plan and verifies the meals
+   * @returns {Observable} Returns the current day meal.
+   */
+  public getMealPlan(): Observable<MealPlan> {
+    return this._mealPlan.map((mealPlan: MealPlan) => {
+      let newMealPlan: MealPlan = mealPlan || new MealPlan();
+      // newMealPlan.meals = mealPlan.meals ? this._setupMeals(mealPlan.meals) : this._getMeals();
+      return newMealPlan;
+    });
+  }
+
+  /**
+   * Gets the alkalinity of a meal, based on the impact of each food item quantity and pral value
+   * @param {Array} items - The food items of the meal
+   * @returns {number} Returns the pral of the meal
+   */
+  public getMealPral(items: Array<MealFoodItem>): number {
+    return +(items.reduce((acc: number, item: MealFoodItem) => acc + (item.pral * item.servings), 0)).toFixed(2);
+  }
+
+  /**
+   * Gets the size of the meal
+   * @param {Array} items - The food items of the meal
+   * @returns {number} Returns the quantity in grams of the meal
+   */
+  public getMealSize(items: Array<MealFoodItem>): number {
+    return items.reduce((acc: number, item: MealFoodItem) => acc + item.quantity, 0);
+  }
+
+  /**
+   * Saves the meal in the database, in the proper location of the meal plan
+   * @param {number} mealIdx - The index of the meal in the current meal plan
+   * @param {Meal} meal - The meal to save
+   * @returns {void}
+   */
+  public saveMeal(mealIdx: number, meal: Meal): void {
+    this.getMeal(mealIdx).update({
+      isCold: meal.isCold,
+      isRaw: meal.isRaw,
+      mealItems: meal.mealItems,
+      nutrition: meal.nutrition,
+      pral: meal.pral,
+      quantity: meal.quantity,
+      serving: meal.serving,
+      tastes: meal.tastes,
+      time: meal.time,
+      type: meal.type,
+      warnings: meal.warnings,
+      wasNourishing: meal.wasNourishing
+    });
+  }
+
+  /**
+   * Saves the meal plan in the database
+   * @param {MealPlan} mealPlan - The meal plan to save
+   * @returns {void}
+   */
+  public saveMealPlan(mealPlan: MealPlan): void {
+    this._mealPlan.update({
+      dailyNutrition: mealPlan.dailyNutrition,
+      date: mealPlan.date,
+      deficiency: mealPlan.deficiency,
+      excess: mealPlan.excess,
+      meals: mealPlan.meals
+    });
+  }
+
+  /**
+   * Gets the nutritional values of each selected food
+   * @param {Array} items The selected food
+   * @returns {Observable} Returns a stream of food reports
+   */
+  public serializeMealItems(items: Array<IFoodSearchResult>): Observable<MealFoodItem> {
+    return new Observable((observer: Observer<MealFoodItem>) => items.forEach((item: IFoodSearchResult, idx: number) => this._foodDataSvc.getFoodReports$(item.ndbno).then((food: Food) => {
+      observer.next(new MealFoodItem(food.group, food.name, food.ndbno, food.nutrition, food.pral, food.quantity, 1, food.tastes, food.type, food.unit));
+      if (idx === items.length - 1) {
+        observer.complete();
+      }
+    })));
+  }
+}
+
+
+/**
    * @returns {Array} Returns the planned meals for the day by breakfast time and sleep time.
    */
+  /*
   private _getMeals(): Array<Meal> {
-    /*
     let profile: UserProfile = this._fitSvc.getProfile(),
       breakfastTime: number = +profile.mealPlan.breakfastTime.split(':')[0],
       meals: Array<Meal> = [],
@@ -124,23 +334,11 @@ export class MealService {
     }
 
     return meals;
-    */
-    return [];
   }
 
-  /**
-   * Organises the meal timing
-   * @description Meals need to be timed by the previous meal digestion duration
-   * 1. Fluids need at least 30 minutes to pass through the intestines
-   * 2. Melons require 30 minutes of digestion ()
-   * 3. Fruits require 30-60 minutes of digestion
-   * 4. Starch requires 2 hours of digestion
-   * 5. Protein requires 4 hours of digestion
-   * @param {Array} meals The meals to reaorganise
-   * @returns {Array} Returns the reaorganised meals
-   */
+  */
+  /*
   private _setupMeals(meals: Array<Meal>): Array<Meal> {
-    /*
     let bedTime: number = +this._fitSvc.getProfile().sleepPlan.bedTime.split(':')[0] + 12,
       currMealHour: number,
       currMealMinutes: number,
@@ -215,158 +413,5 @@ export class MealService {
     }
 
     return meals;
-    */
-
-    return [];
   }
-
-  /**
-   * Updates the food item quantity and nutrients to the new serving size
-   * @param {MealFoodItem} foodItem - The food item to update
-   * @returns {void}
-   */
-  public changeQuantities(foodItem: MealFoodItem): void {
-    // Reset the food details to their default state before changing
-    let initialRatio: number = foodItem.quantity / 100;
-    foodItem.quantity *= (+foodItem.servings / initialRatio);
-
-    for (let nutrientKey in foodItem.nutrition) {
-      foodItem.nutrition[nutrientKey].value *= (+foodItem.servings / initialRatio);
-    }
-  }
-
-  /**
-  * Verifies if a meal is proper
-  * @param {Meal} meal The meal to check
-  * @returns {Promise} Returns confirmation if the meal is or not healthy
   */
-  public checkMeal(meal: Meal): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      let mealComplexityWarning: WarningMessage = this._checkMealComplexity(meal.mealItems),
-        mealPralWarning: WarningMessage = this._checkMealPral(meal.pral),
-        mealServingWarning: WarningMessage = this._checkMealServing(meal.serving),
-        mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity);
-
-      meal.warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
-
-      this._checkMealTastes(meal);
-
-      if (!!mealComplexityWarning) {
-        meal.warnings.push(mealComplexityWarning);
-      }
-
-      if (!!mealPralWarning) {
-        meal.warnings.push(mealPralWarning);
-      }
-
-      if (!!mealServingWarning) {
-        meal.warnings.push(mealServingWarning);
-      }
-
-      if (!!mealSizeWarning) {
-        meal.warnings.push(mealSizeWarning);
-      }
-
-      if (!meal.warnings.length) {
-        resolve(true);
-      } else {
-        reject(meal.warnings);
-      }
-    });
-  }
-
-  /**
-   * Gets a specific meal from the meal plan
-   * @param {number} mealIdx - The index of the meal in the meal plan
-   * @returns {FirebaseObjectObservable} Returns an object observable that publishes the meal
-   */
-  public getMeal(mealIdx: number): FirebaseObjectObservable<Meal> {
-    return this._af.database.object(`/meal-plans/${this._user.id}/${CURRENT_DAY}/meals/${mealIdx}`)
-  }
-
-  /**
-   * Calculates the meal nutritional values based on the food items
-   * @description Each user has specific daily nutrition requirements (DRI)
-   * We must know how much (%) of the requirements a meal fulfills
-   * @param {Array} items - The food items of the meal
-   */
-  public getMealNutrition(items: Array<MealFoodItem>): Nutrition {
-    let nutrition: Nutrition = new Nutrition(),
-      requirements: Nutrition = this._fitSvc.getProfile().requirements;
-    items.forEach((item: MealFoodItem) => {
-
-      // Sum the nutrients for each food item
-      for (let nutrientKey in item.nutrition) {
-        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
-      }
-    });
-
-    // Establish the meal's nutritional value, based on the user's nutritional requirements (%)
-    for (let nutrientKey in nutrition) {
-      nutrition[nutrientKey].value = Math.round((nutrition[nutrientKey].value * 100) / (requirements[nutrientKey].value || 1));
-    }
-
-    return nutrition;
-  }
-
-  /**
-   * Gets the user's meal plan and verifies the meals
-   * @returns {Observable} Returns the current day meal.
-   */
-  public getMealPlan(): Observable<MealPlan> {
-    return this._mealPlan.map((mealPlan: MealPlan) => {
-      let newMealPlan: MealPlan = mealPlan || new MealPlan();
-      newMealPlan.meals = mealPlan.meals ? this._setupMeals(mealPlan.meals) : this._getMeals();
-      return newMealPlan;
-    });
-  }
-
-  /**
-   * Gets the alkalinity of a meal, based on the impact of each food item quantity and pral value
-   * @param {Array} items - The food items of the meal
-   * @returns {number} Returns the pral of the meal
-   */
-  public getMealPral(items: Array<MealFoodItem>): number {
-    return +(items.reduce((acc: number, item: MealFoodItem) => acc + (item.pral * item.servings), 0)).toFixed(2);
-  }
-
-  /**
-   * Gets the size of the meal
-   * @param {Array} items - The food items of the meal
-   * @returns {number} Returns the quantity in grams of the meal
-   */
-  public getMealSize(items: Array<MealFoodItem>): number {
-    return items.reduce((acc: number, item: MealFoodItem) => acc + item.quantity, 0);
-  }
-
-  public saveMeal(mealIdx: number, meal: Meal): void {
-    this.getMeal(mealIdx).update({
-      isCold: meal.isCold,
-      isRaw: meal.isRaw,
-      mealItems: meal.mealItems,
-      nutrition: meal.nutrition,
-      pral: meal.pral,
-      quantity: meal.quantity,
-      serving: meal.serving,
-      tastes: meal.tastes,
-      time: meal.time,
-      type: meal.type,
-      warnings: meal.warnings,
-      wasNourishing: meal.wasNourishing
-    });
-  }
-
-  /**
-   * Gets the nutritional values of each selected food
-   * @param {Array} items The selected food
-   * @returns {Observable} Returns a stream of food reports
-   */
-  public serializeMealItems(items: Array<IFoodSearchResult>): Observable<MealFoodItem> {
-    return new Observable((observer: Observer<MealFoodItem>) => items.forEach((item: IFoodSearchResult, idx: number) => this._foodDataSvc.getFoodReports$(item.ndbno).then((food: Food) => {
-      observer.next(new MealFoodItem(food.group, food.name, food.ndbno, food.nutrition, food.pral, food.quantity, 1, food.tastes, food.type, food.unit));
-      if (idx === items.length - 1) {
-        observer.complete();
-      }
-    })));
-  }
-}

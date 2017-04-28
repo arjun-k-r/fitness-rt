@@ -1,4 +1,15 @@
+/**
+ * 
+ */
 export class Nutrient {
+    /**
+     * @constructor
+     * @param id 
+     * @param group 
+     * @param name 
+     * @param unit 
+     * @param value 
+     */
     constructor(
         public id: number,
         public group: string,
@@ -8,7 +19,184 @@ export class Nutrient {
     ) { }
 }
 
+/**
+ * 
+ */
+export class NutrientDeficiencies {
+    /**
+     * @constructor
+     * @param water 
+     * @param protein 
+     * @param fats 
+     * @param carbs 
+     * @param fiber 
+     * @param calcium 
+     * @param iron 
+     * @param magnesium 
+     * @param phosphorus 
+     * @param potassium 
+     * @param sodium 
+     * @param zinc 
+     * @param copper 
+     * @param manganese 
+     * @param selenium 
+     * @param vitaminC 
+     * @param vitaminB1 
+     * @param vitaminB2 
+     * @param vitaminB3 
+     * @param vitaminB5 
+     * @param vitaminB6 
+     * @param vitaminB9 
+     * @param choline 
+     * @param vitaminB12 
+     * @param vitaminA 
+     * @param vitaminE 
+     * @param vitaminD 
+     * @param vitaminK 
+     * @param la 
+     * @param ala 
+     * @param dha 
+     * @param epa 
+     * @param tryptophan 
+     * @param threonine 
+     * @param isoleucine 
+     * @param leucine 
+     * @param lysine 
+     * @param methionine 
+     * @param phenylalanine 
+     * @param valine 
+     * @param histidine 
+     */
+    constructor(
+        public water: number = 0,
+        public protein: number = 0,
+        public fats: number = 0,
+        public carbs: number = 0,
+        public fiber: number = 0,
+        public calcium: number = 0,
+        public iron: number = 0,
+        public magnesium: number = 0,
+        public phosphorus: number = 0,
+        public potassium: number = 0,
+        public sodium: number = 0,
+        public zinc: number = 0,
+        public copper: number = 0,
+        public manganese: number = 0,
+        public selenium: number = 0,
+        public vitaminC: number = 0,
+        public vitaminB1: number = 0,
+        public vitaminB2: number = 0,
+        public vitaminB3: number = 0,
+        public vitaminB5: number = 0,
+        public vitaminB6: number = 0,
+        public vitaminB9: number = 0,
+        public choline: number = 0,
+        public vitaminB12: number = 0,
+        public vitaminA: number = 0,
+        public vitaminE: number = 0,
+        public vitaminD: number = 0,
+        public vitaminK: number = 0,
+        public la: number = 0,
+        public ala: number = 0,
+        public dha: number = 0,
+        public epa: number = 0,
+        public tryptophan: number = 0,
+        public threonine: number = 0,
+        public isoleucine: number = 0,
+        public leucine: number = 0,
+        public lysine: number = 0,
+        public methionine: number = 0,
+        public phenylalanine: number = 0,
+        public valine: number = 0,
+        public histidine: number = 0
+    ) {}
+}
+
+/**
+ * 
+ */
+export class NutrientExcesses {
+    /**
+     * @constructor
+     * @param protein 
+     * @param fats 
+     * @param carbs 
+     * @param sugars 
+     * @param sodium 
+     * @param satFat 
+     * @param transFat 
+     * @param alcohol 
+     * @param caffeine 
+     */
+    constructor(
+        public protein: number = 0,
+        public fats: number = 0,
+        public carbs: number = 0,
+        public sugars: number = 0,
+        public sodium: number = 0,
+        public satFat: number = 0,
+        public transFat: number = 0,
+        public alcohol: number = 0,
+        public caffeine: number = 0
+    ) {}
+}
+
+/**
+ * 
+ */
 export class Nutrition {
+    /**
+     * @constructor
+     * @param water 
+     * @param energy 
+     * @param protein 
+     * @param fats 
+     * @param carbs 
+     * @param starch 
+     * @param lactose 
+     * @param fiber 
+     * @param sugars 
+     * @param calcium 
+     * @param iron 
+     * @param magnesium 
+     * @param phosphorus 
+     * @param potassium 
+     * @param sodium 
+     * @param zinc 
+     * @param copper 
+     * @param manganese 
+     * @param selenium 
+     * @param vitaminC 
+     * @param vitaminB1 
+     * @param vitaminB2 
+     * @param vitaminB3 
+     * @param vitaminB5 
+     * @param vitaminB6 
+     * @param vitaminB9 
+     * @param choline 
+     * @param vitaminB12 
+     * @param vitaminA 
+     * @param vitaminE 
+     * @param vitaminD 
+     * @param vitaminK 
+     * @param satFat 
+     * @param la 
+     * @param ala 
+     * @param dha 
+     * @param epa 
+     * @param transFat 
+     * @param tryptophan 
+     * @param threonine 
+     * @param isoleucine 
+     * @param leucine 
+     * @param lysine 
+     * @param methionine 
+     * @param phenylalanine 
+     * @param valine 
+     * @param histidine 
+     * @param alcohol 
+     * @param caffeine 
+     */
     constructor(
         public water: Nutrient = new Nutrient(255, 'Proximates', 'Water', 'g'),
         public energy: Nutrient = new Nutrient(208, 'Proximates', 'Energy', 'kcal'),
@@ -56,7 +244,7 @@ export class Nutrition {
         public methionine: Nutrient = new Nutrient(506, 'Amino Acids', 'Methionine', 'g'),
         public phenylalanine: Nutrient = new Nutrient(508, 'Amino Acids', 'Phenylalanine', 'g'),
         public valine: Nutrient = new Nutrient(510, 'Amino Acids', 'Valine', 'g'),
-		public arginine: Nutrient = new Nutrient(511, 'Amino Acids', 'Arginine', 'g'),
+		//public arginine: Nutrient = new Nutrient(511, 'Amino Acids', 'Arginine', 'g'),
         public histidine: Nutrient = new Nutrient(512, 'Amino Acids', 'Histidine', 'g'),
         public alcohol: Nutrient = new Nutrient(221, 'Other', 'Alcohol', 'g'),
         public caffeine: Nutrient = new Nutrient(262, 'Other', 'Caffeine', 'mg')

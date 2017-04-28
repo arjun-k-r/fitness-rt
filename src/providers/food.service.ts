@@ -219,10 +219,11 @@ export class FoodService {
         case '510':
           food.nutrition.valine.value = +nutrient.value;
           break;
-
+          /*
         case '511':
           food.nutrition.arginine.value = +nutrient.value;
           break;
+          */
 
         case '512':
           food.nutrition.histidine.value = +nutrient.value;

@@ -15,7 +15,7 @@ export const NUTRIENT_THRESHOLDS: {
         'carbs': 10,
         'fat': 10,
         'fiber': 10,
-        'lactose': 3,
+        'lactose': 5,
         'potassium': 77,
         'protein': 20,
         'sodium': 1000,

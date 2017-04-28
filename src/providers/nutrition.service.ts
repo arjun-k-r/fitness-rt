@@ -19,7 +19,7 @@ export class NutritionService {
 
     requirements.ala.value = this._driSvc.getALADri(bmr);
     requirements.alcohol.value = this._driSvc.getAlcoholDri(age);
-    requirements.arginine.value = this._driSvc.getArginineDri(age, gender, lactating, pregnant, weight);
+    //requirements.arginine.value = this._driSvc.getArginineDri(age, gender, lactating, pregnant, weight);
     requirements.caffeine.value = this._driSvc.getCaffeine(age);
     requirements.calcium.value = this._driSvc.getCalciumDri(age, gender, lactating, pregnant);
     requirements.carbs.value = this._driSvc.getCarbDri(bmr);

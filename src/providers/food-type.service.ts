@@ -52,7 +52,7 @@ export class FoodTypeService {
    * @returns {boolean} Returns true if the food is milk
    */
   private _checkMilk(food: Food): boolean {
-    return food.name.toLocaleLowerCase().includes('milk');
+    return food.name.includes('Milk') && !food.name.toLocaleLowerCase().includes('sour');
   }
 
   /**
@@ -62,9 +62,9 @@ export class FoodTypeService {
    * @returns {boolean} Returns true if the food is a protein food
    */
   private _checkProtein(food: Food): boolean {
-    let isAnimalProduct: boolean = food.group === 'Beef Products' || food.group === 'Dairy and Egg Products' || food.group === 'Finfish and Shellfish Products' || food.group === 'Lamb, Veal, and Game Products' || food.group === 'Pork Products' || food.group === 'Poultry Products' || food.group === 'Sausages and Luncheon Meats';
+    let isMeat: boolean = food.group === 'Beef Products' || food.group === 'Finfish and Shellfish Products' || food.group === 'Lamb, Veal, and Game Products' || food.group === 'Pork Products' || food.group === 'Poultry Products' || food.group === 'Sausages and Luncheon Meats';
 
-    return food.nutrition.protein.value >= NUTRIENT_THRESHOLDS.protein || isAnimalProduct;
+    return food.nutrition.protein.value >= NUTRIENT_THRESHOLDS.protein || isMeat || food.name.includes('Egg');
   }
 
   /**
@@ -123,9 +123,9 @@ export class FoodTypeService {
    * @returns {boolean} Returns true if the food is an acid
    */
   public checkAcid(food: Food): boolean {
-    let isFermented: boolean = food.group === 'Dairy and Egg Products' && (food.nutrition.lactose.value < NUTRIENT_THRESHOLDS.lactose || food.name.toLocaleLowerCase().includes('sour'));
+    let isFermented: boolean = food.group === 'Dairy and Egg Products' && food.nutrition.sugars.value <= NUTRIENT_THRESHOLDS.lactose && food.nutrition.fats.value < NUTRIENT_THRESHOLDS.fat && !food.name.includes('Egg') && !food.name.includes('Milk');
     
-    return this._checkAcidFruit(food) || food.nutrition.alcohol.value > 0 || food.name.toLocaleLowerCase().includes('vinegar') || isFermented;
+    return this._checkAcidFruit(food) || food.nutrition.alcohol.value > 0 || food.name.toLocaleLowerCase().includes('vinegar') || food.name.toLocaleLowerCase().includes('sour') || isFermented;
   }
 
   /**
@@ -157,16 +157,16 @@ export class FoodTypeService {
       food.type = 'Melon';
     }
 
-    if (this._checkMilk(food) && !this.checkAcid(food)) {
+    if (this._checkMilk(food)) {
       food.type = 'Milk';
     }
 
     if (this._checkProtein(food)) {
-      food.type = 'Protein';
-    }
-
-    if (this._checkStarch(food)) {
-      food.type = 'Starch';
+      if (food.type === 'Fat') {
+        food.type = 'Protein-Fat';
+      } else {
+        food.type = 'Protein';
+      }
     }
 
     if (this._checkSubAcidFruit(food)) {
@@ -179,6 +179,10 @@ export class FoodTypeService {
 
     if (this._checkSweetFruit(food)) {
       food.type = 'Sweet fruit';
+    }
+
+    if (this._checkStarch(food)) {
+      food.type = 'Starch';
     }
   }
 

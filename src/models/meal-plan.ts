@@ -1,5 +1,5 @@
 import { Food } from './food';
-import { Nutrition } from './nutrition';
+import { NutrientDeficiencies, NutrientExcesses, Nutrition } from './nutrition';
 import { WarningMessage } from './warning-message';
 
 export const MEAL_TYPES: Array<string> = ['Beverages meal', 'Melons meal', 'Fruit meal', 'Starch meal', 'Protein meal'];
@@ -78,28 +78,47 @@ export class MealFoodItem extends Food {
     }
 }
 
+/**
+ * Class representing a meal plan
+ * @class
+ * @classdesc We need to have a meal plan routine we respect each day and monitor nutrient deficiency or excess
+ */
 export class MealPlan {
+    /**
+     * @constructor
+     * @param {Nutrition} dailyNutrition - The daily nutrition acquired from all meals
+     * @param {string} date - The date of the meal plan
+     * @param {NutrientDeficiencies} deficiency - Counts the days of essential nutrient deficiency
+     * @param {NutrientExcesses} excess - Counts the days of non-essential nutrient excess
+     * @param {Array} meals - The meals of the meal plan from the specified date
+     */
     constructor(
-        public breakfastTime: string = '06:00 am',
         public dailyNutrition: Nutrition = new Nutrition(),
         public date: string = '',
-
-        // Hours between meals
-        public interval: number = 6,
+        public deficiency: NutrientDeficiencies = new NutrientDeficiencies(),
+        public excess: NutrientExcesses = new NutrientExcesses(),
         public meals: Array<Meal> = []
     ) { }
 }
 
 export class MealServing {
+    /**
+     * @constructor
+     * @param chewing - Flag indicating if the user chewed properly the meal
+     * @param gratitude - Flag indicating if the user was grateful for his meal
+     * @param hunger - Flag indicating if the user has truly hungry
+     * @param noDisturbance - Flag indicating if there were no disturbances around (e.g. TV, talking, loud music, agitation, etc.)
+     * @param noStress - Flag indicating if the user was relaxed and calm while serving his meal
+     * @param organic - Flag indicating if the meal had organic food items
+     * @param slowlyEating - Flag indicating if the user ate slowly and savoured his meal
+     */
     constructor(
         public chewing: boolean = false,
-        public goodMood: boolean = false,
         public gratitude: boolean = false,
         public hunger: boolean = false,
-        public noDisEase: boolean = false,
-        public noStress: boolean = false,
+        public noDisturbance: boolean = false,
         public organic: boolean = false,
-        public silence: boolean = false,
+        public relaxation: boolean = false,
         public slowlyEating: boolean = false
     ) { }
 }

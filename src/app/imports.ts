@@ -122,6 +122,7 @@ export const thgEntries = [
 //    ConstitutionPage,
 //    DoshaDetailsPage,
     FitnessPage,
+    FoodDetailsPage,
     FoodListPage,
     FoodSelectPage,
     ForgotPasswordPage,

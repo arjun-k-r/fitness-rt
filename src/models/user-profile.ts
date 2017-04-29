@@ -1,9 +1,6 @@
 // Models
-import { ActivityPlan } from './activity-plan';
 import { Constitution } from './constitution';
-import { MealPlan } from './meal-plan';
 import { Nutrition } from './nutrition';
-import { SleepPlan } from './sleep-plan'
 
 export class UserProfile {
     constructor(

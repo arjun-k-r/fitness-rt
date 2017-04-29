@@ -18,7 +18,7 @@ export class FoodTasteService {
    * @returns {boolean} Returns true if the food is astrigent
    */
   private _checkAstrigent(food: Food): boolean {
-    return food.nutrition.potassium.value >= NUTRIENT_THRESHOLDS.potassium;
+    return (food.group === 'Fruits and Fruit Juices' || food.group === 'Legumes and Legume Products' || food.group === 'Nut and Seed Products' || food.group === 'Spices and Herbs' || food.group === 'Vegetables and Vegetable Products') && food.nutrition.potassium.value >= NUTRIENT_THRESHOLDS.potassium;
   }
 
   /**
@@ -88,6 +88,11 @@ export class FoodTasteService {
       food.tastes.push('Salty');
     } else if (this._checkBitter(food)) {
       food.tastes.push('Bitter');
+    }
+
+    // Foods tastr sweet by default
+    if (!food.tastes.length) {
+      food.tastes.push('Sweet');
     }
   }
 

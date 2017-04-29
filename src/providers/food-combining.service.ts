@@ -131,7 +131,7 @@ export class FoodCombiningService {
      * Rule #3
      * Not Protein-Protein of different families
      */
-    let noDairyEggs: boolean = (proteins[0].name.includes('Egg') && !proteins[1].name.includes('Egg')) || (proteins[1].name.includes('Egg') && !proteins[0].name.includes('Egg'));
+    let noDairyEggs: boolean = !!proteins.length && ((proteins[0].name.includes('Egg') && !proteins[1].name.includes('Egg')) || (proteins[1].name.includes('Egg') && !proteins[0].name.includes('Egg')));
 
     if (proteins.length > 1 && (proteins[0].group !== proteins[1].group || noDairyEggs)) {
       warnings.push(

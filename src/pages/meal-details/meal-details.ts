@@ -34,7 +34,6 @@ export class MealDetailsPage {
     this.mealIdx = <number>_params.get('mealIdx');
     this.mealPlan = <MealPlan>_params.get('mealPlan');
     this.meal = this.mealPlan.meals[this.mealIdx];
-    _detectorRef.markForCheck();
   }
 
   /**
@@ -46,14 +45,24 @@ export class MealDetailsPage {
     this.meal.pral = this._mealSvc.getMealPral(this.meal.mealItems);
     this.meal.quantity = this._mealSvc.getMealSize(this.meal.mealItems);
 
-    this._mealSvc.checkMeal(this.meal).then((isGood: boolean) => {
+    this._mealSvc.checkMeal(this.mealIdx, this.mealPlan.meals).then((isGood: boolean) => {
       this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy meal!', 'Well done!');
     }).catch((warnings: Array<WarningMessage>) => {
       this.meal.warnings = [...warnings];
       console.log(this.meal);
-      this._alertSvc.showAlert('Please check the warnings', 'This meal seems to be unhealthy and damaging for your digestive system', 'Oh oh...');
+      this._alertSvc.showAlert('Please check the warnings', 'Something is wrong with this meal', 'Oh oh...');
       this._detectorRef.markForCheck();
     });
+  }
+
+  /**
+   * Updates the food item quantity and nutrients to the new serving size and calls meal update method afterwards
+   * @param {MealFoodItem} foodItem - The food item to update
+   * @returns {void}
+   */
+  private _changeItemQuantity(foodItem: MealFoodItem): void {
+    this._mealSvc.changeQuantities(foodItem);
+    this._updateMealDetails();
   }
 
   /**
@@ -78,16 +87,6 @@ export class MealDetailsPage {
         this._updateMealDetails();
       });
     });
-  }
-
-  /**
-   * Updates the food item quantity and nutrients to the new serving size and calls meal update method afterwards
-   * @param {MealFoodItem} foodItem - The food item to update
-   * @returns {void}
-   */
-  private _changeItemQuantity(foodItem: MealFoodItem): void {
-    this._mealSvc.changeQuantities(foodItem);
-    this._updateMealDetails();
   }
 
   /**
@@ -125,6 +124,15 @@ export class MealDetailsPage {
     alert.present();
   }
 
+  public checkMealTime(): void {
+    let warning: WarningMessage = this._mealSvc.checkMealHour(this.mealIdx, this.mealPlan.meals);
+    if (!warning) {
+      this._alertSvc.showAlert('Keep up the good work!', 'A perfect meal timing!', 'Well done!');
+    } else {
+      this._alertSvc.showAlert(warning.message, warning.moreInfo, 'Oh oh...');
+    }
+  }
+
   /**
    * Removes food item from the meal and calls meal update method afterwards
    * @param idx - The index of the food item to remove
@@ -147,10 +155,11 @@ export class MealDetailsPage {
     this._detectorRef.markForCheck();
   }
 
-  /**
-   * App lifecycle method
-   * @description This method is called each time the root page changes (component is destroyed)
-   */
+  ionViewWillEnter(): void {
+    this._detectorRef.detectChanges();
+    this._detectorRef.markForCheck();
+  }
+
   ionViewWillUnload(): void {
     console.log('Destroying...');
     this._detectorRef.detach();

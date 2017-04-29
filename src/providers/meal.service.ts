@@ -21,7 +21,6 @@ import {
   NutrientDeficiencies,
   NutrientExcesses,
   Nutrition,
-  UserProfile,
   WarningMessage
 } from '../models';
 
@@ -134,12 +133,15 @@ export class MealService {
 
   /**
   * Verifies if a meal is proper
-  * @param {Meal} meal The meal to check
+  * @param {number} mealIdx The meal index to check
+  * @param {Array} mealPlan The meal index to check
   * @returns {Promise} Returns confirmation if the meal is or not healthy
   */
-  public checkMeal(meal: Meal): Promise<boolean> {
+  public checkMeal(mealIdx: number, meals: Array<Meal>): Promise<boolean> {
+    let meal: Meal = meals[mealIdx];
     return new Promise((resolve, reject) => {
       let mealComplexityWarning: WarningMessage = this._checkMealComplexity(meal.mealItems),
+        mealHourWarning: WarningMessage = this.checkMealHour(mealIdx, meals),
         mealPralWarning: WarningMessage = this._checkMealPral(meal.pral),
         mealServingWarning: WarningMessage = this._checkMealServing(meal.serving),
         mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity);
@@ -150,6 +152,10 @@ export class MealService {
 
       if (!!mealComplexityWarning) {
         meal.warnings.push(mealComplexityWarning);
+      }
+
+      if (!!mealHourWarning) {
+        meal.warnings.push(mealHourWarning);
       }
 
       if (!!mealPralWarning) {
@@ -182,70 +188,70 @@ export class MealService {
    * 5. Protein requires 4 hours of digestion
    * @param {number} mealIdx - The index of the meal in the current day meal plan meals
    * @param {Array} meals - The current day meals
-   * @returns {Promise} Returns confirmation if the meal time is fine or a warning if not
+   * @returns {WarningMessage} Returns a warning if the hour is not proper
    */
-  private checkMealHour(mealIdx: number, meals: Array<Meal>): Promise<WarningMessage | boolean> {
-    return new Promise((resolve, reject) => {
-      if (mealIdx !== 0) {
+  public checkMealHour(mealIdx: number, meals: Array<Meal>): WarningMessage {
+    let warning: WarningMessage;
+
+    if (mealIdx !== 0) {
+      if (moment(meals[mealIdx].time, 'hours').hours() - moment(meals[mealIdx - 1].time, 'hours').hours() < 0) {
+        warning = new WarningMessage(
+          'I am sorry',
+          'You cannot plan a meal before an already planned meal'
+        );
+      } else {
         meals[mealIdx - 1].mealItems.every((item: MealFoodItem) => {
           if (item.type.toLocaleLowerCase().includes('protein')) {
             if (moment(meals[mealIdx].time, 'hours').subtract(moment(meals[mealIdx - 1].time, 'hours').hours(), 'hours').hours() < 3) {
-              reject(new WarningMessage(
+              warning = new WarningMessage(
                 'The previous meal is not digested yet',
                 'Concentrated protein meals require at least 3 hours of digestion'
-              ));
+              );
             }
 
             return true;
           } else if (item.type === 'Starch') {
             if (moment(meals[mealIdx].time, 'hours').subtract(moment(meals[mealIdx - 1].time, 'hours').hours(), 'hours').hours() < 2) {
-              reject(new WarningMessage(
+              warning = new WarningMessage(
                 'The previous meal is not digested yet',
                 'Concentrated carbohydrate meals require at least 2 hours of digestion'
-              ));
+              );
             }
 
             return true;
           } else if (item.type.toLocaleLowerCase().includes('fruit')) {
             if (moment(meals[mealIdx].time, 'hours').subtract(moment(meals[mealIdx - 1].time, 'hours').hours(), 'hours').hours() < 1) {
-              reject(new WarningMessage(
+              warning = new WarningMessage(
                 'The previous meal is not digested yet',
                 'Fruit meals require at least 1 hour of digestion'
-              ));
+              );
             }
 
             return true;
           } else if (item.type === 'Melon') {
             if (moment.duration(meals[mealIdx].time).asMinutes() - moment.duration(meals[mealIdx - 1].time).asMinutes() < 30) {
-              reject(new WarningMessage(
+              warning = new WarningMessage(
                 'The previous meal is not digested yet',
                 'Melons require at least 30 minutes of digestion'
-              ));
+              );
             }
 
             return true;
           } else if (item.type === 'Fluid') {
             if (moment.duration(meals[mealIdx].time).asMinutes() - moment.duration(meals[mealIdx - 1].time).asMinutes() < 15) {
-              reject(new WarningMessage(
+              warning = new WarningMessage(
                 'Fluids dillute the gastric juices required for digestion',
                 'Fluids require at least 15 minutes to pass through the digestive tracts'
-              ));
+              );
             }
 
             return true;
           }
         });
       }
-    });
-  }
+    }
 
-  /**
-   * Gets a specific meal from the meal plan
-   * @param {number} mealIdx - The index of the meal in the meal plan
-   * @returns {FirebaseObjectObservable} Returns an object observable that publishes the meal
-   */
-  public getMeal(mealIdx: number): FirebaseObjectObservable<Meal> {
-    return this._af.database.object(`/meal-plans/${this._user.id}/${CURRENT_DAY}/meals/${mealIdx}`)
+    return warning;
   }
 
   /**
@@ -266,12 +272,12 @@ export class MealService {
   public getMealPlan(): Observable<MealPlan> {
     return new Observable((observer: Observer<MealPlan>) => {
       this._currentMealPlan.subscribe((currMealPlan: MealPlan) => {
-        if (!currMealPlan['$value']) {
+        if (currMealPlan['$value'] === null) {
           let newMealPlan = new MealPlan();
 
           // Get the previous day meal plan to check for deficiencies and excesses
           this._lastMealPlan.subscribe((prevMealPlan: MealPlan) => {
-            if (!!prevMealPlan['$value']) {
+            if (!prevMealPlan.hasOwnProperty('$value')) {
               let prevDeficiencies: NutrientDeficiencies = this._nutritionSvc.getNutritionDeficiencies(prevMealPlan.dailyNutrition),
                 prevExcesses: NutrientExcesses = this._nutritionSvc.getNutritionExcesses(prevMealPlan.dailyNutrition);
 
@@ -346,7 +352,7 @@ export class MealService {
    */
   public saveMeal(meal: Meal, mealIdx: number, mealPlan: MealPlan): void {
     mealPlan.meals[mealIdx] = meal;
-    this.getMealNutrition
+    mealPlan.dailyNutrition = this.getMealPlanNutrition(mealPlan.meals);
     this._currentMealPlan.update({
       dailyNutrition: mealPlan.dailyNutrition,
       date: mealPlan.date,
@@ -370,109 +376,3 @@ export class MealService {
     })));
   }
 }
-
-
-/**
-   * @returns {Array} Returns the planned meals for the day by breakfast time and sleep time.
-   */
-  /*
-  private _getMeals(): Array<Meal> {
-    let profile: UserProfile = this._fitSvc.getProfile(),
-      breakfastTime: number = +profile.mealPlan.breakfastTime.split(':')[0],
-      meals: Array<Meal> = [],
-      mealTime: number = 0,
-      newMeal: Meal,
-      bedTime: number = +profile.sleepPlan.bedTime.split(':')[0] + 12;
-
-    // As long as the last meal is 2 hours before sleep
-    while (mealTime < bedTime - 6) {
-      newMeal = new Meal();
-      newMeal.time = moment({ 'hours': breakfastTime, 'minutes': 0 })
-        .add({ 'hours': mealTime, 'minutes': 0 })
-        .format('hh:mm a');
-      meals.push(newMeal);
-      mealTime += +profile.mealPlan.interval
-    }
-
-    return meals;
-  }
-
-  */
-  /*
-  private _setupMeals(meals: Array<Meal>): Array<Meal> {
-    let bedTime: number = +this._fitSvc.getProfile().sleepPlan.bedTime.split(':')[0] + 12,
-      currMealHour: number,
-      currMealMinutes: number,
-      currMealTimeItems: Array<string>,
-      lastMealType: string,
-      lastMealHour: number,
-      lastMealMinutes: number,
-      lastMealTimeItems: Array<string>,
-      mealInterval: number = +this._fitSvc.getProfile().mealPlan.interval,
-      mealHour: number,
-      mealMinutes: number,
-      newMeal: Meal;
-
-    for (let i = 0; i < meals.length - 2; i++) {
-      currMealTimeItems = meals[i].time.split(':');
-      currMealHour = +currMealTimeItems[0];
-      currMealMinutes = +currMealTimeItems[1].split(' ')[0];
-
-      if (meals[i].type === 'Beverages meal' || meals[i].type === 'Melons meal') {
-        mealHour = 0;
-        mealMinutes = 30;
-      } else if (meals[i].type === 'Fruit meal') {
-        mealHour = 1;
-        mealMinutes = 0;
-      } else if (meals[i].type === 'Starch meal') {
-        mealHour = 2;
-        mealMinutes = 0;
-      } else if (meals[i].type === 'Protein meal') {
-        mealHour = 4;
-        mealMinutes = 0;
-      } else {
-        mealHour = mealInterval;
-        mealMinutes = 0;
-      }
-
-      meals[i + 1].time = moment({ 'hours': currMealHour, 'minutes': currMealMinutes })
-        .add({ 'hours': mealHour, 'minutes': mealMinutes })
-        .format('hh:mm a');
-    }
-
-    lastMealTimeItems = meals[meals.length - 1].time.split(':');
-    lastMealType = meals[meals.length - 1].type;
-    lastMealHour = +lastMealTimeItems[0];
-    lastMealMinutes = +lastMealTimeItems[1].split(' ')[0];
-
-    if (lastMealType === 'Beverages meal' || lastMealType === 'Melons meal') {
-      mealHour = 0;
-      mealMinutes = 30;
-    } else if (lastMealType === 'Fruit meal') {
-      mealHour = 1;
-      mealMinutes = 0;
-    } else if (lastMealType === 'Starch meal') {
-      mealHour = 2;
-      mealMinutes = 0;
-    } else if (lastMealType === 'Protein meal') {
-      mealHour = 4;
-      mealMinutes = 0;
-    } else {
-      mealHour = mealInterval;
-      mealMinutes = 0;
-    }
-
-    // As long as the last meal is 4 hours before sleep
-    while (mealHour < bedTime - 8) {
-      newMeal = new Meal();
-      newMeal.time = moment({ 'hours': lastMealHour, 'minutes': lastMealMinutes })
-        .add({ 'hours': mealHour, 'minutes': mealMinutes })
-        .format('hh:mm a');
-
-      meals.push(newMeal);
-      mealHour += mealInterval;
-    }
-
-    return meals;
-  }
-  */

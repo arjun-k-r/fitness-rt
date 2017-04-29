@@ -1,3 +1,7 @@
+// Third-party
+import * as moment from 'moment';
+
+// Models
 import { Food } from './food';
 import { NutrientDeficiencies, NutrientExcesses, Nutrition } from './nutrition';
 import { WarningMessage } from './warning-message';
@@ -35,7 +39,7 @@ export class Meal {
         public quantity: number = 0,
         public serving: MealServing = new MealServing(),
         public tastes: MealTastes = new MealTastes(),
-        public time: string = '',
+        public time: string = moment().format('HH:mm'),
         public type: string = '',
         public warnings: Array<WarningMessage> = [],
         public wasNourishing: boolean = false
@@ -87,14 +91,14 @@ export class MealPlan {
     /**
      * @constructor
      * @param {Nutrition} dailyNutrition - The daily nutrition acquired from all meals
-     * @param {string} date - The date of the meal plan
+     * @param {number} date - The date of the meal plan (the day number of the year)
      * @param {NutrientDeficiencies} deficiency - Counts the days of essential nutrient deficiency
      * @param {NutrientExcesses} excess - Counts the days of non-essential nutrient excess
      * @param {Array} meals - The meals of the meal plan from the specified date
      */
     constructor(
         public dailyNutrition: Nutrition = new Nutrition(),
-        public date: string = '',
+        public date: number = moment().dayOfYear(),
         public deficiency: NutrientDeficiencies = new NutrientDeficiencies(),
         public excess: NutrientExcesses = new NutrientExcesses(),
         public meals: Array<Meal> = []

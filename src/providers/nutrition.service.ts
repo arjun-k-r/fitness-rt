@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 // Models
-import { Nutrition, NutrientDeficiencies, NutrientExcesses } from '../models';
+import { Food, Nutrition, NutrientDeficiencies, NutrientExcesses } from '../models';
 
 // Providers
 import { DRIService } from './dri.service';

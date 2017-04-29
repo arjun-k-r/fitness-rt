@@ -8,23 +8,23 @@
   <ion-toolbar>
     <ion-segment [(ngModel)]="mealPlanDetails" (click)="segmentChange()">
       <ion-segment-button value="meals">
-        <ion-icon name="book"></ion-icon>
+        <ion-icon name="clock"></ion-icon>
       </ion-segment-button>
       <ion-segment-button value="guidelines">
         <ion-icon name="bookmarks"></ion-icon>
       </ion-segment-button>
       <ion-segment-button value="nutrition">
-        <ion-icon name="list"></ion-icon>
+        <ion-icon name="nutrition"></ion-icon>
       </ion-segment-button>
     </ion-segment>
 
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <div [ngSwitch]="mealPlanDetails">
-    <ion-list *ngSwitchCase="'meals'">
-      <ion-item-group *ngFor="let meal of (mealPlan | async)?.meals; let i = index">
+    <div *ngSwitchCase="'meals'">
+      <ion-item-group *ngFor="let meal of mealPlan?.meals; let i = index">
         <ion-item-divider color="primary">{{ meal.time }}</ion-item-divider>
         <ion-item>
           pH
@@ -43,11 +43,15 @@
           <p item-content>{{ meal.mealItems?.length }} items</p>
         </ion-item>
         <button ion-item [navPush]="detailsPage" [navParams]="{ mealIdx: i, mealPlan: mealPlan }">
-      More details
-      <ion-note item-right><ion-icon name="arrow-forward"></ion-icon></ion-note>
-    </button>
+          More details
+          <ion-note item-right><ion-icon name="arrow-forward"></ion-icon></ion-note>
+        </button>
       </ion-item-group>
-    </ion-list>
+
+      <ion-fab right bottom>
+        <button ion-fab color="secondary" (click)="addNewMeal()"><ion-icon name="add"></ion-icon></button>
+      </ion-fab>
+    </div>
     <ion-list *ngSwitchCase="'guidelines'">
       <ion-item>
         <h2>Routine</h2>
@@ -108,7 +112,212 @@
         <p text-wrap>Combine foods properly by hygienic means and enzymatic activities for proper digestion.</p>
       </ion-item>
     </ion-list>
-  </div>
 
+    <!-- Start of segment -->
+    <div *ngSwitchCase="'nutrition'">
+      <ion-item-group>
+        <ion-item-divider>Info</ion-item-divider>
+        <ion-item>
+          Energy
+          <p item-content>{{ mealPlan.dailyNutrition.energy?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider>Macronutrients</ion-item-divider>
+        <ion-item>
+          Protein
+          <p item-content>{{ mealPlan.dailyNutrition.protein?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Fats
+          <p item-content>{{ mealPlan.dailyNutrition.fats?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Carbohydrates
+          <p item-content>{{ mealPlan.dailyNutrition.carbs?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Water
+          <p item-content>{{ mealPlan.dailyNutrition.water?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider>Essential amino acids</ion-item-divider>
+        <ion-item>
+          Arginine
+          <p item-content>{{ mealPlan.dailyNutrition.arginine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Histidine
+          <p item-content>{{ mealPlan.dailyNutrition.histidine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Isoleucine
+          <p item-content>{{ mealPlan.dailyNutrition.isoleucine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Leucine
+          <p item-content>{{ mealPlan.dailyNutrition.leucine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Lysine
+          <p item-content>{{ mealPlan.dailyNutrition.lysine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Methionine
+          <p item-content>{{ mealPlan.dailyNutrition.methionine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Phenylalanine
+          <p item-content>{{ mealPlan.dailyNutrition.phenylalanine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Threonine
+          <p item-content>{{ mealPlan.dailyNutrition.threonine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Tryptophan
+          <p item-content>{{ mealPlan.dailyNutrition.tryptophan?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider>Essential vitamins</ion-item-divider>
+        <ion-item>
+          Vitamin A
+          <p item-content>{{ mealPlan.dailyNutrition.vitaminA?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin B1 (Thiamine)
+          <p item-content>{{ mealPlan.dailyNutrition.vitaminB1?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin B2 (Riboflavin)
+          <p item-content>{{ mealPlan.dailyNutrition.vitaminB2?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin B3 (Niacin)
+          <p item-content>{{ mealPlan.dailyNutrition.vitaminB3?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin B5 (Pantothenic acid)
+          <p item-content>{{ mealPlan.dailyNutrition.vitaminB5?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin B6 (Pyridoxine)
+          <p item-content>{{ mealPlan.dailyNutrition.vitaminB6?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin B9 (Folate)
+          <p item-content>{{ mealPlan.dailyNutrition.vitaminB9?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin B12 (Cobalamin)
+          <p item-content>{{ mealPlan.dailyNutrition.vitaminB12?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Choline
+          <p item-content>{{ mealPlan.dailyNutrition.choline?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin C (Ascorbic acid)
+          <p item-content>{{ mealPlan.dailyNutrition.vitaminC?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin D (Cholecalciferol)
+          <p item-content>{{ mealPlan.dailyNutrition.vitaminD?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin E (Tocopherol)
+          <p item-content>{{ mealPlan.dailyNutrition.vitaminE?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin K
+          <p item-content>{{ mealPlan.dailyNutrition.vitaminK?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider>Essential minerals</ion-item-divider>
+        <ion-item>
+          Calcium
+          <p item-content>{{ mealPlan.dailyNutrition.calcium?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Copper
+          <p item-content>{{ mealPlan.dailyNutrition.copper?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Iron
+          <p item-content>{{ mealPlan.dailyNutrition.iron?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Magnesium
+          <p item-content>{{ mealPlan.dailyNutrition.magnesium?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Manganese
+          <p item-content>{{ mealPlan.dailyNutrition.manganese?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Phosphorus
+          <p item-content>{{ mealPlan.dailyNutrition.phosphorus?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Potassium
+          <p item-content>{{ mealPlan.dailyNutrition.potassium?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Selenium
+          <p item-content>{{ mealPlan.dailyNutrition.selenium?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Sodium
+          <p item-content>{{ mealPlan.dailyNutrition.sodium?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Zinc
+          <p item-content>{{ mealPlan.dailyNutrition.zinc?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider>Essential fatty acids</ion-item-divider>
+        <ion-item>
+          Omega-3 (ALA)
+          <p item-content>{{ mealPlan.dailyNutrition.ala?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Omega-3 (DHA)
+          <p item-content>{{ mealPlan.dailyNutrition.dha?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Omega-3 (EPA)
+          <p item-content>{{ mealPlan.dailyNutrition.epa?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Omega-6 (LA)
+          <p item-content>{{ mealPlan.dailyNutrition.la?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider>Non-essential nutrients</ion-item-divider>
+        <ion-item>
+          Alcohol
+          <p item-content>{{ mealPlan.dailyNutrition.alcohol?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Caffeine
+          <p item-content>{{ mealPlan.dailyNutrition.caffeine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Trans fat
+          <p item-content>{{ mealPlan.dailyNutrition.transFat?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Sugars
+          <p item-content>{{ mealPlan.dailyNutrition.sugars?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+    </div>
+    <!-- Start of segment -->
+  </div>
 
 </ion-content>

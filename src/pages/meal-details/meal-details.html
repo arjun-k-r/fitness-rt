@@ -39,10 +39,16 @@
         <div *ngSwitchCase="'details'">
             <ion-list>
                 <ion-item>
-                    <ion-label text-wrap>Nourishing for me (No abdominal cramps, burping, bloating, constipation, diarrhea, gas, heaviness, indigestion,
-                        nausea, tiredness, vomiting)
-                    </ion-label>
-                    <ion-toggle [(ngModel)]="meal.wasNourishing"></ion-toggle>
+                    pH
+                    <p item-content ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
+                </ion-item>
+                <ion-item>
+                    Size
+                    <p item-content ion-text color="{{ meal.quantity > 750 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>Meal time</ion-label>
+                    <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="meal.time" (ionChange)="checkMealTime()"></ion-datetime>
                 </ion-item>
                 <ion-item>
                     <ion-label text-wrap>Served cold</ion-label>
@@ -52,16 +58,13 @@
                     <ion-label text-wrap>Served raw</ion-label>
                     <ion-toggle [(ngModel)]="meal.isRaw"></ion-toggle>
                 </ion-item>
-                <ion-item text-wrap>
-                    <ion-label>Type</ion-label>
-                    <ion-select [(ngModel)]="meal.type">
-                        <ion-option *ngFor="let type of mealTypes" [value]="type">{{ type }}</ion-option>
-                    </ion-select>
+                <ion-item>
+                    <ion-label text-wrap>Nourishing for me (No abdominal cramps, burping, bloating, constipation, diarrhea, gas, heaviness, indigestion,
+                        nausea, tiredness, vomiting)
+                    </ion-label>
+                    <ion-toggle [(ngModel)]="meal.wasNourishing"></ion-toggle>
                 </ion-item>
             </ion-list>
-            <ion-fab bottom right>
-                <button ion-fab (click)="addMealItems()"><ion-icon name="add"></ion-icon></button>
-            </ion-fab>
         </div>
         <!-- End of segment -->
 
@@ -77,7 +80,7 @@
 
             </ion-list>
             <ion-fab bottom right>
-                <button ion-fab (click)="addMealItems()"><ion-icon name="add"></ion-icon></button>
+                <button ion-fab color="secondary" (click)="addMealItems()"><ion-icon name="add"></ion-icon></button>
             </ion-fab>
         </div>
         <!-- End of segment -->

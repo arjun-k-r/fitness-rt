@@ -1,10 +1,9 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Loading, LoadingController } from 'ionic-angular';
+import { Loading, LoadingController, NavController } from 'ionic-angular';
 
 // Models
-import { MealPlan } from '../../models';
+import { Meal, MealPlan } from '../../models';
 
 // Pages
 import { MealDetailsPage } from '../meal-details/meal-details';
@@ -19,9 +18,19 @@ import { MealService } from '../../providers';
 })
 export class MealPlanPage {
   public detailsPage: any = MealDetailsPage;
-  public mealPlan: Observable<MealPlan>;
+  public mealPlan: MealPlan;
   public mealPlanDetails: string = 'meals';
-  constructor(private _detectorRef: ChangeDetectorRef, private _mealSvc: MealService, private _loadCtrl: LoadingController) { }
+  constructor(
+    private _detectorRef: ChangeDetectorRef,
+    private _mealSvc: MealService,
+    private _loadCtrl: LoadingController,
+    private _navCtrl: NavController
+  ) { }
+
+  public addNewMeal(): void {
+    this.mealPlan.meals.push(new Meal());
+    this._navCtrl.push(this.detailsPage, { mealIdx: this.mealPlan.meals.length - 1, mealPlan: this.mealPlan })
+  }
 
   public segmentChange(): void {
     this._detectorRef.markForCheck();
@@ -30,13 +39,15 @@ export class MealPlanPage {
   ionViewWillEnter(): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Loading...',
-      spinner: 'crescent',
-      duration: 1000
+      spinner: 'crescent'
     });
 
     loader.present();
-    this.mealPlan = this._mealSvc.getMealPlan();
-    this._detectorRef.markForCheck();
+    this._mealSvc.getMealPlan().subscribe((mealPlan: MealPlan) => {
+      this.mealPlan = mealPlan;
+      loader.dismiss();
+      this._detectorRef.markForCheck();
+    });
   }
 
   ionViewWillUnload(): void {

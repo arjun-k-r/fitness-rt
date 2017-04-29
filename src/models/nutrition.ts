@@ -177,7 +177,7 @@ export const NUTRIENT_THRESHOLDS: {
         'lactose': 5,
         'potassium': 77,
         'protein': 20,
-        'sodium': 1000,
+        'sodium': 200,
         'starch': 3,
         'sugars': 11,
         'vitaminC': 30,

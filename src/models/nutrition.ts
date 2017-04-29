@@ -1,3 +1,19 @@
+export interface INutrientDetails {
+    actions: Array<string>;
+    deficiencies: Array<string>;
+    functions: Array<string>;
+    id: string;
+    name: string;
+    partnership: Array<string>;
+    references: Array<{ credit: string, url: string }>;
+    recommendations: Array<string>;
+    sources: Array<string>;
+    summary: string;
+    type: string;
+    uses: Array<string>;
+    warnings: Array<string>;
+}
+
 /**
  * 
  */
@@ -140,6 +156,34 @@ export class NutrientExcesses {
         public caffeine: number = 0
     ) {}
 }
+
+export const NUTRIENT_THRESHOLDS: {
+    carbs: number,
+    fat: number,
+    fiber: number,
+    lactose: number,
+    potassium: number,
+    protein: number,
+    sodium: number,
+    starch: number,
+    sugars: number,
+    vitaminC: number,
+    vitaminK: number,
+    water: number
+} = {
+        'carbs': 10,
+        'fat': 10,
+        'fiber': 10,
+        'lactose': 5,
+        'potassium': 77,
+        'protein': 20,
+        'sodium': 1000,
+        'starch': 3,
+        'sugars': 11,
+        'vitaminC': 30,
+        'vitaminK': 125,
+        'water': 10
+    };
 
 /**
  * 

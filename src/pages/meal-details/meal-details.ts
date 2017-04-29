@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { Alert, AlertController, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
 
 // Models
-import { IFoodSearchResult, MEAL_TYPES, Meal, MealFoodItem, WarningMessage } from '../../models';
+import { IFoodSearchResult, MEAL_TYPES, Meal, MealFoodItem, MealPlan, WarningMessage } from '../../models';
 
 // Pages
 import { FoodSelectPage } from '../food-select/food-select';
@@ -20,6 +20,7 @@ export class MealDetailsPage {
   public meal: Meal;
   public mealIdx: number;
   public mealDetails: string = 'details';
+  public mealPlan: MealPlan;
   public mealTypes: Array<string> = [...MEAL_TYPES];
   constructor(
     private _alertCtrl: AlertController,
@@ -31,7 +32,8 @@ export class MealDetailsPage {
     private _params: NavParams
   ) {
     this.mealIdx = <number>_params.get('mealIdx');
-    this.meal = <Meal>_params.get('meal');
+    this.mealPlan = <MealPlan>_params.get('mealPlan');
+    this.meal = this.mealPlan.meals[this.mealIdx];
     _detectorRef.markForCheck();
   }
 
@@ -138,7 +140,7 @@ export class MealDetailsPage {
    * @returns {void}
    */
   public saveMeal(): void {
-    this._mealSvc.saveMeal(this.mealIdx, this.meal);
+    this._mealSvc.saveMeal(this.meal, this.mealIdx, this.mealPlan);
   }
 
   public segmentChange(): void {

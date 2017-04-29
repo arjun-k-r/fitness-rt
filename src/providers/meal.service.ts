@@ -11,28 +11,44 @@ import * as moment from 'moment';
 import * as _ from 'lodash';
 
 // Models
-import { Food, IFoodSearchResult, Meal, MealFoodItem, MealPlan, MealServing, WarningMessage, Nutrition, UserProfile } from '../models';
+import {
+  Food,
+  IFoodSearchResult,
+  Meal,
+  MealFoodItem,
+  MealPlan,
+  MealServing,
+  NutrientDeficiencies,
+  NutrientExcesses,
+  Nutrition,
+  UserProfile,
+  WarningMessage
+} from '../models';
 
 // Providers
 import { FitnessService } from './fitness.service'
 import { FoodCombiningService } from './food-combining.service';
 import { FoodDataService } from './food-data.service';
 import { FoodService } from './food.service';
+import { NutritionService } from './nutrition.service';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class MealService {
-  private _mealPlan: FirebaseObjectObservable<MealPlan>;
+  private _currentMealPlan: FirebaseObjectObservable<MealPlan>;
+  private _lastMealPlan: FirebaseObjectObservable<MealPlan>;
   constructor(
     private _af: AngularFire,
     private _combiningSvc: FoodCombiningService,
     private _fitSvc: FitnessService,
     private _foodSvc: FoodService,
     private _foodDataSvc: FoodDataService,
+    private _nutritionSvc: NutritionService,
     private _user: User
   ) {
-    this._mealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY}`);
+    this._currentMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY}`);
+    this._lastMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY - 1}`);
   }
 
   /**
@@ -159,8 +175,8 @@ export class MealService {
   /**
    * Verifies if the meal serving time is proper
    * @description Meals need to be timed by the previous meal digestion duration
-   * 1. Fluids need at least 30 minutes to pass through the intestines
-   * 2. Melons require 30 minutes of digestion ()
+   * 1. Fluids need at least 15 minutes to pass through the intestines
+   * 2. Melons require 30 minutes of digestion
    * 3. Fruits require 30-60 minutes of digestion
    * 4. Starch requires 2 hours of digestion
    * 5. Protein requires 4 hours of digestion
@@ -173,19 +189,49 @@ export class MealService {
       if (mealIdx !== 0) {
         meals[mealIdx - 1].mealItems.every((item: MealFoodItem) => {
           if (item.type.toLocaleLowerCase().includes('protein')) {
+            if (moment(meals[mealIdx].time, 'hours').subtract(moment(meals[mealIdx - 1].time, 'hours').hours(), 'hours').hours() < 3) {
+              reject(new WarningMessage(
+                'The previous meal is not digested yet',
+                'Concentrated protein meals require at least 3 hours of digestion'
+              ));
+            }
 
             return true;
           } else if (item.type === 'Starch') {
+            if (moment(meals[mealIdx].time, 'hours').subtract(moment(meals[mealIdx - 1].time, 'hours').hours(), 'hours').hours() < 2) {
+              reject(new WarningMessage(
+                'The previous meal is not digested yet',
+                'Concentrated carbohydrate meals require at least 2 hours of digestion'
+              ));
+            }
 
             return true;
           } else if (item.type.toLocaleLowerCase().includes('fruit')) {
+            if (moment(meals[mealIdx].time, 'hours').subtract(moment(meals[mealIdx - 1].time, 'hours').hours(), 'hours').hours() < 1) {
+              reject(new WarningMessage(
+                'The previous meal is not digested yet',
+                'Fruit meals require at least 1 hour of digestion'
+              ));
+            }
 
             return true;
           } else if (item.type === 'Melon') {
+            if (moment.duration(meals[mealIdx].time).asMinutes() - moment.duration(meals[mealIdx - 1].time).asMinutes() < 30) {
+              reject(new WarningMessage(
+                'The previous meal is not digested yet',
+                'Melons require at least 30 minutes of digestion'
+              ));
+            }
 
             return true;
           } else if (item.type === 'Fluid') {
-            
+            if (moment.duration(meals[mealIdx].time).asMinutes() - moment.duration(meals[mealIdx - 1].time).asMinutes() < 15) {
+              reject(new WarningMessage(
+                'Fluids dillute the gastric juices required for digestion',
+                'Fluids require at least 15 minutes to pass through the digestive tracts'
+              ));
+            }
+
             return true;
           }
         });
@@ -207,24 +253,10 @@ export class MealService {
    * @description Each user has specific daily nutrition requirements (DRI)
    * We must know how much (%) of the requirements a meal fulfills
    * @param {Array} items - The food items of the meal
+   * @returns {Nutrition} Returns the meal nutrition
    */
   public getMealNutrition(items: Array<MealFoodItem>): Nutrition {
-    let nutrition: Nutrition = new Nutrition(),
-      requirements: Nutrition = this._fitSvc.getProfile().requirements;
-    items.forEach((item: MealFoodItem) => {
-
-      // Sum the nutrients for each food item
-      for (let nutrientKey in item.nutrition) {
-        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
-      }
-    });
-
-    // Establish the meal's nutritional value, based on the user's nutritional requirements (%)
-    for (let nutrientKey in nutrition) {
-      nutrition[nutrientKey].value = Math.round((nutrition[nutrientKey].value * 100) / (requirements[nutrientKey].value || 1));
-    }
-
-    return nutrition;
+    return this._nutritionSvc.getNutritionTotal(items);
   }
 
   /**
@@ -232,11 +264,59 @@ export class MealService {
    * @returns {Observable} Returns the current day meal.
    */
   public getMealPlan(): Observable<MealPlan> {
-    return this._mealPlan.map((mealPlan: MealPlan) => {
-      let newMealPlan: MealPlan = mealPlan || new MealPlan();
-      // newMealPlan.meals = mealPlan.meals ? this._setupMeals(mealPlan.meals) : this._getMeals();
-      return newMealPlan;
+    return new Observable((observer: Observer<MealPlan>) => {
+      this._currentMealPlan.subscribe((currMealPlan: MealPlan) => {
+        if (!currMealPlan['$value']) {
+          let newMealPlan = new MealPlan();
+
+          // Get the previous day meal plan to check for deficiencies and excesses
+          this._lastMealPlan.subscribe((prevMealPlan: MealPlan) => {
+            if (!!prevMealPlan['$value']) {
+              let prevDeficiencies: NutrientDeficiencies = this._nutritionSvc.getNutritionDeficiencies(prevMealPlan.dailyNutrition),
+                prevExcesses: NutrientExcesses = this._nutritionSvc.getNutritionExcesses(prevMealPlan.dailyNutrition);
+
+              // Add the deficiencies of the last meal plan, along with those from previous meal plans
+              // We need to count the days of deficiency
+              for (let nutrientKey in prevDeficiencies) {
+                newMealPlan.deficiency[nutrientKey] = prevDeficiencies[nutrientKey] + prevMealPlan.deficiency[nutrientKey];
+              }
+
+              // Add the excesses of the last meal plan, along with those from previous meal plans
+              // We need to count the days of excesses
+              for (let nutrientKey in prevExcesses) {
+                newMealPlan.excess[nutrientKey] = prevExcesses[nutrientKey] + prevMealPlan.excess[nutrientKey];
+              }
+            }
+
+            observer.next(newMealPlan);
+            observer.complete();
+          });
+        } else {
+          observer.next(currMealPlan);
+          observer.complete();
+        }
+      });
     });
+  }
+
+  /**
+   * Calculates the total nutrition of a meal plan
+   * @description Each user has specific daily nutrition requirements (DRI)
+   * We must know how much (%) of the requirements a he has fulfilled
+   * @param {Array} meals - The meals of the current meal plan
+   * @returns {Nutrition} Returns the meal plan nutrition
+   */
+  public getMealPlanNutrition(meals: Array<Meal>): Nutrition {
+    let nutrition: Nutrition = new Nutrition();
+    meals.forEach((meal: Meal) => {
+
+      // Sum the nutrients for each meal item
+      for (let nutrientKey in meal.nutrition) {
+        nutrition[nutrientKey].value += meal.nutrition[nutrientKey].value;
+      }
+    });
+
+    return nutrition;
   }
 
   /**
@@ -258,35 +338,16 @@ export class MealService {
   }
 
   /**
-   * Saves the meal in the database, in the proper location of the meal plan
+   * Saves the updated meal in the current meal plan
+   * @param {Meal} meal - The updated meal
    * @param {number} mealIdx - The index of the meal in the current meal plan
-   * @param {Meal} meal - The meal to save
-   * @returns {void}
-   */
-  public saveMeal(mealIdx: number, meal: Meal): void {
-    this.getMeal(mealIdx).update({
-      isCold: meal.isCold,
-      isRaw: meal.isRaw,
-      mealItems: meal.mealItems,
-      nutrition: meal.nutrition,
-      pral: meal.pral,
-      quantity: meal.quantity,
-      serving: meal.serving,
-      tastes: meal.tastes,
-      time: meal.time,
-      type: meal.type,
-      warnings: meal.warnings,
-      wasNourishing: meal.wasNourishing
-    });
-  }
-
-  /**
-   * Saves the meal plan in the database
    * @param {MealPlan} mealPlan - The meal plan to save
    * @returns {void}
    */
-  public saveMealPlan(mealPlan: MealPlan): void {
-    this._mealPlan.update({
+  public saveMeal(meal: Meal, mealIdx: number, mealPlan: MealPlan): void {
+    mealPlan.meals[mealIdx] = meal;
+    this.getMealNutrition
+    this._currentMealPlan.update({
       dailyNutrition: mealPlan.dailyNutrition,
       date: mealPlan.date,
       deficiency: mealPlan.deficiency,

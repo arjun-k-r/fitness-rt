@@ -72,16 +72,16 @@ export class SleepService {
    */
   private _checkOscillation(sleepPlan: SleepPlan): WarningMessage {
     let currDayBedtime: number = moment(sleepPlan.sleepPattern[0].bedTime, 'hours').hours(),
-        prevBedtime: number,
-        prevDaySleep: SleepHabit;
+      prevBedtime: number,
+      prevDaySleep: SleepHabit;
 
-      sleepPlan.sleepOscillation = sleepPlan.sleepPattern.reduce((acc: number, currHabit: SleepHabit, currIdx: number) => {
-        if (currIdx < 6) {
-          prevDaySleep = sleepPlan.sleepPattern[currIdx + 1];
-          prevBedtime = moment((!!prevDaySleep ? prevDaySleep.bedTime : currDayBedtime), 'hours').hours();
-          return acc += moment(currHabit.bedTime, 'hours').subtract(prevBedtime, 'hours').hours();
-        }
-      }, 0);
+    sleepPlan.sleepOscillation = sleepPlan.sleepPattern.reduce((acc: number, currHabit: SleepHabit, currIdx: number) => {
+      if (currIdx < 6) {
+        prevDaySleep = sleepPlan.sleepPattern[currIdx + 1];
+        prevBedtime = moment((!!prevDaySleep ? prevDaySleep.bedTime : currDayBedtime), 'hours').hours();
+        return acc += moment(currHabit.bedTime, 'hours').subtract(prevBedtime, 'hours').hours();
+      }
+    }, 0);
 
     return (sleepPlan.sleepOscillation > 1 || sleepPlan.sleepOscillation < -1) ? new WarningMessage(
       'You need to respect your sleep routine',
@@ -179,11 +179,7 @@ export class SleepService {
    * @returns {string} The returns the bed time
    */
   public getBedtime(wakeUpTime: string): string {
-    let wakeTimeItems = wakeUpTime.split(':'),
-      hhWake = +wakeTimeItems[0],
-      mmWake = +wakeTimeItems[1];
-
-    return moment({ 'hours': hhWake, 'minutes': mmWake })
+    return moment(wakeUpTime, 'hours')
       .subtract({ 'hours': 7, 'minutes': 30 })
       .format('HH:mm');
   }
@@ -217,11 +213,7 @@ export class SleepService {
    * @returns {string} The returns the wake up time
    */
   public getWakeUptime(bedTime: string): string {
-    let bedTimeItems = bedTime.split(':'),
-      hhSleep = +bedTimeItems[0],
-      mmSleep = +bedTimeItems[1];
-
-    return moment({ 'hours': hhSleep, 'minutes': mmSleep })
+    return moment(bedTime, 'hours')
       .add({ 'hours': 7, 'minutes': 30 })
       .format('HH:mm');
   }

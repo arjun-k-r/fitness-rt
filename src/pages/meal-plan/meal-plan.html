@@ -24,7 +24,29 @@
 <ion-content>
   <div [ngSwitch]="mealPlanDetails">
     <ion-list *ngSwitchCase="'meals'">
-
+      <ion-item-group *ngFor="let meal of (mealPlan | async)?.meals; let i = index">
+        <ion-item-divider color="primary">{{ meal.time }}</ion-item-divider>
+        <ion-item>
+          pH
+          <p item-content ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
+        </ion-item>
+        <ion-item>
+          Size
+          <p item-content ion-text color="{{ meal.quantity > 750 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
+        </ion-item>
+        <ion-item>
+          Warnings
+          <p item-content ion-text color="{{ meal.warnings?.length ? 'danger' : 'secondary' }}">{{ meal.warnings?.length || 0 }} warnings</p>
+        </ion-item>
+        <ion-item>
+          Foods
+          <p item-content>{{ meal.mealItems?.length }} items</p>
+        </ion-item>
+        <button ion-item [navPush]="detailsPage" [navParams]="{ mealIdx: i, mealPlan: mealPlan }">
+      More details
+      <ion-note item-right><ion-icon name="arrow-forward"></ion-icon></ion-note>
+    </button>
+      </ion-item-group>
     </ion-list>
     <ion-list *ngSwitchCase="'guidelines'">
       <ion-item>
@@ -90,33 +112,3 @@
 
 
 </ion-content>
-
-<!--
-  <ion-item-group *ngFor="let meal of (mealPlan | async)?.meals; let i = index">
-    <ion-item-divider color="primary">{{ meal.time }}</ion-item-divider>
-    <ion-item>
-      pH
-      <p item-content ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
-    </ion-item>
-    <ion-item>
-      Size
-      <p item-content ion-text color="{{ meal.quantity > 750 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
-    </ion-item>
-    <ion-item>
-      Warnings
-      <p item-content ion-text color="{{ meal.warnings?.length ? 'danger' : 'secondary' }}">{{ meal.warnings?.length || 0 }} warnings</p>
-    </ion-item>
-    <ion-item>
-      Type
-      <p item-content>{{ meal.type}}</p>
-    </ion-item>
-    <ion-item>
-      Foods
-      <p item-content>{{ meal.mealItems?.length }} items</p>
-    </ion-item>
-    <button ion-item [navPush]="detailsPage" [navParams]="{ meal: meal, mealIdx: i }">
-      More details
-      <ion-note item-right><ion-icon name="arrow-forward"></ion-icon></ion-note>
-    </button>
-  </ion-item-group>
--->

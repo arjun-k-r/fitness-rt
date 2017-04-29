@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 // Models
-import { Nutrition } from '../models';
+import { Nutrition, NutrientDeficiencies, NutrientExcesses } from '../models';
 
 // Providers
 import { DRIService } from './dri.service';
@@ -65,6 +65,64 @@ export class NutritionService {
     requirements.zinc.value = this._driSvc.getZincDri(age, gender, lactating, pregnant);
 
     return requirements;
+  }
+
+  /**
+   * Looks for nutrient deficiencies in a nutrition plan
+   * @param {Nutrition} nutrition - The nutrition to look up
+   * @returns {NutrientDeficiencies} Returns the deficiencies found in the plan
+   */
+  public getNutritionDeficiencies(nutrition: Nutrition): NutrientDeficiencies {
+    let deficiencies: NutrientDeficiencies = new NutrientDeficiencies();
+    for (let nutrientKey in deficiencies) {
+      if (nutrition[nutrientKey] < 90) {
+        deficiencies[nutrientKey]++;
+      }
+    }
+
+    return deficiencies;
+  }
+
+  /**
+   * Looks for nutrient excesses in a nutrition plan
+   * @param {Nutrition} nutrition - The nutrition to look up
+   * @returns {NutrientExcesses} Returns the excesses found in the plan
+   */
+  public getNutritionExcesses(nutrition: Nutrition): NutrientExcesses {
+    let excesses: NutrientExcesses = new NutrientExcesses();
+    for (let nutrientKey in excesses) {
+      if (nutrition[nutrientKey] < 90) {
+        excesses[nutrientKey]++;
+      }
+    }
+
+    return excesses;
+  }
+
+  /**
+   * Calculates the total nutritional values of an amount of foods
+   * @description Each user has specific daily nutrition requirements (DRI)
+   * We must know how much (%) of the requirements an amount of foods fulfill
+   * @param {Array} items - The food items to sum up
+   * @returns {Nutrition} Returns the nutrition of total food items
+   */
+  public getNutritionTotal(items: Array<Food>): Nutrition {
+    let nutrition: Nutrition = new Nutrition(),
+      requirements: Nutrition = this._fitSvc.getProfile().requirements;
+    items.forEach((item: Food) => {
+
+      // Sum the nutrients for each food item
+      for (let nutrientKey in item.nutrition) {
+        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
+      }
+    });
+
+    // Establish the meal's nutritional value, based on the user's nutritional requirements (%)
+    for (let nutrientKey in nutrition) {
+      nutrition[nutrientKey].value = Math.round((nutrition[nutrientKey].value * 100) / (requirements[nutrientKey].value || 1));
+    }
+
+    return nutrition;
   }
 
 }

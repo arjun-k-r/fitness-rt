@@ -22,6 +22,7 @@ export class FitnessPage {
   public idealBodyFat: number;
   public idealWeight: number;
   public profile: UserProfile;
+  public profileDetails: string = 'fitness';
   constructor(
     private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
@@ -50,12 +51,15 @@ export class FitnessPage {
     this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.profile.gender);
     this.idealWeight = this._fitSvc.getIdealWeight(this.profile.gender, this.profile.height, this.profile.weight);
     this.profile.requirements = this._nutritionSvc.getDri(this.profile.age, this.profile.bmr, this.profile.gender, this.profile.height, this.profile.lactating, this.profile.pregnant, this.profile.weight);
-
     this._fitSvc.saveProfile(this.profile);
 
     if (!!this._params.get('new')) {
       this._navCtrl.setRoot(SleepPlanPage, { new: true });
     }
+  }
+
+  public segmentChange(): void {
+    this._detectorRef.markForCheck();
   }
 
   ionViewWillEnter(): void {

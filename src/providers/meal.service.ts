@@ -37,6 +37,7 @@ const CURRENT_DAY: number = moment().dayOfYear();
 export class MealService {
   private _currentMealPlan: FirebaseObjectObservable<MealPlan>;
   private _lastMealPlan: FirebaseObjectObservable<MealPlan>;
+  private _nutritionRequirements: Nutrition;
   constructor(
     private _af: AngularFire,
     private _combiningSvc: FoodCombiningService,
@@ -48,17 +49,54 @@ export class MealService {
   ) {
     this._currentMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY}`);
     this._lastMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY - 1}`);
+    this._nutritionRequirements = _fitSvc.getProfile().requirements;
   }
 
   /**
-   * Verifies if the meal is too complex for digestion (has more than 6 food items)
+   * Verifies if the meal does not exceed the limit amount of carbohydrates
+   * @param {Nutrition} nutrition - The meal nutrition
+   * @returns {WarningMessage} Returns warning if the meal has too much carbohydrate
+   */
+  private _checkMealCarbs(nutrition: Nutrition): WarningMessage {
+    return nutrition.carbs.value > nutrition.energy.value * 0.5 ? new WarningMessage(
+      'Too much carbohydrate',
+      `The meal should contain no more than ${nutrition.energy.value * 0.5}% carbohydrate (50% of meal energy)`
+    ) : null;
+  }
+
+  /**
+   * Verifies if the meal is too complex for digestion (has more than 8 food items)
    * @param {Array} foodItems - The food items of the meal
    * @returns {WarningMessage} Returns warning if the meal is too complex
    */
   private _checkMealComplexity(foodItems: Array<MealFoodItem>): WarningMessage {
-    return foodItems.length > 6 ? new WarningMessage(
+    return foodItems.length > 8 ? new WarningMessage(
       'The meal is too complex!',
       'More than 6 food items in a signle meal makes it complex and difficult to digest, as it requires many types of enzymes, gastric juices, and timings.'
+    ) : null;
+  }
+
+  /**
+   * Verifies if the meal does not exceed the limit amount of calories
+   * @param {Nutrition} nutrition - The meal nutrition
+   * @returns {WarningMessage} Returns warning if the meal supplies too much energy
+   */
+  private _checkMealEnergy(nutrition: Nutrition): WarningMessage {
+    return nutrition.energy.value * this._nutritionRequirements.energy.value / 100 > 750 ? new WarningMessage(
+      'Too many calories',
+      `The meal should contain no more than ${750 * 100 / this._nutritionRequirements.energy.value}% calories`
+    ) : null;
+  }
+
+  /**
+   * Verifies if the meal does not exceed the limit amount of fats
+   * @param {Nutrition} nutrition - The meal nutrition
+   * @returns {WarningMessage} Returns warning if the meal has too much fat
+   */
+  private _checkMealFats(nutrition: Nutrition): WarningMessage {
+    return nutrition.fats.value > nutrition.energy.value * 0.3 ? new WarningMessage(
+      'Too much fat',
+      `The meal should contain no more than ${nutrition.energy.value * 0.3}% fat (30% of meal energy)`
     ) : null;
   }
 
@@ -72,6 +110,18 @@ export class MealService {
     return pral >= 1 ? new WarningMessage(
       'The meal is acid forming',
       'Acid forming food and meals cause inflammation, which is the root of all diseases. Try adding some alkaline forming foods, like green vegetables, with PRAL below 0'
+    ) : null;
+  }
+
+  /**
+   * Verifies if the meal does not exceed the limit amount of protein
+   * @param {Nutrition} nutrition - The meal nutrition
+   * @returns {WarningMessage} Returns warning if the meal has too much protein
+   */
+  private _checkMealProtein(nutrition: Nutrition): WarningMessage {
+    return nutrition.fats.value > nutrition.energy.value * 0.2 ? new WarningMessage(
+      'Too much protein',
+      `The meal should contain no more than ${nutrition.energy.value * 0.2}% protein (20% of meal energy)`
     ) : null;
   }
 
@@ -108,6 +158,18 @@ export class MealService {
   }
 
   /**
+   * Verifies if the meal does not exceed the limit amount of sugar
+   * @param {Nutrition} nutrition - The meal nutrition
+   * @returns {WarningMessage} Returns warning if the meal has too much sugar
+   */
+  private _checkMealSugars(nutrition: Nutrition): WarningMessage {
+    return nutrition.sugars.value > nutrition.energy.value * 0.1 ? new WarningMessage(
+      'Too much sugar',
+      `The meal should contain no more than ${nutrition.energy.value * 0.1}% sugar (10% of meal energy)`
+    ) : null;
+  }
+
+  /**
    * Increments the meal tastes by one for each food item containing a specific taste
    * @description According to Ayurveda, a balanced meal contains all six tastes in order to completely nourish and satisfy the body.
    * @param {Meal} meal - The meal to check
@@ -140,9 +202,13 @@ export class MealService {
   public checkMeal(mealIdx: number, meals: Array<Meal>): Promise<boolean> {
     let meal: Meal = meals[mealIdx];
     return new Promise((resolve, reject) => {
-      let mealComplexityWarning: WarningMessage = this._checkMealComplexity(meal.mealItems),
+      let mealCarbsWarning: WarningMessage = this._checkMealCarbs(meal.nutrition),
+        mealComplexityWarning: WarningMessage = this._checkMealComplexity(meal.mealItems),
+        mealEnergyWarning: WarningMessage = this._checkMealEnergy(meal.nutrition),
+        mealFatsWarning: WarningMessage = this._checkMealFats(meal.nutrition),
         mealHourWarning: WarningMessage = this.checkMealHour(mealIdx, meals),
         mealPralWarning: WarningMessage = this._checkMealPral(meal.pral),
+        mealProteinWarning: WarningMessage = this._checkMealProtein(meal.nutrition),
         mealServingWarning: WarningMessage = this._checkMealServing(meal.serving),
         mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity);
 
@@ -150,8 +216,20 @@ export class MealService {
 
       this._checkMealTastes(meal);
 
+      if (!!mealCarbsWarning) {
+        meal.warnings.push(mealCarbsWarning);
+      }
+
       if (!!mealComplexityWarning) {
         meal.warnings.push(mealComplexityWarning);
+      }
+
+      if (!!mealEnergyWarning) {
+        meal.warnings.push(mealEnergyWarning);
+      }
+
+      if (!!mealFatsWarning) {
+        meal.warnings.push(mealFatsWarning);
       }
 
       if (!!mealHourWarning) {
@@ -160,6 +238,10 @@ export class MealService {
 
       if (!!mealPralWarning) {
         meal.warnings.push(mealPralWarning);
+      }
+
+      if (!!mealProteinWarning) {
+        meal.warnings.push(mealProteinWarning);
       }
 
       if (!!mealServingWarning) {

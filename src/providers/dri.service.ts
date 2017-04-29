@@ -54,7 +54,7 @@ export class DRIService {
   }
 
   public getCarbDri(energyConsumption: number): number {
-    return 0.5 * energyConsumption;
+    return 0.5 * energyConsumption / 4;
   }
 
   public getChlorideDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
@@ -124,11 +124,11 @@ export class DRIService {
   }
 
   public getFatDri(energyConsumption: number): number {
-    return 0.3 * energyConsumption;
+    return 0.3 * energyConsumption / 9;
   }
 
   public getFiberDri(weight: number): number {
-    return weight;
+    return +weight;
   }
 
   public getFolicAcidDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
@@ -326,7 +326,7 @@ export class DRIService {
   }
 
   public getProteinDri(energyConsumption: number): number {
-    return 0.2 * energyConsumption;
+    return 0.2 * energyConsumption / 4;
   }
 
   public getPyridoxineDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
@@ -376,7 +376,7 @@ export class DRIService {
   }
 
   public getSugarsDri(energyConsumption: number): number {
-    return 0.1 * energyConsumption;
+    return 0.1 * energyConsumption / 4;
   }
 
   public getThiamineDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {

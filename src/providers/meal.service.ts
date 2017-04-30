@@ -62,12 +62,12 @@ export class MealService {
    * @param {Nutrition} nutrition - The meal nutrition
    * @returns {WarningMessage} Returns warning if the meal has too much carbohydrate
    */
-  private _checkMealCarbs(nutrition: Nutrition): WarningMessage {
-    return nutrition.carbs.value > nutrition.energy.value * 0.5 ? new WarningMessage(
-      'Too much carbohydrate',
-      `The meal should contain no more than ${nutrition.energy.value * 0.5}% carbohydrate (50% of meal energy)`
-    ) : null;
-  }
+  // private _checkMealCarbs(nutrition: Nutrition): WarningMessage {
+  //   return nutrition.carbs.value > nutrition.energy.value * 0.5 ? new WarningMessage(
+  //     'Too much carbohydrate',
+  //     `The meal should contain no more than ${nutrition.energy.value * 0.5}% carbohydrate (50% of meal energy)`
+  //   ) : null;
+  // }
 
   /**
    * Verifies if the meal is too complex for digestion (has more than 8 food items)
@@ -86,24 +86,24 @@ export class MealService {
    * @param {Nutrition} nutrition - The meal nutrition
    * @returns {WarningMessage} Returns warning if the meal supplies too much energy
    */
-  private _checkMealEnergy(nutrition: Nutrition): WarningMessage {
-    return nutrition.energy.value * this._nutritionRequirements.energy.value / 100 > 750 ? new WarningMessage(
-      'Too many calories',
-      `The meal should contain no more than ${750 * 100 / this._nutritionRequirements.energy.value}% calories`
-    ) : null;
-  }
+  // private _checkMealEnergy(nutrition: Nutrition): WarningMessage {
+  //   return nutrition.energy.value * this._nutritionRequirements.energy.value / 100 > 750 ? new WarningMessage(
+  //     'Too many calories',
+  //     `The meal should contain no more than ${750 * 100 / this._nutritionRequirements.energy.value}% calories`
+  //   ) : null;
+  // }
 
   /**
    * Verifies if the meal does not exceed the limit amount of fats
    * @param {Nutrition} nutrition - The meal nutrition
    * @returns {WarningMessage} Returns warning if the meal has too much fat
    */
-  private _checkMealFats(nutrition: Nutrition): WarningMessage {
-    return nutrition.fats.value > nutrition.energy.value * 0.3 ? new WarningMessage(
-      'Too much fat',
-      `The meal should contain no more than ${nutrition.energy.value * 0.3}% fat (30% of meal energy)`
-    ) : null;
-  }
+  // private _checkMealFats(nutrition: Nutrition): WarningMessage {
+  //   return nutrition.fats.value > nutrition.energy.value * 0.3 ? new WarningMessage(
+  //     'Too much fat',
+  //     `The meal should contain no more than ${nutrition.energy.value * 0.3}% fat (30% of meal energy)`
+  //   ) : null;
+  // }
 
   /**
    * Verifies if the meal is alkaline forming
@@ -123,12 +123,12 @@ export class MealService {
    * @param {Nutrition} nutrition - The meal nutrition
    * @returns {WarningMessage} Returns warning if the meal has too much protein
    */
-  private _checkMealProtein(nutrition: Nutrition): WarningMessage {
-    return nutrition.fats.value > nutrition.energy.value * 0.2 ? new WarningMessage(
-      'Too much protein',
-      `The meal should contain no more than ${nutrition.energy.value * 0.2}% protein (20% of meal energy)`
-    ) : null;
-  }
+  // private _checkMealProtein(nutrition: Nutrition): WarningMessage {
+  //   return nutrition.fats.value > nutrition.energy.value * 0.2 ? new WarningMessage(
+  //     'Too much protein',
+  //     `The meal should contain no more than ${nutrition.energy.value * 0.2}% protein (20% of meal energy)`
+  //   ) : null;
+  // }
 
   /**
    * Verifies if each meal serving preparation todo is checked and respected
@@ -167,12 +167,12 @@ export class MealService {
    * @param {Nutrition} nutrition - The meal nutrition
    * @returns {WarningMessage} Returns warning if the meal has too much sugar
    */
-  private _checkMealSugars(nutrition: Nutrition): WarningMessage {
-    return nutrition.sugars.value > nutrition.energy.value * 0.1 ? new WarningMessage(
-      'Too much sugar',
-      `The meal should contain no more than ${nutrition.energy.value * 0.1}% sugar (10% of meal energy)`
-    ) : null;
-  }
+  // private _checkMealSugars(nutrition: Nutrition): WarningMessage {
+  //   return nutrition.sugars.value > nutrition.energy.value * 0.1 ? new WarningMessage(
+  //     'Too much sugar',
+  //     `The meal should contain no more than ${nutrition.energy.value * 0.1}% sugar (10% of meal energy)`
+  //   ) : null;
+  // }
 
   /**
    * Increments the meal tastes by one for each food item containing a specific taste
@@ -215,8 +215,8 @@ export class MealService {
         mealPralWarning: WarningMessage = this._checkMealPral(meal.pral),
         //mealProteinWarning: WarningMessage = this._checkMealProtein(meal.nutrition),
         mealServingWarning: WarningMessage = this._checkMealServing(meal.serving),
-        mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity),
-        mealSugarsWarning: WarningMessage = this._checkMealSugars(meal.nutrition);
+        mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity);
+        //mealSugarsWarning: WarningMessage = this._checkMealSugars(meal.nutrition);
 
       meal.warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
 
@@ -374,16 +374,15 @@ export class MealService {
               let prevDeficiencies: NutrientDeficiencies = this._nutritionSvc.getNutritionDeficiencies(prevMealPlan.dailyNutrition),
                 prevExcesses: NutrientExcesses = this._nutritionSvc.getNutritionExcesses(prevMealPlan.dailyNutrition);
 
-              // Add the deficiencies of the last meal plan, along with those from previous meal plans
-              // We need to count the days of deficiency
+              // Add the deficiencies of the last meal plan, along with those from previous meal plans or reset them if the previous meal plan fulfilled the requirements the previous day
               for (let nutrientKey in prevDeficiencies) {
-                newMealPlan.deficiency[nutrientKey] = prevDeficiencies[nutrientKey] + prevMealPlan.deficiency[nutrientKey];
+                newMealPlan.deficiency[nutrientKey] = prevDeficiencies[nutrientKey] === 1 ? prevDeficiencies[nutrientKey] + prevMealPlan.deficiency[nutrientKey] : 0;
               }
 
-              // Add the excesses of the last meal plan, along with those from previous meal plans
+              // Add the excesses of the last meal plan, along with those from previous meal plans or reset them if the previous meal plan did no longer exceed the requirements the previous day
               // We need to count the days of excesses
               for (let nutrientKey in prevExcesses) {
-                newMealPlan.excess[nutrientKey] = prevExcesses[nutrientKey] + prevMealPlan.excess[nutrientKey];
+                newMealPlan.excess[nutrientKey] = prevExcesses[nutrientKey] === 1 ? prevExcesses[nutrientKey] + prevMealPlan.excess[nutrientKey] : 0;
               }
             }
 
@@ -446,6 +445,8 @@ export class MealService {
   public saveMeal(meal: Meal, mealIdx: number, mealPlan: MealPlan): void {
     mealPlan.meals[mealIdx] = meal;
     mealPlan.dailyNutrition = this.getMealPlanNutrition(mealPlan.meals);
+    console.log('Saving meal plan: ', mealPlan);
+    
     this._currentMealPlan.update({
       dailyNutrition: mealPlan.dailyNutrition,
       date: mealPlan.date,

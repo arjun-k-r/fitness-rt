@@ -134,23 +134,23 @@ export class NutrientDeficiencies {
 export class NutrientExcesses {
     /**
      * @constructor
+     * @param energy
      * @param protein 
      * @param fats 
      * @param carbs 
      * @param sugars 
-     * @param sodium 
-     * @param satFat 
+     * @param sodium
      * @param transFat 
      * @param alcohol 
      * @param caffeine 
      */
     constructor(
+        public energy: number = 0,
         public protein: number = 0,
         public fats: number = 0,
         public carbs: number = 0,
         public sugars: number = 0,
         public sodium: number = 0,
-        public satFat: number = 0,
         public transFat: number = 0,
         public alcohol: number = 0,
         public caffeine: number = 0

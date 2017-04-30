@@ -8,7 +8,6 @@ import 'rxjs/operator/map';
 // Third-party
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import * as moment from 'moment';
-import * as _ from 'lodash';
 
 // Models
 import { SleepHabit, SleepPlan, WarningMessage } from '../models';
@@ -221,6 +220,7 @@ export class SleepService {
   public saveSleep(sleepPlan: SleepPlan, sleepHabit: SleepHabit): Promise<boolean> {
     return new Promise((resolve, reject) => {
       sleepPlan.sleepPattern[0] = sleepHabit;
+      console.log('Saving sleep plan: ', sleepPlan);
 
       this._checkSleep(sleepPlan).then((isGood: boolean) => {
         this._sleepPlan.update({

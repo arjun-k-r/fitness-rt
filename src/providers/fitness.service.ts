@@ -45,6 +45,7 @@ export class FitnessService {
   }
 
   public saveProfile(profile: UserProfile): void {
+    console.log('Saving profile: ', profile);
     this._user.set('profile', profile);
     this._user.save();
     this._profile.set(profile);

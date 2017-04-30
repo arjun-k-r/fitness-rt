@@ -75,7 +75,7 @@ export class NutritionService {
   public getNutritionDeficiencies(nutrition: Nutrition): NutrientDeficiencies {
     let deficiencies: NutrientDeficiencies = new NutrientDeficiencies();
     for (let nutrientKey in deficiencies) {
-      if (nutrition[nutrientKey] < 90) {
+      if (nutrition[nutrientKey].value < 75) {
         deficiencies[nutrientKey]++;
       }
     }
@@ -91,7 +91,7 @@ export class NutritionService {
   public getNutritionExcesses(nutrition: Nutrition): NutrientExcesses {
     let excesses: NutrientExcesses = new NutrientExcesses();
     for (let nutrientKey in excesses) {
-      if (nutrition[nutrientKey] < 90) {
+      if (nutrition[nutrientKey].value > 100) {
         excesses[nutrientKey]++;
       }
     }

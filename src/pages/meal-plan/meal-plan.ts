@@ -44,6 +44,7 @@ export class MealPlanPage {
 
     loader.present();
     this._mealSvc.getMealPlan().subscribe((mealPlan: MealPlan) => {
+      console.log('Received meal plan: ', mealPlan);
       this.mealPlan = mealPlan;
       loader.dismiss();
       this._detectorRef.markForCheck();

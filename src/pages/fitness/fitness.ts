@@ -36,6 +36,7 @@ export class FitnessPage {
     }
 
     this.profile = _fitSvc.getProfile();
+    console.log('Received profile: ', this.profile);
 
     if (this.profile.gender) {
       this.idealBodyFat = _fitSvc.getIdealBodyFat(this.profile.gender);

@@ -34,6 +34,7 @@ export class MealDetailsPage {
     this.mealIdx = <number>_params.get('mealIdx');
     this.mealPlan = <MealPlan>_params.get('mealPlan');
     this.meal = this.mealPlan.meals[this.mealIdx];
+    console.log('Received meal: ', this.meal);
   }
 
   /**

@@ -38,7 +38,7 @@ export class ConstitutionPage {
   ionViewWillEnter(): void {
     this._alertSvc.showAlert('We need to establish your unique constitution', 'Please complete the following quiz', 'Step 1');
 
-    this._constitutionSvc.getConstitutionQuestions().subscribe((questions: Array<ConstitutionQuizQuestion>) => {
+    this._constitutionSvc.getConstitutionQuestions$().subscribe((questions: Array<ConstitutionQuizQuestion>) => {
       this.constitutionQuestions = questions;
       this._detectorRef.markForCheck();
     });

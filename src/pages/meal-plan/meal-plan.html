@@ -23,6 +23,7 @@
 
 <ion-content padding>
   <div [ngSwitch]="mealPlanDetails">
+    <!-- Start of segment -->
     <div *ngSwitchCase="'meals'">
       <ion-item-group *ngFor="let meal of mealPlan?.meals; let i = index">
         <ion-item-divider color="primary">{{ meal.time }}</ion-item-divider>

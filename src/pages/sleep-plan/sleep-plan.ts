@@ -50,7 +50,7 @@ export class SleepPlanPage {
   }
 
   ionViewWillEnter(): void {
-    this._sleepSvc.getSleepPlan().subscribe((sleepPlan: SleepPlan) => {
+    this._sleepSvc.getSleepPlan$().subscribe((sleepPlan: SleepPlan) => {
       console.log('Received sleep plan: ', sleepPlan);
       this.sleepPlan = sleepPlan;
       this.currentSleep = this._sleepSvc.getCurrentSleep(this.sleepPlan);

@@ -51,7 +51,7 @@ export class MealService {
     private _sleepSvc: SleepService,
     private _user: User
   ) {
-    _sleepSvc.getSleepPlan().subscribe((sleePlan: SleepPlan) => this._bedTime = moment(_sleepSvc.getCurrentSleep(sleePlan).bedTime, 'hours').format('HH:mm'));
+    _sleepSvc.getSleepPlan$().subscribe((sleePlan: SleepPlan) => this._bedTime = moment(_sleepSvc.getCurrentSleep(sleePlan).bedTime, 'hours').format('HH:mm'));
     this._currentMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY}`);
     this._lastMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY - 1}`);
     this._nutritionRequirements = _fitSvc.getProfile().requirements;
@@ -359,30 +359,30 @@ export class MealService {
   }
 
   /**
-   * Gets the user's meal plan and verifies the meals
-   * @returns {Observable} Returns the current day meal.
+   * Queries the current day meal plan and checks for nutrient deficiency or excess
+   * @returns {Observable} Returns observable of the current day meal plan
    */
-  public getMealPlan(): Observable<MealPlan> {
+  public getMealPlan$(): Observable<MealPlan> {
     return new Observable((observer: Observer<MealPlan>) => {
       this._currentMealPlan.subscribe((currMealPlan: MealPlan) => {
         if (currMealPlan['$value'] === null) {
-          let newMealPlan = new MealPlan();
+          let newMealPlan: MealPlan = new MealPlan();
 
           // Get the previous day meal plan to check for deficiencies and excesses
-          this._lastMealPlan.subscribe((prevMealPlan: MealPlan) => {
-            if (!prevMealPlan.hasOwnProperty('$value')) {
-              let prevDeficiencies: NutrientDeficiencies = this._nutritionSvc.getNutritionDeficiencies(prevMealPlan.dailyNutrition),
-                prevExcesses: NutrientExcesses = this._nutritionSvc.getNutritionExcesses(prevMealPlan.dailyNutrition);
+          this._lastMealPlan.subscribe((lastMealPlan: MealPlan) => {
+            if (!lastMealPlan.hasOwnProperty('$value')) {
+              let prevDeficiencies: NutrientDeficiencies = this._nutritionSvc.getNutritionDeficiencies(lastMealPlan.dailyNutrition),
+                prevExcesses: NutrientExcesses = this._nutritionSvc.getNutritionExcesses(lastMealPlan.dailyNutrition);
 
               // Add the deficiencies of the last meal plan, along with those from previous meal plans or reset them if the previous meal plan fulfilled the requirements the previous day
               for (let nutrientKey in prevDeficiencies) {
-                newMealPlan.deficiency[nutrientKey] = prevDeficiencies[nutrientKey] === 1 ? prevDeficiencies[nutrientKey] + prevMealPlan.deficiency[nutrientKey] : 0;
+                newMealPlan.deficiency[nutrientKey] = prevDeficiencies[nutrientKey] === 1 ? prevDeficiencies[nutrientKey] + lastMealPlan.deficiency[nutrientKey] : 0;
               }
 
               // Add the excesses of the last meal plan, along with those from previous meal plans or reset them if the previous meal plan did no longer exceed the requirements the previous day
               // We need to count the days of excesses
               for (let nutrientKey in prevExcesses) {
-                newMealPlan.excess[nutrientKey] = prevExcesses[nutrientKey] === 1 ? prevExcesses[nutrientKey] + prevMealPlan.excess[nutrientKey] : 0;
+                newMealPlan.excess[nutrientKey] = prevExcesses[nutrientKey] === 1 ? prevExcesses[nutrientKey] + lastMealPlan.excess[nutrientKey] : 0;
               }
             }
 

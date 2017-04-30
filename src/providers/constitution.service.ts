@@ -82,7 +82,7 @@ export class ConstitutionService {
     }
   }
 
-  public getConstitutionQuestions(): FirebaseListObservable<Array<ConstitutionQuizQuestion>> {
+  public getConstitutionQuestions$(): FirebaseListObservable<Array<ConstitutionQuizQuestion>> {
     return this._af.database.list('/constitution-quiz');;
   }
 

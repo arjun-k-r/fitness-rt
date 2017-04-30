@@ -201,7 +201,7 @@ export class SleepService {
   /**
    * @returns {Observable} Returns an observable that provides the sleep plan
    */
-  public getSleepPlan(): Observable<SleepPlan> {
+  public getSleepPlan$(): Observable<SleepPlan> {
     return new Observable((observer: Observer<SleepPlan>) => this._sleepPlan.subscribe((sleepPlan: SleepPlan) => observer.next(sleepPlan['$value'] === null ? new SleepPlan() : sleepPlan)));
   }
 

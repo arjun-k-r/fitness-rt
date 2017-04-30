@@ -47,11 +47,10 @@ import { ErrorMessageComponent } from '../components';
 // Pages
 import {
     AccountPage,
-    ActivityDetailsPage,
     ActivityPlanPage,
     ActivitySelectPage,
-//    ConstitutionPage,
-//    DoshaDetailsPage,
+    //    ConstitutionPage,
+    //    DoshaDetailsPage,
     FitnessPage,
     FoodDetailsPage,
     FoodListPage,
@@ -68,14 +67,14 @@ import {
 } from '../pages';
 
 // Pipes
-import { CapitalizePipe } from '../pipes'
+import { CapitalizePipe, SearchPipe } from '../pipes'
 
 // Providers
 import {
     ActivityService,
     AlertService,
     AuthValidator,
-//    ConstitutionService,
+    //    ConstitutionService,
     DRIService,
     FitnessService,
     FoodCombiningService,
@@ -91,12 +90,11 @@ import {
 export const thgDeclarations = [
     MyApp,
     AccountPage,
-    ActivityDetailsPage,
     ActivityPlanPage,
     ActivitySelectPage,
     CapitalizePipe,
-//    ConstitutionPage,
-//    DoshaDetailsPage,
+    //    ConstitutionPage,
+    //    DoshaDetailsPage,
     ErrorMessageComponent,
     FitnessPage,
     FoodDetailsPage,
@@ -110,17 +108,17 @@ export const thgDeclarations = [
     MealPlanPage,
     PasswordResetPage,
     RegistrationPage,
+    SearchPipe,
     SleepPlanPage
 ];
 
 export const thgEntries = [
     MyApp,
     AccountPage,
-    ActivityDetailsPage,
     ActivityPlanPage,
     ActivitySelectPage,
-//    ConstitutionPage,
-//    DoshaDetailsPage,
+    //    ConstitutionPage,
+    //    DoshaDetailsPage,
     FitnessPage,
     FoodDetailsPage,
     FoodListPage,
@@ -152,7 +150,7 @@ export const thgProviders = [
     ActivityService,
     AlertService,
     AuthValidator,
-//    ConstitutionService,
+    //    ConstitutionService,
     DRIService,
     FitnessService,
     FoodCombiningService,

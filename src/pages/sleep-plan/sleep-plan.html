@@ -18,16 +18,12 @@
             <ion-segment-button value="warnings">
                 <ion-icon name="warning"></ion-icon>
             </ion-segment-button>
-            <ion-segment-button value="guidelines">
-                <ion-icon name="bookmarks"></ion-icon>
-            </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
     <div [ngSwitch]="sleepPlanDetails">
-
         <!-- Start of segment -->
         <ion-list *ngSwitchCase="'sleep'">
             <ion-item>
@@ -60,9 +56,10 @@
             </ion-list>
         </div>
         <!-- End of segment -->
+    </div>
+</ion-content>
 
-        <!-- Start of segment -->
-        <ion-list *ngSwitchCase="'guidelines'">
+<!--<ion-list *ngSwitchCase="'guidelines'">
             <ion-item>
                 <h2>Routine</h2>
                 <p text-wrap>The body's internal clock (circadian rhythm) is set up by sunlight and by precise sleep routine.</p>
@@ -104,6 +101,4 @@
                 <p item-content>19 C</p>
             </ion-item>
         </ion-list>
-        <!-- End of segment -->
-    </div>
-</ion-content>
+    -->

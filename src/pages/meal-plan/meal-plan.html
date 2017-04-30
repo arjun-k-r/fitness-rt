@@ -10,9 +10,6 @@
       <ion-segment-button value="meals">
         <ion-icon name="clock"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button value="guidelines">
-        <ion-icon name="bookmarks"></ion-icon>
-      </ion-segment-button>
       <ion-segment-button value="nutrition">
         <ion-icon name="nutrition"></ion-icon>
       </ion-segment-button>
@@ -52,66 +49,7 @@
         <button ion-fab color="secondary" (click)="addNewMeal()"><ion-icon name="add"></ion-icon></button>
       </ion-fab>
     </div>
-    <ion-list *ngSwitchCase="'guidelines'">
-      <ion-item>
-        <h2>Routine</h2>
-        <p text-wrap>The body needs to know how to prepare the digestion process and use energy.</p>
-        <p item-content>Every day</p>
-      </ion-item>
-      <ion-item>
-        <h2>Gratitude</h2>
-        <p text-wrap>Be grateful for every meal you have. Other people have died of hunger.</p>
-      </ion-item>
-      <ion-item>
-        <h2>Interval</h2>
-        <p text-wrap>A regular healthy meal digestion requires 4 hours</p>
-        <p item-content>4 hours</p>
-      </ion-item>
-      <ion-item>
-        <h2>Organic</h2>
-        <p text-wrap>Real whole food, with least intervention, and with complete nutritional values (food provides information, not just
-          calories).
-        </p>
-      </ion-item>
-      <ion-item>
-        <h2>Size</h2>
-        <p text-wrap>80% stomach capacity (20% for digestive juices). Overeting causes indigestion.</p>
-        <p item-content>750 g</p>
-      </ion-item>
-      <ion-item>
-        <h2>Meal food variety</h2>
-        <p text-wrap>The less complex the meal, the easier and optimal.</p>
-        <p item-content>4 foods</p>
-      </ion-item>
-      <ion-item>
-        <h2>Chewing</h2>
-        <p text-wrap>Mastication and insalivation are the first digestion processes</p>
-        <p item-content>32 times (30 seconds)</p>
-      </ion-item>
-      <ion-item>
-        <h2>Slowly</h2>
-        <p text-wrap>Prevents you from overeating and helps you enjoy your food and chew correctly</p>
-        <p item-content>30 minutes</p>
-      </ion-item>
-      <ion-item>
-        <h2>Calm</h2>
-        <p text-wrap>Physical, emotional, or mental stress causes stress on your digestive system and, thus, indigestion and damage.</p>
-      </ion-item>
-      <ion-item>
-        <h2>Silence</h2>
-        <p text-wrap>Talking and noise makes you agitated and stressed.</p>
-      </ion-item>
-      <ion-item>
-        <h2>Distractions</h2>
-        <p text-wrap>Don't watch television, don't work, don't use your phone etc. Focus on your meal and eating. Where focus goes, energy
-          flows.
-        </p>
-      </ion-item>
-      <ion-item>
-        <h2>Combining</h2>
-        <p text-wrap>Combine foods properly by hygienic means and enzymatic activities for proper digestion.</p>
-      </ion-item>
-    </ion-list>
+    <!-- End of segment -->
 
     <!-- Start of segment -->
     <div *ngSwitchCase="'nutrition'">
@@ -317,7 +255,70 @@
         </ion-item>
       </ion-item-group>
     </div>
-    <!-- Start of segment -->
+    <!-- End of segment -->
   </div>
 
 </ion-content>
+
+<!--
+  <ion-list *ngSwitchCase="'guidelines'">
+      <ion-item>
+        <h2>Routine</h2>
+        <p text-wrap>The body needs to know how to prepare the digestion process and use energy.</p>
+        <p item-content>Every day</p>
+      </ion-item>
+      <ion-item>
+        <h2>Gratitude</h2>
+        <p text-wrap>Be grateful for every meal you have. Other people have died of hunger.</p>
+      </ion-item>
+      <ion-item>
+        <h2>Interval</h2>
+        <p text-wrap>A regular healthy meal digestion requires 4 hours</p>
+        <p item-content>4 hours</p>
+      </ion-item>
+      <ion-item>
+        <h2>Organic</h2>
+        <p text-wrap>Real whole food, with least intervention, and with complete nutritional values (food provides information, not just
+          calories).
+        </p>
+      </ion-item>
+      <ion-item>
+        <h2>Size</h2>
+        <p text-wrap>80% stomach capacity (20% for digestive juices). Overeting causes indigestion.</p>
+        <p item-content>750 g</p>
+      </ion-item>
+      <ion-item>
+        <h2>Meal food variety</h2>
+        <p text-wrap>The less complex the meal, the easier and optimal.</p>
+        <p item-content>4 foods</p>
+      </ion-item>
+      <ion-item>
+        <h2>Chewing</h2>
+        <p text-wrap>Mastication and insalivation are the first digestion processes</p>
+        <p item-content>32 times (30 seconds)</p>
+      </ion-item>
+      <ion-item>
+        <h2>Slowly</h2>
+        <p text-wrap>Prevents you from overeating and helps you enjoy your food and chew correctly</p>
+        <p item-content>30 minutes</p>
+      </ion-item>
+      <ion-item>
+        <h2>Calm</h2>
+        <p text-wrap>Physical, emotional, or mental stress causes stress on your digestive system and, thus, indigestion and damage.</p>
+      </ion-item>
+      <ion-item>
+        <h2>Silence</h2>
+        <p text-wrap>Talking and noise makes you agitated and stressed.</p>
+      </ion-item>
+      <ion-item>
+        <h2>Distractions</h2>
+        <p text-wrap>Don't watch television, don't work, don't use your phone etc. Focus on your meal and eating. Where focus goes, energy
+          flows.
+        </p>
+      </ion-item>
+      <ion-item>
+        <h2>Combining</h2>
+        <p text-wrap>Combine foods properly by hygienic means and enzymatic activities for proper digestion.</p>
+      </ion-item>
+    </ion-list>
+    -->

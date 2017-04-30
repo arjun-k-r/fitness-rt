@@ -21,6 +21,7 @@ import {
   NutrientDeficiencies,
   NutrientExcesses,
   Nutrition,
+  SleepPlan,
   WarningMessage
 } from '../models';
 
@@ -30,11 +31,13 @@ import { FoodCombiningService } from './food-combining.service';
 import { FoodDataService } from './food-data.service';
 import { FoodService } from './food.service';
 import { NutritionService } from './nutrition.service';
+import { SleepService } from './sleep.service';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class MealService {
+  private _bedTime: string;
   private _currentMealPlan: FirebaseObjectObservable<MealPlan>;
   private _lastMealPlan: FirebaseObjectObservable<MealPlan>;
   private _nutritionRequirements: Nutrition;
@@ -45,8 +48,10 @@ export class MealService {
     private _foodSvc: FoodService,
     private _foodDataSvc: FoodDataService,
     private _nutritionSvc: NutritionService,
+    private _sleepSvc: SleepService,
     private _user: User
   ) {
+    _sleepSvc.getSleepPlan().subscribe((sleePlan: SleepPlan) => this._bedTime = moment(_sleepSvc.getCurrentSleep(sleePlan).bedTime, 'hours').format('HH:mm'));
     this._currentMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY}`);
     this._lastMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY - 1}`);
     this._nutritionRequirements = _fitSvc.getProfile().requirements;
@@ -202,35 +207,32 @@ export class MealService {
   public checkMeal(mealIdx: number, meals: Array<Meal>): Promise<boolean> {
     let meal: Meal = meals[mealIdx];
     return new Promise((resolve, reject) => {
-      let mealCarbsWarning: WarningMessage = this._checkMealCarbs(meal.nutrition),
+      let //mealCarbsWarning: WarningMessage = this._checkMealCarbs(meal.nutrition),
         mealComplexityWarning: WarningMessage = this._checkMealComplexity(meal.mealItems),
-        mealEnergyWarning: WarningMessage = this._checkMealEnergy(meal.nutrition),
-        mealFatsWarning: WarningMessage = this._checkMealFats(meal.nutrition),
+        //mealEnergyWarning: WarningMessage = this._checkMealEnergy(meal.nutrition),
+        //mealFatsWarning: WarningMessage = this._checkMealFats(meal.nutrition),
         mealHourWarning: WarningMessage = this.checkMealHour(mealIdx, meals),
         mealPralWarning: WarningMessage = this._checkMealPral(meal.pral),
-        mealProteinWarning: WarningMessage = this._checkMealProtein(meal.nutrition),
+        //mealProteinWarning: WarningMessage = this._checkMealProtein(meal.nutrition),
         mealServingWarning: WarningMessage = this._checkMealServing(meal.serving),
-        mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity);
+        mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity),
+        mealSugarsWarning: WarningMessage = this._checkMealSugars(meal.nutrition);
 
       meal.warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
 
       this._checkMealTastes(meal);
 
-      if (!!mealCarbsWarning) {
-        meal.warnings.push(mealCarbsWarning);
-      }
+      // if (!!mealCarbsWarning) {
+      //   meal.warnings.push(mealCarbsWarning);
+      // }
 
       if (!!mealComplexityWarning) {
         meal.warnings.push(mealComplexityWarning);
       }
 
-      if (!!mealEnergyWarning) {
-        meal.warnings.push(mealEnergyWarning);
-      }
-
-      if (!!mealFatsWarning) {
-        meal.warnings.push(mealFatsWarning);
-      }
+      // if (!!mealFatsWarning) {
+      //   meal.warnings.push(mealFatsWarning);
+      // }
 
       if (!!mealHourWarning) {
         meal.warnings.push(mealHourWarning);
@@ -240,9 +242,9 @@ export class MealService {
         meal.warnings.push(mealPralWarning);
       }
 
-      if (!!mealProteinWarning) {
-        meal.warnings.push(mealProteinWarning);
-      }
+      // if (!!mealProteinWarning) {
+      //   meal.warnings.push(mealProteinWarning);
+      // }
 
       if (!!mealServingWarning) {
         meal.warnings.push(mealServingWarning);
@@ -251,6 +253,10 @@ export class MealService {
       if (!!mealSizeWarning) {
         meal.warnings.push(mealSizeWarning);
       }
+
+      // if (!!mealSugarsWarning) {
+      //   meal.warnings.push(mealSugarsWarning);
+      // }
 
       if (!meal.warnings.length) {
         resolve(true);
@@ -275,11 +281,16 @@ export class MealService {
   public checkMealHour(mealIdx: number, meals: Array<Meal>): WarningMessage {
     let warning: WarningMessage;
 
-    if (mealIdx !== 0) {
-      if (moment(meals[mealIdx].time, 'hours').hours() - moment(meals[mealIdx - 1].time, 'hours').hours() < 0) {
+    if (moment(this._bedTime, 'hours').subtract(moment(meals[mealIdx].time, 'hours').hours(), 'hours').hours() < 4) {
+      warning = new WarningMessage(
+          'The meal is served too late',
+          'Try no to eat 4 hours before bed, so that your digestion completes before you go to sleep'
+        );
+    } else if (mealIdx !== 0) {
+      if (moment(meals[mealIdx - 1].time, 'hours').subtract(moment(meals[mealIdx].time, 'hours').hours(), 'hours').hours() >= 0) {
         warning = new WarningMessage(
-          'I am sorry',
-          'You cannot plan a meal before an already planned meal'
+          'A meal cannot be planned before or over an already planned meal',
+          'Make sure you plan your meals chronologically, one by one'
         );
       } else {
         meals[mealIdx - 1].mealItems.every((item: MealFoodItem) => {

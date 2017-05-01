@@ -9,10 +9,11 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import * as moment from 'moment';
 
 // Models
-import { Activity, ActivityPlan } from '../models';
+import { Activity, ActivityPlan, UserProfile } from '../models';
 
 // Providers
 import { FitnessService } from './fitness.service';
+import { NutritionService } from './nutrition.service';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 
@@ -26,6 +27,7 @@ export class ActivityService {
   constructor(
     private _af: AngularFire,
     private _fitSvc: FitnessService,
+    private _nutritionSvc: NutritionService,
     private _user: User
   ) {
     this._activities = _af.database.list('/activities', {
@@ -38,7 +40,7 @@ export class ActivityService {
     this._currentActivityPlan = _af.database.object(`/activity-plans/${_user.id}/${CURRENT_DAY}`);
     this._lastActivityPlan = _af.database.object(`/activity-plans/${_user.id}/${CURRENT_DAY - 1}`);
 
-    this._userWeight = _fitSvc.getProfile().weight;
+    this._userWeight = _fitSvc.getUserWeight();
   }
 
   /**
@@ -96,7 +98,7 @@ export class ActivityService {
    * @description The formula was developed by Dr. Gily Ionesc
    * @param {Activity} activity - 
    */
-  public getActivityEffort(activity: Activity): number {
+  public getActivityEnergyBurn(activity: Activity): number {
     return Math.round((activity.met * 3.5 * this._userWeight / 200) * activity.duration);
   }
 
@@ -142,6 +144,15 @@ export class ActivityService {
   }
 
   /**
+   * Gets the user's left energy supplies based on the energy intake and energy burn
+   * @description The user must use his daily energy supplies
+   * @returns {number} Returns the user's left energy supplies
+   */
+  public getLeftEnergy(): number {
+    return this._fitSvc.getUserEnergyIntakes() - this._fitSvc.getUserRequirements().energy.value;
+  }
+
+  /**
    * Calculates the total energy burn of performed activities
    * @param {Array} activities - The activities to count
    * @returns {number} Returns the total energy burn
@@ -157,17 +168,11 @@ export class ActivityService {
    * @param {ActivityPlan} activityPlan - The activity plan to save
    * @returns {void}
    */
-  public saveActivity(activity: Activity, activityIdx: number, activityPlan: ActivityPlan): void {
-    if (activity.type === 'Physical') {
-      activityPlan.physicalActivities[activityIdx] = activity;
-    } else if (activity.type === 'Intellectual') {
-      activityPlan.intellectualActivities[activityIdx] = activity;
-    }
-
-    activityPlan.intellectualEffort = this.getActivitiesDuration(activityPlan.intellectualActivities);
-    activityPlan.physicalEffort = this.getActivitiesDuration(activityPlan.physicalActivities);
-    activityPlan.totalEnergyBurn = this.getTotalEnergyBurn([...activityPlan.intellectualActivities, ...activityPlan.physicalActivities]);
+  public saveActivityPlan(activityPlan: ActivityPlan): void {
     console.log('Saving activity plan: ', activityPlan);
+
+    // Update the user daily requirements
+    this.updateUserRequirements(activityPlan.totalEnergyBurn);
 
     this._currentActivityPlan.update({
       date: activityPlan.date,
@@ -181,6 +186,17 @@ export class ActivityService {
       physicalOverwork: activityPlan.physicalOverwork,
       totalEnergyBurn: activityPlan.totalEnergyBurn
     });
+  }
+
+  /**
+   * Updates the user's requirements based on his energy consumptions
+   * @param {number} energyConsumption - The user's daily energy consumption in kilocalories
+   * @returns {void}
+   */
+  public updateUserRequirements(energyConsumption: number): void {
+    let userProfile: UserProfile = this._fitSvc.getProfile();
+    userProfile.requirements = this._nutritionSvc.getDri(userProfile.age, userProfile.bmr + energyConsumption, userProfile.gender, userProfile.height, userProfile.lactating, userProfile.pregnant, userProfile.weight);
+    this._fitSvc.saveProfile(userProfile);
   }
 
 }

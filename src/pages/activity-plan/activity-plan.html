@@ -4,6 +4,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Activity plan</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="saveActivityPlan()">
+          <ion-icon name="sync"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
   <ion-toolbar>
     <ion-segment [(ngModel)]="activityPlanDetails" (click)="segmentChange()">
@@ -14,7 +19,7 @@
         <ion-icon name="book"></ion-icon>
       </ion-segment-button>
       <ion-segment-button value="total">
-        <ion-icon name="bookmarks"></ion-icon>
+        <ion-icon name="analytics"></ion-icon>
       </ion-segment-button>
     </ion-segment>
 
@@ -27,37 +32,48 @@
 
     <!-- Start of segment -->
     <ion-list *ngSwitchCase="'physical'">
-      <ion-item *ngFor="let activity of activityPlan?.physicalActivities">
+      <ion-item *ngFor="let activity of activityPlan?.physicalActivities" (click)="changeDuration(activity)">
         <h2>{{ activity.name }}</h2>
         <p>{{ activity.duration }} minutes</p>
-        <ion-note item-right>
+        <p item-content>
           {{ activity.energyBurn }} kcal
-        </ion-note>
+        </p>
       </ion-item>
     </ion-list>
     <!-- End of segment -->
 
     <!-- Start of segment -->
     <ion-list *ngSwitchCase="'intellectual'">
-      <ion-item *ngFor="let activity of activityPlan?.intellectualActivities">
+      <ion-item *ngFor="let activity of activityPlan?.intellectualActivities" (click)="changeDuration(activity)">
         <h2>{{ activity.name }}</h2>
         <p>{{ activity.duration }} minutes</p>
-        <ion-note item-right>
+        <p item-content>
           {{ activity.energyBurn }} kcal
-        </ion-note>
+        </p>
       </ion-item>
     </ion-list>
     <!-- End of segment -->
 
     <!-- Start of segment -->
     <div *ngSwitchCase="'total'">
-
-    </div>
-    <!-- End of segment -->
-
-    <!-- Start of segment -->
-    <div *ngSwitchCase="'total'">
-
+      <ion-list>
+        <ion-item>
+          <h2>Intellectual activities duration</h2>
+          <p item-content>{{ activityPlan.intellectualEffort }} minutes</p>
+        </ion-item>
+        <ion-item>
+          <h2>Physical activities duration</h2>
+          <p item-content>{{ activityPlan.physicalEffort }} minutes</p>
+        </ion-item>
+        <ion-item>
+          <h2>Total energy burn</h2>
+          <p item-content>{{ activityPlan.totalEnergyBurn }} kcal</p>
+        </ion-item>
+        <ion-item>
+          <h2>Total energy left</h2>
+          <p item-content>{{ energyIntake }} kcal</p>
+        </ion-item>
+      </ion-list>
     </div>
     <!-- End of segment -->
 

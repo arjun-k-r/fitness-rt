@@ -66,9 +66,9 @@ export class MealFoodItem extends Food {
      * @param {string} unit - The unit of measure (e.g. grams)
      */
     constructor(
-        public ndbno: string = '',
-        public name: string = '',
         public group: string = '',
+        public name: string = '',
+        public ndbno: string = '',
         public nutrition: Nutrition = new Nutrition(),
         public pral: number = 0,
         public quantity: number = 100,
@@ -78,7 +78,7 @@ export class MealFoodItem extends Food {
         public unit: string = 'g'
 
     ) {
-        super(ndbno, name, group, nutrition, pral, quantity, tastes, type, unit);
+        super(group, name, ndbno, nutrition, pral, quantity, tastes, type, unit);
     }
 }
 

@@ -76,16 +76,14 @@ export class MealDetailsPage {
     mealSelectModal.onDidDismiss((items: Array<IFoodSearchResult>) => {
 
       // Request Food report for each item
-      this._mealSvc.serializeMealItems(items).subscribe((item: MealFoodItem) => {
-        this.meal.mealItems.push(item);
+      this._mealSvc.serializeMealItems(items).then((items: Array<MealFoodItem>) => {
+        this.meal.mealItems.push(...items);
         console.log(this.meal.mealItems);
+        // Update the meal details
+        this._updateMealDetails();
         this._detectorRef.markForCheck();
       }, error => {
         console.log(error);
-      }, () => {
-
-        // Update the meal details
-        this._updateMealDetails();
       });
     });
   }
@@ -145,7 +143,7 @@ export class MealDetailsPage {
   }
 
   /**
-   * Saves the meal to Firebase Database
+   * Saves the meal to the database
    * @returns {void}
    */
   public saveMeal(): void {

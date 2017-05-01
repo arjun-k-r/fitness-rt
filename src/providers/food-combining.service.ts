@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 
-// Third-party
-import * as _ from 'lodash';
-
 // Models
 import { MealFoodItem, WarningMessage } from '../models';
 
@@ -131,9 +128,7 @@ export class FoodCombiningService {
      * Rule #3
      * Not Protein-Protein of different families
      */
-    let noDairyEggs: boolean = proteins.length > 1 && ((proteins[0].name.includes('Egg') && !proteins[1].name.includes('Egg')) || (proteins[1].name.includes('Egg') && !proteins[0].name.includes('Egg')));
-
-    if (proteins.length > 1 && (proteins[0].group !== proteins[1].group || noDairyEggs)) {
+    if (proteins.length > 1 && (proteins[0].group !== proteins[1].group)) {
       warnings.push(
         new WarningMessage(
           'No more than one type of protein at the same meal!',
@@ -239,9 +234,9 @@ export class FoodCombiningService {
     /**
      * Rule #10
      * Fruits alone
-     * EXCEPTION: Fruits with protein-fats or low fat, low sugar dairy
+     * EXCEPTION: Fruits with protein-fats
      */
-    if (hasFruits && foodItems.length > 1 && foodItems.length !== (acids.length + subAcidFruits.length + sweetFruits.length + proteinFats.length)) {
+    if (hasFruits && foodItems.length > 1 && (foodItems.length !== (acids.length + subAcidFruits.length + sweetFruits.length + proteinFats.length))) {
       warnings.push(
         new WarningMessage(
           'Fruits go alone or stay alone!',

@@ -1,6 +1,6 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
-import { InfiniteScroll, ViewController } from 'ionic-angular';
+import { Alert, AlertController, InfiniteScroll, ViewController } from 'ionic-angular';
 
 // Third-party
 import { FirebaseListObservable } from 'angularfire2';
@@ -25,6 +25,7 @@ export class ActivitySelectPage {
   public selectedActivityName: string;
   constructor(
     private _activitySvc: ActivityService,
+    private _alertCtrl: AlertController,
     private _detectorRef: ChangeDetectorRef,
     private _viewCtrl: ViewController
   ) { }
@@ -42,17 +43,44 @@ export class ActivitySelectPage {
     setTimeout(() => {
       //this._activitySvc.changeActivityQueryLimit(this.limit);
       ev.complete();
+      this._detectorRef.markForCheck();
     }, 1000);
   }
 
   public selectActivity(activity: Activity): void {
-    this.selectedActivity = activity;
+    let alert: Alert = this._alertCtrl.create({
+      title: 'Duration',
+      subTitle: 'How long did you perform this activity?',
+      inputs: [
+        {
+          name: 'duration',
+          placeholder: 'Minutes',
+          type: 'number'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Done',
+          handler: data => {
+            activity.duration = +data.duration;
+            activity.energyBurn = this._activitySvc.getActivityEnergyBurn(activity);
+            this.selectedActivity = activity;
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   ionViewWillEnter(): void {
     this.activities = this._activitySvc.getActivities$();
     //this._activitySvc.changeActivityQueryLimit(this.limit);
     console.log('Entering...');
+    this._detectorRef.markForCheck();
   }
 
   ionViewWillUnload(): void {

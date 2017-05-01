@@ -108,7 +108,7 @@ export class NutritionService {
    */
   public getNutritionTotal(items: Array<Food>): Nutrition {
     let nutrition: Nutrition = new Nutrition(),
-      requirements: Nutrition = this._fitSvc.getProfile().requirements;
+      requirements: Nutrition = this._fitSvc.getUserRequirements();
     items.forEach((item: Food) => {
 
       // Sum the nutrients for each food item

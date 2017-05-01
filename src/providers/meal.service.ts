@@ -54,7 +54,7 @@ export class MealService {
     _sleepSvc.getSleepPlan$().subscribe((sleePlan: SleepPlan) => this._bedTime = moment(_sleepSvc.getCurrentSleep(sleePlan).bedTime, 'hours').format('HH:mm'));
     this._currentMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY}`);
     this._lastMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY - 1}`);
-    this._nutritionRequirements = _fitSvc.getProfile().requirements;
+    this._nutritionRequirements = _fitSvc.getUserRequirements();
   }
 
   /**
@@ -447,6 +447,9 @@ export class MealService {
     mealPlan.dailyNutrition = this.getMealPlanNutrition(mealPlan.meals);
     console.log('Saving meal plan: ', mealPlan);
     
+    // Store the energy intakes localy
+    this._fitSvc.saveUserEnergyIntakes(mealPlan.dailyNutrition.energy.value);
+
     this._currentMealPlan.update({
       dailyNutrition: mealPlan.dailyNutrition,
       date: mealPlan.date,
@@ -461,12 +464,10 @@ export class MealService {
    * @param {Array} items The selected food
    * @returns {Observable} Returns a stream of food reports
    */
-  public serializeMealItems(items: Array<IFoodSearchResult>): Observable<MealFoodItem> {
-    return new Observable((observer: Observer<MealFoodItem>) => items.forEach((item: IFoodSearchResult, idx: number) => this._foodDataSvc.getFoodReports$(item.ndbno).then((food: Food) => {
-      observer.next(new MealFoodItem(food.group, food.name, food.ndbno, food.nutrition, food.pral, food.quantity, 1, food.tastes, food.type, food.unit));
-      if (idx === items.length - 1) {
-        observer.complete();
-      }
-    })));
+  public serializeMealItems(items: Array<IFoodSearchResult>): Promise<Array<MealFoodItem>> {
+    let requests: Array<Promise<Food>> = [];
+
+    items.forEach((item: IFoodSearchResult, idx: number) => requests.push(this._foodDataSvc.getFoodReports$(item.ndbno)));
+    return Promise.all(requests);
   }
 }

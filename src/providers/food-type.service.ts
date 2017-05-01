@@ -15,17 +15,17 @@ export class FoodTypeService {
    * @returns {boolean} Returns true if the food is an acid fruit
    */
   private _checkAcidFruit(food: Food): boolean {
-    return food.name.toLocaleLowerCase().includes('tomato') || (food.group === 'Fruits and Fruit Juices' && ((food.nutrition.sugars.value < (NUTRIENT_THRESHOLDS.sugars - 1) && food.nutrition.vitaminC.value > NUTRIENT_THRESHOLDS.vitaminC) || food.nutrition.sugars.value === 0));
+    return (food.group === 'Fruits and Fruit Juices' && ((food.nutrition.sugars.value < (NUTRIENT_THRESHOLDS.sugars - 1) && food.nutrition.vitaminC.value > NUTRIENT_THRESHOLDS.vitaminC) || food.nutrition.sugars.value === 0));
   }
 
   /**
    * Verifies if food is a fatty food
-   * @description A food is fatty if it has high fat content
+   * @description A food is fatty if it has high fat content or belongs to dairy or fats groups
    * @param {Food} food The food to clasify
    * @returns {boolean} Returns true if the food is a fatty food
    */
   private _checkFat(food: Food): boolean {
-    return food.nutrition.fats.value >= NUTRIENT_THRESHOLDS.fat;
+    return food.nutrition.fats.value >= NUTRIENT_THRESHOLDS.fat || food.group === 'Fats and Oils';
   }
 
   /**
@@ -62,9 +62,19 @@ export class FoodTypeService {
    * @returns {boolean} Returns true if the food is a protein food
    */
   private _checkProtein(food: Food): boolean {
-    let isMeat: boolean = food.group === 'Beef Products' || food.group === 'Finfish and Shellfish Products' || food.group === 'Lamb, Veal, and Game Products' || food.group === 'Pork Products' || food.group === 'Poultry Products' || food.group === 'Sausages and Luncheon Meats';
+    let isAnimalProduct: boolean = food.group === 'Beef Products' || food.group === 'Dairy and Egg Products' || food.group === 'Finfish and Shellfish Products' || food.group === 'Lamb, Veal, and Game Products' || food.group === 'Pork Products' || food.group === 'Poultry Products' || food.group === 'Sausages and Luncheon Meats';
 
-    return food.nutrition.protein.value >= NUTRIENT_THRESHOLDS.protein || isMeat || food.name.includes('Egg');
+    return food.nutrition.protein.value >= NUTRIENT_THRESHOLDS.protein || isAnimalProduct;
+  }
+
+  /**
+   * Verifies if food is a protein-fat food
+   * @description A food is fatty if it has high fat and protein content (e.g. dairy and nuts)
+   * @param {Food} food The food to clasify
+   * @returns {boolean} Returns true if the food is a protein-fat food
+   */
+  private _checkProteinFat(food: Food): boolean {
+    return (this._checkFat(food) && this._checkProtein(food)) || food.group === 'Dairy and Egg Products' || food.group === 'Nut and Seed Products';
   }
 
   /**
@@ -124,7 +134,7 @@ export class FoodTypeService {
    */
   public checkAcid(food: Food): boolean {
     let isFermented: boolean = food.group === 'Dairy and Egg Products' && food.nutrition.sugars.value <= NUTRIENT_THRESHOLDS.lactose && food.nutrition.fats.value < NUTRIENT_THRESHOLDS.fat && !food.name.includes('Egg') && !food.name.includes('Milk');
-    
+
     return this._checkAcidFruit(food) || food.nutrition.alcohol.value > 0 || food.name.toLocaleLowerCase().includes('vinegar') || food.name.toLocaleLowerCase().includes('sour') || isFermented;
   }
 
@@ -162,11 +172,11 @@ export class FoodTypeService {
     }
 
     if (this._checkProtein(food)) {
-      if (food.type === 'Fat') {
-        food.type = 'Protein-Fat';
-      } else {
-        food.type = 'Protein';
-      }
+      food.type = 'Protein';
+    }
+
+    if (this._checkProteinFat(food)) {
+      food.type = 'Protein-Fat';
     }
 
     if (this._checkSubAcidFruit(food)) {

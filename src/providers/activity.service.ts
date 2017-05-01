@@ -13,6 +13,7 @@ import { Activity, ActivityPlan, UserProfile } from '../models';
 
 // Providers
 import { FitnessService } from './fitness.service';
+import { MealService } from './meal.service';
 import { NutritionService } from './nutrition.service';
 
 const CURRENT_DAY: number = moment().dayOfYear();
@@ -27,6 +28,7 @@ export class ActivityService {
   constructor(
     private _af: AngularFire,
     private _fitSvc: FitnessService,
+    private _mealSvc: MealService,
     private _nutritionSvc: NutritionService,
     private _user: User
   ) {
@@ -148,8 +150,8 @@ export class ActivityService {
    * @description The user must use his daily energy supplies
    * @returns {number} Returns the user's left energy supplies
    */
-  public getLeftEnergy(): number {
-    return this._fitSvc.getUserEnergyIntakes() - this._fitSvc.getUserRequirements().energy.value;
+  public getLeftEnergy(): Promise<number> {
+    return new Promise(resolve => Promise.all([this._fitSvc.restoreEnergyConsumption(), this._fitSvc.restoreEnergyIntake()]).then((data: Array<number>) => resolve(data[1] - data[0])));
   }
 
   /**
@@ -195,6 +197,7 @@ export class ActivityService {
    */
   public updateUserRequirements(energyConsumption: number): void {
     let userProfile: UserProfile = this._fitSvc.getProfile();
+    this._fitSvc.storeEnergyConsumption(userProfile.bmr + energyConsumption);
     userProfile.requirements = this._nutritionSvc.getDri(userProfile.age, userProfile.bmr + energyConsumption, userProfile.gender, userProfile.height, userProfile.lactating, userProfile.pregnant, userProfile.weight);
     this._fitSvc.saveProfile(userProfile);
   }

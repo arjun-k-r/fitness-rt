@@ -19,7 +19,7 @@ import { ActivityService, FitnessService } from '../../providers';
 export class ActivityPlanPage {
   public activityPlan: ActivityPlan;
   public activityPlanDetails: string = 'physical';
-  public energyIntake: number = 0;
+  public leftEnergy: number = 0;
   constructor(
     private _activitySvc: ActivityService,
     private _alertCtrl: AlertController,
@@ -28,9 +28,7 @@ export class ActivityPlanPage {
     private _loadCtrl: LoadingController,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController
-  ) {
-    this.energyIntake = _activitySvc.getLeftEnergy();
-  }
+  ) { }
 
   /**
    * Search for a new activity
@@ -52,7 +50,7 @@ export class ActivityPlanPage {
       this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn([...this.activityPlan.intellectualActivities, ...this.activityPlan.physicalActivities]);
 
       this._activitySvc.updateUserRequirements(this.activityPlan.totalEnergyBurn);
-      this.energyIntake = this._activitySvc.getLeftEnergy();
+      this._activitySvc.getLeftEnergy().then((energy: number) => this.leftEnergy = energy);
 
       this._detectorRef.markForCheck();
     });
@@ -79,6 +77,12 @@ export class ActivityPlanPage {
           handler: data => {
             activity.duration = +data.duration;
             activity.energyBurn = this._activitySvc.getActivityEnergyBurn(activity);
+            if (activity.type === 'Physical') {
+              this.activityPlan.physicalEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.physicalActivities);
+            } else if (activity.type === 'Intellectual') {
+              this.activityPlan.intellectualEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.intellectualActivities);
+            }
+            this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn([...this.activityPlan.intellectualActivities, ...this.activityPlan.physicalActivities]);
             this._detectorRef.markForCheck();
           }
         }
@@ -93,6 +97,10 @@ export class ActivityPlanPage {
    */
   public saveActivityPlan(): void {
     this._activitySvc.saveActivityPlan(this.activityPlan);
+    this._activitySvc.getLeftEnergy().then((energy: number) => {
+      this.leftEnergy = energy;
+      console.log(energy);
+    });
   }
 
   public segmentChange(): void {
@@ -106,6 +114,8 @@ export class ActivityPlanPage {
     });
 
     loader.present();
+    this._activitySvc.getLeftEnergy().then((energy: number) => this.leftEnergy = energy);
+
     this._activitySvc.getActivityPlan$().subscribe((activityPlan: ActivityPlan) => {
       console.log('Received activity plan: ', activityPlan);
       this.activityPlan = activityPlan;

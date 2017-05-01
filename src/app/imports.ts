@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorHandler } from '@angular/core';
 import { IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 
 // Cordova
@@ -140,7 +141,8 @@ export const thgImports = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
-    CloudModule.forRoot(CLOUD_SETTINGS)
+    CloudModule.forRoot(CLOUD_SETTINGS),
+    IonicStorageModule.forRoot()
 ];
 
 export const thgProviders = [

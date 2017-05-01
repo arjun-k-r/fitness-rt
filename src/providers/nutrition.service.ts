@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 // Models
-import { Food, Nutrition, NutrientDeficiencies, NutrientExcesses } from '../models';
+import { Food, Meal, MealFoodItem, Nutrition, NutrientDeficiencies, NutrientExcesses } from '../models';
 
 // Providers
 import { DRIService } from './dri.service';
@@ -14,26 +14,26 @@ export class NutritionService {
   constructor(private _driSvc: DRIService, private _fitSvc: FitnessService) {
   }
 
-  public getDri(age: number, bmr: number, gender: string, height: number, lactating: boolean, pregnant: boolean, weight: number): Nutrition {
+  public getDri(age: number, energyConsumption: number, gender: string, height: number, lactating: boolean, pregnant: boolean, weight: number): Nutrition {
     let requirements: Nutrition = new Nutrition();
 
-    requirements.ala.value = this._driSvc.getALADri(bmr);
+    requirements.ala.value = this._driSvc.getALADri(energyConsumption);
     requirements.alcohol.value = this._driSvc.getAlcoholDri(age);
     //requirements.arginine.value = this._driSvc.getArginineDri(age, gender, lactating, pregnant, weight);
     requirements.caffeine.value = this._driSvc.getCaffeine(age);
     requirements.calcium.value = this._driSvc.getCalciumDri(age, gender, lactating, pregnant);
-    requirements.carbs.value = this._driSvc.getCarbDri(bmr);
+    requirements.carbs.value = this._driSvc.getCarbDri(energyConsumption);
     requirements.choline.value = this._driSvc.getCholineDri(age, gender, lactating, pregnant);
     requirements.copper.value = this._driSvc.getCopperDri(age, gender, lactating, pregnant);
-    requirements.dha.value = this._driSvc.getDHADri(bmr);
-    requirements.energy.value = bmr;
-    requirements.epa.value = this._driSvc.getEPADri(bmr);
-    requirements.fats.value = this._driSvc.getFatDri(bmr);
+    requirements.dha.value = this._driSvc.getDHADri(energyConsumption);
+    requirements.energy.value = energyConsumption;
+    requirements.epa.value = this._driSvc.getEPADri(energyConsumption);
+    requirements.fats.value = this._driSvc.getFatDri(energyConsumption);
     requirements.fiber.value = this._driSvc.getFiberDri(weight);
     requirements.histidine.value = this._driSvc.getHistidineDri(age, gender, lactating, pregnant, weight);
     requirements.iron.value = this._driSvc.getIronDri(age, gender, lactating, pregnant);
     requirements.isoleucine.value = this._driSvc.getIsoleucineDri(age, gender, lactating, pregnant, weight);
-    requirements.la.value = this._driSvc.getLADri(bmr);
+    requirements.la.value = this._driSvc.getLADri(energyConsumption);
     requirements.leucine.value = this._driSvc.getLeucineDri(age, gender, lactating, pregnant, weight);
     requirements.lysine.value = this._driSvc.getLysineDri(age, gender, lactating, pregnant, weight);
     requirements.magnesium.value = this._driSvc.getMagnesiumDri(age, gender, lactating, pregnant);
@@ -42,10 +42,10 @@ export class NutritionService {
     requirements.phenylalanine.value = this._driSvc.getPhenylalanineDri(age, gender, lactating, pregnant, weight);
     requirements.phosphorus.value = this._driSvc.getPhosphorusDri(age, gender, lactating, pregnant);
     requirements.potassium.value = this._driSvc.getPotassiumDri(age, gender, lactating, pregnant);
-    requirements.protein.value = this._driSvc.getProteinDri(bmr);
+    requirements.protein.value = this._driSvc.getProteinDri(energyConsumption);
     requirements.selenium.value = this._driSvc.getSeleniumDri(age, gender, lactating, pregnant);
     requirements.sodium.value = this._driSvc.getSodiumDri(age, gender, lactating, pregnant);
-    requirements.sugars.value = this._driSvc.getSugarsDri(bmr);
+    requirements.sugars.value = this._driSvc.getSugarsDri(energyConsumption);
     requirements.threonine.value = this._driSvc.getThreonineDri(age, gender, lactating, pregnant, weight);
     requirements.transFat.value = this._driSvc.getTransFatDri();
     requirements.tryptophan.value = this._driSvc.getTryptophanDri(age, gender, lactating, pregnant, weight);
@@ -61,7 +61,7 @@ export class NutritionService {
     requirements.vitaminD.value = this._driSvc.getVitaminDDri(age, gender, lactating, pregnant);
     requirements.vitaminE.value = this._driSvc.getVitaminEDri(age, gender, lactating, pregnant);
     requirements.vitaminK.value = this._driSvc.getVitaminKDri(age, gender, lactating, pregnant);
-    requirements.water.value = this._driSvc.getWater(bmr);
+    requirements.water.value = this._driSvc.getWater(energyConsumption);
     requirements.zinc.value = this._driSvc.getZincDri(age, gender, lactating, pregnant);
 
     return requirements;
@@ -106,9 +106,10 @@ export class NutritionService {
    * @param {Array} items - The food items to sum up
    * @returns {Nutrition} Returns the nutrition of total food items
    */
-  public getNutritionTotal(items: Array<Food>): Nutrition {
+  public getNutritionTotal(items: Array<Food | Meal | MealFoodItem>, preserveEnergy: boolean = false): Nutrition {
     let nutrition: Nutrition = new Nutrition(),
       requirements: Nutrition = this._fitSvc.getUserRequirements();
+
     items.forEach((item: Food) => {
 
       // Sum the nutrients for each food item
@@ -116,6 +117,10 @@ export class NutritionService {
         nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
       }
     });
+
+    if (preserveEnergy) {
+      this._fitSvc.storeEnergyIntake(nutrition.energy.value);
+    }
 
     // Establish the meal's nutritional value, based on the user's nutritional requirements (%)
     for (let nutrientKey in nutrition) {

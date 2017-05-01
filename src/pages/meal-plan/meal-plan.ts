@@ -32,8 +32,18 @@ export class MealPlanPage {
     this._navCtrl.push(this.detailsPage, { mealIdx: this.mealPlan.meals.length - 1, mealPlan: this.mealPlan })
   }
 
+  public removeMeal(mealIdx: number): void {
+    this.mealPlan.meals.splice(mealIdx, 1);
+    this._mealSvc.saveMeal(this.mealPlan.meals[mealIdx], mealIdx, this.mealPlan);
+  }
+
   public segmentChange(): void {
     this._detectorRef.markForCheck();
+  }
+
+  public toggleNourishing(mealIdx: number): void {
+    this.mealPlan.meals[mealIdx].wasNourishing = !this.mealPlan.meals[mealIdx].wasNourishing;
+    this._mealSvc.saveMeal(this.mealPlan.meals[mealIdx], mealIdx, this.mealPlan);
   }
 
   ionViewWillEnter(): void {

@@ -216,7 +216,7 @@ export class MealService {
         //mealProteinWarning: WarningMessage = this._checkMealProtein(meal.nutrition),
         mealServingWarning: WarningMessage = this._checkMealServing(meal.serving),
         mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity);
-        //mealSugarsWarning: WarningMessage = this._checkMealSugars(meal.nutrition);
+      //mealSugarsWarning: WarningMessage = this._checkMealSugars(meal.nutrition);
 
       meal.warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
 
@@ -283,9 +283,9 @@ export class MealService {
 
     if (moment(this._bedTime, 'hours').subtract(moment(meals[mealIdx].time, 'hours').hours(), 'hours').hours() < 4) {
       warning = new WarningMessage(
-          'The meal is served too late',
-          'Try no to eat 4 hours before bed, so that your digestion completes before you go to sleep'
-        );
+        'The meal is served too late',
+        'Try no to eat 4 hours before bed, so that your digestion completes before you go to sleep'
+      );
     } else if (mealIdx !== 0) {
       if (moment(meals[mealIdx - 1].time, 'hours').subtract(moment(meals[mealIdx].time, 'hours').hours(), 'hours').hours() >= 0) {
         warning = new WarningMessage(
@@ -349,13 +349,21 @@ export class MealService {
 
   /**
    * Calculates the meal nutritional values based on the food items
-   * @description Each user has specific daily nutrition requirements (DRI)
-   * We must know how much (%) of the requirements a meal fulfills
    * @param {Array} items - The food items of the meal
    * @returns {Nutrition} Returns the meal nutrition
    */
   public getMealNutrition(items: Array<MealFoodItem>): Nutrition {
-    return this._nutritionSvc.getNutritionTotal(items);
+    let nutrition: Nutrition = new Nutrition();
+    items.forEach((item: MealFoodItem) => {
+
+      // Sum the nutrients for each meal item
+      for (let nutrientKey in item.nutrition) {
+        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
+        nutrition[nutrientKey].value = +(nutrition[nutrientKey].value).toFixed(2);
+      }
+    });
+
+    return nutrition;
   }
 
   /**
@@ -405,16 +413,7 @@ export class MealService {
    * @returns {Nutrition} Returns the meal plan nutrition
    */
   public getMealPlanNutrition(meals: Array<Meal>): Nutrition {
-    let nutrition: Nutrition = new Nutrition();
-    meals.forEach((meal: Meal) => {
-
-      // Sum the nutrients for each meal item
-      for (let nutrientKey in meal.nutrition) {
-        nutrition[nutrientKey].value += meal.nutrition[nutrientKey].value;
-      }
-    });
-
-    return nutrition;
+    return this._nutritionSvc.getNutritionTotal(meals, true);
   }
 
   /**
@@ -443,12 +442,10 @@ export class MealService {
    * @returns {void}
    */
   public saveMeal(meal: Meal, mealIdx: number, mealPlan: MealPlan): void {
+    meal.nutrition = this.getMealNutrition(meal.mealItems);
     mealPlan.meals[mealIdx] = meal;
     mealPlan.dailyNutrition = this.getMealPlanNutrition(mealPlan.meals);
     console.log('Saving meal plan: ', mealPlan);
-    
-    // Store the energy intakes localy
-    this._fitSvc.saveUserEnergyIntakes(mealPlan.dailyNutrition.energy.value);
 
     this._currentMealPlan.update({
       dailyNutrition: mealPlan.dailyNutrition,

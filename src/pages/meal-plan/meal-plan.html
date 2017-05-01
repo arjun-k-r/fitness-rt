@@ -21,33 +21,56 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <div [ngSwitch]="mealPlanDetails">
     <!-- Start of segment -->
     <div *ngSwitchCase="'meals'">
-      <ion-item-group *ngFor="let meal of mealPlan?.meals; let i = index">
-        <ion-item-divider color="primary">{{ meal.time }}</ion-item-divider>
-        <ion-item>
-          pH
-          <p item-content ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
-        </ion-item>
-        <ion-item>
-          Size
-          <p item-content ion-text color="{{ meal.quantity > 750 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
-        </ion-item>
-        <ion-item>
-          Warnings
-          <p item-content ion-text color="{{ meal.warnings?.length ? 'danger' : 'secondary' }}">{{ meal.warnings?.length || 0 }} warnings</p>
-        </ion-item>
-        <ion-item>
-          Foods
-          <p item-content>{{ meal.mealItems?.length }} items</p>
-        </ion-item>
-        <button ion-item [navPush]="detailsPage" [navParams]="{ mealIdx: i, mealPlan: mealPlan }">
-          More details
-          <ion-note item-right><ion-icon name="arrow-forward"></ion-icon></ion-note>
-        </button>
-      </ion-item-group>
+      <ion-card *ngFor="let meal of mealPlan?.meals; let i = index">
+        <ion-card-content>
+          <ion-card-title color="primary">
+          {{ meal.time }}
+        </ion-card-title>
+          <ion-list>
+            <ion-item>
+              pH
+              <p item-content ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
+            </ion-item>
+            <ion-item>
+              Size
+              <p item-content ion-text color="{{ meal.quantity > 750 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
+            </ion-item>
+            <ion-item>
+              Warnings
+              <p item-content ion-text color="{{ meal.warnings?.length ? 'danger' : 'secondary' }}">{{ meal.warnings?.length || 0 }} warnings</p>
+            </ion-item>
+            <ion-item>
+              Foods
+              <p item-content>{{ meal.mealItems?.length }} items</p>
+            </ion-item>
+
+          </ion-list>
+        </ion-card-content>
+        <ion-row no-padding>
+          <ion-col>
+            <button ion-button clear small color="primary" icon-left [navPush]="detailsPage" [navParams]="{ mealIdx: i, mealPlan: mealPlan }">
+              <ion-icon name='create'></ion-icon>
+              Edit
+            </button>
+          </ion-col>
+          <ion-col text-center>
+            <button ion-button clear small color="danger" icon-left (click)="removeMeal(i)">
+              <ion-icon name='trash'></ion-icon>
+              Remove
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small [color]="meal.wasNourishing ? 'secondary' : 'dark'" icon-left (click)="toggleNourishing(i)">
+              <ion-icon name='heart'></ion-icon>
+              Nourishing
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
 
       <ion-fab right bottom>
         <button ion-fab color="secondary" (click)="addNewMeal()"><ion-icon name="add"></ion-icon></button>

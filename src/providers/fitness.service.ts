@@ -1,18 +1,21 @@
 // App
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 import { User } from '@ionic/cloud-angular';
 
-// Firebase
+// Third-party
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import * as moment from 'moment';
 
 // Models
 import { Nutrition, UserProfile } from '../models';
 
+const CURRENT_DAY: number = moment().dayOfYear();
+
 @Injectable()
 export class FitnessService {
-  private _energyIntake: number = 0;
   private _profile: FirebaseObjectObservable<UserProfile>;
-  constructor(private _af: AngularFire, private _user: User) {
+  constructor(private _af: AngularFire, private _storage: Storage, private _user: User) {
     this._profile = _af.database.object(`/profiles/${_user.id}`);
   }
 
@@ -82,14 +85,6 @@ export class FitnessService {
   }
 
   /**
-   * Gets the user's daily energy intake
-   * @returns {number} Returns the user's daily energy intakes in kilocalories
-   */
-  public getUserEnergyIntakes(): number {
-    return this._energyIntake;
-  }
-
-  /**
    * Gets the user's daily nutritional requirements from temporary storage
    * @returns {Nutrition} Returns the user's daily intakes
    */
@@ -106,12 +101,37 @@ export class FitnessService {
   }
 
   /**
-   * Temporary stores of user energy intakes
-   * @param {number} energyIntake - The user's daily energy intake in kilocalroies
-   * @returns {void}
+   * Retores the daily energy consumption from local storage
+   * @returns {Promise} Returns the user's daily energy consumption
    */
-  public saveUserEnergyIntakes(energyIntake: number): void {
-    this._energyIntake = energyIntake;
+  public restoreEnergyConsumption(): Promise<number> {
+    return new Promise(resolve => {
+      this._storage.ready().then(() => this._storage.get('energyConsumption').then((energy: { date: number, consumption: number }) => {
+        if (!!energy && energy.date === CURRENT_DAY) {
+          console.log('Restoring energy consumption...', energy);
+          resolve(energy.consumption);
+        } else {
+          resolve(0);
+        }
+      }));
+    });
+  }
+
+  /**
+   * Retores the daily energy intake from local storage
+   * @returns {Promise} Returns the user's daily energy intake
+   */
+  public restoreEnergyIntake(): Promise<number> {
+    return new Promise(resolve => {
+      this._storage.ready().then(() => this._storage.get('energyIntake').then((energy: { date: number, intake: number }) => {
+        if (!!energy && energy.date === CURRENT_DAY) {
+          console.log('Restoring energy intake...', energy);
+          resolve(energy.intake);
+        } else {
+          resolve(0);
+        }
+      }));
+    });
   }
 
   /**
@@ -125,6 +145,24 @@ export class FitnessService {
     this._user.set('profile', profile);
     this._user.save();
     this._profile.set(profile);
+  }
+
+  /**
+   * Stores the daily energy consumption localy
+   * @param {number} energyConsumption - The user's daily energy consumption
+   * @returns {void}
+   */
+  public storeEnergyConsumption(energyConsumption: number): void {
+    this._storage.ready().then(() => this._storage.set('energyConsumption', { date: CURRENT_DAY, consumption: energyConsumption }));
+  }
+
+  /**
+   * Stores the daily energy intake localy
+   * @param {number} energyIntake - The user's daily energy intake
+   * @returns {void}
+   */
+  public storeEnergyIntake(energyIntake: number): void {
+    this._storage.ready().then(() => this._storage.set('energyIntake', { date: CURRENT_DAY, intake: energyIntake }));
   }
 
 }

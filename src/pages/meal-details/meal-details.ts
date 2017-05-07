@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { Alert, AlertController, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
 
 // Models
-import { IFoodSearchResult, MEAL_TYPES, Meal, MealFoodItem, MealPlan, WarningMessage } from '../../models';
+import { Food, IFoodSearchResult, MEAL_TYPES, Meal, MealFoodItem, MealPlan, WarningMessage } from '../../models';
 
 // Pages
 import { FoodSelectPage } from '../food-select/food-select';
@@ -77,7 +77,7 @@ export class MealDetailsPage {
 
       // Request Food report for each item
       this._mealSvc.serializeMealItems(items).then((items: Array<MealFoodItem>) => {
-        this.meal.mealItems.push(...items);
+        this.meal.mealItems.push(...items.map((item: Food) => new MealFoodItem(item.group, item.name, item.ndbno, item.nutrition, item.pral, item.quantity, 1, item.tastes, item.type, item.unit)));
         console.log(this.meal.mealItems);
         // Update the meal details
         this._updateMealDetails();

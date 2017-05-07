@@ -1,6 +1,9 @@
 // Third-party
 import * as moment from 'moment';
 
+// Models
+import { WarningMessage } from './warning-message';
+
 /**
  * Class representing a performed activity
  * @class
@@ -55,6 +58,7 @@ export class ActivityPlan {
         public physicalEffort: number = 0,
         public physicalInactivity: number = 0,
         public physicalOverwork: number = 0,
-        public totalEnergyBurn: number = 0
+        public totalEnergyBurn: number = 0,
+        public warnings: Array<WarningMessage> = []
     ) { }
 }

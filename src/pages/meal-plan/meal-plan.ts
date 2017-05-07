@@ -56,6 +56,7 @@ export class MealPlanPage {
     this._mealSvc.getMealPlan$().subscribe((mealPlan: MealPlan) => {
       console.log('Received meal plan: ', mealPlan);
       this.mealPlan = mealPlan;
+      this.mealPlan.meals = this.mealPlan.meals || [];
       loader.dismiss();
       this._detectorRef.markForCheck();
     });

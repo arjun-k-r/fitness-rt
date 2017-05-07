@@ -153,6 +153,7 @@ export class FitnessService {
    * @returns {void}
    */
   public storeEnergyConsumption(energyConsumption: number): void {
+    console.log('Storing energy consumption: ', energyConsumption);
     this._storage.ready().then(() => this._storage.set('energyConsumption', { date: CURRENT_DAY, consumption: energyConsumption }));
   }
 
@@ -162,6 +163,7 @@ export class FitnessService {
    * @returns {void}
    */
   public storeEnergyIntake(energyIntake: number): void {
+    console.log('Storing energy intake: ', energyIntake);
     this._storage.ready().then(() => this._storage.set('energyIntake', { date: CURRENT_DAY, intake: energyIntake }));
   }
 

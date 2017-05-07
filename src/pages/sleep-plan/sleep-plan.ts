@@ -30,7 +30,7 @@ export class SleepPlanPage {
       console.log(this.currentSleep);
       this._alertSvc.showAlert('Please check the warnings', 'Your sleepng habit seems to be unhealthy', 'Oh oh...');
       this._detectorRef.markForCheck();
-    });;
+    });
   }
 
   public segmentChange(): void {

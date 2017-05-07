@@ -3,13 +3,13 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { Alert, AlertController, Loading, LoadingController, Modal, ModalController, NavController } from 'ionic-angular';
 
 // Models
-import { Activity, ActivityPlan } from '../../models';
+import { Activity, ActivityPlan, WarningMessage } from '../../models';
 
 // Pages
 import { ActivitySelectPage } from '../activity-select/activity-select';
 
 // Providers
-import { ActivityService, FitnessService } from '../../providers';
+import { ActivityService, AlertService, FitnessService } from '../../providers';
 
 @Component({
   selector: 'page-activity-plan',
@@ -23,6 +23,7 @@ export class ActivityPlanPage {
   constructor(
     private _activitySvc: ActivityService,
     private _alertCtrl: AlertController,
+    private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _fitSvc: FitnessService,
     private _loadCtrl: LoadingController,
@@ -91,15 +92,35 @@ export class ActivityPlanPage {
     alert.present();
   }
 
+  public removeActivity(idx: number, type: string): void {
+    if (type === 'physical') {
+      this.activityPlan.physicalActivities.splice(idx, 1);
+    } else {
+      this.activityPlan.intellectualActivities.splice(idx, 1);
+    }
+  }
+
   /**
    * Saves the activity plan to Database
    * @returns {void}
    */
   public saveActivityPlan(): void {
-    this._activitySvc.saveActivityPlan(this.activityPlan);
-    this._activitySvc.getLeftEnergy().then((energy: number) => {
-      this.leftEnergy = energy;
-      console.log(energy);
+    this._activitySvc.saveActivityPlan(this.activityPlan).then((isGood: boolean) => {
+      this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy activity plan!', 'Well done!');
+      this._activitySvc.getLeftEnergy().then((energy: number) => {
+        this.leftEnergy = energy;
+        console.log(energy);
+        this._detectorRef.markForCheck();
+      });
+    }).catch((warnings: Array<WarningMessage>) => {
+      this.activityPlan.warnings = [...warnings];
+      console.log(this.activityPlan);
+      this._alertSvc.showAlert('Please check the warnings', 'Your activity plan seems to be unhealthy', 'Oh oh...');
+      this._activitySvc.getLeftEnergy().then((energy: number) => {
+        this.leftEnergy = energy;
+        console.log(energy);
+        this._detectorRef.markForCheck();
+      });
     });
   }
 
@@ -119,6 +140,9 @@ export class ActivityPlanPage {
     this._activitySvc.getActivityPlan$().subscribe((activityPlan: ActivityPlan) => {
       console.log('Received activity plan: ', activityPlan);
       this.activityPlan = activityPlan;
+      this.activityPlan.intellectualActivities = this.activityPlan.intellectualActivities || [];
+      this.activityPlan.physicalActivities = this.activityPlan.physicalActivities || [];
+      this.activityPlan.warnings = this.activityPlan.warnings || [];
       loader.dismiss();
       this._detectorRef.markForCheck();
     });

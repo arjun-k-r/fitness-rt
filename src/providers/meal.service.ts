@@ -442,9 +442,13 @@ export class MealService {
    * @returns {void}
    */
   public saveMeal(meal: Meal, mealIdx: number, mealPlan: MealPlan): void {
-    meal.nutrition = this.getMealNutrition(meal.mealItems);
-    mealPlan.meals[mealIdx] = meal;
-    mealPlan.dailyNutrition = this.getMealPlanNutrition(mealPlan.meals);
+    if (!!meal) {
+      meal.nutrition = this.getMealNutrition(meal.mealItems);
+      mealPlan.meals[mealIdx] = meal;
+      mealPlan.dailyNutrition = this.getMealPlanNutrition(mealPlan.meals);
+    } else {
+      mealPlan.dailyNutrition = new Nutrition();
+    }
     console.log('Saving meal plan: ', mealPlan);
 
     this._currentMealPlan.update({

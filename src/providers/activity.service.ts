@@ -9,7 +9,7 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 import * as moment from 'moment';
 
 // Models
-import { Activity, ActivityPlan, UserProfile } from '../models';
+import { Activity, ActivityPlan, UserProfile, WarningMessage } from '../models';
 
 // Providers
 import { FitnessService } from './fitness.service';
@@ -47,11 +47,50 @@ export class ActivityService {
 
   /**
    * Looks for imbalance in performed activities
+   * @description We must exercise smart
+   * @param {ActivityPlan} activityPlan - The activity plan to check
+   * @returns {Promise} Returns confirmation if the sleep is healthy or not
+   */
+  private _checkActivityPlan(activityPlan: ActivityPlan): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      let aerobicExercise: number = 0,
+        anaerobicExercise: number = 0;
+      activityPlan.physicalActivities.forEach((activity: Activity) => {
+        if (activity.met >= 8 && activity.duration > 45) {
+          anaerobicExercise += activity.duration;
+          activityPlan.warnings.push(new WarningMessage(
+            'Too much intense exercise at once',
+            'Long sessions of intense exercise damage the heart over time. Keep intense exercise to less than 45 minute per day.'
+          ));
+        }
+
+        if (activity.met > 4 && activity.met < 8) {
+          aerobicExercise += activity.duration;
+        }
+      });
+
+      if (aerobicExercise === 0 && anaerobicExercise === 0) {
+        activityPlan.warnings.push(new WarningMessage(
+          'Remember to raise your heart rate',
+          'Exercise is beneficial only if it helps your reach your target heart rate.'
+        ));
+      }
+
+      if (!!activityPlan.warnings.length) {
+        reject(activityPlan.warnings);
+      } else {
+        resolve(true);
+      }
+    });
+  }
+
+  /**
+   * Looks for imbalance in the previous day activity plan
    * @description We must exercise every day, both intellectually and physically, but not too much
    * @param {ActivityPlan} activityPlan - The activity plan to check
    * @returns {void}
    */
-  private _checkActivityPlan(activityPlan: ActivityPlan): void {
+  private _checkLastActivityPlan(activityPlan: ActivityPlan): void {
     if (activityPlan.intellectualEffort > 480) {
       activityPlan.intellectualOverwork++;
       activityPlan.intellectualInactivity = 0;
@@ -66,6 +105,34 @@ export class ActivityService {
     } else if (activityPlan.physicalEffort < 60) {
       activityPlan.physicalInactivity++;
       activityPlan.physicalOverwork = 0;
+    }
+
+    if (activityPlan.physicalInactivity > 2) {
+      activityPlan.warnings.push(new WarningMessage(
+        'Get moving!',
+        'Sedentary lifestyle is one of the primary causes of all health conditions. You need to move everyday.'
+      ));
+    }
+
+    if (activityPlan.intellectualInactivity > 2) {
+      activityPlan.warnings.push(new WarningMessage(
+        "If you don't use it, you lose it",
+        'You need to exercise your muscles every day and that includes your brain.'
+      ));
+    }
+
+    if (activityPlan.physicalOverwork > 5) {
+      activityPlan.warnings.push(new WarningMessage(
+        'Everything in excess is opposed to nature.',
+        'Too much physical exercise damages your muscles fibers and can prevent them from developing and recovering.'
+      ));
+    }
+
+    if (activityPlan.intellectualOverwork > 5) {
+      activityPlan.warnings.push(new WarningMessage(
+        'Everything in excess is opposed to nature.',
+        'Too much intellectual exercise may lead to irritability, fatigue, depression, stress, and many other health issues'
+      ));
     }
   }
 
@@ -117,7 +184,7 @@ export class ActivityService {
           // Get the previous day activity plan to check for activity imbalances
           this._lastActivityPlan.subscribe((lastActivityPlan: ActivityPlan) => {
             if (!lastActivityPlan.hasOwnProperty('$value')) {
-              this._checkActivityPlan(lastActivityPlan);
+              this._checkLastActivityPlan(lastActivityPlan);
 
               // Add up the intellectual activity imbalances of the previous activity plan along with the accumulated once from previous days or reset them if it is the case
               if (lastActivityPlan.intellectualInactivity > 0) {
@@ -164,29 +231,54 @@ export class ActivityService {
   }
 
   /**
-   * Saves the updated activity in the current activity plan
-   * @param {Activity} activity - The updated activity
-   * @param {number} activityIdx - The index of the activity in the current activity plan
+   * Saves the activity plan to Firebase database
    * @param {ActivityPlan} activityPlan - The activity plan to save
-   * @returns {void}
+   * @returns {Promise} Returns confirmation if the activity plan is fine
    */
-  public saveActivityPlan(activityPlan: ActivityPlan): void {
-    console.log('Saving activity plan: ', activityPlan);
+  public saveActivityPlan(activityPlan: ActivityPlan): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      console.log('Saving activity plan: ', activityPlan);
 
-    // Update the user daily requirements
-    this.updateUserRequirements(activityPlan.totalEnergyBurn);
+      this._checkActivityPlan(activityPlan).then((isGood: boolean) => {
 
-    this._currentActivityPlan.update({
-      date: activityPlan.date,
-      intellectualActivities: activityPlan.intellectualActivities,
-      intellectualEffort: activityPlan.intellectualEffort,
-      intellectualInactivity: activityPlan.intellectualInactivity,
-      intellectualOverwork: activityPlan.intellectualOverwork,
-      physicalActivities: activityPlan.physicalActivities,
-      physicalEffort: activityPlan.physicalEffort,
-      physicalInactivity: activityPlan.physicalInactivity,
-      physicalOverwork: activityPlan.physicalOverwork,
-      totalEnergyBurn: activityPlan.totalEnergyBurn
+        // Update the user daily requirements
+        this.updateUserRequirements(activityPlan.totalEnergyBurn);
+
+        this._currentActivityPlan.update({
+          date: activityPlan.date,
+          intellectualActivities: activityPlan.intellectualActivities,
+          intellectualEffort: activityPlan.intellectualEffort,
+          intellectualInactivity: activityPlan.intellectualInactivity,
+          intellectualOverwork: activityPlan.intellectualOverwork,
+          physicalActivities: activityPlan.physicalActivities,
+          physicalEffort: activityPlan.physicalEffort,
+          physicalInactivity: activityPlan.physicalInactivity,
+          physicalOverwork: activityPlan.physicalOverwork,
+          totalEnergyBurn: activityPlan.totalEnergyBurn
+        });
+
+        resolve(true);
+      }).catch((warnings: Array<WarningMessage>) => {
+
+        // Update the user daily requirements
+        this.updateUserRequirements(activityPlan.totalEnergyBurn);
+
+        this._currentActivityPlan.update({
+          date: activityPlan.date,
+          intellectualActivities: activityPlan.intellectualActivities,
+          intellectualEffort: activityPlan.intellectualEffort,
+          intellectualInactivity: activityPlan.intellectualInactivity,
+          intellectualOverwork: activityPlan.intellectualOverwork,
+          physicalActivities: activityPlan.physicalActivities,
+          physicalEffort: activityPlan.physicalEffort,
+          physicalInactivity: activityPlan.physicalInactivity,
+          physicalOverwork: activityPlan.physicalOverwork,
+          totalEnergyBurn: activityPlan.totalEnergyBurn,
+          warnings: activityPlan.warnings
+        });
+
+        reject(warnings);
+      });
     });
   }
 

@@ -16,6 +16,9 @@
       <ion-segment-button value="warnings">
         <ion-icon name="warning"></ion-icon>
       </ion-segment-button>
+      <ion-segment-button value="nourishing">
+        <ion-icon name="heart"></ion-icon>
+      </ion-segment-button>
     </ion-segment>
 
   </ion-toolbar>
@@ -45,7 +48,7 @@
             </ion-item>
             <ion-item>
               Foods
-              <p item-content>{{ meal.mealItems?.length || 0 }}} items</p>
+              <p item-content>{{ meal.mealItems?.length || 0 }} items</p>
             </ion-item>
 
           </ion-list>
@@ -496,6 +499,17 @@
           <p item-content>{{ mealPlan.excess.sugars }} days</p>
         </ion-item>
       </ion-item-group>
+    </div>
+    <!-- End of segment -->
+
+    <!-- Start of segment -->
+    <div *ngSwitchCase="'nourishing'">
+      <ion-list >
+        <button ion-item *ngFor="let meal of (nourishingMeals$ | async)" (click)="addToMealPlan(meal)">
+          {{ meal.nickname }}
+          <ion-note item-right>Add</ion-note>
+        </button>
+      </ion-list>
     </div>
     <!-- End of segment -->
   </div>

@@ -85,6 +85,7 @@ import {
     FoodTypeService,
     MealService,
     NutritionService,
+    RecipeService,
     SleepService
 } from '../providers';
 
@@ -162,5 +163,6 @@ export const thgProviders = [
     FoodTypeService,
     MealService,
     NutritionService,
+    RecipeService,
     SleepService
 ];

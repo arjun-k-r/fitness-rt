@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 // Models
-import { Food, Meal, MealFoodItem, Nutrition, NutrientDeficiencies, NutrientExcesses } from '../models';
+import { Food, Meal, Nutrition, NutrientDeficiencies, NutrientExcesses } from '../models';
 
 // Providers
 import { DRIService } from './dri.service';
@@ -68,6 +68,24 @@ export class NutritionService {
   }
 
   /**
+   * Calculates the alkalinity of couple of foods
+   * @param {Array} items - The foods
+   * @returns {number} Returns the pral of all foods
+   */
+  public calculatePral(items: Array<Food>): number {
+    return +(items.reduce((acc: number, item: Food) => acc + (item.pral * item.servings), 0)).toFixed(2)
+  }
+
+  /**
+   * Calculates the total quanitty of several foods
+   * @param {Array} items - The foods
+   * @returns {number} Returns the quantity in grams of all foods
+   */
+  public calculateQuantity(items: Array<Food>): number {
+    return items.reduce((acc: number, item: Food) => acc + item.quantity, 0);
+  }
+
+  /**
    * Looks for nutrient deficiencies in a nutrition plan
    * @param {Nutrition} nutrition - The nutrition to look up
    * @returns {NutrientDeficiencies} Returns the deficiencies found in the plan
@@ -103,16 +121,16 @@ export class NutritionService {
    * Calculates the total nutritional values of an amount of foods
    * @description Each user has specific daily nutrition requirements (DRI)
    * We must know how much (%) of the requirements an amount of foods fulfill
-   * @param {Array} items - The food items to sum up
-   * @returns {Nutrition} Returns the nutrition of total food items
+   * @param {Array} items - The foods to sum up
+   * @returns {Nutrition} Returns the nutrition of total foods
    */
-  public getNutritionTotal(items: Array<Food | Meal | MealFoodItem>, preserveEnergy: boolean = false): Nutrition {
+  public getNutritionTotal(items: Array<Food | Meal>, preserveEnergy: boolean = false): Nutrition {
     let nutrition: Nutrition = new Nutrition(),
       requirements: Nutrition = this._fitSvc.getUserRequirements();
 
     items.forEach((item: Food) => {
 
-      // Sum the nutrients for each food item
+      // Sum the nutrients for each food
       for (let nutrientKey in item.nutrition) {
         nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
       }

@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { Alert, AlertController, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
 
 // Models
-import { Food, IFoodSearchResult, MEAL_TYPES, Meal, MealFoodItem, MealPlan, WarningMessage } from '../../models';
+import { Food, IFoodSearchResult, MEAL_TYPES, Meal, MealPlan, WarningMessage } from '../../models';
 
 // Pages
 import { FoodSelectPage } from '../food-select/food-select';
@@ -57,17 +57,17 @@ export class MealDetailsPage {
   }
 
   /**
-   * Updates the food item quantity and nutrients to the new serving size and calls meal update method afterwards
-   * @param {MealFoodItem} foodItem - The food item to update
+   * Updates the food quantity and nutrients to the new serving size and calls meal update method afterwards
+   * @param {Food} foodItem - The food to update
    * @returns {void}
    */
-  private _changeItemQuantity(foodItem: MealFoodItem): void {
+  private _changeItemQuantity(foodItem: Food): void {
     this._mealSvc.changeQuantities(foodItem);
     this._updateMealDetails();
   }
 
   /**
-   * Adds new food items to the meal
+   * Adds new foods to the meal
    * @returns {void}
    */
   public addMealItems(): void {
@@ -76,8 +76,8 @@ export class MealDetailsPage {
     mealSelectModal.onDidDismiss((items: Array<IFoodSearchResult>) => {
 
       // Request Food report for each item
-      this._mealSvc.serializeMealItems(items).then((items: Array<MealFoodItem>) => {
-        this.meal.mealItems.push(...items.map((item: Food) => new MealFoodItem(item.group, item.name, item.ndbno, item.nutrition, item.pral, item.quantity, 1, item.tastes, item.type, item.unit)));
+      this._mealSvc.serializeMealItems(items).then((items: Array<Food>) => {
+        this.meal.mealItems.push(...items);
         console.log(this.meal.mealItems);
         // Update the meal details
         this._updateMealDetails();
@@ -89,12 +89,12 @@ export class MealDetailsPage {
   }
 
   /**
-   * Shows a a modal dialog to change the number of servings of a food item
-   * @description A single serving is 100g. A meal may contain more than 100g of a food item
-   * @param {MealFoodItem} item - The food item the change servings
+   * Shows a a modal dialog to change the number of servings of a food
+   * @description A single serving is 100g. A meal may contain more than 100g of a food
+   * @param {Food} item - The food the change servings
    * @returns {void}
    */
-  public changeServings(item: MealFoodItem): void {
+  public changeServings(item: Food): void {
     let alert: Alert = this._alertCtrl.create({
       title: 'Servings',
       subTitle: `${item.name.toString()} (${item.quantity.toString()}${item.unit.toString()})`,
@@ -133,8 +133,8 @@ export class MealDetailsPage {
   }
 
   /**
-   * Removes food item from the meal and calls meal update method afterwards
-   * @param idx - The index of the food item to remove
+   * Removes food from the meal and calls meal update method afterwards
+   * @param idx - The index of the food to remove
    * @returns {void}
    */
   public removeItem(idx: number): void {

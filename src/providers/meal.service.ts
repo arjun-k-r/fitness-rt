@@ -6,7 +6,7 @@ import { User } from '@ionic/cloud-angular';
 import 'rxjs/operator/map';
 
 // Third-party
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
@@ -15,7 +15,6 @@ import {
   Food,
   IFoodSearchResult,
   Meal,
-  MealFoodItem,
   MealPlan,
   MealServing,
   NutrientDeficiencies,
@@ -40,6 +39,7 @@ export class MealService {
   private _bedTime: string;
   private _currentMealPlan: FirebaseObjectObservable<MealPlan>;
   private _lastMealPlan: FirebaseObjectObservable<MealPlan>;
+  private _nourishingMeals: FirebaseListObservable<Array<Meal>>;
   private _nutritionRequirements: Nutrition;
   constructor(
     private _af: AngularFire,
@@ -54,6 +54,8 @@ export class MealService {
     _sleepSvc.getSleepPlan$().subscribe((sleePlan: SleepPlan) => this._bedTime = moment(_sleepSvc.getCurrentSleep(sleePlan).bedTime, 'hours').format('HH:mm'));
     this._currentMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY}`);
     this._lastMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY - 1}`);
+
+    this._nourishingMeals = _af.database.list(`/nourishing-meals/${_user.id}`);
     this._nutritionRequirements = _fitSvc.getUserRequirements();
   }
 
@@ -70,14 +72,14 @@ export class MealService {
   // }
 
   /**
-   * Verifies if the meal is too complex for digestion (has more than 8 food items)
-   * @param {Array} foodItems - The food items of the meal
+   * Verifies if the meal is too complex for digestion (has more than 8 foods)
+   * @param {Array} foodItems - The foods of the meal
    * @returns {WarningMessage} Returns warning if the meal is too complex
    */
-  private _checkMealComplexity(foodItems: Array<MealFoodItem>): WarningMessage {
+  private _checkMealComplexity(foodItems: Array<Food>): WarningMessage {
     return foodItems.length > 8 ? new WarningMessage(
       'The meal is too complex!',
-      'More than 6 food items in a signle meal makes it complex and difficult to digest, as it requires many types of enzymes, gastric juices, and timings.'
+      'More than 6 foods in a signle meal makes it complex and difficult to digest, as it requires many types of enzymes, gastric juices, and timings.'
     ) : null;
   }
 
@@ -175,20 +177,20 @@ export class MealService {
   // }
 
   /**
-   * Increments the meal tastes by one for each food item containing a specific taste
+   * Increments the meal tastes by one for each food containing a specific taste
    * @description According to Ayurveda, a balanced meal contains all six tastes in order to completely nourish and satisfy the body.
    * @param {Meal} meal - The meal to check
    */
   private _checkMealTastes(meal: Meal): void {
-    meal.mealItems.forEach((item: MealFoodItem) => item.tastes.forEach((taste: string) => meal.tastes[taste.toLocaleLowerCase()]++));
+    meal.mealItems.forEach((item: Food) => item.tastes.forEach((taste: string) => meal.tastes[taste.toLocaleLowerCase()]++));
   }
 
   /**
-   * Updates the food item quantity and nutrients to the new serving size
-   * @param {MealFoodItem} foodItem - The food item to update
+   * Updates the food quantity and nutrients to the new serving size
+   * @param {Food} foodItem - The food to update
    * @returns {void}
    */
-  public changeQuantities(foodItem: MealFoodItem): void {
+  public changeQuantities(foodItem: Food): void {
     // Reset the food details to their default state before changing
     let initialRatio: number = foodItem.quantity / 100;
     foodItem.quantity *= (+foodItem.servings / initialRatio);
@@ -287,13 +289,13 @@ export class MealService {
         'Try no to eat 4 hours before bed, so that your digestion completes before you go to sleep'
       );
     } else if (mealIdx !== 0) {
-      if (moment(meals[mealIdx - 1].time, 'hours').subtract(moment(meals[mealIdx].time, 'hours').hours(), 'hours').hours() >= 0) {
+      if (moment(meals[mealIdx].time, 'hours').hours() - moment(meals[mealIdx - 1].time, 'hours').hours() <= 0) {
         warning = new WarningMessage(
           'A meal cannot be planned before or over an already planned meal',
           'Make sure you plan your meals chronologically, one by one'
         );
       } else {
-        meals[mealIdx - 1].mealItems.every((item: MealFoodItem) => {
+        meals[mealIdx - 1].mealItems.every((item: Food) => {
           if (item.type.toLocaleLowerCase().includes('protein')) {
             if (moment(meals[mealIdx].time, 'hours').subtract(moment(meals[mealIdx - 1].time, 'hours').hours(), 'hours').hours() < 3) {
               warning = new WarningMessage(
@@ -348,13 +350,13 @@ export class MealService {
   }
 
   /**
-   * Calculates the meal nutritional values based on the food items
-   * @param {Array} items - The food items of the meal
+   * Calculates the meal nutritional values based on the foods
+   * @param {Array} items - The foods of the meal
    * @returns {Nutrition} Returns the meal nutrition
    */
-  public getMealNutrition(items: Array<MealFoodItem>): Nutrition {
+  public getMealNutrition(items: Array<Food>): Nutrition {
     let nutrition: Nutrition = new Nutrition();
-    items.forEach((item: MealFoodItem) => {
+    items.forEach((item: Food) => {
 
       // Sum the nutrients for each meal item
       for (let nutrientKey in item.nutrition) {
@@ -417,21 +419,29 @@ export class MealService {
   }
 
   /**
-   * Gets the alkalinity of a meal, based on the impact of each food item quantity and pral value
-   * @param {Array} items - The food items of the meal
+   * Gets the alkalinity of a meal, based on the impact of each food quantity and pral value
+   * @param {Array} items - The foods of the meal
    * @returns {number} Returns the pral of the meal
    */
-  public getMealPral(items: Array<MealFoodItem>): number {
-    return +(items.reduce((acc: number, item: MealFoodItem) => acc + (item.pral * item.servings), 0)).toFixed(2);
+  public getMealPral(items: Array<Food>): number {
+    return this._nutritionSvc.calculatePral(items);
   }
 
   /**
    * Gets the size of the meal
-   * @param {Array} items - The food items of the meal
+   * @param {Array} items - The foods of the meal
    * @returns {number} Returns the quantity in grams of the meal
    */
-  public getMealSize(items: Array<MealFoodItem>): number {
-    return items.reduce((acc: number, item: MealFoodItem) => acc + item.quantity, 0);
+  public getMealSize(items: Array<Food>): number {
+    return this._nutritionSvc.calculateQuantity(items);
+  }
+
+  /**
+   * Gets the nourishing meals from the database
+   * @returns {FirebaseListObservable} Returns an observable that publishes the meals
+   */
+  public getNourishingMeals$(): FirebaseListObservable<Array<Meal>> {
+    return this._nourishingMeals;
   }
 
   /**
@@ -444,6 +454,29 @@ export class MealService {
   public saveMeal(meal: Meal, mealIdx: number, mealPlan: MealPlan): void {
     if (!!meal) {
       meal.nutrition = this.getMealNutrition(meal.mealItems);
+      if (!!meal.wasNourishing && !meal.hasOwnProperty('$key')) {
+        meal.nourishingKey = this._nourishingMeals.push(meal).key;
+      } else if (!meal.wasNourishing) {
+        this._nourishingMeals.remove(meal.nourishingKey);
+        meal.nourishingKey = '';
+      } else {
+        this._nourishingMeals.update(meal['$key'], {
+          isCold: meal.isCold,
+          isRaw: meal.isRaw,
+          mealItems: meal.mealItems,
+          nickname: meal.nickname,
+          nourishingKey: meal.nourishingKey,
+          nutrition: meal.nutrition,
+          pral: meal.pral,
+          quantity: meal.quantity,
+          serving: meal.serving,
+          tastes: meal.tastes,
+          time: meal.time,
+          type: meal.type,
+          warnings: meal.warnings,
+          wasNourishing: meal.wasNourishing
+        });
+      }
       mealPlan.meals[mealIdx] = meal;
       mealPlan.dailyNutrition = this.getMealPlanNutrition(mealPlan.meals);
     } else {
@@ -465,7 +498,7 @@ export class MealService {
    * @param {Array} items The selected food
    * @returns {Observable} Returns a stream of food reports
    */
-  public serializeMealItems(items: Array<IFoodSearchResult>): Promise<Array<MealFoodItem>> {
+  public serializeMealItems(items: Array<IFoodSearchResult>): Promise<Array<Food>> {
     let requests: Array<Promise<Food>> = [];
 
     items.forEach((item: IFoodSearchResult, idx: number) => requests.push(this._foodDataSvc.getFoodReports$(item.ndbno)));

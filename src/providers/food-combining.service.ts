@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 // Models
-import { MealFoodItem, WarningMessage } from '../models';
+import { Food, WarningMessage } from '../models';
 
 @Injectable()
 export class FoodCombiningService {
@@ -9,29 +9,29 @@ export class FoodCombiningService {
   constructor() { }
 
   /**
-   * Verifies if the food items in a meal are well combined
+   * Verifies if the foods in a meal are well combined
    * 
-   * @param {Array} foodItems The food items to check
+   * @param {Array} foodItems The foods to check
    * @returns {Array} Returns a list of warnings if there are wrong combinations
    */
-  public checkCombining(foodItems: Array<MealFoodItem>): Array<WarningMessage> {
-    let acidFruits: Array<MealFoodItem> = [],
-      acids: Array<MealFoodItem> = [],
-      fats: Array<MealFoodItem> = [],
+  public checkCombining(foodItems: Array<Food>): Array<WarningMessage> {
+    let acidFruits: Array<Food> = [],
+      acids: Array<Food> = [],
+      fats: Array<Food> = [],
       hasFluids: boolean = false,
       hasFruits: boolean = false,
       hasMelon: boolean = false,
       hasMilk: boolean = false,
       hasSugars: boolean = false,
-      proteinFats: Array<MealFoodItem> = [],
-      proteins: Array<MealFoodItem> = [],
-      starches: Array<MealFoodItem> = [],
-      subAcidFruits: Array<MealFoodItem> = [],
-      sweetFruits: Array<MealFoodItem> = [],
-      veggies: Array<MealFoodItem> = [],
+      proteinFats: Array<Food> = [],
+      proteins: Array<Food> = [],
+      starches: Array<Food> = [],
+      subAcidFruits: Array<Food> = [],
+      sweetFruits: Array<Food> = [],
+      veggies: Array<Food> = [],
       warnings: Array<WarningMessage> = [];
 
-    foodItems.forEach((item: MealFoodItem) => {
+    foodItems.forEach((item: Food) => {
 
       // Check the food type
       switch (item.type) {

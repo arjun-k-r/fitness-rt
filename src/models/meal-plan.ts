@@ -9,7 +9,7 @@ import { WarningMessage } from './warning-message';
 export const MEAL_TYPES: Array<string> = ['Beverages meal', 'Melons meal', 'Fruit meal', 'Starch meal', 'Protein meal'];
 
 /**
- * Class representing the tastes within a meal offered by the meal food items
+ * Class representing the tastes within a meal offered by the meal foods
  * @class
  * @classdesc According to Ayurveda, a balanced meal contains all six tastes in order to completely nourish and satisfy the body. 
  */
@@ -33,7 +33,9 @@ export class Meal {
     constructor(
         public isCold: boolean = true,
         public isRaw: boolean = true,
-        public mealItems: Array<MealFoodItem> = [],
+        public mealItems: Array<Food> = [],
+        public nickname: string = '',
+        public nourishingKey: string = '',
         public nutrition: Nutrition = new Nutrition(),
         public pral: number = 0,
         public quantity: number = 0,
@@ -44,42 +46,6 @@ export class Meal {
         public warnings: Array<WarningMessage> = [],
         public wasNourishing: boolean = false
     ) { }
-}
-
-/**
- * Class representing a single food from a meal
- * @class
- * @classdesc A single meal (e.g. breakfast) can contain a combination of food items (e.g. nuts and apples)
- * @extends Food
- */
-export class MealFoodItem extends Food {
-    /**
-     * @constructor
-     * @param {string} ndbno - The USDA Database food id
-     * @param {string} name - The food name
-     * @param {string} group - The USDA Databse food group (e.g. Beverages)
-     * @param {Nutrition} nutrition - The food nutritional values
-     * @param {number} quantity - The quantity of food (e.g. 100 food units)
-     * @param {number} servings - The number of same food items
-     * @param {Array} tastes - The tastes a food contains
-     * @param {string} type - The type of food based on dominant nutrient content (e.g. protein, starch, fat, sugar, acid, etc.)
-     * @param {string} unit - The unit of measure (e.g. grams)
-     */
-    constructor(
-        public group: string = '',
-        public name: string = '',
-        public ndbno: string = '',
-        public nutrition: Nutrition = new Nutrition(),
-        public pral: number = 0,
-        public quantity: number = 100,
-        public servings: number = 1,
-        public tastes: Array<string> = [],
-        public type: string = '',
-        public unit: string = 'g'
-
-    ) {
-        super(group, name, ndbno, nutrition, pral, quantity, tastes, type, unit);
-    }
 }
 
 /**
@@ -113,7 +79,7 @@ export class MealServing {
      * @param hunger - Flag indicating if the user has truly hungry
      * @param noDisturbance - Flag indicating if there were no disturbances around (e.g. TV, talking, loud music, agitation, etc.)
      * @param noStress - Flag indicating if the user was relaxed and calm while serving his meal
-     * @param organic - Flag indicating if the meal had organic food items
+     * @param organic - Flag indicating if the meal had organic foods
      * @param slowlyEating - Flag indicating if the user ate slowly and savoured his meal
      */
     constructor(

@@ -63,6 +63,8 @@ import {
     MealDetailsPage,
     MealPlanPage,
     PasswordResetPage,
+    RecipeDetailsPage,
+    RecipeListPage,
     RegistrationPage,
     SleepPlanPage
 } from '../pages';
@@ -109,6 +111,8 @@ export const thgDeclarations = [
     MealDetailsPage,
     MealPlanPage,
     PasswordResetPage,
+    RecipeDetailsPage,
+    RecipeListPage,
     RegistrationPage,
     SearchPipe,
     SleepPlanPage
@@ -132,6 +136,8 @@ export const thgEntries = [
     MealDetailsPage,
     MealPlanPage,
     PasswordResetPage,
+    RecipeDetailsPage,
+    RecipeListPage,
     RegistrationPage,
     SleepPlanPage
 ];

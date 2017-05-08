@@ -15,4 +15,6 @@ export { MealDetailsPage } from './meal-details/meal-details';
 export { MealPlanPage } from './meal-plan/meal-plan';
 export { PasswordResetPage } from './password-reset/password-reset';
 export { RegistrationPage } from './registration/registration';
+export { RecipeDetailsPage } from './recipe-details/recipe-details';
+export { RecipeListPage } from './recipe-list/recipe-list';
 export { SleepPlanPage } from './sleep-plan/sleep-plan';

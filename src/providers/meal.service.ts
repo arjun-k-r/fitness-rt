@@ -20,6 +20,7 @@ import {
   NutrientDeficiencies,
   NutrientExcesses,
   Nutrition,
+  Recipe,
   SleepPlan,
   WarningMessage
 } from '../models';
@@ -76,7 +77,7 @@ export class MealService {
    * @param {Array} foodItems - The foods of the meal
    * @returns {WarningMessage} Returns warning if the meal is too complex
    */
-  private _checkMealComplexity(foodItems: Array<Food>): WarningMessage {
+  private _checkMealComplexity(foodItems: Array<Food | Recipe>): WarningMessage {
     return foodItems.length > 8 ? new WarningMessage(
       'The meal is too complex!',
       'More than 6 foods in a signle meal makes it complex and difficult to digest, as it requires many types of enzymes, gastric juices, and timings.'
@@ -187,17 +188,11 @@ export class MealService {
 
   /**
    * Updates the food quantity and nutrients to the new serving size
-   * @param {Food} foodItem - The food to update
+   * @param {Food} item - The food to update
    * @returns {void}
    */
-  public changeQuantities(foodItem: Food): void {
-    // Reset the food details to their default state before changing
-    let initialRatio: number = foodItem.quantity / 100;
-    foodItem.quantity *= (+foodItem.servings / initialRatio);
-
-    for (let nutrientKey in foodItem.nutrition) {
-      foodItem.nutrition[nutrientKey].value *= (+foodItem.servings / initialRatio);
-    }
+  public changeQuantities(item: Food): void {
+    return this._foodSvc.changeQuantities(item);
   }
 
   /**
@@ -210,7 +205,7 @@ export class MealService {
     let meal: Meal = meals[mealIdx];
     return new Promise((resolve, reject) => {
       let //mealCarbsWarning: WarningMessage = this._checkMealCarbs(meal.nutrition),
-        mealComplexityWarning: WarningMessage = this._checkMealComplexity(meal.mealItems),
+        //mealComplexityWarning: WarningMessage = this._checkMealComplexity(meal.mealItems),
         //mealEnergyWarning: WarningMessage = this._checkMealEnergy(meal.nutrition),
         //mealFatsWarning: WarningMessage = this._checkMealFats(meal.nutrition),
         mealHourWarning: WarningMessage = this.checkMealHour(mealIdx, meals),
@@ -220,7 +215,7 @@ export class MealService {
         mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity);
       //mealSugarsWarning: WarningMessage = this._checkMealSugars(meal.nutrition);
 
-      meal.warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
+      //meal.warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
 
       this._checkMealTastes(meal);
 
@@ -228,9 +223,9 @@ export class MealService {
       //   meal.warnings.push(mealCarbsWarning);
       // }
 
-      if (!!mealComplexityWarning) {
-        meal.warnings.push(mealComplexityWarning);
-      }
+      // if (!!mealComplexityWarning) {
+      //   meal.warnings.push(mealComplexityWarning);
+      // }
 
       // if (!!mealFatsWarning) {
       //   meal.warnings.push(mealFatsWarning);
@@ -354,18 +349,8 @@ export class MealService {
    * @param {Array} items - The foods of the meal
    * @returns {Nutrition} Returns the meal nutrition
    */
-  public getMealNutrition(items: Array<Food>): Nutrition {
-    let nutrition: Nutrition = new Nutrition();
-    items.forEach((item: Food) => {
-
-      // Sum the nutrients for each meal item
-      for (let nutrientKey in item.nutrition) {
-        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
-        nutrition[nutrientKey].value = +(nutrition[nutrientKey].value).toFixed(2);
-      }
-    });
-
-    return nutrition;
+  public getMealNutrition(items: Array<Food | Recipe>): Nutrition {
+    return this._nutritionSvc.getTotalNutrition(items);
   }
 
   /**
@@ -415,7 +400,7 @@ export class MealService {
    * @returns {Nutrition} Returns the meal plan nutrition
    */
   public getMealPlanNutrition(meals: Array<Meal>): Nutrition {
-    return this._nutritionSvc.getNutritionTotal(meals, true);
+    return this._nutritionSvc.getPercentageNutrition(meals, true);
   }
 
   /**
@@ -423,7 +408,7 @@ export class MealService {
    * @param {Array} items - The foods of the meal
    * @returns {number} Returns the pral of the meal
    */
-  public getMealPral(items: Array<Food>): number {
+  public getMealPral(items: Array<Food | Recipe>): number {
     return this._nutritionSvc.calculatePral(items);
   }
 
@@ -432,7 +417,7 @@ export class MealService {
    * @param {Array} items - The foods of the meal
    * @returns {number} Returns the quantity in grams of the meal
    */
-  public getMealSize(items: Array<Food>): number {
+  public getMealSize(items: Array<Food | Recipe>): number {
     return this._nutritionSvc.calculateQuantity(items);
   }
 
@@ -498,10 +483,7 @@ export class MealService {
    * @param {Array} items The selected food
    * @returns {Observable} Returns a stream of food reports
    */
-  public serializeMealItems(items: Array<IFoodSearchResult>): Promise<Array<Food>> {
-    let requests: Array<Promise<Food>> = [];
-
-    items.forEach((item: IFoodSearchResult, idx: number) => requests.push(this._foodDataSvc.getFoodReports$(item.ndbno)));
-    return Promise.all(requests);
+  public serializeMealItems(items: Array<IFoodSearchResult>): Promise<Array<Food | Recipe>> {
+    return this._foodDataSvc.serializeItems(items);
   }
 }

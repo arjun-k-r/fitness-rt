@@ -2,11 +2,14 @@
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { AlertController, InfiniteScroll, Loading, LoadingController, ViewController } from 'ionic-angular';
 
+// Third-party
+import { FirebaseListObservable } from 'angularfire2';
+
 // Models
-import { IFoodSearchResult, FoodGroup } from '../../models';
+import { IFoodSearchResult, FoodGroup, Recipe } from '../../models';
 
 // Providers
-import { FOOD_GROUPS, FoodDataService } from '../../providers';
+import { FOOD_GROUPS, FoodDataService, RecipeService } from '../../providers';
 
 @Component({
   selector: 'page-food-select',
@@ -15,37 +18,48 @@ import { FOOD_GROUPS, FoodDataService } from '../../providers';
 })
 export class FoodSelectPage {
   public foods: Array<IFoodSearchResult>;
+  public foodLimit: number = 50;
   public groups: Array<FoodGroup> = [...FOOD_GROUPS];
-  public limit: number = 50;
-  public searchQuery: string = '';
+  public recipeLimit: number = 50;
+  public recipes$: FirebaseListObservable<Array<Recipe>>;
+  public searchQueryFoods: string = '';
+  public searchQueryRecipes: string = '';
   public selectedGroup: FoodGroup = this.groups[0];
   public selectedFoods: Array<IFoodSearchResult> = [];
+  public selectedRecipes: Array<Recipe> = [];
+  public selectionSegment: string = 'foods';
   public start: number;
   constructor(
     private _alertCtrl: AlertController,
     private _detectorRef: ChangeDetectorRef,
     private _foodDataSvc: FoodDataService,
     private _loadCtrl: LoadingController,
+    private _recipeSvc: RecipeService,
     private _viewCtrl: ViewController
   ) { }
 
-  public clearSearch(ev): void {
-    this.searchQuery = '';
+  public clearSearchFoods(ev: string): void {
+    this.searchQueryFoods = '';
     this.refreshItems();
   }
 
+  public clearSearchRecipes(ev: string): void {
+    this.searchQueryRecipes = '';
+    this._detectorRef.markForCheck();
+  }
+
   public doneSelecting(): void {
-    this._viewCtrl.dismiss(this.selectedFoods);
+    this._viewCtrl.dismiss({ foods: this.selectedFoods, recipes: this.selectedRecipes });
   }
 
   public itemParams(id: string): Object {
     return { id }
   }
 
-  public loadMore(ev: InfiniteScroll) {
+  public loadMoreFoods(ev: InfiniteScroll) {
     setTimeout(() => {
       this.start += 50;
-      this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
+      this._foodDataSvc.getFoods$(this.searchQueryFoods, this.start, this.foodLimit, this.selectedGroup.id)
         .subscribe((data: Array<IFoodSearchResult>) => {
           this.foods.push(...data);
           this._detectorRef.markForCheck();
@@ -60,6 +74,14 @@ export class FoodSelectPage {
     }, 500);
   }
 
+  public loadMoreRecipes(ev: InfiniteScroll) {
+    this.recipeLimit += 50;
+    setTimeout(() => {
+      ev.complete();
+      this._detectorRef.markForCheck();
+    }, 1000);
+  }
+
   public refreshItems(): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Loading...',
@@ -68,7 +90,7 @@ export class FoodSelectPage {
 
     loader.present();
     this.start = 0;
-    this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
+    this._foodDataSvc.getFoods$(this.searchQueryFoods, this.start, this.foodLimit, this.selectedGroup.id)
       .subscribe((data: Array<IFoodSearchResult>) => {
         setTimeout(() => {
           this.foods = [...data];
@@ -83,6 +105,10 @@ export class FoodSelectPage {
           buttons: ['Got it!']
         }).present();
       });
+  }
+
+  public segmentChange(): void {
+    this._detectorRef.markForCheck();
   }
 
   public showFilter(): void {
@@ -109,16 +135,26 @@ export class FoodSelectPage {
     }).present();
   }
 
-  public toggleItem(food: IFoodSearchResult): void {
-    if (this.selectedFoods.indexOf(food) === -1) {
-      this.selectedFoods.push(food);
+  public toggleItem(item: any, type: string): void {
+    if (type === 'food') {
+      if (this.selectedFoods.indexOf(item) === -1) {
+        this.selectedFoods.push(item);
+      } else {
+        this.selectedFoods.splice(this.selectedFoods.indexOf(item), 1);
+      }
     } else {
-      this.selectedFoods.splice(this.selectedFoods.indexOf(food), 1);
+      if (this.selectedRecipes.indexOf(item) === -1) {
+        this.selectedRecipes.push(item);
+      } else {
+        this.selectedRecipes.splice(this.selectedRecipes.indexOf(item), 1);
+      }
     }
+
   }
 
   ionViewWillEnter(): void {
     this.refreshItems();
+    this.recipes$ = this._recipeSvc.getRecipes$();
     console.log('Entering...');
   }
 

@@ -19,7 +19,7 @@ export class Recipe {
      */
     constructor(
         public chef: string = '',
-        public ingredients: Array<Food> = [],
+        public ingredients: Array<Food | Recipe> = [],
         public name: string = '',
         public nutrition: Nutrition = new Nutrition(),
         public portions: number = 1,

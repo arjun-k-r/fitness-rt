@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Recipes</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only padding>
+                <ion-icon name="funnel"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-searchbar debounce="2000" placeholder="Search recipes" [(ngModel)]="searchQuery" (ionCancel)="clearSearch($event)">
+  </ion-searchbar>
+  <ion-list>
+    <button ion-item *ngFor="let recipe of (recipes$ | async) | search: searchQuery: limit" [navPush]="detailsPage" [navParams]="{ recipe: recipe }">
+      {{ recipe.name }}
+      <ion-note item-right>View more</ion-note>
+    </button>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="loadMoreRecipes($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-fab right bottom>
+    <button ion-fab color="secondary" (click)="addNewRecipe()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
+</ion-content>

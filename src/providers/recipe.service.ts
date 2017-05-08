@@ -8,6 +8,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 // Models
 import {
   Food,
+  IFoodSearchResult,
   Nutrition,
   Recipe,
   WarningMessage
@@ -36,12 +37,46 @@ export class RecipeService {
   }
 
   /**
+   * Updates the ingredient quantity and nutrients to the new serving size
+   * @param {Food} item - The ingredient to update
+   * @returns {void}
+   */
+  public changeQuantities(item: Food | Recipe): void {
+    return this._foodSvc.changeQuantities(item);
+  }
+
+  /**
+   * Calculates the nutritional values of a single portions of the recipe based on the ingredients
+   * @param {Array} items - The ingredients of the recipe
+   * @param {number} portions - The number of portions for t
+   * @returns {Nutrition} Returns the recipe nutrition
+   */
+  public getRecipeNutrition(items: Array<Food | Recipe>, portions: number): Nutrition {
+    let totalNutrition: Nutrition = this._nutritionSvc.getTotalNutrition(items),
+      portionNutrition: Nutrition = new Nutrition();
+
+    for (let nutrientKey in totalNutrition) {
+      portionNutrition[nutrientKey].value = totalNutrition[nutrientKey].value / portions;
+      portionNutrition[nutrientKey].value = +(portionNutrition[nutrientKey].value).toFixed(2);
+    }
+    return portionNutrition;
+  }
+
+  /**
    * Gets the alkalinity of a recipe, based on the impact of each ingredient quantity and pral value
    * @param {Array} items - The ingredients of the recipe
    * @returns {number} Returns the pral of the recipe
    */
-  public getRecipePral(items: Array<Food>): number {
+  public getRecipePral(items: Array<Food | Recipe>): number {
     return this._nutritionSvc.calculatePral(items);
+  }
+
+  /**
+   * Gets the user's recipes
+   * @returns {FirebaseListObservable} Returns an observable that publishes the recipes
+   */
+  public getRecipes$(): FirebaseListObservable<Array<Recipe>> {
+    return this._recipes;
   }
 
   /**
@@ -49,7 +84,7 @@ export class RecipeService {
    * @param {Array} items - The ingredients of the recipe
    * @returns {number} Returns the quantity in grams of the recipe
    */
-  public getRecipeSize(items: Array<Food>): number {
+  public getRecipeSize(items: Array<Food | Recipe>): number {
     return this._nutritionSvc.calculateQuantity(items);
   }
 
@@ -68,6 +103,7 @@ export class RecipeService {
    * @returns {void}
    */
   public saveRecipe(recipe: Recipe): void {
+    console.log('Saving recipe: ', recipe);
     if (!recipe.hasOwnProperty('$key')) {
       this._recipes.push(recipe);
     } else {
@@ -79,10 +115,19 @@ export class RecipeService {
         portions: recipe.portions,
         pral: recipe.pral,
         quantity: recipe.quantity,
-        servings: recipe.servings,
-        tastes: recipe.tastes
+        servings: recipe.servings
+        //tastes: recipe.tastes
       });
     }
+  }
+
+  /**
+   * Gets the nutritional values of each ingredient
+   * @param {Array} items The selected ingredient
+   * @returns {Observable} Returns a stream of food reports
+   */
+  public serializeIngredientss(items: Array<IFoodSearchResult>): Promise<Array<Food | Recipe>> {
+    return this._foodDataSvc.serializeItems(items);
   }
 
 }

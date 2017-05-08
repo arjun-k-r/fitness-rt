@@ -14,6 +14,7 @@ import {
     HomePage,
     MealPlanPage,
     FitnessPage,
+    RecipeListPage,
     RegistrationPage,
     SleepPlanPage
 } from '../pages';
@@ -47,6 +48,7 @@ export class MyApp {
             { title: 'Exercise', component: ActivityPlanPage, icon: 'body' },
             { title: 'Nutrition', component: MealPlanPage, icon: 'clock' },
             { title: 'Foods', component: FoodListPage, icon: 'basket' },
+            { title: 'Recipes', component: RecipeListPage, icon: 'restaurant' },
             { title: 'Account', component: AccountPage, icon: 'person' }
         ];
 

@@ -4,6 +4,7 @@ import * as moment from 'moment';
 // Models
 import { Food } from './food';
 import { NutrientDeficiencies, NutrientExcesses, Nutrition } from './nutrition';
+import { Recipe } from './recipe';
 import { WarningMessage } from './warning-message';
 
 export const MEAL_TYPES: Array<string> = ['Beverages meal', 'Melons meal', 'Fruit meal', 'Starch meal', 'Protein meal'];
@@ -33,7 +34,7 @@ export class Meal {
     constructor(
         public isCold: boolean = true,
         public isRaw: boolean = true,
-        public mealItems: Array<Food> = [],
+        public mealItems: Array<Food | Recipe> = [],
         public nickname: string = '',
         public nourishingKey: string = '',
         public nutrition: Nutrition = new Nutrition(),

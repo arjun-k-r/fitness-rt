@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { Alert, AlertController, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
 
 // Models
-import { Food, IFoodSearchResult, MEAL_TYPES, Meal, MealPlan, WarningMessage } from '../../models';
+import { Food, IFoodSearchResult, MEAL_TYPES, Meal, MealPlan, Recipe, WarningMessage } from '../../models';
 
 // Pages
 import { FoodSelectPage } from '../food-select/food-select';
@@ -73,11 +73,12 @@ export class MealDetailsPage {
   public addMealItems(): void {
     let mealSelectModal: Modal = this._modalCtrl.create(FoodSelectPage);
     mealSelectModal.present();
-    mealSelectModal.onDidDismiss((items: Array<IFoodSearchResult>) => {
+    mealSelectModal.onDidDismiss((selections: { foods: Array<IFoodSearchResult>, recipes: Array<Recipe> }) => {
 
       // Request Food report for each item
-      this._mealSvc.serializeMealItems(items).then((items: Array<Food>) => {
+      this._mealSvc.serializeMealItems(selections.foods).then((items: Array<Food>) => {
         this.meal.mealItems.push(...items);
+        this.meal.mealItems.push(...selections.recipes)
         console.log(this.meal.mealItems);
         // Update the meal details
         this._updateMealDetails();

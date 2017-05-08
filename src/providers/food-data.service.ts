@@ -117,4 +117,16 @@ export class FoodDataService {
         return body['list']['item'];
       }).catch((err: any) => Observable.throw(err));
   }
+
+  /**
+   * Gets the nutritional values of foods
+   * @param {Array} items The foods
+   * @returns {Observable} Returns a stream of food reports
+   */
+  public serializeItems(items: Array<IFoodSearchResult>): Promise<Array<Food>> {
+    let requests: Array<Promise<Food>> = [];
+
+    items.forEach((item: IFoodSearchResult, idx: number) => requests.push(this.getFoodReports$(item.ndbno)));
+    return Promise.all(requests);
+  }
 }

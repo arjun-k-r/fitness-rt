@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 // Models
-import { Food, IFoodReportNutrient } from '../models';
+import { Food, IFoodReportNutrient, Recipe } from '../models';
 
 // Providers
 import { FoodTypeService } from './food-type.service';
@@ -11,6 +11,21 @@ import { FoodTasteService } from './food-taste.service';
 @Injectable()
 export class FoodService {
   constructor(private _foodTypeSvc: FoodTypeService, private _tasteSvc: FoodTasteService) { }
+
+  /**
+   * Updates the food quantity and nutrients to the new serving size
+   * @param {Food} item - The food to update
+   * @returns {void}
+   */
+  public changeQuantities(item: Food | Recipe): void {
+    // Reset the food details to their default state before changing
+    let initialRatio: number = item.quantity / 100;
+    item.quantity *= (+item.servings / initialRatio);
+
+    for (let nutrientKey in item.nutrition) {
+      item.nutrition[nutrientKey].value *= (+item.servings / initialRatio);
+    }
+  }
 
   /**
    * Classifies the food by tastes and nutritional values
@@ -219,11 +234,11 @@ export class FoodService {
         case '510':
           food.nutrition.valine.value = +nutrient.value;
           break;
-          /*
-        case '511':
-          food.nutrition.arginine.value = +nutrient.value;
-          break;
-          */
+        /*
+      case '511':
+        food.nutrition.arginine.value = +nutrient.value;
+        break;
+        */
 
         case '512':
           food.nutrition.histidine.value = +nutrient.value;

@@ -18,7 +18,7 @@ import { ActivityService } from '../../providers';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActivitySelectPage {
-  public activities: FirebaseListObservable<Array<Activity>>;
+  public activities$: FirebaseListObservable<Array<Activity>>;
   public limit: number = 50;
   public searchQuery: string = '';
   public selectedActivity: Activity;
@@ -77,7 +77,7 @@ export class ActivitySelectPage {
   }
 
   ionViewWillEnter(): void {
-    this.activities = this._activitySvc.getActivities$();
+    this.activities$ = this._activitySvc.getActivities$();
     //this._activitySvc.changeActivityQueryLimit(this.limit);
     console.log('Entering...');
     this._detectorRef.markForCheck();

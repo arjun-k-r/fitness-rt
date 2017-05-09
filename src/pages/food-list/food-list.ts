@@ -46,7 +46,7 @@ export class FoodListPage {
 
     setTimeout(() => {
       this.start += 50;
-      this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
+      this._foodDataSvc.getFoods$(this.searchQuery.toLocaleLowerCase(), this.start, this.limit, this.selectedGroup.id)
         .subscribe((data: Array<IFoodSearchResult>) => {
           this.foods.push(...data);
           this._detectorRef.markForCheck();
@@ -58,18 +58,17 @@ export class FoodListPage {
   public refreshItems(): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Loading...',
-      spinner: 'crescent'
+      spinner: 'crescent',
+      duration: 10000
     });
 
     loader.present();
     this.start = 0;
     this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
       .subscribe((data: Array<IFoodSearchResult>) => {
-        setTimeout(() => {
-          this.foods = [...data];
+        this.foods = [...data];
           loader.dismiss();
           this._detectorRef.markForCheck();
-        }, 2000);
       }, (err: {status: string, message: string}) => {
         loader.dismiss();
         this._alertSvc.showAlert(err.message, '', `Ooops! Error ${err.status}!`);

@@ -84,8 +84,8 @@ export class RecipeService {
    * @param {Array} items - The ingredients of the recipe
    * @returns {number} Returns the quantity in grams of the recipe
    */
-  public getRecipeSize(items: Array<Food | Recipe>): number {
-    return this._nutritionSvc.calculateQuantity(items);
+  public getRecipeSize(items: Array<Food | Recipe>, portions: number): number {
+    return Math.round(this._nutritionSvc.calculateQuantity(items) / portions);
   }
 
   /**

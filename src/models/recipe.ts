@@ -8,6 +8,7 @@ export class Recipe {
     /**
      * @constructor
      * @param {string} chef - The user who created the recipe
+     * @param {number} quantity - The quantity of recipe in grams used as reference for servings changes in meal plan
      * @param {Array} ingredients - The recipe ingredients
      * @param {string} name - The recipe name
      * @param {Nutrition} nutrition - The recipe nutritional values
@@ -16,16 +17,19 @@ export class Recipe {
      * @param {number} quantity - The quantity of recipe in grams
      * @param {number} servings - The number of servings of a single portion
      * @param {Array} tastes - The tastes a recipe contains
+     * @param {string} unit - The unit of measure (e.g. grams)
      */
     constructor(
         public chef: string = '',
+        public defaultQuantity: number = 0,
         public ingredients: Array<Food | Recipe> = [],
         public name: string = '',
         public nutrition: Nutrition = new Nutrition(),
         public portions: number = 1,
         public pral: number = 0,
-        public quantity: number = 100,
+        public quantity: number = 0,
         public servings: number = 1,
-        public tastes: Array<string> = []
+        public tastes: Array<string> = [],
+        public unit: string = 'g'
     ) {}
 }

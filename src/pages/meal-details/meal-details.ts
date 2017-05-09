@@ -49,10 +49,12 @@ export class MealDetailsPage {
     this._mealSvc.checkMeal(this.mealIdx, this.mealPlan.meals).then((isGood: boolean) => {
       this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy meal!', 'Well done!');
     }).catch((warnings: Array<WarningMessage>) => {
-      this.meal.warnings = [...warnings];
-      console.log(this.meal);
-      this._alertSvc.showAlert('Please check the warnings', 'Something is wrong with this meal', 'Oh oh...');
-      this._detectorRef.markForCheck();
+      if (!!warnings.length) {
+        this.meal.warnings = [...warnings];
+        console.log(this.meal);
+        this._alertSvc.showAlert('Please check the warnings', 'Something is wrong with this meal', 'Oh oh...');
+        this._detectorRef.markForCheck();
+      }
     });
   }
 
@@ -102,7 +104,7 @@ export class MealDetailsPage {
       inputs: [
         {
           name: 'servings',
-          placeholder: 'Servings x 100g',
+          placeholder: `Servings x ${item.quantity.toString()}${item.unit.toString()}`,
           type: 'number'
         }
       ],
@@ -141,6 +143,16 @@ export class MealDetailsPage {
   public removeItem(idx: number): void {
     this.meal.mealItems.splice(idx, 1);
     this._updateMealDetails();
+  }
+
+  /**
+   * Removes the meal from the database
+   * @returns {void}
+   */
+  public removeMeal(): void {
+    this.mealPlan.meals.splice(this.mealIdx, 1);
+    this._mealSvc.saveMeal(this.meal, this.mealIdx, this.mealPlan);
+    this._navCtrl.pop();
   }
 
   /**

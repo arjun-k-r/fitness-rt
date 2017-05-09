@@ -4,8 +4,11 @@
     <ion-title>Recipe details</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="saveRecipe()">
-                <ion-icon name="sync"></ion-icon>
-            </button>
+        <ion-icon name="sync"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="removeRecipe()">
+        <ion-icon name="trash"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar>
@@ -42,6 +45,10 @@
           pH
           <p item-content ion-text color="{{ recipe.pral > 0 ? 'danger' : 'secondary' }}">{{ recipe.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
         </ion-item>
+        <ion-item>
+          Size
+          <p item-content ion-text color="{{ recipe.quantity > 750 ? 'danger' : 'secondary' }}">{{ recipe.quantity }} g</p>
+        </ion-item>
       </ion-list>
     </div>
     <!-- End of segment -->
@@ -50,7 +57,7 @@
     <div *ngSwitchCase="'ingredients'">
       <ion-list>
         <ion-item *ngFor="let item of recipe.ingredients; let i = index">
-          <ion-icon color="danger" name="trash" item-left (click)="removeItem(i)"></ion-icon>
+          <ion-icon color="danger" name="trash" item-left (click)="removeIngredient(i)"></ion-icon>
           <h2 text-wrap>{{ item.name }}</h2>
           <p text-wrap>{{ item.quantity }} {{ item.unit }}</p>
           <p item-content (click)="changeServings(item)">{{ item.servings }} servings</p>

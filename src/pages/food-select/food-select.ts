@@ -85,18 +85,17 @@ export class FoodSelectPage {
   public refreshItems(): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Loading...',
-      spinner: 'crescent'
+      spinner: 'crescent',
+      duration: 10000
     });
 
     loader.present();
     this.start = 0;
-    this._foodDataSvc.getFoods$(this.searchQueryFoods, this.start, this.foodLimit, this.selectedGroup.id)
+    this._foodDataSvc.getFoods$(this.searchQueryFoods.toLocaleLowerCase(), this.start, this.foodLimit, this.selectedGroup.id)
       .subscribe((data: Array<IFoodSearchResult>) => {
-        setTimeout(() => {
-          this.foods = [...data];
-          loader.dismiss();
-          this._detectorRef.markForCheck();
-        }, 2000);
+        this.foods = [...data];
+        loader.dismiss();
+        this._detectorRef.markForCheck();
       }, (err: { status: string, message: string }) => {
         loader.dismiss();
         this._alertCtrl.create({

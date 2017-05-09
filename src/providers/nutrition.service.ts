@@ -82,7 +82,7 @@ export class NutritionService {
    * @returns {number} Returns the quantity in grams of all foods
    */
   public calculateQuantity(items: Array<Food | Recipe>): number {
-    return items.reduce((acc: number, item: Food) => acc + (item.quantity * item.servings), 0);
+    return items.reduce((acc: number, item: Food) => acc + item.quantity, 0);
   }
 
   /**
@@ -132,7 +132,7 @@ export class NutritionService {
 
       // Sum the nutrients for each food
       for (let nutrientKey in item.nutrition) {
-        nutrition[nutrientKey].value += (item.nutrition[nutrientKey].value * item.servings);
+        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
       }
     });
 
@@ -159,7 +159,7 @@ export class NutritionService {
 
       // Sum the nutrients for each meal item
       for (let nutrientKey in item.nutrition) {
-        nutrition[nutrientKey].value += (item.nutrition[nutrientKey].value * item.servings);
+        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
         nutrition[nutrientKey].value = +(nutrition[nutrientKey].value).toFixed(2);
       }
     });

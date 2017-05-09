@@ -202,7 +202,7 @@ export class MealService {
   * @returns {Promise} Returns confirmation if the meal is or not healthy
   */
   public checkMeal(mealIdx: number, meals: Array<Meal>): Promise<boolean> {
-    let meal: Meal = meals[mealIdx];
+    let meal: Meal = meals[mealIdx], warnings: Array<WarningMessage> = [];
     return new Promise((resolve, reject) => {
       let //mealCarbsWarning: WarningMessage = this._checkMealCarbs(meal.nutrition),
         //mealComplexityWarning: WarningMessage = this._checkMealComplexity(meal.mealItems),
@@ -215,50 +215,50 @@ export class MealService {
         mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity);
       //mealSugarsWarning: WarningMessage = this._checkMealSugars(meal.nutrition);
 
-      //meal.warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
+      //warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
 
-      this._checkMealTastes(meal);
+      //this._checkMealTastes(meal);
 
       // if (!!mealCarbsWarning) {
-      //   meal.warnings.push(mealCarbsWarning);
+      //   warnings.push(mealCarbsWarning);
       // }
 
       // if (!!mealComplexityWarning) {
-      //   meal.warnings.push(mealComplexityWarning);
+      //   warnings.push(mealComplexityWarning);
       // }
 
       // if (!!mealFatsWarning) {
-      //   meal.warnings.push(mealFatsWarning);
+      //   warnings.push(mealFatsWarning);
       // }
 
       if (!!mealHourWarning) {
-        meal.warnings.push(mealHourWarning);
+        warnings.push(mealHourWarning);
       }
 
       if (!!mealPralWarning) {
-        meal.warnings.push(mealPralWarning);
+        warnings.push(mealPralWarning);
       }
 
       // if (!!mealProteinWarning) {
-      //   meal.warnings.push(mealProteinWarning);
+      //   warnings.push(mealProteinWarning);
       // }
 
       if (!!mealServingWarning) {
-        meal.warnings.push(mealServingWarning);
+        warnings.push(mealServingWarning);
       }
 
       if (!!mealSizeWarning) {
-        meal.warnings.push(mealSizeWarning);
+        warnings.push(mealSizeWarning);
       }
 
       // if (!!mealSugarsWarning) {
-      //   meal.warnings.push(mealSugarsWarning);
+      //   warnings.push(mealSugarsWarning);
       // }
 
-      if (!meal.warnings.length) {
+      if (!warnings.length) {
         resolve(true);
       } else {
-        reject(meal.warnings);
+        reject(warnings);
       }
     });
   }

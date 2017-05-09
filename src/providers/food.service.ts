@@ -19,7 +19,7 @@ export class FoodService {
    */
   public changeQuantities(item: Food | Recipe): void {
     // Reset the food details to their default state before changing
-    let initialRatio: number = item.quantity / 100;
+    let initialRatio: number = item.quantity / (item['defaultQuantity'] || 100);
     item.quantity *= (+item.servings / initialRatio);
 
     for (let nutrientKey in item.nutrition) {

@@ -39,7 +39,7 @@ export class RecipeDetailsPage {
   private _updateRecipeDetails(): void {
     this.recipe.nutrition = this._recipeSvc.getRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
     this.recipe.pral = this._recipeSvc.getRecipePral(this.recipe.ingredients);
-    this.recipe.quantity = this._recipeSvc.getRecipeSize(this.recipe.ingredients);
+    this.recipe.quantity = this._recipeSvc.getRecipeSize(this.recipe.ingredients, this.recipe.portions);
   }
 
   /**
@@ -77,6 +77,7 @@ export class RecipeDetailsPage {
 
   public changePortions(): void {
     this.recipe.nutrition = this._recipeSvc.getRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
+    this.recipe.quantity = this._recipeSvc.getRecipeSize(this.recipe.ingredients, this.recipe.portions);
   }
 
   /**
@@ -122,6 +123,15 @@ export class RecipeDetailsPage {
   public removeIngredient(idx: number): void {
     this.recipe.ingredients.splice(idx, 1);
     this._updateRecipeDetails();
+  }
+
+  /**
+   * Removes the recipe from the database
+   * @returns {void}
+   */
+  public removeRecipe(): void {
+    this._recipeSvc.removeRecipe(this.recipe);
+    this._navCtrl.pop();
   }
 
   /**

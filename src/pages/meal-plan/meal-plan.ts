@@ -4,10 +4,9 @@ import { Alert, AlertController, Loading, LoadingController, NavController } fro
 
 // Third-party
 import { FirebaseListObservable } from 'angularfire2';
-import * as moment from 'moment';
 
 // Models
-import { Meal, MealPlan, WarningMessage } from '../../models';
+import { Meal, MealPlan } from '../../models';
 
 // Pages
 import { MealDetailsPage } from '../meal-details/meal-details';
@@ -35,7 +34,7 @@ export class MealPlanPage {
   ) { }
 
   public addToMealPlan(meal: Meal): void {
-    let alert: Alert = this._alertCtrl.create({
+    this._alertCtrl.create({
       title: 'Meal hour',
       subTitle: 'Please select the hour of serving',
       inputs: [...this.mealPlan.meals.map((meal: Meal, mealIdx: number) => {
@@ -53,21 +52,24 @@ export class MealPlanPage {
         {
           text: 'Done',
           handler: (data: string) => {
-            meal.time = this.mealPlan.meals[+data].time;
-            this.mealPlan.meals.push(meal);
-            this._mealSvc.saveMeal(meal, +data, this.mealPlan);
+            let newMeal: Meal = Object.assign({}, meal);
+            newMeal.time = this.mealPlan.meals[+data].time;
+            newMeal.nourishingKey = '';
+            newMeal.nickname = '';
+            newMeal.wasNourishing = false;
+            this._mealSvc.saveMeal(newMeal, +data, this.mealPlan);
           }
         }
       ]
-    });
-    alert.present();
-    meal.time = moment().format('HH:mm');
-    this.mealPlan
+    }).present();
   }
 
-  public removeMeal(mealIdx: number): void {
-    this.mealPlan.meals.splice(mealIdx, 1);
-    this._mealSvc.saveMeal(this.mealPlan.meals[mealIdx], mealIdx, this.mealPlan);
+  public clearMeal(mealIdx: number): void {
+    let updatedMeal: Meal = new Meal();
+    updatedMeal.time = this.mealPlan.meals[mealIdx].time;
+    this.mealPlan.meals[mealIdx] = updatedMeal;
+    this._mealSvc.saveMeal(updatedMeal, mealIdx, this.mealPlan);
+    this._detectorRef.markForCheck();
   }
 
   public reorganizeMeals(): void {

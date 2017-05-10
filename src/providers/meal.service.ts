@@ -385,23 +385,23 @@ export class MealService {
   public saveMeal(meal: Meal, mealIdx: number, mealPlan: MealPlan): void {
     if (!!meal) {
       meal.nutrition = this.getMealNutrition(meal.mealItems);
-      if (!!meal.wasNourishing && !meal.hasOwnProperty('$key')) {
+      if (!!meal.wasNourishing && meal.nourishingKey === '') {
         meal.nourishingKey = this._nourishingMeals.push(meal).key;
-      } else if (!meal.wasNourishing) {
+      } else if (!meal.wasNourishing && meal.nourishingKey !== '') {
         this._nourishingMeals.remove(meal.nourishingKey);
         meal.nourishingKey = '';
-      } else {
+      } else if (!!meal.wasNourishing && meal.nourishingKey !== '') {
         this._nourishingMeals.update(meal['$key'], {
           isCold: meal.isCold,
           isRaw: meal.isRaw,
-          mealItems: meal.mealItems,
+          mealItems: meal.mealItems || [],
           nickname: meal.nickname,
           nourishingKey: meal.nourishingKey,
           nutrition: meal.nutrition,
           pral: meal.pral,
           quantity: meal.quantity,
           serving: meal.serving,
-          warnings: meal.warnings,
+          warnings: meal.warnings || [],
           wasNourishing: meal.wasNourishing
         });
       }

@@ -19,7 +19,6 @@ export class NutritionService {
 
     requirements.ala.value = this._driSvc.getALADri(energyConsumption);
     requirements.alcohol.value = this._driSvc.getAlcoholDri(age);
-    //requirements.arginine.value = this._driSvc.getArginineDri(age, gender, lactating, pregnant, weight);
     requirements.caffeine.value = this._driSvc.getCaffeine(age);
     requirements.calcium.value = this._driSvc.getCalciumDri(age, gender, lactating, pregnant);
     requirements.carbs.value = this._driSvc.getCarbDri(energyConsumption);
@@ -68,21 +67,12 @@ export class NutritionService {
   }
 
   /**
-   * Calculates the alkalinity of couple of foods
-   * @param {Array} items - The foods
-   * @returns {number} Returns the pral of all foods
-   */
-  public calculatePral(items: Array<Food | Recipe>): number {
-    return +(items.reduce((acc: number, item: Food) => acc + (item.pral * item.servings), 0)).toFixed(2)
-  }
-
-  /**
    * Calculates the total quanitty of several foods
    * @param {Array} items - The foods
    * @returns {number} Returns the quantity in grams of all foods
    */
   public calculateQuantity(items: Array<Food | Recipe>): number {
-    return items.reduce((acc: number, item: Food) => acc + item.quantity, 0);
+    return items.reduce((acc: number, item: Food) => acc + (item.quantity * item.servings), 0);
   }
 
   /**
@@ -132,7 +122,7 @@ export class NutritionService {
 
       // Sum the nutrients for each food
       for (let nutrientKey in item.nutrition) {
-        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
+        nutrition[nutrientKey].value += (item.nutrition[nutrientKey].value * item.servings);
       }
     });
 
@@ -149,7 +139,17 @@ export class NutritionService {
   }
 
   /**
-   * Calculates the total nutritional values of an amount of foods
+   * The PRAL formula designed by Dr. Thomas Remer
+   * @description Determines if the nutritional impact on the body's pH levels (above 0 is acidic and below 0 is alkaline forming)
+   * @param {Nutrition} nutrition The nutrition to check
+   * @returns {void}
+   */
+  public getPRAL(nutrition: Nutrition): number {
+    return +(0.49 * nutrition.protein.value + 0.037 * nutrition.phosphorus.value - 0.021 * nutrition.potassium.value - 0.026 * nutrition.magnesium.value - 0.013 * nutrition.calcium.value).toFixed(2);
+  }
+
+  /**
+   * Calculates the total nutritional values of an amount of foods based on their servings
    * @param {Array} items - The foods to sum up
    * @returns {Nutrition} Returns the nutrition of total foods
    */
@@ -159,7 +159,7 @@ export class NutritionService {
 
       // Sum the nutrients for each meal item
       for (let nutrientKey in item.nutrition) {
-        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
+        nutrition[nutrientKey].value += (item.nutrition[nutrientKey].value * item.servings);
         nutrition[nutrientKey].value = +(nutrition[nutrientKey].value).toFixed(2);
       }
     });

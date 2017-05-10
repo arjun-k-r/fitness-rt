@@ -34,22 +34,17 @@ export class MealPlanPage {
     private _navCtrl: NavController
   ) { }
 
-  public addNewMeal(): void {
-    this.mealPlan.meals.push(new Meal());
-    this._navCtrl.push(this.detailsPage, { mealIdx: this.mealPlan.meals.length - 1, mealPlan: this.mealPlan })
-  }
-
   public addToMealPlan(meal: Meal): void {
     let alert: Alert = this._alertCtrl.create({
       title: 'Meal hour',
-      subTitle: 'Please give the hour of serving',
-      inputs: [
-        {
-          name: 'time',
-          placeholder: 'HH:mm',
-          type: 'string'
+      subTitle: 'Please select the hour of serving',
+      inputs: [...this.mealPlan.meals.map((meal: Meal, mealIdx: number) => {
+        return {
+          type: 'radio',
+          label: meal.time,
+          value: mealIdx.toString()
         }
-      ],
+      })],
       buttons: [
         {
           text: 'Cancel',
@@ -57,21 +52,10 @@ export class MealPlanPage {
         },
         {
           text: 'Done',
-          handler: data => {
-            if (moment(data.time, 'HH:mm').isValid()) {
-              meal.time = data.time;
-              this.mealPlan.meals.push(meal);
-              let warning: WarningMessage = this._mealSvc.checkMealHour(this.mealPlan.meals.length - 1, this.mealPlan.meals);
-              if (!warning) {
-                this._alertSvc.showAlert('Keep up the good work!', 'A perfect meal timing!', 'Well done!');
-                this._mealSvc.saveMeal(meal, this.mealPlan.meals.length - 1, this.mealPlan);
-              } else {
-                this.mealPlan.meals.splice(this.mealPlan.meals.length - 1, 1);
-                this._alertSvc.showAlert(warning.message, warning.moreInfo, 'Oh oh...');
-              }
-            } else {
-              this._alertSvc.showAlert('Please enter a valid time', 'A valid time must be of format: HH:mm', 'Invalid time');
-            }
+          handler: (data: string) => {
+            meal.time = this.mealPlan.meals[+data].time;
+            this.mealPlan.meals.push(meal);
+            this._mealSvc.saveMeal(meal, +data, this.mealPlan);
           }
         }
       ]
@@ -86,8 +70,16 @@ export class MealPlanPage {
     this._mealSvc.saveMeal(this.mealPlan.meals[mealIdx], mealIdx, this.mealPlan);
   }
 
+  public reorganizeMeals(): void {
+    this._mealSvc.reorganizeMeals(this.mealPlan);
+  }
+
   public segmentChange(): void {
     this._detectorRef.markForCheck();
+  }
+
+  public saveMealPlan(): void {
+    this._mealSvc.saveMealPlan(this.mealPlan);
   }
 
   public toggleNourishing(mealIdx: number): void {

@@ -6,7 +6,7 @@ import { Loading, LoadingController, NavController, NavParams } from 'ionic-angu
 import { Food } from '../../models';
 
 // Providers
-import { AlertService, FoodDataService } from '../../providers';
+import { AlertService, FoodService } from '../../providers';
 
 @Component({
   selector: 'page-food-details',
@@ -18,7 +18,7 @@ export class FoodDetailsPage {
   constructor(
     private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
-    private _foodDataSvc: FoodDataService,
+    private _foodSvc: FoodService,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
     private _params: NavParams
@@ -31,7 +31,7 @@ export class FoodDetailsPage {
     });
 
     loader.present();
-    this._foodDataSvc.getFoodReports$(this._params.get('id')).then((data: Food) => {
+    this._foodSvc.getFoodReports$(this._params.get('id')).then((data: Food) => {
       this.food = data;
       loader.dismiss();
       this._detectorRef.markForCheck();

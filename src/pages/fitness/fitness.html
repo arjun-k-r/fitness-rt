@@ -27,35 +27,11 @@
     <div [ngSwitch]="profileDetails">
         <!-- Start of segment -->
         <div *ngSwitchCase="'fitness'">
-            <!--
-    <ion-grid>
-        <ion-row>
-            <ion-col>
-                <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Vata' }" text-center ion-text color="secondary">Vata</h2>
-                <p text-center>{{ profile?.constitution.vata }}%</p>
-            </ion-col>
-            <ion-col>
-                <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Pitta' }" text-center ion-text color="secondary">Pitta</h2>
-                <p text-center>{{ profile?.constitution.pitta }}%</p>
-            </ion-col>
-            <ion-col>
-                <h2 [navPush]="doshaDetails" [navParams]="{ dosha: 'Kapha' }" text-center ion-text color="secondary">Kapha</h2>
-                <p text-center>{{ profile?.constitution.kapha }}%</p>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-    -->
             <ion-list>
                 <ion-item text-wrap>
                     <ion-label fixed>Age (years)</ion-label>
                     <ion-input type="number" [(ngModel)]="profile.age"></ion-input>
                 </ion-item>
-                <!--
-        <ion-item text-wrap>
-            Constitution
-            <p item-content>{{ profile.dosha }}</p>
-        </ion-item>
-        -->
                 <ion-item *ngIf="profile.bmr" text-wrap>
                     BMR
                     <p item-content>{{ profile.bmr }} kcal/day</p>
@@ -148,12 +124,6 @@
             </ion-item-group>
             <ion-item-group>
                 <ion-item-divider>Essential amino acids</ion-item-divider>
-                <!--
-                <ion-item>
-                    Arginine
-                    <p item-content>{{ (profile.requirements.arginine?.value).toFixed(2) }}{{ profile.requirements.arginine?.unit }}</p>
-                </ion-item>
-                -->
                 <ion-item>
                     Histidine
                     <p item-content>{{ (profile.requirements.histidine?.value).toFixed(2) }}{{ profile.requirements.histidine?.unit }}</p>

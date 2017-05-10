@@ -7,24 +7,6 @@ import { NutrientDeficiencies, NutrientExcesses, Nutrition } from './nutrition';
 import { Recipe } from './recipe';
 import { WarningMessage } from './warning-message';
 
-export const MEAL_TYPES: Array<string> = ['Beverages meal', 'Melons meal', 'Fruit meal', 'Starch meal', 'Protein meal'];
-
-/**
- * Class representing the tastes within a meal offered by the meal foods
- * @class
- * @classdesc According to Ayurveda, a balanced meal contains all six tastes in order to completely nourish and satisfy the body. 
- */
-export class MealTastes {
-    constructor(
-        public sweet: number = 0,
-        public sour: number = 0,
-        public salty: number = 0,
-        public pungent: number = 0,
-        public astrigent: number = 0,
-        public bitter: number = 0
-    ) { }
-}
-
 /**
  * Class representing a meal
  * @class
@@ -41,9 +23,7 @@ export class Meal {
         public pral: number = 0,
         public quantity: number = 0,
         public serving: MealServing = new MealServing(),
-        public tastes: MealTastes = new MealTastes(),
         public time: string = moment().format('HH:mm'),
-        public type: string = '',
         public warnings: Array<WarningMessage> = [],
         public wasNourishing: boolean = false
     ) { }
@@ -57,18 +37,22 @@ export class Meal {
 export class MealPlan {
     /**
      * @constructor
+     * @param {string} breakfastTime - The hour of the first meal of the day; used as reference for the further meals
      * @param {Nutrition} dailyNutrition - The daily nutrition acquired from all meals
      * @param {number} date - The date of the meal plan (the day number of the year)
      * @param {NutrientDeficiencies} deficiency - Counts the days of essential nutrient deficiency
      * @param {NutrientExcesses} excess - Counts the days of non-essential nutrient excess
      * @param {Array} meals - The meals of the meal plan from the specified date
+     * @param {Array} warnings - Warning messages if there are problems related to the meal plan
      */
     constructor(
+        public breakfastTime: string = '',
         public dailyNutrition: Nutrition = new Nutrition(),
         public date: number = moment().dayOfYear(),
         public deficiency: NutrientDeficiencies = new NutrientDeficiencies(),
         public excess: NutrientExcesses = new NutrientExcesses(),
-        public meals: Array<Meal> = []
+        public meals: Array<Meal> = [],
+        public warnings: Array<WarningMessage> = [],
     ) { }
 }
 

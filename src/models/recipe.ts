@@ -8,7 +8,6 @@ export class Recipe {
     /**
      * @constructor
      * @param {string} chef - The user who created the recipe
-     * @param {number} quantity - The quantity of recipe in grams used as reference for servings changes in meal plan
      * @param {Array} ingredients - The recipe ingredients
      * @param {string} name - The recipe name
      * @param {Nutrition} nutrition - The recipe nutritional values
@@ -21,7 +20,6 @@ export class Recipe {
      */
     constructor(
         public chef: string = '',
-        public defaultQuantity: number = 0,
         public ingredients: Array<Food | Recipe> = [],
         public name: string = '',
         public nutrition: Nutrition = new Nutrition(),

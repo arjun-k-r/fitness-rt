@@ -27,8 +27,6 @@ import {
 
 // Providers
 import { FitnessService } from './fitness.service'
-import { FoodCombiningService } from './food-combining.service';
-import { FoodDataService } from './food-data.service';
 import { FoodService } from './food.service';
 import { NutritionService } from './nutrition.service';
 import { SleepService } from './sleep.service';
@@ -42,17 +40,19 @@ export class MealService {
   private _lastMealPlan: FirebaseObjectObservable<MealPlan>;
   private _nourishingMeals: FirebaseListObservable<Array<Meal>>;
   private _nutritionRequirements: Nutrition;
+  private _wakeUpTime: string;
   constructor(
     private _af: AngularFire,
-    private _combiningSvc: FoodCombiningService,
     private _fitSvc: FitnessService,
     private _foodSvc: FoodService,
-    private _foodDataSvc: FoodDataService,
     private _nutritionSvc: NutritionService,
     private _sleepSvc: SleepService,
     private _user: User
   ) {
-    _sleepSvc.getSleepPlan$().subscribe((sleePlan: SleepPlan) => this._bedTime = moment(_sleepSvc.getCurrentSleep(sleePlan).bedTime, 'hours').format('HH:mm'));
+    _sleepSvc.getSleepPlan$().subscribe((sleePlan: SleepPlan) => {
+      this._bedTime = moment(_sleepSvc.getCurrentSleep(sleePlan).bedTime, 'hours').format('HH:mm');
+      this._wakeUpTime = moment(_sleepSvc.getCurrentSleep(sleePlan).wakeUpTime, 'hours').format('HH:mm')
+    });
     this._currentMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY}`);
     this._lastMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY - 1}`);
 
@@ -65,12 +65,12 @@ export class MealService {
    * @param {Nutrition} nutrition - The meal nutrition
    * @returns {WarningMessage} Returns warning if the meal has too much carbohydrate
    */
-  // private _checkMealCarbs(nutrition: Nutrition): WarningMessage {
-  //   return nutrition.carbs.value > nutrition.energy.value * 0.5 ? new WarningMessage(
-  //     'Too much carbohydrate',
-  //     `The meal should contain no more than ${nutrition.energy.value * 0.5}% carbohydrate (50% of meal energy)`
-  //   ) : null;
-  // }
+  private _checkMealCarbs(nutrition: Nutrition): WarningMessage {
+    return nutrition.carbs.value > (this._nutritionRequirements.carbs.value / 4) ? new WarningMessage(
+      'Too much carbohydrates',
+      `The meal should contain no more than ${Math.round(this._nutritionRequirements.carbs.value / 4)}g of carbohydrates`
+    ) : null;
+  }
 
   /**
    * Verifies if the meal is too complex for digestion (has more than 8 foods)
@@ -80,7 +80,7 @@ export class MealService {
   private _checkMealComplexity(foodItems: Array<Food | Recipe>): WarningMessage {
     return foodItems.length > 8 ? new WarningMessage(
       'The meal is too complex!',
-      'More than 6 foods in a signle meal makes it complex and difficult to digest, as it requires many types of enzymes, gastric juices, and timings.'
+      'More than 8 foods in a single meal makes it complex and difficult to digest, as it requires many types of enzymes, gastric juices, and timings.'
     ) : null;
   }
 
@@ -89,24 +89,24 @@ export class MealService {
    * @param {Nutrition} nutrition - The meal nutrition
    * @returns {WarningMessage} Returns warning if the meal supplies too much energy
    */
-  // private _checkMealEnergy(nutrition: Nutrition): WarningMessage {
-  //   return nutrition.energy.value * this._nutritionRequirements.energy.value / 100 > 750 ? new WarningMessage(
-  //     'Too many calories',
-  //     `The meal should contain no more than ${750 * 100 / this._nutritionRequirements.energy.value}% calories`
-  //   ) : null;
-  // }
+  private _checkMealEnergy(nutrition: Nutrition): WarningMessage {
+    return nutrition.energy.value > (this._nutritionRequirements.energy.value / 4) ? new WarningMessage(
+      'Too many calories',
+      `The meal should contain no more than ${Math.round(this._nutritionRequirements.energy.value / 4)} kilocalories`
+    ) : null;
+  }
 
   /**
    * Verifies if the meal does not exceed the limit amount of fats
    * @param {Nutrition} nutrition - The meal nutrition
    * @returns {WarningMessage} Returns warning if the meal has too much fat
    */
-  // private _checkMealFats(nutrition: Nutrition): WarningMessage {
-  //   return nutrition.fats.value > nutrition.energy.value * 0.3 ? new WarningMessage(
-  //     'Too much fat',
-  //     `The meal should contain no more than ${nutrition.energy.value * 0.3}% fat (30% of meal energy)`
-  //   ) : null;
-  // }
+  private _checkMealFats(nutrition: Nutrition): WarningMessage {
+    return nutrition.fats.value > (this._nutritionRequirements.fats.value / 4) ? new WarningMessage(
+      'Too much fat',
+      `The meal should contain no more than ${Math.round(this._nutritionRequirements.fats.value / 4)}g of fat`
+    ) : null;
+  }
 
   /**
    * Verifies if the meal is alkaline forming
@@ -126,12 +126,12 @@ export class MealService {
    * @param {Nutrition} nutrition - The meal nutrition
    * @returns {WarningMessage} Returns warning if the meal has too much protein
    */
-  // private _checkMealProtein(nutrition: Nutrition): WarningMessage {
-  //   return nutrition.fats.value > nutrition.energy.value * 0.2 ? new WarningMessage(
-  //     'Too much protein',
-  //     `The meal should contain no more than ${nutrition.energy.value * 0.2}% protein (20% of meal energy)`
-  //   ) : null;
-  // }
+  private _checkMealProtein(nutrition: Nutrition): WarningMessage {
+    return nutrition.protein.value > (this._nutritionRequirements.protein.value / 4) ? new WarningMessage(
+      'Too much protein',
+      `The meal should contain no more than ${Math.round(this._nutritionRequirements.protein.value / 4)}g of protein`
+    ) : null;
+  }
 
   /**
    * Verifies if each meal serving preparation todo is checked and respected
@@ -159,9 +159,9 @@ export class MealService {
    * @returns {WarningMessage} Returns warning if the meal is too big
    */
   private _checkMealSize(size: number): WarningMessage {
-    return size > 750 ? new WarningMessage(
+    return size > 900 ? new WarningMessage(
       'The meal is too large!',
-      "The meal most be 80% of your stomach's capacity (900 g). The rest of the 20% is required for digestive juices."
+      "The meal most not exceed the stomach's capacity of 900g"
     ) : null;
   }
 
@@ -170,29 +170,31 @@ export class MealService {
    * @param {Nutrition} nutrition - The meal nutrition
    * @returns {WarningMessage} Returns warning if the meal has too much sugar
    */
-  // private _checkMealSugars(nutrition: Nutrition): WarningMessage {
-  //   return nutrition.sugars.value > nutrition.energy.value * 0.1 ? new WarningMessage(
-  //     'Too much sugar',
-  //     `The meal should contain no more than ${nutrition.energy.value * 0.1}% sugar (10% of meal energy)`
-  //   ) : null;
-  // }
-
-  /**
-   * Increments the meal tastes by one for each food containing a specific taste
-   * @description According to Ayurveda, a balanced meal contains all six tastes in order to completely nourish and satisfy the body.
-   * @param {Meal} meal - The meal to check
-   */
-  private _checkMealTastes(meal: Meal): void {
-    meal.mealItems.forEach((item: Food) => item.tastes.forEach((taste: string) => meal.tastes[taste.toLocaleLowerCase()]++));
+  private _checkMealSugars(nutrition: Nutrition): WarningMessage {
+    return nutrition.sugars.value > (this._nutritionRequirements.sugars.value / 4) ? new WarningMessage(
+      'Too much sugar',
+      `The meal should contain no more than ${Math.round(this._nutritionRequirements.sugars.value / 4)}g of sugars`
+    ) : null;
   }
 
   /**
-   * Updates the food quantity and nutrients to the new serving size
-   * @param {Food} item - The food to update
-   * @returns {void}
+   * Get 4-hour interval meals, starting from breakfast time, as long as the last meal is 2 hours before bed
+   * @param {string} breakfastTime - The time of the first meal used as reference
+   * @returns {Array} Returns an array of meals
    */
-  public changeQuantities(item: Food): void {
-    return this._foodSvc.changeQuantities(item);
+  private _getMeals(breakfastTime: string): Array<Meal> {
+    let meals: Array<Meal> = [],
+      newMeal: Meal,
+      newMealTime: number = 0;
+
+    do {
+      newMeal = new Meal();
+      newMeal.time = moment(breakfastTime, 'hours').add(newMealTime, 'hours').format('HH:mm');
+      meals.push(newMeal);
+      newMealTime += 4;
+    } while (moment(this._bedTime, 'hours').subtract(moment(newMeal.time, 'hours').hours(), 'hours').hours() >= 6);
+
+    return meals;
   }
 
   /**
@@ -204,44 +206,35 @@ export class MealService {
   public checkMeal(mealIdx: number, meals: Array<Meal>): Promise<boolean> {
     let meal: Meal = meals[mealIdx], warnings: Array<WarningMessage> = [];
     return new Promise((resolve, reject) => {
-      let //mealCarbsWarning: WarningMessage = this._checkMealCarbs(meal.nutrition),
-        //mealComplexityWarning: WarningMessage = this._checkMealComplexity(meal.mealItems),
-        //mealEnergyWarning: WarningMessage = this._checkMealEnergy(meal.nutrition),
-        //mealFatsWarning: WarningMessage = this._checkMealFats(meal.nutrition),
-        mealHourWarning: WarningMessage = this.checkMealHour(mealIdx, meals),
+      let mealCarbsWarning: WarningMessage = this._checkMealCarbs(meal.nutrition),
+        mealComplexityWarning: WarningMessage = this._checkMealComplexity(meal.mealItems),
+        mealEnergyWarning: WarningMessage = this._checkMealEnergy(meal.nutrition),
+        mealFatsWarning: WarningMessage = this._checkMealFats(meal.nutrition),
         mealPralWarning: WarningMessage = this._checkMealPral(meal.pral),
-        //mealProteinWarning: WarningMessage = this._checkMealProtein(meal.nutrition),
+        mealProteinWarning: WarningMessage = this._checkMealProtein(meal.nutrition),
         mealServingWarning: WarningMessage = this._checkMealServing(meal.serving),
-        mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity);
-      //mealSugarsWarning: WarningMessage = this._checkMealSugars(meal.nutrition);
+        mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity),
+        mealSugarsWarning: WarningMessage = this._checkMealSugars(meal.nutrition);
 
-      //warnings = [...this._combiningSvc.checkCombining(meal.mealItems)];
+      if (!!mealCarbsWarning) {
+        warnings.push(mealCarbsWarning);
+      }
 
-      //this._checkMealTastes(meal);
+      if (!!mealComplexityWarning) {
+        warnings.push(mealComplexityWarning);
+      }
 
-      // if (!!mealCarbsWarning) {
-      //   warnings.push(mealCarbsWarning);
-      // }
-
-      // if (!!mealComplexityWarning) {
-      //   warnings.push(mealComplexityWarning);
-      // }
-
-      // if (!!mealFatsWarning) {
-      //   warnings.push(mealFatsWarning);
-      // }
-
-      if (!!mealHourWarning) {
-        warnings.push(mealHourWarning);
+      if (!!mealFatsWarning) {
+        warnings.push(mealFatsWarning);
       }
 
       if (!!mealPralWarning) {
         warnings.push(mealPralWarning);
       }
 
-      // if (!!mealProteinWarning) {
-      //   warnings.push(mealProteinWarning);
-      // }
+      if (!!mealProteinWarning) {
+        warnings.push(mealProteinWarning);
+      }
 
       if (!!mealServingWarning) {
         warnings.push(mealServingWarning);
@@ -251,9 +244,9 @@ export class MealService {
         warnings.push(mealSizeWarning);
       }
 
-      // if (!!mealSugarsWarning) {
-      //   warnings.push(mealSugarsWarning);
-      // }
+      if (!!mealSugarsWarning) {
+        warnings.push(mealSugarsWarning);
+      }
 
       if (!warnings.length) {
         resolve(true);
@@ -261,87 +254,6 @@ export class MealService {
         reject(warnings);
       }
     });
-  }
-
-  /**
-   * Verifies if the meal serving time is proper
-   * @description Meals need to be timed by the previous meal digestion duration
-   * 1. Fluids need at least 15 minutes to pass through the intestines
-   * 2. Melons require 30 minutes of digestion
-   * 3. Fruits require 30-60 minutes of digestion
-   * 4. Starch requires 2 hours of digestion
-   * 5. Protein requires 4 hours of digestion
-   * @param {number} mealIdx - The index of the meal in the current day meal plan meals
-   * @param {Array} meals - The current day meals
-   * @returns {WarningMessage} Returns a warning if the hour is not proper
-   */
-  public checkMealHour(mealIdx: number, meals: Array<Meal>): WarningMessage {
-    let warning: WarningMessage;
-
-    if (moment(this._bedTime, 'hours').subtract(moment(meals[mealIdx].time, 'hours').hours(), 'hours').hours() < 4) {
-      warning = new WarningMessage(
-        'The meal is served too late',
-        'Try no to eat 4 hours before bed, so that your digestion completes before you go to sleep'
-      );
-    } else if (mealIdx !== 0) {
-      if (moment(meals[mealIdx].time, 'hours').hours() - moment(meals[mealIdx - 1].time, 'hours').hours() <= 0) {
-        warning = new WarningMessage(
-          'A meal cannot be planned before or over an already planned meal',
-          'Make sure you plan your meals chronologically, one by one'
-        );
-      } else {
-        meals[mealIdx - 1].mealItems.every((item: Food) => {
-          if (item.type.toLocaleLowerCase().includes('protein')) {
-            if (moment(meals[mealIdx].time, 'hours').subtract(moment(meals[mealIdx - 1].time, 'hours').hours(), 'hours').hours() < 3) {
-              warning = new WarningMessage(
-                'The previous meal is not digested yet',
-                'Concentrated protein meals require at least 3 hours of digestion'
-              );
-            }
-
-            return true;
-          } else if (item.type === 'Starch') {
-            if (moment(meals[mealIdx].time, 'hours').subtract(moment(meals[mealIdx - 1].time, 'hours').hours(), 'hours').hours() < 2) {
-              warning = new WarningMessage(
-                'The previous meal is not digested yet',
-                'Concentrated carbohydrate meals require at least 2 hours of digestion'
-              );
-            }
-
-            return true;
-          } else if (item.type.toLocaleLowerCase().includes('fruit')) {
-            if (moment(meals[mealIdx].time, 'hours').subtract(moment(meals[mealIdx - 1].time, 'hours').hours(), 'hours').hours() < 1) {
-              warning = new WarningMessage(
-                'The previous meal is not digested yet',
-                'Fruit meals require at least 1 hour of digestion'
-              );
-            }
-
-            return true;
-          } else if (item.type === 'Melon') {
-            if (moment.duration(meals[mealIdx].time).asMinutes() - moment.duration(meals[mealIdx - 1].time).asMinutes() < 30) {
-              warning = new WarningMessage(
-                'The previous meal is not digested yet',
-                'Melons require at least 30 minutes of digestion'
-              );
-            }
-
-            return true;
-          } else if (item.type === 'Fluid') {
-            if (moment.duration(meals[mealIdx].time).asMinutes() - moment.duration(meals[mealIdx - 1].time).asMinutes() < 15) {
-              warning = new WarningMessage(
-                'Fluids dillute the gastric juices required for digestion',
-                'Fluids require at least 15 minutes to pass through the digestive tracts'
-              );
-            }
-
-            return true;
-          }
-        });
-      }
-    }
-
-    return warning;
   }
 
   /**
@@ -362,8 +274,9 @@ export class MealService {
       this._currentMealPlan.subscribe((currMealPlan: MealPlan) => {
         if (currMealPlan['$value'] === null) {
           let newMealPlan: MealPlan = new MealPlan();
+          newMealPlan.meals = this._getMeals(this._wakeUpTime);
 
-          // Get the previous day meal plan to check for deficiencies and excesses
+          //Get the previous day meal plan to check for deficiencies and excesses
           this._lastMealPlan.subscribe((lastMealPlan: MealPlan) => {
             if (!lastMealPlan.hasOwnProperty('$value')) {
               let prevDeficiencies: NutrientDeficiencies = this._nutritionSvc.getNutritionDeficiencies(lastMealPlan.dailyNutrition),
@@ -375,7 +288,7 @@ export class MealService {
               }
 
               // Add the excesses of the last meal plan, along with those from previous meal plans or reset them if the previous meal plan did no longer exceed the requirements the previous day
-              // We need to count the days of excesses
+              //We need to count the days of excesses
               for (let nutrientKey in prevExcesses) {
                 newMealPlan.excess[nutrientKey] = prevExcesses[nutrientKey] === 1 ? prevExcesses[nutrientKey] + lastMealPlan.excess[nutrientKey] : 0;
               }
@@ -385,6 +298,8 @@ export class MealService {
             observer.complete();
           });
         } else {
+          currMealPlan.meals = currMealPlan.meals || this._getMeals(this._wakeUpTime);
+          currMealPlan.warnings = currMealPlan.warnings || [];
           observer.next(currMealPlan);
           observer.complete();
         }
@@ -404,12 +319,12 @@ export class MealService {
   }
 
   /**
-   * Gets the alkalinity of a meal, based on the impact of each food quantity and pral value
-   * @param {Array} items - The foods of the meal
+   * Gets the alkalinity of a meal, based on its nutritional values
+   * @param {Nutrition} nutrition - The nutrition of the meal
    * @returns {number} Returns the pral of the meal
    */
-  public getMealPral(items: Array<Food | Recipe>): number {
-    return this._nutritionSvc.calculatePral(items);
+  public getMealPral(nutrition: Nutrition): number {
+    return this._nutritionSvc.getPRAL(nutrition);
   }
 
   /**
@@ -427,6 +342,34 @@ export class MealService {
    */
   public getNourishingMeals$(): FirebaseListObservable<Array<Meal>> {
     return this._nourishingMeals;
+  }
+
+  /**
+   * Reorganize the meals based on the breakfast time and bedtime, diffused at 4 hour interval
+   * @param {MealPlan} mealPlan - The meal plan
+   * @returns {void}
+   */
+  public reorganizeMeals(mealPlan: MealPlan): void {
+    let mealTime: number = 0,
+      mealTimeWarning: boolean = false;
+
+    mealPlan.meals.forEach((meal: Meal, mealIdx: number) => {
+      meal.time = moment(mealPlan.breakfastTime, 'hours').add(mealTime, 'hours').format('HH:mm');
+      mealTime += 4;
+
+      // Remve the meals which are later than 2 hours before sleep
+      if (moment(this._bedTime, 'hours').subtract(moment(meal.time, 'hours').hours(), 'hours').hours() < 2) {
+        mealPlan.meals.splice(mealIdx, mealPlan.meals.length - mealIdx);
+        if (mealTimeWarning === false) {
+          mealTimeWarning = true;
+          mealPlan.warnings.push(new WarningMessage(
+            'You must leave 2 hours between bed time and last meal for complete digestion',
+            'Some meals were too late'
+          ));
+          return;
+        }
+      }
+    });
   }
 
   /**
@@ -455,9 +398,6 @@ export class MealService {
           pral: meal.pral,
           quantity: meal.quantity,
           serving: meal.serving,
-          tastes: meal.tastes,
-          time: meal.time,
-          type: meal.type,
           warnings: meal.warnings,
           wasNourishing: meal.wasNourishing
         });
@@ -467,14 +407,21 @@ export class MealService {
     } else {
       mealPlan.dailyNutrition = new Nutrition();
     }
+
+    this.saveMealPlan(mealPlan);
+  }
+
+  public saveMealPlan(mealPlan: MealPlan): void {
     console.log('Saving meal plan: ', mealPlan);
 
     this._currentMealPlan.update({
+      breakfastTime: mealPlan.breakfastTime,
       dailyNutrition: mealPlan.dailyNutrition,
       date: mealPlan.date,
       deficiency: mealPlan.deficiency,
       excess: mealPlan.excess,
-      meals: mealPlan.meals
+      meals: mealPlan.meals,
+      warnings: mealPlan.warnings
     });
   }
 
@@ -484,6 +431,6 @@ export class MealService {
    * @returns {Observable} Returns a stream of food reports
    */
   public serializeMealItems(items: Array<IFoodSearchResult>): Promise<Array<Food | Recipe>> {
-    return this._foodDataSvc.serializeItems(items);
+    return this._foodSvc.serializeItems(items);
   }
 }

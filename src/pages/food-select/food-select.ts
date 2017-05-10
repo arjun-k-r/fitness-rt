@@ -9,7 +9,7 @@ import { FirebaseListObservable } from 'angularfire2';
 import { IFoodSearchResult, FoodGroup, Recipe } from '../../models';
 
 // Providers
-import { FOOD_GROUPS, FoodDataService, RecipeService } from '../../providers';
+import { FOOD_GROUPS, FoodService, RecipeService } from '../../providers';
 
 @Component({
   selector: 'page-food-select',
@@ -32,7 +32,7 @@ export class FoodSelectPage {
   constructor(
     private _alertCtrl: AlertController,
     private _detectorRef: ChangeDetectorRef,
-    private _foodDataSvc: FoodDataService,
+    private _foodSvc: FoodService,
     private _loadCtrl: LoadingController,
     private _recipeSvc: RecipeService,
     private _viewCtrl: ViewController
@@ -59,7 +59,7 @@ export class FoodSelectPage {
   public loadMoreFoods(ev: InfiniteScroll) {
     setTimeout(() => {
       this.start += 50;
-      this._foodDataSvc.getFoods$(this.searchQueryFoods, this.start, this.foodLimit, this.selectedGroup.id)
+      this._foodSvc.getFoods$(this.searchQueryFoods, this.start, this.foodLimit, this.selectedGroup.id)
         .subscribe((data: Array<IFoodSearchResult>) => {
           this.foods.push(...data);
           this._detectorRef.markForCheck();
@@ -91,7 +91,7 @@ export class FoodSelectPage {
 
     loader.present();
     this.start = 0;
-    this._foodDataSvc.getFoods$(this.searchQueryFoods.toLocaleLowerCase(), this.start, this.foodLimit, this.selectedGroup.id)
+    this._foodSvc.getFoods$(this.searchQueryFoods.toLocaleLowerCase(), this.start, this.foodLimit, this.selectedGroup.id)
       .subscribe((data: Array<IFoodSearchResult>) => {
         this.foods = [...data];
         loader.dismiss();

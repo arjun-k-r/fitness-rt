@@ -31,10 +31,6 @@ export class ActivityPlanPage {
     private _navCtrl: NavController
   ) { }
 
-  /**
-   * Search for a new activity
-   * @returns {void}
-   */
   public addNewActivity(): void {
     let activitySelectModal: Modal = this._modalCtrl.create(ActivitySelectPage);
     activitySelectModal.present();
@@ -100,10 +96,6 @@ export class ActivityPlanPage {
     }
   }
 
-  /**
-   * Saves the activity plan to Database
-   * @returns {void}
-   */
   public saveActivityPlan(): void {
     this._activitySvc.saveActivityPlan(this.activityPlan).then((isGood: boolean) => {
       this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy activity plan!', 'Well done!');

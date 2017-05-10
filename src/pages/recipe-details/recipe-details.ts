@@ -32,30 +32,12 @@ export class RecipeDetailsPage {
     console.log('Received recipe: ', this.recipe);
   }
 
-  /**
-   * Update the meal whenever changes occur
-   * @returns {void}
-   */
   private _updateRecipeDetails(): void {
     this.recipe.nutrition = this._recipeSvc.getRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
-    this.recipe.pral = this._recipeSvc.getRecipePral(this.recipe.ingredients);
+    this.recipe.pral = this._recipeSvc.getRecipePral(this.recipe.nutrition);
     this.recipe.quantity = this._recipeSvc.getRecipeSize(this.recipe.ingredients, this.recipe.portions);
   }
 
-  /**
-   * Updates the ingredient quantity and nutrients to the new serving size and calls recipe update method afterwards
-   * @param {Food} ingredient - The ingredient to update
-   * @returns {void}
-   */
-  private _changeItemQuantity(ingredient: Food | Recipe): void {
-    this._recipeSvc.changeQuantities(ingredient);
-    this._updateRecipeDetails();
-  }
-
-  /**
-   * Adds new ingredients to the recipe
-   * @returns {void}
-   */
   public addIngredients(): void {
     let ingredientSelectModal: Modal = this._modalCtrl.create(FoodSelectPage);
     ingredientSelectModal.present();
@@ -80,12 +62,6 @@ export class RecipeDetailsPage {
     this.recipe.quantity = this._recipeSvc.getRecipeSize(this.recipe.ingredients, this.recipe.portions);
   }
 
-  /**
-   * Shows a a modal dialog to change the number of servings of a food
-   * @description A single serving is 100g. A meal may contain more than 100g of a food
-   * @param {Food} item - The food the change servings
-   * @returns {void}
-   */
   public changeServings(item: Food): void {
     let alert: Alert = this._alertCtrl.create({
       title: 'Servings',
@@ -106,7 +82,7 @@ export class RecipeDetailsPage {
           text: 'Done',
           handler: data => {
             item.servings = +data.servings;
-            this._changeItemQuantity(item);
+            this._updateRecipeDetails();
             this._detectorRef.markForCheck();
           }
         }
@@ -115,30 +91,18 @@ export class RecipeDetailsPage {
     alert.present();
   }
 
-  /**
-   * Removes ingredient from the recipe and calls recipe update method afterwards
-   * @param idx - The index of the ingredient to remove
-   * @returns {void}
-   */
   public removeIngredient(idx: number): void {
     this.recipe.ingredients.splice(idx, 1);
     this._updateRecipeDetails();
   }
 
-  /**
-   * Removes the recipe from the database
-   * @returns {void}
-   */
   public removeRecipe(): void {
     this._recipeSvc.removeRecipe(this.recipe);
     this._navCtrl.pop();
   }
 
-  /**
-   * Saves the recipe to the database
-   * @returns {void}
-   */
   public saveRecipe(): void {
+    this._updateRecipeDetails();
     this._recipeSvc.saveRecipe(this.recipe);
   }
 

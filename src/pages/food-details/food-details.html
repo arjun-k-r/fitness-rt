@@ -12,16 +12,6 @@
             <p item-content>{{ (food)?.group }}</p>
         </ion-item>
         <ion-item>
-            Tastes
-            <p item-content>
-                <span *ngFor="let taste of (food)?.tastes; let l = last">{{ l ? taste : taste + ', '}}</span>
-            </p>
-        </ion-item>
-        <ion-item>
-            Type
-            <p item-content>{{ (food)?.type }}</p>
-        </ion-item>
-        <ion-item>
             PRAL
             <p item-content>{{ (food)?.pral }}</p>
         </ion-item>
@@ -61,12 +51,6 @@
 
     <ion-item-group>
         <ion-item-divider>Essential amino acids</ion-item-divider>
-        <!--
-        <ion-item>
-            Arginine
-            <p item-content>{{ (food)?.nutrition.arginine?.value }} {{ (food)?.nutrition.arginine?.unit }}</p>
-        </ion-item>
-        -->
         <ion-item>
             Histidine
             <p item-content>{{ (food)?.nutrition.histidine?.value }} {{ (food)?.nutrition.histidine?.unit }}</p>

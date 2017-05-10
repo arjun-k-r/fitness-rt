@@ -41,7 +41,6 @@ export class ActivitySelectPage {
   public loadMore(ev: InfiniteScroll) {
     this.limit += 50;
     setTimeout(() => {
-      //this._activitySvc.changeActivityQueryLimit(this.limit);
       ev.complete();
       this._detectorRef.markForCheck();
     }, 1000);
@@ -78,7 +77,6 @@ export class ActivitySelectPage {
 
   ionViewWillEnter(): void {
     this.activities$ = this._activitySvc.getActivities$();
-    //this._activitySvc.changeActivityQueryLimit(this.limit);
     console.log('Entering...');
     this._detectorRef.markForCheck();
   }

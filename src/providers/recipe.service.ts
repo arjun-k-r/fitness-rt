@@ -15,7 +15,6 @@ import {
 } from '../models';
 
 // Providers
-import { FoodDataService } from './food-data.service';
 import { FoodService } from './food.service';
 import { NutritionService } from './nutrition.service';
 
@@ -25,7 +24,6 @@ export class RecipeService {
   constructor(
     private _af: AngularFire,
     private _foodSvc: FoodService,
-    private _foodDataSvc: FoodDataService,
     private _nutritionSvc: NutritionService,
     private _user: User
   ) {
@@ -34,15 +32,6 @@ export class RecipeService {
         orderByChild: 'name'
       }
     });
-  }
-
-  /**
-   * Updates the ingredient quantity and nutrients to the new serving size
-   * @param {Food} item - The ingredient to update
-   * @returns {void}
-   */
-  public changeQuantities(item: Food | Recipe): void {
-    return this._foodSvc.changeQuantities(item);
   }
 
   /**
@@ -63,12 +52,12 @@ export class RecipeService {
   }
 
   /**
-   * Gets the alkalinity of a recipe, based on the impact of each ingredient quantity and pral value
-   * @param {Array} items - The ingredients of the recipe
+   * Gets the alkalinity of a recipe, based on its nutritional values
+   * @param {Nutrition} nutrition - The nutrition of the recipe
    * @returns {number} Returns the pral of the recipe
    */
-  public getRecipePral(items: Array<Food | Recipe>): number {
-    return this._nutritionSvc.calculatePral(items);
+  public getRecipePral(nutrition: Nutrition): number {
+    return this._nutritionSvc.getPRAL(nutrition);
   }
 
   /**
@@ -127,7 +116,7 @@ export class RecipeService {
    * @returns {Observable} Returns a stream of food reports
    */
   public serializeIngredientss(items: Array<IFoodSearchResult>): Promise<Array<Food | Recipe>> {
-    return this._foodDataSvc.serializeItems(items);
+    return this._foodSvc.serializeItems(items);
   }
 
 }

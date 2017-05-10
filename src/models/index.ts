@@ -1,5 +1,4 @@
 export * from './activity-plan';
-export * from './constitution';
 export * from './food';
 export * from './meal-plan';
 export * from './nutrition';

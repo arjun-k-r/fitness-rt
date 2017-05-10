@@ -6,7 +6,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { UserProfile } from '../../models';
 
 // Pages
-import { DoshaDetailsPage } from '../dosha-details/dosha-details';
 import { SleepPlanPage } from '../sleep-plan/sleep-plan';
 
 // Providers
@@ -18,7 +17,6 @@ import { AlertService, FitnessService, NutritionService } from '../../providers'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FitnessPage {
-  public doshaDetails: any = DoshaDetailsPage;
   public idealBodyFat: number;
   public idealWeight: number;
   public profile: UserProfile;

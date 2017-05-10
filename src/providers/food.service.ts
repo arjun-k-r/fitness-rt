@@ -1,44 +1,60 @@
 // App
 import { Injectable } from '@angular/core';
+import { Http, URLSearchParams, Response, RequestOptions, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
 
 // Models
-import { Food, IFoodReportNutrient, Recipe } from '../models';
+import { Food, FoodGroup, IFoodReportNutrient, IFoodReportSearchResult, IFoodSearchResult } from '../models';
 
 // Providers
-import { FoodTypeService } from './food-type.service';
-import { FoodTasteService } from './food-taste.service';
+import { NutritionService } from './nutrition.service';
+
+export const FOOD_GROUPS: Array<FoodGroup> = [
+  new FoodGroup('', 'All foods'),
+  new FoodGroup('3500', 'American Indian/Alaska Native Foods'),
+  new FoodGroup('0300', 'Baby Foods'),
+  new FoodGroup('1800', 'Baked Products'),
+  new FoodGroup('1300', 'Beef Products'),
+  new FoodGroup('1400', 'Beverages'),
+  new FoodGroup('0800', 'Breakfast Cereals'),
+  new FoodGroup('2000', 'Cereal Grains and Pasta'),
+  new FoodGroup('0100', 'Dairy and Egg Products'),
+  new FoodGroup('2100', 'Fast Foods'),
+  new FoodGroup('0400', 'Fats and Oils'),
+  new FoodGroup('1500', 'Finfish and Shellfish Products'),
+  new FoodGroup('0900', 'Fruits and Fruit Juices'),
+  new FoodGroup('1700', 'Lamb, Veal, and Game Products'),
+  new FoodGroup('1600', 'Legumes and Legume Products'),
+  new FoodGroup('2200', 'Meals, Entrees, and Side Dishes'),
+  new FoodGroup('1200', 'Nut and Seed Products'),
+  new FoodGroup('1000', 'Pork Products'),
+  new FoodGroup('0500', 'Poultry Products'),
+  new FoodGroup('3600', 'Restaurant Foods'),
+  new FoodGroup('0700', 'Sausages and Luncheon Meats'),
+  new FoodGroup('2500', 'Snacks'),
+  new FoodGroup('0600', 'Soups, Sauces, and Gravies'),
+  new FoodGroup('0200', 'Spices and Herbs'),
+  new FoodGroup('1900', 'Sweets'),
+  new FoodGroup('1100', 'Vegetables and Vegetable Products'),
+];
 
 @Injectable()
 export class FoodService {
-  constructor(private _foodTypeSvc: FoodTypeService, private _tasteSvc: FoodTasteService) { }
+  private _usdaApiKey: string = '5nW8It7ORsxY212bV5wpleHkblTLbvpFTKVa010U';
+  private _usdaSource: string = 'Standard+Reference';
+  private _foodListUrl: string = 'https://api.nal.usda.gov/ndb/search/';
+  private _foodNutritionUrl: string = 'https://api.nal.usda.gov/ndb/reports/';
+  constructor(
+    private _http: Http,
+    private _nutritionSvc: NutritionService,
+  ) { }
 
-  /**
-   * Updates the food quantity and nutrients to the new serving size
-   * @param {Food} item - The food to update
-   * @returns {void}
-   */
-  public changeQuantities(item: Food | Recipe): void {
-    // Reset the food details to their default state before changing
-    let initialRatio: number = item.quantity / (item['defaultQuantity'] || 100);
-    item.quantity *= (+item.servings / initialRatio);
-
-    for (let nutrientKey in item.nutrition) {
-      item.nutrition[nutrientKey].value *= (+item.servings / initialRatio);
-    }
-  }
-
-  /**
-   * Classifies the food by tastes and nutritional values
-   * @description Each food has specific tastes (sweet, sour, bitter, salty, punger, astrigent) and
-   * has dominant nutrients (protein, starch, sugar, etc.)
-   * @param {Food} food - The food to classify
-   * @returns {void}
-   */
-  public classifyFood(food: Food): void {
-    this._foodTypeSvc.classifyByType(food);
-
-    // TODO: Is uncertain
-    this._tasteSvc.classifyByTaste(food);
+  private _serializeFood(foodReport: IFoodReportSearchResult): Food {
+    let newFood: Food = new Food(foodReport.fg, foodReport.name, foodReport.ndbno);
+    this._setNutrientValue(foodReport['nutrients'], newFood);
+    newFood.pral = this._nutritionSvc.getPRAL(newFood.nutrition);
+    console.log(newFood);
+    return newFood;
   }
 
   /**
@@ -48,7 +64,7 @@ export class FoodService {
    * @param {Food} food - The food to add the nutritional values to
    * @returns {void}
    */
-  public setNutrientValue(nutrients: Array<IFoodReportNutrient>, food: Food): void {
+  private _setNutrientValue(nutrients: Array<IFoodReportNutrient>, food: Food): void {
     nutrients.forEach((nutrient: IFoodReportNutrient) => {
       switch (nutrient.nutrient_id.toString()) {
         case '255':
@@ -234,11 +250,6 @@ export class FoodService {
         case '510':
           food.nutrition.valine.value = +nutrient.value;
           break;
-        /*
-      case '511':
-        food.nutrition.arginine.value = +nutrient.value;
-        break;
-        */
 
         case '512':
           food.nutrition.histidine.value = +nutrient.value;
@@ -258,13 +269,75 @@ export class FoodService {
     });
   }
 
+  public getFoodReports$(foodId: string = ''): Promise<Food> {
+    let headers: Headers = new Headers({ 'Content-Type': 'application/json' }),
+      options: RequestOptions = new RequestOptions(),
+      params: URLSearchParams = new URLSearchParams();
+
+    params.set('api_key', this._usdaApiKey);
+    params.set('ndbno', foodId);
+    params.set('type', 'f');
+    options.headers = headers;
+    options.search = params;
+
+    return new Promise((resolve, reject) => {
+      this._http.get(this._foodNutritionUrl, options)
+        .map((res: Response) => {
+          let body = res.json();
+          console.log(body);
+          if (body.hasOwnProperty('errors')) {
+            console.log(body.errors);
+            return null;
+          }
+
+          return this._serializeFood(body['report']['food']);
+        }).subscribe((data: Food) => {
+          if (!!data) {
+            resolve(data);
+          } else {
+            reject(data);
+          }
+        });
+    });
+  }
+
+  public getFoods$(searhQuery: string = '', start: number = 0, limit: number = 100, foodGroupId: string = ''): Observable<Array<IFoodSearchResult>> {
+    let headers: Headers = new Headers({ 'Content-Type': 'application/json' }),
+      options: RequestOptions = new RequestOptions(),
+      params: URLSearchParams = new URLSearchParams();
+
+    params.set('api_key', this._usdaApiKey);
+    params.set('ds', this._usdaSource);
+    params.set('q', searhQuery);
+    params.set('fg', foodGroupId);
+    params.set('format', 'json');
+    params.set('sort', 'n');
+    params.set('max', `${limit}`);
+    params.set('offset', `${start}`);
+    options.headers = headers;
+    options.search = params;
+
+    return this._http.get(this._foodListUrl, options)
+      .map((res: Response) => {
+        let body = res.json();
+        console.log(body);
+        if (body.hasOwnProperty('errors')) {
+          console.log(body.errors);
+          throw body.errors.error[0];
+        }
+        return body['list']['item'];
+      }).catch((err: any) => Observable.throw(err));
+  }
+
   /**
-   * The PRAL formula designed by Dr. Thomas Remer
-   * @description Determines the food impact on the body's pH levels (above 0 is acidic and below 0 is alkaline forming)
-   * @param {Food} food The food to check
-   * @returns {void}
+   * Gets the nutritional values of foods
+   * @param {Array} items The foods
+   * @returns {Observable} Returns a stream of food reports
    */
-  public setPRAL(food: Food): void {
-    food.pral = +(0.49 * food.nutrition.protein.value + 0.037 * food.nutrition.phosphorus.value - 0.021 * food.nutrition.potassium.value - 0.026 * food.nutrition.magnesium.value - 0.013 * food.nutrition.calcium.value).toFixed(2);
+  public serializeItems(items: Array<IFoodSearchResult>): Promise<Array<Food>> {
+    let requests: Array<Promise<Food>> = [];
+
+    items.forEach((item: IFoodSearchResult, idx: number) => requests.push(this.getFoodReports$(item.ndbno)));
+    return Promise.all(requests);
   }
 }

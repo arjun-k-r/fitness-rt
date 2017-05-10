@@ -9,7 +9,7 @@ import { IFoodSearchResult, FoodGroup } from '../../models';
 import { FoodDetailsPage } from '../food-details/food-details';
 
 // Providers
-import { AlertService, FOOD_GROUPS, FoodDataService } from '../../providers';
+import { AlertService, FOOD_GROUPS, FoodService } from '../../providers';
 
 @Component({
   selector: 'page-food-list',
@@ -28,7 +28,7 @@ export class FoodListPage {
     private _alertCtrl: AlertController,
     private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
-    private _foodDataSvc: FoodDataService,
+    private _foodSvc: FoodService,
     private _loadCtrl: LoadingController
   ) { }
 
@@ -46,7 +46,7 @@ export class FoodListPage {
 
     setTimeout(() => {
       this.start += 50;
-      this._foodDataSvc.getFoods$(this.searchQuery.toLocaleLowerCase(), this.start, this.limit, this.selectedGroup.id)
+      this._foodSvc.getFoods$(this.searchQuery.toLocaleLowerCase(), this.start, this.limit, this.selectedGroup.id)
         .subscribe((data: Array<IFoodSearchResult>) => {
           this.foods.push(...data);
           this._detectorRef.markForCheck();
@@ -64,7 +64,7 @@ export class FoodListPage {
 
     loader.present();
     this.start = 0;
-    this._foodDataSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
+    this._foodSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
       .subscribe((data: Array<IFoodSearchResult>) => {
         this.foods = [...data];
           loader.dismiss();

@@ -47,9 +47,9 @@
                     Size
                     <p item-content ion-text color="{{ meal.quantity > 750 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
                 </ion-item>
-                <ion-item>
-                    <ion-label floating>Meal time</ion-label>
-                    <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="meal.time" (ionChange)="checkMealTime()"></ion-datetime>
+                 <ion-item>
+                    Time
+                    <p item-content>{{ meal.time }}</p>
                 </ion-item>
                 <ion-item>
                     <ion-label text-wrap>Served cold</ion-label>

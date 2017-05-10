@@ -223,6 +223,9 @@ export class MealService {
       if (!!mealComplexityWarning) {
         warnings.push(mealComplexityWarning);
       }
+      if (!!mealEnergyWarning) {
+        warnings.push(mealEnergyWarning);
+      }
 
       if (!!mealFatsWarning) {
         warnings.push(mealFatsWarning);

@@ -420,8 +420,8 @@ export class MealService {
       date: mealPlan.date,
       deficiency: mealPlan.deficiency,
       excess: mealPlan.excess,
-      meals: mealPlan.meals,
-      warnings: mealPlan.warnings
+      meals: mealPlan.meals || [],
+      warnings: mealPlan.warnings || []
     });
   }
 

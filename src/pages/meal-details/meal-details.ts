@@ -33,6 +33,7 @@ export class MealDetailsPage {
     this.mealIdx = <number>_params.get('mealIdx');
     this.mealPlan = <MealPlan>_params.get('mealPlan');
     this.meal = this.mealPlan.meals[this.mealIdx];
+    this.meal.mealItems = this.meal.mealItems || [];
     console.log('Received meal: ', this.meal);
   }
 
@@ -43,6 +44,7 @@ export class MealDetailsPage {
 
     this._mealSvc.checkMeal(this.mealIdx, this.mealPlan.meals).then((isGood: boolean) => {
       this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy meal!', 'Well done!');
+      this.meal.warnings = [];
     }).catch((warnings: Array<WarningMessage>) => {
       if (!!warnings.length) {
         this.meal.warnings = [...warnings];

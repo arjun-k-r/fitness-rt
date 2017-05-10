@@ -120,9 +120,9 @@ export class NutritionService {
 
     items.forEach((item: Food) => {
 
-      // Sum the nutrients for each food
+      // Sum the nutrients for each item
       for (let nutrientKey in item.nutrition) {
-        nutrition[nutrientKey].value += (item.nutrition[nutrientKey].value * item.servings);
+        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
       }
     });
 

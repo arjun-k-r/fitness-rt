@@ -22,7 +22,6 @@ export class ActivitySelectPage {
   public limit: number = 50;
   public searchQuery: string = '';
   public selectedActivity: Activity;
-  public selectedActivityName: string;
   constructor(
     private _activitySvc: ActivityService,
     private _alertCtrl: AlertController,

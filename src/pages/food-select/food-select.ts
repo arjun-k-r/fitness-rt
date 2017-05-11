@@ -6,7 +6,7 @@ import { AlertController, InfiniteScroll, Loading, LoadingController, ViewContro
 import { FirebaseListObservable } from 'angularfire2';
 
 // Models
-import { IFoodSearchResult, FoodGroup, Recipe } from '../../models';
+import { Food, FoodGroup, IFoodSearchResult, Recipe } from '../../models';
 
 // Providers
 import { FOOD_GROUPS, FoodService, RecipeService } from '../../providers';
@@ -25,8 +25,7 @@ export class FoodSelectPage {
   public searchQueryFoods: string = '';
   public searchQueryRecipes: string = '';
   public selectedGroup: FoodGroup = this.groups[0];
-  public selectedFoods: Array<IFoodSearchResult> = [];
-  public selectedRecipes: Array<Recipe> = [];
+  public selectedItem: IFoodSearchResult | Recipe;
   public selectionSegment: string = 'foods';
   public start: number;
   constructor(
@@ -49,7 +48,11 @@ export class FoodSelectPage {
   }
 
   public doneSelecting(): void {
-    this._viewCtrl.dismiss({ foods: this.selectedFoods, recipes: this.selectedRecipes });
+    if (this.selectedItem.hasOwnProperty('ndbno')) {
+      this._foodSvc.getFoodReports$(this.selectedItem['ndbno']).then((item: Food) => this._viewCtrl.dismiss(this.selectedItem)).catch((err: Error) => console.log('Error on getting food report: ', err));
+    } else {
+      this._viewCtrl.dismiss(this.selectedItem);
+    }
   }
 
   public itemParams(id: string): Object {
@@ -110,6 +113,10 @@ export class FoodSelectPage {
     this._detectorRef.markForCheck();
   }
 
+  public selectItem(item: IFoodSearchResult | Recipe): void {
+    this.selectedItem = item;
+  }
+
   public showFilter(): void {
     this._alertCtrl.create({
       title: 'Filter foods',
@@ -132,23 +139,6 @@ export class FoodSelectPage {
         }
       ]
     }).present();
-  }
-
-  public toggleItem(item: any, type: string): void {
-    if (type === 'food') {
-      if (this.selectedFoods.indexOf(item) === -1) {
-        this.selectedFoods.push(item);
-      } else {
-        this.selectedFoods.splice(this.selectedFoods.indexOf(item), 1);
-      }
-    } else {
-      if (this.selectedRecipes.indexOf(item) === -1) {
-        this.selectedRecipes.push(item);
-      } else {
-        this.selectedRecipes.splice(this.selectedRecipes.indexOf(item), 1);
-      }
-    }
-
   }
 
   ionViewWillEnter(): void {

@@ -94,7 +94,7 @@ export class RecipeService {
   public saveRecipe(recipe: Recipe): void {
     console.log('Saving recipe: ', recipe);
     if (!recipe.hasOwnProperty('$key')) {
-      this._recipes.push(recipe);
+      recipe['$key'] = this._recipes.push(recipe).key;
     } else {
       this._recipes.update(recipe['$key'], {
         chef: recipe.chef,

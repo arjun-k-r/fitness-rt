@@ -58,20 +58,13 @@ export class MealDetailsPage {
   public addMealItems(): void {
     let mealSelectModal: Modal = this._modalCtrl.create(FoodSelectPage);
     mealSelectModal.present();
-    mealSelectModal.onDidDismiss((selections: { foods: Array<IFoodSearchResult>, recipes: Array<Recipe> }) => {
-
-      // Request Food report for each item
-      this._mealSvc.serializeMealItems(selections.foods).then((items: Array<Food>) => {
-        this.meal.mealItems.push(...items);
-        this.meal.mealItems.push(...selections.recipes)
-        console.log(this.meal.mealItems);
-        // Update the meal details
-        this._updateMealDetails();
-        this._detectorRef.markForCheck();
-      }, error => {
-        console.log(error);
-      });
-    });
+    mealSelectModal.onDidDismiss((selection: Food | Recipe) => {
+      this.meal.mealItems.push(selection);
+      console.log('My new foods: ', this.meal.mealItems);
+      // Update the meal details
+      this._updateMealDetails();
+      this._detectorRef.markForCheck();
+    })
   }
 
   public changeServings(item: Food): void {

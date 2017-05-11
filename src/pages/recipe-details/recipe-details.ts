@@ -41,19 +41,12 @@ export class RecipeDetailsPage {
   public addIngredients(): void {
     let ingredientSelectModal: Modal = this._modalCtrl.create(FoodSelectPage);
     ingredientSelectModal.present();
-    ingredientSelectModal.onDidDismiss((selections: { foods: Array<IFoodSearchResult>, recipes: Array<Recipe> }) => {
-
-      // Request Food report for each item
-      this._recipeSvc.serializeIngredientss(selections.foods).then((items: Array<Food>) => {
-        this.recipe.ingredients.push(...items);
-        this.recipe.ingredients.push(...selections.recipes)
-        console.log(this.recipe.ingredients);
-        // Update the meal details
-        this._updateRecipeDetails();
-        this._detectorRef.markForCheck();
-      }, error => {
-        console.log(error);
-      });
+    ingredientSelectModal.onDidDismiss((selection: Food | Recipe) => {
+      this.recipe.ingredients.push(selection);
+      console.log('My new ingredients: ', this.recipe.ingredients);
+      // Update the meal details
+      this._updateRecipeDetails();
+      this._detectorRef.markForCheck();
     });
   }
 

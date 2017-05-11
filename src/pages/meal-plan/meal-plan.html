@@ -12,9 +12,6 @@
   </ion-navbar>
   <ion-toolbar>
     <ion-segment [(ngModel)]="mealPlanDetails" (click)="segmentChange()">
-      <ion-segment-button value="details">
-        <ion-icon name="create"></ion-icon>
-      </ion-segment-button>
       <ion-segment-button value="meals">
         <ion-icon name="clock"></ion-icon>
       </ion-segment-button>
@@ -35,14 +32,11 @@
 <ion-content>
   <div [ngSwitch]="mealPlanDetails">
     <!-- Start of segment -->
-    <ion-list *ngSwitchCase="'details'">
-      <ion-item>
+    <div *ngSwitchCase="'meals'">
+      <ion-item *ngIf="mealPlan">
         <ion-label floating>Breakfast time</ion-label>
         <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="mealPlan.breakfastTime" (ionChange)="reorganizeMeals()"></ion-datetime>
       </ion-item>
-    </ion-list>
-    <!-- Start of segment -->
-    <div *ngSwitchCase="'meals'">
       <ion-card *ngFor="let meal of mealPlan?.meals; let i = index">
         <ion-card-content>
           <ion-card-title color="primary">

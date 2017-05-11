@@ -31,15 +31,15 @@ export class FoodDetailsPage {
     });
 
     loader.present();
-    this._foodSvc.getFoodReports$(this._params.get('id')).then((data: Food) => {
+    this._foodSvc.getFoodReports$(this._params.get('id')).subscribe((data: Food) => {
       this.food = data;
       loader.dismiss();
       this._detectorRef.markForCheck();
-    }).catch((err: Error) => {
-        this._alertSvc.showAlert(err.toString());
-        loader.dismiss();
-        this._navCtrl.pop();
-      })
+    }, (err: Error) => {
+      this._alertSvc.showAlert(err.toString());
+      loader.dismiss();
+      this._navCtrl.pop();
+    });
   }
 
   ionViewWillUnload(): void {

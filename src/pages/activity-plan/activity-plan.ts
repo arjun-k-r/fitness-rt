@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { Alert, AlertController, Loading, LoadingController, Modal, ModalController, NavController } from 'ionic-angular';
 
 // Models
-import { Activity, ActivityPlan } from '../../models';
+import { Activity, ActivityPlan, WarningMessage } from '../../models';
 
 // Pages
 import { ActivitySelectPage } from '../activity-select/activity-select';
@@ -32,10 +32,16 @@ export class ActivityPlanPage {
   ) { }
 
   public addNewActivity(): void {
-    let activitySelectModal: Modal = this._modalCtrl.create(ActivitySelectPage);
+    let activitySelectModal: Modal = this._modalCtrl.create(ActivitySelectPage),
+      warning: WarningMessage;
     activitySelectModal.present();
     activitySelectModal.onDidDismiss((activity: Activity) => {
       console.log('Selected: ', activity);
+      warning = this._activitySvc.checkActivity(activity);
+      if (!!warning) {
+        this._alertSvc.showAlert(warning.moreInfo, 'Try to rethink your activity', warning.message);
+      }
+      
       if (activity.type === 'Physical') {
         this.activityPlan.physicalActivities.push(activity);
         this.activityPlan.physicalEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.physicalActivities);
@@ -97,14 +103,6 @@ export class ActivityPlanPage {
   }
 
   public saveActivityPlan(): void {
-    this._activitySvc.checkActivityPlan(this.activityPlan);
-    
-    if (!this.activityPlan.warnings.length) {
-      this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy activity plan!', 'Well done!');
-    } else {
-      this._alertSvc.showAlert('Please check the warnings', 'Your activity plan seems to be unhealthy', 'Oh oh...');
-    }
-
     this._activitySvc.saveActivityPlan(this.activityPlan);
     this._activitySvc.getLeftEnergy().then((energy: number) => {
       this.leftEnergy = energy;

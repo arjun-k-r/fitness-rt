@@ -55,11 +55,13 @@ export class MealDetailsPage {
     let mealSelectModal: Modal = this._modalCtrl.create(FoodSelectPage);
     mealSelectModal.present();
     mealSelectModal.onDidDismiss((selection: Food | Recipe) => {
-      this.meal.mealItems.push(selection);
-      console.log('My new foods: ', this.meal.mealItems);
-      // Update the meal details
-      this._updateMealDetails();
-      this._detectorRef.markForCheck();
+      if (!!selection) {
+        this.meal.mealItems.push(selection);
+        console.log('My new foods: ', this.meal.mealItems);
+        // Update the meal details
+        this._updateMealDetails();
+        this._detectorRef.markForCheck();
+      }
     })
   }
 

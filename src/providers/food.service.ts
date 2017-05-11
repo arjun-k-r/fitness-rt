@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Http, URLSearchParams, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
+import 'rxjs/operator/map';
 
 // Models
 import { Food, FoodGroup, IFoodReportNutrient, IFoodReportSearchResult, IFoodSearchResult } from '../models';
@@ -269,7 +270,7 @@ export class FoodService {
     });
   }
 
-  public getFoodReports$(foodId: string = ''): Promise<Food> {
+  public getFoodReports$(foodId: string = ''): Observable<Food> {
     let headers: Headers = new Headers({ 'Content-Type': 'application/json' }),
       options: RequestOptions = new RequestOptions(),
       params: URLSearchParams = new URLSearchParams();
@@ -280,25 +281,17 @@ export class FoodService {
     options.headers = headers;
     options.search = params;
 
-    return new Promise((resolve, reject) => {
-      this._http.get(this._foodNutritionUrl, options)
-        .map((res: Response) => {
-          let body = res.json();
-          console.log(body);
-          if (body.hasOwnProperty('errors')) {
-            console.log(body.errors);
-            return null;
-          }
+    return this._http.get(this._foodNutritionUrl, options)
+      .map((res: Response) => {
+        let body = res.json();
+        console.log(body);
+        if (body.hasOwnProperty('errors')) {
+          console.log(body.errors);
+          throw body.errors.error[0];
+        }
 
-          return this._serializeFood(body['report']['food']);
-        }).subscribe((data: Food) => {
-          if (!!data) {
-            resolve(data);
-          } else {
-            reject(data);
-          }
-        });
-    });
+        return this._serializeFood(body['report']['food']);
+      }).catch((err: any) => Observable.throw(err));
   }
 
   public getFoods$(searhQuery: string = '', start: number = 0, limit: number = 100, foodGroupId: string = ''): Observable<Array<IFoodSearchResult>> {
@@ -327,17 +320,5 @@ export class FoodService {
         }
         return body['list']['item'];
       }).catch((err: any) => Observable.throw(err));
-  }
-
-  /**
-   * Gets the nutritional values of foods
-   * @param {Array} items The foods
-   * @returns {Observable} Returns a stream of food reports
-   */
-  public serializeItems(items: Array<IFoodSearchResult>): Promise<Array<Food>> {
-    let requests: Array<Promise<Food>> = [];
-
-    items.forEach((item: IFoodSearchResult, idx: number) => requests.push(this.getFoodReports$(item.ndbno)));
-    return Promise.all(requests);
   }
 }

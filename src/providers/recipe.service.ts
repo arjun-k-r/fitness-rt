@@ -8,7 +8,6 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 // Models
 import {
   Food,
-  IFoodSearchResult,
   Nutrition,
   Recipe
 } from '../models';
@@ -104,18 +103,8 @@ export class RecipeService {
         pral: recipe.pral,
         quantity: recipe.quantity,
         servings: recipe.servings
-        //tastes: recipe.tastes
       });
     }
-  }
-
-  /**
-   * Gets the nutritional values of each ingredient
-   * @param {Array} items The selected ingredient
-   * @returns {Observable} Returns a stream of food reports
-   */
-  public serializeIngredientss(items: Array<IFoodSearchResult>): Promise<Array<Food | Recipe>> {
-    return this._foodSvc.serializeItems(items);
   }
 
 }

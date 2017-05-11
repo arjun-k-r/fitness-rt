@@ -42,11 +42,13 @@ export class RecipeDetailsPage {
     let ingredientSelectModal: Modal = this._modalCtrl.create(FoodSelectPage);
     ingredientSelectModal.present();
     ingredientSelectModal.onDidDismiss((selection: Food | Recipe) => {
-      this.recipe.ingredients.push(selection);
-      console.log('My new ingredients: ', this.recipe.ingredients);
-      // Update the meal details
-      this._updateRecipeDetails();
-      this._detectorRef.markForCheck();
+      if (!!selection) {
+        this.recipe.ingredients.push(selection);
+        console.log('My new ingredients: ', this.recipe.ingredients);
+        // Update the meal details
+        this._updateRecipeDetails();
+        this._detectorRef.markForCheck();
+      }
     });
   }
 

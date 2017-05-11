@@ -13,7 +13,6 @@ import * as _ from 'lodash';
 // Models
 import {
   Food,
-  IFoodSearchResult,
   Meal,
   MealPlan,
   MealServing,
@@ -318,14 +317,5 @@ export class MealService {
       excess: mealPlan.excess,
       meals: mealPlan.meals || []
     });
-  }
-
-  /**
-   * Gets the nutritional values of each selected food
-   * @param {Array} items The selected food
-   * @returns {Observable} Returns a stream of food reports
-   */
-  public serializeMealItems(items: Array<IFoodSearchResult>): Promise<Array<Food | Recipe>> {
-    return this._foodSvc.serializeItems(items);
   }
 }

@@ -52,7 +52,7 @@ export class ActivityService {
    * @returns {void}
    */
   private _checkLastActivityPlan(activityPlan: ActivityPlan): void {
-    if (activityPlan.intellectualEffort > 480) {
+    if (activityPlan.intellectualEffort > 180) {
       activityPlan.intellectualOverwork++;
       activityPlan.intellectualInactivity = 0;
     } else if (activityPlan.intellectualEffort < 60) {
@@ -60,7 +60,7 @@ export class ActivityService {
       activityPlan.intellectualOverwork = 0;
     }
 
-    if (activityPlan.physicalEffort > 240) {
+    if (activityPlan.physicalEffort > 180) {
       activityPlan.physicalOverwork++;
       activityPlan.physicalInactivity = 0;
     } else if (activityPlan.physicalEffort < 60) {
@@ -71,28 +71,28 @@ export class ActivityService {
     if (activityPlan.physicalInactivity > 2) {
       activityPlan.warnings.push(new WarningMessage(
         'Get moving!',
-        'Sedentary lifestyle is one of the primary causes of all health conditions. You need to move everyday.'
+        `You haven't been moving for ${activityPlan.physicalInactivity} days. You need to move everyday.`
       ));
     }
 
     if (activityPlan.intellectualInactivity > 2) {
       activityPlan.warnings.push(new WarningMessage(
         "If you don't use it, you lose it",
-        'You need to exercise your muscles every day and that includes your brain.'
+        `You haven't been using your brain for ${activityPlan.intellectualInactivity} days. You need to learn something new everyday.`
       ));
     }
 
-    if (activityPlan.physicalOverwork > 5) {
+    if (activityPlan.physicalOverwork > 2) {
       activityPlan.warnings.push(new WarningMessage(
-        'Everything in excess is opposed to nature.',
-        'Too much physical exercise damages your muscles fibers and can prevent them from developing and recovering.'
+        "Aren't you feeling tired or burned out?",
+        `You have been overworking your muscles for ${activityPlan.physicalOverwork} days. You need to let your muscles to recover. You aren't iron man you know?`
       ));
     }
 
-    if (activityPlan.intellectualOverwork > 5) {
+    if (activityPlan.intellectualOverwork > 2) {
       activityPlan.warnings.push(new WarningMessage(
-        'Everything in excess is opposed to nature.',
-        'Too much intellectual exercise may lead to irritability, fatigue, depression, stress, and many other health issues'
+        "Aren't you feeling stressed or overwhelmed?",
+        `You have been overworking your brain for ${activityPlan.intellectualOverwork} days. You need to let your brain digest the new information.`
       ));
     }
   }
@@ -107,33 +107,24 @@ export class ActivityService {
   }
 
   /**
-   * Looks for imbalance in performed activities
+   * Checks if the activity is performed properly
    * @description We must exercise smart
-   * @param {ActivityPlan} activityPlan - The activity plan to check
-   * @returns {void}
+   * @param {Activity} activity - The activity to check
+   * @returns {WarningMessage} Returns warning if something is wrong
    */
-  public checkActivityPlan(activityPlan: ActivityPlan): void {
-    let aerobicExercise: number = 0,
-      anaerobicExercise: number = 0;
-    activityPlan.physicalActivities.forEach((activity: Activity) => {
-      if (activity.met >= 8 && activity.duration > 45) {
-        anaerobicExercise += activity.duration;
-        activityPlan.warnings.push(new WarningMessage(
-          'Too much intense exercise at once',
-          'Long sessions of intense exercise damage the heart over time. Keep intense exercise to less than 45 minute per day.'
-        ));
-      }
+  public checkActivity(activity: Activity): WarningMessage {
+    if (activity.met >= 8 && activity.duration > 45) {
+      return new WarningMessage(
+        'Too much intense exercise at once',
+        'Long sessions of intense exercise damage the heart over time. Keep intense exercise to less than 45 minute per day.'
+      )
+    }
 
-      if (activity.met > 4 && activity.met < 8) {
-        aerobicExercise += activity.duration;
-      }
-    });
-
-    if (aerobicExercise === 0 && anaerobicExercise === 0) {
-      activityPlan.warnings.push(new WarningMessage(
-        'Remember to raise your heart rate',
-        'Exercise is beneficial only if it helps your reach your target heart rate.'
-      ));
+    if (activity.met < 4 && activity.type === 'Physical') {
+      return new WarningMessage(
+        'You need to reach your target heart rate',
+        "Keep in mind that your activities are impactless if they don't raise your heart rate in the aerobic zone"
+      )
     }
   }
 

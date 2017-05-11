@@ -16,12 +16,14 @@ const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class SleepService {
+  private _sleepDeficiency: FirebaseObjectObservable<Array<string>>;
   private _sleepPlan: FirebaseObjectObservable<SleepPlan>;
   constructor(
     private _af: AngularFire,
     private _user: User
   ) {
-    this._sleepPlan = _af.database.object(`/sleep-plan/${_user.id}/${CURRENT_DAY}`);
+    this._sleepDeficiency = _af.database.object('/imbalance/deficiencies/sleep');
+    this._sleepPlan = _af.database.object(`/sleep-plan/${_user.id}/`);
   }
 
   /**
@@ -119,56 +121,53 @@ export class SleepService {
    * @param {SleepPlan} sleepPlan - The sleep plan to verify
    * @returns {Promise} Returns confirmation if the sleep is healthy or not
    */
-  private _checkSleep(sleepPlan: SleepPlan): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      let currentSleep: SleepHabit = sleepPlan.sleepPattern[0],
-        sleepBedtimeWarning: WarningMessage = this._checkBedtime(currentSleep),
-        sleepDurationWarning: WarningMessage = this._checkDuration(currentSleep),
-        sleepElectronicsWarning: WarningMessage = this._checkElectronics(currentSleep),
-        sleepOscillationWarning: WarningMessage = this._checkOscillation(sleepPlan),
-        sleepRelaxationWarning: WarningMessage = this._checkRelaxation(currentSleep),
-        sleepStimulantsWarning: WarningMessage = this._checkStimulants(currentSleep);
+  private _checkSleep(sleepPlan: SleepPlan): void {
+    let currentSleep: SleepHabit = sleepPlan.sleepPattern[0],
+      sleepBedtimeWarning: WarningMessage = this._checkBedtime(currentSleep),
+      sleepDurationWarning: WarningMessage = this._checkDuration(currentSleep),
+      sleepElectronicsWarning: WarningMessage = this._checkElectronics(currentSleep),
+      sleepOscillationWarning: WarningMessage = this._checkOscillation(sleepPlan),
+      sleepRelaxationWarning: WarningMessage = this._checkRelaxation(currentSleep),
+      sleepStimulantsWarning: WarningMessage = this._checkStimulants(currentSleep);
 
-      if (!!sleepBedtimeWarning) {
-        currentSleep.warnings.push(sleepBedtimeWarning);
-      }
+    if (!!sleepBedtimeWarning) {
+      currentSleep.warnings.push(sleepBedtimeWarning);
+    }
 
-      if (!!sleepDurationWarning) {
-        currentSleep.warnings.push(sleepDurationWarning);
-      }
+    if (!!sleepDurationWarning) {
+      currentSleep.warnings.push(sleepDurationWarning);
+    }
 
-      if (!!sleepElectronicsWarning) {
-        currentSleep.warnings.push(sleepElectronicsWarning);
-      }
+    if (!!sleepElectronicsWarning) {
+      currentSleep.warnings.push(sleepElectronicsWarning);
+    }
 
-      if (!!sleepOscillationWarning) {
-        currentSleep.warnings.push(sleepOscillationWarning);
-      }
+    if (!!sleepOscillationWarning) {
+      currentSleep.warnings.push(sleepOscillationWarning);
+    }
 
-      if (!!sleepRelaxationWarning) {
-        currentSleep.warnings.push(sleepRelaxationWarning);
-      }
+    if (!!sleepRelaxationWarning) {
+      currentSleep.warnings.push(sleepRelaxationWarning);
+    }
 
-      if (!!sleepStimulantsWarning) {
-        currentSleep.warnings.push(sleepStimulantsWarning);
-      }
+    if (!!sleepStimulantsWarning) {
+      currentSleep.warnings.push(sleepStimulantsWarning);
+    }
 
-      if (!!sleepBedtimeWarning || !!sleepDurationWarning) {
-        sleepPlan.poorSleep++;
-      }
+    if (!!sleepBedtimeWarning || !!sleepDurationWarning) {
+      sleepPlan.poorSleep++;
+    }
 
-      if (!!sleepElectronicsWarning || !!sleepOscillationWarning || !!sleepRelaxationWarning || !!sleepStimulantsWarning) {
-        sleepPlan.notRefreshing++;
-      }
+    if (!!sleepElectronicsWarning || !!sleepOscillationWarning || !!sleepRelaxationWarning || !!sleepStimulantsWarning) {
+      sleepPlan.notRefreshing++;
+    }
 
-      if (!currentSleep.warnings.length) {
-        resolve(true);
-        sleepPlan.notRefreshing = 0;
-        sleepPlan.poorSleep = 0;
-      } else {
-        reject(currentSleep.warnings);
-      }
-    });
+    if (!currentSleep.warnings || !currentSleep.warnings.length) {
+      sleepPlan.notRefreshing = 0;
+      sleepPlan.poorSleep = 0;
+    }
+
+    sleepPlan.sleepPattern[0] = currentSleep;
   }
 
   /**
@@ -206,6 +205,14 @@ export class SleepService {
   }
 
   /**
+   * Gets the signs and symptoms of bad sleep patterns
+   * @returns {FirebaseObjectObservable} Returns observable of symptoms
+   */
+  public getSleepSymptoms$(): FirebaseObjectObservable<Array<string>> {
+    return this._sleepDeficiency;
+  }
+
+  /**
    * Establishes the proper wake up time by the bed time
    * @description We need to sleep 4-5 complete 90-minute REM sleep cycles for optimal health
    * @param {string} bedTime The bed time to set the wake up time for
@@ -217,28 +224,17 @@ export class SleepService {
       .format('HH:mm');
   }
 
-  public saveSleep(sleepPlan: SleepPlan, sleepHabit: SleepHabit): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      sleepPlan.sleepPattern[0] = sleepHabit;
-      console.log('Saving sleep plan: ', sleepPlan);
+  public saveSleep(sleepPlan: SleepPlan, sleepHabit: SleepHabit): void {
+    sleepPlan.sleepPattern[0] = sleepHabit;
+    console.log('Saving sleep plan: ', sleepPlan);
 
-      this._checkSleep(sleepPlan).then((isGood: boolean) => {
-        this._sleepPlan.update({
-          sleepOscillation: sleepPlan.sleepOscillation,
-          sleepPattern: sleepPlan.sleepPattern
-        });
-
-        resolve(true);
-      }).catch((warnings: Array<WarningMessage>) => {
-        sleepPlan.sleepPattern[0].warnings = [...warnings];
-
-        this._sleepPlan.update({
-          sleepOscillation: sleepPlan.sleepOscillation,
-          sleepPattern: sleepPlan.sleepPattern
-        });
-
-        reject(warnings);
-      });
+    this._checkSleep(sleepPlan);
+    sleepHabit = sleepPlan.sleepPattern[0];
+    this._sleepPlan.update({
+      notRefreshing: sleepPlan.notRefreshing,
+      poorSleep: sleepPlan.poorSleep,
+      sleepOscillation: sleepPlan.sleepOscillation,
+      sleepPattern: sleepPlan.sleepPattern
     });
   }
 }

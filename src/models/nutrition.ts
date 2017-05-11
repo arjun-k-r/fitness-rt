@@ -18,14 +18,6 @@ export interface INutrientDetails {
  * 
  */
 export class Nutrient {
-    /**
-     * @constructor
-     * @param id 
-     * @param group 
-     * @param name 
-     * @param unit 
-     * @param value 
-     */
     constructor(
         public id: number,
         public group: string,
@@ -39,55 +31,8 @@ export class Nutrient {
  * 
  */
 export class NutrientDeficiencies {
-    /**
-     * @constructor
-     * @param water 
-     * @param protein 
-     * @param fats 
-     * @param carbs 
-     * @param fiber 
-     * @param calcium 
-     * @param iron 
-     * @param magnesium 
-     * @param phosphorus 
-     * @param potassium 
-     * @param sodium 
-     * @param zinc 
-     * @param copper 
-     * @param manganese 
-     * @param selenium 
-     * @param vitaminC 
-     * @param vitaminB1 
-     * @param vitaminB2 
-     * @param vitaminB3 
-     * @param vitaminB5 
-     * @param vitaminB6 
-     * @param vitaminB9 
-     * @param choline 
-     * @param vitaminB12 
-     * @param vitaminA 
-     * @param vitaminE 
-     * @param vitaminD 
-     * @param vitaminK 
-     * @param la 
-     * @param ala 
-     * @param dha 
-     * @param epa 
-     * @param tryptophan 
-     * @param threonine 
-     * @param isoleucine 
-     * @param leucine 
-     * @param lysine 
-     * @param methionine 
-     * @param phenylalanine 
-     * @param valine 
-     * @param histidine 
-     */
     constructor(
         public water: number = 0,
-        public protein: number = 0,
-        public fats: number = 0,
-        public carbs: number = 0,
         public fiber: number = 0,
         public calcium: number = 0,
         public iron: number = 0,
@@ -132,115 +77,22 @@ export class NutrientDeficiencies {
  * 
  */
 export class NutrientExcesses {
-    /**
-     * @constructor
-     * @param energy
-     * @param protein 
-     * @param fats 
-     * @param carbs 
-     * @param sugars 
-     * @param sodium
-     * @param transFat 
-     * @param alcohol 
-     * @param caffeine 
-     */
     constructor(
+        public alcohol: number = 0,
+        public caffeine: number = 0,
         public energy: number = 0,
         public protein: number = 0,
-        public fats: number = 0,
         public carbs: number = 0,
         public sugars: number = 0,
         public sodium: number = 0,
-        public transFat: number = 0,
-        public alcohol: number = 0,
-        public caffeine: number = 0
+        public transFat: number = 0
     ) {}
 }
-
-export const NUTRIENT_THRESHOLDS: {
-    carbs: number,
-    fat: number,
-    fiber: number,
-    lactose: number,
-    potassium: number,
-    protein: number,
-    sodium: number,
-    starch: number,
-    sugars: number,
-    vitaminC: number,
-    vitaminK: number,
-    water: number
-} = {
-        'carbs': 10,
-        'fat': 10,
-        'fiber': 10,
-        'lactose': 5,
-        'potassium': 77,
-        'protein': 20,
-        'sodium': 200,
-        'starch': 3,
-        'sugars': 11,
-        'vitaminC': 30,
-        'vitaminK': 125,
-        'water': 10
-    };
 
 /**
  * 
  */
 export class Nutrition {
-    /**
-     * @constructor
-     * @param water 
-     * @param energy 
-     * @param protein 
-     * @param fats 
-     * @param carbs 
-     * @param starch 
-     * @param lactose 
-     * @param fiber 
-     * @param sugars 
-     * @param calcium 
-     * @param iron 
-     * @param magnesium 
-     * @param phosphorus 
-     * @param potassium 
-     * @param sodium 
-     * @param zinc 
-     * @param copper 
-     * @param manganese 
-     * @param selenium 
-     * @param vitaminC 
-     * @param vitaminB1 
-     * @param vitaminB2 
-     * @param vitaminB3 
-     * @param vitaminB5 
-     * @param vitaminB6 
-     * @param vitaminB9 
-     * @param choline 
-     * @param vitaminB12 
-     * @param vitaminA 
-     * @param vitaminE 
-     * @param vitaminD 
-     * @param vitaminK 
-     * @param satFat 
-     * @param la 
-     * @param ala 
-     * @param dha 
-     * @param epa 
-     * @param transFat 
-     * @param tryptophan 
-     * @param threonine 
-     * @param isoleucine 
-     * @param leucine 
-     * @param lysine 
-     * @param methionine 
-     * @param phenylalanine 
-     * @param valine 
-     * @param histidine 
-     * @param alcohol 
-     * @param caffeine 
-     */
     constructor(
         public water: Nutrient = new Nutrient(255, 'Proximates', 'Water', 'g'),
         public energy: Nutrient = new Nutrient(208, 'Proximates', 'Energy', 'kcal'),

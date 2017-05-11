@@ -22,8 +22,8 @@
             "Diarrhea",
             "Bleeding",
             "Slow wound healing",
-            "High low-density lipoprotein (LDL) levels",
-            "High blood pressure",
+            "High LDL levels",
+            "Hypertension (high blood pressure)",
             "Irregular heart rhythm"
         ],
         "degradation": [
@@ -116,7 +116,7 @@
         "absorption": [],
         "deficiencies": [
             "Low blood sugar levels",
-            "Low low-density lipoprotein (LDL) levels",
+            "Low LDL levels",
             "Dizziness",
             "Weight loss"
         ],
@@ -193,8 +193,8 @@
             "Slow wound healing",
             "Hair loss",
             "Bleeding",
-            "High low-density lipoprotein (LDL) levels",
-            "High blood pressure",
+            "High LDL levels",
+            "Hypertension (high blood pressure)",
             "Constipation",
             "Liver problems"
         ],
@@ -393,8 +393,8 @@
     {
         "absorption": [],
         "deficiencies": [
-            "High blood glucose",
-            "High low-density lipoprotein (LDL) levels",
+            "High blood sugar levels",
+            "High LDL levels",
             "Fatigue",
             "Anxiety"
         ],
@@ -713,8 +713,8 @@
             "Depression",
             "Irritability",
             "Apathy",
-            "High low-density lipoprotein (LDL) levels",
-            "High blood pressure",
+            "High LDL levels",
+            "Hypertension (high blood pressure)",
             "Irregular heart rhythm"
         ],
         "degradation": [
@@ -796,8 +796,8 @@
             "Swelling",
             "Bleeding",
             "Slow wound healing",
-            "High low-density lipoprotein (LDL) levels",
-            "High blood pressure",
+            "High LDL levels",
+            "Hypertension (high blood pressure)",
             "Irregular heart rhythm"
         ],
         "degradation": [
@@ -887,8 +887,8 @@
             "Anorexia",
             "Diarrhea",
             "Bleeding",
-            "High low-density lipoprotein (LDL) levels",
-            "High blood pressure"
+            "High LDL levels",
+            "Hypertension (high blood pressure)"
         ],
         "degradation": [
             "Cooking",
@@ -968,8 +968,8 @@
         "absorption": [],
         "deficiencies": [
             "Digestive problems",
-            "High low-density lipoprotein (LDL) levels",
-            "High blood glucose levels",
+            "High LDL levels",
+            "High blood sugar levels",
             "Inflammation",
             "Cough",
             "Fever",
@@ -1143,7 +1143,7 @@
     {
         "absorption": [],
         "deficiencies": [
-            "High blood pressure",
+            "Hypertension (high blood pressure)",
             "Fatigue",
             "Weakness",
             "Drowsiness",
@@ -1376,7 +1376,7 @@
             "Skin driness",
             "Skin flakiness",
             "Insomnia",
-            "High low-density lipoprotein (LDL) levels",
+            "High LDL levels",
             "Sensitivity to touch",
             "Eye inflammation",
             "Hair loss",
@@ -1679,7 +1679,7 @@
             "Manganese"
         ],
         "deficiencies": [
-            "High low-density lipoprotein (LDL) levels",
+            "High LDL levels",
             "High blood homocysteine",
             "Instability",
             "Confusion",
@@ -1914,8 +1914,8 @@
             "Diarrhea",
             "Bleeding",
             "Slow wound healing",
-            "High low-density lipoprotein (LDL) levels",
-            "High blood pressure"
+            "High LDL levels",
+            "Hypertension (high blood pressure)"
         ],
         "degradation": [
             "Cooking",
@@ -2065,7 +2065,7 @@
             "Weakness",
             "Depression",
             "Infections",
-            "High blood pressure",
+            "Hypertension (high blood pressure)",
             "Skin problems",
             "Muscle problems",
             "Weight loss"
@@ -2262,7 +2262,7 @@
             "Chest pain",
             "Irregular heart rhythm",
             "Breathing difficulties",
-            "High blood pressure",
+            "Hypertension (high blood pressure)",
             "Numbness and tingling",
             "Delirium",
             "Hallucinations"
@@ -2622,7 +2622,7 @@
             "Tremors",
             "Anxiety",
             "Depression",
-            "High blood pressure"
+            "Hypertension (high blood pressure)"
         ],
         "degradation": [],
         "depletion": [
@@ -2753,7 +2753,7 @@
             "Irregular heart rhythm",
             "Weight loss",
             "Skin problems",
-            "High blood glucose levels"
+            "High blood sugar levels"
         ],
         "degradation": [],
         "depletion": [
@@ -2919,8 +2919,8 @@
     {
         "absorption": [],
         "deficiencies": [
-            "High blood pressure",
-            "High blood glucose levels",
+            "Hypertension (high blood pressure)",
+            "High blood sugar levels",
             "Irregular heart rhythm",
             "Breathing difficulties",
             "Weakness",
@@ -3623,9 +3623,9 @@
     {
         "effects": [
             "Inflammation",
-            "High blood glucose levels",
-            "High low-density lipoprotein (LDL) levels",
-            "High blood pressure",
+            "High blood sugar levels",
+            "High LDL levels",
+            "Hypertension (high blood pressure)",
             "Hyperactivity",
             "Addiction",
             "Attention difficulties",
@@ -3696,8 +3696,8 @@
             "Attention difficulties",
             "Learning difficulties",
             "Memory loss",
-            "High low-density lipoprotein (LDL) levels",
-            "High blood pressure",
+            "High LDL levels",
+            "Hypertension (high blood pressure)",
             "Infertility",
             "Weight gain (obesity)"
         ],

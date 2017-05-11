@@ -265,7 +265,7 @@ export class MealService {
     });
 
     // Add more meals if there is enough time until bedtime
-    mealPlan.meals = [...mealPlan.meals, ...this._getMeals(moment(mealPlan.meals[mealPlan.meals.length - 1].time, 'hours').add(4, 'hours').format('HH:mm'))];
+    //mealPlan.meals = [...mealPlan.meals, ...this._getMeals(moment(mealPlan.meals[mealPlan.meals.length - 1].time, 'hours').add(4, 'hours').format('HH:mm'))];
   }
 
   /**

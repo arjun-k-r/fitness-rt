@@ -251,8 +251,7 @@ export class MealService {
    * @returns {void}
    */
   public reorganizeMeals(mealPlan: MealPlan): void {
-    let mealTime: number = 0,
-      mealTimeWarning: boolean = false;
+    let mealTime: number = 0;
 
     mealPlan.meals.forEach((meal: Meal, mealIdx: number) => {
       meal.time = moment(mealPlan.breakfastTime, 'hours').add(mealTime, 'hours').format('HH:mm');

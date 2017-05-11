@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { Alert, AlertController, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
 
 // Models
-import { Food, IFoodSearchResult, Recipe } from '../../models';
+import { Food, Recipe } from '../../models';
 
 // Pages
 import { FoodSelectPage } from '../food-select/food-select';

@@ -10,8 +10,7 @@ import {
   Food,
   IFoodSearchResult,
   Nutrition,
-  Recipe,
-  WarningMessage
+  Recipe
 } from '../models';
 
 // Providers

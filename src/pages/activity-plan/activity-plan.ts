@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { Alert, AlertController, Loading, LoadingController, Modal, ModalController, NavController } from 'ionic-angular';
 
 // Models
-import { Activity, ActivityPlan, WarningMessage } from '../../models';
+import { Activity, ActivityPlan } from '../../models';
 
 // Pages
 import { ActivitySelectPage } from '../activity-select/activity-select';

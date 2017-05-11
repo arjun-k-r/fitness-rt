@@ -51,6 +51,7 @@
         <ion-item *ngFor="let recipe of (recipes$ | async) | search: searchQueryRecipes: recipeLimit">
           <ion-label text-wrap>{{ recipe.name }}</ion-label>
           <ion-radio [value]="recipe.name" (click)="selectItem(recipe)"></ion-radio>
+        </ion-item>
       </ion-list>
 
       <ion-infinite-scroll (ionInfinite)="loadMoreRecipes($event)">

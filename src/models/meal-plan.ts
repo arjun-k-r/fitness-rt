@@ -43,7 +43,6 @@ export class MealPlan {
      * @param {NutrientDeficiencies} deficiency - Counts the days of essential nutrient deficiency
      * @param {NutrientExcesses} excess - Counts the days of non-essential nutrient excess
      * @param {Array} meals - The meals of the meal plan from the specified date
-     * @param {Array} warnings - Warning messages if there are problems related to the meal plan
      */
     constructor(
         public breakfastTime: string = '',
@@ -51,8 +50,7 @@ export class MealPlan {
         public date: number = moment().dayOfYear(),
         public deficiency: NutrientDeficiencies = new NutrientDeficiencies(),
         public excess: NutrientExcesses = new NutrientExcesses(),
-        public meals: Array<Meal> = [],
-        public warnings: Array<WarningMessage> = [],
+        public meals: Array<Meal> = []
     ) { }
 }
 

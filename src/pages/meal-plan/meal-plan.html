@@ -55,7 +55,7 @@
             </ion-item>
             <ion-item>
               Size
-              <p item-content ion-text color="{{ meal.quantity > 750 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
+              <p item-content ion-text color="{{ meal.quantity > 250 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
             </ion-item>
             <ion-item>
               Warnings
@@ -298,214 +298,214 @@
     <div *ngSwitchCase="'warnings'">
       <ion-item-group>
         <ion-item-divider>Macronutrient deficiency</ion-item-divider>
-        <ion-item *ngIf="mealPlan.deficiency.protein > 7">
+        <ion-item *ngIf="mealPlan.deficiency.protein > 2">
           Protein
           <p item-content>{{ mealPlan.deficiency.protein }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.fats > 7">
+        <ion-item *ngIf="mealPlan.deficiency.fats > 2">
           Fats
           <p item-content>{{ mealPlan.deficiency.fats }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.carbs > 7">
+        <ion-item *ngIf="mealPlan.deficiency.carbs > 2">
           Carbohydrates
           <p item-content>{{ mealPlan.deficiency.carbs }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.water > 7">
+        <ion-item *ngIf="mealPlan.deficiency.water > 2">
           Water
           <p item-content>{{ mealPlan.deficiency.water }} days</p>
         </ion-item>
       </ion-item-group>
       <ion-item-group>
         <ion-item-divider>Essential amino acids deficiency</ion-item-divider>
-        <ion-item *ngIf="mealPlan.deficiency.histidine > 7">
+        <ion-item *ngIf="mealPlan.deficiency.histidine > 2">
           Histidine
           <p item-content>{{ mealPlan.deficiency.histidine }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.isoleucine > 7">
+        <ion-item *ngIf="mealPlan.deficiency.isoleucine > 2">
           Isoleucine
           <p item-content>{{ mealPlan.deficiency.isoleucine }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.leucine > 7">
+        <ion-item *ngIf="mealPlan.deficiency.leucine > 2">
           Leucine
           <p item-content>{{ mealPlan.deficiency.leucine }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.lysine > 7">
+        <ion-item *ngIf="mealPlan.deficiency.lysine > 2">
           Lysine
           <p item-content>{{ mealPlan.deficiency.lysine }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.methionine > 7">
+        <ion-item *ngIf="mealPlan.deficiency.methionine > 2">
           Methionine
           <p item-content>{{ mealPlan.deficiency.methionine }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.phenylalanine > 7">
+        <ion-item *ngIf="mealPlan.deficiency.phenylalanine > 2">
           Phenylalanine
           <p item-content>{{ mealPlan.deficiency.phenylalanine }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.threonine > 7">
+        <ion-item *ngIf="mealPlan.deficiency.threonine > 2">
           Threonine
           <p item-content>{{ mealPlan.deficiency.threonine }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.tryptophan > 7">
+        <ion-item *ngIf="mealPlan.deficiency.tryptophan > 2">
           Tryptophan
           <p item-content>{{ mealPlan.deficiency.tryptophan }} days</p>
         </ion-item>
       </ion-item-group>
       <ion-item-group>
         <ion-item-divider>Essential vitamins deficiency</ion-item-divider>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminA > 7">
+        <ion-item *ngIf="mealPlan.deficiency.vitaminA > 2">
           Vitamin A
           <p item-content>{{ mealPlan.deficiency.vitaminA }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminB1 > 7">
+        <ion-item *ngIf="mealPlan.deficiency.vitaminB1 > 2">
           Vitamin B1 (Thiamine)
           <p item-content>{{ mealPlan.deficiency.vitaminB1 }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminB2 > 7">
+        <ion-item *ngIf="mealPlan.deficiency.vitaminB2 > 2">
           Vitamin B2 (Riboflavin)
           <p item-content>{{ mealPlan.deficiency.vitaminB2 }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminB3 > 7">
+        <ion-item *ngIf="mealPlan.deficiency.vitaminB3 > 2">
           Vitamin B3 (Niacin)
           <p item-content>{{ mealPlan.deficiency.vitaminB3 }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminB5 > 7">
+        <ion-item *ngIf="mealPlan.deficiency.vitaminB5 > 2">
           Vitamin B5 (Pantothenic acid)
           <p item-content>{{ mealPlan.deficiency.vitaminB5 }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminB6 > 7">
+        <ion-item *ngIf="mealPlan.deficiency.vitaminB6 > 2">
           Vitamin B6 (Pyridoxine)
           <p item-content>{{ mealPlan.deficiency.vitaminB6 }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminB9 > 7">
+        <ion-item *ngIf="mealPlan.deficiency.vitaminB9 > 2">
           Vitamin B9 (Folate)
           <p item-content>{{ mealPlan.deficiency.vitaminB9 }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminB12 > 7">
+        <ion-item *ngIf="mealPlan.deficiency.vitaminB12 > 2">
           Vitamin B12 (Cobalamin)
           <p item-content>{{ mealPlan.deficiency.vitaminB12 }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.choline > 7">
+        <ion-item *ngIf="mealPlan.deficiency.choline > 2">
           Choline
           <p item-content>{{ mealPlan.deficiency.choline }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminC > 7">
+        <ion-item *ngIf="mealPlan.deficiency.vitaminC > 2">
           Vitamin C (Ascorbic acid)
           <p item-content>{{ mealPlan.deficiency.vitaminC }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminD > 7">
+        <ion-item *ngIf="mealPlan.deficiency.vitaminD > 2">
           Vitamin D (Cholecalciferol)
           <p item-content>{{ mealPlan.deficiency.vitaminD }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminE > 7">
+        <ion-item *ngIf="mealPlan.deficiency.vitaminE > 2">
           Vitamin E (Tocopherol)
           <p item-content>{{ mealPlan.deficiency.vitaminE }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminK > 7">
+        <ion-item *ngIf="mealPlan.deficiency.vitaminK > 2">
           Vitamin K
           <p item-content>{{ mealPlan.deficiency.vitaminK }} days</p>
         </ion-item>
       </ion-item-group>
       <ion-item-group>
         <ion-item-divider>Essential minerals deficiency</ion-item-divider>
-        <ion-item *ngIf="mealPlan.deficiency.calcium > 7">
+        <ion-item *ngIf="mealPlan.deficiency.calcium > 2">
           Calcium
           <p item-content>{{ mealPlan.deficiency.calcium }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.copper > 7">
+        <ion-item *ngIf="mealPlan.deficiency.copper > 2">
           Copper
           <p item-content>{{ mealPlan.deficiency.copper }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.iron > 7">
+        <ion-item *ngIf="mealPlan.deficiency.iron > 2">
           Iron
           <p item-content>{{ mealPlan.deficiency.iron }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.magnesium > 7">
+        <ion-item *ngIf="mealPlan.deficiency.magnesium > 2">
           Magnesium
           <p item-content>{{ mealPlan.deficiency.magnesium }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.manganese > 7">
+        <ion-item *ngIf="mealPlan.deficiency.manganese > 2">
           Manganese
           <p item-content>{{ mealPlan.deficiency.manganese }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.phosphorus > 7">
+        <ion-item *ngIf="mealPlan.deficiency.phosphorus > 2">
           Phosphorus
           <p item-content>{{ mealPlan.deficiency.phosphorus }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.potassium > 7">
+        <ion-item *ngIf="mealPlan.deficiency.potassium > 2">
           Potassium
           <p item-content>{{ mealPlan.deficiency.potassium }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.selenium > 7">
+        <ion-item *ngIf="mealPlan.deficiency.selenium > 2">
           Selenium
           <p item-content>{{ mealPlan.deficiency.selenium }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.sodium > 7">
+        <ion-item *ngIf="mealPlan.deficiency.sodium > 2">
           Sodium
           <p item-content>{{ mealPlan.deficiency.sodium }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.zinc > 7">
+        <ion-item *ngIf="mealPlan.deficiency.zinc > 2">
           Zinc
           <p item-content>{{ mealPlan.deficiency.zinc }} days</p>
         </ion-item>
       </ion-item-group>
       <ion-item-group>
         <ion-item-divider>Essential fatty acids deficiency</ion-item-divider>
-        <ion-item *ngIf="mealPlan.deficiency.ala > 7">
+        <ion-item *ngIf="mealPlan.deficiency.ala > 2">
           Omega-3 (ALA)
           <p item-content>{{ mealPlan.deficiency.ala }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.dha > 7">
+        <ion-item *ngIf="mealPlan.deficiency.dha > 2">
           Omega-3 (DHA)
           <p item-content>{{ mealPlan.deficiency.dha }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.epa > 7">
+        <ion-item *ngIf="mealPlan.deficiency.epa > 2">
           Omega-3 (EPA)
           <p item-content>{{ mealPlan.deficiency.epa }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.la > 7">
+        <ion-item *ngIf="mealPlan.deficiency.la > 2">
           Omega-6 (LA)
           <p item-content>{{ mealPlan.deficiency.la }} days</p>
         </ion-item>
       </ion-item-group>
       <ion-item-group>
         <ion-item-divider>Excess</ion-item-divider>
-        <ion-item *ngIf="mealPlan.excess.energy > 7">
+        <ion-item *ngIf="mealPlan.excess.energy > 2">
           Energy
           <p item-content>{{ mealPlan.excess.energy }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.excess.carbs > 7">
+        <ion-item *ngIf="mealPlan.excess.carbs > 2">
           Carbohyrates
           <p item-content>{{ mealPlan.excess.carbs }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.excess.fats > 7">
+        <ion-item *ngIf="mealPlan.excess.fats > 2">
           Fats
           <p item-content>{{ mealPlan.excess.fats }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.excess.protein > 7">
+        <ion-item *ngIf="mealPlan.excess.protein > 2">
           Protein
           <p item-content>{{ mealPlan.excess.protein }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.excess.sugars > 7">
+        <ion-item *ngIf="mealPlan.excess.sugars > 2">
           Sugars
           <p item-content>{{ mealPlan.excess.sugars }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.excess.sodium > 7">
+        <ion-item *ngIf="mealPlan.excess.sodium > 2">
           Sodium
           <p item-content>{{ mealPlan.excess.Sodium }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.excess.alcohol > 7">
+        <ion-item *ngIf="mealPlan.excess.alcohol > 2">
           Alcohol
           <p item-content>{{ mealPlan.excess.alcohol }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.excess.caffeine > 7">
+        <ion-item *ngIf="mealPlan.excess.caffeine > 2">
           Caffeine
           <p item-content>{{ mealPlan.excess.caffeine }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.excess.transFat > 7">
+        <ion-item *ngIf="mealPlan.excess.transFat > 2">
           Trans fat
           <p item-content>{{ mealPlan.excess.transFat }} days</p>
         </ion-item>
-        <ion-item *ngIf="mealPlan.excess.sugars > 7">
+        <ion-item *ngIf="mealPlan.excess.sugars > 2">
           Sugars
           <p item-content>{{ mealPlan.excess.sugars }} days</p>
         </ion-item>

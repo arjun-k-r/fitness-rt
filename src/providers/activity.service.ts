@@ -46,45 +46,6 @@ export class ActivityService {
   }
 
   /**
-   * Looks for imbalance in performed activities
-   * @description We must exercise smart
-   * @param {ActivityPlan} activityPlan - The activity plan to check
-   * @returns {Promise} Returns confirmation if the sleep is healthy or not
-   */
-  private _checkActivityPlan(activityPlan: ActivityPlan): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      let aerobicExercise: number = 0,
-        anaerobicExercise: number = 0;
-      activityPlan.physicalActivities.forEach((activity: Activity) => {
-        if (activity.met >= 8 && activity.duration > 45) {
-          anaerobicExercise += activity.duration;
-          activityPlan.warnings.push(new WarningMessage(
-            'Too much intense exercise at once',
-            'Long sessions of intense exercise damage the heart over time. Keep intense exercise to less than 45 minute per day.'
-          ));
-        }
-
-        if (activity.met > 4 && activity.met < 8) {
-          aerobicExercise += activity.duration;
-        }
-      });
-
-      if (aerobicExercise === 0 && anaerobicExercise === 0) {
-        activityPlan.warnings.push(new WarningMessage(
-          'Remember to raise your heart rate',
-          'Exercise is beneficial only if it helps your reach your target heart rate.'
-        ));
-      }
-
-      if (!!activityPlan.warnings.length) {
-        reject(activityPlan.warnings);
-      } else {
-        resolve(true);
-      }
-    });
-  }
-
-  /**
    * Looks for imbalance in the previous day activity plan
    * @description We must exercise every day, both intellectually and physically, but not too much
    * @param {ActivityPlan} activityPlan - The activity plan to check
@@ -143,6 +104,37 @@ export class ActivityService {
    */
   public changeActivityQueryLimit(limit: number): void {
     this._activityLimitSubject.next(limit);
+  }
+
+  /**
+   * Looks for imbalance in performed activities
+   * @description We must exercise smart
+   * @param {ActivityPlan} activityPlan - The activity plan to check
+   * @returns {void}
+   */
+  public checkActivityPlan(activityPlan: ActivityPlan): void {
+    let aerobicExercise: number = 0,
+      anaerobicExercise: number = 0;
+    activityPlan.physicalActivities.forEach((activity: Activity) => {
+      if (activity.met >= 8 && activity.duration > 45) {
+        anaerobicExercise += activity.duration;
+        activityPlan.warnings.push(new WarningMessage(
+          'Too much intense exercise at once',
+          'Long sessions of intense exercise damage the heart over time. Keep intense exercise to less than 45 minute per day.'
+        ));
+      }
+
+      if (activity.met > 4 && activity.met < 8) {
+        aerobicExercise += activity.duration;
+      }
+    });
+
+    if (aerobicExercise === 0 && anaerobicExercise === 0) {
+      activityPlan.warnings.push(new WarningMessage(
+        'Remember to raise your heart rate',
+        'Exercise is beneficial only if it helps your reach your target heart rate.'
+      ));
+    }
   }
 
   /**
@@ -233,52 +225,26 @@ export class ActivityService {
   /**
    * Saves the activity plan to Firebase database
    * @param {ActivityPlan} activityPlan - The activity plan to save
-   * @returns {Promise} Returns confirmation if the activity plan is fine
+   * @returns {void}
    */
-  public saveActivityPlan(activityPlan: ActivityPlan): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      console.log('Saving activity plan: ', activityPlan);
+  public saveActivityPlan(activityPlan: ActivityPlan): void {
+    console.log('Saving activity plan: ', activityPlan);
 
-      this._checkActivityPlan(activityPlan).then((isGood: boolean) => {
+    // Update the user daily requirements
+    this.updateUserRequirements(activityPlan.totalEnergyBurn);
 
-        // Update the user daily requirements
-        this.updateUserRequirements(activityPlan.totalEnergyBurn);
-
-        this._currentActivityPlan.update({
-          date: activityPlan.date,
-          intellectualActivities: activityPlan.intellectualActivities,
-          intellectualEffort: activityPlan.intellectualEffort,
-          intellectualInactivity: activityPlan.intellectualInactivity,
-          intellectualOverwork: activityPlan.intellectualOverwork,
-          physicalActivities: activityPlan.physicalActivities,
-          physicalEffort: activityPlan.physicalEffort,
-          physicalInactivity: activityPlan.physicalInactivity,
-          physicalOverwork: activityPlan.physicalOverwork,
-          totalEnergyBurn: activityPlan.totalEnergyBurn
-        });
-
-        resolve(true);
-      }).catch((warnings: Array<WarningMessage>) => {
-
-        // Update the user daily requirements
-        this.updateUserRequirements(activityPlan.totalEnergyBurn);
-
-        this._currentActivityPlan.update({
-          date: activityPlan.date,
-          intellectualActivities: activityPlan.intellectualActivities,
-          intellectualEffort: activityPlan.intellectualEffort,
-          intellectualInactivity: activityPlan.intellectualInactivity,
-          intellectualOverwork: activityPlan.intellectualOverwork,
-          physicalActivities: activityPlan.physicalActivities,
-          physicalEffort: activityPlan.physicalEffort,
-          physicalInactivity: activityPlan.physicalInactivity,
-          physicalOverwork: activityPlan.physicalOverwork,
-          totalEnergyBurn: activityPlan.totalEnergyBurn,
-          warnings: activityPlan.warnings
-        });
-
-        reject(warnings);
-      });
+    this._currentActivityPlan.update({
+      date: activityPlan.date,
+      intellectualActivities: activityPlan.intellectualActivities,
+      intellectualEffort: activityPlan.intellectualEffort,
+      intellectualInactivity: activityPlan.intellectualInactivity,
+      intellectualOverwork: activityPlan.intellectualOverwork,
+      physicalActivities: activityPlan.physicalActivities,
+      physicalEffort: activityPlan.physicalEffort,
+      physicalInactivity: activityPlan.physicalInactivity,
+      physicalOverwork: activityPlan.physicalOverwork,
+      totalEnergyBurn: activityPlan.totalEnergyBurn,
+      warnings: activityPlan.warnings
     });
   }
 

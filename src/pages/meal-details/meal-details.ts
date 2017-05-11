@@ -42,17 +42,13 @@ export class MealDetailsPage {
     this.meal.pral = this._mealSvc.getMealPral(this.meal.nutrition);
     this.meal.quantity = this._mealSvc.getMealSize(this.meal.mealItems);
 
-    this._mealSvc.checkMeal(this.mealIdx, this.mealPlan.meals).then((isGood: boolean) => {
+    this._mealSvc.checkMeal(this.meal);
+    if (!this.meal.warnings.length) {
       this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy meal!', 'Well done!');
-      this.meal.warnings = [];
-    }).catch((warnings: Array<WarningMessage>) => {
-      if (!!warnings.length) {
-        this.meal.warnings = [...warnings];
-        console.log(this.meal);
-        this._alertSvc.showAlert('Please check the warnings', 'Something is wrong with this meal', 'Oh oh...');
-        this._detectorRef.markForCheck();
-      }
-    });
+    } else {
+      this._alertSvc.showAlert('Please check the warnings', 'Something is wrong with this meal', 'Oh oh...');
+    }
+    this._detectorRef.markForCheck();
   }
 
   public addMealItems(): void {

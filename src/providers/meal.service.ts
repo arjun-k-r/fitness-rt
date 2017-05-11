@@ -39,7 +39,6 @@ export class MealService {
   private _currentMealPlan: FirebaseObjectObservable<MealPlan>;
   private _lastMealPlan: FirebaseObjectObservable<MealPlan>;
   private _nourishingMeals: FirebaseListObservable<Array<Meal>>;
-  private _nutritionRequirements: Nutrition;
   private _wakeUpTime: string;
   constructor(
     private _af: AngularFire,
@@ -57,19 +56,6 @@ export class MealService {
     this._lastMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY - 1}`);
 
     this._nourishingMeals = _af.database.list(`/nourishing-meals/${_user.id}`);
-    this._nutritionRequirements = _fitSvc.getUserRequirements();
-  }
-
-  /**
-   * Verifies if the meal does not exceed the limit amount of carbohydrates
-   * @param {Nutrition} nutrition - The meal nutrition
-   * @returns {WarningMessage} Returns warning if the meal has too much carbohydrate
-   */
-  private _checkMealCarbs(nutrition: Nutrition): WarningMessage {
-    return nutrition.carbs.value > (this._nutritionRequirements.carbs.value / 4) ? new WarningMessage(
-      'Too much carbohydrates',
-      `The meal should contain no more than ${Math.round(this._nutritionRequirements.carbs.value / 4)}g of carbohydrates`
-    ) : null;
   }
 
   /**
@@ -78,33 +64,9 @@ export class MealService {
    * @returns {WarningMessage} Returns warning if the meal is too complex
    */
   private _checkMealComplexity(foodItems: Array<Food | Recipe>): WarningMessage {
-    return foodItems.length > 8 ? new WarningMessage(
+    return foodItems.length > 6 ? new WarningMessage(
       'The meal is too complex!',
       'More than 8 foods in a single meal makes it complex and difficult to digest, as it requires many types of enzymes, gastric juices, and timings.'
-    ) : null;
-  }
-
-  /**
-   * Verifies if the meal does not exceed the limit amount of calories
-   * @param {Nutrition} nutrition - The meal nutrition
-   * @returns {WarningMessage} Returns warning if the meal supplies too much energy
-   */
-  private _checkMealEnergy(nutrition: Nutrition): WarningMessage {
-    return nutrition.energy.value > (this._nutritionRequirements.energy.value / 4) ? new WarningMessage(
-      'Too many calories',
-      `The meal should contain no more than ${Math.round(this._nutritionRequirements.energy.value / 4)} kilocalories`
-    ) : null;
-  }
-
-  /**
-   * Verifies if the meal does not exceed the limit amount of fats
-   * @param {Nutrition} nutrition - The meal nutrition
-   * @returns {WarningMessage} Returns warning if the meal has too much fat
-   */
-  private _checkMealFats(nutrition: Nutrition): WarningMessage {
-    return nutrition.fats.value > (this._nutritionRequirements.fats.value / 4) ? new WarningMessage(
-      'Too much fat',
-      `The meal should contain no more than ${Math.round(this._nutritionRequirements.fats.value / 4)}g of fat`
     ) : null;
   }
 
@@ -118,18 +80,6 @@ export class MealService {
     return pral >= 1 ? new WarningMessage(
       'The meal is acid forming',
       'Acid forming food and meals cause inflammation, which is the root of all diseases. Try adding some alkaline forming foods, like green vegetables, with PRAL below 0'
-    ) : null;
-  }
-
-  /**
-   * Verifies if the meal does not exceed the limit amount of protein
-   * @param {Nutrition} nutrition - The meal nutrition
-   * @returns {WarningMessage} Returns warning if the meal has too much protein
-   */
-  private _checkMealProtein(nutrition: Nutrition): WarningMessage {
-    return nutrition.protein.value > (this._nutritionRequirements.protein.value / 4) ? new WarningMessage(
-      'Too much protein',
-      `The meal should contain no more than ${Math.round(this._nutritionRequirements.protein.value / 4)}g of protein`
     ) : null;
   }
 
@@ -166,18 +116,6 @@ export class MealService {
   }
 
   /**
-   * Verifies if the meal does not exceed the limit amount of sugar
-   * @param {Nutrition} nutrition - The meal nutrition
-   * @returns {WarningMessage} Returns warning if the meal has too much sugar
-   */
-  private _checkMealSugars(nutrition: Nutrition): WarningMessage {
-    return nutrition.sugars.value > (this._nutritionRequirements.sugars.value / 4) ? new WarningMessage(
-      'Too much sugar',
-      `The meal should contain no more than ${Math.round(this._nutritionRequirements.sugars.value / 4)}g of sugars`
-    ) : null;
-  }
-
-  /**
    * Get 4-hour interval meals, starting from breakfast time, as long as the last meal is 2 hours before bed
    * @param {string} breakfastTime - The time of the first meal used as reference
    * @returns {Array} Returns an array of meals
@@ -199,64 +137,25 @@ export class MealService {
 
   /**
   * Verifies if a meal is proper
-  * @param {number} mealIdx The meal index to check
-  * @param {Array} mealPlan The meal index to check
-  * @returns {Promise} Returns confirmation if the meal is or not healthy
+  * @param {Meal} meal The meal to check
+  * @returns {void}
   */
-  public checkMeal(mealIdx: number, meals: Array<Meal>): Promise<boolean> {
-    let meal: Meal = meals[mealIdx], warnings: Array<WarningMessage> = [];
-    return new Promise((resolve, reject) => {
-      let mealCarbsWarning: WarningMessage = this._checkMealCarbs(meal.nutrition),
-        mealComplexityWarning: WarningMessage = this._checkMealComplexity(meal.mealItems),
-        mealEnergyWarning: WarningMessage = this._checkMealEnergy(meal.nutrition),
-        mealFatsWarning: WarningMessage = this._checkMealFats(meal.nutrition),
-        mealPralWarning: WarningMessage = this._checkMealPral(meal.pral),
-        mealProteinWarning: WarningMessage = this._checkMealProtein(meal.nutrition),
-        mealServingWarning: WarningMessage = this._checkMealServing(meal.serving),
-        mealSizeWarning: WarningMessage = this._checkMealSize(meal.quantity),
-        mealSugarsWarning: WarningMessage = this._checkMealSugars(meal.nutrition);
-
-      if (!!mealCarbsWarning) {
-        warnings.push(mealCarbsWarning);
-      }
-
-      if (!!mealComplexityWarning) {
-        warnings.push(mealComplexityWarning);
-      }
-      if (!!mealEnergyWarning) {
-        warnings.push(mealEnergyWarning);
-      }
-
-      if (!!mealFatsWarning) {
-        warnings.push(mealFatsWarning);
-      }
-
-      if (!!mealPralWarning) {
-        warnings.push(mealPralWarning);
-      }
-
-      if (!!mealProteinWarning) {
-        warnings.push(mealProteinWarning);
-      }
-
-      if (!!mealServingWarning) {
-        warnings.push(mealServingWarning);
-      }
-
-      if (!!mealSizeWarning) {
-        warnings.push(mealSizeWarning);
-      }
-
-      if (!!mealSugarsWarning) {
-        warnings.push(mealSugarsWarning);
-      }
-
-      if (!warnings.length) {
-        resolve(true);
-      } else {
-        reject(warnings);
-      }
-    });
+  public checkMeal(meal: Meal): void {
+    meal.warnings = _.compact([
+      this._nutritionSvc.checkAlcohol(meal.nutrition),
+      this._nutritionSvc.checkCaffeine(meal.nutrition),
+      this._nutritionSvc.checkCarbs(meal.nutrition),
+      this._checkMealComplexity(meal.mealItems),
+      this._nutritionSvc.checkEnergy(meal.nutrition),
+      this._nutritionSvc.checkFats(meal.nutrition),
+      this._checkMealPral(meal.pral),
+      this._nutritionSvc.checkProtein(meal.nutrition),
+      this._checkMealServing(meal.serving),
+      this._checkMealSize(meal.quantity),
+      this._nutritionSvc.checkSodium(meal.nutrition),
+      this._nutritionSvc.checkSugars(meal.nutrition),
+      this._nutritionSvc.checkTransFat(meal.nutrition)
+    ]);
   }
 
   /**
@@ -302,7 +201,6 @@ export class MealService {
           });
         } else {
           currMealPlan.meals = currMealPlan.meals || this._getMeals(this._wakeUpTime);
-          currMealPlan.warnings = currMealPlan.warnings || [];
           observer.next(currMealPlan);
           observer.complete();
         }
@@ -363,16 +261,12 @@ export class MealService {
       // Remve the meals which are later than 2 hours before sleep
       if (moment(this._bedTime, 'hours').subtract(moment(meal.time, 'hours').hours(), 'hours').hours() < 2) {
         mealPlan.meals.splice(mealIdx, mealPlan.meals.length - mealIdx);
-        if (mealTimeWarning === false) {
-          mealTimeWarning = true;
-          mealPlan.warnings.push(new WarningMessage(
-            'You must leave 2 hours between bed time and last meal for complete digestion',
-            'Some meals were too late'
-          ));
-          return;
-        }
+        return;
       }
     });
+
+    // Add more meals if there is enough time until bedtime
+    mealPlan.meals = [...mealPlan.meals, ...this._getMeals(moment(mealPlan.meals[mealPlan.meals.length - 1].time, 'hours').add(4, 'hours').format('HH:mm'))];
   }
 
   /**
@@ -423,8 +317,7 @@ export class MealService {
       date: mealPlan.date,
       deficiency: mealPlan.deficiency,
       excess: mealPlan.excess,
-      meals: mealPlan.meals || [],
-      warnings: mealPlan.warnings || []
+      meals: mealPlan.meals || []
     });
   }
 

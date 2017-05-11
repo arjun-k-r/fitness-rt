@@ -97,22 +97,19 @@ export class ActivityPlanPage {
   }
 
   public saveActivityPlan(): void {
-    this._activitySvc.saveActivityPlan(this.activityPlan).then((isGood: boolean) => {
+    this._activitySvc.checkActivityPlan(this.activityPlan);
+    
+    if (!this.activityPlan.warnings.length) {
       this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy activity plan!', 'Well done!');
-      this._activitySvc.getLeftEnergy().then((energy: number) => {
-        this.leftEnergy = energy;
-        console.log(energy);
-        this._detectorRef.markForCheck();
-      });
-    }).catch((warnings: Array<WarningMessage>) => {
-      this.activityPlan.warnings = [...warnings];
-      console.log(this.activityPlan);
+    } else {
       this._alertSvc.showAlert('Please check the warnings', 'Your activity plan seems to be unhealthy', 'Oh oh...');
-      this._activitySvc.getLeftEnergy().then((energy: number) => {
-        this.leftEnergy = energy;
-        console.log(energy);
-        this._detectorRef.markForCheck();
-      });
+    }
+
+    this._activitySvc.saveActivityPlan(this.activityPlan);
+    this._activitySvc.getLeftEnergy().then((energy: number) => {
+      this.leftEnergy = energy;
+      console.log(energy);
+      this._detectorRef.markForCheck();
     });
   }
 

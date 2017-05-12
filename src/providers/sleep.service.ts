@@ -22,7 +22,6 @@ export class SleepService {
     private _af: AngularFire,
     private _user: User
   ) {
-    this._sleepDeficiency = _af.database.object('/imbalance/deficiencies/sleep');
     this._sleepPlan = _af.database.object(`/sleep-plan/${_user.id}/`);
   }
 
@@ -181,14 +180,6 @@ export class SleepService {
    */
   public getSleepPlan$(): Observable<SleepPlan> {
     return new Observable((observer: Observer<SleepPlan>) => this._sleepPlan.subscribe((sleepPlan: SleepPlan) => observer.next(sleepPlan['$value'] === null ? new SleepPlan() : sleepPlan)));
-  }
-
-  /**
-   * Gets the signs and symptoms of bad sleep patterns
-   * @returns {FirebaseObjectObservable} Returns observable of symptoms
-   */
-  public getSleepSymptoms$(): FirebaseObjectObservable<Array<string>> {
-    return this._sleepDeficiency;
   }
 
   /**

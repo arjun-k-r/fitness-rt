@@ -6,7 +6,7 @@ import { AlertController } from 'ionic-angular';
 import { SleepHabit, SleepPlan } from '../../models';
 
 // Providers
-import { AlertService, SleepService } from '../../providers';
+import { AlertService, FitnessService, SleepService } from '../../providers';
 
 @Component({
   selector: 'page-sleep-plan',
@@ -21,6 +21,7 @@ export class SleepPlanPage {
     private _alertCtrl: AlertController,
     private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
+    private _fitSvc: FitnessService,
     private _sleepSvc: SleepService
   ) { }
 
@@ -53,7 +54,7 @@ export class SleepPlanPage {
   }
 
   public viewSymptoms(): void {
-    this._sleepSvc.getSleepSymptoms$().subscribe((signs: Array<string>) => {
+    this._fitSvc.getImbalanceSymptoms$('sleep', 'deficiency').subscribe((signs: Array<string>) => {
       this._alertCtrl.create({
         title: 'Sleep deficiency symptoms',
         subTitle: 'Check the symptoms which fit you',

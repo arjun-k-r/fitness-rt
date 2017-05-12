@@ -85,6 +85,30 @@
     <!-- Start of segment -->
     <div *ngSwitchCase="'warnings'">
       <ion-list>
+        <button ion-item *ngIf="activityPlan.intellectualInactivity > 2" (click)="viewSymptoms('intellectualExercise', 'Intellectual exercise', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have been mentally inactive for {{ activityPlan.intellectualInactivity }} days</h2>
+          <p text-wrap>Try to learn something new everyday</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="activityPlan.physicalInactivity > 2" (click)="viewSymptoms('physicalExercise', 'Physical exercise', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have been physically inactive for {{ activityPlan.physicalInactivity }} days</h2>
+          <p text-wrap>Try to move new everyday</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="activityPlan.intellectualOverwork > 2" (click)="viewSymptoms('intellectualExercise', 'Intellectual exercise', 'excess')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have been mentally overworking for {{ activityPlan.intellectualOverwork }} days</h2>
+          <p text-wrap>Give yourself a brake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="activityPlan.physicalOverwork > 2" (click)="viewSymptoms('physicalExercise', 'Physical exercise', 'excess')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have been physically overworking for {{ activityPlan.physicalOverwork }} days</h2>
+          <p text-wrap>Give yourself a brake</p>
+          <p item-content>Check symptoms</p>
+        </button>
         <ion-item *ngFor="let warning of activityPlan.warnings">
           <ion-icon color="danger" name="warning" item-left></ion-icon>
           <h2 text-wrap>{{ warning.message }}</h2>

@@ -12,7 +12,7 @@ import { Meal, MealPlan } from '../../models';
 import { MealDetailsPage } from '../meal-details/meal-details';
 
 // Providers
-import { AlertService, MealService } from '../../providers';
+import { AlertService, FitnessService, MealService } from '../../providers';
 
 @Component({
   selector: 'page-meal-plan',
@@ -28,6 +28,7 @@ export class MealPlanPage {
     private _alertCtrl: AlertController,
     private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
+    private _fitSvc: FitnessService,
     private _mealSvc: MealService,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController
@@ -116,6 +117,39 @@ export class MealPlanPage {
       this.mealPlan.meals[mealIdx].nickname = '';
       this._mealSvc.saveMeal(this.mealPlan.meals[mealIdx], mealIdx, this.mealPlan);
     }
+  }
+
+  public viewSymptoms(imbalanceKey: string, imbalanceName: string, imbalanceType: string): void {
+    this._fitSvc.getImbalanceSymptoms$(imbalanceKey, imbalanceType).subscribe((signs: Array<string>) => {
+      this._alertCtrl.create({
+        title: `${imbalanceName} ${imbalanceType} symptoms`,
+        subTitle: 'Check the symptoms which fit you',
+        inputs: [...signs.map((sign: string) => {
+          return {
+            type: 'checkbox',
+            label: sign,
+            value: sign
+          }
+        })],
+        buttons: [
+          {
+            text: 'Done',
+            handler: (data: Array<string>) => {
+              console.log('My symptoms are: ', data);
+              if (data.length > signs.length / 4) {
+                if (imbalanceType === 'deficiency') {
+                  this._alertSvc.showAlert(`Try to to eat more ${imbalanceName} rich foods, okay?`, '', 'The time is now to make a change');
+                } else {
+                  this._alertSvc.showAlert(`Try to to limit your intake of ${imbalanceName}, okay?`, '', 'The time is now to make a change');
+                }
+              } else {
+                this._alertSvc.showAlert("Anyway, make sure to take care of your nutrition and don't abuse or neglect any nutrient, okay?", '', 'I am not perfect');
+              }
+            }
+          }
+        ]
+      }).present();
+    });
   }
 
   ionViewWillEnter(): void {

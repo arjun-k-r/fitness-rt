@@ -9,7 +9,7 @@ import { Food, Meal, MealPlan, Recipe } from '../../models';
 import { FoodSelectPage } from '../food-select/food-select';
 
 // Providers
-import { AlertService, MealService } from '../../providers';
+import { AlertService, MealService, NutritionService } from '../../providers';
 
 @Component({
   selector: 'page-meal-details',
@@ -28,6 +28,7 @@ export class MealDetailsPage {
     private _mealSvc: MealService,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
+    private _nutritionSvc: NutritionService,
     private _params: NavParams
   ) {
     this.mealIdx = <number>_params.get('mealIdx');
@@ -38,9 +39,9 @@ export class MealDetailsPage {
   }
 
   private _updateMealDetails(): void {
-    this.meal.nutrition = this._mealSvc.getMealNutrition(this.meal.mealItems);
-    this.meal.pral = this._mealSvc.getMealPral(this.meal.nutrition);
-    this.meal.quantity = this._mealSvc.getMealSize(this.meal.mealItems);
+    this.meal.nutrition = this._nutritionSvc.getTotalNutrition(this.meal.mealItems);
+    this.meal.pral = this._nutritionSvc.getPRAL(this.meal.nutrition);
+    this.meal.quantity = this._nutritionSvc.calculateQuantity(this.meal.mealItems);
 
     this._mealSvc.checkMeal(this.meal);
     if (!this.meal.warnings.length) {

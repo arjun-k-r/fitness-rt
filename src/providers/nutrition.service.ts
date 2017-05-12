@@ -11,7 +11,10 @@ import { FitnessService } from './fitness.service';
 @Injectable()
 export class NutritionService {
   private _nutritionRequirements: Nutrition;
-  constructor(private _driSvc: DRIService, private _fitSvc: FitnessService) {
+  constructor(
+    private _driSvc: DRIService,
+    private _fitSvc: FitnessService
+  ) {
     this._nutritionRequirements = _fitSvc.getUserRequirements();
   }
 

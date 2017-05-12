@@ -1,5 +1,32 @@
 {
-    "deficiencies": {
+    "deficiency": {
+        "intellectualExercise": [
+            "Boredom",
+            "Depression",
+            "Memory problems",
+            "Lack of motivation or focus",
+            "Attention difficulties",
+            "Fatigued, tired, drained, lack of energy",
+            "Reduced ability to concentrate",
+            "Apathy or no motivation",
+            "Laziness"
+        ],
+        "physicalExercise": [
+            "Weight gain",
+            "Muscle atrophy",
+            "Fatigued, tired, drained, lack of energy",
+            "Sleepiness",
+            "Laziness",
+            "Lack of motivation or focus",
+            "High LDL levels",
+            "High blood sugar levels",
+            "Depression",
+            "Anxiety",
+            "Cardiovascular disease",
+            "Diabetes",
+            "Obesity",
+            "Cancer"
+        ],
         "sleep": [
             "Aching muscles",
             "Confusion",

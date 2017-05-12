@@ -292,217 +292,285 @@
     <div *ngSwitchCase="'warnings'">
       <ion-item-group>
         <ion-item-divider>Macronutrient deficiency</ion-item-divider>
-        <ion-item *ngIf="mealPlan.deficiency.protein > 2">
-          Protein
-          <p item-content>{{ mealPlan.deficiency.protein }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.fats > 2">
-          Fats
-          <p item-content>{{ mealPlan.deficiency.fats }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.carbs > 2">
-          Carbohydrates
-          <p item-content>{{ mealPlan.deficiency.carbs }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.water > 2">
-          Water
-          <p item-content>{{ mealPlan.deficiency.water }} days</p>
-        </ion-item>
+        <button ion-item *ngIf="mealPlan.deficiency.water > 2" (click)="viewSymptoms('water', 'Water', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a water deficiency for {{ mealPlan.deficiency.water }} days</h2>
+          <p text-wrap>Try to increase your water intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
       </ion-item-group>
       <ion-item-group>
         <ion-item-divider>Essential amino acids deficiency</ion-item-divider>
-        <ion-item *ngIf="mealPlan.deficiency.histidine > 2">
-          Histidine
-          <p item-content>{{ mealPlan.deficiency.histidine }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.isoleucine > 2">
-          Isoleucine
-          <p item-content>{{ mealPlan.deficiency.isoleucine }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.leucine > 2">
-          Leucine
-          <p item-content>{{ mealPlan.deficiency.leucine }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.lysine > 2">
-          Lysine
-          <p item-content>{{ mealPlan.deficiency.lysine }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.methionine > 2">
-          Methionine
-          <p item-content>{{ mealPlan.deficiency.methionine }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.phenylalanine > 2">
-          Phenylalanine
-          <p item-content>{{ mealPlan.deficiency.phenylalanine }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.threonine > 2">
-          Threonine
-          <p item-content>{{ mealPlan.deficiency.threonine }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.tryptophan > 2">
-          Tryptophan
-          <p item-content>{{ mealPlan.deficiency.tryptophan }} days</p>
-        </ion-item>
+        <button ion-item *ngIf="mealPlan.deficiency.histidine > 2" (click)="viewSymptoms('histidine', 'Histidine', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a histidine deficiency for {{ mealPlan.deficiency.histidine }} days</h2>
+          <p text-wrap>Try to increase your histidine intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.isoleucine > 2" (click)="viewSymptoms('isoleucine', 'Isoleucine', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a isoleucine deficiency for {{ mealPlan.deficiency.isoleucine }} days</h2>
+          <p text-wrap>Try to increase your isoleucine intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.leucine > 2" (click)="viewSymptoms('leucine', 'Leucine', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a leucine deficiency for {{ mealPlan.deficiency.leucine }} days</h2>
+          <p text-wrap>Try to increase your leucine intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.lysine > 2" (click)="viewSymptoms('lysine', 'Lysine', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a lysine deficiency for {{ mealPlan.deficiency.lysine }} days</h2>
+          <p text-wrap>Try to increase your lysine intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.methionine > 2" (click)="viewSymptoms('methionine', 'Methionine', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a methionine deficiency for {{ mealPlan.deficiency.methionine }} days</h2>
+          <p text-wrap>Try to increase your methionine intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.phenylalanine > 2" (click)="viewSymptoms('phenylalanine', 'Phenylalanine', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a phenylalanine deficiency for {{ mealPlan.deficiency.phenylalanine }} days</h2>
+          <p text-wrap>Try to increase your phenylalanine intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.threonine > 2" (click)="viewSymptoms('threonine', 'Threonine', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a threonine deficiency for {{ mealPlan.deficiency.threonine }} days</h2>
+          <p text-wrap>Try to increase your threonine intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.tryptophan > 2" (click)="viewSymptoms('tryptophan', 'Tryptophan', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a tryptophan deficiency for {{ mealPlan.deficiency.tryptophan }} days</h2>
+          <p text-wrap>Try to increase your tryptophan intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
       </ion-item-group>
       <ion-item-group>
         <ion-item-divider>Essential vitamins deficiency</ion-item-divider>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminA > 2">
-          Vitamin A
-          <p item-content>{{ mealPlan.deficiency.vitaminA }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminB1 > 2">
-          Vitamin B1 (Thiamine)
-          <p item-content>{{ mealPlan.deficiency.vitaminB1 }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminB2 > 2">
-          Vitamin B2 (Riboflavin)
-          <p item-content>{{ mealPlan.deficiency.vitaminB2 }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminB3 > 2">
-          Vitamin B3 (Niacin)
-          <p item-content>{{ mealPlan.deficiency.vitaminB3 }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminB5 > 2">
-          Vitamin B5 (Pantothenic acid)
-          <p item-content>{{ mealPlan.deficiency.vitaminB5 }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminB6 > 2">
-          Vitamin B6 (Pyridoxine)
-          <p item-content>{{ mealPlan.deficiency.vitaminB6 }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminB9 > 2">
-          Vitamin B9 (Folate)
-          <p item-content>{{ mealPlan.deficiency.vitaminB9 }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminB12 > 2">
-          Vitamin B12 (Cobalamin)
-          <p item-content>{{ mealPlan.deficiency.vitaminB12 }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.choline > 2">
-          Choline
-          <p item-content>{{ mealPlan.deficiency.choline }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminC > 2">
-          Vitamin C (Ascorbic acid)
-          <p item-content>{{ mealPlan.deficiency.vitaminC }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminD > 2">
-          Vitamin D (Cholecalciferol)
-          <p item-content>{{ mealPlan.deficiency.vitaminD }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminE > 2">
-          Vitamin E (Tocopherol)
-          <p item-content>{{ mealPlan.deficiency.vitaminE }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.vitaminK > 2">
-          Vitamin K
-          <p item-content>{{ mealPlan.deficiency.vitaminK }} days</p>
-        </ion-item>
+        <button ion-item *ngIf="mealPlan.deficiency.vitaminA > 2" (click)="viewSymptoms('vitaminA', 'Vitamin A', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a vitamin A deficiency for {{ mealPlan.deficiency.vitaminA }} days</h2>
+          <p text-wrap>Try to increase your vitamin A intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.vitaminB1 > 2" (click)="viewSymptoms('vitaminB1', 'Vitamin B1', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a vitamin B1 deficiency for {{ mealPlan.deficiency.vitaminB1 }} days</h2>
+          <p text-wrap>Try to increase your vitamin B1 intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.vitaminB2 > 2" (click)="viewSymptoms('vitaminB2', 'Vitamin B2', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a vitamin B2 deficiency for {{ mealPlan.deficiency.vitaminB2 }} days</h2>
+          <p text-wrap>Try to increase your vitamin B2 intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.vitaminB3 > 2" (click)="viewSymptoms('vitaminB3', 'Vitamin B3', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a vitamin B3 deficiency for {{ mealPlan.deficiency.vitaminB3 }} days</h2>
+          <p text-wrap>Try to increase your vitamin B3 intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.vitaminB5 > 2" (click)="viewSymptoms('vitaminB5', 'Vitamin B5', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a vitamin B5 deficiency for {{ mealPlan.deficiency.vitaminB5 }} days</h2>
+          <p text-wrap>Try to increase your vitamin B5 intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.vitaminB6 > 2" (click)="viewSymptoms('vitaminB6', 'Vitamin B6', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a vitamin B6 deficiency for {{ mealPlan.deficiency.vitaminB6 }} days</h2>
+          <p text-wrap>Try to increase your vitamin B6 intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.vitaminB9 > 2" (click)="viewSymptoms('vitaminB9', 'Vitamin B9', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a vitamin B9 deficiency for {{ mealPlan.deficiency.vitaminB9 }} days</h2>
+          <p text-wrap>Try to increase your vitamin B9 intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.vitaminB12 > 2" (click)="viewSymptoms('vitaminB12', 'Vitamin B12', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a vitamin B12 deficiency for {{ mealPlan.deficiency.vitaminB12 }} days</h2>
+          <p text-wrap>Try to increase your vitamin B12 intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.choline > 2" (click)="viewSymptoms('choline', 'Choline', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a choline deficiency for {{ mealPlan.deficiency.choline }} days</h2>
+          <p text-wrap>Try to increase your choline intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.vitaminC > 2" (click)="viewSymptoms('vitaminC', 'Vitamin C', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a vitamin C deficiency for {{ mealPlan.deficiency.vitaminC }} days</h2>
+          <p text-wrap>Try to increase your vitamin C intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.vitaminD > 2" (click)="viewSymptoms('vitaminD', 'Vitamin D', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a vitamin D deficiency for {{ mealPlan.deficiency.vitaminD }} days</h2>
+          <p text-wrap>Try to increase your vitamin D intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.vitaminE > 2" (click)="viewSymptoms('vitaminE', 'Vitamin E', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a vitamin E deficiency for {{ mealPlan.deficiency.vitaminE }} days</h2>
+          <p text-wrap>Try to increase your vitamin E intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.vitaminK > 2" (click)="viewSymptoms('vitaminK', 'Vitamin K', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a vitamin K deficiency for {{ mealPlan.deficiency.vitaminK }} days</h2>
+          <p text-wrap>Try to increase your vitamin K intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
       </ion-item-group>
       <ion-item-group>
         <ion-item-divider>Essential minerals deficiency</ion-item-divider>
-        <ion-item *ngIf="mealPlan.deficiency.calcium > 2">
-          Calcium
-          <p item-content>{{ mealPlan.deficiency.calcium }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.copper > 2">
-          Copper
-          <p item-content>{{ mealPlan.deficiency.copper }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.iron > 2">
-          Iron
-          <p item-content>{{ mealPlan.deficiency.iron }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.magnesium > 2">
-          Magnesium
-          <p item-content>{{ mealPlan.deficiency.magnesium }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.manganese > 2">
-          Manganese
-          <p item-content>{{ mealPlan.deficiency.manganese }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.phosphorus > 2">
-          Phosphorus
-          <p item-content>{{ mealPlan.deficiency.phosphorus }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.potassium > 2">
-          Potassium
-          <p item-content>{{ mealPlan.deficiency.potassium }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.selenium > 2">
-          Selenium
-          <p item-content>{{ mealPlan.deficiency.selenium }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.sodium > 2">
-          Sodium
-          <p item-content>{{ mealPlan.deficiency.sodium }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.zinc > 2">
-          Zinc
-          <p item-content>{{ mealPlan.deficiency.zinc }} days</p>
-        </ion-item>
+        <button ion-item *ngIf="mealPlan.deficiency.calcium > 2" (click)="viewSymptoms('calcium', 'Calcium', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a calcium deficiency for {{ mealPlan.deficiency.calcium }} days</h2>
+          <p text-wrap>Try to increase your calcium intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.copper > 2" (click)="viewSymptoms('copper', 'Copper', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a copper deficiency for {{ mealPlan.deficiency.copper }} days</h2>
+          <p text-wrap>Try to increase your copper intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.iron > 2" (click)="viewSymptoms('iron', 'Iron', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a iron deficiency for {{ mealPlan.deficiency.iron }} days</h2>
+          <p text-wrap>Try to increase your iron intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.magnesium > 2" (click)="viewSymptoms('magnesium', 'Magnesium', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a magnesium deficiency for {{ mealPlan.deficiency.magnesium }} days</h2>
+          <p text-wrap>Try to increase your magnesium intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.manganese > 2" (click)="viewSymptoms('manganese', 'Manganese', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a manganese deficiency for {{ mealPlan.deficiency.manganese }} days</h2>
+          <p text-wrap>Try to increase your manganese intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.phosphorus > 2" (click)="viewSymptoms('phosphorus', 'Phosphorus', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a phosphorus deficiency for {{ mealPlan.deficiency.phosphorus }} days</h2>
+          <p text-wrap>Try to increase your phosphorus intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.potassium > 2" (click)="viewSymptoms('potassium', 'Potassium', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a potassium deficiency for {{ mealPlan.deficiency.potassium }} days</h2>
+          <p text-wrap>Try to increase your potassium intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.selenium > 2" (click)="viewSymptoms('selenium', 'Selenium', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a selenium deficiency for {{ mealPlan.deficiency.selenium }} days</h2>
+          <p text-wrap>Try to increase your selenium intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.sodium > 2" (click)="viewSymptoms('sodium', 'Sodium', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a sodium deficiency for {{ mealPlan.deficiency.sodium }} days</h2>
+          <p text-wrap>Try to increase your sodium intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.zinc > 2" (click)="viewSymptoms('zinc', 'Zinc', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a zinc deficiency for {{ mealPlan.deficiency.zinc }} days</h2>
+          <p text-wrap>Try to increase your zinc intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
       </ion-item-group>
       <ion-item-group>
         <ion-item-divider>Essential fatty acids deficiency</ion-item-divider>
-        <ion-item *ngIf="mealPlan.deficiency.ala > 2">
-          Omega-3 (ALA)
-          <p item-content>{{ mealPlan.deficiency.ala }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.dha > 2">
-          Omega-3 (DHA)
-          <p item-content>{{ mealPlan.deficiency.dha }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.epa > 2">
-          Omega-3 (EPA)
-          <p item-content>{{ mealPlan.deficiency.epa }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.deficiency.la > 2">
-          Omega-6 (LA)
-          <p item-content>{{ mealPlan.deficiency.la }} days</p>
-        </ion-item>
+        <button ion-item *ngIf="mealPlan.deficiency.ala > 2" (click)="viewSymptoms('ala', 'Omega-3 (ALA)', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have an omega-3 (ALA) deficiency for {{ mealPlan.deficiency.ala }} days</h2>
+          <p text-wrap>Try to increase your omega-3 (ALA) intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.dha > 2" (click)="viewSymptoms('dha', 'Omega-3 (DHA)', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have an omega-3 (DHA) deficiency for {{ mealPlan.deficiency.dha }} days</h2>
+          <p text-wrap>Try to increase your omega-3 (DHA) intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.epa > 2" (click)="viewSymptoms('epa', 'Omega-3 (EPA)', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have an omega-3 (EPA) deficiency for {{ mealPlan.deficiency.epa }} days</h2>
+          <p text-wrap>Try to increase your omega-3 (EPA) intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.deficiency.la > 2" (click)="viewSymptoms('la', 'Omega-6 (LA)', 'deficiency')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have an omega-6 (LA) deficiency for {{ mealPlan.deficiency.la }} days</h2>
+          <p text-wrap>Try to increase your omega-6 (LA) intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
       </ion-item-group>
       <ion-item-group>
         <ion-item-divider>Excess</ion-item-divider>
-        <ion-item *ngIf="mealPlan.excess.energy > 2">
-          Energy
-          <p item-content>{{ mealPlan.excess.energy }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.excess.carbs > 2">
-          Carbohyrates
-          <p item-content>{{ mealPlan.excess.carbs }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.excess.fats > 2">
-          Fats
-          <p item-content>{{ mealPlan.excess.fats }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.excess.protein > 2">
-          Protein
-          <p item-content>{{ mealPlan.excess.protein }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.excess.sugars > 2">
-          Sugars
-          <p item-content>{{ mealPlan.excess.sugars }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.excess.sodium > 2">
-          Sodium
-          <p item-content>{{ mealPlan.excess.Sodium }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.excess.alcohol > 2">
-          Alcohol
-          <p item-content>{{ mealPlan.excess.alcohol }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.excess.caffeine > 2">
-          Caffeine
-          <p item-content>{{ mealPlan.excess.caffeine }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.excess.transFat > 2">
-          Trans fat
-          <p item-content>{{ mealPlan.excess.transFat }} days</p>
-        </ion-item>
-        <ion-item *ngIf="mealPlan.excess.sugars > 2">
-          Sugars
-          <p item-content>{{ mealPlan.excess.sugars }} days</p>
-        </ion-item>
+        <button ion-item *ngIf="mealPlan.excess.energy > 2" (click)="viewSymptoms('energy', 'Energy', 'excess')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have an energy excess for {{ mealPlan.excess.la }} days</h2>
+          <p text-wrap>Try to limit your energy intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.excess.carbs > 2" (click)="viewSymptoms('carbs', 'Carbohydrate', 'excess')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a carbohydrate excess for {{ mealPlan.excess.carbs }} days</h2>
+          <p text-wrap>Try to limit your carbohydrate intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.excess.protein > 2" (click)="viewSymptoms('protein', 'Protein', 'excess')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a protein excess for {{ mealPlan.excess.protein }} days</h2>
+          <p text-wrap>Try to limit your protein intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.excess.sugars > 2" (click)="viewSymptoms('sugars', 'Sugar', 'excess')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a sugar excess for {{ mealPlan.excess.sugars }} days</h2>
+          <p text-wrap>Try to limit your sugar intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.excess.sodium > 2" (click)="viewSymptoms('sodium', 'Sodium', 'excess')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a sodium excess for {{ mealPlan.excess.sodium }} days</h2>
+          <p text-wrap>Try to limit your sodium intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.excess.alcohol > 2" (click)="viewSymptoms('alcohol', 'Alcohol', 'excess')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have an alcohol excess for {{ mealPlan.excess.alcohol }} days</h2>
+          <p text-wrap>Try to limit your alcohol intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.excess.caffeine > 2" (click)="viewSymptoms('caffeine', 'Caffeine', 'excess')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a caffeine excess for {{ mealPlan.excess.caffeine }} days</h2>
+          <p text-wrap>Try to limit your caffeine intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.excess.transFat > 2" (click)="viewSymptoms('transFat', 'Trans fat', 'excess')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a trans fat excess for {{ mealPlan.excess.transFat }} days</h2>
+          <p text-wrap>Try to limit your trans fat intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
       </ion-item-group>
     </div>
     <!-- End of segment -->

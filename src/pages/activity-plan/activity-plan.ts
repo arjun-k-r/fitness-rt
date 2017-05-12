@@ -41,7 +41,7 @@ export class ActivityPlanPage {
       if (!!warning) {
         this._alertSvc.showAlert(warning.moreInfo, 'Try to rethink your activity', warning.message);
       }
-      
+
       if (activity.type === 'Physical') {
         this.activityPlan.physicalActivities.push(activity);
         this.activityPlan.physicalEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.physicalActivities);
@@ -113,6 +113,39 @@ export class ActivityPlanPage {
 
   public segmentChange(): void {
     this._detectorRef.markForCheck();
+  }
+
+  public viewSymptoms(imbalanceKey: string, imbalanceName: string, imbalanceType: string): void {
+    this._fitSvc.getImbalanceSymptoms$(imbalanceKey, imbalanceType).subscribe((signs: Array<string>) => {
+      this._alertCtrl.create({
+        title: `${imbalanceName} ${imbalanceType} symptoms`,
+        subTitle: 'Check the symptoms which fit you',
+        inputs: [...signs.map((sign: string) => {
+          return {
+            type: 'checkbox',
+            label: sign,
+            value: sign
+          }
+        })],
+        buttons: [
+          {
+            text: 'Done',
+            handler: (data: Array<string>) => {
+              console.log('My symptoms are: ', data);
+              if (data.length > signs.length / 4) {
+                if (imbalanceType === 'deficiency') {
+                  this._alertSvc.showAlert('Try to slow it down and offer your body the rest it deserves, okay?', 'Relaxation is as important as exercise', 'The time is now to make a change');
+                } else {
+                  this._alertSvc.showAlert('Try to exercise with moderation every single day, okay?', "If you don't use it, you'll lose it", 'The time is now to make a change');
+                }
+              } else {
+                this._alertSvc.showAlert("Anyway, make sure to take care of your nutrition and don't abuse or neglect any nutrient, okay?", '', 'I am not perfect');
+              }
+            }
+          }
+        ]
+      }).present();
+    });
   }
 
   ionViewWillEnter(): void {

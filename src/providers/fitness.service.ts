@@ -77,6 +77,16 @@ export class FitnessService {
   }
 
   /**
+   * Gets the signs and symptoms of a specific imbalance
+   * @param {string} imbalanceKey - The key of the imbalance factor
+   * @param {string} imbalanceType - Type of imbalance (deficiencies or excess)
+   * @returns {FirebaseObjectObservable} Returns observable of symptoms
+   */
+  public getImbalanceSymptoms$(imbalanceKey: string, imbalanceType: string): FirebaseObjectObservable<Array<string>> {
+    return this._af.database.object(`/imbalance/${imbalanceType}/${imbalanceKey}`);
+  }
+
+  /**
    * Queries the user's fitness profile from the database
    * @returns {UserProfile} Returns the user's fitness profile
    */

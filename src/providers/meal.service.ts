@@ -158,15 +158,6 @@ export class MealService {
   }
 
   /**
-   * Calculates the meal nutritional values based on the foods
-   * @param {Array} items - The foods of the meal
-   * @returns {Nutrition} Returns the meal nutrition
-   */
-  public getMealNutrition(items: Array<Food | Recipe>): Nutrition {
-    return this._nutritionSvc.getTotalNutrition(items);
-  }
-
-  /**
    * Queries the current day meal plan and checks for nutrient deficiency or excess
    * @returns {Observable} Returns observable of the current day meal plan
    */
@@ -205,35 +196,6 @@ export class MealService {
         }
       });
     });
-  }
-
-  /**
-   * Calculates the total nutrition of a meal plan
-   * @description Each user has specific daily nutrition requirements (DRI)
-   * We must know how much (%) of the requirements a he has fulfilled
-   * @param {Array} meals - The meals of the current meal plan
-   * @returns {Nutrition} Returns the meal plan nutrition
-   */
-  public getMealPlanNutrition(meals: Array<Meal>): Nutrition {
-    return this._nutritionSvc.getPercentageNutrition(meals, true);
-  }
-
-  /**
-   * Gets the alkalinity of a meal, based on its nutritional values
-   * @param {Nutrition} nutrition - The nutrition of the meal
-   * @returns {number} Returns the pral of the meal
-   */
-  public getMealPral(nutrition: Nutrition): number {
-    return this._nutritionSvc.getPRAL(nutrition);
-  }
-
-  /**
-   * Gets the size of the meal
-   * @param {Array} items - The foods of the meal
-   * @returns {number} Returns the quantity in grams of the meal
-   */
-  public getMealSize(items: Array<Food | Recipe>): number {
-    return this._nutritionSvc.calculateQuantity(items);
   }
 
   /**
@@ -276,7 +238,7 @@ export class MealService {
    */
   public saveMeal(meal: Meal, mealIdx: number, mealPlan: MealPlan): void {
     if (!!meal) {
-      meal.nutrition = this.getMealNutrition(meal.mealItems);
+      meal.nutrition = this._nutritionSvc.getTotalNutrition(meal.mealItems);
       if (!!meal.wasNourishing && meal.nourishingKey === '') {
         meal.nourishingKey = this._nourishingMeals.push(meal).key;
       } else if (!meal.wasNourishing && meal.nourishingKey !== '') {
@@ -298,7 +260,7 @@ export class MealService {
         });
       }
       mealPlan.meals[mealIdx] = meal;
-      mealPlan.dailyNutrition = this.getMealPlanNutrition(mealPlan.meals);
+      mealPlan.dailyNutrition = this._nutritionSvc.getPercentageNutrition(mealPlan.meals);
     } else {
       mealPlan.dailyNutrition = new Nutrition();
     }

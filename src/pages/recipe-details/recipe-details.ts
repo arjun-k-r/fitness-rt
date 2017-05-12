@@ -9,7 +9,7 @@ import { Food, Recipe } from '../../models';
 import { FoodSelectPage } from '../food-select/food-select';
 
 // Providers
-import { AlertService, RecipeService } from '../../providers';
+import { AlertService, NutritionService, RecipeService } from '../../providers';
 
 @Component({
   selector: 'page-recipe-details',
@@ -25,6 +25,7 @@ export class RecipeDetailsPage {
     private _detectorRef: ChangeDetectorRef,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
+    private _nutritionSvc: NutritionService,
     private _params: NavParams,
     private _recipeSvc: RecipeService
   ) {
@@ -34,7 +35,7 @@ export class RecipeDetailsPage {
 
   private _updateRecipeDetails(): void {
     this.recipe.nutrition = this._recipeSvc.getRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
-    this.recipe.pral = this._recipeSvc.getRecipePral(this.recipe.nutrition);
+    this.recipe.pral = this._nutritionSvc.getPRAL(this.recipe.nutrition);
     this.recipe.quantity = this._recipeSvc.getRecipeSize(this.recipe.ingredients, this.recipe.portions);
   }
 

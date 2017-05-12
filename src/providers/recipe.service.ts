@@ -50,15 +50,6 @@ export class RecipeService {
   }
 
   /**
-   * Gets the alkalinity of a recipe, based on its nutritional values
-   * @param {Nutrition} nutrition - The nutrition of the recipe
-   * @returns {number} Returns the pral of the recipe
-   */
-  public getRecipePral(nutrition: Nutrition): number {
-    return this._nutritionSvc.getPRAL(nutrition);
-  }
-
-  /**
    * Gets the user's recipes
    * @returns {FirebaseListObservable} Returns an observable that publishes the recipes
    */

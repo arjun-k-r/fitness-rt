@@ -52,7 +52,7 @@ export class ActivityService {
    * @returns {void}
    */
   private _checkLastActivityPlan(activityPlan: ActivityPlan): void {
-    if (activityPlan.intellectualEffort > 180) {
+    if (activityPlan.intellectualEffort > 480) {
       activityPlan.intellectualOverwork++;
       activityPlan.intellectualInactivity = 0;
     } else if (activityPlan.intellectualEffort < 60) {
@@ -60,40 +60,12 @@ export class ActivityService {
       activityPlan.intellectualOverwork = 0;
     }
 
-    if (activityPlan.physicalEffort > 180) {
+    if (activityPlan.physicalEffort > 480) {
       activityPlan.physicalOverwork++;
       activityPlan.physicalInactivity = 0;
     } else if (activityPlan.physicalEffort < 60) {
       activityPlan.physicalInactivity++;
       activityPlan.physicalOverwork = 0;
-    }
-
-    if (activityPlan.physicalInactivity > 2) {
-      activityPlan.warnings.push(new WarningMessage(
-        'Get moving!',
-        `You haven't been moving for ${activityPlan.physicalInactivity} days. You need to move everyday.`
-      ));
-    }
-
-    if (activityPlan.intellectualInactivity > 2) {
-      activityPlan.warnings.push(new WarningMessage(
-        "If you don't use it, you lose it",
-        `You haven't been using your brain for ${activityPlan.intellectualInactivity} days. You need to learn something new everyday.`
-      ));
-    }
-
-    if (activityPlan.physicalOverwork > 2) {
-      activityPlan.warnings.push(new WarningMessage(
-        "Aren't you feeling tired or burned out?",
-        `You have been overworking your muscles for ${activityPlan.physicalOverwork} days. You need to let your muscles to recover. You aren't iron man you know?`
-      ));
-    }
-
-    if (activityPlan.intellectualOverwork > 2) {
-      activityPlan.warnings.push(new WarningMessage(
-        "Aren't you feeling stressed or overwhelmed?",
-        `You have been overworking your brain for ${activityPlan.intellectualOverwork} days. You need to let your brain digest the new information.`
-      ));
     }
   }
 

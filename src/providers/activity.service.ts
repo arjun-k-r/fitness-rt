@@ -170,18 +170,12 @@ export class ActivityService {
               this._checkLastActivityPlan(lastActivityPlan);
 
               // Add up the intellectual activity imbalances of the previous activity plan along with the accumulated once from previous days or reset them if it is the case
-              if (lastActivityPlan.intellectualInactivity > 0) {
-                newActivityPlan.intellectualInactivity += lastActivityPlan.intellectualInactivity;
-              } else if (lastActivityPlan.intellectualOverwork > 0) {
-                newActivityPlan.intellectualOverwork += lastActivityPlan.intellectualOverwork;
-              }
+              newActivityPlan.intellectualInactivity += lastActivityPlan.intellectualInactivity;
+              newActivityPlan.intellectualOverwork += lastActivityPlan.intellectualOverwork;
 
               // Add up the physical activity imbalances of the previous activity plan along with the accumulated once from previous days or reset them if it is the case
-              if (lastActivityPlan.physicalInactivity > 0) {
-                newActivityPlan.physicalInactivity += lastActivityPlan.physicalInactivity;
-              } else if (lastActivityPlan.physicalOverwork > 0) {
-                newActivityPlan.physicalOverwork += lastActivityPlan.physicalOverwork;
-              }
+              newActivityPlan.physicalInactivity += lastActivityPlan.physicalInactivity;
+              newActivityPlan.physicalOverwork += lastActivityPlan.physicalOverwork;
             }
 
             observer.next(newActivityPlan);

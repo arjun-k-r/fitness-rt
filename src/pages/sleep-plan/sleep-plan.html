@@ -39,10 +39,6 @@
                 <ion-checkbox [(ngModel)]="currentSleep.noElectronics"></ion-checkbox>
             </ion-item>
             <ion-item>
-                <ion-label>Relaxation before bed</ion-label>
-                <ion-checkbox [(ngModel)]="currentSleep.relaxation"></ion-checkbox>
-            </ion-item>
-            <ion-item>
                 <ion-label>No stimulants before bed</ion-label>
                 <ion-checkbox [(ngModel)]="currentSleep.noStimulants"></ion-checkbox>
             </ion-item>
@@ -52,15 +48,9 @@
         <!-- Start of segment -->
         <div *ngSwitchCase="'warnings'">
             <ion-list>
-                <button ion-item *ngIf="sleepPlan.poorSleep > 2" (click)="viewSymptoms()">
+                <button ion-item *ngIf="sleepPlan.daysOfImbalance > 2" (click)="viewSymptoms()">
                     <ion-icon color="danger" name="warning" item-left></ion-icon>
-                    <h2 text-wrap>It seems you are sleep deprived for {{ sleepPlan.poorSleep }} days</h2>
-                    <p text-wrap>Try to reaorganize your sleep patterns</p>
-                    <p item-content>Check symptoms</p>
-                </button>
-                <button ion-item *ngIf="sleepPlan.notRefreshing > 7" (click)="viewSymptoms()">
-                    <ion-icon color="danger" name="warning" item-left></ion-icon>
-                    <h2 text-wrap>It seems your sleep may be unrefreshing for {{ sleepPlan.notRefreshing }} days</h2>
+                    <h2 text-wrap>It seems you have been neglecting your sleep for {{ sleepPlan.poorSleep }} days</h2>
                     <p text-wrap>Try to reaorganize your sleep patterns</p>
                     <p item-content>Check symptoms</p>
                 </button>

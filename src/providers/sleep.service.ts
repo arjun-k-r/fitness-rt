@@ -46,7 +46,8 @@ export class SleepService {
    * @returns {WarningMessage} Returns a warning if something is wrong
    */
   private _checkDuration(sleep: SleepHabit): WarningMessage {
-    return moment(sleep.wakeUpTime, 'hours').subtract(moment(sleep.bedTime, 'hours').hours(), 'hours').hours() < 6 ? new WarningMessage(
+    sleep.duration = moment(sleep.wakeUpTime, 'hours').subtract(moment(sleep.bedTime, 'hours').hours(), 'hours').hours();
+    return sleep.duration < 6 ? new WarningMessage(
       'We need at least 6 hours of sleep every night',
       'There are two tyes of sleep: REM (rapid eye movement or deep sleep) and non-REM (light sleep). The transition between these two types of sleep is a 90-minute cycle. We need to wake up during one of these transitions in order to feel refreshed and energized, more precisely after 4-5 complete cycles (07:30 hours).'
     ) : null;
@@ -91,19 +92,6 @@ export class SleepService {
   }
 
   /**
-   * Verifies if there was relaxation (no working or stress) before bed time
-   * @desc Sleep preparation routine is as important as sleeping itself. Working or stressing before bedtime will make your body secrete stress hormones, which will keep you alert and keep you from falling asleep. You will also feel unrefreshed in the morning.
-   * @param {SleepHabit} sleep - The sleep habit to check
-   * @returns {WarningMessage} Returns a warning if something is wrong
-   */
-  private _checkRelaxation(sleep: SleepHabit): WarningMessage {
-    return !sleep.noElectronics ? new WarningMessage(
-      'You need to relax before bed',
-      'Sleep preparation routine is as important as sleeping itself. Working or stressing before bedtime will make your body secrete stress hormones, which will keep you alert and keep you from falling asleep. You will also feel unrefreshed in the morning.'
-    ) : null;
-  }
-
-  /**
    * Verifies if there were stimulants consumed before bed
    * @desc Stimulants (e.g. coffee, black tea, green tea, alcohol, tobacco etc.), as their name suggests, stimulate blood flow throughout the body and keep you alert both mentally and physically.
    * @param {SleepHabit} sleep - The sleep habit to check
@@ -127,7 +115,6 @@ export class SleepService {
       sleepDurationWarning: WarningMessage = this._checkDuration(currentSleep),
       sleepElectronicsWarning: WarningMessage = this._checkElectronics(currentSleep),
       sleepOscillationWarning: WarningMessage = this._checkOscillation(sleepPlan),
-      sleepRelaxationWarning: WarningMessage = this._checkRelaxation(currentSleep),
       sleepStimulantsWarning: WarningMessage = this._checkStimulants(currentSleep);
 
     if (!!sleepBedtimeWarning) {
@@ -146,26 +133,11 @@ export class SleepService {
       currentSleep.warnings.push(sleepOscillationWarning);
     }
 
-    if (!!sleepRelaxationWarning) {
-      currentSleep.warnings.push(sleepRelaxationWarning);
-    }
-
     if (!!sleepStimulantsWarning) {
       currentSleep.warnings.push(sleepStimulantsWarning);
     }
 
-    if (!!sleepBedtimeWarning || !!sleepDurationWarning) {
-      sleepPlan.poorSleep++;
-    }
-
-    if (!!sleepElectronicsWarning || !!sleepOscillationWarning || !!sleepRelaxationWarning || !!sleepStimulantsWarning) {
-      sleepPlan.notRefreshing++;
-    }
-
-    if (!currentSleep.warnings || !currentSleep.warnings.length) {
-      sleepPlan.notRefreshing = 0;
-      sleepPlan.poorSleep = 0;
-    }
+    sleepPlan.imbalancedSleep = (!!sleepBedtimeWarning && !!sleepDurationWarning && !!sleepOscillationWarning) ? true : false;
 
     sleepPlan.sleepPattern[0] = currentSleep;
   }
@@ -193,6 +165,13 @@ export class SleepService {
       sleepPlan.sleepPattern.pop();
       sleepPlan.sleepPattern.unshift(new SleepHabit());
       sleepPlan.sleepPattern[0].date = CURRENT_DAY;
+
+      // Check if the sleep plan is imbalanced
+      if (sleepPlan.imbalancedSleep) {
+        sleepPlan.daysOfImbalance++;
+      } else {
+        sleepPlan.daysOfImbalance = 0;
+      }
       return sleepPlan.sleepPattern[0];
     }
   }
@@ -231,8 +210,8 @@ export class SleepService {
     this._checkSleep(sleepPlan);
     sleepHabit = sleepPlan.sleepPattern[0];
     this._sleepPlan.update({
-      notRefreshing: sleepPlan.notRefreshing,
-      poorSleep: sleepPlan.poorSleep,
+      daysOfImbalance: sleepPlan.daysOfImbalance,
+      imbalancedSleep: sleepPlan.imbalancedSleep,
       sleepOscillation: sleepPlan.sleepOscillation,
       sleepPattern: sleepPlan.sleepPattern
     });

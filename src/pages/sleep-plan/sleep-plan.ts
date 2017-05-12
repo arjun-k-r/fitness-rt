@@ -87,7 +87,6 @@ export class SleepPlanPage {
       this.sleepPlan = sleepPlan;
       this.currentSleep = this._sleepSvc.getCurrentSleep(this.sleepPlan);
       this._detectorRef.markForCheck();
-      this._detectorRef.markForCheck();
     });
   }
 

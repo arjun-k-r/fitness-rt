@@ -6,7 +6,7 @@ export class DRIService {
   constructor() { }
 
   public getALADri(energyConsumption: number): number {
-    return 0.03 * energyConsumption;
+    return 0.03 * energyConsumption / 9;
   }
 
   public getAlcoholDri(age: number): number {
@@ -54,7 +54,7 @@ export class DRIService {
   }
 
   public getCarbDri(energyConsumption: number): number {
-    return 0.5 * energyConsumption / 4;
+    return 0.4 * energyConsumption / 4;
   }
 
   public getChlorideDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
@@ -116,15 +116,15 @@ export class DRIService {
   }
 
   public getDHADri(energyConsumption: number): number {
-    return 0.005 * energyConsumption;
+    return 0.01 * energyConsumption / 9;
   }
 
   public getEPADri(energyConsumption: number): number {
-    return 0.005 * energyConsumption;
+    return 0.01 * energyConsumption / 9;
   }
 
   public getFatDri(energyConsumption: number): number {
-    return 0.3 * energyConsumption / 9;
+    return 0.4 * energyConsumption / 9;
   }
 
   public getFiberDri(weight: number): number {
@@ -192,7 +192,7 @@ export class DRIService {
   }
 
   public getLADri(energyConsumption: number): number {
-    return 0.09 * energyConsumption;
+    return 0.03 * energyConsumption;
   }
 
   public getLeucineDri(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
@@ -279,6 +279,14 @@ export class DRIService {
     }
   }
 
+  public getOmega3(energyConsumption: number): number {
+    return 0.05 * energyConsumption / 9;
+  }
+
+  public getOmega6(energyConsumption: number): number {
+    return 0.05 * energyConsumption / 9;
+  }
+
   public getPantothenicAcidDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (age <= 1) {
       return 1.8;
@@ -311,6 +319,10 @@ export class DRIService {
     } else {
       return 700;
     }
+  }
+
+  public getPolyunsaturatedFatDri(energyConsumption: number): number {
+    return 0.1 * energyConsumption / 9;
   }
 
   public getPotassiumDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {

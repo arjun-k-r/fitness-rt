@@ -22,6 +22,9 @@
       <ion-segment-button value="nutrition">
         <ion-icon name="nutrition"></ion-icon>
       </ion-segment-button>
+      <ion-segment-button value="instructions">
+        <ion-icon name="checkmark"></ion-icon>
+      </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
@@ -47,7 +50,32 @@
         </ion-item>
         <ion-item>
           Size
-          <p item-content ion-text color="{{ recipe.quantity > 750 ? 'danger' : 'secondary' }}">{{ recipe.quantity }} g</p>
+          <p item-content ion-text color="{{ recipe.quantity > 900 ? 'danger' : 'secondary' }}">{{ recipe.quantity }} g</p>
+        </ion-item>
+        <ion-item>
+          Difficulty
+          <p item-content>{{ recipe.difficulty }}</p>
+        </ion-item>
+        <ion-item>
+          <ion-label>Cooking method</ion-label>
+          <ion-select [(ngModel)]="recipe.cookingMethod" (ionChange)="showCookingInfo()">
+            <ion-option value="Baking">Baking</ion-option>
+            <ion-option value="Barbequing">Barbequing</ion-option>
+            <ion-option value="Boiling">Boiling</ion-option>
+            <ion-option value="Frying">Frying</ion-option>
+            <ion-option value="Grilling">Grilling</ion-option>
+            <ion-option value="Roasting">Roasting</ion-option>
+            <ion-option value="Steaming">Steaming</ion-option>
+            <ion-option value="Stewing">Stewing</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item text-wrap>
+          <ion-label fixed>Cooking temperature (Celsius)</ion-label>
+          <ion-input type="number" [(ngModel)]="recipe.cookingTemperature"></ion-input>
+        </ion-item>
+        <ion-item text-wrap>
+          <ion-label fixed>Cooking time (minutes)</ion-label>
+          <ion-input type="number" [(ngModel)]="recipe.cookingTime"></ion-input>
         </ion-item>
       </ion-list>
     </div>
@@ -66,6 +94,21 @@
       </ion-list>
       <ion-fab bottom right>
         <button ion-fab color="secondary" (click)="addIngredients()"><ion-icon name="add"></ion-icon></button>
+      </ion-fab>
+    </div>
+    <!-- End of segment -->
+
+    <!-- Start of segment -->
+    <div *ngSwitchCase="'instructions'">
+      <ion-list>
+        <ion-item text-wrap *ngFor="let item of recipe.instructions; let i = index">
+          <ion-icon color="danger" name="trash" item-left (click)="removeInstruction(i)"></ion-icon>
+          <ion-label fixed>Step {{i + 1}}:</ion-label>
+          <ion-input type="text" name="step{{i}}" [(ngModel)]="recipeInstructions[i]"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-fab bottom right>
+        <button ion-fab color="secondary" (click)="addInstruction()"><ion-icon name="add"></ion-icon></button>
       </ion-fab>
     </div>
     <!-- End of segment -->

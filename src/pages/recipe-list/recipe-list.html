@@ -1,30 +1,66 @@
 <ion-header>
-    <ion-navbar>
-        <button ion-button menuToggle>
+  <ion-navbar>
+    <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Recipes</ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only padding>
+    <ion-title>Recipes</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only padding>
                 <ion-icon name="funnel"></ion-icon>
             </button>
-        </ion-buttons>
-    </ion-navbar>
+    </ion-buttons>
+  </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-searchbar debounce="2000" placeholder="Search recipes" [(ngModel)]="searchQuery" (ionCancel)="clearSearch($event)">
   </ion-searchbar>
-  <ion-list>
-    <button ion-item *ngFor="let recipe of (recipes$ | async) | search: searchQuery: limit" [navPush]="detailsPage" [navParams]="{ recipe: recipe }">
-      {{ recipe.name }}
-      <ion-note item-right>View more</ion-note>
-    </button>
-  </ion-list>
+  
+  <ion-card *ngFor="let recipe of (recipes$ | async) | search: searchQuery: limit; let i = index">
+    <ion-card-content>
+      <ion-card-title color="primary">
+        {{ recipe.name }}
+      </ion-card-title>
+      <ion-list>
+        <ion-item>
+          pH
+          <p item-content ion-text color="{{ recipe.pral > 0 ? 'danger' : 'secondary' }}">{{ recipe.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
+        </ion-item>
+        <ion-item>
+          Size
+          <p item-content ion-text color="{{ recipe.quantity > 900 ? 'danger' : 'secondary' }}">{{ recipe.quantity }} g</p>
+        </ion-item>
+        <ion-item>
+          Difficulty
+          <p item-content>{{ recipe.difficulty }}</p>
+        </ion-item>
+        <ion-item>
+          Ingredients
+          <p item-content>{{ recipe.ingredients?.length || 0 }} items</p>
+        </ion-item>
 
-  <ion-infinite-scroll (ionInfinite)="loadMoreRecipes($event)">
+      </ion-list>
+    </ion-card-content>
+    <ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small color="primary" icon-left [navPush]="detailsPage" [navParams]="{ recipe: recipe }">
+          <ion-icon name='create'></ion-icon>
+          Edit
+        </button>
+      </ion-col>
+      <ion-col text-right>
+        <button ion-button clear small icon-left (click)="removeRecipe(recipe)">
+          <ion-icon name='heart'></ion-icon>
+          Remove
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <!-- End of segment -->
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 

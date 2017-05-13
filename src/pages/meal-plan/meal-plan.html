@@ -49,7 +49,7 @@
             </ion-item>
             <ion-item>
               Size
-              <p item-content ion-text color="{{ meal.quantity > 250 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
+              <p item-content ion-text color="{{ meal.quantity > 900 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
             </ion-item>
             <ion-item>
               Warnings
@@ -93,6 +93,10 @@
         <ion-item>
           Energy
           <p item-content>{{ mealPlan.dailyNutrition.energy?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Omega-3:Omega-6 ratio
+          <p ion-text color="{{ omega36Ratio < 0.5 ? 'danger' : 'secondary' }}" item-content>{{ omega36Ratio }}</p>
         </ion-item>
       </ion-item-group>
       <ion-item-group>
@@ -563,6 +567,18 @@
           <ion-icon color="danger" name="warning" item-left></ion-icon>
           <h2 text-wrap>It seems you have a caffeine excess for {{ mealPlan.excess.caffeine }} days</h2>
           <p text-wrap>Try to limit your caffeine intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.excess.omega6 > 2" (click)="viewSymptoms('omega6', 'Omega-6 fat', 'excess')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a omega-6 fat excess for {{ mealPlan.excess.omega6 }} days</h2>
+          <p text-wrap>Try to limit your omega-6 fat intake</p>
+          <p item-content>Check symptoms</p>
+        </button>
+        <button ion-item *ngIf="mealPlan.excess.polyunsatFat > 2" (click)="viewSymptoms('polyunsatFat', 'Polyunsaturated fat', 'excess')">
+          <ion-icon color="danger" name="warning" item-left></ion-icon>
+          <h2 text-wrap>It seems you have a polyunsaturated fat excess for {{ mealPlan.excess.polyunsatFat }} days</h2>
+          <p text-wrap>Try to limit your polyunsaturated fat intake</p>
           <p item-content>Check symptoms</p>
         </button>
         <button ion-item *ngIf="mealPlan.excess.transFat > 2" (click)="viewSymptoms('transFat', 'Trans fat', 'excess')">

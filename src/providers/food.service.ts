@@ -196,28 +196,68 @@ export class FoodService {
           food.nutrition.vitaminK.value = +nutrient.value;
           break;
 
+        case '605':
+          food.nutrition.transFat.value = +nutrient.value;
+          break;
+
         case '606':
           food.nutrition.satFat.value = +nutrient.value;
           break;
 
         case '618':
-          food.nutrition.ala.value = +nutrient.value;
+          food.nutrition.la.value = +nutrient.value;
+          food.nutrition.omega6.value += +nutrient.value;
           break;
 
         case '619':
-          food.nutrition.la.value = +nutrient.value;
+          food.nutrition.ala.value = +nutrient.value;
+          food.nutrition.omega3.value += +nutrient.value;
+          break;
+
+        case '620':
+          food.nutrition.omega3.value += +nutrient.value;
           break;
 
         case '621':
           food.nutrition.dha.value = +nutrient.value;
+          food.nutrition.omega3.value += +nutrient.value;
+          break;
+
+        case '627':
+          food.nutrition.omega3.value += +nutrient.value;
           break;
 
         case '629':
           food.nutrition.epa.value = +nutrient.value;
+          food.nutrition.omega3.value += +nutrient.value;
           break;
 
-        case '605':
-          food.nutrition.transFat.value = +nutrient.value;
+        case '631':
+          food.nutrition.omega3.value += +nutrient.value;
+          break;
+
+        case '646':
+          food.nutrition.polyunsatFat.value = +nutrient.value;
+          break;
+
+        case '646':
+          food.nutrition.polyunsatFat.value = +nutrient.value;
+          break;
+
+        case '672':
+          food.nutrition.omega6.value += +nutrient.value;
+          break;
+
+        case '689':
+          food.nutrition.omega3.value += +nutrient.value;
+          break;
+
+        case '857':
+          food.nutrition.omega3.value += +nutrient.value;
+          break;
+
+        case '858':
+          food.nutrition.omega6.value += +nutrient.value;
           break;
 
         case '501':

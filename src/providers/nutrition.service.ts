@@ -19,6 +19,15 @@ export class NutritionService {
   }
 
   /**
+   * Calculates the total quanitty of several foods
+   * @param {Array} items - The foods
+   * @returns {number} Returns the quantity in grams of all foods
+   */
+  public calculateQuantity(items: Array<Food | Recipe>): number {
+    return items.reduce((acc: number, item: Food) => acc + (item.quantity * item.servings), 0);
+  }
+
+  /**
   * Verifies if there is an excess of sugar
   * @param {Nutrition} nutrition - The nutrition to check
   * @returns {WarningMessage} Returns warning if there is too much sugar
@@ -150,8 +159,11 @@ export class NutritionService {
     requirements.magnesium.value = this._driSvc.getMagnesiumDri(age, gender, lactating, pregnant);
     requirements.manganese.value = this._driSvc.getManganeseDri(age, gender, lactating, pregnant);
     requirements.methionine.value = this._driSvc.getMethionineDri(age, gender, lactating, pregnant, weight);
+    requirements.omega3.value = this._driSvc.getOmega3(energyConsumption);
+    requirements.omega6.value = this._driSvc.getOmega6(energyConsumption);
     requirements.phenylalanine.value = this._driSvc.getPhenylalanineDri(age, gender, lactating, pregnant, weight);
     requirements.phosphorus.value = this._driSvc.getPhosphorusDri(age, gender, lactating, pregnant);
+    requirements.polyunsatFat.value = this._driSvc.getPolyunsaturatedFatDri(energyConsumption);
     requirements.potassium.value = this._driSvc.getPotassiumDri(age, gender, lactating, pregnant);
     requirements.protein.value = this._driSvc.getProteinDri(energyConsumption);
     requirements.selenium.value = this._driSvc.getSeleniumDri(age, gender, lactating, pregnant);
@@ -176,15 +188,6 @@ export class NutritionService {
     requirements.zinc.value = this._driSvc.getZincDri(age, gender, lactating, pregnant);
 
     return requirements;
-  }
-
-  /**
-   * Calculates the total quanitty of several foods
-   * @param {Array} items - The foods
-   * @returns {number} Returns the quantity in grams of all foods
-   */
-  public calculateQuantity(items: Array<Food | Recipe>): number {
-    return items.reduce((acc: number, item: Food) => acc + (item.quantity * item.servings), 0);
   }
 
   /**
@@ -233,7 +236,7 @@ export class NutritionService {
     items.forEach((item: Food) => {
 
       // Sum the nutrients for each item
-      for (let nutrientKey in item.nutrition) {
+      for (let nutrientKey in requirements) {
         nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
       }
     });
@@ -248,6 +251,16 @@ export class NutritionService {
     }
 
     return nutrition;
+  }
+
+  /**
+   * Gets the omega-3:omega-6 ratio
+   * @desc The daily healthy ratio should be more than 0.5 (1:2), ideally 1 (1:!)
+   * @param {Nutrittion} nutrition - The daily nutrition
+   * @returns {number} Returns the ratio
+   */
+  public getOmega36Ratio(nutrition: Nutrition): number {
+    return +((nutrition.omega3.value || 1) / (nutrition.omega6.value || 1)).toFixed(2);
   }
 
   /**

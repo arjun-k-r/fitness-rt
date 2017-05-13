@@ -12,7 +12,7 @@ import { Meal, MealPlan } from '../../models';
 import { MealDetailsPage } from '../meal-details/meal-details';
 
 // Providers
-import { AlertService, FitnessService, MealService } from '../../providers';
+import { AlertService, FitnessService, MealService, NutritionService } from '../../providers';
 
 @Component({
   selector: 'page-meal-plan',
@@ -23,15 +23,17 @@ export class MealPlanPage {
   public detailsPage: any = MealDetailsPage;
   public mealPlan: MealPlan;
   public mealPlanDetails: string = 'meals';
+  public omega36Ratio: number;
   public nourishingMeals$: FirebaseListObservable<Array<Meal>>;
   constructor(
     private _alertCtrl: AlertController,
     private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _fitSvc: FitnessService,
-    private _mealSvc: MealService,
     private _loadCtrl: LoadingController,
-    private _navCtrl: NavController
+    private _mealSvc: MealService,
+    private _navCtrl: NavController,
+    private _nutritionSvc: NutritionService
   ) { }
 
   public addToMealPlan(meal: Meal): void {
@@ -164,6 +166,7 @@ export class MealPlanPage {
       console.log('Received meal plan: ', mealPlan);
       this.mealPlan = mealPlan;
       this.mealPlan.meals = this.mealPlan.meals || [];
+      this.omega36Ratio = this._nutritionSvc.getOmega36Ratio(this.mealPlan.dailyNutrition);
       loader.dismiss();
       this._detectorRef.markForCheck();
     });

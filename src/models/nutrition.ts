@@ -61,6 +61,7 @@ export class NutrientDeficiencies {
         public ala: number = 0,
         public dha: number = 0,
         public epa: number = 0,
+        public omega3: number = 0,
         public tryptophan: number = 0,
         public threonine: number = 0,
         public isoleucine: number = 0,
@@ -85,6 +86,7 @@ export class NutrientExcesses {
         public carbs: number = 0,
         public sugars: number = 0,
         public sodium: number = 0,
+        public polyunsatFat: number = 0,
         public transFat: number = 0
     ) {}
 }
@@ -131,6 +133,9 @@ export class Nutrition {
         public ala: Nutrient = new Nutrient(619, 'Lipids', 'Omega-3 (ALA)', 'g'),
         public dha: Nutrient = new Nutrient(621, 'Lipids', 'Omega-3 (DHA)', 'g'),
         public epa: Nutrient = new Nutrient(629, 'Lipids', 'Omega-3 (EPA)', 'g'),
+        public omega3: Nutrient = new Nutrient(0, 'Lipids', 'Omega-3 (Total)', 'g'),
+        public omega6: Nutrient = new Nutrient(0, 'Lipids', 'Omega-6 (Total)', 'g'),
+        public polyunsatFat: Nutrient = new Nutrient(646, 'Lipids', 'Polyunsaturated fat', 'g'),
         public transFat: Nutrient = new Nutrient(605, 'Lipids', 'Trans fat', 'g'),
         public tryptophan: Nutrient = new Nutrient(501, 'Amino Acids', 'Tryptophan', 'g'),
         public threonine: Nutrient = new Nutrient(502, 'Amino Acids', 'Threonine', 'g'),
@@ -140,7 +145,6 @@ export class Nutrition {
         public methionine: Nutrient = new Nutrient(506, 'Amino Acids', 'Methionine', 'g'),
         public phenylalanine: Nutrient = new Nutrient(508, 'Amino Acids', 'Phenylalanine', 'g'),
         public valine: Nutrient = new Nutrient(510, 'Amino Acids', 'Valine', 'g'),
-		//public arginine: Nutrient = new Nutrient(511, 'Amino Acids', 'Arginine', 'g'),
         public histidine: Nutrient = new Nutrient(512, 'Amino Acids', 'Histidine', 'g'),
         public alcohol: Nutrient = new Nutrient(221, 'Other', 'Alcohol', 'g'),
         public caffeine: Nutrient = new Nutrient(262, 'Other', 'Caffeine', 'mg')

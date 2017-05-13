@@ -49,6 +49,10 @@ export class RecipeListPage {
     }, 1000);
   }
 
+  public removeRecipe(recipe: Recipe): void {
+    this._recipeSvc.removeRecipe(recipe);
+  }
+
   ionViewWillEnter(): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Loading...',
@@ -66,5 +70,4 @@ export class RecipeListPage {
     console.log('Destroying...');
     this._detectorRef.detach();
   }
-
 }

@@ -15,7 +15,6 @@ import {
   Food,
   Meal,
   MealPlan,
-  MealServing,
   NutrientDeficiencies,
   NutrientExcesses,
   Nutrition,
@@ -83,23 +82,63 @@ export class MealService {
   }
 
   /**
-   * Verifies if each meal serving preparation todo is checked and respected
+   * Verifies if each meal is served correclty
    * @description A complete healthy digestion and nutrient absorption requires healthy eating habits. How you eat is as important as what you eat
-   * @param serving - The meal serving todo's
+   * @param {Meal} meal - The meal to check
    * @returns {WarningMessage} Returns a warning to make the user create healthy eating habits
    */
-  private _checkMealServing(serving: MealServing): WarningMessage {
-    let warning: WarningMessage;
-    _.values(serving).forEach((todo: boolean) => {
-      if (!todo) {
-        warning = new WarningMessage(
-          'The meal serving preparations were not checked',
-          'A complete healthy digestion and nutrient absorption requires healthy eating habits. How you eat is as important as what you eat'
-        );
-      }
-    });
+  private _checkMealServing(meal: Meal): Array<WarningMessage> {
+    let warnings: Array<WarningMessage> = [];
+    if (!meal.chewing) {
+      warnings.push(new WarningMessage(
+        'Chewing is the first step of the digestion process',
+        'A complete digestion requires finely chewed and insalivated food. Have you witnessed any discomfort after your meal?'
+      ));
+    }
 
-    return warning;
+    if (!meal.gratitude) {
+      warnings.push(new WarningMessage(
+        'Some people do not have what to eat, you know?',
+        'Be grateful for every meal you have and enjoy each bite like it is your last one, because it may be...'
+      ));
+    }
+
+    if (!meal.hunger) {
+      warnings.push(new WarningMessage(
+        'Are you watching your cravings?',
+        'Eating between meals or when not hungry interferes with previous digestion processes and may lead yo weight gain and digestive problems'
+      ));
+    }
+
+    if (meal.isCold) {
+      warnings.push(new WarningMessage(
+        'Avoid cold foods',
+        'Digestion is a mechanical and chimical process and requires heat. It is just like a cooking process.'
+      ));
+    }
+
+    if (!meal.isNatural) {
+      warnings.push(new WarningMessage(
+        'We need real food',
+        'We are genetically designes to digest and natural (real) food. Comercial foods are just empty calories without any nutritional values (poison)'
+      ));
+    }
+
+    if (!meal.isRaw) {
+      warnings.push(new WarningMessage(
+        'Cooking removes the oxygen (life) from foods',
+        'The more oxygen a food has, the more alkaline forming (nourishing) it is. Try to eat at least half of your meals raw.'
+      ));
+    }
+
+    if (!meal.relaxation) {
+      warnings.push(new WarningMessage(
+        'Calm down',
+        'Eating when stressed, angry, sad or while working, walking, or during any other activities interferes with digestion and may lead to indigestion and other digestive problems. Sit down, take a deep breath, relax, and savour your food with complete focus and joy.'
+      ));
+    }
+
+    return warnings;
   }
 
   /**
@@ -149,7 +188,7 @@ export class MealService {
       this._nutritionSvc.checkFats(meal.nutrition),
       this._checkMealPral(meal.pral),
       this._nutritionSvc.checkProtein(meal.nutrition),
-      this._checkMealServing(meal.serving),
+      ...this._checkMealServing(meal),
       this._checkMealSize(meal.quantity),
       this._nutritionSvc.checkSodium(meal.nutrition),
       this._nutritionSvc.checkSugars(meal.nutrition),
@@ -226,7 +265,10 @@ export class MealService {
     });
 
     // Add more meals if there is enough time until bedtime
-    //mealPlan.meals = [...mealPlan.meals, ...this._getMeals(moment(mealPlan.meals[mealPlan.meals.length - 1].time, 'hours').add(4, 'hours').format('HH:mm'))];
+    let lastMealTime: string = mealPlan.meals[mealPlan.meals.length - 1].time;
+    if (moment(this._bedTime, 'hours').subtract(moment(lastMealTime, 'hours').hours(), 'hours').hours() >= 6) {
+      mealPlan.meals = [...mealPlan.meals, ...this._getMeals(moment(lastMealTime, 'hours').add(4, 'hours').format('HH:mm'))];
+    }
   }
 
   /**
@@ -246,7 +288,11 @@ export class MealService {
         meal.nourishingKey = '';
       } else if (!!meal.wasNourishing && meal.nourishingKey !== '') {
         this._nourishingMeals.update(meal['$key'], {
+          chewing: meal.chewing,
+          gratitude: meal.gratitude,
+          hunger: meal.hunger,
           isCold: meal.isCold,
+          isNatural: meal.isNatural,
           isRaw: meal.isRaw,
           mealItems: meal.mealItems || [],
           nickname: meal.nickname,
@@ -254,13 +300,13 @@ export class MealService {
           nutrition: meal.nutrition,
           pral: meal.pral,
           quantity: meal.quantity,
-          serving: meal.serving,
+          relaxation: meal.relaxation,
           warnings: meal.warnings || [],
           wasNourishing: meal.wasNourishing
         });
       }
       mealPlan.meals[mealIdx] = meal;
-      mealPlan.dailyNutrition = this._nutritionSvc.getPercentageNutrition(mealPlan.meals);
+      mealPlan.dailyNutrition = this._nutritionSvc.getPercentageNutrition(mealPlan.meals, true);
     } else {
       mealPlan.dailyNutrition = new Nutrition();
     }

@@ -19,6 +19,7 @@ import { AlertService, FOOD_GROUPS, FoodService, RecipeService } from '../../pro
 })
 export class FoodSelectPage {
   private _foodSubscription: Subscription;
+  private _querying: boolean = false;
   public foods: Array<IFoodSearchResult>;
   public foodLimit: number = 50;
   public groups: Array<FoodGroup> = [...FOOD_GROUPS];
@@ -51,10 +52,10 @@ export class FoodSelectPage {
   }
 
   public doneSelecting(): void {
-    if (this.selectedItem.hasOwnProperty('ndbno')) {
-      this._foodSvc.getFoodReports$(this.selectedItem['ndbno']).subscribe((item: Food) => this._viewCtrl.dismiss(this.selectedItem), (err: Error) => console.log('Error on getting food report: ', err));
+    if (!!this.selectedItem && this.selectedItem.hasOwnProperty('ndbno')) {
+      this._foodSvc.getFoodReports$(this.selectedItem['ndbno']).subscribe((item: Food) => this._viewCtrl.dismiss(item), (err: Error) => console.log('Error on getting food report: ', err));
     } else {
-      this._viewCtrl.dismiss(this.selectedItem);
+      this._viewCtrl.dismiss();
     }
   }
 
@@ -86,37 +87,41 @@ export class FoodSelectPage {
   }
 
   public refreshItems(): void {
-    let loader: Loading = this._loadCtrl.create({
-      content: 'Loading...',
-      spinner: 'crescent',
-      duration: 10000
-    }), doneLoading: boolean = false;
+    if (!this._querying) {
+      this._querying = true;
+      let loader: Loading = this._loadCtrl.create({
+        content: 'Loading...',
+        spinner: 'crescent',
+        duration: 30000
+      }), doneLoading: boolean = false;
 
-    loader.present();
-    this.start = 0;
+      loader.present();
+      this.start = 0;
 
-    if (!!this._foodSubscription) {
-      this._foodSubscription.unsubscribe();
-    }
-    this._foodSubscription = this._foodSvc.getFoods$(this.searchQueryFoods.toLocaleLowerCase(), this.start, this.foodLimit, this.selectedGroup.id)
-      .subscribe((data: Array<IFoodSearchResult>) => {
-        this.foods = [...data];
-        loader.dismiss();
-        doneLoading = true;
-        this._detectorRef.markForCheck();
-      }, (err: { status: string, message: string }) => {
-        loader.dismiss();
-        doneLoading = true;
-        this._alertSvc.showAlert(err.message, `Error ${err.status}!`, 'Whoops... something went wrong');
-      });
-
-    loader.onDidDismiss(() => {
-      if (!doneLoading) {
+      if (!!this._foodSubscription) {
         this._foodSubscription.unsubscribe();
-        this._alertSvc.showAlert('Please try again in a few minutes', 'The food request failed', 'Whoops... something went wrong');
-        this.doneSelecting();
       }
-    });
+      this._foodSubscription = this._foodSvc.getFoods$(this.searchQueryFoods.toLocaleLowerCase(), this.start, this.foodLimit, this.selectedGroup.id)
+        .subscribe((data: Array<IFoodSearchResult>) => {
+          this.foods = [...data];
+          doneLoading = true;
+          loader.dismiss();
+          this._detectorRef.markForCheck();
+        }, (err: { status: string, message: string }) => {
+          doneLoading = true;
+          loader.dismiss();
+          this._alertSvc.showAlert(err.message, `Error ${err.status}!`, 'Whoops... something went wrong');
+        });
+
+      loader.onDidDismiss(() => {
+        this._querying = false;
+        if (!doneLoading) {
+          this._foodSubscription.unsubscribe();
+          this._alertSvc.showAlert('Please try again in a few minutes', 'The food request failed', 'Whoops... something went wrong');
+          this.doneSelecting();
+        }
+      });
+    }
   }
 
   public segmentChange(): void {

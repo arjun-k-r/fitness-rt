@@ -14,15 +14,19 @@ import { WarningMessage } from './warning-message';
  */
 export class Meal {
     constructor(
-        public isCold: boolean = true,
-        public isRaw: boolean = true,
+        public chewing: boolean = false,
+        public gratitude: boolean = false,
+        public hunger: boolean = false,
+        public isCold: boolean = false,
+        public isNatural: boolean = false,
+        public isRaw: boolean = false,
         public mealItems: Array<Food | Recipe> = [],
         public nickname: string = '',
         public nourishingKey: string = '',
         public nutrition: Nutrition = new Nutrition(),
         public pral: number = 0,
         public quantity: number = 0,
-        public serving: MealServing = new MealServing(),
+        public relaxation: boolean = false,
         public time: string = moment().format('HH:mm'),
         public warnings: Array<WarningMessage> = [],
         public wasNourishing: boolean = false
@@ -51,27 +55,5 @@ export class MealPlan {
         public deficiency: NutrientDeficiencies = new NutrientDeficiencies(),
         public excess: NutrientExcesses = new NutrientExcesses(),
         public meals: Array<Meal> = []
-    ) { }
-}
-
-export class MealServing {
-    /**
-     * @constructor
-     * @param chewing - Flag indicating if the user chewed properly the meal
-     * @param gratitude - Flag indicating if the user was grateful for his meal
-     * @param hunger - Flag indicating if the user has truly hungry
-     * @param noDisturbance - Flag indicating if there were no disturbances around (e.g. TV, talking, loud music, agitation, etc.)
-     * @param noStress - Flag indicating if the user was relaxed and calm while serving his meal
-     * @param organic - Flag indicating if the meal had organic foods
-     * @param slowlyEating - Flag indicating if the user ate slowly and savoured his meal
-     */
-    constructor(
-        public chewing: boolean = false,
-        public gratitude: boolean = false,
-        public hunger: boolean = false,
-        public noDisturbance: boolean = false,
-        public organic: boolean = false,
-        public relaxation: boolean = false,
-        public slowlyEating: boolean = false
     ) { }
 }

@@ -16,7 +16,6 @@ const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class SleepService {
-  private _sleepDeficiency: FirebaseObjectObservable<Array<string>>;
   private _sleepPlan: FirebaseObjectObservable<SleepPlan>;
   constructor(
     private _af: AngularFire,

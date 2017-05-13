@@ -1,6 +1,7 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { AlertController, InfiniteScroll, Loading, LoadingController } from 'ionic-angular';
+import { Subscription } from 'rxjs/Subscription';
 
 // Models
 import { IFoodSearchResult, FoodGroup } from '../../models';
@@ -17,6 +18,8 @@ import { AlertService, FOOD_GROUPS, FoodService } from '../../providers';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FoodListPage {
+  private _foodSubscription: Subscription;
+  private _querying: boolean = false;
   public detailsPage: any = FoodDetailsPage;
   public foods: Array<IFoodSearchResult>;
   public groups: Array<FoodGroup> = [...FOOD_GROUPS];
@@ -56,23 +59,40 @@ export class FoodListPage {
   }
 
   public refreshItems(): void {
-    let loader: Loading = this._loadCtrl.create({
-      content: 'Loading...',
-      spinner: 'crescent',
-      duration: 10000
-    });
+    if (!this._querying) {
+      this._querying = true;
+      let loader: Loading = this._loadCtrl.create({
+        content: 'Loading...',
+        spinner: 'crescent',
+        duration: 30000
+      }), doneLoading: boolean = false;
 
-    loader.present();
-    this.start = 0;
-    this._foodSvc.getFoods$(this.searchQuery, this.start, this.limit, this.selectedGroup.id)
-      .subscribe((data: Array<IFoodSearchResult>) => {
-        this.foods = [...data];
+      loader.present();
+      this.start = 0;
+
+      if (!!this._foodSubscription) {
+        this._foodSubscription.unsubscribe();
+      }
+      this._foodSubscription = this._foodSvc.getFoods$(this.searchQuery.toLocaleLowerCase(), this.start, this.limit, this.selectedGroup.id)
+        .subscribe((data: Array<IFoodSearchResult>) => {
+          this.foods = [...data];
+          doneLoading = true;
           loader.dismiss();
           this._detectorRef.markForCheck();
-      }, (err: {status: string, message: string}) => {
-        loader.dismiss();
-        this._alertSvc.showAlert(err.message, '', `Ooops! Error ${err.status}!`);
+        }, (err: { status: string, message: string }) => {
+          doneLoading = true;
+          loader.dismiss();
+          this._alertSvc.showAlert(err.message, `Error ${err.status}!`, 'Whoops... something went wrong');
+        });
+
+      loader.onDidDismiss(() => {
+        this._querying = false;
+        if (!doneLoading) {
+          this._foodSubscription.unsubscribe();
+          this._alertSvc.showAlert('Please try again in a few minutes', 'The food request failed', 'Whoops... something went wrong');
+        }
       });
+    }
   }
 
   public showFilter(): void {

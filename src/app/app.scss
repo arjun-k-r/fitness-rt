@@ -72,6 +72,24 @@
     font-size: 20px;
 }
 
+@media (max-width: 25rem) {
+    .card {
+        .col button {
+            font-size: 1.2rem;
+        }
+        .card-content {
+            .label,
+            ion-text,
+            p {
+                font-size: 1.2rem;
+            }
+        }
+        .card-title {
+            font-size: 1.85rem;
+        }
+    }
+}
+
 .form {
     max-width: 25rem;
     width: 100%;

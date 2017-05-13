@@ -1,7 +1,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>Meal details</ion-title>
+        <ion-title>{{ meal.time }} meal</ion-title>
         <ion-buttons end>
             <button ion-button icon-only (click)="saveMeal()">
                 <ion-icon name="sync"></ion-icon>
@@ -16,9 +16,6 @@
             <ion-segment-button value="details">
                 <ion-icon name="create"></ion-icon>
             </ion-segment-button>
-            <ion-segment-button value="preparation">
-                <ion-icon name="checkmark"></ion-icon>
-            </ion-segment-button>
             <ion-segment-button value="items">
                 <ion-icon name="list"></ion-icon>
             </ion-segment-button>
@@ -32,22 +29,24 @@
     </ion-toolbar>
 </ion-header>
 
-
 <ion-content padding>
     <div [ngSwitch]="mealDetails">
 
         <!-- Start of segment -->
         <div *ngSwitchCase="'details'">
             <ion-list>
+                <ion-list-header>
+                    Details
+                </ion-list-header>
                 <ion-item>
                     pH
                     <p item-content ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
                 </ion-item>
                 <ion-item>
                     Size
-                    <p item-content ion-text color="{{ meal.quantity > 750 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
+                    <p item-content ion-text color="{{ meal.quantity > 900 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
                 </ion-item>
-                 <ion-item>
+                <ion-item>
                     Time
                     <p item-content>{{ meal.time }}</p>
                 </ion-item>
@@ -58,6 +57,29 @@
                 <ion-item>
                     <ion-label text-wrap>Served raw</ion-label>
                     <ion-toggle [(ngModel)]="meal.isRaw"></ion-toggle>
+                </ion-item>
+                <ion-item>
+                    <ion-label text-wrap>Natural foods</ion-label>
+                    <ion-toggle [(ngModel)]="meal.isNatural"></ion-toggle>
+                </ion-item>
+                <ion-list-header>
+                    Before eating
+                </ion-list-header>
+                <ion-item>
+                    <ion-label text-wrap>Chew carefully until fluid</ion-label>
+                    <ion-checkbox [(ngModel)]="meal.chewing"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label text-wrap>Be grateful (enjoy each bite)</ion-label>
+                    <ion-checkbox [(ngModel)]="meal.gratitude"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label text-wrap>Make sure you are truly hungry (not boredum or craving)</ion-label>
+                    <ion-checkbox [(ngModel)]="meal.hunger"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label text-wrap>Make sure you are relaxed</ion-label>
+                    <ion-checkbox [(ngModel)]="meal.relaxation"></ion-checkbox>
                 </ion-item>
             </ion-list>
         </div>
@@ -77,45 +99,6 @@
             <ion-fab bottom right>
                 <button ion-fab color="secondary" (click)="addMealItems()"><ion-icon name="add"></ion-icon></button>
             </ion-fab>
-        </div>
-        <!-- End of segment -->
-
-        <!-- Start of segment -->
-        <div *ngSwitchCase="'preparation'">
-            <ion-list>
-                <ion-list-header>
-                    Before serving my meal
-                </ion-list-header>
-                <ion-item>
-                    <ion-label text-wrap>Chew 32 times and insalivate for 30 seconds</ion-label>
-                    <ion-checkbox [(ngModel)]="meal.serving.chewing"></ion-checkbox>
-                </ion-item>
-                <ion-item>
-                    <ion-label text-wrap>I am grateful for this meal</ion-label>
-                    <ion-checkbox [(ngModel)]="meal.serving.gratitude"></ion-checkbox>
-                </ion-item>
-                <ion-item>
-                    <ion-label text-wrap>I am truly hungry and not just bored.</ion-label>
-                    <ion-checkbox [(ngModel)]="meal.serving.hunger"></ion-checkbox>
-                </ion-item>
-                <ion-item>
-                    <ion-label text-wrap>No disturbance (e.g. TV, talking, loud music, etc.)</ion-label>
-                    <ion-checkbox [(ngModel)]="meal.serving.noDisturbance"></ion-checkbox>
-                </ion-item>
-                <ion-item>
-                    <ion-label text-wrap>My meal is organic and clean</ion-label>
-                    <ion-checkbox [(ngModel)]="meal.serving.organic"></ion-checkbox>
-                </ion-item>
-                <ion-item>
-                    <ion-label text-wrap>I am relaxed and calm</ion-label>
-                    <ion-checkbox [(ngModel)]="meal.serving.relaxation"></ion-checkbox>
-                </ion-item>
-                <ion-item>
-                    <ion-label text-wrap>Eat slowly and enjoy each bite
-                    </ion-label>
-                    <ion-checkbox [(ngModel)]="meal.serving.slowlyEating"></ion-checkbox>
-                </ion-item>
-            </ion-list>
         </div>
         <!-- End of segment -->
 

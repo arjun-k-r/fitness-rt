@@ -1,6 +1,6 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
-import { Alert, AlertController, InfiniteScroll, ViewController } from 'ionic-angular';
+import { AlertController, InfiniteScroll, ViewController } from 'ionic-angular';
 
 // Third-party
 import { FirebaseListObservable } from 'angularfire2';
@@ -46,7 +46,7 @@ export class ActivitySelectPage {
   }
 
   public selectActivity(activity: Activity): void {
-    let alert: Alert = this._alertCtrl.create({
+    this._alertCtrl.create({
       title: 'Duration',
       subTitle: 'How long did you perform this activity?',
       inputs: [
@@ -63,15 +63,14 @@ export class ActivitySelectPage {
         },
         {
           text: 'Done',
-          handler: data => {
+          handler: (data: { duration: number }) => {
             activity.duration = +data.duration;
             activity.energyBurn = this._activitySvc.getActivityEnergyBurn(activity);
             this.selectedActivity = activity;
           }
         }
       ]
-    });
-    alert.present();
+    }).present();
   }
 
   ionViewWillEnter(): void {

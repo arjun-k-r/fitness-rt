@@ -4,9 +4,6 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Loading, LoadingController, NavController } from 'ionic-angular';
 import { Auth, IDetailedError, User, UserDetails } from '@ionic/cloud-angular';
 
-// Vendor
-import { Md5 } from 'ts-md5/dist/md5';
-
 // Pages
 import { LoginPage } from '../login/login';
 import { FitnessPage } from '../fitness/fitness';
@@ -79,7 +76,7 @@ export class RegistrationPage {
         'lastName': form.lastName
       },
       'email': form.email.trim(),
-      'image': 'https://www.gravatar.com/avatar/' + Md5.hashStr(form.email.trim()),
+      'image': '',
       'name': `${form.firstName.trim()} ${form.lastName.trim()}`,
       'password': form.password.trim(),
       'username': `${form.firstName.trim().toLocaleLowerCase()}${form.lastName.trim().toLocaleLowerCase()}`

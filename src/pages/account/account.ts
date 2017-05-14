@@ -1,10 +1,13 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
-import { AlertController, AlertOptions, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, AlertOptions, LoadingController, NavController, Toast, ToastController } from 'ionic-angular';
 import { Auth, User } from '@ionic/cloud-angular';
 
 // Pages
 import { RegistrationPage } from '../registration/registration';
+
+// Providers
+import { AlertService, PictureService } from '../../providers';
 
 @Component({
   selector: 'page-account',
@@ -12,15 +15,20 @@ import { RegistrationPage } from '../registration/registration';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AccountPage {
-
+  public avatar: string;
   constructor(
     private _alertCtrl: AlertController,
+    private _alertSvc: AlertService,
     private _auth: Auth,
     private _detectorRef: ChangeDetectorRef,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
+    private _picService: PictureService,
+    private _toastCtrl: ToastController,
     private _user: User
-  ) { }
+  ) {
+    this.avatar = _user.details.image;
+  }
 
   private _deleteAccount(): void {
     let loader = this._loadCtrl.create({
@@ -57,6 +65,35 @@ export class AccountPage {
     };
 
     this._alertCtrl.create(alertOpt).present();
+  }
+
+  public changeAvatar(inputRef: HTMLInputElement): void {
+    let toast: Toast = this._toastCtrl.create({
+      message: 'Uploading ... 0%',
+      position: 'bottom',
+      showCloseButton: true,
+      closeButtonText: 'Hide'
+    });
+
+    toast.present();
+    this._picService.uploadImage(inputRef.files[0], 'avatars').subscribe((data: string | number) => {
+      console.log(typeof data === 'number');
+      if (typeof data === 'number') {
+        toast.setMessage(`Uploading ... ${data}%`);
+      } else {
+        this._user.details.image = data;
+        this._user.save();
+        this.avatar = data;
+      }
+    }, (err: Error) => {
+      console.log('Error uploading avatar: ', err);
+      toast.setMessage('Uhh ohh, something went wrong!');
+    },
+      () => {
+        toast.dismiss();
+        this._alertSvc.showAlert('Your avatar has been updated successfully', '', 'Success!');
+        this._detectorRef.markForCheck();
+      });
   }
 
   public signout(): void {

@@ -91,7 +91,7 @@
                 <ion-item *ngFor="let item of meal.mealItems; let i = index">
                     <ion-icon color="danger" name="trash" item-left (click)="removeItem(i)"></ion-icon>
                     <h2 text-wrap>{{ item.name }}</h2>
-                    <p text-wrap>{{ item.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
+                    <p text-wrap>{{ item.quantity * item.servings }}{{ item.unit }}</p>
                     <p item-content (click)="changeServings(item)">{{ item.servings }} servings</p>
                 </ion-item>
 

@@ -29,6 +29,7 @@ export class FoodSelectPage {
   public searchQueryRecipes: string = '';
   public selectedGroup: FoodGroup = this.groups[0];
   public selectedItem: IFoodSearchResult | Recipe;
+  public selectedServings: number = 0;
   public selectionSegment: string = 'foods';
   public start: number;
   constructor(
@@ -53,7 +54,10 @@ export class FoodSelectPage {
 
   public doneSelecting(): void {
     if (!!this.selectedItem && this.selectedItem.hasOwnProperty('ndbno')) {
-      this._foodSvc.getFoodReports$(this.selectedItem['ndbno']).subscribe((item: Food) => this._viewCtrl.dismiss(item), (err: Error) => console.log('Error on getting food report: ', err));
+      this._foodSvc.getFoodReports$(this.selectedItem['ndbno']).subscribe((item: Food) => {
+        item.servings = this.selectedServings;
+        this._viewCtrl.dismiss(item);
+      }, (err: Error) => console.log('Error on getting food report: ', err));
     } else {
       this._viewCtrl.dismiss();
     }
@@ -129,7 +133,30 @@ export class FoodSelectPage {
   }
 
   public selectItem(item: IFoodSearchResult | Recipe): void {
-    this.selectedItem = item;
+    this._alertCtrl.create({
+      title: 'Servings',
+      subTitle: `${item.name.toString()}`,
+      inputs: [
+        {
+          name: 'servings',
+          placeholder: item.hasOwnProperty('chef') ? `Servings x ${item['quantity'].toString()}${item['unit'].toString()}` : 'Servings x 100g',
+          type: 'number'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Done',
+          handler: (data: { servings: number}) => {
+            this.selectedServings = data.servings;
+            this.selectedItem = item;
+          }
+        }
+      ]
+    }).present();
   }
 
   public showFilter(): void {

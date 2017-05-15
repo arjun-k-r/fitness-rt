@@ -34,33 +34,9 @@ export class PictureService {
       this._uploadTask.catch((err: Error) => observer.error(err));
 
       this._uploadTask.on('state_changed', (snapshot: firebase.storage.UploadTaskSnapshot) => {
-        switch (snapshot.state) {
-          case 'canceled':
-            observer.complete();
-            break;
-
-          default:
-            break;
-        }
         progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         observer.next(progress);
-      }, (err: any) => {
-        switch (err.code) {
-          case 'storage/unauthorized':
-            // User doesn't have permission to access the object
-            break;
-
-          case 'storage/canceled':
-            // User canceled the upload
-            break;
-
-          case 'storage/unknown':
-            // Unknown error occurred, inspect error.serverResponse
-            break;
-        }
-
-        //observer.error(err);
-      },
+      }, (err: Error) =>  observer.error(err),
         () => {
           observer.next(this._uploadTask.snapshot.downloadURL);
           observer.complete()

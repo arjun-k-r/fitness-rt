@@ -78,10 +78,10 @@ export class AccountPage {
 
     toast.present();
     toast.onWillDismiss(() => {
-      this._picService.cancelUpload();
       canceledUpload = true;
-
+      this._picService.cancelUpload();
     });
+    
     this._picService.uploadImage(inputRef.files[0], 'avatars').subscribe((data: string | number) => {
       console.log(typeof data === 'number');
       if (typeof data === 'number') {
@@ -99,7 +99,7 @@ export class AccountPage {
         if (canceledUpload === true) {
           this._alertSvc.showAlert('Your avatar upload has been canceled', '', 'Canceled!');
         } else {
-          console.log(toast.didLeave);
+          toast.dismissAll();
           this._alertSvc.showAlert('Your avatar has been updated successfully', '', 'Success!');
           this._detectorRef.markForCheck();
         }

@@ -68,14 +68,20 @@ export class AccountPage {
   }
 
   public changeAvatar(inputRef: HTMLInputElement): void {
-    let toast: Toast = this._toastCtrl.create({
-      message: 'Uploading ... 0%',
-      position: 'bottom',
-      showCloseButton: true,
-      closeButtonText: 'Hide'
-    });
+    let canceledUpload: boolean = false,
+      toast: Toast = this._toastCtrl.create({
+        message: 'Uploading ... 0%',
+        position: 'bottom',
+        showCloseButton: true,
+        closeButtonText: 'Cancel'
+      });
 
     toast.present();
+    toast.onWillDismiss(() => {
+      this._picService.cancelUpload();
+      canceledUpload = true;
+
+    });
     this._picService.uploadImage(inputRef.files[0], 'avatars').subscribe((data: string | number) => {
       console.log(typeof data === 'number');
       if (typeof data === 'number') {
@@ -90,9 +96,13 @@ export class AccountPage {
       toast.setMessage('Uhh ohh, something went wrong!');
     },
       () => {
-        toast.dismiss();
-        this._alertSvc.showAlert('Your avatar has been updated successfully', '', 'Success!');
-        this._detectorRef.markForCheck();
+        if (canceledUpload === true) {
+          this._alertSvc.showAlert('Your avatar upload has been canceled', '', 'Canceled!');
+        } else {
+          console.log(toast.didLeave);
+          this._alertSvc.showAlert('Your avatar has been updated successfully', '', 'Success!');
+          this._detectorRef.markForCheck();
+        }
       });
   }
 

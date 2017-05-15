@@ -9,10 +9,17 @@ import { FirebaseApp } from 'angularfire2';
 @Injectable()
 export class PictureService {
   private _images: firebase.storage.Reference;
+  private _pictureObserver: Observer<string>;
+  private _uploadTask: firebase.storage.UploadTask;
   constructor(
-    @Inject(FirebaseApp) firebaseApp: any,
+    @Inject(FirebaseApp) _firebaseApp: any,
     private _user: User
-  ) { this._images = firebaseApp.storage().ref().child(`${_user.id}/images`); }
+  ) { this._images = _firebaseApp.storage().ref().child(`${_user.id}/images`); }
+
+  public cancelUpload(): void {
+    this._uploadTask.cancel();
+    this._pictureObserver.complete();
+  }
 
   public getImage(imgName: string, pathName: string): firebase.Promise<any> {
     return this._images.child(`${pathName}/${imgName}`).getDownloadURL();
@@ -21,14 +28,41 @@ export class PictureService {
   public uploadImage(img: File, pathName: string): Observable<string | number> {
     let progress: number;
     return new Observable((observer: Observer<string | number>) => {
-      let uploadTask: firebase.storage.UploadTask = this._images.child(`${pathName}/${img.name}`).put(img);
+      this._uploadTask = this._images.child(`${pathName}/${img.name}`).put(img);
+      this._pictureObserver = observer;
 
-      uploadTask.on('state_changed', (snapshot: firebase.storage.UploadTaskSnapshot) => {
+      this._uploadTask.catch((err: Error) => observer.error(err));
+
+      this._uploadTask.on('state_changed', (snapshot: firebase.storage.UploadTaskSnapshot) => {
+        switch (snapshot.state) {
+          case 'canceled':
+            observer.complete();
+            break;
+
+          default:
+            break;
+        }
         progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         observer.next(progress);
-      }, (err: Error) =>  observer.error(err),
+      }, (err: any) => {
+        switch (err.code) {
+          case 'storage/unauthorized':
+            // User doesn't have permission to access the object
+            break;
+
+          case 'storage/canceled':
+            // User canceled the upload
+            break;
+
+          case 'storage/unknown':
+            // Unknown error occurred, inspect error.serverResponse
+            break;
+        }
+
+        //observer.error(err);
+      },
         () => {
-          observer.next(uploadTask.snapshot.downloadURL);
+          observer.next(this._uploadTask.snapshot.downloadURL);
           observer.complete()
         });
     });

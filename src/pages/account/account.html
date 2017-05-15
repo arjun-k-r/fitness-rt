@@ -9,8 +9,8 @@
 </ion-header>
 
 <ion-content padding>
-    <img [src]="avatar" alt="User avatar">
-    <input type="file" name="avatarInput" #avatarInput (change)="changeAvatar(avatarInput)"/>
+    <img class="image image--avatar" [src]="avatar" alt="User avatar">
+    <input class="upload-input" type="file" name="avatarInput" #avatarInput (change)="changeAvatar(avatarInput)"/>
     <button (click)="changeAvatar()" ion-button block>Upload avatar</button>
     <button (click)="signout()" ion-button block>Sign out</button>
     <br/>

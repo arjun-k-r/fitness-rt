@@ -26,6 +26,9 @@ export class PictureService {
   }
 
   public uploadImage(img: File, pathName: string): Observable<string | number> {
+    /**
+     * FIXME: Firebase sends an uncaught error on cancel and don't know how to catch it
+     */
     let progress: number;
     return new Observable((observer: Observer<string | number>) => {
       this._uploadTask = this._images.child(`${pathName}/${img.name}`).put(img);

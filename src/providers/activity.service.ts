@@ -5,7 +5,7 @@ import { Subject } from 'rxjs/Subject';
 import { User } from '@ionic/cloud-angular';
 
 // Third-party
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as moment from 'moment';
 
 // Models
@@ -26,21 +26,21 @@ export class ActivityService {
   private _lastActivityPlan: FirebaseObjectObservable<ActivityPlan>;
   private _userWeight: number;
   constructor(
-    private _af: AngularFire,
+    private _db: AngularFireDatabase,
     private _fitSvc: FitnessService,
     private _mealSvc: MealService,
     private _nutritionSvc: NutritionService,
     private _user: User
   ) {
-    this._activities = _af.database.list('/activities', {
+    this._activities = _db.list('/activities', {
       query: {
         //limitToFirst: this._activityLimitSubject,
         orderByChild: 'name'
       }
     });
 
-    this._currentActivityPlan = _af.database.object(`/activity-plans/${_user.id}/${CURRENT_DAY}`);
-    this._lastActivityPlan = _af.database.object(`/activity-plans/${_user.id}/${CURRENT_DAY - 1}`);
+    this._currentActivityPlan = _db.object(`/activity-plans/${_user.id}/${CURRENT_DAY}`);
+    this._lastActivityPlan = _db.object(`/activity-plans/${_user.id}/${CURRENT_DAY - 1}`);
 
     this._userWeight = _fitSvc.getUserWeight();
   }

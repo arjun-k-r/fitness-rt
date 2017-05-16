@@ -1,6 +1,5 @@
 {
   "name": "the-health-guide",
   "app_id": "af911689",
-  "v2": true,
-  "typescript": true
+  "type": "ionic-angular"
 }

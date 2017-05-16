@@ -6,7 +6,7 @@ import { User } from '@ionic/cloud-angular';
 import 'rxjs/operator/map';
 
 // Third-party
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
@@ -39,7 +39,7 @@ export class MealService {
   private _nourishingMeals: FirebaseListObservable<Array<Meal>>;
   private _wakeUpTime: string;
   constructor(
-    private _af: AngularFire,
+    private _db: AngularFireDatabase,
     private _fitSvc: FitnessService,
     private _foodSvc: FoodService,
     private _nutritionSvc: NutritionService,
@@ -50,10 +50,10 @@ export class MealService {
       this._bedTime = moment(_sleepSvc.getCurrentSleep(sleePlan).bedTime, 'hours').format('HH:mm');
       this._wakeUpTime = moment(_sleepSvc.getCurrentSleep(sleePlan).wakeUpTime, 'hours').format('HH:mm')
     });
-    this._currentMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY}`);
-    this._lastMealPlan = _af.database.object(`/meal-plans/${_user.id}/${CURRENT_DAY - 1}`);
+    this._currentMealPlan = _db.object(`/meal-plans/${_user.id}/${CURRENT_DAY}`);
+    this._lastMealPlan = _db.object(`/meal-plans/${_user.id}/${CURRENT_DAY - 1}`);
 
-    this._nourishingMeals = _af.database.list(`/nourishing-meals/${_user.id}`);
+    this._nourishingMeals = _db.list(`/nourishing-meals/${_user.id}`);
   }
 
   /**

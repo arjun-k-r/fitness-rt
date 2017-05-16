@@ -4,7 +4,7 @@ import { AlertController, InfiniteScroll, Loading, LoadingController, ViewContro
 import { Subscription } from 'rxjs/Subscription';
 
 // Third-party
-import { FirebaseListObservable } from 'angularfire2';
+import { FirebaseListObservable } from 'angularfire2/database';
 
 // Models
 import { Food, FoodGroup, IFoodSearchResult, Recipe } from '../../models';

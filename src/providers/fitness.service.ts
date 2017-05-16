@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import { User } from '@ionic/cloud-angular';
 
 // Third-party
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import * as moment from 'moment';
 
 // Models
@@ -15,8 +15,8 @@ const CURRENT_DAY: number = moment().dayOfYear();
 @Injectable()
 export class FitnessService {
   private _profile: FirebaseObjectObservable<UserProfile>;
-  constructor(private _af: AngularFire, private _storage: Storage, private _user: User) {
-    this._profile = _af.database.object(`/profiles/${_user.id}`);
+  constructor(private _db: AngularFireDatabase, private _storage: Storage, private _user: User) {
+    this._profile = _db.object(`/profiles/${_user.id}`);
   }
 
   /**
@@ -83,7 +83,7 @@ export class FitnessService {
    * @returns {FirebaseObjectObservable} Returns observable of symptoms
    */
   public getImbalanceSymptoms$(imbalanceKey: string, imbalanceType: string): FirebaseObjectObservable<Array<string>> {
-    return this._af.database.object(`/imbalance/${imbalanceType}/${imbalanceKey}`);
+    return this._db.object(`/imbalance/${imbalanceType}/${imbalanceKey}`);
   }
 
   /**

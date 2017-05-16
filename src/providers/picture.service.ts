@@ -5,6 +5,7 @@ import { Observer } from 'rxjs/Observer';
 
 // Third-party
 import { FirebaseApp } from 'angularfire2';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class PictureService {
@@ -12,9 +13,9 @@ export class PictureService {
   private _pictureObserver: Observer<string>;
   private _uploadTask: firebase.storage.UploadTask;
   constructor(
-    @Inject(FirebaseApp) _firebaseApp: any,
+    private fb: FirebaseApp,
     private _user: User
-  ) { this._images = _firebaseApp.storage().ref().child(`${_user.id}/images`); }
+  ) { this._images = fb.storage().ref().child(`${_user.id}/images`); }
 
   public cancelUpload(): void {
     this._uploadTask.cancel();

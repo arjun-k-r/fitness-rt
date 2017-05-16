@@ -9,11 +9,20 @@
 </ion-header>
 
 <ion-content padding>
-    <img class="image image--avatar" [src]="avatar" alt="User avatar">
-    <input class="upload-input" type="file" name="avatarInput" #avatarInput (change)="changeAvatar(avatarInput)"/>
-    <button (click)="changeAvatar()" ion-button block>Upload avatar</button>
+    <ion-grid>
+        <ion-row justify-content-center>
+            <ion-col align-self-center col-auto>
+                <img class="avatar avatar__big" [src]="avatar" alt="User avatar">
+            </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+            <ion-col align-self-center col-auto>
+                <input type="file" name="avatarInput" #avatarInput (change)="changeAvatar(avatarInput)"/>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <button showWhen='cordova' margin-top margin-bottom (click)="changeAvatar()" ion-button block>Change avatar</button>
     <button (click)="signout()" ion-button block>Sign out</button>
-    <br/>
     <button (click)="deleteAccountRequest()" ion-button block>Delete account</button>
 
 </ion-content>

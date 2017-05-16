@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '@ionic/cloud-angular';
 
 // Third-party
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 // Models
 import {
@@ -21,12 +21,12 @@ import { NutritionService } from './nutrition.service';
 export class RecipeService {
   private _recipes: FirebaseListObservable<Array<Recipe>>;
   constructor(
-    private _af: AngularFire,
+    private _db: AngularFireDatabase,
     private _foodSvc: FoodService,
     private _nutritionSvc: NutritionService,
     private _user: User
   ) {
-    this._recipes = _af.database.list(`/recipes/${_user.id}`, {
+    this._recipes = _db.list(`/recipes/${_user.id}`, {
       query: {
         orderByChild: 'name'
       }

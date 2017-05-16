@@ -1,18 +1,21 @@
 // App
+import { BrowserModule } from '@angular/platform-browser';
+import { ErrorHandler } from '@angular/core';
+import { IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ErrorHandler } from '@angular/core';
-import { IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
-import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 
 // Cordova
-import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 
 // Firebase
-import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 const CLOUD_SETTINGS: CloudSettings = {
     'core': {
@@ -27,11 +30,6 @@ const CLOUD_SETTINGS: CloudSettings = {
             'scope': ['']
         }
     }
-};
-
-const FIREBASE_AUTH_CONFIG = {
-    provider: AuthProviders.Password,
-    method: AuthMethods.Password
 };
 
 const FIREBASE_CONFIG = {
@@ -129,20 +127,23 @@ export const thgEntries = [
     SleepPlanPage
 ];
 
-export const thgImports = [
-    AngularFireModule.initializeApp(FIREBASE_CONFIG, FIREBASE_AUTH_CONFIG, 'the-health-guide-1'),
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
+export const thgImports = [,
+    BrowserModule,
     IonicModule.forRoot(MyApp),
     CloudModule.forRoot(CLOUD_SETTINGS),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG, 'the-health-guide-1'),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
 ];
 
 export const thgProviders = [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     ActivityService,
     AlertService,
     AuthValidator,

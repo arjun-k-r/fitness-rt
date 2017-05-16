@@ -6,7 +6,7 @@ import { User } from '@ionic/cloud-angular';
 import 'rxjs/operator/map';
 
 // Third-party
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import * as moment from 'moment';
 
 // Models
@@ -18,10 +18,10 @@ const CURRENT_DAY: number = moment().dayOfYear();
 export class SleepService {
   private _sleepPlan: FirebaseObjectObservable<SleepPlan>;
   constructor(
-    private _af: AngularFire,
+    private _db: AngularFireDatabase,
     private _user: User
   ) {
-    this._sleepPlan = _af.database.object(`/sleep-plan/${_user.id}/`);
+    this._sleepPlan = _db.object(`/sleep-plan/${_user.id}/`);
   }
 
   /**

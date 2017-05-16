@@ -12,6 +12,16 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.avatar {
+    border-radius: 50%;
+    border: .2rem solid color($colors, secondary);
+}
+
+.avatar__big {
+    width: 20rem;
+}
+
 .auth-page {
     margin: 3rem auto;
     max-width: 75rem;
@@ -107,14 +117,4 @@
 .form__group {
     width: 100%;
     padding: 0;
-}
-
-.image {
-    display: block;
-    margin: auto;
-}
-
-.upload-input {
-    display: block;
-    margin: 2rem auto;
 }

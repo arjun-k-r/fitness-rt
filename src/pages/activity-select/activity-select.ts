@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { AlertController, InfiniteScroll, ViewController } from 'ionic-angular';
 
 // Third-party
-import { FirebaseListObservable } from 'angularfire2';
+import { FirebaseListObservable } from 'angularfire2/database';
 
 // Models
 import { Activity } from '../../models';

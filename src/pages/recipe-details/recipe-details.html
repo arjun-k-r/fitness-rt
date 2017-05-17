@@ -35,6 +35,20 @@
 
     <!-- Start of segment -->
     <div *ngSwitchCase="'details'">
+      <ion-grid>
+        <ion-row justify-content-center>
+          <ion-col align-self-center col-auto>
+            <img class="picture" [src]="recipe.image" alt="Recipe image">
+          </ion-col>
+        </ion-row>
+        <ion-row hideWhen="cordova" justify-content-center>
+          <ion-col align-self-center col-auto>
+            <input type="file" name="imageInput" #imageInput (change)="changeImage(imageInput)" />
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <button showWhen="cordova" margin-top margin-bottom (click)="changeImage()" ion-button block>Change image</button>
+      <button *ngIf="image" showWhen="cordova" margin-top margin-bottom (click)="uploadImage()" ion-button block>Upload image</button>
       <ion-list>
         <ion-item text-wrap>
           <ion-label fixed>Name</ion-label>

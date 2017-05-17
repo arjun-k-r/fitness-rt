@@ -4,6 +4,7 @@ import { Alert, AlertController, Loading, LoadingController, NavController } fro
 
 // Third-party
 import { FirebaseListObservable } from 'angularfire2/database';
+import * as _ from 'lodash';
 
 // Models
 import { Meal, MealPlan } from '../../models';
@@ -23,6 +24,7 @@ export class MealPlanPage {
   public detailsPage: any = MealDetailsPage;
   public mealPlan: MealPlan;
   public mealPlanDetails: string = 'meals';
+  public meals: Array<Array<Meal>> = [[]];
   public omega36Ratio: number;
   public nourishingMeals$: FirebaseListObservable<Array<Meal>>;
   constructor(
@@ -60,18 +62,23 @@ export class MealPlanPage {
             newMeal.nourishingKey = '';
             newMeal.nickname = '';
             newMeal.wasNourishing = false;
+            this.mealPlan.meals[+data] = newMeal;
             this._mealSvc.saveMeal(newMeal, +data, this.mealPlan);
+            this.meals = _.chunk(this.mealPlan.meals, 3);
+            this._detectorRef.markForCheck();
           }
         }
       ]
     }).present();
   }
 
-  public clearMeal(mealIdx: number): void {
-    let updatedMeal: Meal = new Meal();
+  public clearMeal(meal: Meal): void {
+    let mealIdx: number = this.mealPlan.meals.indexOf(meal),
+      updatedMeal: Meal = new Meal();
     updatedMeal.time = this.mealPlan.meals[mealIdx].time;
     this.mealPlan.meals[mealIdx] = updatedMeal;
     this._mealSvc.saveMeal(updatedMeal, mealIdx, this.mealPlan);
+    this.meals = _.chunk(this.mealPlan.meals, 3);
     this._detectorRef.markForCheck();
   }
 
@@ -87,7 +94,8 @@ export class MealPlanPage {
     this._mealSvc.saveMealPlan(this.mealPlan);
   }
 
-  public toggleNourishing(mealIdx: number): void {
+  public toggleNourishing(meal: Meal): void {
+    let mealIdx: number = this.mealPlan.meals.indexOf(meal);
     this.mealPlan.meals[mealIdx].wasNourishing = !this.mealPlan.meals[mealIdx].wasNourishing;
     if (!!this.mealPlan.meals[mealIdx].wasNourishing) {
       let alert: Alert = this._alertCtrl.create({
@@ -104,6 +112,10 @@ export class MealPlanPage {
           {
             text: 'Cancel',
             role: 'cancel',
+            handler: () => {
+              this.mealPlan.meals[mealIdx].wasNourishing = false;
+              this._detectorRef.markForCheck();
+            }
           },
           {
             text: 'Done',
@@ -166,6 +178,7 @@ export class MealPlanPage {
       console.log('Received meal plan: ', mealPlan);
       this.mealPlan = mealPlan;
       this.mealPlan.meals = this.mealPlan.meals || [];
+      this.meals = _.chunk(this.mealPlan.meals, 3);
       this.omega36Ratio = this._nutritionSvc.getOmega36Ratio(this.mealPlan.dailyNutrition);
       loader.dismiss();
       this._detectorRef.markForCheck();

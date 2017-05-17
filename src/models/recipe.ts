@@ -8,10 +8,12 @@ export class Recipe {
     /**
      * @constructor
      * @param {string} chef - The user who created the recipe
+     * @param {string} chefAvatar - The user's profile picture
      * @param {string} cookingMethod - The cooking method used for preparing the recipe
      * @param {number} cookingTemperature - The temperature required for the recipe to be cooked
      * @param {number} cookingTime - The time required for the recipe to be cooked
      * @param {string} difficulty - The difficulty of the recipe according to the number of instructions
+     * @param {string} image - The recipe image
      * @param {Array} ingredients - The recipe ingredients
      * @param {Array} instructions - The instructions to fulfill the recipe
      * @param {string} name - The recipe name
@@ -25,10 +27,12 @@ export class Recipe {
      */
     constructor(
         public chef: string = '',
+        public chefAvatar: string = '',
         public cookingMethod: string = '',
         public cookingTemperature: number = 0,
         public cookingTime: number = 0,
         public difficulty: string = '',
+        public image: string = '',
         public ingredients: Array<Food | Recipe> = [],
         public instructions: Array<string> = [],
         public name: string = '',

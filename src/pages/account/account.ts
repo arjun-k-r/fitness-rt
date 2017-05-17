@@ -1,6 +1,6 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
-import { AlertController, AlertOptions, LoadingController, NavController, Toast, ToastController } from 'ionic-angular';
+import { ActionSheetController, AlertController, AlertOptions, LoadingController, NavController, Platform, Toast, ToastController } from 'ionic-angular';
 import { Auth, User } from '@ionic/cloud-angular';
 
 // Pages
@@ -17,6 +17,7 @@ import { AlertService, PictureService } from '../../providers';
 export class AccountPage {
   public avatar: string;
   constructor(
+    private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
     private _alertSvc: AlertService,
     private _auth: Auth,
@@ -24,6 +25,7 @@ export class AccountPage {
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
     private _picService: PictureService,
+    private _platform: Platform,
     private _toastCtrl: ToastController,
     private _user: User
   ) {
@@ -67,7 +69,41 @@ export class AccountPage {
     this._alertCtrl.create(alertOpt).present();
   }
 
-  public changeAvatar(inputRef: HTMLInputElement): void {
+  public changeAvatar(inputRef?: HTMLInputElement): void {
+    if (this._platform.is('cordova')) {
+      this._actionSheetCtrl.create({
+        title: 'Change avatar',
+        buttons: [
+          {
+            text: 'Take photo',
+            handler: () => {
+              this._picService.takePhoto().then((photoUri: string) => this.avatar = photoUri).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
+            }
+          }, {
+            text: 'Choose image',
+            handler: () => {
+              this._picService.chooseImage().then((photoUri: string) => this.avatar = photoUri).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
+            }
+          }, {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      }).present();
+    } else {
+      this.uploadAvatar(inputRef.files[0]);
+    }
+  }
+
+  public signout(): void {
+    this._auth.logout();
+    this._navCtrl.setRoot(RegistrationPage);
+  }
+
+  public uploadAvatar(file?: File): void {
     let canceledUpload: boolean = false,
       toast: Toast = this._toastCtrl.create({
         message: 'Uploading ... 0%',
@@ -81,8 +117,8 @@ export class AccountPage {
       canceledUpload = true;
       this._picService.cancelUpload();
     });
-    
-    this._picService.uploadImage(inputRef.files[0], 'avatars').subscribe((data: string | number) => {
+
+    this._picService.uploadImage('avatars', file).subscribe((data: string | number) => {
       console.log(typeof data === 'number');
       if (typeof data === 'number') {
         toast.setMessage(`Uploading ... ${data}%`);
@@ -104,11 +140,6 @@ export class AccountPage {
           this._detectorRef.markForCheck();
         }
       });
-  }
-
-  public signout(): void {
-    this._auth.logout();
-    this._navCtrl.setRoot(RegistrationPage);
   }
 
   ionViewWillUnload(): void {

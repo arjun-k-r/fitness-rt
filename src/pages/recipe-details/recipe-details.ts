@@ -1,6 +1,6 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
-import { Alert, AlertController, Modal, ModalController, NavController, NavParams, ToastController } from 'ionic-angular';
+import { ActionSheetController, Alert, AlertController, Modal, ModalController, NavController, NavParams, Platform, Toast, ToastController } from 'ionic-angular';
 
 // Models
 import { Food, Recipe } from '../../models';
@@ -9,7 +9,7 @@ import { Food, Recipe } from '../../models';
 import { FoodSelectPage } from '../food-select/food-select';
 
 // Providers
-import { AlertService, NutritionService, RecipeService } from '../../providers';
+import { AlertService, NutritionService, PictureService, RecipeService } from '../../providers';
 
 @Component({
   selector: 'page-recipe-details',
@@ -21,6 +21,7 @@ export class RecipeDetailsPage {
   public recipeDetails: string = 'details';
   public recipeInstructions: Array<string>;
   constructor(
+    private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
     private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
@@ -28,6 +29,8 @@ export class RecipeDetailsPage {
     private _navCtrl: NavController,
     private _nutritionSvc: NutritionService,
     private _params: NavParams,
+    private _picService: PictureService,
+    private _platform: Platform,
     private _recipeSvc: RecipeService,
     private _toastCtrl: ToastController
   ) {
@@ -42,6 +45,7 @@ export class RecipeDetailsPage {
     this.recipe.nutrition = this._recipeSvc.getRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
     this.recipe.pral = this._nutritionSvc.getPRAL(this.recipe.nutrition);
     this.recipe.quantity = this._recipeSvc.getRecipeSize(this.recipe.ingredients, this.recipe.portions);
+    this.recipe.difficulty = this._recipeSvc.checkDifficulty(this.recipe);
   }
 
   public addIngredients(): void {
@@ -61,6 +65,35 @@ export class RecipeDetailsPage {
   public addInstruction(): void {
     this.recipe.instructions.push('');
     this.recipeInstructions.push('');
+  }
+
+  public changeImage(inputRef?: HTMLInputElement): void {
+    if (this._platform.is('cordova')) {
+      this._actionSheetCtrl.create({
+        title: 'Change image',
+        buttons: [
+          {
+            text: 'Take photo',
+            handler: () => {
+              this._picService.takePhoto().then((photoUri: string) => this.recipe.image = photoUri).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
+            }
+          }, {
+            text: 'Choose image',
+            handler: () => {
+              this._picService.chooseImage().then((photoUri: string) => this.recipe.image = photoUri).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
+            }
+          }, {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      }).present();
+    } else {
+      this.uploadImage(inputRef.files[0]);
+    }
   }
 
   public changePortions(): void {
@@ -129,6 +162,43 @@ export class RecipeDetailsPage {
       showCloseButton: true,
       closeButtonText: 'Got it!'
     }).present();
+  }
+
+  public uploadImage(file?: File): void {
+    let canceledUpload: boolean = false,
+      toast: Toast = this._toastCtrl.create({
+        message: 'Uploading ... 0%',
+        position: 'bottom',
+        showCloseButton: true,
+        closeButtonText: 'Cancel'
+      });
+
+    toast.present();
+    toast.onWillDismiss(() => {
+      canceledUpload = true;
+      this._picService.cancelUpload();
+    });
+
+    this._picService.uploadImage('recipes', file).subscribe((data: string | number) => {
+      console.log(typeof data === 'number');
+      if (typeof data === 'number') {
+        toast.setMessage(`Uploading ... ${data}%`);
+      } else {
+        this.recipe.image = data;
+      }
+    }, (err: Error) => {
+      console.log('Error uploading avatar: ', err);
+      toast.setMessage('Uhh ohh, something went wrong!');
+    },
+      () => {
+        if (canceledUpload === true) {
+          this._alertSvc.showAlert('Your avatar upload has been canceled', '', 'Canceled!');
+        } else {
+          toast.dismissAll();
+          this._alertSvc.showAlert('Your avatar has been updated successfully', '', 'Success!');
+          this._detectorRef.markForCheck();
+        }
+      });
   }
 
   ionViewWillEnter(): void {

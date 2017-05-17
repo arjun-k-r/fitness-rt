@@ -3,7 +3,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 import { InfiniteScroll, Loading, LoadingController, NavController } from 'ionic-angular';
 
 // Third-party
-import { FirebaseListObservable } from 'angularfire2/database';
+import * as _ from 'lodash';
 
 // Models
 import { Recipe } from '../../models';
@@ -22,7 +22,7 @@ import { RecipeService } from '../../providers';
 export class RecipeListPage {
   public detailsPage: any = RecipeDetailsPage;
   public limit: number = 50;
-  public recipes$: FirebaseListObservable<Array<Recipe>>;
+  public recipes: Array<Array<Recipe>> = [[]];
   public searchQuery: string = '';
   constructor(
     private _detectorRef: ChangeDetectorRef,
@@ -61,8 +61,11 @@ export class RecipeListPage {
     });
 
     loader.present();
-    this.recipes$ = this._recipeSvc.getRecipes$();
-    this._detectorRef.markForCheck();
+    this._recipeSvc.getRecipes$().subscribe((recipes: Array<Recipe>) => {
+      this.recipes = _.chunk(recipes, 3);
+      console.log(this.recipes);
+      this._detectorRef.markForCheck();
+    });
     console.log('Entering...');
   }
 

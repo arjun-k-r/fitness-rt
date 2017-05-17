@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+import { Camera } from '@ionic-native/camera';
+import { ImagePicker } from '@ionic-native/image-picker';
 import { MyApp } from './app.component';
 
 // Cordova
@@ -67,7 +69,7 @@ import {
 } from '../pages';
 
 // Pipes
-import { CapitalizePipe, SearchPipe } from '../pipes'
+import { CapitalizePipe, GroupPipe, SearchPipe } from '../pipes'
 
 // Providers
 import {
@@ -97,6 +99,7 @@ import {
     FoodListPage,
     FoodSelectPage,
     ForgotPasswordPage,
+    GroupPipe,
     HomePage,
     LoginPage,
     MealDetailsPage,
@@ -106,7 +109,8 @@ import {
     RecipeListPage,
     RegistrationPage,
     SearchPipe,
-    SleepPlanPage
+    SleepPlanPage,
+    GroupPipe
   ],
   imports: [
     BrowserModule,
@@ -143,6 +147,8 @@ import {
     SleepPlanPage
   ],
   providers: [
+    Camera,
+    ImagePicker,
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },

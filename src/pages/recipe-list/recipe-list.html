@@ -6,8 +6,8 @@
     <ion-title>Recipes</ion-title>
     <ion-buttons end>
       <button ion-button icon-only padding>
-                <ion-icon name="funnel"></ion-icon>
-            </button>
+        <ion-icon name="funnel"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 
@@ -17,47 +17,62 @@
 <ion-content>
   <ion-searchbar debounce="2000" placeholder="Search recipes" [(ngModel)]="searchQuery" (ionCancel)="clearSearch($event)">
   </ion-searchbar>
-  
-  <ion-card *ngFor="let recipe of (recipes$ | async) | search: searchQuery: limit; let i = index">
-    <ion-card-content>
-      <ion-card-title color="primary">
-        {{ recipe.name }}
-      </ion-card-title>
-      <ion-list>
-        <ion-item>
-          pH
-          <p item-content ion-text color="{{ recipe.pral > 0 ? 'danger' : 'secondary' }}">{{ recipe.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
-        </ion-item>
-        <ion-item>
-          Size
-          <p item-content ion-text color="{{ recipe.quantity > 900 ? 'danger' : 'secondary' }}">{{ recipe.quantity }} g</p>
-        </ion-item>
-        <ion-item>
-          Difficulty
-          <p item-content>{{ recipe.difficulty }}</p>
-        </ion-item>
-        <ion-item>
-          Ingredients
-          <p item-content>{{ recipe.ingredients?.length || 0 }} items</p>
-        </ion-item>
 
-      </ion-list>
-    </ion-card-content>
-    <ion-row no-padding>
-      <ion-col>
-        <button ion-button clear small color="primary" icon-left [navPush]="detailsPage" [navParams]="{ recipe: recipe }">
-          <ion-icon name='create'></ion-icon>
-          Edit
-        </button>
-      </ion-col>
-      <ion-col text-right>
-        <button ion-button clear small icon-left (click)="removeRecipe(recipe)">
-          <ion-icon name='heart'></ion-icon>
-          Remove
-        </button>
+  <ion-grid>
+    <ion-row *ngFor="let chunk of recipes">
+      <ion-col col-lg-4 *ngFor="let recipe of chunk | search: searchQuery: limit">
+        <ion-card>
+          <ion-item>
+            <ion-avatar item-left>
+              <img [src]="recipe.chefAvatar">
+            </ion-avatar>
+            <h2>{{ recipe.name }}</h2>
+            <p>Made by {{ recipe.chef }}</p>
+          </ion-item>
+
+          <img [src]="recipe.image">
+
+          <ion-card-content>
+            <ion-list>
+              <ion-item>
+                pH
+                <p item-content ion-text color="{{ recipe.pral > 0 ? 'danger' : 'secondary' }}">{{ recipe.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
+              </ion-item>
+              <ion-item>
+                Size
+                <p item-content ion-text color="{{ recipe.quantity > 900 ? 'danger' : 'secondary' }}">{{ recipe.quantity }} g</p>
+              </ion-item>
+              <ion-item>
+                Difficulty
+                <p item-content>{{ recipe.difficulty }}</p>
+              </ion-item>
+              <ion-item>
+                Ingredients
+                <p item-content>{{ recipe.ingredients?.length || 0 }} items</p>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+
+          <ion-row no-padding>
+            <ion-col>
+              <button ion-button clear small icon-left [navPush]="detailsPage" [navParams]="{ recipe: recipe }">
+                <ion-icon name='create'></ion-icon>
+                Edit
+              </button>
+            </ion-col>
+            <ion-col text-right>
+              <button ion-button clear small icon-left (click)="removeRecipe(recipe)">
+                <ion-icon name='trash'></ion-icon>
+                Remove
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
       </ion-col>
     </ion-row>
-  </ion-card>
+  </ion-grid>
+
+
   <!-- End of segment -->
 
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">

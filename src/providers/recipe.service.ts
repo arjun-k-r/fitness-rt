@@ -9,8 +9,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import {
   Food,
   Nutrition,
-  Recipe,
-  WarningMessage
+  Recipe
 } from '../models';
 
 // Providers
@@ -132,11 +131,13 @@ export class RecipeService {
       recipe['$key'] = this._recipes.push(recipe).key;
     } else {
       this._recipes.update(recipe['$key'], {
-        chef: recipe.chef,
+        chef: this._user.details.username || this._user.details.name,
+        chefAvatar: this._user.details.image,
         cookingMethod: recipe.cookingMethod,
         cookingTemperature: recipe.cookingTemperature,
         cookingTime: recipe.cookingTime,
         difficulty: recipe.difficulty,
+        image: recipe.image,
         ingredients: recipe.ingredients || [],
         instructions: recipe.instructions || [],
         name: recipe.name,

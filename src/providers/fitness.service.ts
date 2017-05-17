@@ -20,6 +20,28 @@ export class FitnessService {
   }
 
   /**
+  * Calculates the maximum of heart rate reached during aerobic exercise which enables one's heart and lungs to receive the most benefit from a workout
+  * @desc Base on the Karvonen method 
+  * @param {number} hrMax - The user's maximum heart rate
+  * @param {number} hrRest - The user's resting heart rate
+  * @returns {number} Returns the training heart rate max
+  */
+  private _getHeartRateTrainingMax(hrMax: number, hrRest: number): number {
+    return Math.round(0.85 * (hrMax - hrRest) + hrRest);
+  }
+
+  /**
+  * Calculates the minimum of heart rate reached during aerobic exercise which enables one's heart and lungs to receive the most benefit from a workout
+  * @desc Base on the Karvonen method 
+  * @param {number} hrMax - The user's maximum heart rate
+  * @param {number} hrRest - The user's resting heart rate
+  * @returns {number} Returns the training heart rate min
+  */
+  private _getHeartRateTrainingMin(hrMax: number, hrRest: number): number {
+    return Math.round(0.5 * (hrMax - hrRest) + hrRest);
+  }
+
+  /**
    * Gets the user's body mass index
    * @description The U.S. Navy body fat equations developed by Drs. Hodgdon and Beckett at the Naval Health Research Center
    * @param {number} age - The user's age
@@ -53,6 +75,30 @@ export class FitnessService {
     } else {
       return +(495 / (1.29579 - 0.35004 * Math.log10(waist + hips - neck) + 0.221 * Math.log10(height)) - 450).toFixed(2);
     }
+  }
+
+ /**
+  * Calculates the maximum cardiac output of a user based on its age
+  * @desc Nes, B.M, et al. HRMax formula
+  * @param {number} age - The user's age
+  * @returns {number} Returns the HRMax
+  */
+  public getHeartRateMax(age: number): number {
+    return Math.round(211 - (0.64 * age));
+  }
+
+  /**
+  * Calculates the range of heart rate reached during aerobic exercise which enables one's heart and lungs to receive the most benefit from a workout
+  * @desc Base on the Karvonen method
+  * @param {number} hrMax - The user's maximum heart rate
+  * @param {number} hrRest - The user's resting heart rate
+  * @returns {{ min: number, max: number }} Returns the training heart rate range
+  */
+  public getHeartRateTrainingRange(hrMax: number, hrRest: number): { min: number, max: number } {
+    return {
+      min: this._getHeartRateTrainingMin(+hrMax, +hrRest),
+      max: this._getHeartRateTrainingMax(+hrMax, +hrRest)
+    };
   }
 
   /**

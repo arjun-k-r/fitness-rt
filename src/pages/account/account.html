@@ -15,13 +15,14 @@
                 <img class="avatar avatar__big" [src]="avatar" alt="User avatar">
             </ion-col>
         </ion-row>
-        <ion-row justify-content-center>
+        <ion-row hideWhen="cordova" justify-content-center>
             <ion-col align-self-center col-auto>
                 <input type="file" name="avatarInput" #avatarInput (change)="changeAvatar(avatarInput)"/>
             </ion-col>
         </ion-row>
     </ion-grid>
-    <button showWhen='cordova' margin-top margin-bottom (click)="changeAvatar()" ion-button block>Change avatar</button>
+    <button showWhen="cordova" margin-top margin-bottom (click)="changeAvatar()" ion-button block>Change avatar</button>
+    <button *ngIf="avatar" showWhen="cordova" margin-top margin-bottom (click)="uploadAvatar()" ion-button block>Upload image</button>
     <button (click)="signout()" ion-button block>Sign out</button>
     <button (click)="deleteAccountRequest()" ion-button block>Delete account</button>
 

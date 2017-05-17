@@ -31,9 +31,9 @@ export class MealDetailsPage {
     private _nutritionSvc: NutritionService,
     private _params: NavParams
   ) {
-    this.mealIdx = <number>_params.get('mealIdx');
+    this.meal = <Meal>_params.get('meal');
     this.mealPlan = <MealPlan>_params.get('mealPlan');
-    this.meal = this.mealPlan.meals[this.mealIdx];
+    this.mealIdx = this.mealPlan.meals.indexOf(this.meal);
     this.meal.mealItems = this.meal.mealItems || [];
     console.log('Received meal: ', this.meal);
   }

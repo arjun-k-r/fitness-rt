@@ -37,52 +37,58 @@
         <ion-label floating>Breakfast time</ion-label>
         <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="mealPlan.breakfastTime" (ionChange)="reorganizeMeals()"></ion-datetime>
       </ion-item>
-      <ion-card *ngFor="let meal of mealPlan?.meals; let i = index">
-        <ion-card-content>
-          <ion-card-title color="primary">
-            {{ meal.time }}
-          </ion-card-title>
-          <ion-list>
-            <ion-item>
-              pH
-              <p item-content ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
-            </ion-item>
-            <ion-item>
-              Size
-              <p item-content ion-text color="{{ meal.quantity > 900 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
-            </ion-item>
-            <ion-item>
-              Warnings
-              <p item-content ion-text color="{{ meal.warnings?.length ? 'danger' : 'secondary' }}">{{ meal.warnings?.length || 0 }} warnings</p>
-            </ion-item>
-            <ion-item>
-              Foods
-              <p item-content>{{ meal.mealItems?.length || 0 }} items</p>
-            </ion-item>
+      <ion-grid>
+        <ion-row *ngFor="let chunk of meals">
+          <ion-col col-lg-4 *ngFor="let meal of chunk">
+            <ion-card>
+              <ion-card-content>
+                <ion-card-title color="primary">
+                  {{ meal.time }}
+                </ion-card-title>
+                <ion-list>
+                  <ion-item>
+                    pH
+                    <p item-content ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
+                  </ion-item>
+                  <ion-item>
+                    Size
+                    <p item-content ion-text color="{{ meal.quantity > 900 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
+                  </ion-item>
+                  <ion-item>
+                    Warnings
+                    <p item-content ion-text color="{{ meal.warnings?.length ? 'danger' : 'secondary' }}">{{ meal.warnings?.length || 0 }} warnings</p>
+                  </ion-item>
+                  <ion-item>
+                    Foods
+                    <p item-content>{{ meal.mealItems?.length || 0 }} items</p>
+                  </ion-item>
 
-          </ion-list>
-        </ion-card-content>
-        <ion-row no-padding>
-          <ion-col>
-            <button ion-button clear small color="primary" icon-left [navPush]="detailsPage" [navParams]="{ mealIdx: i, mealPlan: mealPlan }">
-              <ion-icon name='create'></ion-icon>
-              Edit
-            </button>
-          </ion-col>
-          <ion-col text-center>
-            <button ion-button clear small color="danger" icon-left (click)="clearMeal(i)">
-              <ion-icon name='trash'></ion-icon>
-              Clear
-            </button>
-          </ion-col>
-          <ion-col text-right>
-            <button ion-button clear small [color]="meal.wasNourishing ? 'secondary' : 'dark'" icon-left (click)="toggleNourishing(i)">
-              <ion-icon name='heart'></ion-icon>
-              Nourishing
-            </button>
+                </ion-list>
+              </ion-card-content>
+              <ion-row no-padding>
+                <ion-col>
+                  <button ion-button clear small color="primary" icon-left [navPush]="detailsPage" [navParams]="{ meal: meal, mealPlan: mealPlan }">
+                    <ion-icon name='create'></ion-icon>
+                    Edit
+                  </button>
+                </ion-col>
+                <ion-col text-center>
+                  <button ion-button clear small color="danger" icon-left (click)="clearMeal(meal)">
+                    <ion-icon name='trash'></ion-icon>
+                    Clear
+                  </button>
+                </ion-col>
+                <ion-col text-right>
+                  <button ion-button clear small [color]="meal.wasNourishing ? 'secondary' : 'dark'" icon-left (click)="toggleNourishing(meal)">
+                    <ion-icon name='heart'></ion-icon>
+                    Nourishing
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-card>
           </ion-col>
         </ion-row>
-      </ion-card>
+      </ion-grid>
     </div>
     <!-- End of segment -->
 

@@ -28,10 +28,6 @@
         <!-- Start of segment -->
         <div *ngSwitchCase="'fitness'">
             <ion-list>
-                <ion-item text-wrap>
-                    <ion-label fixed>Age (years)</ion-label>
-                    <ion-input type="number" [(ngModel)]="profile.age"></ion-input>
-                </ion-item>
                 <ion-item *ngIf="profile.bmr" text-wrap>
                     BMR
                     <p item-content>{{ profile.bmr }} kcal/day</p>
@@ -47,6 +43,22 @@
                 <ion-item *ngIf="idealWeight" text-wrap>
                     Ideal weight
                     <p item-content>{{ idealWeight }} kg</p>
+                </ion-item>
+                <ion-item *ngIf="profile.heartRate.max" text-wrap>
+                    Maximum heart rate (HRMax)
+                    <p item-content>{{ profile.heartRate.max }} bpm</p>
+                </ion-item>
+                <ion-item *ngIf="profile.heartRate.trainingMin && profile.heartRate.trainingMax" text-wrap>
+                    Training heart rate (THR)
+                    <p item-content>{{ profile.heartRate.trainingMin }}-{{ profile.heartRate.trainingMax }} bpm</p>
+                </ion-item>
+                <ion-item text-wrap>
+                    <ion-label fixed>Age (years)</ion-label>
+                    <ion-input type="number" [(ngModel)]="profile.age"></ion-input>
+                </ion-item>
+                <ion-item text-wrap>
+                    <ion-label fixed>Resting heart rate (BPM)</ion-label>
+                    <ion-input type="number" [(ngModel)]="profile.heartRate.resting"></ion-input>
                 </ion-item>
                 <ion-item text-wrap>
                     <ion-label>Gender</ion-label>
@@ -90,6 +102,7 @@
                     <ion-input type="number" [(ngModel)]="profile.hips"></ion-input>
                 </ion-item>
             </ion-list>
+            <button showWhen="cordova" margin-top margin-bottom (click)="takeRHR()" ion-button block>Check RHR</button>
         </div>
         <!-- End of segment -->
 

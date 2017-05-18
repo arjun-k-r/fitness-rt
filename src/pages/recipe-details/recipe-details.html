@@ -68,7 +68,7 @@
         </ion-item>
         <ion-item>
           Difficulty
-          <p item-content>{{ recipe.difficulty }}</p>
+          <p item-content>{{ recipe.difficulty === 1 ? 'Easy' : recipe.difficulty === 2 ? 'Medium' : 'Chef' }}</p>
         </ion-item>
         <ion-item>
           <ion-label>Cooking method</ion-label>

@@ -67,20 +67,6 @@ export class FitnessPage {
     this._detectorRef.markForCheck();
   }
 
-  public takeRHR(): void {
-    cordova.plugins.heartbeat.take({
-      seconds: 10,
-      fps: 30
-    }, (bpm: number) => {
-      this.profile.heartRate.resting = bpm;
-      this.profile.heartRate.max = this._fitSvc.getHeartRateMax(this.profile.age);
-      let thrRange: { min: number, max: number } = this._fitSvc.getHeartRateTrainingRange(this.profile.heartRate.max, this.profile.heartRate.resting);
-      this.profile.heartRate.trainingMin = thrRange.min;
-      this.profile.heartRate.trainingMax = thrRange.max;
-      this._detectorRef.markForCheck();
-    }, () => console.log('Something went wrong'));
-  }
-
   ionViewWillEnter(): void {
     this._detectorRef.markForCheck();
   }

@@ -33,12 +33,71 @@ export class RecipeService {
   }
 
   /**
+   * Applies the cooking impact on nutrients
+   * @param {Recipe} recipe - The recipe to check
+   * @returns {void}
+   */
+  public checkCooking(recipe: Recipe): void {
+    if (recipe.cookingMethod === 'Baking' || recipe.cookingMethod === 'Grilling' || recipe.cookingMethod === 'Roasting' || recipe.cookingMethod === 'Steaming') {
+      // Dry heat cooking
+      recipe.nutrition.ala.value *= 0.75;
+      recipe.nutrition.choline.value *= 0.5;
+      recipe.nutrition.dha.value *= 0.75;
+      recipe.nutrition.epa.value *= 0.75;
+      recipe.nutrition.la.value *= 0.75;
+      recipe.nutrition.omega3.value *= 0.75;
+      recipe.nutrition.omega6.value *= 0.75;
+      recipe.nutrition.vitaminA.value *= 0.5;
+      recipe.nutrition.vitaminB1.value *= 0.5;
+      recipe.nutrition.vitaminB2.value *= 0.5;
+      recipe.nutrition.vitaminB3.value *= 0.5;
+      recipe.nutrition.vitaminB5.value *= 0.5;
+      recipe.nutrition.vitaminB9.value *= 0.5;
+      recipe.nutrition.vitaminB12.value *= 0.5;
+      recipe.nutrition.vitaminC.value *= 0.5;
+      recipe.nutrition.vitaminD.value *= 0.5;
+      recipe.nutrition.vitaminE.value *= 0.5;
+      recipe.nutrition.vitaminK.value *= 0.5;
+    } else if (recipe.cookingMethod === 'Frying' || recipe.cookingMethod === 'Stewing') {
+      // Moist cooking
+      recipe.nutrition.ala.value *= 0.75;
+      recipe.nutrition.calcium.value *= 0.25;
+      recipe.nutrition.choline.value *= 0.5;
+      recipe.nutrition.copper.value *= 0.25;
+      recipe.nutrition.dha.value *= 0.75;
+      recipe.nutrition.epa.value *= 0.75;
+      recipe.nutrition.iron.value *= 0.25;
+      recipe.nutrition.la.value *= 0.75;
+      recipe.nutrition.magnesium.value *= 0.25;
+      recipe.nutrition.manganese.value *= 0.25;
+      recipe.nutrition.omega3.value *= 0.5;
+      recipe.nutrition.omega6.value *= 0.5;
+      recipe.nutrition.phosphorus.value *= 0.5;
+      recipe.nutrition.potassium.value *= 0.5;
+      recipe.nutrition.selenium.value *= 0.5;
+      recipe.nutrition.vitaminA.value *= 0.5;
+      recipe.nutrition.vitaminB1.value *= 0.5;
+      recipe.nutrition.vitaminB2.value *= 0.5;
+      recipe.nutrition.vitaminB3.value *= 0.5;
+      recipe.nutrition.vitaminB5.value *= 0.5;
+      recipe.nutrition.vitaminB9.value *= 0.5;
+      recipe.nutrition.vitaminB12.value *= 0.5;
+      recipe.nutrition.vitaminC.value *= 0.5;
+      recipe.nutrition.vitaminD.value *= 0.5;
+      recipe.nutrition.vitaminE.value *= 0.5;
+      recipe.nutrition.vitaminK.value *= 0.5;
+      recipe.nutrition.zinc.value *= 0.5;
+    }
+
+  }
+
+  /**
    * Gets the recipe difficulty level by the number of instructions
    * @param {Recipe} recipe - The recipe to check
    * @returns {string} Returns the difficulty level name
    */
-  public checkDifficulty(recipe: Recipe): string {
-    return recipe.instructions.length < 5 ? 'Piece of cake' : recipe.instructions.length < 10 ? 'Warth a try' : 'Master chef';
+  public checkDifficulty(recipe: Recipe): number {
+    return recipe.instructions.length < 5 ? 1 : recipe.instructions.length < 10 ? 2 : 3;
   }
 
   /**
@@ -71,7 +130,7 @@ export class RecipeService {
 
       case 'Stewing':
         return 'In the process of cooking using the stewing method, food is cooked using a lot of liquid. Different kinds of vegetables are chopped, diced or cubed and added to the pot. Sometimes pieces of selected meat, fish or chicken is also chopped and added to the stew. The liquid is slightly thickened and stewed food is served in that manner. This method is also used when preparing fruits that are going to be served as desserts. With this cooking method, every food is cooked together at the same time in one pot. The flavour, colours, shapes and textures of the different vegetables that are used, makes stewing a handy method of cooking. The only disadvantage is that some of the vegetables might be overcooked and thus the nutrient content becomes much less. It is therefore important that the vegetables that take the longest to cook to be put into the pot first and the ones that need least cooking to be put in last. In this way much of the nutrient contents of the food does not get lost.'
-    
+
       default:
         return 'Least amount of preparation required. Only rinsing, pealing, or cutting without any heat or chemical processes (eating as it is)';
     }

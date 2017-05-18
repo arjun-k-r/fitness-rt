@@ -43,15 +43,21 @@ export const FOOD_GROUPS: Array<FoodGroup> = [
 export class FoodService {
   private _usdaApiKey: string = '5nW8It7ORsxY212bV5wpleHkblTLbvpFTKVa010U';
   private _usdaSource: string = 'Standard+Reference';
-  private _foodListUrl: string = 'https://api.nal.usda.gov/ndb/search/';
   private _foodNutritionUrl: string = 'https://api.nal.usda.gov/ndb/reports/';
+  private _foodSearchUrl: string = 'https://api.nal.usda.gov/ndb/search/';
+  private _foodSortUrl: string = 'https://api.nal.usda.gov/ndb/nutrients/';
   constructor(
     private _http: Http,
     private _nutritionSvc: NutritionService,
   ) { }
 
   private _serializeFood(foodReport: IFoodReportSearchResult): Food {
-    let newFood: Food = new Food(foodReport.fg, foodReport.name, foodReport.ndbno);
+    let newFood: Food = new Food(foodReport.name, foodReport.ndbno);
+    if (foodReport.ds === 'Standard Reference') {
+      newFood.group = foodReport.fg;
+    } else {
+      newFood.ingredients = foodReport.ing.desc;
+    }
     this._setNutrientValue(foodReport['nutrients'], newFood);
     newFood.pral = this._nutritionSvc.getPRAL(newFood.nutrition);
     console.log(newFood);
@@ -340,7 +346,9 @@ export class FoodService {
       params: URLSearchParams = new URLSearchParams();
 
     params.set('api_key', this._usdaApiKey);
-    params.set('ds', this._usdaSource);
+    if (foodGroupId !== '') {
+      params.set('ds', 'Standard+Reference');
+    }
     params.set('q', searhQuery);
     params.set('fg', foodGroupId);
     params.set('format', 'json');
@@ -350,7 +358,7 @@ export class FoodService {
     options.headers = headers;
     options.search = params;
 
-    return this._http.get(this._foodListUrl, options)
+    return this._http.get(this._foodSearchUrl, options)
       .map((res: Response) => {
         let body = res.json();
         console.log(body);
@@ -359,6 +367,34 @@ export class FoodService {
           throw body.errors.error[0];
         }
         return body['list']['item'];
+      }).catch((err: any) => Observable.throw(err));
+  }
+
+  public getSortedFoods$(nutrientId: number, start: number = 0, limit: number = 100): Observable<Array<IFoodSearchResult>> {
+    let headers: Headers = new Headers({ 'Content-Type': 'application/json' }),
+      options: RequestOptions = new RequestOptions(),
+      params: URLSearchParams = new URLSearchParams();
+
+    params.set('api_key', this._usdaApiKey);
+    params.set('nutrients', `${nutrientId}`);
+    params.set('nutrients', `${nutrientId}`);
+    params.set('format', 'json');
+    params.set('sort', 'c');
+    params.set('measureby', 'g');
+    params.set('max', `${limit}`);
+    params.set('offset', `${start}`);
+    options.headers = headers;
+    options.search = params;
+
+    return this._http.get(this._foodSortUrl, options)
+      .map((res: Response) => {
+        let body = res.json();
+        console.log(body);
+        if (body.hasOwnProperty('errors')) {
+          console.log(body.errors);
+          throw body.errors.error[0];
+        }
+        return body['report']['foods'];
       }).catch((err: any) => Observable.throw(err));
   }
 }

@@ -102,13 +102,13 @@ export class MealDetailsPage {
 
   public removeMeal(): void {
     this.mealPlan.meals.splice(this.mealIdx, 1);
-    this._mealSvc.saveMeal(this.meal, this.mealIdx, this.mealPlan);
+    this._mealSvc.saveMealPlan(this.mealPlan);
     this._navCtrl.pop();
   }
 
   public saveMeal(): void {
     this._updateMealDetails();
-    this._mealSvc.saveMeal(this.meal, this.mealIdx, this.mealPlan);
+    this._mealSvc.saveMeal(this.meal, this.mealPlan);
   }
 
   public segmentChange(): void {

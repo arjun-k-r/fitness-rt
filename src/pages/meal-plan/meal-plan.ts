@@ -4,7 +4,6 @@ import { Alert, AlertController, Loading, LoadingController, NavController } fro
 
 // Third-party
 import { FirebaseListObservable } from 'angularfire2/database';
-import * as _ from 'lodash';
 
 // Models
 import { Meal, MealPlan } from '../../models';
@@ -24,7 +23,6 @@ export class MealPlanPage {
   public detailsPage: any = MealDetailsPage;
   public mealPlan: MealPlan;
   public mealPlanDetails: string = 'meals';
-  public meals: Array<Array<Meal>> = [[]];
   public omega36Ratio: number;
   public nourishingMeals$: FirebaseListObservable<Array<Meal>>;
   constructor(
@@ -63,8 +61,7 @@ export class MealPlanPage {
             newMeal.nickname = '';
             newMeal.wasNourishing = false;
             this.mealPlan.meals[+data] = newMeal;
-            this._mealSvc.saveMeal(newMeal, +data, this.mealPlan);
-            this.meals = _.chunk(this.mealPlan.meals, 3);
+            this._mealSvc.saveMeal(newMeal, this.mealPlan);
             this._detectorRef.markForCheck();
           }
         }
@@ -77,8 +74,7 @@ export class MealPlanPage {
       updatedMeal: Meal = new Meal();
     updatedMeal.time = this.mealPlan.meals[mealIdx].time;
     this.mealPlan.meals[mealIdx] = updatedMeal;
-    this._mealSvc.saveMeal(updatedMeal, mealIdx, this.mealPlan);
-    this.meals = _.chunk(this.mealPlan.meals, 3);
+    this._mealSvc.saveMeal(updatedMeal, this.mealPlan);
     this._detectorRef.markForCheck();
   }
 
@@ -95,9 +91,8 @@ export class MealPlanPage {
   }
 
   public toggleNourishing(meal: Meal): void {
-    let mealIdx: number = this.mealPlan.meals.indexOf(meal);
-    this.mealPlan.meals[mealIdx].wasNourishing = !this.mealPlan.meals[mealIdx].wasNourishing;
-    if (!!this.mealPlan.meals[mealIdx].wasNourishing) {
+    meal.wasNourishing = !meal.wasNourishing;
+    if (!!meal.wasNourishing) {
       let alert: Alert = this._alertCtrl.create({
         title: 'Nickname',
         subTitle: 'Please give a nickname to this nourishing meal',
@@ -113,23 +108,23 @@ export class MealPlanPage {
             text: 'Cancel',
             role: 'cancel',
             handler: () => {
-              this.mealPlan.meals[mealIdx].wasNourishing = false;
+              meal.wasNourishing = false;
               this._detectorRef.markForCheck();
             }
           },
           {
             text: 'Done',
             handler: data => {
-              this.mealPlan.meals[mealIdx].nickname = data.nickname;
-              this._mealSvc.saveMeal(this.mealPlan.meals[mealIdx], mealIdx, this.mealPlan);
+              meal.nickname = data.nickname;
+              this._mealSvc.saveMeal(meal, this.mealPlan);
             }
           }
         ]
       });
       alert.present();
     } else {
-      this.mealPlan.meals[mealIdx].nickname = '';
-      this._mealSvc.saveMeal(this.mealPlan.meals[mealIdx], mealIdx, this.mealPlan);
+      meal.nickname = '';
+      this._mealSvc.saveMeal(meal, this.mealPlan);
     }
   }
 
@@ -177,8 +172,6 @@ export class MealPlanPage {
     this._mealSvc.getMealPlan$().subscribe((mealPlan: MealPlan) => {
       console.log('Received meal plan: ', mealPlan);
       this.mealPlan = mealPlan;
-      this.mealPlan.meals = this.mealPlan.meals || [];
-      this.meals = _.chunk(this.mealPlan.meals, 3);
       this.omega36Ratio = this._nutritionSvc.getOmega36Ratio(this.mealPlan.dailyNutrition);
       loader.dismiss();
       this._detectorRef.markForCheck();

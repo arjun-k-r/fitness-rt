@@ -278,7 +278,7 @@ export class MealService {
    * @param {MealPlan} mealPlan - The meal plan to save
    * @returns {void}
    */
-  public saveMeal(meal: Meal, mealIdx: number, mealPlan: MealPlan): void {
+  public saveMeal(meal: Meal, mealPlan: MealPlan): void {
     if (!!meal) {
       meal.nutrition = this._nutritionSvc.getTotalNutrition(meal.mealItems);
       if (!!meal.wasNourishing && meal.nourishingKey === '') {
@@ -305,7 +305,6 @@ export class MealService {
           wasNourishing: meal.wasNourishing
         });
       }
-      mealPlan.meals[mealIdx] = meal;
       mealPlan.dailyNutrition = this._nutritionSvc.getPercentageNutrition(mealPlan.meals, true);
     } else {
       mealPlan.dailyNutrition = new Nutrition();

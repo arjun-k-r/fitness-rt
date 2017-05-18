@@ -35,7 +35,7 @@ export class NutritionService {
   public checkAlcohol(nutrition: Nutrition): WarningMessage {
     return nutrition.alcohol.value > this._nutritionRequirements.alcohol.value ? new WarningMessage(
       'Too much alcohol',
-      `Your daily requirements are ${this._nutritionRequirements.alcohol.value}g of alcohol`
+      `Your daily requirements are ${Math.round(this._nutritionRequirements.alcohol.value)}g of alcohol`
     ) : null;
   }
 
@@ -47,7 +47,7 @@ export class NutritionService {
   public checkCaffeine(nutrition: Nutrition): WarningMessage {
     return nutrition.caffeine.value > this._nutritionRequirements.caffeine.value ? new WarningMessage(
       'Too much caffeine',
-      `Your daily requirements are ${this._nutritionRequirements.alcohol.value}mg of caffeine`
+      `Your daily requirements are ${Math.round(this._nutritionRequirements.caffeine.value)}mg of caffeine`
     ) : null;
   }
 
@@ -59,7 +59,7 @@ export class NutritionService {
   public checkCarbs(nutrition: Nutrition): WarningMessage {
     return nutrition.carbs.value > this._nutritionRequirements.carbs.value ? new WarningMessage(
       'Too much carbohydrates',
-      `Your daily requirements are ${this._nutritionRequirements.carbs.value}g of carbohydrates`
+      `Your daily requirements are ${Math.round(this._nutritionRequirements.carbs.value)}g of carbohydrates`
     ) : null;
   }
 
@@ -71,7 +71,7 @@ export class NutritionService {
   public checkEnergy(nutrition: Nutrition): WarningMessage {
     return nutrition.energy.value > this._nutritionRequirements.energy.value ? new WarningMessage(
       'Too much energy',
-      `Your daily requirements are ${this._nutritionRequirements.energy.value}kcal`
+      `Your daily requirements are ${Math.round(this._nutritionRequirements.energy.value)}kcal`
     ) : null;
   }
 
@@ -83,7 +83,7 @@ export class NutritionService {
   public checkFats(nutrition: Nutrition): WarningMessage {
     return nutrition.fats.value > this._nutritionRequirements.fats.value ? new WarningMessage(
       'Too much fat',
-      `Your daily requirements are ${this._nutritionRequirements.fats.value}g of fat`
+      `Your daily requirements are ${Math.round(this._nutritionRequirements.fats.value)}g of fat`
     ) : null;
   }
 
@@ -95,7 +95,7 @@ export class NutritionService {
   public checkProtein(nutrition: Nutrition): WarningMessage {
     return nutrition.protein.value > this._nutritionRequirements.protein.value ? new WarningMessage(
       'Too much protein',
-      `Your daily requirements are ${this._nutritionRequirements.protein.value}g of protein`
+      `Your daily requirements are ${Math.round(this._nutritionRequirements.protein.value)}g of protein`
     ) : null;
   }
 
@@ -107,7 +107,7 @@ export class NutritionService {
   public checkSodium(nutrition: Nutrition): WarningMessage {
     return nutrition.sodium.value > this._nutritionRequirements.sodium.value ? new WarningMessage(
       'Too much sodium',
-      `Your daily requirements are ${this._nutritionRequirements.sodium.value}mg of sodium`
+      `Your daily requirements are ${Math.round(this._nutritionRequirements.sodium.value)}mg of sodium`
     ) : null;
   }
 
@@ -119,7 +119,7 @@ export class NutritionService {
   public checkSugars(nutrition: Nutrition): WarningMessage {
     return nutrition.sugars.value > this._nutritionRequirements.sugars.value ? new WarningMessage(
       'Too much sugar',
-      `Your daily requirements are ${this._nutritionRequirements.sugars.value}g of sugars`
+      `Your daily requirements are ${Math.round(this._nutritionRequirements.sugars.value)}g of sugars`
     ) : null;
   }
 

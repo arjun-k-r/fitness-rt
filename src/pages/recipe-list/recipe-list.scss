@@ -1,3 +1,5 @@
-page-recipe-list {
-
+.recipe-card {
+    &:hover {
+        cursor: pointer;
+    }
 }

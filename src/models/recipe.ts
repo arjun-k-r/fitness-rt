@@ -31,7 +31,7 @@ export class Recipe {
         public cookingMethod: string = '',
         public cookingTemperature: number = 0,
         public cookingTime: number = 0,
-        public difficulty: string = '',
+        public difficulty: number = 1,
         public image: string = '',
         public ingredients: Array<Food | Recipe> = [],
         public instructions: Array<string> = [],

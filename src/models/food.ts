@@ -13,6 +13,8 @@ export interface IFoodReportSearchResult {
     ds: string;
     // Food group
     fg: string;
+    // Ingredients and last update if the food is a branded food
+    ing: {desc: string, upd: string};
     // Food name
     name: string;
     // Database id
@@ -41,9 +43,10 @@ export class FoodGroup {
 export class Food {
     /**
      * @constructor
-     * @param {string} group - The USDA Databse food group (e.g. Beverages)
      * @param {string} name - The food name
      * @param {string} ndbno - The USDA Database food id
+     * @param {string} group - The food ingredients if the food is a branded food
+     * @param {string} ingredients - The food ingredients if the food is a branded food
      * @param {Nutrition} nutrition - The food nutritional values
      * @param {number} pral - Indicates the alkalinity of the food
      * @param {number} quantity - The quantity of food (e.g. 100 food units)
@@ -53,9 +56,10 @@ export class Food {
      * @param {string} unit - The unit of measure (e.g. grams)
      */
     constructor(
-        public group: string = '',
         public name: string = '',
         public ndbno: string = '',
+        public group: string = '',
+        public ingredients: string = '',
         public nutrition: Nutrition = new Nutrition(),
         public pral: number = 0,
         public quantity: number = 100,

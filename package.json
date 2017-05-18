@@ -84,8 +84,7 @@
                 "REVERSED_CLIENT_ID": "com.googleusercontent.apps.493536537981-sur3vbbhkp6b8imijmlqmfidvfi5fhn0"
             },
             "cordova-plugin-camera": {},
-            "cordova-plugin-image-picker": {},
-            "cordova-plugin-heartbeat": {}
+            "cordova-plugin-image-picker": {}
         },
         "platforms": [
             "android",

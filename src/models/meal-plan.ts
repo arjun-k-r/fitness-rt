@@ -14,9 +14,14 @@ import { WarningMessage } from './warning-message';
  */
 export class Meal {
     constructor(
-        public chewing: boolean = false,
-        public gratitude: boolean = false,
-        public hunger: boolean = false,
+        public eatingHabits = {
+            chewing: false,
+            gratitude: false,
+            hunger: false,
+            relaxation: false,
+            vitality: false,
+            wellness: false
+        },
         public isCold: boolean = false,
         public isNatural: boolean = false,
         public isRaw: boolean = false,
@@ -26,7 +31,6 @@ export class Meal {
         public nutrition: Nutrition = new Nutrition(),
         public pral: number = 0,
         public quantity: number = 0,
-        public relaxation: boolean = false,
         public time: string = moment().format('HH:mm'),
         public warnings: Array<WarningMessage> = [],
         public wasNourishing: boolean = false

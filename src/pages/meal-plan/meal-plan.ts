@@ -175,6 +175,7 @@ export class MealPlanPage {
       this.omega36Ratio = this._nutritionSvc.getOmega36Ratio(this.mealPlan.dailyNutrition);
       loader.dismiss();
       this._detectorRef.detectChanges();
+      this._detectorRef.markForCheck();
     });
   }
 

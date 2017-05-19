@@ -204,7 +204,6 @@ export class RecipeDetailsPage {
 
   ionViewWillEnter(): void {
     this._detectorRef.detectChanges();
-    this._detectorRef.detectChanges();
   }
 
   ionViewWillUnload(): void {

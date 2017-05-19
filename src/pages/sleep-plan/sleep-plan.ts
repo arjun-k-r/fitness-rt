@@ -44,13 +44,13 @@ export class SleepPlanPage {
   public setBedtime(): void {
     this.currentSleep.bedTime = this._sleepSvc.getBedtime(this.currentSleep.wakeUpTime);
     this._detectorRef.detectChanges();
-    this._detectorRef.detectChanges();
+    this._detectorRef.markForCheck();
   }
 
   public setWakeUptime(): void {
     this.currentSleep.wakeUpTime = this._sleepSvc.getWakeUptime(this.currentSleep.bedTime);
     this._detectorRef.detectChanges();
-    this._detectorRef.detectChanges();
+    this._detectorRef.markForCheck();
   }
 
   public viewSymptoms(): void {

@@ -137,7 +137,7 @@ export class AccountPage {
         } else {
           toast.dismissAll();
           this._alertSvc.showAlert('Your avatar has been updated successfully', '', 'Success!');
-          this._detectorRef.markForCheck();
+          this._detectorRef.detectChanges();
         }
       });
   }

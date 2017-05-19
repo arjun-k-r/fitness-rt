@@ -49,7 +49,7 @@ export class FoodSelectPage {
 
   public clearSearchRecipes(ev: string): void {
     this.searchQueryRecipes = '';
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   public doneSelecting(): void {
@@ -76,7 +76,7 @@ export class FoodSelectPage {
       this._foodSubscription = this._foodSvc.getFoods$(this.searchQueryFoods, this.start, this.foodLimit, this.selectedGroup.id)
         .subscribe((data: Array<IFoodSearchResult>) => {
           this.foods.push(...data);
-          this._detectorRef.markForCheck();
+          this._detectorRef.detectChanges();
         }, (err: { status: string, message: string }) => this._alertSvc.showAlert(err.message, `Error ${err.status}!`, 'Whoops... something went wrong'));
       ev.complete();
     }, 500);
@@ -86,7 +86,7 @@ export class FoodSelectPage {
     this.recipeLimit += 50;
     setTimeout(() => {
       ev.complete();
-      this._detectorRef.markForCheck();
+      this._detectorRef.detectChanges();
     }, 1000);
   }
 
@@ -110,7 +110,7 @@ export class FoodSelectPage {
           this.foods = [...data];
           doneLoading = true;
           loader.dismiss();
-          this._detectorRef.markForCheck();
+          this._detectorRef.detectChanges();
         }, (err: { status: string, message: string }) => {
           doneLoading = true;
           loader.dismiss();
@@ -129,7 +129,7 @@ export class FoodSelectPage {
   }
 
   public segmentChange(): void {
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   public selectItem(item: IFoodSearchResult | Recipe): void {

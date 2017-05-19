@@ -31,26 +31,26 @@ export class SleepPlanPage {
     if (!!this.currentSleep.warnings && !!this.currentSleep.warnings.length) {
       console.log(this.currentSleep);
       this._alertSvc.showAlert('Please check the warnings', 'Your sleepng habit seems to be unhealthy', 'Oh oh...');
-      this._detectorRef.markForCheck();
+      this._detectorRef.detectChanges();
     } else {
       this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy sleep habit!', 'Well done!');
     }
   }
 
   public segmentChange(): void {
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   public setBedtime(): void {
     this.currentSleep.bedTime = this._sleepSvc.getBedtime(this.currentSleep.wakeUpTime);
     this._detectorRef.detectChanges();
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   public setWakeUptime(): void {
     this.currentSleep.wakeUpTime = this._sleepSvc.getWakeUptime(this.currentSleep.bedTime);
     this._detectorRef.detectChanges();
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   public viewSymptoms(): void {
@@ -87,7 +87,7 @@ export class SleepPlanPage {
       console.log('Received sleep plan: ', sleepPlan);
       this.sleepPlan = sleepPlan;
       this.currentSleep = this._sleepSvc.getCurrentSleep(this.sleepPlan);
-      this._detectorRef.markForCheck();
+      this._detectorRef.detectChanges();
     });
   }
 

@@ -41,7 +41,7 @@ export class ActivitySelectPage {
     this.limit += 50;
     setTimeout(() => {
       ev.complete();
-      this._detectorRef.markForCheck();
+      this._detectorRef.detectChanges();
     }, 1000);
   }
 
@@ -76,7 +76,7 @@ export class ActivitySelectPage {
   ionViewWillEnter(): void {
     this.activities$ = this._activitySvc.getActivities$();
     console.log('Entering...');
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   ionViewWillUnload(): void {

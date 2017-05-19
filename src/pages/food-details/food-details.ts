@@ -34,7 +34,7 @@ export class FoodDetailsPage {
     this._foodSvc.getFoodReports$(this._params.get('id')).subscribe((data: Food) => {
       this.food = data;
       loader.dismiss();
-      this._detectorRef.markForCheck();
+      this._detectorRef.detectChanges();
     }, (err: Error) => {
       this._alertSvc.showAlert(err.toString());
       loader.dismiss();

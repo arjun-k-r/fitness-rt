@@ -55,7 +55,7 @@ export class ActivityPlanPage {
       this._activitySvc.updateUserRequirements(this.activityPlan.totalEnergyBurn);
       this._activitySvc.getLeftEnergy().then((energy: number) => this.leftEnergy = energy);
 
-      this._detectorRef.markForCheck();
+      this._detectorRef.detectChanges();
     });
   }
 
@@ -86,7 +86,7 @@ export class ActivityPlanPage {
               this.activityPlan.intellectualEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.intellectualActivities);
             }
             this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn([...this.activityPlan.intellectualActivities, ...this.activityPlan.physicalActivities]);
-            this._detectorRef.markForCheck();
+            this._detectorRef.detectChanges();
           }
         }
       ]
@@ -107,12 +107,12 @@ export class ActivityPlanPage {
     this._activitySvc.getLeftEnergy().then((energy: number) => {
       this.leftEnergy = energy;
       console.log(energy);
-      this._detectorRef.markForCheck();
+      this._detectorRef.detectChanges();
     });
   }
 
   public segmentChange(): void {
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   public viewSymptoms(imbalanceKey: string, imbalanceName: string, imbalanceType: string): void {
@@ -164,7 +164,7 @@ export class ActivityPlanPage {
       this.activityPlan.physicalActivities = this.activityPlan.physicalActivities || [];
       this.activityPlan.warnings = this.activityPlan.warnings || [];
       loader.dismiss();
-      this._detectorRef.markForCheck();
+      this._detectorRef.detectChanges();
     });
   }
 

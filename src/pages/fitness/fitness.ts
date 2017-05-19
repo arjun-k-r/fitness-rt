@@ -64,11 +64,11 @@ export class FitnessPage {
   }
 
   public segmentChange(): void {
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   ionViewWillEnter(): void {
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   ionViewWillUnload(): void {

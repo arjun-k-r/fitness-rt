@@ -55,7 +55,7 @@ export class RecipeListPage {
             if (!this.queryIngredients.find((query: string) => query.toLocaleLowerCase().includes(data.ingredient.toLocaleLowerCase()))) {
               this.queryIngredients.push(data.ingredient);
               this.queryIngredients = [...this.queryIngredients];
-              this._detectorRef.markForCheck();
+              this._detectorRef.detectChanges();
             }
           }
         }
@@ -70,26 +70,26 @@ export class RecipeListPage {
 
   public clearSearch(ev: string): void {
     this.searchQuery = '';
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   public loadMore(ev: InfiniteScroll) {
     this.limit += 50;
     setTimeout(() => {
       ev.complete();
-      this._detectorRef.markForCheck();
+      this._detectorRef.detectChanges();
     }, 1000);
   }
 
   public removeQueryIngredient(idx: number): void {
     this.queryIngredients.splice(idx, 1);
     this.queryIngredients = [...this.queryIngredients];
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   public removeRecipe(recipe: Recipe): void {
     this._recipeSvc.removeRecipe(recipe);
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   ionViewWillEnter(): void {
@@ -101,7 +101,7 @@ export class RecipeListPage {
 
     loader.present();
     this.recipes$ = this._recipeSvc.getRecipes$();
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
     console.log('Entering...');
   }
 

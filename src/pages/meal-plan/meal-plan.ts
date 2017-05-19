@@ -62,7 +62,7 @@ export class MealPlanPage {
             newMeal.wasNourishing = false;
             this.mealPlan.meals[+data] = newMeal;
             this._mealSvc.saveMeal(newMeal, this.mealPlan);
-            this._detectorRef.markForCheck();
+            this._detectorRef.detectChanges();
           }
         }
       ]
@@ -75,7 +75,7 @@ export class MealPlanPage {
     updatedMeal.time = this.mealPlan.meals[mealIdx].time;
     this.mealPlan.meals[mealIdx] = updatedMeal;
     this._mealSvc.saveMeal(updatedMeal, this.mealPlan);
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   public reorganizeMeals(): void {
@@ -83,7 +83,7 @@ export class MealPlanPage {
   }
 
   public segmentChange(): void {
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   public saveMealPlan(): void {
@@ -109,7 +109,7 @@ export class MealPlanPage {
             role: 'cancel',
             handler: () => {
               meal.wasNourishing = false;
-              this._detectorRef.markForCheck();
+              this._detectorRef.detectChanges();
             }
           },
           {
@@ -174,7 +174,7 @@ export class MealPlanPage {
       this.mealPlan = mealPlan;
       this.omega36Ratio = this._nutritionSvc.getOmega36Ratio(this.mealPlan.dailyNutrition);
       loader.dismiss();
-      this._detectorRef.markForCheck();
+      this._detectorRef.detectChanges();
     });
   }
 

@@ -70,31 +70,6 @@ export class FoodListPage {
     }).present();
   }
 
-  private _selectNutrient(): void {
-    this._alertCtrl.create({
-      title: 'Sort by nutrient',
-      subTitle: 'Pick a nutrient',
-      inputs: [...this.nutrients.map((item: Nutrient) => {
-        return {
-          type: 'radio',
-          label: item.name,
-          value: item.id.toString(),
-          checked: this.selectedNutrient.name === item.name
-        }
-      })],
-      buttons: [
-        {
-          text: 'Done',
-          handler: (data: string) => {
-            this.selectedNutrient = this.nutrients.filter((item: Nutrient) => item.id === +data)[0];
-            this.sorting = true;
-            this.refreshItems();
-          }
-        }
-      ]
-    }).present();
-  }
-
   public clearSearch(ev): void {
     this.searchQuery = '';
     this.refreshItems();
@@ -112,7 +87,7 @@ export class FoodListPage {
       this._foodSvc.getFoods$(this.searchQuery.toLocaleLowerCase(), this.start, this.limit, this.selectedGroup.id)
         .subscribe((data: Array<IFoodSearchResult>) => {
           this.foods.push(...data);
-          this._detectorRef.markForCheck();
+          this._detectorRef.detectChanges();
         });
       ev.complete();
     }, 500);
@@ -140,7 +115,7 @@ export class FoodListPage {
             this.foods = [...data];
             doneLoading = true;
             loader.dismiss();
-            this._detectorRef.markForCheck();
+            this._detectorRef.detectChanges();
           }, (err: { status: string, message: string }) => {
             doneLoading = true;
             loader.dismiss();
@@ -152,7 +127,7 @@ export class FoodListPage {
             this.foods = [...data];
             doneLoading = true;
             loader.dismiss();
-            this._detectorRef.markForCheck();
+            this._detectorRef.detectChanges();
           }, (err: { status: string, message: string }) => {
             doneLoading = true;
             loader.dismiss();
@@ -212,3 +187,31 @@ export class FoodListPage {
   }
 
 }
+
+/**
+   * Not working, because of API bug
+   */
+  // private _selectNutrient(): void {
+  //   this._alertCtrl.create({
+  //     title: 'Sort by nutrient',
+  //     subTitle: 'Pick a nutrient',
+  //     inputs: [...this.nutrients.map((item: Nutrient) => {
+  //       return {
+  //         type: 'radio',
+  //         label: item.name,
+  //         value: item.id.toString(),
+  //         checked: this.selectedNutrient.name === item.name
+  //       }
+  //     })],
+  //     buttons: [
+  //       {
+  //         text: 'Done',
+  //         handler: (data: string) => {
+  //           this.selectedNutrient = this.nutrients.filter((item: Nutrient) => item.id === +data)[0];
+  //           this.sorting = true;
+  //           this.refreshItems();
+  //         }
+  //       }
+  //     ]
+  //   }).present();
+  // }

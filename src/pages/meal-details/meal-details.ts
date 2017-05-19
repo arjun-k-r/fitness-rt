@@ -49,7 +49,7 @@ export class MealDetailsPage {
     } else {
       this._alertSvc.showAlert('Please check the warnings', 'Something is wrong with this meal', 'Oh oh...');
     }
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   public addMealItems(): void {
@@ -61,7 +61,7 @@ export class MealDetailsPage {
         console.log('My new foods: ', this.meal.mealItems);
         // Update the meal details
         this._updateMealDetails();
-        this._detectorRef.markForCheck();
+        this._detectorRef.detectChanges();
       }
     })
   }
@@ -87,7 +87,7 @@ export class MealDetailsPage {
           handler: data => {
             item.servings = +data.servings;
             this._updateMealDetails();
-            this._detectorRef.markForCheck();
+            this._detectorRef.detectChanges();
           }
         }
       ]
@@ -112,12 +112,11 @@ export class MealDetailsPage {
   }
 
   public segmentChange(): void {
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   ionViewWillEnter(): void {
     this._detectorRef.detectChanges();
-    this._detectorRef.markForCheck();
   }
 
   ionViewWillUnload(): void {

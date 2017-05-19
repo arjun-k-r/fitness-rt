@@ -58,7 +58,7 @@ export class RecipeDetailsPage {
         console.log('My new ingredients: ', this.recipe.ingredients);
         // Update the meal details
         this._updateRecipeDetails();
-        this._detectorRef.markForCheck();
+        this._detectorRef.detectChanges();
       }
     });
   }
@@ -123,7 +123,7 @@ export class RecipeDetailsPage {
           handler: data => {
             item.servings = +data.servings;
             this._updateRecipeDetails();
-            this._detectorRef.markForCheck();
+            this._detectorRef.detectChanges();
           }
         }
       ]
@@ -153,7 +153,7 @@ export class RecipeDetailsPage {
   }
 
   public segmentChange(): void {
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   public showCookingInfo(): void {
@@ -197,14 +197,14 @@ export class RecipeDetailsPage {
         } else {
           toast.dismissAll();
           this._alertSvc.showAlert('Your avatar has been updated successfully', '', 'Success!');
-          this._detectorRef.markForCheck();
+          this._detectorRef.detectChanges();
         }
       });
   }
 
   ionViewWillEnter(): void {
     this._detectorRef.detectChanges();
-    this._detectorRef.markForCheck();
+    this._detectorRef.detectChanges();
   }
 
   ionViewWillUnload(): void {

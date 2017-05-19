@@ -1,6 +1,6 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
-import { InfiniteScroll, Loading, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, InfiniteScroll, Loading, LoadingController, NavController } from 'ionic-angular';
 
 // Third-party
 import { FirebaseListObservable } from 'angularfire2/database';
@@ -22,14 +22,46 @@ import { RecipeService } from '../../providers';
 export class RecipeListPage {
   public detailsPage: any = RecipeDetailsPage;
   public limit: number = 50;
+  public queryIngredients: Array<string> = [];
   public recipes$: FirebaseListObservable<Array<Recipe>>;
   public searchQuery: string = '';
   constructor(
+    private _alertCtrl: AlertController,
     private _detectorRef: ChangeDetectorRef,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
     private _recipeSvc: RecipeService,
   ) { }
+
+  public addIngredientFilter(): void {
+    this._alertCtrl.create({
+      title: 'Filter by ingredients',
+      subTitle: 'Tip: Type the singular form of the ingredient',
+      inputs: [
+        {
+          name: 'ingredient',
+          placeholder: 'E.g. apple, banana, broccoli',
+          type: 'text'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Done',
+          handler: (data: { ingredient: string }) => {
+            if (!this.queryIngredients.find((query: string) => query.toLocaleLowerCase().includes(data.ingredient.toLocaleLowerCase()))) {
+              this.queryIngredients.push(data.ingredient);
+              this.queryIngredients = [...this.queryIngredients];
+              this._detectorRef.markForCheck();
+            }
+          }
+        }
+      ]
+    }).present();
+  }
 
   public addNewRecipe(): void {
     let newRecipe: Recipe = new Recipe();
@@ -49,8 +81,15 @@ export class RecipeListPage {
     }, 1000);
   }
 
+  public removeQueryIngredient(idx: number): void {
+    this.queryIngredients.splice(idx, 1);
+    this.queryIngredients = [...this.queryIngredients];
+    this._detectorRef.markForCheck();
+  }
+
   public removeRecipe(recipe: Recipe): void {
     this._recipeSvc.removeRecipe(recipe);
+    this._detectorRef.markForCheck();
   }
 
   ionViewWillEnter(): void {

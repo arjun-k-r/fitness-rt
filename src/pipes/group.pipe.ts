@@ -5,13 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class GroupPipe implements PipeTransform {
 
-  transform(value: any[], columns: number, colNr: number): any {
-    if (value) {
-           return value.filter((item, index) => {
-               if (index % columns === colNr - 1) {
-                   return item;
-               }
-           });
-       }
+  /**
+   * Groups the items according to their index (used for UI Grid representation iterations)
+   */
+  transform(items: Array<any> = [], columns: number = 0, colNr: number = 0): any {
+    return (!!items && !!items.length) ? items.filter((item, index) => index % columns === colNr - 1) : [];
   }
 }

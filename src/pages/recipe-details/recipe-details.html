@@ -6,7 +6,7 @@
       <button ion-button icon-only (click)="saveRecipe()">
         <ion-icon name="sync"></ion-icon>
       </button>
-      <button ion-button icon-only (click)="removeRecipe()">
+      <button *ngIf="recipe.hasOwnProperty('$key')" ion-button icon-only (click)="removeRecipe()">
         <ion-icon name="trash"></ion-icon>
       </button>
     </ion-buttons>
@@ -36,8 +36,8 @@
     <!-- Start of segment -->
     <div *ngSwitchCase="'details'">
       <ion-grid>
-        <ion-row justify-content-center>
-          <ion-col align-self-center col-auto>
+        <ion-row justify-content-center *ngIf="!!recipe.image">
+          <ion-col col-auto>
             <img class="picture" [src]="recipe.image" alt="Recipe image">
           </ion-col>
         </ion-row>
@@ -78,6 +78,7 @@
             <ion-option value="Boiling">Boiling</ion-option>
             <ion-option value="Frying">Frying</ion-option>
             <ion-option value="Grilling">Grilling</ion-option>
+            <ion-option value="Raw">Raw</ion-option>
             <ion-option value="Roasting">Roasting</ion-option>
             <ion-option value="Steaming">Steaming</ion-option>
             <ion-option value="Stewing">Stewing</ion-option>

@@ -5,8 +5,11 @@ import { Injectable, Pipe, PipeTransform } from '@angular/core';
 })
 @Injectable()
 export class CapitalizePipe implements PipeTransform {
+
+  /**
+   * Transforms a specific string to uppercase
+   */
   transform(value: string = '') {
-    value = value + ''; // make sure it's a string
-    return value.charAt(0).toUpperCase() + value.slice(1);
+    return value.toString().charAt(0).toUpperCase() + value.slice(1);
   }
 }

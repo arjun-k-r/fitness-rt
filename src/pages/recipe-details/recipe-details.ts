@@ -43,6 +43,7 @@ export class RecipeDetailsPage {
 
   private _updateRecipeDetails(): void {
     this.recipe.nutrition = this._recipeSvc.getRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
+    this._recipeSvc.checkCooking(this.recipe);
     this.recipe.pral = this._nutritionSvc.getPRAL(this.recipe.nutrition);
     this.recipe.quantity = this._recipeSvc.getRecipeSize(this.recipe.ingredients, this.recipe.portions);
     this.recipe.difficulty = this._recipeSvc.checkDifficulty(this.recipe);

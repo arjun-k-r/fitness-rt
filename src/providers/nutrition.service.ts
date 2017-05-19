@@ -178,6 +178,7 @@ export class NutritionService {
     requirements.vitaminB2.value = this._driSvc.getRiboflavinDri(age, gender, lactating, pregnant);
     requirements.vitaminB3.value = this._driSvc.getNiacinDri(age, gender, lactating, pregnant);
     requirements.vitaminB5.value = this._driSvc.getPantothenicAcidDri(age, gender, lactating, pregnant);
+    requirements.vitaminB6.value = this._driSvc.getRiboflavinDri(age, gender, lactating, pregnant);
     requirements.vitaminB9.value = this._driSvc.getFolicAcidDri(age, gender, lactating, pregnant);
     requirements.vitaminB12.value = this._driSvc.getCobalaminDri(age, gender, lactating, pregnant);
     requirements.vitaminC.value = this._driSvc.getVitaminCDri(age, gender, lactating, pregnant);

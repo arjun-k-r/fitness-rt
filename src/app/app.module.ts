@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { Camera } from '@ionic-native/camera';
+import { Pedometer } from '@ionic-native/pedometer';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { MyApp } from './app.component';
 
@@ -148,8 +150,10 @@ import {
     SleepPlanPage
   ],
   providers: [
+    BarcodeScanner,
     Camera,
     ImagePicker,
+    Pedometer,
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },

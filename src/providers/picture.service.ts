@@ -28,6 +28,7 @@ export class PictureService {
     private _user: User
   ) {
     this._cameraOpts = {
+      allowEdit: true,
       quality: 100,
       destinationType: _camera.DestinationType.DATA_URL,
       encodingType: _camera.EncodingType.JPEG,

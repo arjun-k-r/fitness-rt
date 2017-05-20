@@ -22,7 +22,7 @@
         </ion-row>
     </ion-grid>
     <button showWhen="cordova" margin-top margin-bottom (click)="changeAvatar()" ion-button block>Change avatar</button>
-    <button *ngIf="avatar" showWhen="cordova" margin-top margin-bottom (click)="uploadAvatar()" ion-button block>Upload image</button>
+    <button *ngIf="!!avatar" showWhen="cordova" margin-top margin-bottom (click)="uploadAvatar()" ion-button block>Upload image</button>
     <button (click)="signout()" ion-button block>Sign out</button>
     <button (click)="deleteAccountRequest()" ion-button block>Delete account</button>
 

@@ -1,6 +1,7 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { Alert, AlertController, Loading, LoadingController, Modal, ModalController, NavController } from 'ionic-angular';
+import { IPedometerData, Pedometer } from '@ionic-native/pedometer';
 
 // Models
 import { Activity, ActivityPlan, WarningMessage } from '../../models';
@@ -20,6 +21,7 @@ export class ActivityPlanPage {
   public activityPlan: ActivityPlan;
   public activityPlanDetails: string = 'physical';
   public leftEnergy: number = 0;
+  public steps: number = 0;
   constructor(
     private _activitySvc: ActivityService,
     private _alertCtrl: AlertController,
@@ -28,6 +30,7 @@ export class ActivityPlanPage {
     private _fitSvc: FitnessService,
     private _loadCtrl: LoadingController,
     private _modalCtrl: ModalController,
+    private _pedometer: Pedometer,
     private _navCtrl: NavController
   ) { }
 
@@ -92,6 +95,19 @@ export class ActivityPlanPage {
       ]
     });
     alert.present();
+  }
+
+  public measureSteps(): void {
+    this._pedometer.isDistanceAvailable()
+      .then((available: boolean) => console.log(available))
+      .catch((error: any) => console.log(error));
+
+    this._pedometer.startPedometerUpdates()
+      .subscribe((data: IPedometerData) => {
+        //this.steps = data.numberOfSteps;
+        console.log(data);
+        this._detectorRef.detectChanges();
+      });
   }
 
   public removeActivity(idx: number, type: string): void {

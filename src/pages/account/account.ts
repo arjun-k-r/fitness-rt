@@ -77,12 +77,18 @@ export class AccountPage {
           {
             text: 'Take photo',
             handler: () => {
-              this._picService.takePhoto().then((photoUri: string) => this.avatar = photoUri).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
+              this._picService.takePhoto().then((photoUri: string) => {
+                this.avatar = photoUri;
+                this._detectorRef.detectChanges();
+              }).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
             }
           }, {
             text: 'Choose image',
             handler: () => {
-              this._picService.chooseImage().then((photoUri: string) => this.avatar = photoUri).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
+              this._picService.chooseImage().then((photoUri: string) => {
+                this.avatar = photoUri;
+                this._detectorRef.detectChanges();
+              }).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
             }
           }, {
             text: 'Cancel',

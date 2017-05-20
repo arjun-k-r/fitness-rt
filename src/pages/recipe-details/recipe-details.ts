@@ -76,12 +76,18 @@ export class RecipeDetailsPage {
           {
             text: 'Take photo',
             handler: () => {
-              this._picService.takePhoto().then((photoUri: string) => this.recipe.image = photoUri).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
+              this._picService.takePhoto().then((photoUri: string) => {
+                this.recipe.image = photoUri;
+                this._detectorRef.detectChanges();
+              }).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
             }
           }, {
             text: 'Choose image',
             handler: () => {
-              this._picService.chooseImage().then((photoUri: string) => this.recipe.image = photoUri).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
+              this._picService.chooseImage().then((photoUri: string) => {
+                this.recipe.image = photoUri;
+                this._detectorRef.detectChanges();
+              }).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
             }
           }, {
             text: 'Cancel',

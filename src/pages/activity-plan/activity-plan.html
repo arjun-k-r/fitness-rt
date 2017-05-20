@@ -35,7 +35,7 @@
 
     <!-- Start of segment -->
     <ion-list *ngSwitchCase="'physical'">
-      <button ion-button (click)="measureSteps()"></button>
+      <button ion-button (click)="measureSteps()">Measure steps</button>
       {{ steps }}
       <ion-item *ngFor="let activity of activityPlan?.physicalActivities; let i = index" (click)="changeDuration(activity)">
         <ion-icon color="danger" name="trash" item-left (click)="removeActivity(i, 'physical')"></ion-icon>

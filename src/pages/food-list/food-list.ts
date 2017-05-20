@@ -2,7 +2,6 @@
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActionSheetController, AlertController, InfiniteScroll, Loading, LoadingController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
-import { BarcodeScanResult, BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 // Third-party
 import * as _ from 'lodash';
@@ -38,7 +37,6 @@ export class FoodListPage {
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
     private _alertSvc: AlertService,
-    private _barScanner: BarcodeScanner,
     private _detectorRef: ChangeDetectorRef,
     private _foodSvc: FoodService,
     private _loadCtrl: LoadingController
@@ -145,14 +143,6 @@ export class FoodListPage {
         }
       });
     }
-  }
-
-  public scanBarcode(): void {
-    this._barScanner.scan().then((barcodeData: BarcodeScanResult) => {
-     console.log(barcodeData.text);
-    }, (err) => {
-      // An error occurred
-    });
   }
 
   public showFilter(): void {

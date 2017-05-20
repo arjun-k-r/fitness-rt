@@ -98,14 +98,10 @@ export class ActivityPlanPage {
   }
 
   public measureSteps(): void {
-    this._pedometer.isDistanceAvailable()
-      .then((available: boolean) => console.log(available))
-      .catch((error: any) => console.log(error));
-
     this._pedometer.startPedometerUpdates()
       .subscribe((data: IPedometerData) => {
         //this.steps = data.numberOfSteps;
-        console.log(data);
+        alert(data);
         this._detectorRef.detectChanges();
       });
   }

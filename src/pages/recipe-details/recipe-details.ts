@@ -20,6 +20,7 @@ export class RecipeDetailsPage {
   public recipe: Recipe;
   public recipeDetails: string = 'details';
   public recipeInstructions: Array<string>;
+  public uploadReady: boolean = false;
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
@@ -78,6 +79,7 @@ export class RecipeDetailsPage {
             handler: () => {
               this._picService.takePhoto().then((photoUri: string) => {
                 this.recipe.image = photoUri;
+                this.uploadReady = true;
                 this._detectorRef.detectChanges();
               }).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
             }
@@ -86,6 +88,7 @@ export class RecipeDetailsPage {
             handler: () => {
               this._picService.chooseImage().then((photoUri: string) => {
                 this.recipe.image = photoUri;
+                this.uploadReady = true;
                 this._detectorRef.detectChanges();
               }).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
             }
@@ -191,6 +194,7 @@ export class RecipeDetailsPage {
       if (typeof data === 'number') {
         toast.setMessage(`Uploading ... ${data}%`);
       } else {
+        this.uploadReady = false;
         this.recipe.image = data;
       }
     }, (err: Error) => {

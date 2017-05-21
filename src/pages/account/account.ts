@@ -16,6 +16,7 @@ import { AlertService, PictureService } from '../../providers';
 })
 export class AccountPage {
   public avatar: string;
+  public uploadReady: boolean = false;
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
@@ -79,6 +80,7 @@ export class AccountPage {
             handler: () => {
               this._picService.takePhoto().then((photoUri: string) => {
                 this.avatar = photoUri;
+                this.uploadReady = true;
                 this._detectorRef.detectChanges();
               }).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
             }
@@ -87,6 +89,7 @@ export class AccountPage {
             handler: () => {
               this._picService.chooseImage().then((photoUri: string) => {
                 this.avatar = photoUri;
+                this.uploadReady = true;
                 this._detectorRef.detectChanges();
               }).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
             }
@@ -132,6 +135,7 @@ export class AccountPage {
         this._user.details.image = data;
         this._user.save();
         this.avatar = data;
+        this.uploadReady = false;
       }
     }, (err: Error) => {
       console.log('Error uploading avatar: ', err);

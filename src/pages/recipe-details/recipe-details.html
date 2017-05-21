@@ -48,7 +48,7 @@
         </ion-row>
       </ion-grid>
       <button showWhen="cordova" margin-top margin-bottom (click)="changeImage()" ion-button block>Change image</button>
-      <button *ngIf="!!recipe.image" showWhen="cordova" margin-top margin-bottom (click)="uploadImage()" ion-button block>Upload image</button>
+      <button [disabled]="!recipe.image || !uploadReady" showWhen="cordova" margin-top margin-bottom (click)="uploadImage()" ion-button block>Upload image</button>
       <ion-list>
         <ion-item text-wrap>
           <ion-label fixed>Name</ion-label>

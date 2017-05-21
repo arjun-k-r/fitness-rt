@@ -168,26 +168,6 @@ export class MealService {
   }
 
   /**
-   * Get 4-hour interval meals, starting from breakfast time, as long as the last meal is 2 hours before bed
-   * @param {string} breakfastTime - The time of the first meal used as reference
-   * @returns {Array} Returns an array of meals
-   */
-  private _getMeals(breakfastTime: string): Array<Meal> {
-    let meals: Array<Meal> = [],
-      newMeal: Meal,
-      newMealTime: number = 0;
-
-    do {
-      newMeal = new Meal();
-      newMeal.time = moment(breakfastTime, 'hours').add(newMealTime, 'hours').format('HH:mm');
-      meals.push(newMeal);
-      newMealTime += 4;
-    } while (moment(this._bedTime, 'hours').subtract(moment(newMeal.time, 'hours').hours(), 'hours').hours() >= 6);
-
-    return meals;
-  }
-
-  /**
   * Verifies if a meal is proper
   * @param {Meal} meal The meal to check
   * @returns {void}
@@ -205,7 +185,7 @@ export class MealService {
       ...this._checkMealServing(meal),
       this._checkMealSize(meal.quantity),
       this._nutritionSvc.checkSodium(meal.nutrition),
-      this._nutritionSvc.checkSugars(meal.nutrition),
+      this._nutritionSvc.checkSugar(meal.nutrition),
       this._nutritionSvc.checkTransFat(meal.nutrition)
     ]);
   }
@@ -219,7 +199,7 @@ export class MealService {
       this._currentMealPlan.subscribe((currMealPlan: MealPlan) => {
         if (currMealPlan['$value'] === null) {
           let newMealPlan: MealPlan = new MealPlan();
-          newMealPlan.meals = this._getMeals(this._wakeUpTime);
+          newMealPlan.meals = this.getMeals(this._wakeUpTime);
 
           //Get the previous day meal plan to check for deficiencies and excesses
           this._lastMealPlan.subscribe((lastMealPlan: MealPlan) => {
@@ -243,12 +223,34 @@ export class MealService {
             observer.complete();
           });
         } else {
-          currMealPlan.meals = currMealPlan.meals || this._getMeals(this._wakeUpTime);
+          currMealPlan.meals = currMealPlan.meals || this.getMeals(this._wakeUpTime);
           observer.next(currMealPlan);
           observer.complete();
         }
       });
     });
+  }
+
+  /**
+  * Get 4-hour interval meals, starting from breakfast time, as long as the last meal is 2 hours before bed
+  * @param {string} breakfastTime - The time of the first meal used as reference
+  * @returns {Array} Returns an array of meals
+  */
+  public getMeals(breakfastTime: string): Array<Meal> {
+    let meals: Array<Meal> = [],
+      newMeal: Meal,
+      newMealTime: number = 0;
+
+      breakfastTime = breakfastTime || this._wakeUpTime || moment().format('HH:mm');
+
+    do {
+      newMeal = new Meal();
+      newMeal.time = moment(breakfastTime, 'hours').add(newMealTime, 'hours').format('HH:mm');
+      meals.push(newMeal);
+      newMealTime += 4;
+    } while (moment(this._bedTime, 'hours').subtract(moment(newMeal.time, 'hours').hours(), 'hours').hours() >= 6);
+
+    return meals;
   }
 
   /**
@@ -281,7 +283,7 @@ export class MealService {
     // Add more meals if there is enough time until bedtime
     let lastMealTime: string = mealPlan.meals[mealPlan.meals.length - 1].time;
     if (moment(this._bedTime, 'hours').subtract(moment(lastMealTime, 'hours').hours(), 'hours').hours() >= 6) {
-      mealPlan.meals = [...mealPlan.meals, ...this._getMeals(moment(lastMealTime, 'hours').add(4, 'hours').format('HH:mm'))];
+      mealPlan.meals = [...mealPlan.meals, ...this.getMeals(moment(lastMealTime, 'hours').add(4, 'hours').format('HH:mm'))];
     }
   }
 

@@ -53,7 +53,7 @@ export class MealPlan {
      * @param {Array} meals - The meals of the meal plan from the specified date
      */
     constructor(
-        public breakfastTime: string = '',
+        public breakfastTime: string = moment().format('HH:mm'),
         public dailyNutrition: Nutrition = new Nutrition(),
         public date: number = moment().dayOfYear(),
         public deficiency: NutrientDeficiencies = new NutrientDeficiencies(),

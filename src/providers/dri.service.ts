@@ -387,8 +387,8 @@ export class DRIService {
     }
   }
 
-  public getSugarsDri(energyConsumption: number): number {
-    return 0.1 * energyConsumption / 4;
+  public getSugarDri(energyConsumption: number): number {
+    return 0.05 * energyConsumption / 4;
   }
 
   public getThiamineDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {

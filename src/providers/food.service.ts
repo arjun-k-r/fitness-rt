@@ -105,8 +105,8 @@ export class FoodService {
           food.nutrition.fiber.value = +nutrient.value;
           break;
 
-        case '269':
-          food.nutrition.sugars.value = +nutrient.value;
+        case '210':
+          food.nutrition.sugar.value = +nutrient.value;
           break;
 
         case '301':

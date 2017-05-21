@@ -5,6 +5,9 @@
     </button>
     <ion-title>Meal plan</ion-title>
     <ion-buttons end>
+      <button ion-button icon-only (click)="resetMealPlan()">
+        <ion-icon name="remove-circle"></ion-icon>
+      </button>
       <button ion-button icon-only (click)="saveMealPlan()">
         <ion-icon name="sync"></ion-icon>
       </button>
@@ -25,7 +28,6 @@
         <ion-icon name="heart"></ion-icon>
       </ion-segment-button>
     </ion-segment>
-
   </ion-toolbar>
 </ion-header>
 
@@ -257,8 +259,8 @@
           <p item-content>{{ mealPlan.dailyNutrition.transFat?.value }}%</p>
         </ion-item>
         <ion-item>
-          Sugars
-          <p item-content>{{ mealPlan.dailyNutrition.sugars?.value }}%</p>
+          Sugar
+          <p item-content>{{ mealPlan.dailyNutrition.sugar?.value }}%</p>
         </ion-item>
       </ion-item-group>
     </div>
@@ -517,9 +519,9 @@
           <p text-wrap>Try to limit your protein intake</p>
           <p item-content>Check symptoms</p>
         </button>
-        <button ion-item *ngIf="mealPlan.excess.sugars > 2" (click)="viewSymptoms('sugars', 'Sugar', 'excess')">
+        <button ion-item *ngIf="mealPlan.excess.sugar > 2" (click)="viewSymptoms('sugars', 'Sugar', 'excess')">
           <ion-icon color="danger" name="warning" item-left></ion-icon>
-          <h2 text-wrap>It seems you have a sugar excess for {{ mealPlan.excess.sugars }} days</h2>
+          <h2 text-wrap>It seems you have a sugar excess for {{ mealPlan.excess.sugar }} days</h2>
           <p text-wrap>Try to limit your sugar intake</p>
           <p item-content>Check symptoms</p>
         </button>

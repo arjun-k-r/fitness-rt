@@ -82,11 +82,19 @@ export class MealPlanPage {
     this._mealSvc.reorganizeMeals(this.mealPlan);
   }
 
+  public resetMealPlan(): void {
+    let newMealPlan: MealPlan = new MealPlan();
+    newMealPlan.meals = [...this._mealSvc.getMeals(this.mealPlan.breakfastTime)];
+    this.mealPlan = Object.assign({}, newMealPlan);
+    this._detectorRef.detectChanges();
+  }
+
   public segmentChange(): void {
     this._detectorRef.detectChanges();
   }
 
   public saveMealPlan(): void {
+    this.mealPlan.dailyNutrition = this._nutritionSvc.getPercentageNutrition(this.mealPlan.meals, true);
     this._mealSvc.saveMealPlan(this.mealPlan);
   }
 

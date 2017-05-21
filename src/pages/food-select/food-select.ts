@@ -58,6 +58,8 @@ export class FoodSelectPage {
         item.servings = this.selectedServings;
         this._viewCtrl.dismiss(item);
       }, (err: Error) => console.log('Error on getting food report: ', err));
+    } else if (!!this.selectedItem) {
+      this._viewCtrl.dismiss(this.selectedItem);
     } else {
       this._viewCtrl.dismiss();
     }
@@ -132,7 +134,7 @@ export class FoodSelectPage {
     this._detectorRef.detectChanges();
   }
 
-  public selectItem(item: IFoodSearchResult | Recipe): void {
+  public selectItem(item: IFoodSearchResult | Recipe, radioInput: HTMLInputElement): void {
     this._alertCtrl.create({
       title: 'Servings',
       subTitle: `${item.name.toString()}`,
@@ -140,13 +142,17 @@ export class FoodSelectPage {
         {
           name: 'servings',
           placeholder: item.hasOwnProperty('chef') ? `Servings x ${item['quantity'].toString()}${item['unit'].toString()}` : 'Servings x 100g',
-          type: 'number'
+          type: 'number',
         }
       ],
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
+          handler: () => {
+            radioInput.checked = false;
+            this._detectorRef.detectChanges();
+          }
         },
         {
           text: 'Done',

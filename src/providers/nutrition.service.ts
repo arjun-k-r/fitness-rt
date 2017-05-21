@@ -116,10 +116,10 @@ export class NutritionService {
  * @param {Nutrition} nutrition - The nutrition to check
  * @returns {WarningMessage} Returns warning if there is too much sugar
  */
-  public checkSugars(nutrition: Nutrition): WarningMessage {
-    return nutrition.sugars.value > this._nutritionRequirements.sugars.value ? new WarningMessage(
+  public checkSugar(nutrition: Nutrition): WarningMessage {
+    return nutrition.sugar.value > this._nutritionRequirements.sugar.value ? new WarningMessage(
       'Too much sugar',
-      `Your daily requirements are ${Math.round(this._nutritionRequirements.sugars.value)}g of sugars`
+      `Your daily requirements are ${Math.round(this._nutritionRequirements.sugar.value)}g of sugar`
     ) : null;
   }
 
@@ -168,7 +168,7 @@ export class NutritionService {
     requirements.protein.value = this._driSvc.getProteinDri(energyConsumption);
     requirements.selenium.value = this._driSvc.getSeleniumDri(age, gender, lactating, pregnant);
     requirements.sodium.value = this._driSvc.getSodiumDri(age, gender, lactating, pregnant);
-    requirements.sugars.value = this._driSvc.getSugarsDri(energyConsumption);
+    requirements.sugar.value = this._driSvc.getSugarDri(energyConsumption);
     requirements.threonine.value = this._driSvc.getThreonineDri(age, gender, lactating, pregnant, weight);
     requirements.transFat.value = this._driSvc.getTransFatDri();
     requirements.tryptophan.value = this._driSvc.getTryptophanDri(age, gender, lactating, pregnant, weight);

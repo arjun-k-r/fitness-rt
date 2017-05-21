@@ -104,7 +104,7 @@ export class Nutrition {
         public starch: Nutrient = new Nutrient(209, 'Proximates', 'Starch', 'g'),
         public lactose: Nutrient = new Nutrient(213, 'Proximates', 'Lactose', 'g'),
         public fiber: Nutrient = new Nutrient(291, 'Proximates', 'Fiber', 'g'),
-        public sugars: Nutrient = new Nutrient(269, 'Proximates', 'Sugars', 'g'),
+        public sugar: Nutrient = new Nutrient(210, 'Proximates', 'Sugar', 'g'),
         public calcium: Nutrient = new Nutrient(301, 'Minerals', 'Calcium', 'mg'),
         public iron: Nutrient = new Nutrient(303, 'Minerals', 'Iron', 'mg'),
         public magnesium: Nutrient = new Nutrient(304, 'Minerals', 'Magnesium', 'mg'),

@@ -55,8 +55,10 @@ export class FitnessPage {
     this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.profile.gender);
     this.idealWeight = this._fitSvc.getIdealWeight(this.profile.gender, this.profile.height, this.profile.weight);
     this.profile.heartRate.max = this._fitSvc.getHeartRateMax(this.profile.age);
-    this.profile.requirements = this._nutritionSvc.getDri(this.profile.age, this.profile.bmr, this.profile.gender, this.profile.height, this.profile.lactating, this.profile.pregnant, this.profile.weight);
-    this._fitSvc.saveProfile(this.profile);
+    this._fitSvc.restoreEnergyConsumption().then((energyConsumption: number) => {
+      this.profile.requirements = this._nutritionSvc.getDri(this.profile.age, energyConsumption, this.profile.gender, this.profile.height, this.profile.lactating, this.profile.pregnant, this.profile.weight);
+      this._fitSvc.saveProfile(this.profile);
+    });
 
     if (!!this._params.get('new')) {
       this._navCtrl.setRoot(SleepPlanPage, { new: true });

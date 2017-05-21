@@ -118,7 +118,7 @@
       <ion-list>
         <ion-item text-wrap *ngFor="let item of recipe.instructions; let i = index">
           <ion-icon color="danger" name="trash" item-left (click)="removeInstruction(i)"></ion-icon>
-          <ion-label fixed>Step {{i + 1}}:</ion-label>
+          <ion-label floating>Step {{i + 1}}:</ion-label>
           <ion-input type="text" name="step{{i}}" [(ngModel)]="recipeInstructions[i]"></ion-input>
         </ion-item>
       </ion-list>
@@ -329,8 +329,8 @@
           <p item-content>{{ recipe.nutrition.transFat?.value }} {{ recipe.nutrition.transFat?.unit }}</p>
         </ion-item>
         <ion-item>
-          Sugars
-          <p item-content>{{ recipe.nutrition.sugars?.value }} {{ recipe.nutrition.sugars?.unit }}</p>
+          Sugar
+          <p item-content>{{ recipe.nutrition.sugar?.value }} {{ recipe.nutrition.sugar?.unit }}</p>
         </ion-item>
       </ion-item-group>
     </div>

@@ -20,7 +20,6 @@ export class ActivityPlanPage {
   public activityPlan: ActivityPlan;
   public activityPlanDetails: string = 'physical';
   public leftEnergy: number = 0;
-  public steps: number = 0;
   constructor(
     private _activitySvc: ActivityService,
     private _alertCtrl: AlertController,

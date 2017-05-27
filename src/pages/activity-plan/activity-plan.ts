@@ -56,6 +56,11 @@ export class ActivityPlanPage {
       this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn([...this.activityPlan.intellectualActivities, ...this.activityPlan.physicalActivities]);
 
       this.activityPlan.warnings = _.compact([this._activitySvc.checkActivity(activity)]);
+      if (!this.activityPlan.warnings.length) {
+        this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy performed activity!', 'Well done!');
+      } else {
+        this._alertSvc.showAlert('Please check the warnings', 'Something is wrong with this activity', 'Oh oh...');
+      }
       this._activitySvc.updateUserRequirements(this.activityPlan.totalEnergyBurn);
       this._activitySvc.getLeftEnergy().then((energy: number) => this.leftEnergy = energy);
 
@@ -91,6 +96,11 @@ export class ActivityPlanPage {
             }
             this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn([...this.activityPlan.intellectualActivities, ...this.activityPlan.physicalActivities]);
             this.activityPlan.warnings = _.compact([this._activitySvc.checkActivity(activity)]);
+            if (!this.activityPlan.warnings.length) {
+              this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy performed activity!', 'Well done!');
+            } else {
+              this._alertSvc.showAlert('Please check the warnings', 'Something is wrong with this activity', 'Oh oh...');
+            }
             this._detectorRef.detectChanges();
           }
         }

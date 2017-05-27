@@ -98,6 +98,18 @@ export class ActivityService {
         "Keep in mind that your activities are impactless if they don't raise your heart rate in the aerobic zone"
       )
     }
+
+    /**
+     * In a study, students who did more hours of homework experienced greater behavioral engagement in school but also more academic stress,
+     * physical health problems, and lack of balance in their lives
+     * http://www.tandfonline.com/doi/abs/10.1080/00220973.2012.745469
+     */
+    if (activity.duration >= 240 && activity.type === 'Intellectual') {
+      return new WarningMessage(
+        'Too much intellectual activity',
+        'Studying for too long is not beneficial for your nervous system and not productive. Try to study less time, but more intense during your productive hours of the day.'
+      )
+    }
   }
 
   /**

@@ -56,8 +56,9 @@ export class FitnessPage {
     this.idealWeight = this._fitSvc.getIdealWeight(this.profile.gender, this.profile.height, this.profile.weight);
     this.profile.heartRate.max = this._fitSvc.getHeartRateMax(this.profile.age);
     this._fitSvc.restoreEnergyConsumption().then((energyConsumption: number) => {
-      this.profile.requirements = this._nutritionSvc.getDri(this.profile.age, energyConsumption, this.profile.gender, this.profile.height, this.profile.lactating, this.profile.pregnant, this.profile.weight);
+      this.profile.requirements = this._nutritionSvc.getDri(this.profile.age, energyConsumption === 0 ? this.profile.bmr : energyConsumption, this.profile.gender, this.profile.height, this.profile.lactating, this.profile.pregnant, this.profile.weight);
       this._fitSvc.saveProfile(this.profile);
+      this._detectorRef.detectChanges();
     });
 
     if (!!this._params.get('new')) {

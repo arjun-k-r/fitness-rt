@@ -61,7 +61,7 @@ export class MealDetailsPage {
         console.log('My new foods: ', this.meal.mealItems);
         // Update the meal details
         this._updateMealDetails();
-        this._detectorRef.detectChanges();
+        this._detectorRef.markForCheck();
       }
     })
   }

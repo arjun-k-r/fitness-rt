@@ -1,6 +1,9 @@
 // App
 import { Injectable } from '@angular/core';
 
+// Third-party
+import * as _ from 'lodash';
+
 // Models
 import { Food, Meal, Nutrition, NutrientDeficiencies, NutrientExcesses, Recipe, WarningMessage } from '../models';
 
@@ -10,12 +13,126 @@ import { FitnessService } from './fitness.service';
 
 @Injectable()
 export class NutritionService {
-  private _nutritionRequirements: Nutrition;
   constructor(
     private _driSvc: DRIService,
     private _fitSvc: FitnessService
-  ) {
-    this._nutritionRequirements = _fitSvc.getUserRequirements();
+  ) { }
+
+  /**
+  * Verifies if there is an excess of sugar
+  * @param {Nutrition} nutrition - The nutrition to check
+  * @param {Nutrition} requirements - The user's nutrition requirements
+  * @returns {WarningMessage} Returns warning if there is too much sugar
+  */
+  private _checkAlcohol(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
+    return nutrition.alcohol.value > requirements.alcohol.value ? new WarningMessage(
+      'Too much alcohol',
+      `Your daily requirements are ${Math.round(requirements.alcohol.value)}g of alcohol`
+    ) : null;
+  }
+
+  /**
+   * Verifies if there is an excess of sugar
+   * @param {Nutrition} nutrition - The nutrition to check
+   * @param {Nutrition} requirements - The user's nutrition requirements
+   * @returns {WarningMessage} Returns warning if there is too much sugar
+   */
+  private _checkCaffeine(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
+    return nutrition.caffeine.value > requirements.caffeine.value ? new WarningMessage(
+      'Too much caffeine',
+      `Your daily requirements are ${Math.round(requirements.caffeine.value)}mg of caffeine`
+    ) : null;
+  }
+
+  /**
+   * Verifies if there is an excess of carbohydrates
+   * @param {Nutrition} nutrition - The nutrition to check
+   * @param {Nutrition} requirements - The user's nutrition requirements
+   * @returns {WarningMessage} Returns warning if there is too much carbohydrate
+   */
+  private _checkCarbs(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
+    return nutrition.carbs.value > requirements.carbs.value ? new WarningMessage(
+      'Too much carbohydrates',
+      `Your daily requirements are ${Math.round(requirements.carbs.value)}g of carbohydrates`
+    ) : null;
+  }
+
+  /**
+   * Verifies if there is an excess of energy
+   * @param {Nutrition} nutrition - The nutrition to check
+   * @param {Nutrition} requirements - The user's nutrition requirements
+   * @returns {WarningMessage} Returns warning if there is too much energy
+   */
+  private _checkEnergy(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
+    return nutrition.energy.value > requirements.energy.value ? new WarningMessage(
+      'Too much energy',
+      `Your daily requirements are ${Math.round(requirements.energy.value)}kcal`
+    ) : null;
+  }
+
+  /**
+   * Verifies if there is an excess of fats
+   * @param {Nutrition} nutrition - The nutrition to check
+   * @param {Nutrition} requirements - The user's nutrition requirements
+   * @returns {WarningMessage} Returns warning if there is too much fat
+   */
+  private _checkFats(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
+    return nutrition.fats.value > requirements.fats.value ? new WarningMessage(
+      'Too much fat',
+      `Your daily requirements are ${Math.round(requirements.fats.value)}g of fat`
+    ) : null;
+  }
+
+  /**
+ * Verifies if there is an excess of protein
+ * @param {Nutrition} nutrition - The nutrition to check
+ * @param {Nutrition} requirements - The user's nutrition requirements
+ * @returns {WarningMessage} Returns warning if there is too much protein
+ */
+  private _checkProtein(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
+    return nutrition.protein.value > requirements.protein.value ? new WarningMessage(
+      'Too much protein',
+      `Your daily requirements are ${Math.round(requirements.protein.value)}g of protein`
+    ) : null;
+  }
+
+  /**
+   * Verifies if there is an excess of sugar
+   * @param {Nutrition} nutrition - The nutrition to check
+   * @param {Nutrition} requirements - The user's nutrition requirements
+   * @returns {WarningMessage} Returns warning if there is too much sugar
+   */
+  private _checkSodium(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
+    return nutrition.sodium.value > requirements.sodium.value ? new WarningMessage(
+      'Too much sodium',
+      `Your daily requirements are ${Math.round(requirements.sodium.value)}mg of sodium`
+    ) : null;
+  }
+
+  /**
+ * Verifies if there is an excess of sugar
+ * @param {Nutrition} nutrition - The nutrition to check
+ * @param {Nutrition} requirements - The user's nutrition requirements
+ * @returns {WarningMessage} Returns warning if there is too much sugar
+ */
+  private _checkSugar(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
+    return nutrition.sugar.value > requirements.sugar.value ? new WarningMessage(
+      'Too much sugar',
+      `Your daily requirements are ${Math.round(requirements.sugar.value)}g of sugar`
+    ) : null;
+  }
+
+  /**
+   * Verifies if there is an excess of sugar
+   * @param {Nutrition} nutrition - The nutrition to check
+   * @param {Nutrition} requirements - The user's nutrition requirements
+   * @returns {WarningMessage} Returns warning if there is too much sugar
+   */
+  private _checkTransFat(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
+    return nutrition.transFat.value > requirements.transFat.value ? new WarningMessage(
+      'Too much trans fat',
+      `Your daily requirements are ${requirements.transFat.value}g of trans fat`
+    ) : null;
   }
 
   /**
@@ -27,112 +144,30 @@ export class NutritionService {
     return items.reduce((acc: number, item: Food) => acc + (item.quantity * item.servings), 0);
   }
 
-  /**
-  * Verifies if there is an excess of sugar
+ /**
+  * Verifies if there are any nutritional excesses
   * @param {Nutrition} nutrition - The nutrition to check
-  * @returns {WarningMessage} Returns warning if there is too much sugar
+  * @returns {Array} Returns an array of warning messages, if there are
   */
-  public checkAlcohol(nutrition: Nutrition): WarningMessage {
-    return nutrition.alcohol.value > this._nutritionRequirements.alcohol.value ? new WarningMessage(
-      'Too much alcohol',
-      `Your daily requirements are ${Math.round(this._nutritionRequirements.alcohol.value)}g of alcohol`
-    ) : null;
-  }
+  public checkNutrition(nutrition: Nutrition): Array<WarningMessage> {
+    let requirements: Nutrition = this._fitSvc.getUserRequirements(),
+    warnings: Array<WarningMessage> = _.compact([
+      this._checkAlcohol(nutrition, requirements),
+      this._checkCaffeine(nutrition, requirements),
+      this._checkCarbs(nutrition, requirements),
+      this._checkEnergy(nutrition, requirements),
+      this._checkFats(nutrition, requirements),
+      this._checkProtein(nutrition, requirements),
+      this._checkSodium(nutrition, requirements),
+      this._checkSugar(nutrition, requirements),
+      this._checkTransFat(nutrition, requirements)
+    ]);
 
-  /**
-   * Verifies if there is an excess of sugar
-   * @param {Nutrition} nutrition - The nutrition to check
-   * @returns {WarningMessage} Returns warning if there is too much sugar
-   */
-  public checkCaffeine(nutrition: Nutrition): WarningMessage {
-    return nutrition.caffeine.value > this._nutritionRequirements.caffeine.value ? new WarningMessage(
-      'Too much caffeine',
-      `Your daily requirements are ${Math.round(this._nutritionRequirements.caffeine.value)}mg of caffeine`
-    ) : null;
-  }
+    if (!warnings.length) {
+      return null;
+    }
 
-  /**
-   * Verifies if there is an excess of carbohydrates
-   * @param {Nutrition} nutrition - The nutrition to check
-   * @returns {WarningMessage} Returns warning if there is too much carbohydrate
-   */
-  public checkCarbs(nutrition: Nutrition): WarningMessage {
-    return nutrition.carbs.value > this._nutritionRequirements.carbs.value ? new WarningMessage(
-      'Too much carbohydrates',
-      `Your daily requirements are ${Math.round(this._nutritionRequirements.carbs.value)}g of carbohydrates`
-    ) : null;
-  }
-
-  /**
-   * Verifies if there is an excess of energy
-   * @param {Nutrition} nutrition - The nutrition to check
-   * @returns {WarningMessage} Returns warning if there is too much energy
-   */
-  public checkEnergy(nutrition: Nutrition): WarningMessage {
-    return nutrition.energy.value > this._nutritionRequirements.energy.value ? new WarningMessage(
-      'Too much energy',
-      `Your daily requirements are ${Math.round(this._nutritionRequirements.energy.value)}kcal`
-    ) : null;
-  }
-
-  /**
-   * Verifies if there is an excess of fats
-   * @param {Nutrition} nutrition - The nutrition to check
-   * @returns {WarningMessage} Returns warning if there is too much fat
-   */
-  public checkFats(nutrition: Nutrition): WarningMessage {
-    return nutrition.fats.value > this._nutritionRequirements.fats.value ? new WarningMessage(
-      'Too much fat',
-      `Your daily requirements are ${Math.round(this._nutritionRequirements.fats.value)}g of fat`
-    ) : null;
-  }
-
-  /**
- * Verifies if there is an excess of protein
- * @param {Nutrition} nutrition - The nutrition to check
- * @returns {WarningMessage} Returns warning if there is too much protein
- */
-  public checkProtein(nutrition: Nutrition): WarningMessage {
-    return nutrition.protein.value > this._nutritionRequirements.protein.value ? new WarningMessage(
-      'Too much protein',
-      `Your daily requirements are ${Math.round(this._nutritionRequirements.protein.value)}g of protein`
-    ) : null;
-  }
-
-  /**
-   * Verifies if there is an excess of sugar
-   * @param {Nutrition} nutrition - The nutrition to check
-   * @returns {WarningMessage} Returns warning if there is too much sugar
-   */
-  public checkSodium(nutrition: Nutrition): WarningMessage {
-    return nutrition.sodium.value > this._nutritionRequirements.sodium.value ? new WarningMessage(
-      'Too much sodium',
-      `Your daily requirements are ${Math.round(this._nutritionRequirements.sodium.value)}mg of sodium`
-    ) : null;
-  }
-
-  /**
- * Verifies if there is an excess of sugar
- * @param {Nutrition} nutrition - The nutrition to check
- * @returns {WarningMessage} Returns warning if there is too much sugar
- */
-  public checkSugar(nutrition: Nutrition): WarningMessage {
-    return nutrition.sugar.value > this._nutritionRequirements.sugar.value ? new WarningMessage(
-      'Too much sugar',
-      `Your daily requirements are ${Math.round(this._nutritionRequirements.sugar.value)}g of sugar`
-    ) : null;
-  }
-
-  /**
-   * Verifies if there is an excess of sugar
-   * @param {Nutrition} nutrition - The nutrition to check
-   * @returns {WarningMessage} Returns warning if there is too much sugar
-   */
-  public checkTransFat(nutrition: Nutrition): WarningMessage {
-    return nutrition.transFat.value > this._nutritionRequirements.transFat.value ? new WarningMessage(
-      'Too much trans fat',
-      `Your daily requirements are ${this._nutritionRequirements.transFat.value}g of trans fat`
-    ) : null;
+    return warnings;
   }
 
   public getDri(age: number, energyConsumption: number, gender: string, height: number, lactating: boolean, pregnant: boolean, weight: number): Nutrition {

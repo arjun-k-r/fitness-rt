@@ -2,6 +2,9 @@
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { Alert, AlertController, Loading, LoadingController, Modal, ModalController, NavController } from 'ionic-angular';
 
+// Third-party
+import * as _ from 'lodash';
+
 // Models
 import { Activity, ActivityPlan, WarningMessage } from '../../models';
 
@@ -52,6 +55,7 @@ export class ActivityPlanPage {
 
       this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn([...this.activityPlan.intellectualActivities, ...this.activityPlan.physicalActivities]);
 
+      this.activityPlan.warnings = _.compact([this._activitySvc.checkActivity(activity)]);
       this._activitySvc.updateUserRequirements(this.activityPlan.totalEnergyBurn);
       this._activitySvc.getLeftEnergy().then((energy: number) => this.leftEnergy = energy);
 
@@ -86,6 +90,7 @@ export class ActivityPlanPage {
               this.activityPlan.intellectualEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.intellectualActivities);
             }
             this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn([...this.activityPlan.intellectualActivities, ...this.activityPlan.physicalActivities]);
+            this.activityPlan.warnings = _.compact([this._activitySvc.checkActivity(activity)]);
             this._detectorRef.detectChanges();
           }
         }

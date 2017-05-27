@@ -8,6 +8,7 @@ import 'rxjs/operator/map';
 // Third-party
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import * as moment from 'moment';
+import * as _ from 'lodash';
 
 // Models
 import { SleepHabit, SleepPlan, WarningMessage } from '../models';
@@ -26,14 +27,14 @@ export class SleepService {
 
   /**
    * Verifies if the bedtime of a sleeping habit is healthy
-   * @desc We need to go to bed before 10:00 pm for a refreshing, healthy, good night sleep. Between 10:00 pm and 02:00 is the time of vata during which there is an abundance of hormone secretion from the adrenal glands, including stress hormones which keep us alert
+   * @desc It is important to go to sleep by 10 p.m. every night. Why? This is because our adrenal glands kick in for a "second wind" to keep us going from 11 pm to 1 am. This puts tremendous stress on the adrenals. When we rest early, our adrenals are rested. Between 10 p.m. and 1 a.m., our adrenals work the hardest to repair the body. We should also try to sleep in until 8:30 a.m. or 9: 00 a.m. if possible. This is because our cortisol level rises to its peak from 6:00 a.m. to 8:00 a.m. to wake us up and get us going for the day. (https://www.drlam.com/articles/adrenal_fatigue.asp)
    * @param {SleepHabit} sleep - The sleep habit to check
    * @returns {WarningMessage} Returns a warning if something is wrong
    */
   private _checkBedtime(sleep: SleepHabit): WarningMessage {
     return moment(sleep.bedTime, 'hours').hours() > 22 ? new WarningMessage(
       'You need to go to bed before 10:00 pm',
-      'Between 10:00 pm and 02:00 am, is time of vata energy. This causes the adrenal glands to secrete hormones, including stress hormones that keep us alert'
+      'Our adrenal glands kick in for a "second wind" to keep us going from 11 pm to 1 am. This puts tremendous stress on the adrenals. When we rest early, our adrenals are rested. Between 10 p.m. and 1 a.m., our adrenals work the hardest to repair the body.'
     ) : null;
   }
 
@@ -108,34 +109,15 @@ export class SleepService {
    * @returns {Promise} Returns confirmation if the sleep is healthy or not
    */
   private _checkSleep(sleepPlan: SleepPlan): void {
-    let currentSleep: SleepHabit = sleepPlan.sleepPattern[0],
-      sleepBedtimeWarning: WarningMessage = this._checkBedtime(currentSleep),
-      sleepDurationWarning: WarningMessage = this._checkDuration(currentSleep),
-      sleepElectronicsWarning: WarningMessage = this._checkElectronics(currentSleep),
-      sleepOscillationWarning: WarningMessage = this._checkOscillation(sleepPlan),
-      sleepStimulantsWarning: WarningMessage = this._checkStimulants(currentSleep);
+    let currentSleep: SleepHabit = sleepPlan.sleepPattern[0];
+    currentSleep.warnings = _.compact([this._checkBedtime(currentSleep),
+    this._checkDuration(currentSleep),
+    this._checkElectronics(currentSleep),
+    this._checkOscillation(sleepPlan),
+    this._checkStimulants(currentSleep)
+    ]);
 
-    if (!!sleepBedtimeWarning) {
-      currentSleep.warnings.push(sleepBedtimeWarning);
-    }
-
-    if (!!sleepDurationWarning) {
-      currentSleep.warnings.push(sleepDurationWarning);
-    }
-
-    if (!!sleepElectronicsWarning) {
-      currentSleep.warnings.push(sleepElectronicsWarning);
-    }
-
-    if (!!sleepOscillationWarning) {
-      currentSleep.warnings.push(sleepOscillationWarning);
-    }
-
-    if (!!sleepStimulantsWarning) {
-      currentSleep.warnings.push(sleepStimulantsWarning);
-    }
-
-    sleepPlan.imbalancedSleep = (!!sleepBedtimeWarning && !!sleepDurationWarning && !!sleepOscillationWarning) ? true : false;
+    sleepPlan.imbalancedSleep = currentSleep.warnings.length > 2;
 
     sleepPlan.sleepPattern[0] = currentSleep;
   }

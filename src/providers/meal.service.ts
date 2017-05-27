@@ -174,19 +174,11 @@ export class MealService {
   */
   public checkMeal(meal: Meal): void {
     meal.warnings = _.compact([
-      this._nutritionSvc.checkAlcohol(meal.nutrition),
-      this._nutritionSvc.checkCaffeine(meal.nutrition),
-      this._nutritionSvc.checkCarbs(meal.nutrition),
+      this._nutritionSvc.checkNutrition(meal.nutrition),
       this._checkMealComplexity(meal.mealItems),
-      this._nutritionSvc.checkEnergy(meal.nutrition),
-      this._nutritionSvc.checkFats(meal.nutrition),
       this._checkMealPral(meal.pral),
-      this._nutritionSvc.checkProtein(meal.nutrition),
       ...this._checkMealServing(meal),
-      this._checkMealSize(meal.quantity),
-      this._nutritionSvc.checkSodium(meal.nutrition),
-      this._nutritionSvc.checkSugar(meal.nutrition),
-      this._nutritionSvc.checkTransFat(meal.nutrition)
+      this._checkMealSize(meal.quantity)
     ]);
   }
 

@@ -1,7 +1,7 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Loading, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, Loading, LoadingController, NavController } from 'ionic-angular';
 import { Auth, IDetailedError, User, UserDetails } from '@ionic/cloud-angular';
 
 // Pages
@@ -9,7 +9,7 @@ import { LoginPage } from '../login/login';
 import { FitnessPage } from '../fitness/fitness';
 
 // Providers
-import { AlertService, AuthValidator } from '../../providers';
+import { AuthValidator } from '../../providers';
 
 @Component({
   selector: 'page-registration',
@@ -25,7 +25,7 @@ export class RegistrationPage {
   public passwordConfirm: AbstractControl;
   public registerForm: FormGroup;
   constructor(
-    private _alertSvc: AlertService,
+    private _alertCtrl: AlertController,
     private _auth: Auth,
     private _detectorRef: ChangeDetectorRef,
     private _fb: FormBuilder,
@@ -92,14 +92,24 @@ export class RegistrationPage {
           .catch((err: IDetailedError<Array<string>>) => {
             loader.dismiss();
             for (let e of err.details) {
-              this._alertSvc.showAlert(AuthValidator.getErrorMessage(e, err));
+              this._alertCtrl.create({
+                title: 'Uhh ohh...',
+                subTitle: 'Something went wrong',
+                message: AuthValidator.getErrorMessage(e, err),
+                buttons: ['OK']
+              }).present();
             }
           });
       })
       .catch((err: IDetailedError<Array<string>>) => {
         loader.dismiss();
         for (let e of err.details) {
-          this._alertSvc.showAlert(AuthValidator.getErrorMessage(e, err));
+          this._alertCtrl.create({
+            title: 'Uhh ohh...',
+            subTitle: 'Something went wrong',
+            message: AuthValidator.getErrorMessage(e, err),
+            buttons: ['OK']
+          }).present();
         }
       });
   }
@@ -110,8 +120,7 @@ export class RegistrationPage {
     }
   }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
     this._detectorRef.detach();
   }
 

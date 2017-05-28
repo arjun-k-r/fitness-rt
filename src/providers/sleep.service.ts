@@ -29,49 +29,29 @@ export class SleepService {
    * Verifies if the bedtime of a sleeping habit is healthy
    * @desc It is important to go to sleep by 10 p.m. every night. Why? This is because our adrenal glands kick in for a "second wind" to keep us going from 11 pm to 1 am. This puts tremendous stress on the adrenals. When we rest early, our adrenals are rested. Between 10 p.m. and 1 a.m., our adrenals work the hardest to repair the body. We should also try to sleep in until 8:30 a.m. or 9: 00 a.m. if possible. This is because our cortisol level rises to its peak from 6:00 a.m. to 8:00 a.m. to wake us up and get us going for the day. (https://www.drlam.com/articles/adrenal_fatigue.asp)
    * @param {SleepHabit} sleep - The sleep habit to check
-   * @returns {WarningMessage} Returns a warning if something is wrong
+   * @returns {boolean} Returns false if the bedtime is after 10:00 p.m.
    */
-  private _checkBedtime(sleep: SleepHabit): WarningMessage {
-    return moment(sleep.bedTime, 'hours').hours() > 22 ? new WarningMessage(
-      'You need to go to bed before 10:00 pm',
-      'Our adrenal glands kick in for a "second wind" to keep us going from 11 pm to 1 am. This puts tremendous stress on the adrenals. When we rest early, our adrenals are rested. Between 10 p.m. and 1 a.m., our adrenals work the hardest to repair the body.'
-    ) : null;
+  private _checkBedtime(sleep: SleepHabit): boolean {
+    return moment(sleep.bedTime, 'hours').hours() < 22;
   }
 
   /**
    * Verifies if the sleep was long enough
-   * @desc We need to catch 4-5 complete 90-minute REM sleep cycles (07:30 hours).
+   * @desc We need to catch 4-5 complete 90-minute REM sleep cycles (6-7.5 hours).
    * @param {SleepHabit} sleep - The sleep habit to check
-   * @returns {WarningMessage} Returns a warning if something is wrong
+   * @returns {boolean} Returns false if the sleep is less than 6 hours
    */
-  private _checkDuration(sleep: SleepHabit): WarningMessage {
-    sleep.duration = moment(sleep.wakeUpTime, 'hours').subtract(moment(sleep.bedTime, 'hours').hours(), 'hours').hours();
-    return sleep.duration < 6 ? new WarningMessage(
-      'We need at least 6 hours of sleep every night',
-      'There are two tyes of sleep: REM (rapid eye movement or deep sleep) and non-REM (light sleep). The transition between these two types of sleep is a 90-minute cycle. We need to wake up during one of these transitions in order to feel refreshed and energized, more precisely after 4-5 complete cycles (07:30 hours).'
-    ) : null;
-  }
-
-  /**
-   * Verifies if there were any electronics (blue light exposure) used before bedtime
-   * @desc Electornics emit blue light, which is preceived as sunlight by the body and disrupts the circadian rhythm (internal clock)
-   * @param {SleepHabit} sleep - The sleep habit to check
-   * @returns {WarningMessage} Returns a warning if something is wrong
-   */
-  private _checkElectronics(sleep: SleepHabit): WarningMessage {
-    return !sleep.noElectronics ? new WarningMessage(
-      'No electronics 1 hours before bed',
-      'Electornics emit blue light, which is preceived as sunlight by the body and disrupts the circadian rhythm (internal clock). This will keep you from falling asleep and your sleep will be unrefreshing.'
-    ) : null;
+  private _checkDuration(sleep: SleepHabit): boolean {
+    return moment(sleep.wakeUpTime, 'hours').subtract(moment(sleep.bedTime, 'hours').hours(), 'hours').hours() > 6;
   }
 
   /**
    * Verifies if there were any electronics (blue light exposure) used before bedtime
    * @desc Electornics emit blue light, which is preceived as sunlight by the body and disrupts the circadian rhythm (internal clock)
    * @param {SleepPlan} sleepPlan - The sleep plan to check
-   * @returns {WarningMessage} Returns a warning if something is wrong
+   * @returns {boolean} Returns false if the sleep is irregular
    */
-  private _checkOscillation(sleepPlan: SleepPlan): WarningMessage {
+  private _checkOscillation(sleepPlan: SleepPlan): boolean {
     let currDayBedtime: number = moment(sleepPlan.sleepPattern[0].bedTime, 'hours').hours(),
       prevBedtime: number,
       prevDaySleep: SleepHabit;
@@ -84,42 +64,16 @@ export class SleepService {
       }
     }, 0);
 
-    return (sleepPlan.sleepOscillation > 1 || sleepPlan.sleepOscillation < -1) ? new WarningMessage(
-      'You need to respect your sleep routine',
-      "Going to bed and waking up at the same hour every day teaches your bed to set up its circadian rhythm (internal clock). All metabolic processes function according to the body's internal clock."
-    ) : null;
-  }
-
-  /**
-   * Verifies if there were stimulants consumed before bed
-   * @desc Stimulants (e.g. coffee, black tea, green tea, alcohol, tobacco etc.), as their name suggests, stimulate blood flow throughout the body and keep you alert both mentally and physically.
-   * @param {SleepHabit} sleep - The sleep habit to check
-   * @returns {WarningMessage} Returns a warning if something is wrong
-   */
-  private _checkStimulants(sleep: SleepHabit): WarningMessage {
-    return !sleep.noStimulants ? new WarningMessage(
-      'You need to avoid stimulants at least 6 hours before bed',
-      'Stimulants (e.g. coffee, black tea, green tea, alcohol, tobacco etc.), as their name suggests, stimulate blood flow throughout the body and keep you alert both mentally and physically.'
-    ) : null;
+    return (sleepPlan.sleepOscillation <= 1 || sleepPlan.sleepOscillation >= -1);
   }
 
   /**
    * Verifies if the sleep plan is healthy
    * @param {SleepPlan} sleepPlan - The sleep plan to verify
-   * @returns {Promise} Returns confirmation if the sleep is healthy or not
+   * @returns {boolean} Returns false if the sleep is imbalanced
    */
-  private _checkSleep(sleepPlan: SleepPlan): void {
-    let currentSleep: SleepHabit = sleepPlan.sleepPattern[0];
-    currentSleep.warnings = _.compact([this._checkBedtime(currentSleep),
-    this._checkDuration(currentSleep),
-    this._checkElectronics(currentSleep),
-    this._checkOscillation(sleepPlan),
-    this._checkStimulants(currentSleep)
-    ]);
-
-    sleepPlan.imbalancedSleep = currentSleep.warnings.length > 2;
-
-    sleepPlan.sleepPattern[0] = currentSleep;
+  private _checkSleep(sleepPlan: SleepPlan): boolean {
+    return  this._checkBedtime(sleepPlan.sleepPattern[0]) && this._checkDuration(sleepPlan.sleepPattern[0]) && this._checkOscillation(sleepPlan);
   }
 
   /**
@@ -176,11 +130,11 @@ export class SleepService {
   }
 
   public saveSleep(sleepPlan: SleepPlan, sleepHabit: SleepHabit): void {
-    sleepPlan.sleepPattern[0] = sleepHabit;
+    sleepPlan.sleepPattern[0] = Object.assign({}, sleepHabit);
     console.log('Saving sleep plan: ', sleepPlan);
 
-    this._checkSleep(sleepPlan);
-    sleepHabit = sleepPlan.sleepPattern[0];
+    sleepPlan.imbalancedSleep = !this._checkSleep(sleepPlan);
+
     this._sleepPlan.update({
       daysOfImbalance: sleepPlan.daysOfImbalance,
       imbalancedSleep: sleepPlan.imbalancedSleep,

@@ -1,11 +1,11 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { Auth } from '@ionic/cloud-angular';
 
 // Providers
-import { AlertService, AuthValidator } from '../../providers';
+import { AuthValidator } from '../../providers';
 
 @Component({
   selector: 'page-password-reset',
@@ -18,7 +18,7 @@ export class PasswordResetPage {
   public passwordResetForm: FormGroup;
   public resetCode: AbstractControl;
   constructor(
-    private _alertSvc: AlertService,
+    private _alertCtrl: AlertController,
     private _auth: Auth,
     private _detectorRef: ChangeDetectorRef,
     private _fb: FormBuilder,
@@ -55,17 +55,21 @@ export class PasswordResetPage {
     });
 
     loader.present();
-    
+
     this._auth.confirmPasswordReset(form.resetCode, form.password)
       .then(() => {
         loader.dismiss();
         this._navCtrl.popToRoot();
       })
-      .catch((err: Error) => this._alertSvc.showAlert(err.toString()));
+      .catch((err: Error) => this._alertCtrl.create({
+        title: 'Uhh ohh...',
+        subTitle: 'Something went wrong',
+        message: err.toString(),
+        buttons: ['OK']
+      }).present());
   }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
     this._detectorRef.detach();
   }
 

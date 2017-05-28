@@ -74,7 +74,6 @@ import { CapitalizePipe, GroupPipe, ItemsFilterPipe, SearchPipe } from '../pipes
 // Providers
 import {
   ActivityService,
-  AlertService,
   AuthValidator,
   DRIService,
   FitnessService,
@@ -154,7 +153,6 @@ import {
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ActivityService,
-    AlertService,
     AuthValidator,
     DRIService,
     FitnessService,

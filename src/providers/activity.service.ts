@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { Subject } from 'rxjs/Subject';
 import { User } from '@ionic/cloud-angular';
 
 // Third-party
@@ -9,7 +8,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import * as moment from 'moment';
 
 // Models
-import { Activity, ActivityPlan, UserProfile, WarningMessage } from '../models';
+import { Activity, ActivityPlan, Fitness, WarningMessage } from '../models';
 
 // Providers
 import { FitnessService } from './fitness.service';
@@ -21,7 +20,6 @@ const CURRENT_DAY: number = moment().dayOfYear();
 @Injectable()
 export class ActivityService {
   private _activities: FirebaseListObservable<Array<Activity>>;
-  private _activityLimitSubject: Subject<number> = new Subject();
   private _currentActivityPlan: FirebaseObjectObservable<ActivityPlan>;
   private _lastActivityPlan: FirebaseObjectObservable<ActivityPlan>;
   private _userWeight: number;
@@ -34,15 +32,13 @@ export class ActivityService {
   ) {
     this._activities = _db.list('/activities', {
       query: {
-        //limitToFirst: this._activityLimitSubject,
         orderByChild: 'name'
       }
     });
 
     this._currentActivityPlan = _db.object(`/activity-plans/${_user.id}/${CURRENT_DAY}`);
     this._lastActivityPlan = _db.object(`/activity-plans/${_user.id}/${CURRENT_DAY - 1}`);
-
-    this._userWeight = _fitSvc.getUserWeight();
+    this._userWeight = Object.assign({}, _fitSvc.getUserWeight());
   }
 
   /**
@@ -70,49 +66,6 @@ export class ActivityService {
   }
 
   /**
-   * Changes the database query limit of activities
-   * @param {number} limit - The maximum limit
-   * @returns {void}
-   */
-  public changeActivityQueryLimit(limit: number): void {
-    this._activityLimitSubject.next(limit);
-  }
-
-  /**
-   * Checks if the activity is performed properly
-   * @description We must exercise smart
-   * @param {Activity} activity - The activity to check
-   * @returns {WarningMessage} Returns warning if something is wrong
-   */
-  public checkActivity(activity: Activity): WarningMessage {
-    if (activity.met >= 8 && activity.duration > 45) {
-      return new WarningMessage(
-        'Too much intense exercise at once',
-        'Long sessions of intense exercise damage the heart over time. Keep intense exercise to less than 45 minute per day.'
-      )
-    }
-
-    if (activity.met < 4 && activity.type === 'Physical') {
-      return new WarningMessage(
-        'You need to reach your target heart rate',
-        "Keep in mind that your activities are impactless if they don't raise your heart rate in the aerobic zone"
-      )
-    }
-
-    /**
-     * In a study, students who did more hours of homework experienced greater behavioral engagement in school but also more academic stress,
-     * physical health problems, and lack of balance in their lives
-     * http://www.tandfonline.com/doi/abs/10.1080/00220973.2012.745469
-     */
-    if (activity.duration >= 240 && activity.type === 'Intellectual') {
-      return new WarningMessage(
-        'Too much intellectual activity',
-        'Studying for too long is not beneficial for your nervous system and not productive. Try to study less time, but more intense during your productive hours of the day.'
-      )
-    }
-  }
-
-  /**
    * Queries the activities
    * @returns {FirebaseListObservable} Returns observable of activities
    */
@@ -132,7 +85,8 @@ export class ActivityService {
   /**
    * Calculates the kilocalories burned during a performed energy
    * @description The formula was developed by Dr. Gily Ionesc
-   * @param {Activity} activity - 
+   * @param {Activity} activity - The activity to use
+   * @returns {number} Returns energy burn in kilocalories
    */
   public getActivityEnergyBurn(activity: Activity): number {
     return Math.round((activity.met * 3.5 * this._userWeight / 200) * activity.duration);
@@ -212,8 +166,7 @@ export class ActivityService {
       physicalEffort: activityPlan.physicalEffort,
       physicalInactivity: activityPlan.physicalInactivity,
       physicalOverwork: activityPlan.physicalOverwork,
-      totalEnergyBurn: activityPlan.totalEnergyBurn,
-      warnings: activityPlan.warnings
+      totalEnergyBurn: activityPlan.totalEnergyBurn
     });
   }
 
@@ -223,10 +176,10 @@ export class ActivityService {
    * @returns {void}
    */
   public updateUserRequirements(energyConsumption: number): void {
-    let userProfile: UserProfile = this._fitSvc.getProfile();
-    this._fitSvc.storeEnergyConsumption(userProfile.bmr + energyConsumption);
-    userProfile.requirements = this._nutritionSvc.getDri(userProfile.age, userProfile.bmr + energyConsumption, userProfile.gender, userProfile.height, userProfile.lactating, userProfile.pregnant, userProfile.weight);
-    this._fitSvc.saveProfile(userProfile);
+    let userFitness: Fitness = this._fitSvc.getFitness();
+    this._fitSvc.storeEnergyConsumption(userFitness.bmr + energyConsumption);
+    userFitness.requirements = this._nutritionSvc.getDri(userFitness.age, userFitness.bmr + energyConsumption, userFitness.gender, userFitness.height, userFitness.lactating, userFitness.pregnant, userFitness.weight);
+    this._fitSvc.saveFitness(userFitness);
   }
 
 }

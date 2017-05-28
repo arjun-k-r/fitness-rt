@@ -1,7 +1,7 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingController, NavController } from 'ionic-angular';
+import { AlertController, LoadingController, NavController } from 'ionic-angular';
 import { Auth, IDetailedError, User, UserDetails } from '@ionic/cloud-angular';
 
 // Pages
@@ -9,7 +9,7 @@ import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 import { HomePage } from '../home/home';
 
 // Providers
-import { AlertService, AuthValidator } from '../../providers';
+import { AuthValidator } from '../../providers';
 
 @Component({
   selector: 'page-login',
@@ -22,7 +22,7 @@ export class LoginPage {
   public loginForm: FormGroup;
   public password: AbstractControl;
   constructor(
-    private _alertSvc: AlertService,
+    private _alertCtrl: AlertController,
     private _auth: Auth,
     private _detectorRef: ChangeDetectorRef,
     private _fb: FormBuilder,
@@ -69,13 +69,17 @@ export class LoginPage {
       .catch((err: IDetailedError<Array<string>>) => {
         loader.dismiss();
         for (let e of err.details) {
-          this._alertSvc.showAlert(AuthValidator.getErrorMessage(e, err));
+          this._alertCtrl.create({
+            title: 'Uhh ohh...',
+            subTitle: 'Something went wrong',
+            message: AuthValidator.getErrorMessage(e, err),
+            buttons: ['OK']
+          }).present();
         }
       });
   }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
     this._detectorRef.detach();
   }
 

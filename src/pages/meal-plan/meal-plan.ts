@@ -12,7 +12,7 @@ import { Meal, MealPlan } from '../../models';
 import { MealDetailsPage } from '../meal-details/meal-details';
 
 // Providers
-import { AlertService, FitnessService, MealService, NutritionService } from '../../providers';
+import { FitnessService, MealService, NutritionService } from '../../providers';
 
 @Component({
   selector: 'page-meal-plan',
@@ -27,7 +27,6 @@ export class MealPlanPage {
   public nourishingMeals$: FirebaseListObservable<Array<Meal>>;
   constructor(
     private _alertCtrl: AlertController,
-    private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _fitSvc: FitnessService,
     private _loadCtrl: LoadingController,
@@ -153,15 +152,6 @@ export class MealPlanPage {
             text: 'Done',
             handler: (data: Array<string>) => {
               console.log('My symptoms are: ', data);
-              if (data.length > signs.length / 4) {
-                if (imbalanceType === 'deficiency') {
-                  this._alertSvc.showAlert(`Try to to eat more ${imbalanceName} rich foods, okay?`, '', 'The time is now to make a change');
-                } else {
-                  this._alertSvc.showAlert(`Try to to limit your intake of ${imbalanceName}, okay?`, '', 'The time is now to make a change');
-                }
-              } else {
-                this._alertSvc.showAlert("Anyway, make sure to take care of your nutrition and don't abuse or neglect any nutrient, okay?", '', 'I am not perfect');
-              }
             }
           }
         ]
@@ -187,8 +177,7 @@ export class MealPlanPage {
     });
   }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
     this._detectorRef.detach();
   }
 }

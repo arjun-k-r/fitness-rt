@@ -79,8 +79,7 @@ export class ActivitySelectPage {
     this._detectorRef.detectChanges();
   }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
     this._detectorRef.detach();
   }
 }

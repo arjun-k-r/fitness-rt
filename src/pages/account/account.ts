@@ -7,7 +7,7 @@ import { Auth, User } from '@ionic/cloud-angular';
 import { RegistrationPage } from '../registration/registration';
 
 // Providers
-import { AlertService, PictureService } from '../../providers';
+import { PictureService } from '../../providers';
 
 @Component({
   selector: 'page-account',
@@ -20,7 +20,6 @@ export class AccountPage {
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
-    private _alertSvc: AlertService,
     private _auth: Auth,
     private _detectorRef: ChangeDetectorRef,
     private _loadCtrl: LoadingController,
@@ -82,7 +81,12 @@ export class AccountPage {
                 this.avatar = photoUri;
                 this.uploadReady = true;
                 this._detectorRef.detectChanges();
-              }).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
+              }).catch((err: Error) => this._alertCtrl.create({
+                title: 'Uhh ohh...',
+                subTitle: 'Something went wrong',
+                message: err.toString(),
+                buttons: ['OK']
+              }).present());
             }
           }, {
             text: 'Choose image',
@@ -91,7 +95,12 @@ export class AccountPage {
                 this.avatar = photoUri;
                 this.uploadReady = true;
                 this._detectorRef.detectChanges();
-              }).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
+              }).catch((err: Error) => this._alertCtrl.create({
+                title: 'Uhh ohh...',
+                subTitle: 'Something went wrong',
+                message: err.toString(),
+                buttons: ['OK']
+              }).present());
             }
           }, {
             text: 'Cancel',
@@ -132,7 +141,7 @@ export class AccountPage {
       if (typeof data === 'number') {
         toast.setMessage(`Uploading ... ${data}%`);
       } else {
-        this._user.details.image = data;
+        this._user.details = Object.assign({}, this._user.details, { image: data });
         this._user.save();
         this.avatar = data;
         this.uploadReady = false;
@@ -143,17 +152,20 @@ export class AccountPage {
     },
       () => {
         if (canceledUpload === true) {
-          this._alertSvc.showAlert('Your avatar upload has been canceled', '', 'Canceled!');
+          this._toastCtrl.create({
+            message: 'Upload canceled',
+            position: 'bottom',
+            showCloseButton: true,
+            closeButtonText: 'Cancel'
+          }).present();
         } else {
-          toast.dismissAll();
-          this._alertSvc.showAlert('Your avatar has been updated successfully', '', 'Success!');
-          this._detectorRef.detectChanges();
+          toast.setMessage('Upload complete');
         }
       });
   }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
+    
     this._detectorRef.detach();
   }
 

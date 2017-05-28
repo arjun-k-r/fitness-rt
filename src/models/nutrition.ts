@@ -14,9 +14,6 @@ export interface INutrientDetails {
     warnings: Array<string>;
 }
 
-/**
- * 
- */
 export class Nutrient {
     constructor(
         public id: number,
@@ -27,9 +24,6 @@ export class Nutrient {
     ) { }
 }
 
-/**
- * 
- */
 export class NutrientDeficiencies {
     constructor(
         public water: number = 0,
@@ -74,9 +68,6 @@ export class NutrientDeficiencies {
     ) {}
 }
 
-/**
- * 
- */
 export class NutrientExcesses {
     constructor(
         public alcohol: number = 0,
@@ -91,9 +82,6 @@ export class NutrientExcesses {
     ) {}
 }
 
-/**
- * 
- */
 export class Nutrition {
     constructor(
         public water: Nutrient = new Nutrient(255, 'Proximates', 'Water', 'g'),

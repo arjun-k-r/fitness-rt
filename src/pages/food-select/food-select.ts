@@ -10,7 +10,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
 import { Food, FoodGroup, IFoodSearchResult, Recipe } from '../../models';
 
 // Providers
-import { AlertService, FOOD_GROUPS, FoodService, RecipeService } from '../../providers';
+import { FOOD_GROUPS, FoodService, RecipeService } from '../../providers';
 
 @Component({
   selector: 'page-food-select',
@@ -34,7 +34,6 @@ export class FoodSelectPage {
   public start: number;
   constructor(
     private _alertCtrl: AlertController,
-    private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _foodSvc: FoodService,
     private _loadCtrl: LoadingController,
@@ -79,17 +78,19 @@ export class FoodSelectPage {
         .subscribe((data: Array<IFoodSearchResult>) => {
           this.foods.push(...data);
           this._detectorRef.detectChanges();
-        }, (err: { status: string, message: string }) => this._alertSvc.showAlert(err.message, `Error ${err.status}!`, 'Whoops... something went wrong'));
+        }, (err: { status: string, message: string }) => this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: `Error ${err.status}! ${err.message}`,
+          buttons: ['OK']
+        }).present());
       ev.complete();
     }, 500);
   }
 
   public loadMoreRecipes(ev: InfiniteScroll) {
     this.recipeLimit += 50;
-    setTimeout(() => {
-      ev.complete();
-      this._detectorRef.detectChanges();
-    }, 1000);
+    setTimeout(() => ev.complete(), 1000);
   }
 
   public refreshItems(): void {
@@ -116,14 +117,24 @@ export class FoodSelectPage {
         }, (err: { status: string, message: string }) => {
           doneLoading = true;
           loader.dismiss();
-          this._alertSvc.showAlert(err.message, `Error ${err.status}!`, 'Whoops... something went wrong');
+          this._alertCtrl.create({
+            title: 'Uhh ohh...',
+            subTitle: 'Something went wrong',
+            message: `Error ${err.status}! ${err.message}`,
+            buttons: ['OK']
+          }).present();
         });
 
       loader.onDidDismiss(() => {
         this._querying = false;
         if (!doneLoading) {
           this._foodSubscription.unsubscribe();
-          this._alertSvc.showAlert('Please try again in a few minutes', 'The food request failed', 'Whoops... something went wrong');
+          this._alertCtrl.create({
+            title: 'Uhh ohh...',
+            subTitle: 'Something went wrong',
+            message: 'The request has timed out. Try again in a few moments!',
+            buttons: ['OK']
+          }).present();
           this.doneSelecting();
         }
       });
@@ -156,9 +167,9 @@ export class FoodSelectPage {
         },
         {
           text: 'Done',
-          handler: (data: { servings: number}) => {
+          handler: (data: { servings: number }) => {
             this.selectedServings = data.servings;
-            this.selectedItem = item;
+            this.selectedItem = Object.assign({}, item);
           }
         }
       ]
@@ -195,8 +206,8 @@ export class FoodSelectPage {
     console.log('Entering...');
   }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
+    
     this._foodSubscription.unsubscribe();
     this._detectorRef.detach();
   }

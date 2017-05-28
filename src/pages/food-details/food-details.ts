@@ -1,12 +1,12 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
-import { Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
 
 // Models
 import { Food } from '../../models';
 
 // Providers
-import { AlertService, FoodService } from '../../providers';
+import { FoodService } from '../../providers';
 
 @Component({
   selector: 'page-food-details',
@@ -16,7 +16,7 @@ import { AlertService, FoodService } from '../../providers';
 export class FoodDetailsPage {
   public food: Food;
   constructor(
-    private _alertSvc: AlertService,
+    private _alertCtrl: AlertController,
     private _detectorRef: ChangeDetectorRef,
     private _foodSvc: FoodService,
     private _loadCtrl: LoadingController,
@@ -32,18 +32,22 @@ export class FoodDetailsPage {
 
     loader.present();
     this._foodSvc.getFoodReports$(this._params.get('id')).subscribe((data: Food) => {
-      this.food = data;
+      this.food = Object.assign({}, data);
       loader.dismiss();
-      this._detectorRef.detectChanges();
     }, (err: Error) => {
-      this._alertSvc.showAlert(err.toString());
+      this._alertCtrl.create({
+        title: 'Uhh ohh...',
+        subTitle: 'Something went wrong',
+        message: err.toString(),
+        buttons: ['OK']
+      }).present();
       loader.dismiss();
       this._navCtrl.pop();
     });
   }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
+    
     this._detectorRef.detach();
   }
 

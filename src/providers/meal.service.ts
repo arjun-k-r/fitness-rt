@@ -57,18 +57,6 @@ export class MealService {
   }
 
   /**
-   * Verifies if the meal is too complex for digestion (has more than 8 foods)
-   * @param {Array} foodItems - The foods of the meal
-   * @returns {WarningMessage} Returns warning if the meal is too complex
-   */
-  private _checkMealComplexity(foodItems: Array<Food | Recipe>): WarningMessage {
-    return foodItems.length > 6 ? new WarningMessage(
-      'The meal is too complex!',
-      'More than 8 foods in a single meal makes it complex and difficult to digest, as it requires many types of enzymes, gastric juices, and timings.'
-    ) : null;
-  }
-
-  /**
    * Verifies if the meal is alkaline forming
    * @description Acid forming meals are inflammatory and the root of all diseases. The PRAL value must remain, at least, below 1.
    * @param {number} size - The size of the meal
@@ -89,47 +77,6 @@ export class MealService {
    */
   private _checkMealServing(meal: Meal): Array<WarningMessage> {
     let warnings: Array<WarningMessage> = [];
-    if (!meal.eatingHabits.chewing) {
-      warnings.push(new WarningMessage(
-        'Chewing is the first step of the digestion process',
-        'A complete digestion requires finely chewed and insalivated food. Have you witnessed any discomfort after your meal?'
-      ));
-    }
-
-    if (!meal.eatingHabits.gratitude) {
-      warnings.push(new WarningMessage(
-        'Some people do not have what to eat, you know?',
-        'Be grateful for every meal you have and enjoy each bite like it is your last one, because it may be...'
-      ));
-    }
-
-    if (!meal.eatingHabits.hunger) {
-      warnings.push(new WarningMessage(
-        'Are you watching your cravings?',
-        'Eating between meals or when not hungry interferes with previous digestion processes and may lead yo weight gain and digestive problems'
-      ));
-    }
-
-    if (!meal.eatingHabits.relaxation) {
-      warnings.push(new WarningMessage(
-        'Calm down',
-        'Eating when stressed, angry, sad or while working, walking, or during any other activities interferes with digestion and may lead to indigestion and other digestive problems. Sit down, take a deep breath, relax, and savour your food with complete focus and joy.'
-      ));
-    }
-
-    if (!meal.eatingHabits.vitality) {
-      warnings.push(new WarningMessage(
-        'Are you sure you are hungry?',
-        'Digestion requires energy. When you are tired, the body decreases your appetite to warn you it cannot maintain digestion, because it does not have the required energy. Think again before eating'
-      ));
-    }
-
-    if (!meal.eatingHabits.wellness) {
-      warnings.push(new WarningMessage(
-        'Are you sure you are hungry?',
-        "Digestion requires energy. When you are in disease, the body decreases your appetite to warn you it cannot maintain digestion, because it uses the energy for healing. Let your body to heal and don't waste its energy"
-      ));
-    }
 
     if (meal.isCold) {
       warnings.push(new WarningMessage(
@@ -175,7 +122,6 @@ export class MealService {
   public checkMeal(meal: Meal): void {
     meal.warnings = _.compact([
       this._nutritionSvc.checkNutrition(meal.nutrition),
-      this._checkMealComplexity(meal.mealItems),
       this._checkMealPral(meal.pral),
       ...this._checkMealServing(meal),
       this._checkMealSize(meal.quantity)
@@ -296,7 +242,6 @@ export class MealService {
         meal.nourishingKey = '';
       } else if (!!meal.wasNourishing && meal.nourishingKey !== '') {
         this._nourishingMeals.update(meal['$key'], {
-          eatingHabits: meal.eatingHabits,
           isCold: meal.isCold,
           isNatural: meal.isNatural,
           isRaw: meal.isRaw,

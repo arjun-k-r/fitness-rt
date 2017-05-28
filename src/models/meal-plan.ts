@@ -7,21 +7,8 @@ import { NutrientDeficiencies, NutrientExcesses, Nutrition } from './nutrition';
 import { Recipe } from './recipe';
 import { WarningMessage } from './warning-message';
 
-/**
- * Class representing a meal
- * @class
- * @classdesc A single meal serving during the day (e.g. breakfast, lunch, etc.)
- */
 export class Meal {
     constructor(
-        public eatingHabits = {
-            chewing: false,
-            gratitude: false,
-            hunger: false,
-            relaxation: false,
-            vitality: false,
-            wellness: false
-        },
         public isCold: boolean = false,
         public isNatural: boolean = false,
         public isRaw: boolean = false,
@@ -37,21 +24,7 @@ export class Meal {
     ) { }
 }
 
-/**
- * Class representing a meal plan
- * @class
- * @classdesc We need to have a meal plan routine we respect each day and monitor nutrient deficiency or excess
- */
 export class MealPlan {
-    /**
-     * @constructor
-     * @param {string} breakfastTime - The hour of the first meal of the day; used as reference for the further meals
-     * @param {Nutrition} dailyNutrition - The daily nutrition acquired from all meals
-     * @param {number} date - The date of the meal plan (the day number of the year)
-     * @param {NutrientDeficiencies} deficiency - Counts the days of essential nutrient deficiency
-     * @param {NutrientExcesses} excess - Counts the days of non-essential nutrient excess
-     * @param {Array} meals - The meals of the meal plan from the specified date
-     */
     constructor(
         public breakfastTime: string = moment().format('HH:mm'),
         public dailyNutrition: Nutrition = new Nutrition(),

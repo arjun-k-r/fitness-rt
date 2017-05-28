@@ -13,7 +13,7 @@ import { IFoodSearchResult, FoodGroup, Nutrient, Nutrition } from '../../models'
 import { FoodDetailsPage } from '../food-details/food-details';
 
 // Providers
-import { AlertService, FOOD_GROUPS, FoodService } from '../../providers';
+import { FOOD_GROUPS, FoodService } from '../../providers';
 
 @Component({
   selector: 'page-food-list',
@@ -36,7 +36,6 @@ export class FoodListPage {
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
-    private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _foodSvc: FoodService,
     private _loadCtrl: LoadingController
@@ -115,11 +114,15 @@ export class FoodListPage {
             this.foods = [...data];
             doneLoading = true;
             loader.dismiss();
-            this._detectorRef.detectChanges();
           }, (err: { status: string, message: string }) => {
             doneLoading = true;
             loader.dismiss();
-            this._alertSvc.showAlert(err.message, `Error ${err.status}!`, 'Whoops... something went wrong');
+            this._alertCtrl.create({
+              title: 'Uhh ohh...',
+              subTitle: 'Something went wrong',
+              message: `Error ${err.status}! ${err.message}`,
+              buttons: ['OK']
+            }).present();
           });
       } else {
         this._foodSubscription = this._foodSvc.getFoods$(this.searchQuery.toLocaleLowerCase(), this.start, this.limit, this.selectedGroup.id)
@@ -127,11 +130,15 @@ export class FoodListPage {
             this.foods = [...data];
             doneLoading = true;
             loader.dismiss();
-            this._detectorRef.detectChanges();
           }, (err: { status: string, message: string }) => {
             doneLoading = true;
             loader.dismiss();
-            this._alertSvc.showAlert(err.message, `Error ${err.status}!`, 'Whoops... something went wrong');
+            this._alertCtrl.create({
+              title: 'Uhh ohh...',
+              subTitle: 'Something went wrong',
+              message: `Error ${err.status}! ${err.message}`,
+              buttons: ['OK']
+            }).present();
           });
       }
 
@@ -139,7 +146,12 @@ export class FoodListPage {
         this._querying = false;
         if (!doneLoading) {
           this._foodSubscription.unsubscribe();
-          this._alertSvc.showAlert('Please try again in a few minutes', 'The food request failed', 'Whoops... something went wrong');
+          this._alertCtrl.create({
+            title: 'Uhh ohh...',
+            subTitle: 'Something went wrong',
+            message: 'The request has timed out. Try again in a few moments!',
+            buttons: ['OK']
+          }).present();
         }
       });
     }
@@ -176,13 +188,12 @@ export class FoodListPage {
      */
   }
 
-  ionViewWillEnter(): void {
+  ionViewDidLoad(): void {
     this.refreshItems();
-    console.log('Entering...');
   }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
+    this._foodSubscription.unsubscribe();
     this._detectorRef.detach();
   }
 

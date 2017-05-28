@@ -1,6 +1,7 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { Alert, AlertController, Loading, LoadingController, Modal, ModalController, NavController } from 'ionic-angular';
+import { Subscription } from 'rxjs/Subscription';
 
 // Third-party
 import * as _ from 'lodash';
@@ -12,7 +13,7 @@ import { Activity, ActivityPlan, WarningMessage } from '../../models';
 import { ActivitySelectPage } from '../activity-select/activity-select';
 
 // Providers
-import { ActivityService, AlertService, FitnessService } from '../../providers';
+import { ActivityService, FitnessService } from '../../providers';
 
 @Component({
   selector: 'page-activity-plan',
@@ -20,13 +21,13 @@ import { ActivityService, AlertService, FitnessService } from '../../providers';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActivityPlanPage {
+  private _activityPlanSubscription: Subscription;
   public activityPlan: ActivityPlan;
   public activityPlanDetails: string = 'physical';
   public leftEnergy: number = 0;
   constructor(
     private _activitySvc: ActivityService,
     private _alertCtrl: AlertController,
-    private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _fitSvc: FitnessService,
     private _loadCtrl: LoadingController,
@@ -34,38 +35,26 @@ export class ActivityPlanPage {
     private _navCtrl: NavController
   ) { }
 
+  private _updateActivityPlan(activity: Activity): void {
+    if (activity.type === 'Physical') {
+      this.activityPlan.physicalActivities.push(activity);
+      this.activityPlan.physicalActivities = [...this.activityPlan.physicalActivities, activity];
+      this.activityPlan.physicalEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.physicalActivities);
+    } else if (activity.type === 'Intellectual') {
+      this.activityPlan.intellectualActivities = [...this.activityPlan.intellectualActivities, activity];
+      this.activityPlan.intellectualEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.intellectualActivities);
+    }
+
+    this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn([...this.activityPlan.intellectualActivities, ...this.activityPlan.physicalActivities]);
+    this._activitySvc.updateUserRequirements(this.activityPlan.totalEnergyBurn);
+    this._activitySvc.getLeftEnergy().then((energy: number) => this.leftEnergy = energy);
+  }
+
   public addNewActivity(): void {
     let activitySelectModal: Modal = this._modalCtrl.create(ActivitySelectPage),
       warning: WarningMessage;
     activitySelectModal.present();
-    activitySelectModal.onDidDismiss((activity: Activity) => {
-      console.log('Selected: ', activity);
-      warning = this._activitySvc.checkActivity(activity);
-      if (!!warning) {
-        this._alertSvc.showAlert(warning.moreInfo, 'Try to rethink your activity', warning.message);
-      }
-
-      if (activity.type === 'Physical') {
-        this.activityPlan.physicalActivities.push(activity);
-        this.activityPlan.physicalEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.physicalActivities);
-      } else if (activity.type === 'Intellectual') {
-        this.activityPlan.intellectualActivities.push(activity);
-        this.activityPlan.intellectualEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.intellectualActivities);
-      }
-
-      this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn([...this.activityPlan.intellectualActivities, ...this.activityPlan.physicalActivities]);
-
-      this.activityPlan.warnings = _.compact([this._activitySvc.checkActivity(activity)]);
-      if (!this.activityPlan.warnings.length) {
-        this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy performed activity!', 'Well done!');
-      } else {
-        this._alertSvc.showAlert('Please check the warnings', 'Something is wrong with this activity', 'Oh oh...');
-      }
-      this._activitySvc.updateUserRequirements(this.activityPlan.totalEnergyBurn);
-      this._activitySvc.getLeftEnergy().then((energy: number) => this.leftEnergy = energy);
-
-      this._detectorRef.detectChanges();
-    });
+    activitySelectModal.onDidDismiss((activity: Activity) => this._updateActivityPlan(activity));
   }
 
   public changeDuration(activity: Activity): void {
@@ -95,12 +84,6 @@ export class ActivityPlanPage {
               this.activityPlan.intellectualEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.intellectualActivities);
             }
             this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn([...this.activityPlan.intellectualActivities, ...this.activityPlan.physicalActivities]);
-            this.activityPlan.warnings = _.compact([this._activitySvc.checkActivity(activity)]);
-            if (!this.activityPlan.warnings.length) {
-              this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy performed activity!', 'Well done!');
-            } else {
-              this._alertSvc.showAlert('Please check the warnings', 'Something is wrong with this activity', 'Oh oh...');
-            }
             this._detectorRef.detectChanges();
           }
         }
@@ -111,9 +94,9 @@ export class ActivityPlanPage {
 
   public removeActivity(idx: number, type: string): void {
     if (type === 'physical') {
-      this.activityPlan.physicalActivities.splice(idx, 1);
+      this.activityPlan.physicalActivities = [...this.activityPlan.physicalActivities.slice(0, idx), ...this.activityPlan.physicalActivities.slice(idx + 1)];
     } else {
-      this.activityPlan.intellectualActivities.splice(idx, 1);
+      this.activityPlan.intellectualActivities = [...this.activityPlan.intellectualActivities.slice(0, idx), ...this.activityPlan.intellectualActivities.slice(idx + 1)];
     }
   }
 
@@ -147,15 +130,6 @@ export class ActivityPlanPage {
             text: 'Done',
             handler: (data: Array<string>) => {
               console.log('My symptoms are: ', data);
-              if (data.length > signs.length / 4) {
-                if (imbalanceType === 'deficiency') {
-                  this._alertSvc.showAlert('Try to slow it down and offer your body the rest it deserves, okay?', 'Relaxation is as important as exercise', 'The time is now to make a change');
-                } else {
-                  this._alertSvc.showAlert('Try to exercise with moderation every single day, okay?', "If you don't use it, you'll lose it", 'The time is now to make a change');
-                }
-              } else {
-                this._alertSvc.showAlert("Anyway, make sure to take care of your nutrition and don't abuse or neglect any nutrient, okay?", '', 'I am not perfect');
-              }
             }
           }
         ]
@@ -163,7 +137,7 @@ export class ActivityPlanPage {
     });
   }
 
-  ionViewWillEnter(): void {
+  ionViewDidLoad(): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Loading...',
       spinner: 'crescent'
@@ -172,19 +146,16 @@ export class ActivityPlanPage {
     loader.present();
     this._activitySvc.getLeftEnergy().then((energy: number) => this.leftEnergy = energy);
 
-    this._activitySvc.getActivityPlan$().subscribe((activityPlan: ActivityPlan) => {
+    this._activityPlanSubscription = this._activitySvc.getActivityPlan$().subscribe((activityPlan: ActivityPlan) => {
       console.log('Received activity plan: ', activityPlan);
-      this.activityPlan = activityPlan;
-      this.activityPlan.intellectualActivities = this.activityPlan.intellectualActivities || [];
-      this.activityPlan.physicalActivities = this.activityPlan.physicalActivities || [];
-      this.activityPlan.warnings = this.activityPlan.warnings || [];
-      loader.dismiss();
-      this._detectorRef.detectChanges();
+      this.activityPlan = Object.assign({}, activityPlan);
+      this.activityPlan.intellectualActivities = [...this.activityPlan.intellectualActivities] || [];
+      this.activityPlan.physicalActivities = [...this.activityPlan.physicalActivities] || [];
     });
   }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
+    this._activityPlanSubscription.unsubscribe();
     this._detectorRef.detach();
   }
 

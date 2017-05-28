@@ -9,8 +9,7 @@ import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/
 export class HomePage {
   constructor(private _detectorRef: ChangeDetectorRef) { }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
     this._detectorRef.detach();
   }
 

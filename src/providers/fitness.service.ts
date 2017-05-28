@@ -8,15 +8,15 @@ import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/data
 import * as moment from 'moment';
 
 // Models
-import { Nutrition, UserProfile } from '../models';
+import { Nutrition, Fitness } from '../models';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class FitnessService {
-  private _profile: FirebaseObjectObservable<UserProfile>;
+  private _fitness: FirebaseObjectObservable<Fitness>;
   constructor(private _db: AngularFireDatabase, private _storage: Storage, private _user: User) {
-    this._profile = _db.object(`/profiles/${_user.id}`);
+    this._fitness = _db.object(`/fitnesss/${_user.id}`);
   }
 
   /**
@@ -133,11 +133,11 @@ export class FitnessService {
   }
 
   /**
-   * Queries the user's fitness profile from the database
-   * @returns {UserProfile} Returns the user's fitness profile
+   * Queries the user's fitness fitness from the database
+   * @returns {Fitness} Returns the user's fitness fitness
    */
-  public getProfile(): UserProfile {
-    return <UserProfile>this._user.get('profile', new UserProfile());
+  public getFitness(): Fitness {
+    return <Fitness>this._user.get('fitness', new Fitness());
   }
 
   /**
@@ -145,7 +145,7 @@ export class FitnessService {
    * @returns {Nutrition} Returns the user's daily intakes
    */
   public getUserRequirements(): Nutrition {
-    return <Nutrition>this.getProfile().requirements;
+    return <Nutrition>this.getFitness().requirements;
   }
 
   /**
@@ -153,7 +153,7 @@ export class FitnessService {
    * @returns {number} Returns the user's weight in kilograms
    */
   public getUserWeight(): number {
-    return <number>this.getProfile().weight;
+    return <number>this.getFitness().weight;
   }
 
   /**
@@ -191,16 +191,16 @@ export class FitnessService {
   }
 
   /**
-   * Stores user's fitness profile to the database
-   * @param {UserProfile} profile - The user's fitness profile
+   * Stores user's fitness fitness to the database
+   * @param {Fitness} fitness - The user's fitness fitness
    * @returns {void}
    */
-  public saveProfile(profile: UserProfile): void {
-    console.log('Saving profile: ', profile);
+  public saveFitness(fitness: Fitness): void {
+    console.log('Saving fitness: ', fitness);
 
-    this._user.set('profile', profile);
+    this._user.set('fitness', fitness);
     this._user.save();
-    this._profile.set(profile);
+    this._fitness.set(fitness);
   }
 
   /**

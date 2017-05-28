@@ -9,7 +9,7 @@ import { Food, Recipe } from '../../models';
 import { FoodSelectPage } from '../food-select/food-select';
 
 // Providers
-import { AlertService, NutritionService, PictureService, RecipeService } from '../../providers';
+import { NutritionService, PictureService, RecipeService } from '../../providers';
 
 @Component({
   selector: 'page-recipe-details',
@@ -24,7 +24,6 @@ export class RecipeDetailsPage {
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
-    private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
@@ -81,7 +80,12 @@ export class RecipeDetailsPage {
                 this.recipe.image = photoUri;
                 this.uploadReady = true;
                 this._detectorRef.detectChanges();
-              }).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
+              }).catch((err: Error) => this._alertCtrl.create({
+                title: 'Uhh ohh...',
+                subTitle: 'Something went wrong',
+                message: err.toString(),
+                buttons: ['OK']
+              }).present());
             }
           }, {
             text: 'Choose image',
@@ -90,7 +94,12 @@ export class RecipeDetailsPage {
                 this.recipe.image = photoUri;
                 this.uploadReady = true;
                 this._detectorRef.detectChanges();
-              }).catch((err: Error) => this._alertSvc.showAlert(err.toString()));
+              }).catch((err: Error) => this._alertCtrl.create({
+                title: 'Uhh ohh...',
+                subTitle: 'Something went wrong',
+                message: err.toString(),
+                buttons: ['OK']
+              }).present());
             }
           }, {
             text: 'Cancel',
@@ -141,13 +150,13 @@ export class RecipeDetailsPage {
   }
 
   public removeIngredient(idx: number): void {
-    this.recipe.ingredients.splice(idx, 1);
+    this.recipe.ingredients = [...this.recipe.ingredients.slice(0, idx), ...this.recipe.ingredients.slice(idx + 1)];
     this._updateRecipeDetails();
   }
 
   public removeInstruction(idx: number): void {
-    this.recipe.instructions.splice(idx, 1);
-    this.recipeInstructions.splice(idx, 1);
+    this.recipe.instructions = [...this.recipe.instructions.slice(0, idx), ...this.recipe.instructions.slice(idx + 1)];
+    this.recipeInstructions = [...this.recipeInstructions.slice(0, idx), ...this.recipeInstructions.slice(idx + 1)];
   }
 
   public removeRecipe(): void {
@@ -163,15 +172,6 @@ export class RecipeDetailsPage {
 
   public segmentChange(): void {
     this._detectorRef.detectChanges();
-  }
-
-  public showCookingInfo(): void {
-    this._toastCtrl.create({
-      message: this._recipeSvc.getCookMethodInfo(this.recipe.cookingMethod),
-      position: 'bottom',
-      showCloseButton: true,
-      closeButtonText: 'Got it!'
-    }).present();
   }
 
   public uploadImage(file?: File): void {
@@ -203,11 +203,14 @@ export class RecipeDetailsPage {
     },
       () => {
         if (canceledUpload === true) {
-          this._alertSvc.showAlert('Your avatar upload has been canceled', '', 'Canceled!');
+          this._toastCtrl.create({
+            message: 'Upload canceled',
+            position: 'bottom',
+            showCloseButton: true,
+            closeButtonText: 'Cancel'
+          }).present();
         } else {
-          toast.dismissAll();
-          this._alertSvc.showAlert('Your avatar has been updated successfully', '', 'Success!');
-          this._detectorRef.detectChanges();
+          toast.setMessage('Upload complete');
         }
       });
   }
@@ -216,8 +219,7 @@ export class RecipeDetailsPage {
     this._detectorRef.detectChanges();
   }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
     this._detectorRef.detach();
   }
 

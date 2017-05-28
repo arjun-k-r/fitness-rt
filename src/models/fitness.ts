@@ -1,7 +1,7 @@
 // Models
 import { Nutrition } from './nutrition';
 
-export class UserProfile {
+export class Fitness {
     constructor(
         public age: number = 0,
         public bmr: number = 1800,

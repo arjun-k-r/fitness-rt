@@ -9,17 +9,11 @@ export interface IFoodReportNutrient {
 }
 
 export interface IFoodReportSearchResult {
-    // Data source
     ds: string;
-    // Food group
     fg: string;
-    // Ingredients and last update if the food is a branded food
     ing: {desc: string, upd: string};
-    // Food name
     name: string;
-    // Database id
     ndbno: string;
-    // Food nutritional values
     nutrients: Array<IFoodReportNutrient>;
 }
 
@@ -37,24 +31,7 @@ export class FoodGroup {
     ) { }
 }
 
-/**
- * Class representing a food
- */
 export class Food {
-    /**
-     * @constructor
-     * @param {string} name - The food name
-     * @param {string} ndbno - The USDA Database food id
-     * @param {string} group - The food ingredients if the food is a branded food
-     * @param {string} ingredients - The food ingredients if the food is a branded food
-     * @param {Nutrition} nutrition - The food nutritional values
-     * @param {number} pral - Indicates the alkalinity of the food
-     * @param {number} quantity - The quantity of food (e.g. 100 food units)
-     * @param {number} servings - The number of servings of 100 units of food
-     * @param {Array} tastes - The tastes a food contains
-     * @param {string} type - The type of food based on dominant nutrient content (e.g. protein, starch, fat, sugar, acid, etc.)
-     * @param {string} unit - The unit of measure (e.g. grams)
-     */
     constructor(
         public name: string = '',
         public ndbno: string = '',

@@ -12,6 +12,9 @@
     </ion-navbar>
     <ion-toolbar>
         <ion-segment [(ngModel)]="sleepPlanDetails" (click)="segmentChange()">
+            <ion-segment-button value="guidelines">
+                <ion-icon name="bulb"></ion-icon>
+            </ion-segment-button>
             <ion-segment-button value="sleep">
                 <ion-icon name="clock"></ion-icon>
             </ion-segment-button>
@@ -25,6 +28,26 @@
 <ion-content padding>
     <div [ngSwitch]="sleepPlanDetails">
         <!-- Start of segment -->
+        <ion-list *ngSwitchCase="'guidelines'">
+            <ion-item>
+                <h2>Go to bed before 10:00 p.m.</h2>
+            </ion-item>
+            <ion-item>
+                <h2>Avoid electronics 1 hour before bed</h2>
+            </ion-item>
+            <ion-item>
+                <h2>Avoid stimulants 6 hours before bed</h2>
+            </ion-item>
+            <ion-item>
+                <h2>Maintain room temperature at 19&#176; Celsius </h2>
+            </ion-item>
+            <ion-item>
+                <h2>No fluids or food 2 hours before bed</h2>
+            </ion-item>
+        </ion-list>
+        <!-- End of segment -->
+        
+        <!-- Start of segment -->
         <ion-list *ngSwitchCase="'sleep'">
             <ion-item>
                 <ion-label floating>Bed time</ion-label>
@@ -33,14 +56,6 @@
             <ion-item>
                 <ion-label floating>Wake up time</ion-label>
                 <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="currentSleep.wakeUpTime" (ionChange)="setBedtime()"></ion-datetime>
-            </ion-item>
-            <ion-item>
-                <ion-label>No electronics before bed</ion-label>
-                <ion-checkbox [(ngModel)]="currentSleep.noElectronics"></ion-checkbox>
-            </ion-item>
-            <ion-item>
-                <ion-label>No stimulants before bed</ion-label>
-                <ion-checkbox [(ngModel)]="currentSleep.noStimulants"></ion-checkbox>
             </ion-item>
         </ion-list>
         <!-- End of segment -->
@@ -54,57 +69,8 @@
                     <p text-wrap>Try to reaorganize your sleep patterns</p>
                     <p item-content>Check symptoms</p>
                 </button>
-                <ion-item *ngFor="let warning of currentSleep.warnings">
-                    <ion-icon color="danger" name="warning" item-left></ion-icon>
-                    <h2 text-wrap>{{ warning.message }}</h2>
-                    <p text-wrap>{{ warning.moreInfo }} servings</p>
-                </ion-item>
             </ion-list>
         </div>
         <!-- End of segment -->
     </div>
 </ion-content>
-
-<!--<ion-list *ngSwitchCase="'guidelines'">
-            <ion-item>
-                <h2>Routine</h2>
-                <p text-wrap>The body's internal clock (circadian rhythm) is set up by sunlight and by precise sleep routine.</p>
-                <p item-content>Every day</p>
-            </ion-item>
-            <ion-item>
-                <h2>Bed time</h2>
-                <p text-wrap>Between 10:00pm and 02:00, vata energy is abundant and the adrenal glands release hormones</p>
-                <p item-content>10:00 pm</p>
-            </ion-item>
-            <ion-item>
-                <h2>Wake up time</h2>
-                <p text-wrap>We need to catch 4-5 complete 90-minute REM sleep cycles (07:30 hours).</p>
-                <p item-content>05:30 am</p>
-            </ion-item>
-            <ion-item>
-                <h2>Disconnect</h2>
-                <p text-wrap>Electronics emit blue light similar to sunlight. This disrupts the body's internal clock.</p>
-                <p item-content>09:00 pm</p>
-            </ion-item>
-            <ion-item>
-                <h2>Relax</h2>
-                <p text-wrap>Stressing before sleep keeps you alert and prevents you from falling asleep.</p>
-                <p item-content>08:00 pm</p>
-            </ion-item>
-            <ion-item>
-                <h2>No fluids</h2>
-                <p text-wrap>Fluids will make you need go to the bathroom during the night and disrupt the sleep cycles.</p>
-                <p item-content>08:00 pm</p>
-            </ion-item>
-            <ion-item>
-                <h2>No stimulants</h2>
-                <p text-wrap>Moderate intake of alcohol, caffeine, tea, etc. requires aprox. 6 hours to be completely metabolised.</p>
-                <p item-content>04:00 pm</p>
-            </ion-item>
-            <ion-item>
-                <h2>Temperature</h2>
-                <p text-wrap></p>
-                <p item-content>19 C</p>
-            </ion-item>
-        </ion-list>
-    -->

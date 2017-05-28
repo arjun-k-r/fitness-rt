@@ -1,5 +1,4 @@
 export { ActivityService } from './activity.service';
-export { AlertService } from './alert.service';
 export { AuthValidator } from './auth-validator';
 export { DRIService } from './dri.service';
 export { FitnessService } from './fitness.service';

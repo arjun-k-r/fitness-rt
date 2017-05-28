@@ -1,6 +1,6 @@
 // App
 import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
-import { Alert, AlertController, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
+import { Alert, AlertController, Modal, ModalController, NavController, NavParams, ToastController } from 'ionic-angular';
 
 // Models
 import { Food, Meal, MealPlan, Recipe } from '../../models';
@@ -9,7 +9,7 @@ import { Food, Meal, MealPlan, Recipe } from '../../models';
 import { FoodSelectPage } from '../food-select/food-select';
 
 // Providers
-import { AlertService, MealService, NutritionService } from '../../providers';
+import { MealService, NutritionService } from '../../providers';
 
 @Component({
   selector: 'page-meal-details',
@@ -23,13 +23,13 @@ export class MealDetailsPage {
   public mealPlan: MealPlan;
   constructor(
     private _alertCtrl: AlertController,
-    private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _mealSvc: MealService,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
     private _nutritionSvc: NutritionService,
-    private _params: NavParams
+    private _params: NavParams,
+    private _toastCtrl: ToastController
   ) {
     this.meal = <Meal>_params.get('meal');
     this.mealPlan = <MealPlan>_params.get('mealPlan');
@@ -39,17 +39,26 @@ export class MealDetailsPage {
   }
 
   private _updateMealDetails(): void {
-    this.meal.nutrition = this._nutritionSvc.getTotalNutrition(this.meal.mealItems);
+    this.meal.nutrition = Object.assign({}, this._nutritionSvc.getTotalNutrition(this.meal.mealItems));
     this.meal.pral = this._nutritionSvc.getPRAL(this.meal.nutrition);
     this.meal.quantity = this._nutritionSvc.calculateQuantity(this.meal.mealItems);
 
     this._mealSvc.checkMeal(this.meal);
     if (!this.meal.warnings.length) {
-      this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy meal!', 'Well done!');
+      this._toastCtrl.create({
+        message: 'Bravo! A perfect meal',
+        position: 'bottom',
+        showCloseButton: true,
+        closeButtonText: 'Cancel'
+      }).present();
     } else {
-      this._alertSvc.showAlert('Please check the warnings', 'Something is wrong with this meal', 'Oh oh...');
+      this._toastCtrl.create({
+        message: 'There are some warnings for this meal!',
+        position: 'bottom',
+        showCloseButton: true,
+        closeButtonText: 'Cancel'
+      }).present();
     }
-    this._detectorRef.detectChanges();
   }
 
   public addMealItems(): void {
@@ -57,11 +66,10 @@ export class MealDetailsPage {
     mealSelectModal.present();
     mealSelectModal.onDidDismiss((selection: Food | Recipe) => {
       if (!!selection) {
-        this.meal.mealItems.push(selection);
+        this.meal.mealItems = [...this.meal.mealItems, selection];
         console.log('My new foods: ', this.meal.mealItems);
         // Update the meal details
         this._updateMealDetails();
-        this._detectorRef.markForCheck();
       }
     })
   }
@@ -96,12 +104,12 @@ export class MealDetailsPage {
   }
 
   public removeItem(idx: number): void {
-    this.meal.mealItems.splice(idx, 1);
+    this.meal.mealItems = [...this.meal.mealItems.slice(0, idx), ...this.meal.mealItems.slice(idx + 1)];
     this._updateMealDetails();
   }
 
   public removeMeal(): void {
-    this.mealPlan.meals.splice(this.mealIdx, 1);
+    this.mealPlan.meals = [...this.mealPlan.meals.slice(0, this.mealIdx), ...this.mealPlan.meals.slice(this.mealIdx + 1)];
     this._mealSvc.saveMealPlan(this.mealPlan);
     this._navCtrl.pop();
   }
@@ -115,12 +123,45 @@ export class MealDetailsPage {
     this._detectorRef.detectChanges();
   }
 
+  ionViewCanLeave(): Promise<boolean> {
+    return new Promise((resolve, reject) => this._alertCtrl.create({
+      title: 'Before eating',
+      subTitle: 'Please make sure you check each item',
+      inputs: [
+        {
+          type: 'checkbox',
+          label: 'Eat slowly and chew until fluid',
+          value: 'chewing'
+        }, {
+          type: 'checkbox',
+          label: 'Be grateful for your meal and enjoy each bite',
+          value: 'gratitude'
+        }, {
+          type: 'checkbox',
+          label: 'Make sure you are truly hungry, not just bored or tired',
+          value: 'hunger'
+        }, {
+          type: 'checkbox',
+          label: 'Serve your meal peacefully',
+          value: 'silence'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Done',
+          handler: () => {
+            resolve(true);
+          }
+        }
+      ]
+    }));
+  }
+
   ionViewWillEnter(): void {
     this._detectorRef.detectChanges();
   }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
     this._detectorRef.detach();
   }
 }

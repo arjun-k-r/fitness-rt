@@ -6,7 +6,7 @@ import { AlertController } from 'ionic-angular';
 import { SleepHabit, SleepPlan } from '../../models';
 
 // Providers
-import { AlertService, FitnessService, SleepService } from '../../providers';
+import { FitnessService, SleepService } from '../../providers';
 
 @Component({
   selector: 'page-sleep-plan',
@@ -16,10 +16,9 @@ import { AlertService, FitnessService, SleepService } from '../../providers';
 export class SleepPlanPage {
   public currentSleep: SleepHabit = new SleepHabit();
   public sleepPlan: SleepPlan;
-  public sleepPlanDetails: string = 'sleep';
+  public sleepPlanDetails: string = 'guidelines';
   constructor(
     private _alertCtrl: AlertController,
-    private _alertSvc: AlertService,
     private _detectorRef: ChangeDetectorRef,
     private _fitSvc: FitnessService,
     private _sleepSvc: SleepService
@@ -27,14 +26,6 @@ export class SleepPlanPage {
 
   public saveSleep(): void {
     this._sleepSvc.saveSleep(this.sleepPlan, this.currentSleep);
-
-    if (!!this.currentSleep.warnings && !!this.currentSleep.warnings.length) {
-      console.log(this.currentSleep);
-      this._alertSvc.showAlert('Please check the warnings', 'Your sleepng habit seems to be unhealthy', 'Oh oh...');
-      this._detectorRef.detectChanges();
-    } else {
-      this._alertSvc.showAlert('Keep up the good work!', 'A perfectly healthy sleep habit!', 'Well done!');
-    }
   }
 
   public segmentChange(): void {
@@ -42,9 +33,7 @@ export class SleepPlanPage {
   }
 
   public setBedtime(): void {
-    this.currentSleep.bedTime = this._sleepSvc.getBedtime(this.currentSleep.wakeUpTime);
-    this._detectorRef.detectChanges();
-    this._detectorRef.markForCheck();
+    this.currentSleep = Object.assign({}, this.currentSleep, { bedtime: this._sleepSvc.getBedtime(this.currentSleep.wakeUpTime) });
   }
 
   public setWakeUptime(): void {
@@ -70,11 +59,6 @@ export class SleepPlanPage {
             text: 'Done',
             handler: (data: Array<string>) => {
               console.log('My symptoms are: ', data);
-              if (data.length > signs.length / 4) {
-                this._alertSvc.showAlert('Try to sleep well from now on, okay?', '', 'The time is now to make a change');
-              } else {
-                this._alertSvc.showAlert('Anyway, make sure to take care of your sleep everyday, okay?', '', 'I am not perfect');
-              }
             }
           }
         ]
@@ -85,14 +69,12 @@ export class SleepPlanPage {
   ionViewWillEnter(): void {
     this._sleepSvc.getSleepPlan$().subscribe((sleepPlan: SleepPlan) => {
       console.log('Received sleep plan: ', sleepPlan);
-      this.sleepPlan = sleepPlan;
-      this.currentSleep = this._sleepSvc.getCurrentSleep(this.sleepPlan);
-      this._detectorRef.detectChanges();
+      this.sleepPlan = Object.assign({}, sleepPlan);
+      this.currentSleep = Object.assign({}, this._sleepSvc.getCurrentSleep(this.sleepPlan));
     });
   }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
     this._detectorRef.detach();
   }
 }

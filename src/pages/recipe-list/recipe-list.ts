@@ -105,8 +105,7 @@ export class RecipeListPage {
     console.log('Entering...');
   }
 
-  ionViewWillUnload(): void {
-    console.log('Destroying...');
+  ionViewWillLeave(): void {
     this._detectorRef.detach();
   }
 }

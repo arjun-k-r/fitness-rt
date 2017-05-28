@@ -3,9 +3,6 @@ import { Component } from '@angular/core';
 import { Alert, AlertController, Loading, LoadingController, Modal, ModalController, NavController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
-// Third-party
-import * as _ from 'lodash';
-
 // Models
 import { Activity, ActivityPlan, WarningMessage } from '../../models';
 
@@ -48,8 +45,7 @@ export class ActivityPlanPage {
   }
 
   public addNewActivity(): void {
-    let activitySelectModal: Modal = this._modalCtrl.create(ActivitySelectPage),
-      warning: WarningMessage;
+    let activitySelectModal: Modal = this._modalCtrl.create(ActivitySelectPage);
     activitySelectModal.present();
     activitySelectModal.onDidDismiss((activity: Activity) => this._updateActivityPlan(activity));
   }
@@ -140,8 +136,8 @@ export class ActivityPlanPage {
     this._activityPlanSubscription = this._activitySvc.getActivityPlan$().subscribe((activityPlan: ActivityPlan) => {
       console.log('Received activity plan: ', activityPlan);
       this.activityPlan = Object.assign({}, activityPlan);
-      this.activityPlan.intellectualActivities = [...this.activityPlan.intellectualActivities] || [];
-      this.activityPlan.physicalActivities = [...this.activityPlan.physicalActivities] || [];
+      this.activityPlan.intellectualActivities = this.activityPlan.intellectualActivities || [];
+      this.activityPlan.physicalActivities = this.activityPlan.physicalActivities || [];
       loader.dismiss();
     });
   }

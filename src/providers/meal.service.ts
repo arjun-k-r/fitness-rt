@@ -12,13 +12,11 @@ import * as _ from 'lodash';
 
 // Models
 import {
-  Food,
   Meal,
   MealPlan,
   NutrientDeficiencies,
   NutrientExcesses,
   Nutrition,
-  Recipe,
   SleepPlan,
   WarningMessage
 } from '../models';
@@ -70,39 +68,6 @@ export class MealService {
   }
 
   /**
-   * Verifies if each meal is served correclty
-   * @description A complete healthy digestion and nutrient absorption requires healthy eating habits. How you eat is as important as what you eat
-   * @param {Meal} meal - The meal to check
-   * @returns {WarningMessage} Returns a warning to make the user create healthy eating habits
-   */
-  private _checkMealServing(meal: Meal): Array<WarningMessage> {
-    let warnings: Array<WarningMessage> = [];
-
-    if (meal.isCold) {
-      warnings.push(new WarningMessage(
-        'Avoid cold foods',
-        'Digestion is a mechanical and chimical process and requires heat. It is just like a cooking process.'
-      ));
-    }
-
-    if (!meal.isNatural) {
-      warnings.push(new WarningMessage(
-        'We need real food',
-        'We are genetically designes to digest and natural (real) food. Comercial foods are just empty calories without any nutritional values (poison)'
-      ));
-    }
-
-    if (!meal.isRaw) {
-      warnings.push(new WarningMessage(
-        'Cooking removes the oxygen (life) from foods',
-        'The more oxygen a food has, the more alkaline forming (nourishing) it is. Try to eat at least half of your meals raw.'
-      ));
-    }
-
-    return warnings;
-  }
-
-  /**
    * Verifies if the meal is too big for normal digestion
    * @param {number} size - The size of the meal
    * @returns {WarningMessage} Returns warning if the meal is too big
@@ -123,7 +88,6 @@ export class MealService {
     meal.warnings = _.compact([
       this._nutritionSvc.checkNutrition(meal.nutrition),
       this._checkMealPral(meal.pral),
-      ...this._checkMealServing(meal),
       this._checkMealSize(meal.quantity)
     ]);
   }
@@ -242,9 +206,6 @@ export class MealService {
         meal.nourishingKey = '';
       } else if (!!meal.wasNourishing && meal.nourishingKey !== '') {
         this._nourishingMeals.update(meal['$key'], {
-          isCold: meal.isCold,
-          isNatural: meal.isNatural,
-          isRaw: meal.isRaw,
           mealItems: meal.mealItems || [],
           nickname: meal.nickname,
           nourishingKey: meal.nourishingKey,

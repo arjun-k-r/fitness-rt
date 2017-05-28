@@ -9,9 +9,6 @@ import { WarningMessage } from './warning-message';
 
 export class Meal {
     constructor(
-        public isCold: boolean = false,
-        public isNatural: boolean = false,
-        public isRaw: boolean = false,
         public mealItems: Array<Food | Recipe> = [],
         public nickname: string = '',
         public nourishingKey: string = '',

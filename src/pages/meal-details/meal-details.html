@@ -35,9 +35,6 @@
         <!-- Start of segment -->
         <div *ngSwitchCase="'details'">
             <ion-list>
-                <ion-list-header>
-                    Details
-                </ion-list-header>
                 <ion-item>
                     pH
                     <p item-content ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
@@ -49,18 +46,6 @@
                 <ion-item>
                     Time
                     <p item-content>{{ meal.time }}</p>
-                </ion-item>
-                <ion-item>
-                    <ion-label text-wrap>Served cold</ion-label>
-                    <ion-toggle [(ngModel)]="meal.isCold"></ion-toggle>
-                </ion-item>
-                <ion-item>
-                    <ion-label text-wrap>Served raw</ion-label>
-                    <ion-toggle [(ngModel)]="meal.isRaw"></ion-toggle>
-                </ion-item>
-                <ion-item>
-                    <ion-label text-wrap>Natural foods</ion-label>
-                    <ion-toggle [(ngModel)]="meal.isNatural"></ion-toggle>
                 </ion-item>
             </ion-list>
         </div>

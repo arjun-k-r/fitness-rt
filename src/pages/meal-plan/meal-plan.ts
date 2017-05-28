@@ -168,7 +168,6 @@ export class MealPlanPage {
   }
 
   ionViewWillLeave(): void {
-    console.log('Leaving...');
     this._mealPlanSubscription.unsubscribe();
   }
 }

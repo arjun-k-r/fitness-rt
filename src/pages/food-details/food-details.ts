@@ -10,8 +10,7 @@ import { FoodService } from '../../providers';
 
 @Component({
   selector: 'page-food-details',
-  templateUrl: 'food-details.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'food-details.html'
 })
 export class FoodDetailsPage {
   public food: Food;
@@ -44,5 +43,4 @@ export class FoodDetailsPage {
       this._navCtrl.pop();
     });
   }
-
 }

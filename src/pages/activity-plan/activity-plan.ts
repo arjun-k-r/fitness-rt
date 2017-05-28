@@ -22,7 +22,7 @@ import { ActivityService, FitnessService } from '../../providers';
 export class ActivityPlanPage {
   private _activityPlanSubscription: Subscription;
   public activityPlan: ActivityPlan;
-  public activityPlanDetails: string = 'physical';
+  public activityPlanDetails: string = 'guidelines';
   public leftEnergy: number = 0;
   constructor(
     private _activitySvc: ActivityService,

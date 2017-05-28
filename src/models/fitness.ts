@@ -7,9 +7,8 @@ export class Fitness {
         public bmr: number = 1800,
         public bodyFat: number = 10,
         public gender: string = '',
-        public heartRate: { max: number, reserve: number, resting: number, trainingMin: number, trainingMax: number } = {
+        public heartRate: { max: number, resting: number, trainingMin: number, trainingMax: number } = {
             max: 0,
-            reserve: 0,
             resting: 0,
             trainingMin: 0,
             trainingMax: 0

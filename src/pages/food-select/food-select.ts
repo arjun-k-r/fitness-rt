@@ -74,7 +74,6 @@ export class FoodSelectPage {
       this._foodSubscription = this._foodSvc.getFoods$(this.searchQueryFoods, this.start, this.foodLimit, this.selectedGroup.id)
         .subscribe((data: Array<IFoodSearchResult>) => {
           this.foods.push(...data);
-          this._detectorRef.detectChanges();
         }, (err: { status: string, message: string }) => this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',

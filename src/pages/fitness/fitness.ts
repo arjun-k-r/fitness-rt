@@ -39,14 +39,17 @@ export class FitnessPage {
   }
 
   public saveFitness(): void {
-    
-    let thrRange: { min: number, max: number } = this._fitSvc.getHeartRateTrainingRange(this.fitness.heartRate.max, this.fitness.heartRate.resting);
+    let heartRateMax: number = this._fitSvc.getHeartRateMax(this.fitness.age),
+    thrRange: { min: number, max: number } = this._fitSvc.getHeartRateTrainingRange(heartRateMax, this.fitness.heartRate.resting);
     this.fitness = Object.assign({}, this.fitness, {
       bmr: this._fitSvc.getBmr(this.fitness.age, this.fitness.gender, this.fitness.height, this.fitness.weight),
       bodyFat: this._fitSvc.getBodyFat(this.fitness.age, this.fitness.gender, this.fitness.height, this.fitness.hips, this.fitness.neck, this.fitness.waist),
-      heartRate.max: this._fitSvc.getHeartRateMax(this.fitness.age),
-      heartRate.trainingMin: thrRange.min,
-      heartRate.trainingMax: thrRange.max
+      heartRate: {
+        max: heartRateMax,
+        resting: this.fitness.heartRate.resting,
+        trainingMin: thrRange.min,
+        trainingMax: thrRange.max
+      }
     });
 
     this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.fitness.gender);

@@ -12,6 +12,9 @@
   </ion-navbar>
   <ion-toolbar>
     <ion-segment [(ngModel)]="activityPlanDetails">
+      <ion-segment-button value="guidelines">
+        <ion-icon name="bulb"></ion-icon>
+      </ion-segment-button>
       <ion-segment-button value="physical">
         <ion-icon name="bicycle"></ion-icon>
       </ion-segment-button>
@@ -25,13 +28,31 @@
         <ion-icon name="warning"></ion-icon>
       </ion-segment-button>
     </ion-segment>
-
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
   <div [ngSwitch]="activityPlanDetails">
+    <!-- Start of segment -->
+    <ion-list *ngSwitchCase="'guidelines'">
+      <ion-item>
+        <h2>Go to bed before 10:00 p.m.</h2>
+      </ion-item>
+      <ion-item>
+        <h2>Avoid electronics 1 hour before bed</h2>
+      </ion-item>
+      <ion-item>
+        <h2>Avoid stimulants 6 hours before bed</h2>
+      </ion-item>
+      <ion-item>
+        <h2>Maintain room temperature at 19&#176; Celsius </h2>
+      </ion-item>
+      <ion-item>
+        <h2>No fluids or food 2 hours before bed</h2>
+      </ion-item>
+    </ion-list>
+    <!-- End of segment -->
 
     <!-- Start of segment -->
     <ion-list *ngSwitchCase="'physical'">

@@ -21,7 +21,7 @@ import { FitnessService, MealService, NutritionService } from '../../providers';
 export class MealPlanPage {
   public detailsPage: any = MealDetailsPage;
   public mealPlan: MealPlan;
-  public mealPlanDetails: string = 'meals';
+  public mealPlanDetails: string = 'guidelines';
   public omega36Ratio: number;
   public nourishingMeals$: FirebaseListObservable<Array<Meal>>;
   constructor(

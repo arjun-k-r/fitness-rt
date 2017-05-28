@@ -116,34 +116,37 @@ export class MealDetailsPage {
     this._mealSvc.saveMeal(this.meal, this.mealPlan);
   }
 
-  ionViewWillLeave(): void{
-    this._alertCtrl.create({
-      title: 'Before eating',
-      subTitle: 'Please make sure you check each item',
-      inputs: [
-        {
-          type: 'checkbox',
-          label: 'Eat slowly and chew until fluid',
-          value: 'chewing'
-        }, {
-          type: 'checkbox',
-          label: 'Be grateful for your meal and enjoy each bite',
-          value: 'gratitude'
-        }, {
-          type: 'checkbox',
-          label: 'Make sure you are truly hungry, not just bored or tired',
-          value: 'hunger'
-        }, {
-          type: 'checkbox',
-          label: 'Serve your meal peacefully',
-          value: 'silence'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Done'
-        }
-      ]
-    });
-  }
+  ionViewCanLeave(): Promise<boolean> {
+      return new Promise((resolve, reject) => this._alertCtrl.create({
+        title: 'Before eating',
+       subTitle: 'Please make sure you check each item',
+       inputs: [
+         {
+           type: 'checkbox',
+           label: 'Eat slowly and chew until fluid',
+           value: 'chewing'
+         }, {
+           type: 'checkbox',
+           label: 'Be grateful for your meal and enjoy each bite',
+           value: 'gratitude'
+         }, {
+           type: 'checkbox',
+           label: 'Make sure you are truly hungry, not just bored or tired',
+           value: 'hunger'
+         }, {
+           type: 'checkbox',
+           label: 'Serve your meal peacefully',
+           value: 'silence'
+         }
+       ],
+       buttons: [
+         {
+           text: 'Done',
+           handler: () => {
+             resolve(true);
+           }
+         }
+        ]
+      }).present());
+    }
 }

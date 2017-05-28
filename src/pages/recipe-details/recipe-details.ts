@@ -197,7 +197,7 @@ export class RecipeDetailsPage {
             message: 'Upload canceled',
             position: 'bottom',
             showCloseButton: true,
-            closeButtonText: 'Cancel'
+            closeButtonText: 'OK'
           }).present();
         } else {
           toast.setMessage('Upload complete');

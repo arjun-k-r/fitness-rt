@@ -61,7 +61,8 @@ export class ActivitySelectPage {
         {
           text: 'Done',
           handler: (data: { duration: number }) => {
-            activity = Object.assign({}, activity, { duration: +data.duration, energyBurn: this._activitySvc.getActivityEnergyBurn(activity) });
+            activity.duration = +data.duration;
+            activity.energyBurn = this._activitySvc.getActivityEnergyBurn(activity);
             this.selectedActivity = Object.assign({}, activity);
           }
         }
@@ -71,6 +72,5 @@ export class ActivitySelectPage {
 
   ionViewWillEnter(): void {
     this.activities$ = this._activitySvc.getActivities$();
-    console.log('Entering...');
   }
 }

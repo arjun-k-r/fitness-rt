@@ -33,7 +33,7 @@ export class FitnessPage {
         message: 'Please complete the following form',
         position: 'bottom',
         showCloseButton: true,
-        closeButtonText: 'Cancel'
+        closeButtonText: 'OK'
       }).present();
     }
   }
@@ -55,7 +55,7 @@ export class FitnessPage {
     this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.fitness.gender);
     this.idealWeight = this._fitSvc.getIdealWeight(this.fitness.gender, this.fitness.height, this.fitness.weight);
     this._fitSvc.restoreEnergyConsumption().then((energyConsumption: number) => {
-      this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, energyConsumption === 0 ? this.fitness.bmr : energyConsumption, this.fitness.gender, this.fitness.height, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
+      this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, (energyConsumption > 0) ? energyConsumption : this.fitness.bmr, this.fitness.gender, this.fitness.height, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
       this._fitSvc.saveFitness(this.fitness);
     });
 
@@ -67,6 +67,7 @@ export class FitnessPage {
   ionViewWillEnter(): void {
     this.fitness = Object.assign({}, this._fitSvc.getFitness());
     console.log('Received fitness: ', this.fitness);
+    this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.height, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
 
     if (this.fitness.gender) {
       this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.fitness.gender);

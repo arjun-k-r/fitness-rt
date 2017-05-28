@@ -1,6 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { Alert, AlertController, Loading, LoadingController, NavController } from 'ionic-angular';
+import { Subscription } from 'rxjs/Subscription';
 
 // Third-party
 import { FirebaseListObservable } from 'angularfire2/database';
@@ -19,6 +20,7 @@ import { FitnessService, MealService, NutritionService } from '../../providers';
   templateUrl: 'meal-plan.html'
 })
 export class MealPlanPage {
+  private _mealPlanSubscription: Subscription;
   public detailsPage: any = MealDetailsPage;
   public mealPlan: MealPlan;
   public mealPlanDetails: string = 'guidelines';
@@ -157,11 +159,15 @@ export class MealPlanPage {
 
     loader.present();
     this.nourishingMeals$ = this._mealSvc.getNourishingMeals$();
-    this._mealSvc.getMealPlan$().subscribe((mealPlan: MealPlan) => {
+    this._mealPlanSubscription = this._mealSvc.getMealPlan$().subscribe((mealPlan: MealPlan) => {
       console.log('Received meal plan: ', mealPlan);
-      this.mealPlan = mealPlan;
+      this.mealPlan = Object.assign({}, mealPlan);
       this.omega36Ratio = this._nutritionSvc.getOmega36Ratio(this.mealPlan.dailyNutrition);
       loader.dismiss();
     });
+  }
+
+  ionViewWillLeave(): void {
+    this._mealPlanSubscription.unsubscribe();
   }
 }

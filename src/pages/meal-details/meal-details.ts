@@ -47,14 +47,14 @@ export class MealDetailsPage {
         message: 'Bravo! A perfect meal',
         position: 'bottom',
         showCloseButton: true,
-        closeButtonText: 'Cancel'
+        closeButtonText: 'OK'
       }).present();
     } else {
       this._toastCtrl.create({
         message: 'There are some warnings for this meal!',
         position: 'bottom',
         showCloseButton: true,
-        closeButtonText: 'Cancel'
+        closeButtonText: 'OK'
       }).present();
     }
   }
@@ -116,8 +116,8 @@ export class MealDetailsPage {
     this._mealSvc.saveMeal(this.meal, this.mealPlan);
   }
 
-  ionViewCanLeave(): Promise<boolean> {
-    return new Promise((resolve, reject) => this._alertCtrl.create({
+  ionViewWillLeave(): void{
+    this._alertCtrl.create({
       title: 'Before eating',
       subTitle: 'Please make sure you check each item',
       inputs: [
@@ -141,12 +141,9 @@ export class MealDetailsPage {
       ],
       buttons: [
         {
-          text: 'Done',
-          handler: () => {
-            resolve(true);
-          }
+          text: 'Done'
         }
       ]
-    }));
+    });
   }
 }

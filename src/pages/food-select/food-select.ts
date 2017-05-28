@@ -195,11 +195,9 @@ export class FoodSelectPage {
   ionViewWillEnter(): void {
     this.refreshItems();
     this.recipes$ = this._recipeSvc.getRecipes$();
-    console.log('Entering...');
   }
 
   ionViewWillLeave(): void {
     this._foodSubscription.unsubscribe();
   }
-
 }

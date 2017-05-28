@@ -93,6 +93,5 @@ export class RecipeListPage {
 
     loader.present();
     this.recipes$ = this._recipeSvc.getRecipes$();
-    console.log('Entering...');
   }
 }

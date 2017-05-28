@@ -35,7 +35,6 @@ export class ActivityPlanPage {
 
   private _updateActivityPlan(activity: Activity): void {
     if (activity.type === 'Physical') {
-      this.activityPlan.physicalActivities.push(activity);
       this.activityPlan.physicalActivities = [...this.activityPlan.physicalActivities, activity];
       this.activityPlan.physicalEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.physicalActivities);
     } else if (activity.type === 'Intellectual') {

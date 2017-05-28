@@ -35,10 +35,9 @@ export class ActivityService {
         orderByChild: 'name'
       }
     });
-
     this._currentActivityPlan = _db.object(`/activity-plans/${_user.id}/${CURRENT_DAY}`);
     this._lastActivityPlan = _db.object(`/activity-plans/${_user.id}/${CURRENT_DAY - 1}`);
-    this._userWeight = Object.assign({}, _fitSvc.getUserWeight());
+    this._userWeight = +_fitSvc.getUserWeight();
   }
 
   /**

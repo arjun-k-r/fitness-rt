@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActionSheetController, AlertController, InfiniteScroll, Loading, LoadingController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -17,8 +17,7 @@ import { FOOD_GROUPS, FoodService } from '../../providers';
 
 @Component({
   selector: 'page-food-list',
-  templateUrl: 'food-list.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'food-list.html'
 })
 export class FoodListPage {
   private _foodSubscription: Subscription;
@@ -36,7 +35,6 @@ export class FoodListPage {
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
-    private _detectorRef: ChangeDetectorRef,
     private _foodSvc: FoodService,
     private _loadCtrl: LoadingController
   ) {
@@ -86,7 +84,6 @@ export class FoodListPage {
       this._foodSvc.getFoods$(this.searchQuery.toLocaleLowerCase(), this.start, this.limit, this.selectedGroup.id)
         .subscribe((data: Array<IFoodSearchResult>) => {
           this.foods.push(...data);
-          this._detectorRef.detectChanges();
         });
       ev.complete();
     }, 500);
@@ -194,7 +191,6 @@ export class FoodListPage {
 
   ionViewWillLeave(): void {
     this._foodSubscription.unsubscribe();
-    this._detectorRef.detach();
   }
 
 }

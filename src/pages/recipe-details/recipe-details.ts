@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActionSheetController, Alert, AlertController, Modal, ModalController, NavController, NavParams, Platform, Toast, ToastController } from 'ionic-angular';
 
 // Models
@@ -13,8 +13,7 @@ import { NutritionService, PictureService, RecipeService } from '../../providers
 
 @Component({
   selector: 'page-recipe-details',
-  templateUrl: 'recipe-details.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'recipe-details.html'
 })
 export class RecipeDetailsPage {
   public recipe: Recipe;
@@ -24,7 +23,6 @@ export class RecipeDetailsPage {
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
-    private _detectorRef: ChangeDetectorRef,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
     private _nutritionSvc: NutritionService,
@@ -58,14 +56,13 @@ export class RecipeDetailsPage {
         console.log('My new ingredients: ', this.recipe.ingredients);
         // Update the meal details
         this._updateRecipeDetails();
-        this._detectorRef.detectChanges();
       }
     });
   }
 
   public addInstruction(): void {
-    this.recipe.instructions.push('');
-    this.recipeInstructions.push('');
+    this.recipe.instructions = [...this.recipe.instructions, ''];
+    this.recipeInstructions = [...this.recipeInstructions, ''];
   }
 
   public changeImage(inputRef?: HTMLInputElement): void {
@@ -79,7 +76,6 @@ export class RecipeDetailsPage {
               this._picService.takePhoto().then((photoUri: string) => {
                 this.recipe.image = photoUri;
                 this.uploadReady = true;
-                this._detectorRef.detectChanges();
               }).catch((err: Error) => this._alertCtrl.create({
                 title: 'Uhh ohh...',
                 subTitle: 'Something went wrong',
@@ -93,7 +89,6 @@ export class RecipeDetailsPage {
               this._picService.chooseImage().then((photoUri: string) => {
                 this.recipe.image = photoUri;
                 this.uploadReady = true;
-                this._detectorRef.detectChanges();
               }).catch((err: Error) => this._alertCtrl.create({
                 title: 'Uhh ohh...',
                 subTitle: 'Something went wrong',
@@ -141,7 +136,6 @@ export class RecipeDetailsPage {
           handler: data => {
             item.servings = +data.servings;
             this._updateRecipeDetails();
-            this._detectorRef.detectChanges();
           }
         }
       ]
@@ -168,10 +162,6 @@ export class RecipeDetailsPage {
     this.recipe.instructions = [...this.recipeInstructions];
     this._updateRecipeDetails();
     this._recipeSvc.saveRecipe(this.recipe);
-  }
-
-  public segmentChange(): void {
-    this._detectorRef.detectChanges();
   }
 
   public uploadImage(file?: File): void {
@@ -214,13 +204,4 @@ export class RecipeDetailsPage {
         }
       });
   }
-
-  ionViewWillEnter(): void {
-    this._detectorRef.detectChanges();
-  }
-
-  ionViewWillLeave(): void {
-    this._detectorRef.detach();
-  }
-
 }

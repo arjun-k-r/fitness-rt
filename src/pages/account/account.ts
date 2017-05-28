@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActionSheetController, AlertController, AlertOptions, LoadingController, NavController, Platform, Toast, ToastController } from 'ionic-angular';
 import { Auth, User } from '@ionic/cloud-angular';
 
@@ -11,8 +11,7 @@ import { PictureService } from '../../providers';
 
 @Component({
   selector: 'page-account',
-  templateUrl: 'account.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'account.html'
 })
 export class AccountPage {
   public avatar: string;
@@ -21,7 +20,6 @@ export class AccountPage {
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
     private _auth: Auth,
-    private _detectorRef: ChangeDetectorRef,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
     private _picService: PictureService,
@@ -80,7 +78,6 @@ export class AccountPage {
               this._picService.takePhoto().then((photoUri: string) => {
                 this.avatar = photoUri;
                 this.uploadReady = true;
-                this._detectorRef.detectChanges();
               }).catch((err: Error) => this._alertCtrl.create({
                 title: 'Uhh ohh...',
                 subTitle: 'Something went wrong',
@@ -94,7 +91,6 @@ export class AccountPage {
               this._picService.chooseImage().then((photoUri: string) => {
                 this.avatar = photoUri;
                 this.uploadReady = true;
-                this._detectorRef.detectChanges();
               }).catch((err: Error) => this._alertCtrl.create({
                 title: 'Uhh ohh...',
                 subTitle: 'Something went wrong',
@@ -163,10 +159,4 @@ export class AccountPage {
         }
       });
   }
-
-  ionViewWillLeave(): void {
-    
-    this._detectorRef.detach();
-  }
-
 }

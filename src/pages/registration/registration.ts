@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, Loading, LoadingController, NavController } from 'ionic-angular';
 import { Auth, IDetailedError, User, UserDetails } from '@ionic/cloud-angular';
@@ -13,8 +13,7 @@ import { AuthValidator } from '../../providers';
 
 @Component({
   selector: 'page-registration',
-  templateUrl: 'registration.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'registration.html'
 })
 export class RegistrationPage {
   public email: AbstractControl;
@@ -27,7 +26,6 @@ export class RegistrationPage {
   constructor(
     private _alertCtrl: AlertController,
     private _auth: Auth,
-    private _detectorRef: ChangeDetectorRef,
     private _fb: FormBuilder,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
@@ -119,9 +117,4 @@ export class RegistrationPage {
       this._navCtrl.setRoot(FitnessPage);
     }
   }
-
-  ionViewWillLeave(): void {
-    this._detectorRef.detach();
-  }
-
 }

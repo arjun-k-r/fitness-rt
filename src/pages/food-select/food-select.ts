@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { AlertController, InfiniteScroll, Loading, LoadingController, ViewController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -14,8 +14,7 @@ import { FOOD_GROUPS, FoodService, RecipeService } from '../../providers';
 
 @Component({
   selector: 'page-food-select',
-  templateUrl: 'food-select.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'food-select.html'
 })
 export class FoodSelectPage {
   private _foodSubscription: Subscription;
@@ -34,7 +33,6 @@ export class FoodSelectPage {
   public start: number;
   constructor(
     private _alertCtrl: AlertController,
-    private _detectorRef: ChangeDetectorRef,
     private _foodSvc: FoodService,
     private _loadCtrl: LoadingController,
     private _recipeSvc: RecipeService,
@@ -48,7 +46,6 @@ export class FoodSelectPage {
 
   public clearSearchRecipes(ev: string): void {
     this.searchQueryRecipes = '';
-    this._detectorRef.detectChanges();
   }
 
   public doneSelecting(): void {
@@ -90,7 +87,9 @@ export class FoodSelectPage {
 
   public loadMoreRecipes(ev: InfiniteScroll) {
     this.recipeLimit += 50;
-    setTimeout(() => ev.complete(), 1000);
+    setTimeout(() => {
+      ev.complete();
+    }, 1000);
   }
 
   public refreshItems(): void {
@@ -113,7 +112,6 @@ export class FoodSelectPage {
           this.foods = [...data];
           doneLoading = true;
           loader.dismiss();
-          this._detectorRef.detectChanges();
         }, (err: { status: string, message: string }) => {
           doneLoading = true;
           loader.dismiss();
@@ -141,10 +139,6 @@ export class FoodSelectPage {
     }
   }
 
-  public segmentChange(): void {
-    this._detectorRef.detectChanges();
-  }
-
   public selectItem(item: IFoodSearchResult | Recipe, radioInput: HTMLInputElement): void {
     this._alertCtrl.create({
       title: 'Servings',
@@ -162,7 +156,6 @@ export class FoodSelectPage {
           role: 'cancel',
           handler: () => {
             radioInput.checked = false;
-            this._detectorRef.detectChanges();
           }
         },
         {
@@ -207,9 +200,7 @@ export class FoodSelectPage {
   }
 
   ionViewWillLeave(): void {
-    
     this._foodSubscription.unsubscribe();
-    this._detectorRef.detach();
   }
 
 }

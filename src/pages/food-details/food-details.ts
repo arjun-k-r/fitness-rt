@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { AlertController, Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
 
 // Models
@@ -17,7 +17,6 @@ export class FoodDetailsPage {
   public food: Food;
   constructor(
     private _alertCtrl: AlertController,
-    private _detectorRef: ChangeDetectorRef,
     private _foodSvc: FoodService,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
@@ -44,11 +43,6 @@ export class FoodDetailsPage {
       loader.dismiss();
       this._navCtrl.pop();
     });
-  }
-
-  ionViewWillLeave(): void {
-    
-    this._detectorRef.detach();
   }
 
 }

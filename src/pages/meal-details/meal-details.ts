@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Alert, AlertController, Modal, ModalController, NavController, NavParams, ToastController } from 'ionic-angular';
 
 // Models
@@ -13,8 +13,7 @@ import { MealService, NutritionService } from '../../providers';
 
 @Component({
   selector: 'page-meal-details',
-  templateUrl: 'meal-details.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'meal-details.html'
 })
 export class MealDetailsPage {
   public meal: Meal;
@@ -23,7 +22,6 @@ export class MealDetailsPage {
   public mealPlan: MealPlan;
   constructor(
     private _alertCtrl: AlertController,
-    private _detectorRef: ChangeDetectorRef,
     private _mealSvc: MealService,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
@@ -95,7 +93,6 @@ export class MealDetailsPage {
           handler: data => {
             item.servings = +data.servings;
             this._updateMealDetails();
-            this._detectorRef.detectChanges();
           }
         }
       ]
@@ -117,10 +114,6 @@ export class MealDetailsPage {
   public saveMeal(): void {
     this._updateMealDetails();
     this._mealSvc.saveMeal(this.meal, this.mealPlan);
-  }
-
-  public segmentChange(): void {
-    this._detectorRef.detectChanges();
   }
 
   ionViewCanLeave(): Promise<boolean> {
@@ -155,13 +148,5 @@ export class MealDetailsPage {
         }
       ]
     }));
-  }
-
-  ionViewWillEnter(): void {
-    this._detectorRef.detectChanges();
-  }
-
-  ionViewWillLeave(): void {
-    this._detectorRef.detach();
   }
 }

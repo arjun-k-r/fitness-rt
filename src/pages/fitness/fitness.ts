@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 
 // Models
@@ -13,8 +13,7 @@ import { FitnessService, NutritionService } from '../../providers';
 
 @Component({
   selector: 'page-fitness',
-  templateUrl: 'fitness.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'fitness.html'
 })
 export class FitnessPage {
   public fitness: Fitness = new Fitness();
@@ -23,7 +22,6 @@ export class FitnessPage {
   public idealWeight: number;
   public fitnessDetails: string = 'fitness';
   constructor(
-    private _detectorRef: ChangeDetectorRef,
     private _fitSvc: FitnessService,
     private _navCtrl: NavController,
     private _nutritionSvc: NutritionService,
@@ -41,28 +39,26 @@ export class FitnessPage {
   }
 
   public saveFitness(): void {
-    this.fitness.heartRate.max = this._fitSvc.getHeartRateMax(this.fitness.age);
+    
     let thrRange: { min: number, max: number } = this._fitSvc.getHeartRateTrainingRange(this.fitness.heartRate.max, this.fitness.heartRate.resting);
-    this.fitness.heartRate.trainingMin = thrRange.min;
-    this.fitness.heartRate.trainingMax = thrRange.max;
-    this.fitness.bmr = this._fitSvc.getBmr(this.fitness.age, this.fitness.gender, this.fitness.height, this.fitness.weight);
-    this.fitness.bodyFat = this._fitSvc.getBodyFat(this.fitness.age, this.fitness.gender, this.fitness.height, this.fitness.hips, this.fitness.neck, this.fitness.waist);
+    this.fitness = Object.assign({}, this.fitness, {
+      bmr: this._fitSvc.getBmr(this.fitness.age, this.fitness.gender, this.fitness.height, this.fitness.weight),
+      bodyFat: this._fitSvc.getBodyFat(this.fitness.age, this.fitness.gender, this.fitness.height, this.fitness.hips, this.fitness.neck, this.fitness.waist),
+      heartRate.max: this._fitSvc.getHeartRateMax(this.fitness.age),
+      heartRate.trainingMin: thrRange.min,
+      heartRate.trainingMax: thrRange.max
+    });
+
     this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.fitness.gender);
     this.idealWeight = this._fitSvc.getIdealWeight(this.fitness.gender, this.fitness.height, this.fitness.weight);
-    this.fitness.heartRate.max = this._fitSvc.getHeartRateMax(this.fitness.age);
     this._fitSvc.restoreEnergyConsumption().then((energyConsumption: number) => {
-      this.fitness.requirements = this._nutritionSvc.getDri(this.fitness.age, energyConsumption === 0 ? this.fitness.bmr : energyConsumption, this.fitness.gender, this.fitness.height, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight);
+      this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, energyConsumption === 0 ? this.fitness.bmr : energyConsumption, this.fitness.gender, this.fitness.height, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
       this._fitSvc.saveFitness(this.fitness);
-      this._detectorRef.detectChanges();
     });
 
     if (!!this._params.get('new')) {
       this._navCtrl.setRoot(SleepPlanPage, { new: true });
     }
-  }
-
-  public segmentChange(): void {
-    this._detectorRef.detectChanges();
   }
 
   ionViewWillEnter(): void {
@@ -75,12 +71,5 @@ export class FitnessPage {
         this.idealWeight = this._fitSvc.getIdealWeight(this.fitness.gender, this.fitness.height, this.fitness.weight);
       }
     }
-
-    this._detectorRef.detectChanges();
-    this._detectorRef.markForCheck();
-  }
-
-  ionViewWillLeave(): void {
-    this._detectorRef.detach();
   }
 }

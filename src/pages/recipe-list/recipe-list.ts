@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { AlertController, InfiniteScroll, Loading, LoadingController, NavController } from 'ionic-angular';
 
 // Third-party
@@ -16,8 +16,7 @@ import { RecipeService } from '../../providers';
 
 @Component({
   selector: 'page-recipe-list',
-  templateUrl: 'recipe-list.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'recipe-list.html'
 })
 export class RecipeListPage {
   public detailsPage: any = RecipeDetailsPage;
@@ -27,7 +26,6 @@ export class RecipeListPage {
   public searchQuery: string = '';
   constructor(
     private _alertCtrl: AlertController,
-    private _detectorRef: ChangeDetectorRef,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
     private _recipeSvc: RecipeService,
@@ -55,7 +53,6 @@ export class RecipeListPage {
             if (!this.queryIngredients.find((query: string) => query.toLocaleLowerCase().includes(data.ingredient.toLocaleLowerCase()))) {
               this.queryIngredients.push(data.ingredient);
               this.queryIngredients = [...this.queryIngredients];
-              this._detectorRef.detectChanges();
             }
           }
         }
@@ -70,26 +67,21 @@ export class RecipeListPage {
 
   public clearSearch(ev: string): void {
     this.searchQuery = '';
-    this._detectorRef.detectChanges();
   }
 
   public loadMore(ev: InfiniteScroll) {
     this.limit += 50;
     setTimeout(() => {
       ev.complete();
-      this._detectorRef.detectChanges();
     }, 1000);
   }
 
   public removeQueryIngredient(idx: number): void {
-    this.queryIngredients.splice(idx, 1);
-    this.queryIngredients = [...this.queryIngredients];
-    this._detectorRef.detectChanges();
+    this.queryIngredients = [...this.queryIngredients.slice(0, idx), ...this.queryIngredients.slice(idx + 1)];
   }
 
   public removeRecipe(recipe: Recipe): void {
     this._recipeSvc.removeRecipe(recipe);
-    this._detectorRef.detectChanges();
   }
 
   ionViewWillEnter(): void {
@@ -101,11 +93,6 @@ export class RecipeListPage {
 
     loader.present();
     this.recipes$ = this._recipeSvc.getRecipes$();
-    this._detectorRef.detectChanges();
     console.log('Entering...');
-  }
-
-  ionViewWillLeave(): void {
-    this._detectorRef.detach();
   }
 }

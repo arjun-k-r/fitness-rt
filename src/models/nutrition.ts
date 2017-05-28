@@ -75,7 +75,7 @@ export class NutrientExcesses {
         public energy: number = 0,
         public protein: number = 0,
         public carbs: number = 0,
-        public sugars: number = 0,
+        public sugar: number = 0,
         public sodium: number = 0,
         public polyunsatFat: number = 0,
         public transFat: number = 0

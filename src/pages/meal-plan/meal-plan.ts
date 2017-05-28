@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Alert, AlertController, Loading, LoadingController, NavController } from 'ionic-angular';
 
 // Third-party
@@ -16,8 +16,7 @@ import { FitnessService, MealService, NutritionService } from '../../providers';
 
 @Component({
   selector: 'page-meal-plan',
-  templateUrl: 'meal-plan.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'meal-plan.html'
 })
 export class MealPlanPage {
   public detailsPage: any = MealDetailsPage;
@@ -27,7 +26,6 @@ export class MealPlanPage {
   public nourishingMeals$: FirebaseListObservable<Array<Meal>>;
   constructor(
     private _alertCtrl: AlertController,
-    private _detectorRef: ChangeDetectorRef,
     private _fitSvc: FitnessService,
     private _loadCtrl: LoadingController,
     private _mealSvc: MealService,
@@ -61,7 +59,6 @@ export class MealPlanPage {
             newMeal.wasNourishing = false;
             this.mealPlan.meals[+data] = newMeal;
             this._mealSvc.saveMeal(newMeal, this.mealPlan);
-            this._detectorRef.detectChanges();
           }
         }
       ]
@@ -74,7 +71,6 @@ export class MealPlanPage {
     updatedMeal.time = this.mealPlan.meals[mealIdx].time;
     this.mealPlan.meals[mealIdx] = updatedMeal;
     this._mealSvc.saveMeal(updatedMeal, this.mealPlan);
-    this._detectorRef.detectChanges();
   }
 
   public reorganizeMeals(): void {
@@ -85,11 +81,6 @@ export class MealPlanPage {
     let newMealPlan: MealPlan = new MealPlan();
     newMealPlan.meals = [...this._mealSvc.getMeals(this.mealPlan.breakfastTime)];
     this.mealPlan = Object.assign({}, newMealPlan);
-    this._detectorRef.detectChanges();
-  }
-
-  public segmentChange(): void {
-    this._detectorRef.detectChanges();
   }
 
   public saveMealPlan(): void {
@@ -116,7 +107,6 @@ export class MealPlanPage {
             role: 'cancel',
             handler: () => {
               meal.wasNourishing = false;
-              this._detectorRef.detectChanges();
             }
           },
           {
@@ -172,12 +162,6 @@ export class MealPlanPage {
       this.mealPlan = mealPlan;
       this.omega36Ratio = this._nutritionSvc.getOmega36Ratio(this.mealPlan.dailyNutrition);
       loader.dismiss();
-      this._detectorRef.detectChanges();
-      this._detectorRef.markForCheck();
     });
-  }
-
-  ionViewWillLeave(): void {
-    this._detectorRef.detach();
   }
 }

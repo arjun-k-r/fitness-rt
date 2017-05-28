@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { AlertController, InfiniteScroll, ViewController } from 'ionic-angular';
 
 // Third-party
@@ -14,8 +14,7 @@ import { ActivityService } from '../../providers';
 
 @Component({
   selector: 'page-activity-select',
-  templateUrl: 'activity-select.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'activity-select.html'
 })
 export class ActivitySelectPage {
   public activities$: FirebaseListObservable<Array<Activity>>;
@@ -25,7 +24,6 @@ export class ActivitySelectPage {
   constructor(
     private _activitySvc: ActivityService,
     private _alertCtrl: AlertController,
-    private _detectorRef: ChangeDetectorRef,
     private _viewCtrl: ViewController
   ) { }
 
@@ -41,7 +39,6 @@ export class ActivitySelectPage {
     this.limit += 50;
     setTimeout(() => {
       ev.complete();
-      this._detectorRef.detectChanges();
     }, 1000);
   }
 
@@ -64,9 +61,8 @@ export class ActivitySelectPage {
         {
           text: 'Done',
           handler: (data: { duration: number }) => {
-            activity.duration = +data.duration;
-            activity.energyBurn = this._activitySvc.getActivityEnergyBurn(activity);
-            this.selectedActivity = activity;
+            activity = Object.assign({}, activity, { duration: +data.duration, energyBurn: this._activitySvc.getActivityEnergyBurn(activity) });
+            this.selectedActivity = Object.assign({}, activity);
           }
         }
       ]
@@ -76,10 +72,5 @@ export class ActivitySelectPage {
   ionViewWillEnter(): void {
     this.activities$ = this._activitySvc.getActivities$();
     console.log('Entering...');
-    this._detectorRef.detectChanges();
-  }
-
-  ionViewWillLeave(): void {
-    this._detectorRef.detach();
   }
 }

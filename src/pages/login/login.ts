@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, NavController } from 'ionic-angular';
 import { Auth, IDetailedError, User, UserDetails } from '@ionic/cloud-angular';
@@ -13,8 +13,7 @@ import { AuthValidator } from '../../providers';
 
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'login.html'
 })
 export class LoginPage {
   public forgotPasswordPage: any = ForgotPasswordPage;
@@ -24,7 +23,6 @@ export class LoginPage {
   constructor(
     private _alertCtrl: AlertController,
     private _auth: Auth,
-    private _detectorRef: ChangeDetectorRef,
     private _fb: FormBuilder,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
@@ -78,9 +76,4 @@ export class LoginPage {
         }
       });
   }
-
-  ionViewWillLeave(): void {
-    this._detectorRef.detach();
-  }
-
 }

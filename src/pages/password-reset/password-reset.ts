@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { Auth } from '@ionic/cloud-angular';
@@ -9,8 +9,7 @@ import { AuthValidator } from '../../providers';
 
 @Component({
   selector: 'page-password-reset',
-  templateUrl: 'password-reset.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'password-reset.html'
 })
 export class PasswordResetPage {
   public email: string;
@@ -20,7 +19,6 @@ export class PasswordResetPage {
   constructor(
     private _alertCtrl: AlertController,
     private _auth: Auth,
-    private _detectorRef: ChangeDetectorRef,
     private _fb: FormBuilder,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
@@ -68,9 +66,4 @@ export class PasswordResetPage {
         buttons: ['OK']
       }).present());
   }
-
-  ionViewWillLeave(): void {
-    this._detectorRef.detach();
-  }
-
 }

@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 
 // Models
@@ -10,8 +10,7 @@ import { FitnessService, SleepService } from '../../providers';
 
 @Component({
   selector: 'page-sleep-plan',
-  templateUrl: 'sleep-plan.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'sleep-plan.html'
 })
 export class SleepPlanPage {
   public currentSleep: SleepHabit = new SleepHabit();
@@ -19,7 +18,6 @@ export class SleepPlanPage {
   public sleepPlanDetails: string = 'guidelines';
   constructor(
     private _alertCtrl: AlertController,
-    private _detectorRef: ChangeDetectorRef,
     private _fitSvc: FitnessService,
     private _sleepSvc: SleepService
   ) { }
@@ -28,18 +26,12 @@ export class SleepPlanPage {
     this._sleepSvc.saveSleep(this.sleepPlan, this.currentSleep);
   }
 
-  public segmentChange(): void {
-    this._detectorRef.detectChanges();
-  }
-
   public setBedtime(): void {
-    this.currentSleep = Object.assign({}, this.currentSleep, { bedtime: this._sleepSvc.getBedtime(this.currentSleep.wakeUpTime) });
+    this.currentSleep = Object.assign({}, this.currentSleep, { bedTime: this._sleepSvc.getBedtime(this.currentSleep.wakeUpTime) });
   }
 
   public setWakeUptime(): void {
-    this.currentSleep.wakeUpTime = this._sleepSvc.getWakeUptime(this.currentSleep.bedTime);
-    this._detectorRef.detectChanges();
-    this._detectorRef.markForCheck();
+    this.currentSleep = Object.assign({}, this.currentSleep, { wakeUpTime: this._sleepSvc.getWakeUptime(this.currentSleep.bedTime) });
   }
 
   public viewSymptoms(): void {
@@ -72,9 +64,5 @@ export class SleepPlanPage {
       this.sleepPlan = Object.assign({}, sleepPlan);
       this.currentSleep = Object.assign({}, this._sleepSvc.getCurrentSleep(this.sleepPlan));
     });
-  }
-
-  ionViewWillLeave(): void {
-    this._detectorRef.detach();
   }
 }

@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, NavController } from 'ionic-angular';
 import { Auth } from '@ionic/cloud-angular';
@@ -12,8 +12,7 @@ import { AuthValidator } from '../../providers';
 
 @Component({
   selector: 'page-forgot-password',
-  templateUrl: 'forgot-password.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'forgot-password.html'
 })
 export class ForgotPasswordPage {
   public forgotPasswordForm: FormGroup;
@@ -23,7 +22,6 @@ export class ForgotPasswordPage {
   constructor(
     private _alertCtrl: AlertController,
     private _auth: Auth,
-    private _detectorRef: ChangeDetectorRef,
     private _loadCtrl: LoadingController,
     private _fb: FormBuilder,
     private _navCtrl: NavController
@@ -60,10 +58,4 @@ export class ForgotPasswordPage {
         buttons: ['OK']
       }).present());
   }
-
-  ionViewWillLeave(): void {
-    
-    this._detectorRef.detach();
-  }
-
 }

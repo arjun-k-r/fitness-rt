@@ -1,5 +1,5 @@
 // App
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Alert, AlertController, Loading, LoadingController, Modal, ModalController, NavController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -17,8 +17,7 @@ import { ActivityService, FitnessService } from '../../providers';
 
 @Component({
   selector: 'page-activity-plan',
-  templateUrl: 'activity-plan.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'activity-plan.html'
 })
 export class ActivityPlanPage {
   private _activityPlanSubscription: Subscription;
@@ -28,7 +27,6 @@ export class ActivityPlanPage {
   constructor(
     private _activitySvc: ActivityService,
     private _alertCtrl: AlertController,
-    private _detectorRef: ChangeDetectorRef,
     private _fitSvc: FitnessService,
     private _loadCtrl: LoadingController,
     private _modalCtrl: ModalController,
@@ -84,7 +82,6 @@ export class ActivityPlanPage {
               this.activityPlan.intellectualEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.intellectualActivities);
             }
             this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn([...this.activityPlan.intellectualActivities, ...this.activityPlan.physicalActivities]);
-            this._detectorRef.detectChanges();
           }
         }
       ]
@@ -105,12 +102,7 @@ export class ActivityPlanPage {
     this._activitySvc.getLeftEnergy().then((energy: number) => {
       this.leftEnergy = energy;
       console.log(energy);
-      this._detectorRef.detectChanges();
     });
-  }
-
-  public segmentChange(): void {
-    this._detectorRef.detectChanges();
   }
 
   public viewSymptoms(imbalanceKey: string, imbalanceName: string, imbalanceType: string): void {
@@ -151,12 +143,12 @@ export class ActivityPlanPage {
       this.activityPlan = Object.assign({}, activityPlan);
       this.activityPlan.intellectualActivities = [...this.activityPlan.intellectualActivities] || [];
       this.activityPlan.physicalActivities = [...this.activityPlan.physicalActivities] || [];
+      loader.dismiss();
     });
   }
 
   ionViewWillLeave(): void {
     this._activityPlanSubscription.unsubscribe();
-    this._detectorRef.detach();
   }
 
 }

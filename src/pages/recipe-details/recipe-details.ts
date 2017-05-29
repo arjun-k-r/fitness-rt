@@ -1,6 +1,7 @@
 // App
-import { Component } from '@angular/core';
-import { ActionSheetController, Alert, AlertController, Modal, ModalController, NavController, NavParams, Platform, Toast, ToastController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { ActionSheetController, Alert, AlertController, Modal, ModalController, NavController, NavParams, Toast, ToastController } from 'ionic-angular';
+import { Camera } from '@ionic-native/camera';
 
 // Models
 import { Food, Recipe } from '../../models';
@@ -16,10 +17,11 @@ import { NutritionService, PictureService, RecipeService } from '../../providers
   templateUrl: 'recipe-details.html'
 })
 export class RecipeDetailsPage {
+  @ViewChild('fileInput') fileInput;
+  public isDirty: boolean = false;
   public recipe: Recipe;
   public recipeDetails: string = 'details';
   public recipeInstructions: Array<string>;
-  public uploadReady: boolean = false;
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
@@ -28,7 +30,6 @@ export class RecipeDetailsPage {
     private _nutritionSvc: NutritionService,
     private _params: NavParams,
     private _picService: PictureService,
-    private _platform: Platform,
     private _recipeSvc: RecipeService,
     private _toastCtrl: ToastController
   ) {
@@ -40,6 +41,7 @@ export class RecipeDetailsPage {
   }
 
   private _updateRecipeDetails(): void {
+    this.isDirty = true;
     this.recipe.nutrition = this._recipeSvc.getRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
     this._recipeSvc.checkCooking(this.recipe);
     this.recipe.pral = this._nutritionSvc.getPRAL(this.recipe.nutrition);
@@ -63,10 +65,11 @@ export class RecipeDetailsPage {
   public addInstruction(): void {
     this.recipe.instructions = [...this.recipe.instructions, ''];
     this.recipeInstructions = [...this.recipeInstructions, ''];
+    this.isDirty = true;
   }
 
-  public changeImage(inputRef?: HTMLInputElement): void {
-    if (this._platform.is('cordova')) {
+  public changeImage(): void {
+    if (Camera['installed']()) {
       this._actionSheetCtrl.create({
         title: 'Change image',
         buttons: [
@@ -75,7 +78,7 @@ export class RecipeDetailsPage {
             handler: () => {
               this._picService.takePhoto().then((photoUri: string) => {
                 this.recipe.image = photoUri;
-                this.uploadReady = true;
+                this.uploadImage();
               }).catch((err: Error) => this._alertCtrl.create({
                 title: 'Uhh ohh...',
                 subTitle: 'Something went wrong',
@@ -88,7 +91,7 @@ export class RecipeDetailsPage {
             handler: () => {
               this._picService.chooseImage().then((photoUri: string) => {
                 this.recipe.image = photoUri;
-                this.uploadReady = true;
+                this.uploadImage();
               }).catch((err: Error) => this._alertCtrl.create({
                 title: 'Uhh ohh...',
                 subTitle: 'Something went wrong',
@@ -106,13 +109,14 @@ export class RecipeDetailsPage {
         ]
       }).present();
     } else {
-      this.uploadImage(inputRef.files[0]);
+      this.fileInput.nativeElement.click();
     }
   }
 
   public changePortions(): void {
     this.recipe.nutrition = this._recipeSvc.getRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
     this.recipe.quantity = this._recipeSvc.getRecipeSize(this.recipe.ingredients, this.recipe.portions);
+    this.isDirty = true;
   }
 
   public changeServings(item: Food): void {
@@ -143,6 +147,16 @@ export class RecipeDetailsPage {
     alert.present();
   }
 
+  public processWebImage(event: any) {
+    let reader: FileReader = new FileReader();
+    reader.onload = (readerEvent: Event) => {
+      this.recipe.image = (readerEvent.target as any).result;
+      this.uploadImage(event.target.files[0]);
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
   public removeIngredient(idx: number): void {
     this.recipe.ingredients = [...this.recipe.ingredients.slice(0, idx), ...this.recipe.ingredients.slice(idx + 1)];
     this._updateRecipeDetails();
@@ -151,6 +165,7 @@ export class RecipeDetailsPage {
   public removeInstruction(idx: number): void {
     this.recipe.instructions = [...this.recipe.instructions.slice(0, idx), ...this.recipe.instructions.slice(idx + 1)];
     this.recipeInstructions = [...this.recipeInstructions.slice(0, idx), ...this.recipeInstructions.slice(idx + 1)];
+    this.isDirty = true;
   }
 
   public removeRecipe(): void {
@@ -162,6 +177,7 @@ export class RecipeDetailsPage {
     this.recipe.instructions = [...this.recipeInstructions];
     this._updateRecipeDetails();
     this._recipeSvc.saveRecipe(this.recipe);
+    this.isDirty = false;
   }
 
   public uploadImage(file?: File): void {
@@ -184,8 +200,8 @@ export class RecipeDetailsPage {
       if (typeof data === 'number') {
         toast.setMessage(`Uploading ... ${data}%`);
       } else {
-        this.uploadReady = false;
         this.recipe.image = data;
+        this.isDirty = true;
       }
     }, (err: Error) => {
       console.log('Error uploading avatar: ', err);
@@ -204,4 +220,32 @@ export class RecipeDetailsPage {
         }
       });
   }
+
+  ionViewCanLeave(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      if (this.isDirty) {
+        this._alertCtrl.create({
+          title: 'Discard changes',
+          message: 'Changes have been made. Are you sure you want to leave?',
+          buttons: [
+            {
+              text: 'Yes',
+              handler: () => {
+                resolve(true);
+              }
+            },
+            {
+              text: 'No',
+              handler: () => {
+                reject(true);
+              }
+            }
+          ]
+        }).present();
+      } else {
+        resolve(true);
+      }
+    });
+  }
 }
+

@@ -86,7 +86,7 @@ export class MealService {
   */
   public checkMeal(meal: Meal): void {
     meal.warnings = _.compact([
-      this._nutritionSvc.checkNutrition(meal.nutrition),
+      ...this._nutritionSvc.checkNutrition(meal.nutrition),
       this._checkMealPral(meal.pral),
       this._checkMealSize(meal.quantity)
     ]);

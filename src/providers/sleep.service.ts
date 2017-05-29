@@ -8,10 +8,9 @@ import 'rxjs/operator/map';
 // Third-party
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import * as moment from 'moment';
-import * as _ from 'lodash';
 
 // Models
-import { SleepHabit, SleepPlan, WarningMessage } from '../models';
+import { SleepHabit, SleepPlan } from '../models';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 
@@ -96,7 +95,9 @@ export class SleepService {
     if (!!sleepPlan.sleepPattern[0] && sleepPlan.sleepPattern[0].date === CURRENT_DAY) {
       return sleepPlan.sleepPattern[0];
     } else {
-      sleepPlan.sleepPattern.pop();
+      if (sleepPlan.sleepPattern.length === 7) {
+        sleepPlan.sleepPattern.pop();
+      }
       sleepPlan.sleepPattern.unshift(new SleepHabit());
       sleepPlan.sleepPattern[0].date = CURRENT_DAY;
 

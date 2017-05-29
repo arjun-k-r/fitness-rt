@@ -17,7 +17,6 @@ export class ErrorMessageComponent {
   public get errorMessage() {
     if (!!this.control && !!this.control.touched) {
       for (let propertyName in this.control.errors) {
-        console.log(AuthValidator.getErrorMessage(propertyName, this.control.errors[propertyName]));
         return AuthValidator.getErrorMessage(propertyName, this.control.errors[propertyName]);
       }
     }

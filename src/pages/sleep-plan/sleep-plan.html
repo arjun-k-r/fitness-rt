@@ -3,7 +3,7 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Sleep plan</ion-title>
+        <ion-title>Sleep plan{{ isDirty ? '*' : ''}}</ion-title>
         <ion-buttons end>
             <button ion-button icon-only (click)="saveSleep()">
                 <ion-icon name="sync"></ion-icon>
@@ -27,22 +27,35 @@
 
 <ion-content padding>
     <div [ngSwitch]="sleepPlanDetails">
+        
         <!-- Start of segment -->
         <ion-list *ngSwitchCase="'guidelines'">
             <ion-item>
+                <h2>Sleep 6-8 hours</h2>
+                <p text-wrap>We need 4-5 complete R.E.M. 90-minute cycles.</p>
+            </ion-item>
+            <ion-item>
+                <h2>Go to bed at the same hour</h2>
+                <p text-wrap>Setup your biological clock (circadian rhythm)</p>
+            </ion-item>
+            <ion-item>
                 <h2>Go to bed before 10:00 p.m.</h2>
+                <p text-wrap>After 10:00 p.m., the adrenal glands secrete steroid hormones.</p>
             </ion-item>
             <ion-item>
                 <h2>Avoid electronics 1 hour before bed</h2>
+                <p text-wrap>Electronics emit blue light, which is perceived as sunlight.</p>
             </ion-item>
             <ion-item>
-                <h2>Avoid stimulants 6 hours before bed</h2>
+                <h2>Avoid stimulants 6 hours before bed.</h2>
             </ion-item>
             <ion-item>
-                <h2>Maintain room temperature at 19&#176; Celsius </h2>
+                <h2>Maintain room temperature at 19&#176; Celsius</h2>
+                <p text-wrap>Too hot or too cold disrupts your sleep.</p>
             </ion-item>
             <ion-item>
                 <h2>No fluids or food 2 hours before bed</h2>
+                <p text-wrap>You'll need to go to the bathroom during the night.</p>
             </ion-item>
         </ion-list>
         <!-- End of segment -->
@@ -51,7 +64,7 @@
         <ion-list *ngSwitchCase="'sleep'">
             <ion-item>
                 <ion-label floating>Bed time</ion-label>
-                <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="currentSleep.bedTime"></ion-datetime>
+                <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="currentSleep.bedTime" (ionChange)="setWakeUptime()"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label floating>Wake up time</ion-label>

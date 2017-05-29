@@ -150,8 +150,8 @@ export class NutritionService {
   * @returns {Array} Returns an array of warning messages, if there are
   */
   public checkNutrition(nutrition: Nutrition): Array<WarningMessage> {
-    let requirements: Nutrition = this._fitSvc.getUserRequirements(),
-    warnings: Array<WarningMessage> = _.compact([
+    let requirements: Nutrition = this._fitSvc.getUserRequirements()
+    return _.compact([
       this._checkAlcohol(nutrition, requirements),
       this._checkCaffeine(nutrition, requirements),
       this._checkCarbs(nutrition, requirements),
@@ -162,12 +162,6 @@ export class NutritionService {
       this._checkSugar(nutrition, requirements),
       this._checkTransFat(nutrition, requirements)
     ]);
-
-    if (!warnings.length) {
-      return null;
-    }
-
-    return warnings;
   }
 
   public getDri(age: number, energyConsumption: number, gender: string, height: number, lactating: boolean, pregnant: boolean, weight: number): Nutrition {

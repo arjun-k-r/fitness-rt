@@ -23,13 +23,13 @@ export class LoginPage {
   constructor(
     private _alertCtrl: AlertController,
     private _auth: Auth,
-    private _fb: FormBuilder,
+    private _formBuilder: FormBuilder,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
     private _user: User
   ) {
 
-    this.loginForm = _fb.group({
+    this.loginForm = _formBuilder.group({
       email: [
         '',
         Validators.compose([Validators.required, AuthValidator.emailValidator,

@@ -26,12 +26,12 @@ export class RegistrationPage {
   constructor(
     private _alertCtrl: AlertController,
     private _auth: Auth,
-    private _fb: FormBuilder,
+    private _formBuilder: FormBuilder,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
     private _user: User
   ) {
-    this.registerForm = this._fb.group({
+    this.registerForm = this._formBuilder.group({
       email: [
         '',
         Validators.compose([Validators.required, AuthValidator.emailValidator,

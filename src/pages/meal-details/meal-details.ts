@@ -16,6 +16,7 @@ import { MealService, NutritionService } from '../../providers';
   templateUrl: 'meal-details.html'
 })
 export class MealDetailsPage {
+  public isDirty: boolean = false;
   public meal: Meal;
   public mealIdx: number;
   public mealDetails: string = 'details';
@@ -37,6 +38,7 @@ export class MealDetailsPage {
   }
 
   private _updateMealDetails(): void {
+    this.isDirty = true;
     this.meal.nutrition = Object.assign({}, this._nutritionSvc.getTotalNutrition(this.meal.mealItems));
     this.meal.pral = this._nutritionSvc.getPRAL(this.meal.nutrition);
     this.meal.quantity = this._nutritionSvc.calculateQuantity(this.meal.mealItems);
@@ -114,39 +116,63 @@ export class MealDetailsPage {
   public saveMeal(): void {
     this._updateMealDetails();
     this._mealSvc.saveMeal(this.meal, this.mealPlan);
+    this.isDirty = false;
   }
 
   ionViewCanLeave(): Promise<boolean> {
-      return new Promise((resolve, reject) => this._alertCtrl.create({
-        title: 'Before eating',
-       subTitle: 'Please make sure you check each item',
-       inputs: [
-         {
-           type: 'checkbox',
-           label: 'Eat slowly and chew until fluid',
-           value: 'chewing'
-         }, {
-           type: 'checkbox',
-           label: 'Be grateful for your meal and enjoy each bite',
-           value: 'gratitude'
-         }, {
-           type: 'checkbox',
-           label: 'Make sure you are truly hungry, not just bored or tired',
-           value: 'hunger'
-         }, {
-           type: 'checkbox',
-           label: 'Serve your meal peacefully',
-           value: 'silence'
-         }
-       ],
-       buttons: [
-         {
-           text: 'Done',
-           handler: () => {
-             resolve(true);
-           }
-         }
-        ]
-      }).present());
-    }
+    return new Promise((resolve, reject) => {
+      if (this.isDirty) {
+        this._alertCtrl.create({
+          title: 'Discard changes',
+          message: 'Changes have been made. Are you sure you want to leave?',
+          buttons: [
+            {
+              text: 'Yes',
+              handler: () => {
+                this._alertCtrl.create({
+                  title: 'Before eating',
+                  subTitle: 'Please make sure you check each item',
+                  inputs: [
+                    {
+                      type: 'checkbox',
+                      label: 'Are you really hungry?',
+                      value: 'hunger'
+                    }, {
+                      type: 'checkbox',
+                      label: 'Be grateful',
+                      value: 'gratitude'
+                    }, {
+                      type: 'checkbox',
+                      label: 'Chew until fluid',
+                      value: 'chewing'
+                    }, {
+                      type: 'checkbox',
+                      label: 'Eat peacefully',
+                      value: 'silence'
+                    }
+                  ],
+                  buttons: [
+                    {
+                      text: 'Done',
+                      handler: () => {
+                        resolve(true);
+                      }
+                    }
+                  ]
+                }).present();
+              }
+            },
+            {
+              text: 'No',
+              handler: () => {
+                reject(true);
+              }
+            }
+          ]
+        }).present();
+      } else {
+        resolve(true);
+      }
+    });
+  }
 }

@@ -3,7 +3,7 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Fitness</ion-title>
+        <ion-title>Fitness{{ isDirty ? '*' : ''}}</ion-title>
         <ion-buttons end>
             <button ion-button icon-only (click)="saveFitness()">
                 <ion-icon name="sync"></ion-icon>
@@ -27,81 +27,87 @@
     <div [ngSwitch]="fitnessDetails">
         <!-- Start of segment -->
         <div *ngSwitchCase="'fitness'">
-            <ion-list>
-                <ion-item *ngIf="fitness.bmr" text-wrap>
-                    BMR
-                    <p item-content>{{ fitness.bmr }} kcal/day</p>
-                </ion-item>
-                <ion-item *ngIf="fitness.bodyFat" text-wrap>
-                    Body fat
-                    <p item-content>{{ fitness.bodyFat }}%</p>
-                </ion-item>
-                <ion-item *ngIf="idealBodyFat" text-wrap>
-                    Ideal body fat
-                    <p item-content>{{ idealBodyFat }}%</p>
-                </ion-item>
-                <ion-item *ngIf="idealWeight" text-wrap>
-                    Ideal weight
-                    <p item-content>{{ idealWeight }} kg</p>
-                </ion-item>
-                <ion-item *ngIf="fitness.heartRate.max" text-wrap>
-                    Maximum heart rate (HRMax)
-                    <p item-content>{{ fitness.heartRate.max }} bpm</p>
-                </ion-item>
-                <ion-item *ngIf="fitness.heartRate.trainingMin && fitness.heartRate.trainingMax" text-wrap>
-                    Training heart rate (THR)
-                    <p item-content>{{ fitness.heartRate.trainingMin }}-{{ fitness.heartRate.trainingMax }} bpm</p>
-                </ion-item>
-                <ion-item text-wrap>
-                    <ion-label fixed>Age (years)</ion-label>
-                    <ion-input type="number" [(ngModel)]="fitness.age"></ion-input>
-                </ion-item>
-                <ion-item text-wrap>
-                    <ion-label fixed>Resting heart rate (BPM)</ion-label>
-                    <ion-input type="number" [(ngModel)]="fitness.heartRate.resting"></ion-input>
-                </ion-item>
-                <ion-item text-wrap>
-                    <ion-label>Gender</ion-label>
-                    <ion-select [(ngModel)]="fitness.gender">
-                        <ion-option value="male">Male</ion-option>
-                        <ion-option value="female">Female</ion-option>
-                    </ion-select>
-                </ion-item>
-                <ion-item *ngIf="fitness.gender === 'female'">
-                    <ion-label>Pregnant</ion-label>
-                    <ion-select [(ngModel)]="fitness.pregnant">
-                        <ion-option value="true">Yes</ion-option>
-                        <ion-option value="false">No</ion-option>
-                    </ion-select>
-                </ion-item>
-                <ion-item *ngIf="fitness.gender === 'female'">
-                    <ion-label>Lactating</ion-label>
-                    <ion-select [(ngModel)]="fitness.lactating">
-                        <ion-option value="true">Yes</ion-option>
-                        <ion-option value="false">No</ion-option>
-                    </ion-select>
-                </ion-item>
-                <ion-item text-wrap>
-                    <ion-label fixed>Height (cm)</ion-label>
-                    <ion-input type="number" [(ngModel)]="fitness.height"></ion-input>
-                </ion-item>
-                <ion-item text-wrap>
-                    <ion-label fixed>Weight (kg)</ion-label>
-                    <ion-input type="number" [(ngModel)]="fitness.weight"></ion-input>
-                </ion-item>
-                <ion-item text-wrap>
-                    <ion-label fixed>Waist (cm)</ion-label>
-                    <ion-input type="number" [(ngModel)]="fitness.waist"></ion-input>
-                </ion-item>
-                <ion-item text-wrap>
-                    <ion-label fixed>Neck (cm)</ion-label>
-                    <ion-input type="number" [(ngModel)]="fitness.neck"></ion-input>
-                </ion-item>
-                <ion-item *ngIf="fitness.gender === 'female'" text-wrap>
-                    <ion-label fixed>Hips (cm)</ion-label>
-                    <ion-input type="number" [(ngModel)]="fitness.hips"></ion-input>
-                </ion-item>
-            </ion-list>
+            <form [formGroup]="fitnessForm" *ngIf="fitnessForm">
+                <ion-list>
+                    <ion-item *ngIf="fitness?.bmr" text-wrap>
+                        BMR
+                        <p item-content>{{ fitness?.bmr }} kcal/day</p>
+                    </ion-item>
+                    <ion-item *ngIf="fitness?.bodyFat" text-wrap>
+                        Body fat
+                        <p item-content>{{ fitness?.bodyFat }}%</p>
+                    </ion-item>
+                    <ion-item *ngIf="idealBodyFat" text-wrap>
+                        Ideal body fat
+                        <p item-content>{{ idealBodyFat }}%</p>
+                    </ion-item>
+                    <ion-item *ngIf="idealWeight" text-wrap>
+                        Ideal weight
+                        <p item-content>{{ idealWeight }} kg</p>
+                    </ion-item>
+                    <ion-item *ngIf="fitness?.heartRate.max" text-wrap>
+                        Maximum heart rate (HRMax)
+                        <p item-content>{{ fitness?.heartRate.max }} bpm</p>
+                    </ion-item>
+                    <ion-item *ngIf="fitness?.heartRate.trainingMin && fitness?.heartRate.trainingMax" text-wrap>
+                        Training heart rate (THR)
+                        <p item-content>{{ fitness?.heartRate.trainingMin }}-{{ fitness?.heartRate.trainingMax }} bpm</p>
+                    </ion-item>
+                    <ion-item text-wrap>
+                        <ion-label fixed>Age (years)</ion-label>
+                        <ion-input type="number" formControlName="age"></ion-input>
+                    </ion-item>
+                    <error-message [control]="age"></error-message>
+                    <ion-item text-wrap>
+                        <ion-label fixed>Resting heart rate (BPM)</ion-label>
+                        <ion-input type="number" formControlName="rhr"></ion-input>
+                    </ion-item>
+                    <ion-item text-wrap>
+                        <ion-label>Gender</ion-label>
+                        <ion-select formControlName="gender">
+                            <ion-option value="male">Male</ion-option>
+                            <ion-option value="female">Female</ion-option>
+                        </ion-select>
+                    </ion-item>
+                    <error-message [control]="gender"></error-message>
+                    <ion-item *ngIf="fitnessForm.get('gender').value === 'female'">
+                        <ion-label>Pregnant</ion-label>
+                        <ion-select formControlName="pregnant">
+                            <ion-option value="true">Yes</ion-option>
+                            <ion-option value="false">No</ion-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item *ngIf="fitnessForm.get('gender').value === 'female'">
+                        <ion-label>Lactating</ion-label>
+                        <ion-select formControlName="lactating">
+                            <ion-option value="true">Yes</ion-option>
+                            <ion-option value="false">No</ion-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item text-wrap>
+                        <ion-label fixed>Height (cm)</ion-label>
+                        <ion-input type="number" formControlName="height"></ion-input>
+                    </ion-item>
+                    <error-message [control]="height"></error-message>
+                    <ion-item text-wrap>
+                        <ion-label fixed>Weight (kg)</ion-label>
+                        <ion-input type="number" formControlName="weight"></ion-input>
+                    </ion-item>
+                    <error-message [control]="weight"></error-message>
+                    <ion-item text-wrap>
+                        <ion-label fixed>Waist (cm)</ion-label>
+                        <ion-input type="number" formControlName="waist"></ion-input>
+                    </ion-item>
+                    <ion-item text-wrap>
+                        <ion-label fixed>Neck (cm)</ion-label>
+                        <ion-input type="number" formControlName="neck"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="fitnessForm.get('gender').value === 'female'" text-wrap>
+                        <ion-label fixed>Hips (cm)</ion-label>
+                        <ion-input type="number" formControlName="hips"></ion-input>
+                    </ion-item>
+                </ion-list>
+            </form>
         </div>
         <!-- End of segment -->
 
@@ -158,7 +164,8 @@
                 </ion-item>
                 <ion-item>
                     Phenylalanine
-                    <p item-content>{{ (fitness.requirements.phenylalanine?.value).toFixed(2) }}{{ fitness.requirements.phenylalanine?.unit }}</p>
+                    <p item-content>{{ (fitness.requirements.phenylalanine?.value).toFixed(2) }}{{ fitness.requirements.phenylalanine?.unit
+                        }}</p>
                 </ion-item>
                 <ion-item>
                     Threonine

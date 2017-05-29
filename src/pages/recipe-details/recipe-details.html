@@ -30,32 +30,32 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <div [ngSwitch]="recipeDetails">
 
     <!-- Start of segment -->
     <div *ngSwitchCase="'details'">
       <ion-grid>
-        <ion-row justify-content-center *ngIf="!!recipe.image">
-          <ion-col col-auto>
-            <img class="picture" [src]="recipe.image" alt="Recipe image">
-          </ion-col>
-        </ion-row>
-        <ion-row hideWhen="cordova" justify-content-center>
-          <ion-col align-self-center col-auto>
-            <input type="file" name="imageInput" #imageInput (change)="changeImage(imageInput)" />
+        <ion-row justify-content-center align-items-center>
+          <ion-col (click)="changeImage()">
+            <div class="picture--placeholder" *ngIf="!recipe.image">
+              <ion-icon name="add"></ion-icon>
+              <div>
+                Choose image
+              </div>
+            </div>
+            <div class="picture" [style.backgroundImage]="'url(' + this.recipe.image + ')'" *ngIf="recipe.image"></div>
           </ion-col>
         </ion-row>
       </ion-grid>
-      <button showWhen="cordova" margin-top margin-bottom (click)="changeImage()" ion-button block>Change image</button>
-      <button [disabled]="!recipe.image || !uploadReady" showWhen="cordova" margin-top margin-bottom (click)="uploadImage()" ion-button block>Upload image</button>
-      <ion-list>
+      <input type="file" #fileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event)" />
+      <ion-list padding>
         <ion-item text-wrap>
-          <ion-label fixed>Name</ion-label>
+          <ion-label floating>Name</ion-label>
           <ion-input type="text" [(ngModel)]="recipe.name"></ion-input>
         </ion-item>
         <ion-item text-wrap>
-          <ion-label fixed>Portions</ion-label>
+          <ion-label floating>Portions</ion-label>
           <ion-input type="number" [(ngModel)]="recipe.portions" (blur)="changePortions()"></ion-input>
         </ion-item>
         <ion-item>
@@ -85,11 +85,11 @@
           </ion-select>
         </ion-item>
         <ion-item text-wrap>
-          <ion-label fixed>Cooking temperature (Celsius)</ion-label>
+          <ion-label floating>Cooking temperature (Celsius)</ion-label>
           <ion-input type="number" [(ngModel)]="recipe.cookingTemperature"></ion-input>
         </ion-item>
         <ion-item text-wrap>
-          <ion-label fixed>Cooking time (minutes)</ion-label>
+          <ion-label floating>Cooking time (minutes)</ion-label>
           <ion-input type="number" [(ngModel)]="recipe.cookingTime"></ion-input>
         </ion-item>
       </ion-list>

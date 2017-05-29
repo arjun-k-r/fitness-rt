@@ -4,7 +4,7 @@ import { Alert, AlertController, Loading, LoadingController, Modal, ModalControl
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
-import { Activity, ActivityPlan, WarningMessage } from '../../models';
+import { Activity, ActivityPlan } from '../../models';
 
 // Pages
 import { ActivitySelectPage } from '../activity-select/activity-select';
@@ -20,6 +20,7 @@ export class ActivityPlanPage {
   private _activityPlanSubscription: Subscription;
   public activityPlan: ActivityPlan;
   public activityPlanDetails: string = 'guidelines';
+  public isDirty: boolean = false;
   public leftEnergy: number = 0;
   constructor(
     private _activitySvc: ActivityService,
@@ -31,23 +32,27 @@ export class ActivityPlanPage {
   ) { }
 
   private _updateActivityPlan(activity: Activity): void {
+    this.isDirty = true;
     if (activity.type === 'Physical') {
-      this.activityPlan.physicalActivities = [...this.activityPlan.physicalActivities, activity];
       this.activityPlan.physicalEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.physicalActivities);
     } else if (activity.type === 'Intellectual') {
-      this.activityPlan.intellectualActivities = [...this.activityPlan.intellectualActivities, activity];
       this.activityPlan.intellectualEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.intellectualActivities);
     }
 
     this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn([...this.activityPlan.intellectualActivities, ...this.activityPlan.physicalActivities]);
-    this._activitySvc.updateUserRequirements(this.activityPlan.totalEnergyBurn);
-    this._activitySvc.getLeftEnergy().then((energy: number) => this.leftEnergy = energy);
   }
 
   public addNewActivity(): void {
     let activitySelectModal: Modal = this._modalCtrl.create(ActivitySelectPage);
     activitySelectModal.present();
-    activitySelectModal.onDidDismiss((activity: Activity) => this._updateActivityPlan(activity));
+    activitySelectModal.onDidDismiss((activity: Activity) => {
+      if (activity.type === 'Physical') {
+        this.activityPlan.physicalActivities = [...this.activityPlan.physicalActivities, activity];
+      } else if (activity.type === 'Intellectual') {
+        this.activityPlan.intellectualActivities = [...this.activityPlan.intellectualActivities, activity];
+      }
+      this._updateActivityPlan(activity);
+    });
   }
 
   public changeDuration(activity: Activity): void {
@@ -71,12 +76,8 @@ export class ActivityPlanPage {
           handler: data => {
             activity.duration = +data.duration;
             activity.energyBurn = this._activitySvc.getActivityEnergyBurn(activity);
-            if (activity.type === 'Physical') {
-              this.activityPlan.physicalEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.physicalActivities);
-            } else if (activity.type === 'Intellectual') {
-              this.activityPlan.intellectualEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.intellectualActivities);
-            }
-            this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn([...this.activityPlan.intellectualActivities, ...this.activityPlan.physicalActivities]);
+
+            this._updateActivityPlan(activity);
           }
         }
       ]
@@ -94,10 +95,12 @@ export class ActivityPlanPage {
 
   public saveActivityPlan(): void {
     this._activitySvc.saveActivityPlan(this.activityPlan);
-    this._activitySvc.getLeftEnergy().then((energy: number) => {
+    this._activitySvc.updateUserRequirements(this.activityPlan.totalEnergyBurn);
+    setTimeout(() => this._activitySvc.getLeftEnergy().then((energy: number) => {
       this.leftEnergy = energy;
       console.log(energy);
-    });
+    }), 1000);
+    this.isDirty = false;
   }
 
   public viewSymptoms(imbalanceKey: string, imbalanceName: string, imbalanceType: string): void {
@@ -121,6 +124,33 @@ export class ActivityPlanPage {
           }
         ]
       }).present();
+    });
+  }
+
+  ionViewCanLeave(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      if (this.isDirty) {
+        this._alertCtrl.create({
+          title: 'Discard changes',
+          message: 'Changes have been made. Are you sure you want to leave?',
+          buttons: [
+            {
+              text: 'Yes',
+              handler: () => {
+                resolve(true);
+              }
+            },
+            {
+              text: 'No',
+              handler: () => {
+                reject(true);
+              }
+            }
+          ]
+        }).present();
+      } else {
+        resolve(true);
+      }
     });
   }
 

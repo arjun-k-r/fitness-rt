@@ -15,6 +15,6 @@ export class SleepPlan {
         public daysOfImbalance: number = 0,
         public imbalancedSleep: boolean = false,
         public sleepOscillation: number = 0,
-        public sleepPattern: Array<SleepHabit> = Array(7)
+        public sleepPattern: Array<SleepHabit> = []
     ) { }
 }

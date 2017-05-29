@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Activity plan</ion-title>
+    <ion-title>Activity plan{{ isDirty ? '*' : ''}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="saveActivityPlan()">
           <ion-icon name="sync"></ion-icon>
@@ -37,19 +37,24 @@
     <!-- Start of segment -->
     <ion-list *ngSwitchCase="'guidelines'">
       <ion-item>
-        <h2>Go to bed before 10:00 p.m.</h2>
+        <h2>Exercise physicaly every day</h2>
+        <p text-wrap>Refresh and energize the body</p>
       </ion-item>
       <ion-item>
-        <h2>Avoid electronics 1 hour before bed</h2>
+        <h2>Exercise intelectually every day</h2>
+        <p text-wrap>Improve mental capacity</p>
       </ion-item>
       <ion-item>
-        <h2>Avoid stimulants 6 hours before bed</h2>
+        <h2>Exercise intensely 4 times per week</h2>
+        <p text-wrap>Improve cardiovascular system and detoxification</p>
       </ion-item>
       <ion-item>
-        <h2>Maintain room temperature at 19&#176; Celsius </h2>
+        <h2>Don't exceed 45 minutes of continous intense workout</h2>
+        <p text-wrap>Damage the heart</p>
       </ion-item>
       <ion-item>
-        <h2>No fluids or food 2 hours before bed</h2>
+        <h2>Don't study more than 4 hours per day</h2>
+        <p text-wrap>Damage the nervous system</p>
       </ion-item>
     </ion-list>
     <!-- End of segment -->
@@ -60,7 +65,7 @@
         <ion-icon color="danger" name="trash" item-left (click)="removeActivity(i, 'physical')"></ion-icon>
         <h2>{{ activity.name }}</h2>
         <p>{{ activity.duration }} minutes</p>
-        <p item-content>
+        <p>
           {{ activity.energyBurn }} kcal
         </p>
       </ion-item>
@@ -73,7 +78,7 @@
         <ion-icon color="danger" name="trash" item-left (click)="removeActivity(i, 'intellectual')"></ion-icon>
         <h2>{{ activity.name }}</h2>
         <p>{{ activity.duration }} minutes</p>
-        <p item-content>
+        <p>
           {{ activity.energyBurn }} kcal
         </p>
       </ion-item>
@@ -85,19 +90,19 @@
       <ion-list>
         <ion-item>
           <h2 text-wrap>Intellectual activities duration</h2>
-          <p item-content>{{ activityPlan.intellectualEffort }} minutes</p>
+          <p>{{ activityPlan.intellectualEffort }} minutes</p>
         </ion-item>
         <ion-item>
           <h2 text-wrap>Physical activities duration</h2>
-          <p item-content>{{ activityPlan.physicalEffort }} minutes</p>
+          <p>{{ activityPlan.physicalEffort }} minutes</p>
         </ion-item>
         <ion-item>
           <h2>Total energy burn</h2>
-          <p item-content>{{ activityPlan.totalEnergyBurn }} kcal</p>
+          <p>{{ activityPlan.totalEnergyBurn }} kcal</p>
         </ion-item>
         <ion-item>
           <h2>Total energy left</h2>
-          <p item-content>{{ leftEnergy }} kcal</p>
+          <p>{{ leftEnergy }} kcal</p>
         </ion-item>
       </ion-list>
     </div>
@@ -110,25 +115,25 @@
           <ion-icon color="danger" name="warning" item-left></ion-icon>
           <h2 text-wrap>It seems you have been mentally inactive for {{ activityPlan.intellectualInactivity }} days</h2>
           <p text-wrap>Try to learn something new everyday</p>
-          <p item-content>Check symptoms</p>
+          <p>Check symptoms</p>
         </button>
         <button ion-item *ngIf="activityPlan.physicalInactivity > 2" (click)="viewSymptoms('physicalExercise', 'Physical exercise', 'deficiency')">
           <ion-icon color="danger" name="warning" item-left></ion-icon>
           <h2 text-wrap>It seems you have been physically inactive for {{ activityPlan.physicalInactivity }} days</h2>
           <p text-wrap>Try to move new everyday</p>
-          <p item-content>Check symptoms</p>
+          <p>Check symptoms</p>
         </button>
         <button ion-item *ngIf="activityPlan.intellectualOverwork > 2" (click)="viewSymptoms('intellectualExercise', 'Intellectual exercise', 'excess')">
           <ion-icon color="danger" name="warning" item-left></ion-icon>
           <h2 text-wrap>It seems you have been mentally overworking for {{ activityPlan.intellectualOverwork }} days</h2>
           <p text-wrap>Give yourself a brake</p>
-          <p item-content>Check symptoms</p>
+          <p>Check symptoms</p>
         </button>
         <button ion-item *ngIf="activityPlan.physicalOverwork > 2" (click)="viewSymptoms('physicalExercise', 'Physical exercise', 'excess')">
           <ion-icon color="danger" name="warning" item-left></ion-icon>
           <h2 text-wrap>It seems you have been physically overworking for {{ activityPlan.physicalOverwork }} days</h2>
           <p text-wrap>Give yourself a brake</p>
-          <p item-content>Check symptoms</p>
+          <p>Check symptoms</p>
         </button>
         <ion-item *ngFor="let warning of activityPlan.warnings">
           <ion-icon color="danger" name="warning" item-left></ion-icon>
@@ -150,18 +155,18 @@
       <ion-item>
         <h2>Routine</h2>
         <p text-wrap>Move constantly everyday to maintain energy levels, keep blood moving, and stay alert physically and mentally.</p>
-        <p item-content>240 minutes</p>
+        <p>240 minutes</p>
       </ion-item>
       <ion-item>
         <h2>Breathing</h2>
         <p text-wrap>Learn to always breath correctly and completely through your nose. Oxygen is the most important nutrient and the
           key to energy, whereas CO2 is the main toxin elimination source.</p>
-        <p item-content>Every day</p>
+        <p>Every day</p>
       </ion-item>
       <ion-item>
         <h2>Warmup</h2>
         <p text-wrap>Prepare your skeletal muscles and cardiac muscles (increase heart rate).</p>
-        <p item-content>5 minutes</p>
+        <p>5 minutes</p>
       </ion-item>
       <ion-item>
         <h2>Start slowly</h2>
@@ -171,27 +176,27 @@
         <h2>High intensity interval training (HIIT)</h2>
         <p text-wrap>Eliminate toxins through perspiration, burn energy storages, cardiovascular support, increase endurance, preserve
           muscle tissue, and increase metabolism.</p>
-        <p item-content>5 times per week</p>
+        <p>5 times per week</p>
       </ion-item>
       <ion-item>
         <h2>HIIT duration</h2>
         <p text-wrap>Too much intense exercise at once damages the heart.</p>
-        <p item-content>45 minutes</p>
+        <p>45 minutes</p>
       </ion-item>
       <ion-item>
         <h2>HIIT breaks and sets</h2>
         <p text-wrap>Maintain heart rate stable in an aerobic state.</p>
-        <p item-content>30-60 seconds</p>
+        <p>30-60 seconds</p>
       </ion-item>
       <ion-item>
         <h2>Walking</h2>
         <p text-wrap>"Walking is man's best medicine." - Hippocrates</p>
-        <p item-content>90 minutes</p>
+        <p>90 minutes</p>
       </ion-item>
       <ion-item>
         <h2>Recovery</h2>
         <p text-wrap>The muscles need to rest to recover and become stronger.</p>
-        <p item-content>Every day</p>
+        <p>Every day</p>
       </ion-item>
     </ion-list>
 -->

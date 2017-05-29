@@ -40,27 +40,35 @@
     <ion-list *ngSwitchCase="'guidelines'">
       <ion-item>
         <h2>Eat natural and wholesome food</h2>
+        <p text-wrap>Complete nutritional values</p>
       </ion-item>
       <ion-item>
         <h2>Avoid cold meals</h2>
+        <p text-wrap>Digestion requires heat</p>
       </ion-item>
       <ion-item>
         <h2>Eat mostly raw</h2>
+        <p text-wrap>Processing destroys nutrients</p>
       </ion-item>
       <ion-item>
         <h2>Don't exceed your stomach size (900 g)</h2>
+        <p text-wrap>Stress for digestion system</p>
       </ion-item>
       <ion-item>
         <h2>Eat every 4 hours</h2>
+        <p text-wrap>Digestion lasts for 4 hours and prevents you from overeating</p>
       </ion-item>
       <ion-item>
         <h2>Eat alkaline forming meals (raw plants)</h2>
+        <p text-wrap>Filled with oxygen and prevent inflammation</p>
       </ion-item>
       <ion-item>
         <h2>Eat fruits in the morning</h2>
+        <p text-wrap>The digestion is weak and we require water, oxygen, and all nutrients</p>
       </ion-item>
       <ion-item>
         <h2>Don't eat 2 hours before going to bed</h2>
+        <p text-wrap>Digestion will be interrupted and disrupts sleep</p>
       </ion-item>
     </ion-list>
     <!-- End of segment -->
@@ -102,7 +110,7 @@
         </ion-item>
         <ion-item>
           Omega-3:Omega-6 ratio
-          <p ion-text color="{{ omega36Ratio < 0.5 ? 'danger' : 'secondary' }}" item-content>{{ omega36Ratio }}</p>
+          <p ion-text item-content color="{{ omega36Ratio < 0.5 ? 'danger' : 'secondary' }}">{{ omega36Ratio }}</p>
         </ion-item>
       </ion-item-group>
       <ion-item-group>

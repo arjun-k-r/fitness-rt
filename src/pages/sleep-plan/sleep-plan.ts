@@ -14,6 +14,7 @@ import { FitnessService, SleepService } from '../../providers';
 })
 export class SleepPlanPage {
   public currentSleep: SleepHabit = new SleepHabit();
+  public isDirty: boolean = false;
   public sleepPlan: SleepPlan;
   public sleepPlanDetails: string = 'guidelines';
   constructor(
@@ -24,14 +25,17 @@ export class SleepPlanPage {
 
   public saveSleep(): void {
     this._sleepSvc.saveSleep(this.sleepPlan, this.currentSleep);
+    this.isDirty = false;
   }
 
   public setBedtime(): void {
     this.currentSleep = Object.assign({}, this.currentSleep, { bedTime: this._sleepSvc.getBedtime(this.currentSleep.wakeUpTime) });
+    this.isDirty = true;
   }
 
   public setWakeUptime(): void {
-    this.currentSleep = Object.assign({}, this.currentSleep, { wakeUpTime: this._sleepSvc.getWakeUptime(this.currentSleep.bedTime) });
+    this.isDirty = true;
+    //this.currentSleep = Object.assign({}, this.currentSleep, { wakeUpTime: this._sleepSvc.getWakeUptime(this.currentSleep.bedTime) });
   }
 
   public viewSymptoms(): void {
@@ -55,6 +59,33 @@ export class SleepPlanPage {
           }
         ]
       }).present();
+    });
+  }
+
+  ionViewCanLeave(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      if (this.isDirty) {
+        this._alertCtrl.create({
+          title: 'Discard changes',
+          message: 'Changes have been made. Are you sure you want to leave?',
+          buttons: [
+            {
+              text: 'Yes',
+              handler: () => {
+                resolve(true);
+              }
+            },
+            {
+              text: 'No',
+              handler: () => {
+                reject(true);
+              }
+            }
+          ]
+        }).present();
+      } else {
+        resolve(true);
+      }
     });
   }
 

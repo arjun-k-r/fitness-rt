@@ -12,7 +12,6 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-
 .avatar {
     border-radius: 50%;
     border: .2rem solid color($colors, secondary);
@@ -20,6 +19,18 @@
 
 .avatar__big {
     width: 20rem;
+}
+
+.auth-form {
+    max-width: 25rem;
+    width: 100%;
+    flex: 0 1 auto;
+    align-self: auto;
+}
+
+.auth-form__group {
+    width: 100%;
+    padding: 0;
 }
 
 .auth-page {
@@ -81,18 +92,22 @@
     }
 }
 
-.form {
-    max-width: 25rem;
-    width: 100%;
-    flex: 0 1 auto;
-    align-self: auto;
-}
-
-.form__group {
-    width: 100%;
-    padding: 0;
-}
-
-.picture {
-    max-height: 75vh;
+.upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background-color: #eee;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    ion-icon {
+        font-size: 3rem;
+    }
+    &:hover {
+        cursor: pointer;
+    }
 }

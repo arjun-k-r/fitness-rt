@@ -38,13 +38,13 @@
       <ion-grid>
         <ion-row justify-content-center align-items-center>
           <ion-col (click)="changeImage()">
-            <div class="picture--placeholder" *ngIf="!recipe.image">
+            <div class="upload-placeholder" *ngIf="!recipe.image">
               <ion-icon name="add"></ion-icon>
               <div>
                 Choose image
               </div>
             </div>
-            <div class="picture" [style.backgroundImage]="'url(' + this.recipe.image + ')'" *ngIf="recipe.image"></div>
+            <div class="recipe-image" [style.backgroundImage]="'url(' + this.recipe.image + ')'" *ngIf="recipe.image"></div>
           </ion-col>
         </ion-row>
       </ion-grid>

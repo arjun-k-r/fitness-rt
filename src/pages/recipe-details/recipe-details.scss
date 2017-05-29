@@ -1,4 +1,4 @@
-.picture {
+.recipe-image {
     width: 100%;
     height: 25rem;
     background-position: center center;
@@ -6,24 +6,4 @@
     margin: 0;
     flex: 0 1 auto;
     align-self: stretch;
-}
-
-.picture--placeholder {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    margin: 0 auto;
-    background-color: #eee;
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50%;
-    ion-icon {
-        font-size: 3rem;
-    }
-    &:hover {
-        cursor: pointer;
-    }
 }

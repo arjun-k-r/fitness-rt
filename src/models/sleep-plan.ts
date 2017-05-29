@@ -1,6 +1,3 @@
-// Models
-import { WarningMessage } from './warning-message';
-
 export class SleepHabit {
     constructor(
         public bedTime: string = '22:00',

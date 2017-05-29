@@ -1,9 +1,6 @@
 // Third-party
 import * as moment from 'moment';
 
-// Models
-import { WarningMessage } from './warning-message';
-
 export class Activity {
     constructor(
         public type: string,

@@ -8,7 +8,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import * as moment from 'moment';
 
 // Models
-import { Activity, ActivityPlan, Fitness, WarningMessage } from '../models';
+import { Activity, ActivityPlan, Fitness } from '../models';
 
 // Providers
 import { FitnessService } from './fitness.service';

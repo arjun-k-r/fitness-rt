@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Recipe details</ion-title>
+    <ion-title>Recipe details{{ isDirty ? '*' : ''}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="saveRecipe()">
         <ion-icon name="sync"></ion-icon>
@@ -56,7 +56,7 @@
         </ion-item>
         <ion-item text-wrap>
           <ion-label floating>Portions</ion-label>
-          <ion-input type="number" [(ngModel)]="recipe.portions" (blur)="changePortions()"></ion-input>
+          <ion-input type="number" [(ngModel)]="recipe.portions" (change)="changePortions()"></ion-input>
         </ion-item>
         <ion-item>
           pH

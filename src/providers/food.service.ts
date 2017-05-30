@@ -170,7 +170,7 @@ export class FoodService {
           break;
 
         case '415':
-          food.nutrition.vitaminB5.value = +nutrient.value;
+          food.nutrition.vitaminB6.value = +nutrient.value;
           break;
 
         case '417':

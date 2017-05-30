@@ -65,7 +65,7 @@
         <ion-icon color="danger" name="trash" item-left (click)="removeActivity(i, 'physical')"></ion-icon>
         <h2>{{ activity.name }}</h2>
         <p>{{ activity.duration }} minutes</p>
-        <p>
+        <p item-content>
           {{ activity.energyBurn }} kcal
         </p>
       </ion-item>
@@ -78,7 +78,7 @@
         <ion-icon color="danger" name="trash" item-left (click)="removeActivity(i, 'intellectual')"></ion-icon>
         <h2>{{ activity.name }}</h2>
         <p>{{ activity.duration }} minutes</p>
-        <p>
+        <p item-content>
           {{ activity.energyBurn }} kcal
         </p>
       </ion-item>

@@ -49,8 +49,8 @@ export class RecipeDetailsPage {
 
     this.recipeForm = _formBuilder.group({
       cookingMethod: [this.recipe.cookingMethod, Validators.required],
-      cookingTemperature: [this.recipe.cookingMethod, Validators.required],
-      cookingTime: [this.recipe.cookingMethod, Validators.required],
+      cookingTemperature: [this.recipe.cookingTemperature, Validators.required],
+      cookingTime: [this.recipe.cookingTime, Validators.required],
       image: [this.recipe.image, Validators.required],
       name: [this.recipe.name, Validators.required],
       portions: [this.recipe.portions, Validators.required]

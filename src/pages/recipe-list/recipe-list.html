@@ -19,7 +19,7 @@
     <h2>
       Filter ingredients:
     </h2>
-    <button ion-button icon-right *ngFor="let ingredient of queryIngredients" (click)="removeQueryIngredient(i)">
+    <button ion-button icon-right *ngFor="let ingredient of queryIngredients; let i = index" (click)="removeQueryIngredient(i)">
       {{ ingredient }}
       <ion-icon name="close"></ion-icon>
     </button>

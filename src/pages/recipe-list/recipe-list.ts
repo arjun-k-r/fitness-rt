@@ -34,11 +34,11 @@ export class RecipeListPage {
   public addIngredientFilter(): void {
     this._alertCtrl.create({
       title: 'Filter by ingredients',
-      subTitle: 'Tip: Type the singular form of the ingredient',
+      subTitle: 'Tip: Try both singular and plural form',
       inputs: [
         {
           name: 'ingredient',
-          placeholder: 'E.g. apple, banana, broccoli',
+          placeholder: 'E.g. apples, bananas, strawberries, melon',
           type: 'text'
         }
       ],

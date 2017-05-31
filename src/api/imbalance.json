@@ -906,13 +906,6 @@
             "Muscle twitching or spasms",
             "Convulsions"
         ],
-        "carbs": [
-            "High blood sugar levels",
-            "Weight gain",
-            "High triglycerides",
-            "High LDL levels",
-            "Low HDL levels"
-        ],
         "energy": [
             "Weight gain"
         ],
@@ -1033,7 +1026,7 @@
             "Seizures",
             "Coma"
         ],
-        "sugars": [
+        "sugar": [
             "Inflammation",
             "Addiction",
             "Anxiety",

@@ -165,7 +165,7 @@ export class MealPlanPage {
       this.mealPlan = Object.assign({}, mealPlan);
       this.omega36Ratio = this._nutritionSvc.getOmega36Ratio(this.mealPlan.dailyNutrition);
       this.pral = this._mealSvc.getNutritionPral(this.mealPlan);
-      console.log(this.pral);
+      this.mealPlan.dailyNutrition = this._nutritionSvc.getPercentageNutrition(this.mealPlan.meals, true);
       loader.dismiss();
     });
   }

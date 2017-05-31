@@ -36,6 +36,11 @@ export class MealPlanPage {
     private _nutritionSvc: NutritionService
   ) { }
 
+  public addNewMeal(): void {
+    this.mealPlan.meals = [...this.mealPlan.meals, new Meal()];
+    this._navCtrl.push(this.detailsPage, { meal: this.mealPlan.meals[this.mealPlan.meals.length - 1], mealPlan: this.mealPlan });
+  }
+
   public addToMealPlan(meal: Meal): void {
     this._alertCtrl.create({
       title: 'Meal hour',

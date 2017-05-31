@@ -15,10 +15,14 @@
 .avatar {
     border-radius: 50%;
     border: .2rem solid color($colors, secondary);
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .avatar__big {
     width: 20rem;
+    height: 20rem;
 }
 
 .auth-form {

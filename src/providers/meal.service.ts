@@ -246,4 +246,13 @@ export class MealService {
       meals: mealPlan.meals || []
     });
   }
+
+  /**
+   * Sorts the meals by their time
+   * @param {Array} meals The meals to sort
+   * @returns {Array} Returns the sorted meals
+   */
+  public sortMeals(meals: Array<Meal>): Array<Meal> {
+    return _.sortBy(meals, (meal: Meal) => meal.time);
+  }
 }

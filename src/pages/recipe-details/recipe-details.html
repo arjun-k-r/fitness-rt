@@ -3,7 +3,7 @@
   <ion-navbar>
     <ion-title>Recipe details{{ isDirty ? '*' : ''}}</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="saveRecipe()">
+      <button ion-button icon-only (click)="saveRecipe()" [disabled]="recipeForm.invalid">
         <ion-icon name="sync"></ion-icon>
       </button>
       <button *ngIf="recipe.hasOwnProperty('$key')" ion-button icon-only (click)="removeRecipe()">
@@ -34,7 +34,7 @@
   <div [ngSwitch]="recipeDetails">
 
     <!-- Start of segment -->
-    <div *ngSwitchCase="'details'">
+    <form *ngSwitchCase="'details'" [formGroup]="recipeForm">
       <ion-grid>
         <ion-row justify-content-center align-items-center>
           <ion-col (click)="changeImage()">
@@ -52,12 +52,14 @@
       <ion-list padding>
         <ion-item text-wrap>
           <ion-label floating>Name</ion-label>
-          <ion-input type="text" [(ngModel)]="recipe.name"></ion-input>
+          <ion-input type="text" formControlName="name" required></ion-input>
         </ion-item>
+        <error-message [control]="name"></error-message>
         <ion-item text-wrap>
           <ion-label floating>Portions</ion-label>
-          <ion-input type="number" [(ngModel)]="recipe.portions" (change)="changePortions()"></ion-input>
+          <ion-input type="number" formControlName="portions" (change)="changePortions()"></ion-input>
         </ion-item>
+        <error-message [control]="portions"></error-message>
         <ion-item>
           pH
           <p item-content ion-text color="{{ recipe.pral > 0 ? 'danger' : 'secondary' }}">{{ recipe.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
@@ -72,7 +74,7 @@
         </ion-item>
         <ion-item>
           <ion-label>Cooking method</ion-label>
-          <ion-select [(ngModel)]="recipe.cookingMethod">
+          <ion-select formControlName="cookingMethod" required>
             <ion-option value="Baking">Baking</ion-option>
             <ion-option value="Barbequing">Barbequing</ion-option>
             <ion-option value="Boiling">Boiling</ion-option>
@@ -84,16 +86,19 @@
             <ion-option value="Stewing">Stewing</ion-option>
           </ion-select>
         </ion-item>
+        <error-message [control]="cookingMethod"></error-message>
         <ion-item text-wrap>
           <ion-label floating>Cooking temperature (Celsius)</ion-label>
-          <ion-input type="number" [(ngModel)]="recipe.cookingTemperature"></ion-input>
+          <ion-input type="number" formControlName="cookingTemperature" required></ion-input>
         </ion-item>
+        <error-message [control]="cookingTemperature"></error-message>
         <ion-item text-wrap>
           <ion-label floating>Cooking time (minutes)</ion-label>
-          <ion-input type="number" [(ngModel)]="recipe.cookingTime"></ion-input>
+          <ion-input type="number" formControlName="cookingTime" required></ion-input>
         </ion-item>
+        <error-message [control]="cookingTime"></error-message>
       </ion-list>
-    </div>
+    </form>
     <!-- End of segment -->
 
     <!-- Start of segment -->
@@ -105,7 +110,6 @@
           <p text-wrap>{{ item.quantity * item.servings }}{{ item.unit }}</p>
           <p item-content (click)="changeServings(item)">{{ item.servings }} servings</p>
         </ion-item>
-
       </ion-list>
       <ion-fab bottom right>
         <button ion-fab color="secondary" (click)="addIngredients()"><ion-icon name="add"></ion-icon></button>
@@ -119,7 +123,7 @@
         <ion-item text-wrap *ngFor="let item of recipe.instructions; let i = index">
           <ion-icon color="danger" name="trash" item-left (click)="removeInstruction(i)"></ion-icon>
           <ion-label floating>Step {{i + 1}}:</ion-label>
-          <ion-input type="text" name="step{{i}}" [(ngModel)]="recipeInstructions[i]"></ion-input>
+          <ion-input type="text" [(ngModel)]="recipeInstructions[i]" required></ion-input>
         </ion-item>
       </ion-list>
       <ion-fab bottom right>

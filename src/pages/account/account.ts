@@ -1,7 +1,8 @@
 // App
-import { Component } from '@angular/core';
-import { ActionSheetController, AlertController, AlertOptions, LoadingController, NavController, Platform, Toast, ToastController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { ActionSheetController, AlertController, AlertOptions, LoadingController, NavController, Toast, ToastController } from 'ionic-angular';
 import { Auth, User } from '@ionic/cloud-angular';
+import { Camera } from '@ionic-native/camera';
 
 // Pages
 import { RegistrationPage } from '../registration/registration';
@@ -14,6 +15,7 @@ import { PictureService } from '../../providers';
   templateUrl: 'account.html'
 })
 export class AccountPage {
+  @ViewChild('fileInput') fileInput;
   public avatar: string;
   public uploadReady: boolean = false;
   constructor(
@@ -23,7 +25,6 @@ export class AccountPage {
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
     private _picService: PictureService,
-    private _platform: Platform,
     private _toastCtrl: ToastController,
     private _user: User
   ) {
@@ -42,6 +43,51 @@ export class AccountPage {
     this._auth.logout();
     loader.dismiss();
     this._navCtrl.setRoot(RegistrationPage);
+  }
+
+  public changeImage(): void {
+    if (Camera['installed']()) {
+      this._actionSheetCtrl.create({
+        title: 'Change image',
+        buttons: [
+          {
+            text: 'Take photo',
+            handler: () => {
+              this._picService.takePhoto().then((photoUri: string) => {
+                this.avatar = photoUri;
+                this.uploadImage();
+              }).catch((err: Error) => this._alertCtrl.create({
+                title: 'Uhh ohh...',
+                subTitle: 'Something went wrong',
+                message: err.toString(),
+                buttons: ['OK']
+              }).present());
+            }
+          }, {
+            text: 'Choose image',
+            handler: () => {
+              this._picService.chooseImage().then((photoUri: string) => {
+                this.avatar = photoUri;
+                this.uploadImage();
+              }).catch((err: Error) => this._alertCtrl.create({
+                title: 'Uhh ohh...',
+                subTitle: 'Something went wrong',
+                message: err.toString(),
+                buttons: ['OK']
+              }).present());
+            }
+          }, {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      }).present();
+    } else {
+      this.fileInput.nativeElement.click();
+    }
   }
 
   public deleteAccountRequest(): void {
@@ -67,49 +113,14 @@ export class AccountPage {
     this._alertCtrl.create(alertOpt).present();
   }
 
-  public changeAvatar(inputRef?: HTMLInputElement): void {
-    if (this._platform.is('cordova')) {
-      this._actionSheetCtrl.create({
-        title: 'Change avatar',
-        buttons: [
-          {
-            text: 'Take photo',
-            handler: () => {
-              this._picService.takePhoto().then((photoUri: string) => {
-                this.avatar = photoUri;
-                this.uploadReady = true;
-              }).catch((err: Error) => this._alertCtrl.create({
-                title: 'Uhh ohh...',
-                subTitle: 'Something went wrong',
-                message: err.toString(),
-                buttons: ['OK']
-              }).present());
-            }
-          }, {
-            text: 'Choose image',
-            handler: () => {
-              this._picService.chooseImage().then((photoUri: string) => {
-                this.avatar = photoUri;
-                this.uploadReady = true;
-              }).catch((err: Error) => this._alertCtrl.create({
-                title: 'Uhh ohh...',
-                subTitle: 'Something went wrong',
-                message: err.toString(),
-                buttons: ['OK']
-              }).present());
-            }
-          }, {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
-            }
-          }
-        ]
-      }).present();
-    } else {
-      this.uploadAvatar(inputRef.files[0]);
-    }
+  public processWebImage(event: any) {
+    let reader: FileReader = new FileReader();
+    reader.onload = (readerEvent: Event) => {
+      this.avatar = (readerEvent.target as any).result;
+      this.uploadImage(event.target.files[0]);
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
   }
 
   public signout(): void {
@@ -117,7 +128,7 @@ export class AccountPage {
     this._navCtrl.setRoot(RegistrationPage);
   }
 
-  public uploadAvatar(file?: File): void {
+  public uploadImage(file?: File): void {
     let canceledUpload: boolean = false,
       toast: Toast = this._toastCtrl.create({
         message: 'Uploading ... 0%',
@@ -132,15 +143,11 @@ export class AccountPage {
       this._picService.cancelUpload();
     });
 
-    this._picService.uploadImage('avatars', file).subscribe((data: string | number) => {
-      console.log(typeof data === 'number');
+    this._picService.uploadImage('recipes', file).subscribe((data: string | number) => {
       if (typeof data === 'number') {
         toast.setMessage(`Uploading ... ${data}%`);
       } else {
-        this._user.details = Object.assign({}, this._user.details, { image: data });
-        this._user.save();
         this.avatar = data;
-        this.uploadReady = false;
       }
     }, (err: Error) => {
       console.log('Error uploading avatar: ', err);
@@ -156,7 +163,19 @@ export class AccountPage {
           }).present();
         } else {
           toast.setMessage('Upload complete');
+          toast.setBackButtonText('OK');
         }
       });
+  }
+
+  ionViewDidEnter(): void {
+    if (!!this.avatar) {
+      this._toastCtrl.create({
+        message: 'Hint: Click the avatar to change it',
+        position: 'bottom',
+        showCloseButton: true,
+        closeButtonText: 'OK'
+      }).present();
+    }
   }
 }

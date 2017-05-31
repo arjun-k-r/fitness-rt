@@ -19,7 +19,6 @@ export class Recipe {
         public pral: number = 0,
         public quantity: number = 0,
         public servings: number = 1,
-        public tastes: Array<string> = [],
         public unit: string = 'g'
     ) {}
 }

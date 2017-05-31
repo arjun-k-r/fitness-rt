@@ -135,7 +135,7 @@ export class FitnessPage {
     this.height = this.fitnessForm.get('height');
     this.weight = this.fitnessForm.get('weight');
 
-    this.fitnessForm.valueChanges.subscribe((v) => this.isDirty = true);
+    this.fitnessForm.valueChanges.subscribe(() => this.isDirty = true);
 
     this._fitSvc.restoreEnergyConsumption().then((energyConsumption: number) => {
       this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, (energyConsumption > 0) ? energyConsumption : this.fitness.bmr, this.fitness.gender, this.fitness.height, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));

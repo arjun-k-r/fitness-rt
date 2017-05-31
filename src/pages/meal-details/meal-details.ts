@@ -42,23 +42,7 @@ export class MealDetailsPage {
     this.meal.nutrition = Object.assign({}, this._nutritionSvc.getTotalNutrition(this.meal.mealItems));
     this.meal.pral = this._nutritionSvc.getPRAL(this.meal.nutrition);
     this.meal.quantity = this._nutritionSvc.calculateQuantity(this.meal.mealItems);
-
     this._mealSvc.checkMeal(this.meal);
-    if (!this.meal.warnings.length) {
-      this._toastCtrl.create({
-        message: 'Bravo! A perfect meal',
-        position: 'bottom',
-        showCloseButton: true,
-        closeButtonText: 'OK'
-      }).present();
-    } else {
-      this._toastCtrl.create({
-        message: 'There are some warnings for this meal!',
-        position: 'bottom',
-        showCloseButton: true,
-        closeButtonText: 'OK'
-      }).present();
-    }
   }
 
   public addMealItems(): void {
@@ -115,8 +99,24 @@ export class MealDetailsPage {
 
   public saveMeal(): void {
     this._updateMealDetails();
+    this.mealPlan.meals = this._mealSvc.sortMeals(this.mealPlan.meals);
     this._mealSvc.saveMeal(this.meal, this.mealPlan);
     this.isDirty = false;
+    if (!this.meal.warnings.length) {
+      this._toastCtrl.create({
+        message: 'Bravo! A perfect meal',
+        position: 'bottom',
+        showCloseButton: true,
+        closeButtonText: 'OK'
+      }).present();
+    } else {
+      this._toastCtrl.create({
+        message: 'There are some warnings for this meal!',
+        position: 'bottom',
+        showCloseButton: true,
+        closeButtonText: 'OK'
+      }).present();
+    }
   }
 
   ionViewCanLeave(): Promise<boolean> {

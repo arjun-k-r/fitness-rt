@@ -10,19 +10,19 @@
 
 <ion-content padding>
     <ion-grid>
-        <ion-row justify-content-center>
-            <ion-col align-self-center col-auto>
-                <img class="avatar avatar__big" [src]="avatar" alt="User avatar">
-            </ion-col>
-        </ion-row>
-        <ion-row hideWhen="cordova" justify-content-center>
-            <ion-col align-self-center col-auto>
-                <input type="file" name="avatarInput" #avatarInput (change)="changeAvatar(avatarInput)"/>
+        <ion-row justify-content-center align-items-center>
+            <ion-col align-self-center col-auto (click)="changeImage()">
+                <div class="upload-placeholder" *ngIf="!avatar">
+                    <ion-icon name="add"></ion-icon>
+                    <div>
+                        Choose image
+                    </div>
+                </div>
+                <img class="avatar avatar__big" [src]="avatar" alt="User avatar" *ngIf="avatar">
             </ion-col>
         </ion-row>
     </ion-grid>
-    <button showWhen="cordova" margin-top margin-bottom (click)="changeAvatar()" ion-button block>Change avatar</button>
-    <button [disabled]="!avatar || !uploadReady" showWhen="cordova" margin-top margin-bottom (click)="uploadAvatar()" ion-button block>Upload image</button>
+    <input type="file" #fileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event)" />
     <button (click)="signout()" ion-button block>Sign out</button>
     <button (click)="deleteAccountRequest()" ion-button block>Delete account</button>
 

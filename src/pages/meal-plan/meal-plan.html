@@ -35,6 +35,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-fab bottom right>
+    <button ion-fab color="secondary" (click)="addNewMeal()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
   <div [ngSwitch]="mealPlanDetails">
     <!-- Start of segment -->
     <ion-list *ngSwitchCase="'guidelines'">

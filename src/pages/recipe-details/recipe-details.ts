@@ -1,5 +1,6 @@
 // App
 import { Component, ViewChild } from '@angular/core';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActionSheetController, Alert, AlertController, Modal, ModalController, NavController, NavParams, Toast, ToastController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 
@@ -18,13 +19,20 @@ import { NutritionService, PictureService, RecipeService } from '../../providers
 })
 export class RecipeDetailsPage {
   @ViewChild('fileInput') fileInput;
+  public cookingMethod: AbstractControl;
+  public cookingTemperature: AbstractControl;
+  public cookingTime: AbstractControl;
   public isDirty: boolean = false;
+  public name: AbstractControl;
+  public portions: AbstractControl;
   public recipe: Recipe;
   public recipeDetails: string = 'details';
+  public recipeForm: FormGroup;
   public recipeInstructions: Array<string>;
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
+    private _formBuilder: FormBuilder,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
     private _nutritionSvc: NutritionService,
@@ -38,6 +46,23 @@ export class RecipeDetailsPage {
     this.recipe.instructions = this.recipe.instructions || [];
     this.recipeInstructions = [...this.recipe.instructions];
     console.log('Received recipe: ', this.recipe);
+
+    this.recipeForm = _formBuilder.group({
+      cookingMethod: [this.recipe.cookingMethod, Validators.required],
+      cookingTemperature: [this.recipe.cookingMethod, Validators.required],
+      cookingTime: [this.recipe.cookingMethod, Validators.required],
+      image: [this.recipe.image, Validators.required],
+      name: [this.recipe.name, Validators.required],
+      portions: [this.recipe.portions, Validators.required]
+    });
+
+    this.cookingMethod = this.recipeForm.get('cookingMethod');
+    this.cookingTemperature = this.recipeForm.get('cookingTemperature');
+    this.cookingTime = this.recipeForm.get('cookingTime');
+    this.name = this.recipeForm.get('name');
+    this.portions = this.recipeForm.get('portions');
+
+    this.recipeForm.valueChanges.subscribe(() => this.isDirty = true);
   }
 
   private _updateRecipeDetails(): void {
@@ -54,7 +79,7 @@ export class RecipeDetailsPage {
     ingredientSelectModal.present();
     ingredientSelectModal.onDidDismiss((selection: Food | Recipe) => {
       if (!!selection) {
-        this.recipe.ingredients.push(selection);
+        this.recipe.ingredients = [...this.recipe.ingredients, selection];
         console.log('My new ingredients: ', this.recipe.ingredients);
         // Update the meal details
         this._updateRecipeDetails();
@@ -114,6 +139,7 @@ export class RecipeDetailsPage {
   }
 
   public changePortions(): void {
+    this.recipe.portions = this.recipeForm.get('portions').value;
     this.recipe.nutrition = this._recipeSvc.getRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
     this.recipe.quantity = this._recipeSvc.getRecipeSize(this.recipe.ingredients, this.recipe.portions);
     this.isDirty = true;
@@ -175,6 +201,11 @@ export class RecipeDetailsPage {
 
   public saveRecipe(): void {
     this.recipe.instructions = [...this.recipeInstructions];
+    this.recipe.cookingMethod = this.recipeForm.get('cookingMethod').value;
+    this.recipe.cookingTemperature = this.recipeForm.get('cookingTemperature').value;
+    this.recipe.cookingTime = this.recipeForm.get('cookingTime').value;
+    this.recipe.name = this.recipeForm.get('name').value;
+    this.recipe.portions = this.recipeForm.get('portions').value;
     this._updateRecipeDetails();
     this._recipeSvc.saveRecipe(this.recipe);
     this.isDirty = false;
@@ -196,7 +227,6 @@ export class RecipeDetailsPage {
     });
 
     this._picService.uploadImage('recipes', file).subscribe((data: string | number) => {
-      console.log(typeof data === 'number');
       if (typeof data === 'number') {
         toast.setMessage(`Uploading ... ${data}%`);
       } else {
@@ -217,13 +247,42 @@ export class RecipeDetailsPage {
           }).present();
         } else {
           toast.setMessage('Upload complete');
+          toast.setBackButtonText('OK');
+          this.recipeForm.patchValue({ 'image': this.recipe.image });
         }
       });
   }
 
   ionViewCanLeave(): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      if (this.isDirty) {
+      if (this.recipe.ingredients.length === 0) {
+        this._toastCtrl.create({
+          message: 'Ingredients are required',
+          position: 'bottom',
+          showCloseButton: true,
+          closeButtonText: 'OK'
+        }).present();
+
+        reject(true);
+      } else if (this.recipe.instructions.length === 0) {
+        this._toastCtrl.create({
+          message: 'Instructions are required',
+          position: 'bottom',
+          showCloseButton: true,
+          closeButtonText: 'OK'
+        }).present();
+
+        reject(true);
+      } else if (this.recipeForm.invalid) {
+        this._toastCtrl.create({
+          message: 'Please complete all the recipe details',
+          position: 'bottom',
+          showCloseButton: true,
+          closeButtonText: 'OK'
+        }).present();
+
+        reject(true);
+      } else if (this.isDirty) {
         this._alertCtrl.create({
           title: 'Discard changes',
           message: 'Changes have been made. Are you sure you want to leave?',
@@ -246,6 +305,17 @@ export class RecipeDetailsPage {
         resolve(true);
       }
     });
+  }
+
+  ionViewDidEnter(): void {
+    if (!!this.recipe.image) {
+      this._toastCtrl.create({
+        message: 'Hint: Click the recipe image to change it',
+        position: 'bottom',
+        showCloseButton: true,
+        closeButtonText: 'OK'
+      }).present();
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 // App
 import { Component, ViewChild } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActionSheetController, Alert, AlertController, Modal, ModalController, NavController, NavParams, Toast, ToastController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 

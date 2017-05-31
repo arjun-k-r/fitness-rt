@@ -24,8 +24,9 @@ export class MealPlanPage {
   public detailsPage: any = MealDetailsPage;
   public mealPlan: MealPlan;
   public mealPlanDetails: string = 'guidelines';
-  public omega36Ratio: number;
   public nourishingMeals$: FirebaseListObservable<Array<Meal>>;
+  public omega36Ratio: number;
+  public pral: number;
   constructor(
     private _alertCtrl: AlertController,
     private _fitSvc: FitnessService,
@@ -163,6 +164,8 @@ export class MealPlanPage {
       console.log('Received meal plan: ', mealPlan);
       this.mealPlan = Object.assign({}, mealPlan);
       this.omega36Ratio = this._nutritionSvc.getOmega36Ratio(this.mealPlan.dailyNutrition);
+      this.pral = this._mealSvc.getNutritionPral(this.mealPlan);
+      console.log(this.pral);
       loader.dismiss();
     });
   }

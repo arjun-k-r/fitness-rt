@@ -36,8 +36,8 @@
         <div *ngSwitchCase="'details'">
             <ion-list>
                 <ion-item>
-                    pH
-                    <p item-content ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
+                    PRAL
+                    <p item-content ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral }} ({{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}})</p>
                 </ion-item>
                 <ion-item>
                     Size

@@ -17,6 +17,7 @@ import { FitnessService, NutritionService } from '../../providers';
   templateUrl: 'fitness.html'
 })
 export class FitnessPage {
+  private _workEnergy: number;
   public age: AbstractControl;
   public gender: AbstractControl;
   public height: AbstractControl;
@@ -59,8 +60,9 @@ export class FitnessPage {
     this.fitness.waist = this.fitnessForm.get('waist').value;
     this.fitness.weight = this.fitnessForm.get('weight').value;
 
-    let heartRateMax: number = this._fitSvc.getHeartRateMax(this.fitness.age),
-    thrRange: { min: number, max: number } = this._fitSvc.getHeartRateTrainingRange(heartRateMax, this.fitness.heartRate.resting);
+    let energyConsumption = this._workEnergy + this.fitness.bmr,
+      heartRateMax: number = this._fitSvc.getHeartRateMax(this.fitness.age),
+      thrRange: { min: number, max: number } = this._fitSvc.getHeartRateTrainingRange(heartRateMax, this.fitness.heartRate.resting);
     this.fitness = Object.assign({}, this.fitness, {
       bmr: this._fitSvc.getBmr(this.fitness.age, this.fitness.gender, this.fitness.height, this.fitness.weight),
       bodyFat: this._fitSvc.getBodyFat(this.fitness.age, this.fitness.gender, this.fitness.height, this.fitness.hips, this.fitness.neck, this.fitness.waist),
@@ -74,11 +76,10 @@ export class FitnessPage {
 
     this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.fitness.gender);
     this.idealWeight = this._fitSvc.getIdealWeight(this.fitness.gender, this.fitness.height, this.fitness.weight);
-    this._fitSvc.restoreEnergyConsumption().then((energyConsumption: number) => {
-      this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, (energyConsumption > 0) ? energyConsumption : this.fitness.bmr, this.fitness.gender, this.fitness.height, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
-      this._fitSvc.saveFitness(this.fitness);
-      this.isDirty = false;
-    });
+    this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, energyConsumption, this.fitness.gender, this.fitness.height, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
+    this._fitSvc.saveFitness(this.fitness);
+    this._fitSvc.storeEnergyConsumption(energyConsumption);
+    this.isDirty = false;
 
     if (!!this._params.get('new')) {
       this._navCtrl.setRoot(SleepPlanPage, { new: true });
@@ -136,7 +137,10 @@ export class FitnessPage {
 
     this.fitnessForm.valueChanges.subscribe((v) => this.isDirty = true);
 
-    this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.height, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
+    this._fitSvc.restoreEnergyConsumption().then((energyConsumption: number) => {
+      this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, (energyConsumption > 0) ? energyConsumption : this.fitness.bmr, this.fitness.gender, this.fitness.height, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
+      this._workEnergy = energyConsumption - this.fitness.bmr;
+    });
 
     if (this.fitness.gender) {
       this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.fitness.gender);

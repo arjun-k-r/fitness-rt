@@ -163,6 +163,16 @@ export class MealService {
     return this._nourishingMeals;
   }
 
+
+  /**
+   * Calculates the overal pral of a meal plan nutrition
+   * @param {MealPlan} mealPlan - The meal plan
+   * @returns {number} Returns the overall pral
+   */
+  public getNutritionPral(mealPlan: MealPlan): number {
+    return mealPlan.meals.reduce((acc: number, currMeal: Meal) => acc += currMeal.pral, 0);
+  }
+
   /**
    * Reorganize the meals based on the breakfast time and bedtime, diffused at 4 hour interval
    * @param {MealPlan} mealPlan - The meal plan

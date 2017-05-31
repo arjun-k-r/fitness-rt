@@ -112,6 +112,10 @@
           Omega-3:Omega-6 ratio
           <p ion-text item-content color="{{ omega36Ratio < 0.5 ? 'danger' : 'secondary' }}">{{ omega36Ratio }}</p>
         </ion-item>
+        <ion-item>
+          PRAL
+          <p ion-text item-content color="{{ pral > 0 ? 'danger' : 'secondary' }}">{{ pral > 0 ? 'Acid' : 'Alkaline'}}</p>
+        </ion-item>
       </ion-item-group>
       <ion-item-group>
         <ion-item-divider>Macronutrients</ion-item-divider>

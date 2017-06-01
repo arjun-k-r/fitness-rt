@@ -1,6 +1,6 @@
 // App
 import { Component } from '@angular/core';
-import { Alert, AlertController, Modal, ModalController, NavController, NavParams, ToastController } from 'ionic-angular';
+import { ActionSheetController, Alert, AlertController, Modal, ModalController, NavController, NavParams, ToastController } from 'ionic-angular';
 
 // Models
 import { Food, Meal, MealPlan, Recipe } from '../../models';
@@ -22,6 +22,7 @@ export class MealDetailsPage {
   public mealDetails: string = 'details';
   public mealPlan: MealPlan;
   constructor(
+    private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
     private _mealSvc: MealService,
     private _modalCtrl: ModalController,
@@ -37,28 +38,7 @@ export class MealDetailsPage {
     console.log('Received meal: ', this.meal);
   }
 
-  private _updateMealDetails(): void {
-    this.isDirty = true;
-    this.meal.nutrition = Object.assign({}, this._nutritionSvc.getTotalNutrition(this.meal.mealItems));
-    this.meal.pral = this._nutritionSvc.getPRAL(this.meal.nutrition);
-    this.meal.quantity = this._nutritionSvc.calculateQuantity(this.meal.mealItems);
-    this._mealSvc.checkMeal(this.meal);
-  }
-
-  public addMealItems(): void {
-    let mealSelectModal: Modal = this._modalCtrl.create(FoodSelectPage);
-    mealSelectModal.present();
-    mealSelectModal.onDidDismiss((selection: Food | Recipe) => {
-      if (!!selection) {
-        this.meal.mealItems = [...this.meal.mealItems, selection];
-        console.log('My new foods: ', this.meal.mealItems);
-        // Update the meal details
-        this._updateMealDetails();
-      }
-    })
-  }
-
-  public changeServings(item: Food): void {
+  private _changeServings(item: Food | Recipe): void {
     let alert: Alert = this._alertCtrl.create({
       title: 'Servings',
       subTitle: `${item.name.toString()} (${item.quantity.toString()}${item.unit.toString()})`,
@@ -86,9 +66,55 @@ export class MealDetailsPage {
     alert.present();
   }
 
-  public removeItem(idx: number): void {
+  private _removeItem(idx: number): void {
     this.meal.mealItems = [...this.meal.mealItems.slice(0, idx), ...this.meal.mealItems.slice(idx + 1)];
     this._updateMealDetails();
+  }
+
+  private _updateMealDetails(): void {
+    this.isDirty = true;
+    this.meal.nutrition = Object.assign({}, this._nutritionSvc.getTotalNutrition(this.meal.mealItems));
+    this.meal.pral = this._nutritionSvc.getPRAL(this.meal.nutrition);
+    this.meal.quantity = this._nutritionSvc.calculateQuantity(this.meal.mealItems);
+    this._mealSvc.checkMeal(this.meal);
+  }
+
+  public addMealItems(): void {
+    let mealSelectModal: Modal = this._modalCtrl.create(FoodSelectPage);
+    mealSelectModal.present();
+    mealSelectModal.onDidDismiss((selection: Food | Recipe) => {
+      if (!!selection) {
+        this.meal.mealItems = [...this.meal.mealItems, selection];
+        console.log('My new foods: ', this.meal.mealItems);
+        // Update the meal details
+        this._updateMealDetails();
+      }
+    })
+  }
+
+  public changeItem(idx: number): void {
+    this._actionSheetCtrl.create({
+      title: 'Change item',
+      buttons: [
+        {
+          text: 'Change servings',
+          handler: () => {
+            this._changeServings(this.meal.mealItems[idx]);
+          }
+        }, {
+          text: 'Remove item',
+          handler: () => {
+            this._removeItem(idx);
+          }
+        }, {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    }).present();
   }
 
   public removeMeal(): void {
@@ -135,11 +161,11 @@ export class MealDetailsPage {
                   inputs: [
                     {
                       type: 'checkbox',
-                      label: 'Are you really hungry?',
+                      label: 'Am I really hungry?',
                       value: 'hunger'
                     }, {
                       type: 'checkbox',
-                      label: 'Be grateful',
+                      label: 'I am grateful',
                       value: 'gratitude'
                     }, {
                       type: 'checkbox',
@@ -148,6 +174,10 @@ export class MealDetailsPage {
                     }, {
                       type: 'checkbox',
                       label: 'Eat peacefully',
+                      value: 'silence'
+                    }, {
+                      type: 'checkbox',
+                      label: 'I am not tired',
                       value: 'silence'
                     }
                   ],

@@ -74,23 +74,23 @@
                 <ion-icon [name]="recipe.difficulty === 1 ? 'star-outline' : recipe.difficulty === 2 ? 'star-half' : 'star'"></ion-icon>
                 {{ recipe.difficulty === 1 ? 'Easy' : recipe.difficulty === 2 ? 'Medium' : 'Chef' }}
               </button>
-      </ion-col>
-      <ion-col text-center>
-        <button ion-button clear small icon-left>
+            </ion-col>
+            <ion-col text-center>
+              <button ion-button clear small icon-left>
                 <ion-icon name="timer"></ion-icon>
                 {{ recipe.cookingTime }} minutes
               </button>
-      </ion-col>
+            </ion-col>
 
-      <ion-col text-right>
-        <button ion-button clear small icon-left>
+            <ion-col text-right>
+              <button ion-button clear small icon-left>
                 <ion-icon name="thermometer"></ion-icon>
                 {{ recipe.cookingTemperature }} &#176; C
               </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
       </ion-col>
-    </ion-row>
-    </ion-card>
-    </ion-col>
     </ion-row>
   </ion-grid>
 

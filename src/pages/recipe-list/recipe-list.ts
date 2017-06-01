@@ -62,7 +62,7 @@ export class RecipeListPage {
 
   public addNewRecipe(): void {
     let newRecipe: Recipe = new Recipe();
-    this._navCtrl.push(RecipeDetailsPage, { recipe: newRecipe });
+    this._navCtrl.push(RecipeDetailsPage, { recipe: newRecipe, new: true });
   }
 
   public clearSearch(ev: string): void {

@@ -31,6 +31,14 @@
 
 
 <ion-content>
+  <ion-fab bottom right *ngIf="recipeDetails === 'ingredients'">
+    <button ion-fab color="secondary" (click)="addIngredients()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
+  <ion-fab bottom right *ngIf="recipeDetails === 'instructions'">
+    <button ion-fab color="secondary" (click)="addInstruction()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
   <div [ngSwitch]="recipeDetails">
 
     <!-- Start of segment -->
@@ -104,16 +112,12 @@
     <!-- Start of segment -->
     <div *ngSwitchCase="'ingredients'">
       <ion-list>
-        <ion-item *ngFor="let item of recipe.ingredients; let i = index">
-          <ion-icon color="danger" name="trash" item-left (click)="removeIngredient(i)"></ion-icon>
+        <button ion-item *ngFor="let item of recipe.ingredients; let i = index" (click)="changeIngredient(i)">
           <h2 text-wrap>{{ item.name }}</h2>
           <p text-wrap>{{ item.quantity * item.servings }}{{ item.unit }}</p>
-          <p item-content (click)="changeServings(item)">{{ item.servings }} servings</p>
-        </ion-item>
+          <p item-content>{{ item.servings }} servings</p>
+        </button>
       </ion-list>
-      <ion-fab bottom right>
-        <button ion-fab color="secondary" (click)="addIngredients()"><ion-icon name="add"></ion-icon></button>
-      </ion-fab>
     </div>
     <!-- End of segment -->
 
@@ -126,9 +130,6 @@
           <ion-input type="text" [(ngModel)]="recipeInstructions[i]" required></ion-input>
         </ion-item>
       </ion-list>
-      <ion-fab bottom right>
-        <button ion-fab color="secondary" (click)="addInstruction()"><ion-icon name="add"></ion-icon></button>
-      </ion-fab>
     </div>
     <!-- End of segment -->
 

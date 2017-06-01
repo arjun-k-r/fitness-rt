@@ -35,10 +35,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-fab bottom right>
+  <ion-fab bottom right *ngIf="mealPlanDetails === 'meals'">
     <button ion-fab color="secondary" (click)="addNewMeal()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <div [ngSwitch]="mealPlanDetails">
+
     <!-- Start of segment -->
     <ion-list *ngSwitchCase="'guidelines'">
       <ion-item>
@@ -51,7 +52,7 @@
       </ion-item>
       <ion-item>
         <h2>Eat mostly raw</h2>
-        <p text-wrap>Processing destroys nutrients</p>
+        <p text-wrap>Processing destroys nutrients and remove oxygen</p>
       </ion-item>
       <ion-item>
         <h2>Don't exceed your stomach size (900 g)</h2>
@@ -66,12 +67,16 @@
         <p text-wrap>Filled with oxygen and prevent inflammation</p>
       </ion-item>
       <ion-item>
-        <h2>Eat fruits in the morning</h2>
-        <p text-wrap>The digestion is weak and we require water, oxygen, and all nutrients</p>
+        <h2>Eat fruits and nuts in the morning</h2>
+        <p text-wrap>Nutrient dense, refreshing, and energizing</p>
       </ion-item>
       <ion-item>
         <h2>Don't eat 2 hours before going to bed</h2>
         <p text-wrap>Digestion will be interrupted and disrupts sleep</p>
+      </ion-item>
+      <ion-item>
+        <h2>Never eat when bored or tired</h2>
+        <p text-wrap>Digestion requires complete nerve energy</p>
       </ion-item>
     </ion-list>
     <!-- End of segment -->

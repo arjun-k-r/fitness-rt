@@ -65,6 +65,39 @@ export class RecipeDetailsPage {
     this.recipeForm.valueChanges.subscribe(() => this.isDirty = true);
   }
 
+  private _changeServings(item: Food | Recipe): void {
+    let alert: Alert = this._alertCtrl.create({
+      title: 'Servings',
+      subTitle: `${item.name.toString()} (${item.quantity.toString()}${item.unit.toString()})`,
+      inputs: [
+        {
+          name: 'servings',
+          placeholder: 'Servings x 100g',
+          type: 'number'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Done',
+          handler: data => {
+            item.servings = +data.servings;
+            this._updateRecipeDetails();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  private _removeIngredient(idx: number): void {
+    this.recipe.ingredients = [...this.recipe.ingredients.slice(0, idx), ...this.recipe.ingredients.slice(idx + 1)];
+    this._updateRecipeDetails();
+  }
+
   private _updateRecipeDetails(): void {
     this.isDirty = true;
     this.recipe.nutrition = this._recipeSvc.getRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
@@ -145,33 +178,31 @@ export class RecipeDetailsPage {
     this.isDirty = true;
   }
 
-  public changeServings(item: Food): void {
-    let alert: Alert = this._alertCtrl.create({
-      title: 'Servings',
-      subTitle: `${item.name.toString()} (${item.quantity.toString()}${item.unit.toString()})`,
-      inputs: [
-        {
-          name: 'servings',
-          placeholder: 'Servings x 100g',
-          type: 'number'
-        }
-      ],
+  public changeIngredient(idx: number): void {
+    this._actionSheetCtrl.create({
+      title: 'Change ingredient',
       buttons: [
         {
+          text: 'Change servings',
+          handler: () => {
+            this._changeServings(this.recipe.ingredients[idx]);
+          }
+        }, {
+          text: 'Remove item',
+          handler: () => {
+            this._removeIngredient(idx);
+          }
+        }, {
           text: 'Cancel',
           role: 'cancel',
-        },
-        {
-          text: 'Done',
-          handler: data => {
-            item.servings = +data.servings;
-            this._updateRecipeDetails();
+          handler: () => {
+            console.log('Cancel clicked');
           }
         }
       ]
-    });
-    alert.present();
+    }).present();
   }
+
 
   public processWebImage(event: any) {
     let reader: FileReader = new FileReader();
@@ -181,11 +212,6 @@ export class RecipeDetailsPage {
     };
 
     reader.readAsDataURL(event.target.files[0]);
-  }
-
-  public removeIngredient(idx: number): void {
-    this.recipe.ingredients = [...this.recipe.ingredients.slice(0, idx), ...this.recipe.ingredients.slice(idx + 1)];
-    this._updateRecipeDetails();
   }
 
   public removeInstruction(idx: number): void {
@@ -255,7 +281,28 @@ export class RecipeDetailsPage {
 
   ionViewCanLeave(): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      if (this.recipe.ingredients.length === 0) {
+      if (!!this._params.get('new') && !this.isDirty) {
+        resolve(true);
+      } else if (this.isDirty) {
+        this._alertCtrl.create({
+          title: 'Discard changes',
+          message: 'Changes have been made. Are you sure you want to leave?',
+          buttons: [
+            {
+              text: 'Yes',
+              handler: () => {
+                resolve(true);
+              }
+            },
+            {
+              text: 'No',
+              handler: () => {
+                reject(true);
+              }
+            }
+          ]
+        }).present();
+      } else if (this.recipe.ingredients.length === 0) {
         this._toastCtrl.create({
           message: 'Ingredients are required',
           position: 'bottom',
@@ -282,25 +329,6 @@ export class RecipeDetailsPage {
         }).present();
 
         reject(true);
-      } else if (this.isDirty) {
-        this._alertCtrl.create({
-          title: 'Discard changes',
-          message: 'Changes have been made. Are you sure you want to leave?',
-          buttons: [
-            {
-              text: 'Yes',
-              handler: () => {
-                resolve(true);
-              }
-            },
-            {
-              text: 'No',
-              handler: () => {
-                reject(true);
-              }
-            }
-          ]
-        }).present();
       } else {
         resolve(true);
       }

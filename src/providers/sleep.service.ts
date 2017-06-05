@@ -59,8 +59,10 @@ export class SleepService {
       if (currIdx < 6) {
         prevDaySleep = sleepPlan.sleepPattern[currIdx + 1];
         prevBedtime = moment((!!prevDaySleep ? prevDaySleep.bedTime : currDayBedtime), 'hours').hours();
-        return acc += moment(currHabit.bedTime, 'hours').subtract(prevBedtime, 'hours').hours();
+        acc += (moment(currHabit.bedTime, 'hours').hours() - prevBedtime);
       }
+      
+      return acc;
     }, 0);
 
     return (sleepPlan.sleepOscillation <= 1 || sleepPlan.sleepOscillation >= -1);
@@ -72,7 +74,7 @@ export class SleepService {
    * @returns {boolean} Returns false if the sleep is imbalanced
    */
   private _checkSleep(sleepPlan: SleepPlan): boolean {
-    return  this._checkBedtime(sleepPlan.sleepPattern[0]) && this._checkDuration(sleepPlan.sleepPattern[0]) && this._checkOscillation(sleepPlan);
+    return this._checkBedtime(sleepPlan.sleepPattern[0]) && this._checkDuration(sleepPlan.sleepPattern[0]) && this._checkOscillation(sleepPlan);
   }
 
   /**
@@ -131,6 +133,8 @@ export class SleepService {
   }
 
   public saveSleep(sleepPlan: SleepPlan, sleepHabit: SleepHabit): void {
+    sleepHabit.duration = moment(sleepHabit.wakeUpTime, 'hours')
+      .subtract(moment(sleepHabit.bedTime, 'hours').hours(), 'hours').hours();
     sleepPlan.sleepPattern[0] = Object.assign({}, sleepHabit);
     console.log('Saving sleep plan: ', sleepPlan);
 

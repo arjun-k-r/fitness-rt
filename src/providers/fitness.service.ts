@@ -43,7 +43,7 @@ export class FitnessService {
 
   /**
    * Gets the user's body mass index
-   * @description The U.S. Navy body fat equations developed by Drs. Hodgdon and Beckett at the Naval Health Research Center
+   * @description The Revised Harris-Benedict Equation
    * @param {number} age - The user's age
    * @param {string} gender - The user's gender
    * @param {number} height - The user's height in centimeters

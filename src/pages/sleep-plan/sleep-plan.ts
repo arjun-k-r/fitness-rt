@@ -16,26 +16,21 @@ export class SleepPlanPage {
   public currentSleep: SleepHabit = new SleepHabit();
   public isDirty: boolean = false;
   public sleepPlan: SleepPlan;
-  public sleepPlanDetails: string = 'guidelines';
+  public sleepPlanDetails: string = 'sleep';
   constructor(
     private _alertCtrl: AlertController,
     private _fitSvc: FitnessService,
     private _sleepSvc: SleepService
   ) { }
 
+  public changedTime(): void {
+    this.currentSleep.duration = this._sleepSvc.getSleepDuration(this.currentSleep);
+    this.isDirty = true;
+  }
+
   public saveSleep(): void {
     this._sleepSvc.saveSleep(this.sleepPlan, this.currentSleep);
     this.isDirty = false;
-  }
-
-  public setBedtime(): void {
-    this.currentSleep = Object.assign({}, this.currentSleep, { bedTime: this._sleepSvc.getBedtime(this.currentSleep.wakeUpTime) });
-    this.isDirty = true;
-  }
-
-  public setWakeUptime(): void {
-    this.isDirty = true;
-    //this.currentSleep = Object.assign({}, this.currentSleep, { wakeUpTime: this._sleepSvc.getWakeUptime(this.currentSleep.bedTime) });
   }
 
   public viewSymptoms(): void {
@@ -94,6 +89,7 @@ export class SleepPlanPage {
       console.log('Received sleep plan: ', sleepPlan);
       this.sleepPlan = Object.assign({}, sleepPlan);
       this.currentSleep = Object.assign({}, this._sleepSvc.getCurrentSleep(this.sleepPlan));
+      console.log(this.currentSleep.warnings);
     });
   }
 }

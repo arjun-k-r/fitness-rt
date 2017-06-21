@@ -24,8 +24,10 @@ export class SleepPlanPage {
   ) { }
 
   public changedTime(): void {
-    this.currentSleep.duration = this._sleepSvc.getSleepDuration(this.currentSleep);
-    this.isDirty = true;
+    if (this.currentSleep.bedTime !== this.sleepPlan.sleepPattern[0].bedTime || this.currentSleep.wakeUpTime !== this.sleepPlan.sleepPattern[0].wakeUpTime) {
+      this.currentSleep.duration = this._sleepSvc.getSleepDuration(this.currentSleep);
+      this.isDirty = true;
+    }
   }
 
   public saveSleep(): void {

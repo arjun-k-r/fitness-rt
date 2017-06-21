@@ -12,14 +12,14 @@
     </ion-navbar>
     <ion-toolbar>
         <ion-segment [(ngModel)]="sleepPlanDetails">
-            <!--<ion-segment-button value="guidelines">
+            <ion-segment-button value="guidelines">
                 <ion-icon name="bulb"></ion-icon>
-            </ion-segment-button>-->
+            </ion-segment-button>
             <ion-segment-button value="sleep">
                 <ion-icon name="clock"></ion-icon>
             </ion-segment-button>
             <ion-segment-button value="warnings">
-                <ion-icon  color="{{currentSleep.warnings?.length ? 'danger' : ''}}" name="warning"></ion-icon>
+                <ion-icon color="{{currentSleep.warnings?.length ? 'danger' : ''}}" name="warning"></ion-icon>
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
@@ -27,37 +27,25 @@
 
 <ion-content padding>
     <div [ngSwitch]="sleepPlanDetails">
-
         <!-- Start of segment -->
-        <!--<ion-list *ngSwitchCase="'guidelines'">
+        <ion-list *ngSwitchCase="'guidelines'">
             <ion-item>
-                <h2>Sleep 6-8 hours</h2>
-                <p text-wrap>We need 4-5 complete R.E.M. 90-minute cycles.</p>
+                <h2>Sleep 7-8 hours</h2>
+                <p text-wrap>We need to catch 4-5 complete 90-minute sleep cycles.</p>
             </ion-item>
             <ion-item>
                 <h2>Go to bed at the same hour</h2>
-                <p text-wrap>Setup your biological clock (circadian rhythm)</p>
+                <p text-wrap>Set your circadian rhythm (biological clock)</p>
             </ion-item>
             <ion-item>
                 <h2>Go to bed before 10:00 p.m.</h2>
-                <p text-wrap>After 10:00 p.m., the adrenal glands secrete steroid hormones.</p>
+                <p text-wrap>Between 10:00 p.m. and 01:00 a.m. our adrenal glands work to repair the body</p>
             </ion-item>
             <ion-item>
-                <h2>Avoid electronics 1 hour before bed</h2>
+                <h2>Avoid electronics before bed</h2>
                 <p text-wrap>Electronics emit blue light, which is perceived as sunlight.</p>
             </ion-item>
-            <ion-item>
-                <h2>Avoid stimulants 6 hours before bed.</h2>
-            </ion-item>
-            <ion-item>
-                <h2>Maintain room temperature at 19&#176; Celsius</h2>
-                <p text-wrap>Too hot or too cold disrupts your sleep.</p>
-            </ion-item>
-            <ion-item>
-                <h2>No fluids or food 2 hours before bed</h2>
-                <p text-wrap>You'll need to go to the bathroom during the night.</p>
-            </ion-item>
-        </ion-list>-->
+        </ion-list>
         <!-- End of segment -->
 
         <!-- Start of segment -->

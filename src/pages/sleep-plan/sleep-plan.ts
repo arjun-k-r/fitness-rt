@@ -16,7 +16,7 @@ export class SleepPlanPage {
   public currentSleep: SleepHabit = new SleepHabit();
   public isDirty: boolean = false;
   public sleepPlan: SleepPlan;
-  public sleepPlanDetails: string = 'sleep';
+  public sleepPlanDetails: string = 'guidelines';
   constructor(
     private _alertCtrl: AlertController,
     private _fitSvc: FitnessService,

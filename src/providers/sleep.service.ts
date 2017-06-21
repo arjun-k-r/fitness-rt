@@ -28,7 +28,7 @@ export class SleepService {
     if (moment(sleep.bedTime, 'hours').hours() > 22) {
       sleep.warnings.push(new WarningMessage(
         'Your bedtime is too late',
-        'You need to go to bed before 10:00 p.m., because between 10:00 p.m. and 01:00 a.m. our adrenals work to repair the body'
+        'You need to go to bed before 10:00 p.m., because between 10:00 p.m. and 01:00 a.m. our adrenal glands work to repair the body'
       ));
 
       return false;
@@ -49,19 +49,17 @@ export class SleepService {
   }
 
   private _checkOscillation(sleepPlan: SleepPlan): boolean {
-    let currDayBedtime: number = moment(sleepPlan.sleepPattern[0].bedTime, 'hours').hours(),
-      prevBedtime: number,
-      prevDaySleep: SleepHabit;
+    let currBedHM: Array<number>,
+      prevBedHM: Array<number>;
 
-    sleepPlan.sleepOscillation = sleepPlan.sleepPattern.reduce((acc: number, currHabit: SleepHabit, currIdx: number) => {
-      if (currIdx < 6) {
-        prevDaySleep = sleepPlan.sleepPattern[currIdx + 1];
-        prevBedtime = moment((!!prevDaySleep ? prevDaySleep.bedTime : currDayBedtime), 'hours').hours();
-        acc += (moment(currHabit.bedTime, 'hours').hours() - prevBedtime);
-      }
+      sleepPlan.sleepOscillation = 0;
 
-      return acc;
-    }, 0);
+    for (let i = 0; i < 5; i++) {
+      currBedHM = sleepPlan.sleepPattern[i].bedTime.split(':').map(item => +item);
+      prevBedHM = sleepPlan.sleepPattern[i + 1].bedTime.split(':').map(item => +item);
+
+      sleepPlan.sleepOscillation += (currBedHM[0] + currBedHM[1] / 60) - (prevBedHM[0] + prevBedHM[1] / 60); 
+    }
 
     if ((sleepPlan.sleepOscillation > 1 || sleepPlan.sleepOscillation < -1)) {
       sleepPlan.sleepPattern[0].warnings.push(new WarningMessage(
@@ -97,7 +95,7 @@ export class SleepService {
         sleepPlan.sleepPattern[0].duration,
         sleepPlan.sleepPattern[0].wakeUpTime
       ));
-      
+
       if (sleepPlan.imbalancedSleep) {
         sleepPlan.daysOfImbalance++;
       } else {
@@ -109,9 +107,9 @@ export class SleepService {
   }
 
   public getSleepDuration(sleep: SleepHabit): number {
-    let bedHM: Array<string> = sleep.bedTime.split(':'),
-      wakeHM: Array<string> = sleep.wakeUpTime.split(':');
-      return 24 - (+bedHM[0] + +bedHM[1] / 60) + (+wakeHM[0] + +wakeHM[1] / 60);
+    let bedHM: Array<number> = sleep.bedTime.split(':').map(item => +item),
+      wakeHM: Array<number> = sleep.wakeUpTime.split(':').map(item => +item);
+    return 24 - (bedHM[0] + bedHM[1] / 60) + (wakeHM[0] + wakeHM[1] / 60);
   }
 
   public getSleepPlan$(): Observable<SleepPlan> {

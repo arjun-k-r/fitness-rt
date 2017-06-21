@@ -47,10 +47,7 @@ export class SleepPlanPage {
         })],
         buttons: [
           {
-            text: 'Done',
-            handler: (data: Array<string>) => {
-              console.log('My symptoms are: ', data);
-            }
+            text: 'Done'
           }
         ]
       }).present();
@@ -86,10 +83,8 @@ export class SleepPlanPage {
 
   ionViewWillEnter(): void {
     this._sleepSvc.getSleepPlan$().subscribe((sleepPlan: SleepPlan) => {
-      console.log('Received sleep plan: ', sleepPlan);
       this.sleepPlan = Object.assign({}, sleepPlan);
       this.currentSleep = Object.assign({}, this._sleepSvc.getCurrentSleep(this.sleepPlan));
-      console.log(this.currentSleep.warnings);
     });
   }
 }

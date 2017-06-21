@@ -117,8 +117,6 @@ export class SleepService {
   }
 
   public saveSleep(sleepPlan: SleepPlan, sleepHabit: SleepHabit): void {
-    console.log('Saving sleep plan: ', sleepPlan);
-
     sleepPlan.imbalancedSleep = !this._checkSleep(sleepPlan);
 
     this._sleepPlan.update({

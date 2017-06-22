@@ -59,9 +59,9 @@ export class DRIService {
 
   public getChlorideDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (age <= 1) {
-      return 1000;
+      return 600;
     } else if (age <= 14) {
-      return 1700;
+      return 1500;
     } else {
       return 2300;
     }
@@ -175,7 +175,7 @@ export class DRIService {
     } else if (gender === 'male') {
       return 8;
     } else {
-      return lactating ? 10 : pregnant ? 27 : 10;
+      return lactating ? 15 : pregnant ? 27 : 10;
     }
   }
 
@@ -367,13 +367,13 @@ export class DRIService {
 
   public getSeleniumDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (age <= 1) {
-      return 20;
+      return 0.02;
     } else if (age <= 14) {
-      return 30;
+      return 0.03;
     } else if (gender === 'male') {
-      return 55;
+      return 0.055;
     } else {
-      return lactating ? 70 : pregnant ? 60 : 55;
+      return lactating ? 0.07 : pregnant ? 0.06 : 0.055;
     }
   }
 

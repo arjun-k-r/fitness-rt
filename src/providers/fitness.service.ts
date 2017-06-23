@@ -19,36 +19,16 @@ export class FitnessService {
     this._fitness = _db.object(`/fitnesss/${_user.id}`);
   }
 
-  /**
-  * Calculates the maximum of heart rate reached during aerobic exercise which enables one's heart and lungs to receive the most benefit from a workout
-  * @desc Base on the Karvonen method 
-  * @param {number} hrMax - The user's maximum heart rate
-  * @param {number} hrRest - The user's resting heart rate
-  * @returns {number} Returns the training heart rate max
-  */
   private _getHeartRateTrainingMax(hrMax: number, hrRest: number): number {
     return Math.round(0.85 * (hrMax - hrRest) + hrRest);
   }
 
-  /**
-  * Calculates the minimum of heart rate reached during aerobic exercise which enables one's heart and lungs to receive the most benefit from a workout
-  * @desc Base on the Karvonen method 
-  * @param {number} hrMax - The user's maximum heart rate
-  * @param {number} hrRest - The user's resting heart rate
-  * @returns {number} Returns the training heart rate min
-  */
   private _getHeartRateTrainingMin(hrMax: number, hrRest: number): number {
     return Math.round(0.5 * (hrMax - hrRest) + hrRest);
   }
 
   /**
-   * Gets the user's body mass index
-   * @description The Revised Harris-Benedict Equation
-   * @param {number} age - The user's age
-   * @param {string} gender - The user's gender
-   * @param {number} height - The user's height in centimeters
-   * @param {number} weight - The user's weight in kilograms
-   * @returns {number} Returns the body mass index
+   * The Revised Harris-Benedict Equation
    */
   public getBmr(age: number, gender: string, height: number, weight: number): number {
     if (gender === 'male') {
@@ -59,15 +39,7 @@ export class FitnessService {
   }
 
   /**
-   * Gets the user's body fat
-   * @description The U.S. Navy body fat equations developed by Drs. Hodgdon and Beckett at the Naval Health Research Center
-   * @param {number} age - The user's age
-   * @param {string} gender - The user's gender
-   * @param {number} height - The user's height in centimeters
-   * @param {number} hips - The user's hips (women only)
-   * @param {number} neck - The user's neck in centimeters
-   * @param {number} waist - The user's waist in centimeters
-   * @returns {number} Returns the body fat percentage
+   * The U.S. Navy body fat equations developed by Drs. Hodgdon and Beckett at the Naval Health Research Center
    */
   public getBodyFat(age: number, gender: string, height: number, hips: number, neck: number, waist: number): number {
     if (gender === 'male') {
@@ -78,21 +50,14 @@ export class FitnessService {
   }
 
  /**
-  * Calculates the maximum cardiac output of a user based on its age
-  * @desc Nes, B.M, et al. HRMax formula
-  * @param {number} age - The user's age
-  * @returns {number} Returns the HRMax
+  * Nes, B.M, et al. HRMax formula
   */
   public getHeartRateMax(age: number): number {
     return Math.round(211 - (0.64 * age));
   }
 
   /**
-  * Calculates the range of heart rate reached during aerobic exercise which enables one's heart and lungs to receive the most benefit from a workout
-  * @desc Base on the Karvonen method
-  * @param {number} hrMax - The user's maximum heart rate
-  * @param {number} hrRest - The user's resting heart rate
-  * @returns {{ min: number, max: number }} Returns the training heart rate range
+  * The Karvonen method
   */
   public getHeartRateTrainingRange(hrMax: number, hrRest: number): { min: number, max: number } {
     return {
@@ -101,65 +66,31 @@ export class FitnessService {
     };
   }
 
-  /**
-   * Gets the ideal body fat by gender
-   * @param {string} gender - The user's gender
-   * @returns {number} Returns the ideal body fat in percentages
-   */
   public getIdealBodyFat(gender: string): number {
     return gender === 'male' ? 12 : 21;
   }
 
-  /**
-   * Gets the ideal body weight
-   * @param {string} gender - The user's gender
-   * @param {number} height - The user's height in centimeters
-   * @param {number} weight - The user's weight in kilograms
-   * @returns {number} Returns the ideal weight in kilograms
-   */
   public getIdealWeight(gender: string, height: number, weight: number): number {
     let extraInch: number = (height * 0.394) % 12;
     return gender === 'male' ? Math.round(52 + 1.9 * extraInch) : Math.round(49 + 1.7 * extraInch);
   }
 
-  /**
-   * Gets the signs and symptoms of a specific imbalance
-   * @param {string} imbalanceKey - The key of the imbalance factor
-   * @param {string} imbalanceType - Type of imbalance (deficiencies or excess)
-   * @returns {FirebaseObjectObservable} Returns observable of symptoms
-   */
   public getImbalanceSymptoms$(imbalanceKey: string, imbalanceType: string): FirebaseObjectObservable<Array<string>> {
     return this._db.object(`/imbalance/${imbalanceType}/${imbalanceKey}`);
   }
 
-  /**
-   * Queries the user's fitness fitness from the database
-   * @returns {Fitness} Returns the user's fitness fitness
-   */
   public getFitness(): Fitness {
     return <Fitness>this._user.get('fitness', new Fitness());
   }
 
-  /**
-   * Gets the user's daily nutritional requirements from temporary storage
-   * @returns {Nutrition} Returns the user's daily intakes
-   */
   public getUserRequirements(): Nutrition {
     return <Nutrition>this.getFitness().requirements;
   }
 
-  /**
-   * Gets the user's weight
-   * @returns {number} Returns the user's weight in kilograms
-   */
   public getUserWeight(): number {
     return <number>this.getFitness().weight;
   }
 
-  /**
-   * Retores the daily energy consumption from local storage
-   * @returns {Promise} Returns the user's daily energy consumption
-   */
   public restoreEnergyConsumption(): Promise<number> {
     return new Promise(resolve => {
       this._storage.ready().then(() => this._storage.get('energyConsumption').then((energy: { date: number, consumption: number }) => {
@@ -173,10 +104,6 @@ export class FitnessService {
     });
   }
 
-  /**
-   * Retores the daily energy intake from local storage
-   * @returns {Promise} Returns the user's daily energy intake
-   */
   public restoreEnergyIntake(): Promise<number> {
     return new Promise(resolve => {
       this._storage.ready().then(() => this._storage.get('energyIntake').then((energy: { date: number, intake: number }) => {
@@ -190,11 +117,6 @@ export class FitnessService {
     });
   }
 
-  /**
-   * Stores user's fitness fitness to the database
-   * @param {Fitness} fitness - The user's fitness fitness
-   * @returns {void}
-   */
   public saveFitness(fitness: Fitness): void {
     console.log('Saving fitness: ', fitness);
 
@@ -203,21 +125,11 @@ export class FitnessService {
     this._fitness.set(fitness);
   }
 
-  /**
-   * Stores the daily energy consumption localy
-   * @param {number} energyConsumption - The user's daily energy consumption
-   * @returns {void}
-   */
   public storeEnergyConsumption(energyConsumption: number): void {
     console.log('Storing energy consumption: ', energyConsumption);
     this._storage.ready().then(() => this._storage.set('energyConsumption', { date: CURRENT_DAY, consumption: energyConsumption }));
   }
 
-  /**
-   * Stores the daily energy intake localy
-   * @param {number} energyIntake - The user's daily energy intake
-   * @returns {void}
-   */
   public storeEnergyIntake(energyIntake: number): void {
     console.log('Storing energy intake: ', energyIntake);
     this._storage.ready().then(() => this._storage.set('energyIntake', { date: CURRENT_DAY, intake: energyIntake }));

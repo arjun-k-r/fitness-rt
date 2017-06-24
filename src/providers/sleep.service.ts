@@ -26,22 +26,22 @@ export class SleepService {
 
   private _checkBedtime(sleep: SleepHabit): boolean {
     if (moment(sleep.bedTime, 'hours').hours() > 22) {
-      sleep.warnings.push(new WarningMessage(
+      sleep.warnings = [...sleep.warnings, new WarningMessage(
         'Your bedtime is too late',
         'You need to go to bed before 10:00 p.m., because between 10:00 p.m. and 01:00 a.m. our adrenal glands work to repair the body'
-      ));
-
+      )];
       return false;
     }
+
     return true;
   }
 
   private _checkDuration(sleep: SleepHabit): boolean {
     if (sleep.duration < 6) {
-      sleep.warnings.push(new WarningMessage(
+      sleep.warnings = [...sleep.warnings, new WarningMessage(
         'Insufficient sleep',
-        'You need to catch 4-5 complete 90-minute sleep cycles (7-8 hours of casual sleep)'
-      ));
+        'We need to catch 5 complete sleep cycles of 90-110 minutes (7-9 hours)'
+      )];
       return false;
     }
 
@@ -51,21 +51,19 @@ export class SleepService {
   private _checkOscillation(sleepPlan: SleepPlan): boolean {
     let currBedHM: Array<number>,
       prevBedHM: Array<number>;
-
       sleepPlan.sleepOscillation = 0;
 
     for (let i = 0; i < 5; i++) {
       currBedHM = sleepPlan.sleepPattern[i].bedTime.split(':').map(item => +item);
       prevBedHM = sleepPlan.sleepPattern[i + 1].bedTime.split(':').map(item => +item);
-
       sleepPlan.sleepOscillation += (currBedHM[0] + currBedHM[1] / 60) - (prevBedHM[0] + prevBedHM[1] / 60); 
     }
 
     if ((sleepPlan.sleepOscillation > 1 || sleepPlan.sleepOscillation < -1)) {
-      sleepPlan.sleepPattern[0].warnings.push(new WarningMessage(
+      sleepPlan.sleepPattern[0].warnings = [...sleepPlan.sleepPattern[0].warnings, new WarningMessage(
         'You bedtime is too variable',
         'You need to go to bed around the same hour every night to set your circadian rhythm (internal clock)'
-      ));
+      )];
       return false
     }
 
@@ -118,7 +116,6 @@ export class SleepService {
 
   public saveSleep(sleepPlan: SleepPlan, sleepHabit: SleepHabit): void {
     sleepPlan.imbalancedSleep = !this._checkSleep(sleepPlan);
-
     this._sleepPlan.update({
       daysOfImbalance: sleepPlan.daysOfImbalance,
       imbalancedSleep: sleepPlan.imbalancedSleep,

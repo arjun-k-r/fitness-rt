@@ -31,27 +31,19 @@ export class ActivityPlanPage {
     private _navCtrl: NavController
   ) { }
 
-  private _updateActivityPlan(activity: Activity): void {
+  private _updateActivityPlan(): void {
     this.isDirty = true;
-    if (activity.type === 'Physical') {
-      this.activityPlan.physicalEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.physicalActivities);
-    } else if (activity.type === 'Intellectual') {
-      this.activityPlan.intellectualEffort = this._activitySvc.getActivitiesDuration(this.activityPlan.intellectualActivities);
-    }
-
-    this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn([...this.activityPlan.intellectualActivities, ...this.activityPlan.physicalActivities]);
+    this.activityPlan.totalDuration = this._activitySvc.getActivitiesDuration(this.activityPlan.activities);
+    this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn(this.activityPlan.activities);
   }
 
   public addNewActivity(): void {
     let activitySelectModal: Modal = this._modalCtrl.create(ActivitySelectPage);
     activitySelectModal.present();
-    activitySelectModal.onDidDismiss((activity: Activity) => {
-      if (activity.type === 'Physical') {
-        this.activityPlan.physicalActivities = [...this.activityPlan.physicalActivities, activity];
-      } else if (activity.type === 'Intellectual') {
-        this.activityPlan.intellectualActivities = [...this.activityPlan.intellectualActivities, activity];
-      }
-      this._updateActivityPlan(activity);
+    activitySelectModal.onDidDismiss((activities: Array<Activity>) => {
+      this.activityPlan.activities = [...this.activityPlan.activities, ...activities];
+      this.activityPlan.activities.forEach((activity: Activity) => this._activitySvc.checkActivity(activity, this.activityPlan));
+      this._updateActivityPlan();
     });
   }
 
@@ -76,8 +68,8 @@ export class ActivityPlanPage {
           handler: data => {
             activity.duration = +data.duration;
             activity.energyBurn = this._activitySvc.getActivityEnergyBurn(activity);
-
-            this._updateActivityPlan(activity);
+            this._activitySvc.checkActivity(activity, this.activityPlan);
+            this._updateActivityPlan();
           }
         }
       ]
@@ -85,12 +77,8 @@ export class ActivityPlanPage {
     alert.present();
   }
 
-  public removeActivity(idx: number, type: string): void {
-    if (type === 'physical') {
-      this.activityPlan.physicalActivities = [...this.activityPlan.physicalActivities.slice(0, idx), ...this.activityPlan.physicalActivities.slice(idx + 1)];
-    } else {
-      this.activityPlan.intellectualActivities = [...this.activityPlan.intellectualActivities.slice(0, idx), ...this.activityPlan.intellectualActivities.slice(idx + 1)];
-    }
+  public removeActivity(idx: number): void {
+    this.activityPlan.activities = [...this.activityPlan.activities.slice(0, idx), ...this.activityPlan.activities.slice(idx + 1)];
   }
 
   public saveActivityPlan(): void {
@@ -166,8 +154,7 @@ export class ActivityPlanPage {
     this._activityPlanSubscription = this._activitySvc.getActivityPlan$().subscribe((activityPlan: ActivityPlan) => {
       console.log('Received activity plan: ', activityPlan);
       this.activityPlan = Object.assign({}, activityPlan);
-      this.activityPlan.intellectualActivities = this.activityPlan.intellectualActivities || [];
-      this.activityPlan.physicalActivities = this.activityPlan.physicalActivities || [];
+      this.activityPlan.activities = this.activityPlan.activities || [];
       loader.dismiss();
     });
   }

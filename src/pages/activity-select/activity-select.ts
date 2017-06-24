@@ -20,7 +20,7 @@ export class ActivitySelectPage {
   public activities$: FirebaseListObservable<Array<Activity>>;
   public limit: number = 50;
   public searchQuery: string = '';
-  public selectedActivity: Activity;
+  public selectedActivities: Array<Activity> = [];
   constructor(
     private _activitySvc: ActivityService,
     private _alertCtrl: AlertController,
@@ -32,7 +32,7 @@ export class ActivitySelectPage {
   }
 
   public doneSelecting(): void {
-    this._viewCtrl.dismiss(this.selectedActivity);
+    this._viewCtrl.dismiss(this.selectedActivities);
   }
 
   public loadMore(ev: InfiniteScroll) {
@@ -43,31 +43,37 @@ export class ActivitySelectPage {
   }
 
   public selectActivity(activity: Activity): void {
-    this._alertCtrl.create({
-      title: 'Duration',
-      subTitle: 'How long did you perform this activity?',
-      inputs: [
-        {
-          name: 'duration',
-          placeholder: 'Minutes',
-          type: 'number'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-        {
-          text: 'Done',
-          handler: (data: { duration: number }) => {
-            activity.duration = +data.duration;
-            activity.energyBurn = this._activitySvc.getActivityEnergyBurn(activity);
-            this.selectedActivity = Object.assign({}, activity);
+    let idx: number = this.selectedActivities.indexOf(activity);
+    if (idx === -1) {
+      this._alertCtrl.create({
+        title: 'Duration',
+        subTitle: 'How long did you perform this activity?',
+        inputs: [
+          {
+            name: 'duration',
+            placeholder: 'Minutes',
+            type: 'number'
           }
-        }
-      ]
-    }).present();
+        ],
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          },
+          {
+            text: 'Done',
+            handler: (data: { duration: number }) => {
+              activity.duration = +data.duration;
+              activity.energyBurn = this._activitySvc.getActivityEnergyBurn(activity);
+              this.selectedActivities = [...this.selectedActivities, activity];
+            }
+          }
+        ]
+      }).present();
+    } else {
+      this.selectedActivities = [...this.selectedActivities.slice(0, idx), ...this.selectedActivities.slice(idx + 1)];
+    }
+
   }
 
   ionViewWillEnter(): void {

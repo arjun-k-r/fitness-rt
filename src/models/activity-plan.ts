@@ -1,6 +1,9 @@
 // Third-party
 import * as moment from 'moment';
 
+// Models
+import { WarningMessage } from './warning-message';
+
 export class Activity {
     constructor(
         public type: string,
@@ -14,15 +17,11 @@ export class Activity {
 
 export class ActivityPlan {
     constructor(
+        public activities: Array<Activity> = [],
         public date: number = moment().dayOfYear(),
-        public intellectualActivities: Array<Activity> = [],
-        public intellectualEffort: number = 0,
-        public intellectualInactivity: number = 0,
-        public intellectualOverwork: number = 0,
-        public physicalActivities: Array<Activity> = [],
-        public physicalEffort: number = 0,
-        public physicalInactivity: number = 0,
-        public physicalOverwork: number = 0,
-        public totalEnergyBurn: number = 0
+        public intenseDays: number = 0,
+        public totalDuration: number = 0,
+        public totalEnergyBurn: number = 0,
+        public warnings: Array<WarningMessage> = []
     ) { }
 }

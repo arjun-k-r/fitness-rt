@@ -17,7 +17,7 @@
   <ion-list radio-group [(ngModel)]="selectedActivityName">
     <ion-item *ngFor="let activity of (activities$ | async) | search: searchQuery: limit">
       <ion-label text-wrap>{{ activity.name }}</ion-label>
-      <ion-radio [value]="activity.name" (click)="selectActivity(activity)"></ion-radio>
+      <ion-checkbox (click)="selectActivity(activity)"></ion-checkbox>
     </ion-item>
   </ion-list>
 

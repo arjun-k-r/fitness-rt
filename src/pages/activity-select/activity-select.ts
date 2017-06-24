@@ -27,6 +27,10 @@ export class ActivitySelectPage {
     private _viewCtrl: ViewController
   ) { }
 
+  public cancelSelecting(): void {
+    this._viewCtrl.dismiss([]);
+  }
+
   public clearSearch(ev): void {
     this.searchQuery = '';
   }
@@ -42,7 +46,7 @@ export class ActivitySelectPage {
     }, 1000);
   }
 
-  public selectActivity(activity: Activity): void {
+  public selectActivity(activity: Activity, checkBox: HTMLInputElement): void {
     let idx: number = this.selectedActivities.indexOf(activity);
     if (idx === -1) {
       this._alertCtrl.create({
@@ -59,6 +63,9 @@ export class ActivitySelectPage {
           {
             text: 'Cancel',
             role: 'cancel',
+            handler: () => {
+              checkBox.checked = false;
+            }
           },
           {
             text: 'Done',

@@ -22,7 +22,7 @@
         <ion-icon name="analytics"></ion-icon>
       </ion-segment-button>
       <ion-segment-button value="warnings">
-        <ion-icon color="{{activityPlan.warnings?.length ? 'danger' : ''}}" name="warning"></ion-icon>
+        <ion-icon color="{{activityPlan?.warnings.length ? 'danger' : ''}}" name="warning"></ion-icon>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -34,8 +34,8 @@
     <!-- Start of segment -->
     <ion-list *ngSwitchCase="'guidelines'">
       <ion-item>
-        <h2>Move constantly every hour</h2>
-        <p text-wrap>Improve circulation and increase energy</p>
+        <h2>Move every hour and every day</h2>
+        <p text-wrap>Sedentarism is one of the leading causes of aging (mortality) and all diseases (cardiovascular, diabetes, cancer, obesity, etc.)</p>
       </ion-item>
       <ion-item>
         <h2>Develop a HIIT (High intensity interval training) routine</h2>

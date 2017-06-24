@@ -1,9 +1,14 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Select activity</ion-title>
-    <ion-buttons end>
+    <ion-buttons start>
       <button ion-button icon-only padding (click)="doneSelecting()">
         <ion-icon name="done-all"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only padding (click)="cancelSelecting()">
+        <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -17,7 +22,7 @@
   <ion-list radio-group [(ngModel)]="selectedActivityName">
     <ion-item *ngFor="let activity of (activities$ | async) | search: searchQuery: limit">
       <ion-label text-wrap>{{ activity.name }}</ion-label>
-      <ion-checkbox (click)="selectActivity(activity)"></ion-checkbox>
+      <ion-checkbox #checkBox (click)="selectActivity(activity, checkBox)"></ion-checkbox>
     </ion-item>
   </ion-list>
 

@@ -131,7 +131,7 @@ export class ActivityService {
     // Update the user daily requirements
     this.updateUserRequirements(activityPlan.totalEnergyBurn);
     this._currentActivityPlan.update({
-      activitites: activityPlan.activities,
+      activities: activityPlan.activities,
       date: activityPlan.date,
       totalDuration: activityPlan.totalDuration,
       totalEnergyBurn: activityPlan.totalEnergyBurn,

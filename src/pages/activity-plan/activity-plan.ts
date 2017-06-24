@@ -79,40 +79,14 @@ export class ActivityPlanPage {
 
   public removeActivity(idx: number): void {
     this.activityPlan.activities = [...this.activityPlan.activities.slice(0, idx), ...this.activityPlan.activities.slice(idx + 1)];
+    this._updateActivityPlan();
   }
 
   public saveActivityPlan(): void {
     this._activitySvc.saveActivityPlan(this.activityPlan);
     this._activitySvc.updateUserRequirements(this.activityPlan.totalEnergyBurn);
-    setTimeout(() => this._activitySvc.getLeftEnergy().then((energy: number) => {
-      this.leftEnergy = energy;
-      console.log(energy);
-    }), 1000);
+    setTimeout(() => this._activitySvc.getLeftEnergy().then((energy: number) => this.leftEnergy = energy), 1000);
     this.isDirty = false;
-  }
-
-  public viewSymptoms(imbalanceKey: string, imbalanceName: string, imbalanceType: string): void {
-    this._fitSvc.getImbalanceSymptoms$(imbalanceKey, imbalanceType).subscribe((signs: Array<string>) => {
-      this._alertCtrl.create({
-        title: `${imbalanceName} ${imbalanceType} symptoms`,
-        subTitle: 'Check the symptoms which fit you',
-        inputs: [...signs.map((sign: string) => {
-          return {
-            type: 'checkbox',
-            label: sign,
-            value: sign
-          }
-        })],
-        buttons: [
-          {
-            text: 'Done',
-            handler: (data: Array<string>) => {
-              console.log('My symptoms are: ', data);
-            }
-          }
-        ]
-      }).present();
-    });
   }
 
   ionViewCanLeave(): Promise<boolean> {
@@ -155,6 +129,7 @@ export class ActivityPlanPage {
       console.log('Received activity plan: ', activityPlan);
       this.activityPlan = Object.assign({}, activityPlan);
       this.activityPlan.activities = this.activityPlan.activities || [];
+      this.activityPlan.warnings = this.activityPlan.warnings || [];
       loader.dismiss();
     });
   }

@@ -59,7 +59,6 @@ export class FitnessPage {
     this.fitness.pregnant = this.fitnessForm.get('pregnant').value;
     this.fitness.waist = this.fitnessForm.get('waist').value;
     this.fitness.weight = this.fitnessForm.get('weight').value;
-
     let energyConsumption = this._workEnergy + this.fitness.bmr,
       heartRateMax: number = this._fitSvc.getHeartRateMax(this.fitness.age),
       thrRange: { min: number, max: number } = this._fitSvc.getHeartRateTrainingRange(heartRateMax, this.fitness.heartRate.resting);
@@ -80,7 +79,6 @@ export class FitnessPage {
     this._fitSvc.saveFitness(this.fitness);
     this._fitSvc.storeEnergyConsumption(energyConsumption);
     this.isDirty = false;
-
     if (!!this._params.get('new')) {
       this._navCtrl.setRoot(SleepPlanPage, { new: true });
     }
@@ -115,8 +113,6 @@ export class FitnessPage {
 
   ionViewWillEnter(): void {
     this.fitness = Object.assign({}, this._fitSvc.getFitness());
-    console.log('Received fitness: ', this.fitness);
-
     this.fitnessForm = this._formBuilder.group({
       age: [this.fitness.age, Validators.required],
       gender: [this.fitness.gender, Validators.required],
@@ -134,9 +130,7 @@ export class FitnessPage {
     this.gender = this.fitnessForm.get('gender');
     this.height = this.fitnessForm.get('height');
     this.weight = this.fitnessForm.get('weight');
-
     this.fitnessForm.valueChanges.subscribe(() => this.isDirty = true);
-
     this._fitSvc.restoreEnergyConsumption().then((energyConsumption: number) => {
       this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, (energyConsumption > 0) ? energyConsumption : this.fitness.bmr, this.fitness.gender, this.fitness.height, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
       this._workEnergy = energyConsumption - this.fitness.bmr;

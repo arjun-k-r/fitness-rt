@@ -124,9 +124,7 @@ export class ActivityPlanPage {
 
     loader.present();
     this._activitySvc.getLeftEnergy().then((energy: number) => this.leftEnergy = energy);
-
     this._activityPlanSubscription = this._activitySvc.getActivityPlan$().subscribe((activityPlan: ActivityPlan) => {
-      console.log('Received activity plan: ', activityPlan);
       this.activityPlan = Object.assign({}, activityPlan);
       this.activityPlan.activities = this.activityPlan.activities || [];
       this.activityPlan.warnings = this.activityPlan.warnings || [];

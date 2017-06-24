@@ -95,7 +95,6 @@ export class FitnessService {
     return new Promise(resolve => {
       this._storage.ready().then(() => this._storage.get('energyConsumption').then((energy: { date: number, consumption: number }) => {
         if (!!energy && energy.date === CURRENT_DAY) {
-          console.log('Restoring energy consumption...', energy);
           resolve(energy.consumption);
         } else {
           resolve(0);
@@ -108,7 +107,6 @@ export class FitnessService {
     return new Promise(resolve => {
       this._storage.ready().then(() => this._storage.get('energyIntake').then((energy: { date: number, intake: number }) => {
         if (!!energy && energy.date === CURRENT_DAY) {
-          console.log('Restoring energy intake...', energy);
           resolve(energy.intake);
         } else {
           resolve(0);
@@ -118,21 +116,16 @@ export class FitnessService {
   }
 
   public saveFitness(fitness: Fitness): void {
-    console.log('Saving fitness: ', fitness);
-
     this._user.set('fitness', fitness);
     this._user.save();
     this._fitness.set(fitness);
   }
 
   public storeEnergyConsumption(energyConsumption: number): void {
-    console.log('Storing energy consumption: ', energyConsumption);
     this._storage.ready().then(() => this._storage.set('energyConsumption', { date: CURRENT_DAY, consumption: energyConsumption }));
   }
 
   public storeEnergyIntake(energyIntake: number): void {
-    console.log('Storing energy intake: ', energyIntake);
     this._storage.ready().then(() => this._storage.set('energyIntake', { date: CURRENT_DAY, intake: energyIntake }));
   }
-
 }

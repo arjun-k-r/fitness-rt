@@ -5,7 +5,5 @@ https://en.wikipedia.org/wiki/Sleep_deprivation
 https://en.wikipedia.org/wiki/Hypernatremia
 http://www.healthline.com/health/caffeine-overdose#symptoms3
 https://pubs.niaaa.nih.gov/publications/AlcoholOverdoseFactsheet/Overdosefact.htm
-http://www.mayoclinic.org/healthy-lifestyle/stress-management/in-depth/stress-symptoms/art-20050987
 https://www.stress.org/stress-effects/
-http://www.daveywaveyfitness.com/nutrition/8-side-effects-of-too-much-protein
 http://www.healthline.com/symptom/dehydration

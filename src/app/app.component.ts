@@ -43,10 +43,10 @@ export class MyApp {
         this._initializeApp();
         this.pages = [
             { title: 'Home', component: HomePage, icon: 'home' },
-            { title: 'Fitness', component: FitnessPage, icon: 'happy' },
+            { title: 'Fitness', component: FitnessPage, icon: 'body' },
             { title: 'Sleep', component: SleepPlanPage, icon: 'moon' },
-            { title: 'Exercise', component: ActivityPlanPage, icon: 'body' },
-            { title: 'Nutrition', component: MealPlanPage, icon: 'clock' },
+            { title: 'Exercise', component: ActivityPlanPage, icon: 'walk' },
+            { title: 'Nutrition', component: MealPlanPage, icon: 'nutrition' },
             { title: 'Foods', component: FoodListPage, icon: 'basket' },
             { title: 'Recipes', component: RecipeListPage, icon: 'restaurant' },
             { title: 'Account', component: AccountPage, icon: 'person' }

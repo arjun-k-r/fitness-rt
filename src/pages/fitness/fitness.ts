@@ -6,9 +6,6 @@ import { AlertController, NavController, NavParams, ToastController } from 'ioni
 // Models
 import { Fitness } from '../../models';
 
-// Pages
-import { SleepPlanPage } from '../sleep-plan/sleep-plan';
-
 // Providers
 import { FitnessService, NutritionService } from '../../providers';
 
@@ -19,6 +16,7 @@ import { FitnessService, NutritionService } from '../../providers';
 export class FitnessPage {
   private _workEnergy: number;
   public age: AbstractControl;
+  public bodyFatLabel: string;
   public gender: AbstractControl;
   public height: AbstractControl;
   public weight: AbstractControl;
@@ -26,8 +24,6 @@ export class FitnessPage {
   public fitnessDetails: string = 'fitness';
   public fitnessForm: FormGroup;
   public heartRate: number;
-  public idealBodyFat: number;
-  public idealWeight: number;
   public isDirty: boolean = false;
   constructor(
     private _alertCtrl: AlertController,
@@ -73,15 +69,11 @@ export class FitnessPage {
       }
     });
 
-    this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.fitness.gender);
-    this.idealWeight = this._fitSvc.getIdealWeight(this.fitness.gender, this.fitness.height, this.fitness.weight);
-    this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, energyConsumption, this.fitness.gender, this.fitness.height, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
+    this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, energyConsumption, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
     this._fitSvc.saveFitness(this.fitness);
     this._fitSvc.storeEnergyConsumption(energyConsumption);
+    this.bodyFatLabel = this._fitSvc.getBodyFatLabel(this.fitness.bodyFat, this.fitness.gender);
     this.isDirty = false;
-    if (!!this._params.get('new')) {
-      this._navCtrl.setRoot(SleepPlanPage, { new: true });
-    }
   }
 
   ionViewCanLeave(): Promise<boolean> {
@@ -132,15 +124,10 @@ export class FitnessPage {
     this.weight = this.fitnessForm.get('weight');
     this.fitnessForm.valueChanges.subscribe(() => this.isDirty = true);
     this._fitSvc.restoreEnergyConsumption().then((energyConsumption: number) => {
-      this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, (energyConsumption > 0) ? energyConsumption : this.fitness.bmr, this.fitness.gender, this.fitness.height, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
-      this._workEnergy = energyConsumption - this.fitness.bmr;
+      this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, (energyConsumption > 0) ? energyConsumption : this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
+      this._workEnergy = energyConsumption > 0 ? energyConsumption - this.fitness.bmr : 0;
     });
 
-    if (this.fitness.gender) {
-      this.idealBodyFat = this._fitSvc.getIdealBodyFat(this.fitness.gender);
-      if (this.fitness.height && this.fitness.weight) {
-        this.idealWeight = this._fitSvc.getIdealWeight(this.fitness.gender, this.fitness.height, this.fitness.weight);
-      }
-    }
+    this.bodyFatLabel = this._fitSvc.getBodyFatLabel(this.fitness.bodyFat, this.fitness.gender);
   }
 }

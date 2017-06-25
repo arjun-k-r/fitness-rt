@@ -5,8 +5,8 @@ import { AlertController, LoadingController, NavController } from 'ionic-angular
 import { Auth, IDetailedError, User, UserDetails } from '@ionic/cloud-angular';
 
 // Pages
+import { FitnessPage } from '../fitness/fitness';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
-import { HomePage } from '../home/home';
 
 // Providers
 import { AuthValidator } from '../../providers';
@@ -62,7 +62,7 @@ export class LoginPage {
     this._auth.login('basic', details)
       .then(() => {
         loader.dismiss();
-        this._navCtrl.setRoot(HomePage);
+        this._navCtrl.setRoot(FitnessPage);
       })
       .catch((err: IDetailedError<Array<string>>) => {
         loader.dismiss();

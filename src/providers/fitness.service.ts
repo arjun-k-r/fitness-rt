@@ -4,7 +4,6 @@ import { Storage } from '@ionic/storage';
 import { User } from '@ionic/cloud-angular';
 
 // Third-party
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import * as moment from 'moment';
 
 // Models
@@ -14,10 +13,7 @@ const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class FitnessService {
-  private _fitness: FirebaseObjectObservable<Fitness>;
-  constructor(private _db: AngularFireDatabase, private _storage: Storage, private _user: User) {
-    this._fitness = _db.object(`/fitnesss/${_user.id}`);
-  }
+  constructor(private _storage: Storage, private _user: User) {}
 
   private _getHeartRateTrainingMax(hrMax: number, hrRest: number): number {
     return Math.round(0.85 * (hrMax - hrRest) + hrRest);
@@ -49,9 +45,9 @@ export class FitnessService {
     }
   }
 
- /**
-  * Nes, B.M, et al. HRMax formula
-  */
+  /**
+   * Nes, B.M, et al. HRMax formula
+   */
   public getHeartRateMax(age: number): number {
     return Math.round(211 - (0.64 * age));
   }
@@ -66,17 +62,32 @@ export class FitnessService {
     };
   }
 
-  public getIdealBodyFat(gender: string): number {
-    return gender === 'male' ? 12 : 21;
-  }
-
-  public getIdealWeight(gender: string, height: number, weight: number): number {
-    let extraInch: number = (height * 0.394) % 12;
-    return gender === 'male' ? Math.round(52 + 1.9 * extraInch) : Math.round(49 + 1.7 * extraInch);
-  }
-
-  public getImbalanceSymptoms$(imbalanceKey: string, imbalanceType: string): FirebaseObjectObservable<Array<string>> {
-    return this._db.object(`/imbalance/${imbalanceType}/${imbalanceKey}`);
+  public getBodyFatLabel(fatPercentage: number, gender: string): string {
+    if (gender === 'male') {
+      if (fatPercentage <= 5) {
+        return 'Underfat';
+      } else if (fatPercentage <= 13) {
+        return 'Athletic';
+      } else if (fatPercentage <= 17) {
+        return 'Fitness';
+      } else if (fatPercentage <= 24) {
+        return 'Overbodyfat';
+      } else {
+        return 'Obesity';
+      }
+    } else {
+      if (fatPercentage <= 13) {
+        return 'Underfat';
+      } else if (fatPercentage <= 20) {
+        return 'Athletic';
+      } else if (fatPercentage <= 24) {
+        return 'Fitness';
+      } else if (fatPercentage <= 31) {
+        return 'Overbodyfat';
+      } else {
+        return 'Obesity';
+      }
+    }
   }
 
   public getFitness(): Fitness {
@@ -118,7 +129,6 @@ export class FitnessService {
   public saveFitness(fitness: Fitness): void {
     this._user.set('fitness', fitness);
     this._user.save();
-    this._fitness.set(fitness);
   }
 
   public storeEnergyConsumption(energyConsumption: number): void {

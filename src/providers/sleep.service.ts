@@ -115,6 +115,7 @@ export class SleepService {
   }
 
   public saveSleep(sleepPlan: SleepPlan, sleepHabit: SleepHabit): void {
+    sleepPlan.sleepPattern[0] = sleepHabit;
     sleepPlan.imbalancedSleep = !this._checkSleep(sleepPlan);
     this._sleepPlan.update({
       daysOfImbalance: sleepPlan.daysOfImbalance,

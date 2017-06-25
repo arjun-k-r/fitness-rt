@@ -1,6 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { AlertController } from 'ionic-angular';
+import { Subscription } from 'rxjs/Subscription';
 
 // Models
 import { SleepHabit, SleepPlan } from '../../models';
@@ -13,6 +14,7 @@ import { FitnessService, SleepService } from '../../providers';
   templateUrl: 'sleep-plan.html'
 })
 export class SleepPlanPage {
+  private _sleepPlanSubscription: Subscription;
   public currentSleep: SleepHabit = new SleepHabit();
   public isDirty: boolean = false;
   public sleepPlan: SleepPlan;
@@ -33,27 +35,6 @@ export class SleepPlanPage {
   public saveSleep(): void {
     this._sleepSvc.saveSleep(this.sleepPlan, this.currentSleep);
     this.isDirty = false;
-  }
-
-  public viewSymptoms(): void {
-    this._fitSvc.getImbalanceSymptoms$('sleep', 'deficiency').subscribe((signs: Array<string>) => {
-      this._alertCtrl.create({
-        title: 'Sleep deficiency symptoms',
-        subTitle: 'Check the symptoms which fit you',
-        inputs: [...signs.map((sign: string) => {
-          return {
-            type: 'checkbox',
-            label: sign,
-            value: sign
-          }
-        })],
-        buttons: [
-          {
-            text: 'Done'
-          }
-        ]
-      }).present();
-    });
   }
 
   ionViewCanLeave(): Promise<boolean> {
@@ -84,9 +65,13 @@ export class SleepPlanPage {
   }
 
   ionViewWillEnter(): void {
-    this._sleepSvc.getSleepPlan$().subscribe((sleepPlan: SleepPlan) => {
+    this._sleepPlanSubscription = this._sleepSvc.getSleepPlan$().subscribe((sleepPlan: SleepPlan) => {
       this.sleepPlan = Object.assign({}, sleepPlan);
       this.currentSleep = Object.assign({}, this._sleepSvc.getCurrentSleep(this.sleepPlan));
     });
+  }
+
+  ionViewWillLeave(): void {
+    this._sleepPlanSubscription.unsubscribe();
   }
 }

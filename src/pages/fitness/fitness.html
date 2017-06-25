@@ -30,27 +30,20 @@
             <form [formGroup]="fitnessForm" *ngIf="fitnessForm">
                 <ion-list>
                     <ion-item *ngIf="fitness?.bmr" text-wrap>
-                        BMR
+                        <h2>BMR</h2>
                         <p item-content>{{ fitness?.bmr }} kcal/day</p>
                     </ion-item>
                     <ion-item *ngIf="fitness?.bodyFat" text-wrap>
-                        Body fat
-                        <p item-content>{{ fitness?.bodyFat }}%</p>
-                    </ion-item>
-                    <ion-item *ngIf="idealBodyFat" text-wrap>
-                        Ideal body fat
-                        <p item-content>{{ idealBodyFat }}%</p>
-                    </ion-item>
-                    <ion-item *ngIf="idealWeight" text-wrap>
-                        Ideal weight
-                        <p item-content>{{ idealWeight }} kg</p>
+                        <h2>Body fat percentage</h2>
+                        <ion-icon color="{{fitness?.bodyFat > 17 ? 'danger' : 'secondary'}}" name="{{fitness?.bodyFat > 17 ? 'thumbs-down' : 'thumbs-up'}}" item-right></ion-icon>
+                        <p item-right ion-text color="{{ fitness?.bodyFat > 17 ? 'danger' : 'secondary' }}">{{ fitness?.bodyFat }}%</p>
                     </ion-item>
                     <ion-item *ngIf="fitness?.heartRate.max" text-wrap>
-                        Maximum heart rate (HRMax)
+                        <h2>Maximum heart rate (HRMax)</h2>
                         <p item-content>{{ fitness?.heartRate.max }} bpm</p>
                     </ion-item>
                     <ion-item *ngIf="fitness?.heartRate.trainingMin && fitness?.heartRate.trainingMax" text-wrap>
-                        Training heart rate (THR)
+                        <h2>Training heart rate (THR)</h2>
                         <p item-content>{{ fitness?.heartRate.trainingMin }}-{{ fitness?.heartRate.trainingMax }} bpm</p>
                     </ion-item>
                     <ion-item text-wrap>
@@ -88,6 +81,10 @@
                         <ion-label fixed>Height (cm)</ion-label>
                         <ion-input type="number" formControlName="height"></ion-input>
                     </ion-item>
+                    <ion-item *ngIf="fitnessForm.get('gender').value === 'female'" text-wrap>
+                        <ion-label fixed>Hips (cm)</ion-label>
+                        <ion-input type="number" formControlName="hips"></ion-input>
+                    </ion-item>
                     <error-message [control]="height"></error-message>
                     <ion-item text-wrap>
                         <ion-label fixed>Weight (kg)</ion-label>
@@ -101,10 +98,6 @@
                     <ion-item text-wrap>
                         <ion-label fixed>Neck (cm)</ion-label>
                         <ion-input type="number" formControlName="neck"></ion-input>
-                    </ion-item>
-                    <ion-item *ngIf="fitnessForm.get('gender').value === 'female'" text-wrap>
-                        <ion-label fixed>Hips (cm)</ion-label>
-                        <ion-input type="number" formControlName="hips"></ion-input>
                     </ion-item>
                 </ion-list>
             </form>
@@ -261,7 +254,7 @@
                 </ion-item>
                 <ion-item>
                     Potassium
-                    <p item-content>{{ (fitness.requirements.Potassium?.value).toFixed(2) }}{{ fitness.requirements.Potassium?.unit }}</p>
+                    <p item-content>{{ (fitness.requirements.potassium?.value).toFixed(2) }}{{ fitness.requirements.potassium?.unit }}</p>
                 </ion-item>
                 <ion-item>
                     Selenium

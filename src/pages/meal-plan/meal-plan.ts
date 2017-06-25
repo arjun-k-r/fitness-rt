@@ -133,30 +133,6 @@ export class MealPlanPage {
     }
   }
 
-  public viewSymptoms(imbalanceKey: string, imbalanceName: string, imbalanceType: string): void {
-    this._fitSvc.getImbalanceSymptoms$(imbalanceKey, imbalanceType).subscribe((signs: Array<string>) => {
-      this._alertCtrl.create({
-        title: `${imbalanceName} ${imbalanceType} symptoms`,
-        subTitle: 'Check the symptoms which fit you',
-        inputs: [...signs.map((sign: string) => {
-          return {
-            type: 'checkbox',
-            label: sign,
-            value: sign
-          }
-        })],
-        buttons: [
-          {
-            text: 'Done',
-            handler: (data: Array<string>) => {
-              console.log('My symptoms are: ', data);
-            }
-          }
-        ]
-      }).present();
-    });
-  }
-
   ionViewWillEnter(): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Loading...',

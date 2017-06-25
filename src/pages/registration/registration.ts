@@ -85,7 +85,7 @@ export class RegistrationPage {
         this._auth.login('basic', details)
           .then(() => {
             loader.dismiss();
-            this._navCtrl.setRoot(FitnessPage, { new: true });
+            this._navCtrl.setRoot(FitnessPage);
           })
           .catch((err: IDetailedError<Array<string>>) => {
             loader.dismiss();

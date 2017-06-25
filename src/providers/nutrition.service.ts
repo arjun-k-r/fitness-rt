@@ -164,7 +164,7 @@ export class NutritionService {
     ]);
   }
 
-  public getDri(age: number, energyConsumption: number, gender: string, height: number, lactating: boolean, pregnant: boolean, weight: number): Nutrition {
+  public getDri(age: number, energyConsumption: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): Nutrition {
     let requirements: Nutrition = new Nutrition();
 
     requirements.ala.value = this._driSvc.getALADri(energyConsumption);

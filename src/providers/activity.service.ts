@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
 import { User } from '@ionic/cloud-angular';
+import 'rxjs/add/operator/map';
 
 // Third-party
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
@@ -71,10 +71,12 @@ export class ActivityService {
 
   public checkActivity(activity: Activity, activityPlan: ActivityPlan): void {
     if (activity.met >= 8 && activity.duration > 45) {
-      activityPlan.warnings = [...activityPlan.warnings, new WarningMessage(
+      activityPlan.warnings = [new WarningMessage(
         'Too much intense exercise at once',
         'Keep your intense exercise sessions to less than 45 minutes'
       )];
+    } else {
+      activityPlan.warnings = [];
     }
   }
 
@@ -91,31 +93,31 @@ export class ActivityService {
   }
 
   public getActivityPlan$(): Observable<ActivityPlan> {
-    return new Observable((observer: Observer<ActivityPlan>) => {
-      this._currentActivityPlan.subscribe((currActivityPlan: ActivityPlan) => {
-        if (currActivityPlan['$value'] === null) {
-          // Get the previous day activity plan to check for activity imbalances
-          this._lastActivityPlan.subscribe((lastActivityPlan: ActivityPlan) => {
-            let newActivityPlan: ActivityPlan = new ActivityPlan();
-            if (!lastActivityPlan.hasOwnProperty('$value')) {
-              this._checkInactivity(lastActivityPlan.totalDuration, newActivityPlan);
-              newActivityPlan.intenseDays = lastActivityPlan.intenseDays;
-              if (moment().day() < moment().dayOfYear(lastActivityPlan.date).day() || moment().day() === 1) {
-                this._checkIntenseRoutine(newActivityPlan);
-                newActivityPlan.intenseDays = 0;
-              }
-
-              this._checkIntenseExercise(lastActivityPlan.activities, newActivityPlan);
+    return this._currentActivityPlan.map((currActivityPlan: ActivityPlan) => {
+      if (currActivityPlan['$value'] === null) {
+        // Get the previous day activity plan to check for activity imbalances
+        this._lastActivityPlan.subscribe((lastActivityPlan: ActivityPlan) => {
+          let newActivityPlan: ActivityPlan = new ActivityPlan();
+          if (!lastActivityPlan.hasOwnProperty('$value')) {
+            this._checkInactivity(lastActivityPlan.totalDuration, newActivityPlan);
+            newActivityPlan.intenseDays = lastActivityPlan.intenseDays;
+            if (moment().day() < moment().dayOfYear(lastActivityPlan.date).day() || moment().day() === 1) {
+              this._checkIntenseRoutine(newActivityPlan);
+              newActivityPlan.intenseDays = 0;
             }
 
-            observer.next(newActivityPlan);
-            observer.complete();
-          });
-        } else {
-          observer.next(currActivityPlan);
-          observer.complete();
-        }
-      });
+            this._checkIntenseExercise(lastActivityPlan.activities, newActivityPlan);
+          }
+
+          currActivityPlan = Object.assign({}, newActivityPlan);
+        });
+      }
+
+      // Firebase removes empty objects on save
+      currActivityPlan.activities = currActivityPlan.activities || [];
+      currActivityPlan.warnings = currActivityPlan.warnings || [];
+
+      return currActivityPlan;
     });
   }
 
@@ -145,7 +147,7 @@ export class ActivityService {
   public updateUserRequirements(energyConsumption: number): void {
     let userFitness: Fitness = this._fitSvc.getFitness();
     this._fitSvc.storeEnergyConsumption(userFitness.bmr + energyConsumption);
-    userFitness.requirements = this._nutritionSvc.getDri(userFitness.age, userFitness.bmr + energyConsumption, userFitness.gender, userFitness.height, userFitness.lactating, userFitness.pregnant, userFitness.weight);
+    userFitness.requirements = this._nutritionSvc.getDri(userFitness.age, userFitness.bmr + energyConsumption, userFitness.gender, userFitness.lactating, userFitness.pregnant, userFitness.weight);
     this._fitSvc.saveFitness(userFitness);
   }
 

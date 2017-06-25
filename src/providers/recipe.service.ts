@@ -32,11 +32,6 @@ export class RecipeService {
     });
   }
 
-  /**
-   * Applies the cooking impact on nutrients
-   * @param {Recipe} recipe - The recipe to check
-   * @returns {void}
-   */
   public checkCooking(recipe: Recipe): void {
     if (recipe.cookingMethod === 'Baking' || recipe.cookingMethod === 'Grilling' || recipe.cookingMethod === 'Roasting' || recipe.cookingMethod === 'Steaming') {
       // Dry heat cooking
@@ -45,8 +40,6 @@ export class RecipeService {
       recipe.nutrition.dha.value *= 0.75;
       recipe.nutrition.epa.value *= 0.75;
       recipe.nutrition.la.value *= 0.75;
-      recipe.nutrition.omega3.value *= 0.75;
-      recipe.nutrition.omega6.value *= 0.75;
       recipe.nutrition.vitaminA.value *= 0.5;
       recipe.nutrition.vitaminB1.value *= 0.3;
       recipe.nutrition.vitaminB2.value *= 0.1;
@@ -70,8 +63,6 @@ export class RecipeService {
       recipe.nutrition.la.value *= 0.75;
       recipe.nutrition.magnesium.value *= 0.25;
       recipe.nutrition.manganese.value *= 0.25;
-      recipe.nutrition.omega3.value *= 0.75;
-      recipe.nutrition.omega6.value *= 0.75;
       recipe.nutrition.phosphorus.value *= 0.25;
       recipe.nutrition.potassium.value *= 0.3;
       recipe.nutrition.selenium.value *= 0.25;
@@ -100,8 +91,6 @@ export class RecipeService {
       recipe.nutrition.la.value *= 0.75;
       recipe.nutrition.magnesium.value *= 0.4;
       recipe.nutrition.manganese.value *= 0.4;
-      recipe.nutrition.omega3.value *= 0.75;
-      recipe.nutrition.omega6.value *= 0.75;
       recipe.nutrition.phosphorus.value *= 0.35;
       recipe.nutrition.potassium.value *= 0.7;
       recipe.nutrition.selenium.value *= 0.4;
@@ -119,28 +108,15 @@ export class RecipeService {
       recipe.nutrition.vitaminK.value *= 0.35;
       recipe.nutrition.zinc.value *= 0.4;
     }
-
   }
 
-  /**
-   * Gets the recipe difficulty level by the number of instructions
-   * @param {Recipe} recipe - The recipe to check
-   * @returns {string} Returns the difficulty level name
-   */
   public checkDifficulty(recipe: Recipe): number {
     return recipe.instructions.length < 5 ? 1 : recipe.instructions.length < 10 ? 2 : 3;
   }
   
-  /**
-   * Calculates the nutritional values of a single portions of the recipe based on the ingredients
-   * @param {Array} items - The ingredients of the recipe
-   * @param {number} portions - The number of portions for t
-   * @returns {Nutrition} Returns the recipe nutrition
-   */
   public getRecipeNutrition(items: Array<Food | Recipe>, portions: number): Nutrition {
     let totalNutrition: Nutrition = this._nutritionSvc.getTotalNutrition(items),
       portionNutrition: Nutrition = new Nutrition();
-
     for (let nutrientKey in totalNutrition) {
       portionNutrition[nutrientKey].value = totalNutrition[nutrientKey].value / portions;
       portionNutrition[nutrientKey].value = +(portionNutrition[nutrientKey].value).toFixed(2);
@@ -148,39 +124,19 @@ export class RecipeService {
     return portionNutrition;
   }
 
-  /**
-   * Gets the user's recipes
-   * @returns {FirebaseListObservable} Returns an observable that publishes the recipes
-   */
   public getRecipes$(): FirebaseListObservable<Array<Recipe>> {
     return this._recipes;
   }
 
-  /**
-   * Gets the size of the recipe
-   * @param {Array} items - The ingredients of the recipe
-   * @returns {number} Returns the quantity in grams of the recipe
-   */
   public getRecipeSize(items: Array<Food | Recipe>, portions: number): number {
     return Math.round(this._nutritionSvc.calculateQuantity(items) / portions);
   }
 
-  /**
-   * Removes the recipe from the database
-   * @param {Recipes} recipe - The recipe to update
-   * @returns {void}
-   */
   public removeRecipe(recipe: Recipe): void {
     this._recipes.remove(recipe['$key']);
   }
 
-  /**
-   * Updates a recipe to the database or adds it if it's new
-   * @param {Recipes} recipe - The recipe to update
-   * @returns {void}
-   */
   public saveRecipe(recipe: Recipe): void {
-    console.log('Saving recipe: ', recipe);
     if (!recipe.hasOwnProperty('$key')) {
       recipe['$key'] = this._recipes.push(recipe).key;
     } else {
@@ -203,5 +159,4 @@ export class RecipeService {
       });
     }
   }
-
 }

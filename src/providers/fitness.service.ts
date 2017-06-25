@@ -13,7 +13,7 @@ const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class FitnessService {
-  constructor(private _storage: Storage, private _user: User) {}
+  constructor(private _storage: Storage, private _user: User) { }
 
   private _getHeartRateTrainingMax(hrMax: number, hrRest: number): number {
     return Math.round(0.85 * (hrMax - hrRest) + hrRest);
@@ -62,31 +62,11 @@ export class FitnessService {
     };
   }
 
-  public getBodyFatLabel(fatPercentage: number, gender: string): string {
+  public getBodyFatFitness(fatPercentage: number, gender: string): boolean {
     if (gender === 'male') {
-      if (fatPercentage <= 5) {
-        return 'Underfat';
-      } else if (fatPercentage <= 13) {
-        return 'Athletic';
-      } else if (fatPercentage <= 17) {
-        return 'Fitness';
-      } else if (fatPercentage <= 24) {
-        return 'Overbodyfat';
-      } else {
-        return 'Obesity';
-      }
+      return fatPercentage <= 17;
     } else {
-      if (fatPercentage <= 13) {
-        return 'Underfat';
-      } else if (fatPercentage <= 20) {
-        return 'Athletic';
-      } else if (fatPercentage <= 24) {
-        return 'Fitness';
-      } else if (fatPercentage <= 31) {
-        return 'Overbodyfat';
-      } else {
-        return 'Obesity';
-      }
+      return fatPercentage <= 24;
     }
   }
 

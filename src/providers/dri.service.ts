@@ -13,18 +13,6 @@ export class DRIService {
     return age > 18 ? 10 : 0;
   }
 
-  public getArginineDri(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
-    if (age <= 1) {
-      return 0.2 * weight;
-    } else if (age <= 14) {
-      return 0.06 * weight;
-    } else if (gender === 'male') {
-      return 0.04 * weight;
-    } else {
-      return lactating ? 0.1 * weight : pregnant ? 0.1 * weight : 0.04 * weight;
-    }
-  }
-
   public getBiotinDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (age <= 1) {
       return 0.006;
@@ -33,7 +21,7 @@ export class DRIService {
     } else if (gender === 'male') {
       return 0.03;
     } else {
-      return lactating ? 0.35 : pregnant ? 0.03 : 0.03;
+      return lactating ? 0.035 : pregnant ? 0.03 : 0.03;
     }
   }
 
@@ -54,16 +42,16 @@ export class DRIService {
   }
 
   public getCarbDri(energyConsumption: number): number {
-    return 0.5 * energyConsumption / 4;
+    return 0.4 * energyConsumption / 4;
   }
 
   public getChlorideDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (age <= 1) {
-      return 600;
+      return 250;
     } else if (age <= 14) {
-      return 1500;
+      return 500;
     } else {
-      return 2300;
+      return 800;
     }
   }
 
@@ -279,14 +267,6 @@ export class DRIService {
     }
   }
 
-  public getOmega3(energyConsumption: number): number {
-    return 0.05 * energyConsumption / 9;
-  }
-
-  public getOmega6(energyConsumption: number): number {
-    return 0.05 * energyConsumption / 9;
-  }
-
   public getPantothenicAcidDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (age <= 1) {
       return 1.8;
@@ -321,10 +301,6 @@ export class DRIService {
     }
   }
 
-  public getPolyunsaturatedFatDri(energyConsumption: number): number {
-    return 0.1 * energyConsumption / 9;
-  }
-
   public getPotassiumDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (age <= 1) {
       return 700;
@@ -338,7 +314,7 @@ export class DRIService {
   }
 
   public getProteinDri(energyConsumption: number): number {
-    return 0.15 * energyConsumption / 4;
+    return 0.25 * energyConsumption / 4;
   }
 
   public getPyridoxineDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
@@ -387,8 +363,8 @@ export class DRIService {
     }
   }
 
-  public getSugarDri(energyConsumption: number): number {
-    return 0.05 * energyConsumption / 4;
+  public getSugarsDri(energyConsumption: number): number {
+    return 0.1 * energyConsumption / 4;
   }
 
   public getThiamineDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
@@ -399,7 +375,7 @@ export class DRIService {
     } else if (gender === 'male') {
       return 1.2;
     } else {
-      return lactating ? 1.4 : pregnant ? 1.4 : 0.1;
+      return lactating ? 1.4 : pregnant ? 1.4 : 1.1;
     }
   }
 
@@ -415,8 +391,8 @@ export class DRIService {
     }
   }
 
-  public getTransFatDri(): number {
-    return 0;
+  public getTransFatDri(energyConsumption: number): number {
+    return 0.01 * energyConsumption / 9;
   }
 
   public getTryptophanDri(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
@@ -467,14 +443,8 @@ export class DRIService {
     }
   }
 
-  public getVitaminDDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
-    if (age <= 1) {
-      return 10;
-    } else if (age <= 14) {
-      return 15;
-    } else {
-      return 15;
-    }
+  public getVitaminDDri(): number {
+    return 5;
   }
 
   public getVitaminEDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {

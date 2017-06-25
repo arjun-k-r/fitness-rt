@@ -28,6 +28,7 @@ export class NutrientDeficiencies {
     constructor(
         public water: number = 0,
         public fiber: number = 0,
+        public protein: number = 0,
         public calcium: number = 0,
         public iron: number = 0,
         public magnesium: number = 0,
@@ -55,7 +56,6 @@ export class NutrientDeficiencies {
         public ala: number = 0,
         public dha: number = 0,
         public epa: number = 0,
-        public omega3: number = 0,
         public tryptophan: number = 0,
         public threonine: number = 0,
         public isoleucine: number = 0,
@@ -72,11 +72,8 @@ export class NutrientExcesses {
     constructor(
         public alcohol: number = 0,
         public caffeine: number = 0,
-        public energy: number = 0,
-        public protein: number = 0,
-        public sugar: number = 0,
+        public sugars: number = 0,
         public sodium: number = 0,
-        public polyunsatFat: number = 0,
         public transFat: number = 0
     ) {}
 }
@@ -88,10 +85,8 @@ export class Nutrition {
         public protein: Nutrient = new Nutrient(203, 'Proximates', 'Protein', 'g'),
         public fats: Nutrient = new Nutrient(204, 'Proximates', 'Fats', 'g'),
         public carbs: Nutrient = new Nutrient(205, 'Proximates', 'Carbohydrates', 'g'),
-        public starch: Nutrient = new Nutrient(209, 'Proximates', 'Starch', 'g'),
-        public lactose: Nutrient = new Nutrient(213, 'Proximates', 'Lactose', 'g'),
         public fiber: Nutrient = new Nutrient(291, 'Proximates', 'Fiber', 'g'),
-        public sugar: Nutrient = new Nutrient(210, 'Proximates', 'Sugar', 'g'),
+        public sugars: Nutrient = new Nutrient(269, 'Proximates', 'Sugars', 'g'),
         public calcium: Nutrient = new Nutrient(301, 'Minerals', 'Calcium', 'mg'),
         public iron: Nutrient = new Nutrient(303, 'Minerals', 'Iron', 'mg'),
         public magnesium: Nutrient = new Nutrient(304, 'Minerals', 'Magnesium', 'mg'),
@@ -120,9 +115,6 @@ export class Nutrition {
         public ala: Nutrient = new Nutrient(619, 'Lipids', 'Omega-3 (ALA)', 'g'),
         public dha: Nutrient = new Nutrient(621, 'Lipids', 'Omega-3 (DHA)', 'g'),
         public epa: Nutrient = new Nutrient(629, 'Lipids', 'Omega-3 (EPA)', 'g'),
-        public omega3: Nutrient = new Nutrient(0, 'Lipids', 'Omega-3 (Total)', 'g'),
-        public omega6: Nutrient = new Nutrient(0, 'Lipids', 'Omega-6 (Total)', 'g'),
-        public polyunsatFat: Nutrient = new Nutrient(646, 'Lipids', 'Polyunsaturated fat', 'g'),
         public transFat: Nutrient = new Nutrient(605, 'Lipids', 'Trans fat', 'g'),
         public tryptophan: Nutrient = new Nutrient(501, 'Amino Acids', 'Tryptophan', 'g'),
         public threonine: Nutrient = new Nutrient(502, 'Amino Acids', 'Threonine', 'g'),

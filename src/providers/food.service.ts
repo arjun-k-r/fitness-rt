@@ -63,13 +63,6 @@ export class FoodService {
     return newFood;
   }
 
-  /**
-   * Sets the nutritional value of the food to a specific formats
-   * @description When the food report is fetched from the USDA Databse it has a very complex value and needs to be mapped to a simpler format
-   * @param {Array} nutrients - The list of nutrients
-   * @param {Food} food - The food to add the nutritional values to
-   * @returns {void}
-   */
   private _setNutrientValue(nutrients: Array<IFoodReportNutrient>, food: Food): void {
     nutrients.forEach((nutrient: IFoodReportNutrient) => {
       switch (nutrient.nutrient_id.toString()) {
@@ -93,20 +86,12 @@ export class FoodService {
           food.nutrition.carbs.value = +nutrient.value;
           break;
 
-        case '209':
-          food.nutrition.starch.value = +nutrient.value;
-          break;
-
-        case '213':
-          food.nutrition.lactose.value = +nutrient.value;
-          break;
-
         case '291':
           food.nutrition.fiber.value = +nutrient.value;
           break;
 
-        case '210':
-          food.nutrition.sugar.value = +nutrient.value;
+        case '269':
+          food.nutrition.sugars.value = +nutrient.value;
           break;
 
         case '301':
@@ -205,64 +190,20 @@ export class FoodService {
           food.nutrition.transFat.value = +nutrient.value;
           break;
 
-        case '606':
-          food.nutrition.satFat.value = +nutrient.value;
-          break;
-
         case '618':
           food.nutrition.la.value = +nutrient.value;
-          food.nutrition.omega6.value += +nutrient.value;
           break;
 
         case '619':
           food.nutrition.ala.value = +nutrient.value;
-          food.nutrition.omega3.value += +nutrient.value;
-          break;
-
-        case '620':
-          food.nutrition.omega3.value += +nutrient.value;
           break;
 
         case '621':
           food.nutrition.dha.value = +nutrient.value;
-          food.nutrition.omega3.value += +nutrient.value;
-          break;
-
-        case '627':
-          food.nutrition.omega3.value += +nutrient.value;
           break;
 
         case '629':
           food.nutrition.epa.value = +nutrient.value;
-          food.nutrition.omega3.value += +nutrient.value;
-          break;
-
-        case '631':
-          food.nutrition.omega3.value += +nutrient.value;
-          break;
-
-        case '646':
-          food.nutrition.polyunsatFat.value = +nutrient.value;
-          break;
-
-        case '646':
-          food.nutrition.polyunsatFat.value = +nutrient.value;
-          break;
-
-        case '672':
-          food.nutrition.omega6.value += +nutrient.value;
-          break;
-
-        case '689':
-          food.nutrition.omega3.value += +nutrient.value;
-          break;
-
-        case '857':
-          food.nutrition.omega3.value += +nutrient.value;
-          break;
-
-        case '858':
-          food.nutrition.omega6.value += +nutrient.value;
           break;
 
         case '501':

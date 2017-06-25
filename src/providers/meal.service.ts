@@ -73,9 +73,9 @@ export class MealService {
    * @returns {WarningMessage} Returns warning if the meal is too big
    */
   private _checkMealSize(size: number): WarningMessage {
-    return size > 900 ? new WarningMessage(
+    return size > 1000 ? new WarningMessage(
       'The meal is too large!',
-      "The meal most not exceed the stomach's capacity of 900g"
+      "The meal most not exceed the stomach's capacity of 1 l iter"
     ) : null;
   }
 

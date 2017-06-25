@@ -16,7 +16,6 @@ import { FitnessService, NutritionService } from '../../providers';
 export class FitnessPage {
   private _workEnergy: number;
   public age: AbstractControl;
-  public bodyFatLabel: string;
   public gender: AbstractControl;
   public height: AbstractControl;
   public weight: AbstractControl;
@@ -25,6 +24,7 @@ export class FitnessPage {
   public fitnessForm: FormGroup;
   public heartRate: number;
   public isDirty: boolean = false;
+    public isFitness: boolean;
   constructor(
     private _alertCtrl: AlertController,
     private _formBuilder: FormBuilder,
@@ -72,7 +72,7 @@ export class FitnessPage {
     this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, energyConsumption, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
     this._fitSvc.saveFitness(this.fitness);
     this._fitSvc.storeEnergyConsumption(energyConsumption);
-    this.bodyFatLabel = this._fitSvc.getBodyFatLabel(this.fitness.bodyFat, this.fitness.gender);
+    this.isFitness = this._fitSvc.getBodyFatFitness(this.fitness.bodyFat, this.fitness.gender);
     this.isDirty = false;
   }
 
@@ -128,6 +128,6 @@ export class FitnessPage {
       this._workEnergy = energyConsumption > 0 ? energyConsumption - this.fitness.bmr : 0;
     });
 
-    this.bodyFatLabel = this._fitSvc.getBodyFatLabel(this.fitness.bodyFat, this.fitness.gender);
+    this.isFitness = this._fitSvc.getBodyFatFitness(this.fitness.bodyFat, this.fitness.gender);
   }
 }

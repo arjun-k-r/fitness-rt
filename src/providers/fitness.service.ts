@@ -15,18 +15,18 @@ const CURRENT_DAY: number = moment().dayOfYear();
 export class FitnessService {
   constructor(private _storage: Storage, private _user: User) { }
 
-  private _getHeartRateTrainingMax(hrMax: number, hrRest: number): number {
+  private _calculateTHRMax(hrMax: number, hrRest: number): number {
     return Math.round(0.85 * (hrMax - hrRest) + hrRest);
   }
 
-  private _getHeartRateTrainingMin(hrMax: number, hrRest: number): number {
+  private _calculateTHRMin(hrMax: number, hrRest: number): number {
     return Math.round(0.5 * (hrMax - hrRest) + hrRest);
   }
 
   /**
    * The Revised Harris-Benedict Equation
    */
-  public getBmr(age: number, gender: string, height: number, weight: number): number {
+  public calculateBmr(age: number, gender: string, height: number, weight: number): number {
     if (gender === 'male') {
       return Math.round(13.397 * weight + 4.799 * height - 5.677 * age + 88.362);
     } else {
@@ -37,7 +37,7 @@ export class FitnessService {
   /**
    * The U.S. Navy body fat equations developed by Drs. Hodgdon and Beckett at the Naval Health Research Center
    */
-  public getBodyFat(age: number, gender: string, height: number, hips: number, neck: number, waist: number): number {
+  public calculateBodyFat(age: number, gender: string, height: number, hips: number, neck: number, waist: number): number {
     if (gender === 'male') {
       return +(495 / (1.0324 - 0.19077 * Math.log10(waist - neck) + 0.15456 * Math.log10(height)) - 450).toFixed(2);
     } else {
@@ -48,21 +48,21 @@ export class FitnessService {
   /**
    * Nes, B.M, et al. HRMax formula
    */
-  public getHeartRateMax(age: number): number {
+  public calculateHRMax(age: number): number {
     return Math.round(211 - (0.64 * age));
   }
 
   /**
-  * The Karvonen method
+  * Calculates the heart tThe Karvonen method
   */
-  public getHeartRateTrainingRange(hrMax: number, hrRest: number): { min: number, max: number } {
+  public calculateTHR(hrMax: number, hrRest: number): { min: number, max: number } {
     return {
-      min: this._getHeartRateTrainingMin(+hrMax, +hrRest),
-      max: this._getHeartRateTrainingMax(+hrMax, +hrRest)
+      min: this._calculateTHRMin(+hrMax, +hrRest),
+      max: this._calculateTHRMax(+hrMax, +hrRest)
     };
   }
 
-  public getBodyFatFitness(fatPercentage: number, gender: string): boolean {
+  public getBodyFatFlag(fatPercentage: number, gender: string): boolean {
     if (gender === 'male') {
       return fatPercentage <= 17;
     } else {

@@ -56,11 +56,11 @@ export class FitnessPage {
     this.fitness.waist = this.fitnessForm.get('waist').value;
     this.fitness.weight = this.fitnessForm.get('weight').value;
     let energyConsumption = this._workEnergy + this.fitness.bmr,
-      heartRateMax: number = this._fitSvc.getHeartRateMax(this.fitness.age),
-      thrRange: { min: number, max: number } = this._fitSvc.getHeartRateTrainingRange(heartRateMax, this.fitness.heartRate.resting);
+      heartRateMax: number = this._fitSvc.calculateHRMax(this.fitness.age),
+      thrRange: { min: number, max: number } = this._fitSvc.calculateTHR(heartRateMax, this.fitness.heartRate.resting);
     this.fitness = Object.assign({}, this.fitness, {
-      bmr: this._fitSvc.getBmr(this.fitness.age, this.fitness.gender, this.fitness.height, this.fitness.weight),
-      bodyFat: this._fitSvc.getBodyFat(this.fitness.age, this.fitness.gender, this.fitness.height, this.fitness.hips, this.fitness.neck, this.fitness.waist),
+      bmr: this._fitSvc.calculateBmr(this.fitness.age, this.fitness.gender, this.fitness.height, this.fitness.weight),
+      bodyFat: this._fitSvc.calculateBodyFat(this.fitness.age, this.fitness.gender, this.fitness.height, this.fitness.hips, this.fitness.neck, this.fitness.waist),
       heartRate: {
         max: heartRateMax,
         resting: this.fitness.heartRate.resting,
@@ -72,7 +72,7 @@ export class FitnessPage {
     this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, energyConsumption, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
     this._fitSvc.saveFitness(this.fitness);
     this._fitSvc.storeEnergyConsumption(energyConsumption);
-    this.isFitness = this._fitSvc.getBodyFatFitness(this.fitness.bodyFat, this.fitness.gender);
+    this.isFitness = this._fitSvc.getBodyFatFlag(this.fitness.bodyFat, this.fitness.gender);
     this.isDirty = false;
   }
 
@@ -128,6 +128,6 @@ export class FitnessPage {
       this._workEnergy = energyConsumption > 0 ? energyConsumption - this.fitness.bmr : 0;
     });
 
-    this.isFitness = this._fitSvc.getBodyFatFitness(this.fitness.bodyFat, this.fitness.gender);
+    this.isFitness = this._fitSvc.getBodyFatFlag(this.fitness.bodyFat, this.fitness.gender);
   }
 }

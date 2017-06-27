@@ -1,9 +1,8 @@
 // App
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
 import { User } from '@ionic/cloud-angular';
-import 'rxjs/operator/map';
+import 'rxjs/add/operator/map';
 
 // Third-party
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
@@ -28,7 +27,7 @@ export class SleepService {
     if (moment(sleep.bedTime, 'hours').hours() > 22) {
       sleep.warnings = [...sleep.warnings, new WarningMessage(
         'Your bedtime is too late',
-        'You need to go to bed before 10:00 p.m., because between 10:00 p.m. and 01:00 a.m. our adrenal glands work to repair the body'
+        'You need to go to bed before 10:00 p.m., because between 10:00 p.m. and 01:00 a.m. our adrenal glands work to repair the body, including melatonin'
       )];
       return false;
     }
@@ -37,7 +36,7 @@ export class SleepService {
   }
 
   private _checkDuration(sleep: SleepHabit): boolean {
-    if (sleep.duration < 6) {
+    if (sleep.duration < 7) {
       sleep.warnings = [...sleep.warnings, new WarningMessage(
         'Insufficient sleep',
         'We need to catch 5 complete sleep cycles of 90-110 minutes (7-9 hours)'
@@ -111,7 +110,7 @@ export class SleepService {
   }
 
   public getSleepPlan$(): Observable<SleepPlan> {
-    return new Observable((observer: Observer<SleepPlan>) => this._sleepPlan.subscribe((sleepPlan: SleepPlan) => observer.next(sleepPlan['$value'] === null ? new SleepPlan() : sleepPlan)));
+    return this._sleepPlan.map((sleepPlan: SleepPlan) => sleepPlan['$value'] === null ? new SleepPlan() : sleepPlan);
   }
 
   public saveSleep(sleepPlan: SleepPlan, sleepHabit: SleepHabit): void {

@@ -58,7 +58,7 @@ export class FoodService {
       newFood.ingredients = foodReport.ing.desc;
     }
     this._setNutrientValue(foodReport['nutrients'], newFood);
-    newFood.pral = this._nutritionSvc.getPRAL(newFood.nutrition);
+    newFood.pral = this._nutritionSvc.calculatePRAL(newFood.nutrition);
     console.log(newFood);
     return newFood;
   }

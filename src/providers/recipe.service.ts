@@ -115,7 +115,7 @@ export class RecipeService {
   }
   
   public getRecipeNutrition(items: Array<Food | Recipe>, portions: number): Nutrition {
-    let totalNutrition: Nutrition = this._nutritionSvc.getTotalNutrition(items),
+    let totalNutrition: Nutrition = this._nutritionSvc.calculateNutrition(items),
       portionNutrition: Nutrition = new Nutrition();
     for (let nutrientKey in totalNutrition) {
       portionNutrition[nutrientKey].value = totalNutrition[nutrientKey].value / portions;

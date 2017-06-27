@@ -68,13 +68,16 @@
           <ion-input type="number" formControlName="portions" (change)="changePortions()"></ion-input>
         </ion-item>
         <error-message [control]="portions"></error-message>
-        <ion-item>
-          pH
-          <p item-content ion-text color="{{ recipe.pral > 0 ? 'danger' : 'secondary' }}">{{ recipe.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
+        <ion-item text-wrap>
+          <h2>PRAL</h2>
+          <ion-icon color="{{recipe.pral > 0 ? 'danger' : 'secondary'}}" name="{{recipe.pral > 0 ? 'thumbs-down' : 'thumbs-up'}}" item-right></ion-icon>
+          <p item-right ion-text color="{{ recipe.pral > 0 ? 'danger' : 'secondary' }}">{{ recipe.pral }} ({{ recipe.pral > 0 ? 'Acid forming' : 'Alkaline forming'}})</p>
         </ion-item>
-        <ion-item>
-          Size
-          <p item-content ion-text color="{{ recipe.quantity > 900 ? 'danger' : 'secondary' }}">{{ recipe.quantity }} g</p>
+        <ion-item text-wrap>
+          <h2>Size</h2>
+          <ion-icon color="{{recipe.quantity > 1000 ? 'danger' : 'secondary'}}" name="{{recipe.quantity > 1000 ? 'thumbs-down' : 'thumbs-up'}}"
+            item-right></ion-icon>
+          <p item-right ion-text color="{{ recipe.quantity > 1000 ? 'danger' : 'secondary' }}">{{ recipe.quantity }} g</p>
         </ion-item>
         <ion-item>
           Difficulty

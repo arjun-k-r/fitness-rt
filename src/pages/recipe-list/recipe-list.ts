@@ -1,9 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { AlertController, InfiniteScroll, Loading, LoadingController, NavController } from 'ionic-angular';
-
-// Third-party
-import { FirebaseListObservable } from 'angularfire2/database';
+import { Subscription } from 'rxjs/Subscription';
 
 // Models
 import { Recipe } from '../../models';
@@ -19,10 +17,11 @@ import { RecipeService } from '../../providers';
   templateUrl: 'recipe-list.html'
 })
 export class RecipeListPage {
+  private _recipesSubscription: Subscription;
   public detailsPage: any = RecipeDetailsPage;
   public limit: number = 50;
   public queryIngredients: Array<string> = [];
-  public recipes$: FirebaseListObservable<Array<Recipe>>;
+  public recipes: Array<Recipe> = [];
   public searchQuery: string = '';
   constructor(
     private _alertCtrl: AlertController,
@@ -87,11 +86,17 @@ export class RecipeListPage {
   ionViewWillEnter(): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Loading...',
-      spinner: 'crescent',
-      duration: 1000
+      spinner: 'crescent'
     });
 
     loader.present();
-    this.recipes$ = this._recipeSvc.getRecipes$();
+    this._recipesSubscription = this._recipeSvc.getRecipes$().subscribe((recipes: Array<Recipe>) => {
+      this.recipes = [...recipes];
+      loader.dismiss();
+    });
+  }
+
+  ionViewWillLeave(): void {
+    this._recipesSubscription.unsubscribe();
   }
 }

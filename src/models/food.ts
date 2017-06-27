@@ -41,8 +41,6 @@ export class Food {
         public pral: number = 0,
         public quantity: number = 100,
         public servings: number = 1,
-        public tastes: Array<string> = [],
-        public type: string = '',
         public unit: string = 'g'
     ) { }
 }

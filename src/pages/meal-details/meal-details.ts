@@ -1,6 +1,6 @@
 // App
 import { Component } from '@angular/core';
-import { ActionSheetController, Alert, AlertController, Modal, ModalController, NavController, NavParams, ToastController } from 'ionic-angular';
+import { ActionSheetController, Alert, AlertController, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
 
 // Models
 import { Food, Meal, MealPlan, Recipe } from '../../models';
@@ -28,8 +28,7 @@ export class MealDetailsPage {
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
     private _nutritionSvc: NutritionService,
-    private _params: NavParams,
-    private _toastCtrl: ToastController
+    private _params: NavParams
   ) {
     this.meal = <Meal>_params.get('meal');
     this.mealPlan = <MealPlan>_params.get('mealPlan');
@@ -73,10 +72,13 @@ export class MealDetailsPage {
 
   private _updateMealDetails(): void {
     this.isDirty = true;
-    this.meal.nutrition = Object.assign({}, this._nutritionSvc.getTotalNutrition(this.meal.mealItems));
-    this.meal.pral = this._nutritionSvc.getPRAL(this.meal.nutrition);
+    this.meal.nutrition = Object.assign({}, this._nutritionSvc.calculateNutrition(this.meal.mealItems));
+    this.meal.pral = this._mealSvc.calculatePRAL(this.meal.mealItems);
     this.meal.quantity = this._nutritionSvc.calculateQuantity(this.meal.mealItems);
     this._mealSvc.checkMeal(this.meal);
+    this.mealPlan.dailyNutrition = this._nutritionSvc.calculateNutritionPercent(this.mealPlan.meals, true);
+    this.mealPlan.omega36Ratio = this._mealSvc.calculateOmega36RatioDaily(this.mealPlan.meals);
+    this.mealPlan.pral = this._mealSvc.calculatePRALDaily(this.mealPlan.meals);
   }
 
   public addMealItems(): void {
@@ -119,6 +121,9 @@ export class MealDetailsPage {
 
   public removeMeal(): void {
     this.mealPlan.meals = [...this.mealPlan.meals.slice(0, this.mealIdx), ...this.mealPlan.meals.slice(this.mealIdx + 1)];
+    this.mealPlan.dailyNutrition = this._nutritionSvc.calculateNutritionPercent(this.mealPlan.meals, true);
+    this.mealPlan.omega36Ratio = this._mealSvc.calculateOmega36RatioDaily(this.mealPlan.meals);
+    this.mealPlan.pral = this._mealSvc.calculatePRALDaily(this.mealPlan.meals);
     this._mealSvc.saveMealPlan(this.mealPlan);
     this._navCtrl.pop();
   }
@@ -128,20 +133,40 @@ export class MealDetailsPage {
     this.mealPlan.meals = this._mealSvc.sortMeals(this.mealPlan.meals);
     this._mealSvc.saveMeal(this.meal, this.mealPlan);
     this.isDirty = false;
-    if (!this.meal.warnings.length) {
-      this._toastCtrl.create({
-        message: 'Bravo! A perfect meal',
-        position: 'bottom',
-        showCloseButton: true,
-        closeButtonText: 'OK'
-      }).present();
+  }
+
+  public toggleFavourite(): void {
+    if (!!this.meal.favourite) {
+      let alert: Alert = this._alertCtrl.create({
+        title: 'Favourite name',
+        subTitle: 'Please give a name to your favourite meal',
+        inputs: [
+          {
+            name: 'favouriteName',
+            placeholder: 'e.g. My special healthy breakfast',
+            type: 'string'
+          }
+        ],
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              this.meal.favourite = false;
+            }
+          },
+          {
+            text: 'Done',
+            handler: data => {
+              this.meal.favouriteName = data.favouriteName;
+              this._mealSvc.saveMeal(this.meal, this.mealPlan);
+            }
+          }
+        ]
+      });
+      alert.present();
     } else {
-      this._toastCtrl.create({
-        message: 'There are some warnings for this meal!',
-        position: 'bottom',
-        showCloseButton: true,
-        closeButtonText: 'OK'
-      }).present();
+      this._mealSvc.saveMeal(this.meal, this.mealPlan);
     }
   }
 
@@ -156,36 +181,19 @@ export class MealDetailsPage {
               text: 'Yes',
               handler: () => {
                 this._alertCtrl.create({
-                  title: 'Before eating',
-                  subTitle: 'Please make sure you check each item',
-                  inputs: [
-                    {
-                      type: 'checkbox',
-                      label: 'Am I really hungry?',
-                      value: 'hunger'
-                    }, {
-                      type: 'checkbox',
-                      label: 'I am grateful',
-                      value: 'gratitude'
-                    }, {
-                      type: 'checkbox',
-                      label: 'Chew until fluid',
-                      value: 'chewing'
-                    }, {
-                      type: 'checkbox',
-                      label: 'Eat peacefully',
-                      value: 'silence'
-                    }, {
-                      type: 'checkbox',
-                      label: 'I am not tired',
-                      value: 'silence'
-                    }
-                  ],
+                  title: 'Eat properly',
+                  message: 'Remember to eat slowly and chew properly for complete digestion, nutrient absorption, and to prevent overeating',
                   buttons: [
                     {
-                      text: 'Done',
+                      text: 'I will',
                       handler: () => {
                         resolve(true);
+                      }
+                    },
+                    {
+                      text: "I won't",
+                      handler: () => {
+                        reject(true);
                       }
                     }
                   ]

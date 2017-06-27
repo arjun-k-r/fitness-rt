@@ -1,6 +1,10 @@
 {
   "rules": {
-    ".read": "true",
-    ".write": "true"
+    ".read": true,
+    ".write": true,
+
+    "foods": {
+      ".indexOn": "name"
+    }
   }
 }

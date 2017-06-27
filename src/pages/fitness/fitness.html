@@ -35,8 +35,8 @@
                     </ion-item>
                     <ion-item *ngIf="fitness?.bodyFat" text-wrap>
                         <h2>Body fat percentage</h2>
-                        <ion-icon color="{{isFitness ? 'danger' : 'secondary'}}" name="{{isFitness ? 'thumbs-down' : 'thumbs-up'}}" item-right></ion-icon>
-                        <p item-right ion-text color="{{ isFitness ? 'danger' : 'secondary' }}">{{ fitness?.bodyFat }}%</p>
+                        <ion-icon color="{{isFitness ? 'secondary' : 'danger'}}" name="{{isFitness ? 'thumbs-up' : 'thumbs-down'}}" item-right></ion-icon>
+                        <p item-right ion-text color="{{ isFitness ? 'secondary' : 'danger' }}">{{ fitness?.bodyFat }}%</p>
                     </ion-item>
                     <ion-item *ngIf="fitness?.heartRate.max" text-wrap>
                         <h2>Maximum heart rate (HRMax)</h2>

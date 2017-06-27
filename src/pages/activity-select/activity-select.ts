@@ -71,7 +71,7 @@ export class ActivitySelectPage {
             text: 'Done',
             handler: (data: { duration: number }) => {
               activity.duration = +data.duration;
-              activity.energyBurn = this._activitySvc.getActivityEnergyBurn(activity);
+              activity.energyBurn = this._activitySvc.calculateEnergyBurn(activity);
               this.selectedActivities = [...this.selectedActivities, activity];
             }
           }

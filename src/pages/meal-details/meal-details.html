@@ -20,7 +20,7 @@
                 <ion-icon name="basket"></ion-icon>
             </ion-segment-button>
             <ion-segment-button value="warnings">
-                <ion-icon name="warning"></ion-icon>
+                <ion-icon color="{{meal.warnings?.length ? 'danger' : ''}}" name="warning"></ion-icon>
             </ion-segment-button>
             <ion-segment-button value="nutrition">
                 <ion-icon name="nutrition"></ion-icon>
@@ -39,17 +39,24 @@
         <!-- Start of segment -->
         <div *ngSwitchCase="'details'">
             <ion-list>
-                <ion-item>
-                    PRAL
-                    <p item-content ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral }} ({{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}})</p>
+                <ion-item text-wrap>
+                    <h2>PRAL</h2>
+                    <ion-icon color="{{meal.pral > 0 ? 'danger' : 'secondary'}}" name="{{meal.pral > 0 ? 'thumbs-down' : 'thumbs-up'}}" item-right></ion-icon>
+                    <p item-right ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral }} ({{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}})</p>
                 </ion-item>
-                <ion-item>
-                    Size
-                    <p item-content ion-text color="{{ meal.quantity > 900 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
+                <ion-item text-wrap>
+                    <h2>Size</h2>
+                    <ion-icon color="{{meal.quantity > 1000 ? 'danger' : 'secondary'}}" name="{{meal.quantity > 1000 ? 'thumbs-down' : 'thumbs-up'}}"
+                        item-right></ion-icon>
+                    <p item-right ion-text color="{{ meal.quantity > 1000 ? 'danger' : 'secondary' }}">{{ meal.quantity }} g</p>
                 </ion-item>
                 <ion-item>
                     <ion-label floating>Meal time</ion-label>
                     <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="meal.time"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Favourite</ion-label>
+                    <ion-toggle [(ngModel)]="meal.favourite" (ionChange)="toggleFavourite()"></ion-toggle>
                 </ion-item>
             </ion-list>
         </div>

@@ -67,6 +67,59 @@ export class NutritionService {
     ) : null;
   }
 
+  /**
+   * Calculates the total nutritional values of an amount of foods based on their servings
+   */
+  public calculateNutrition(items: Array<Food | Meal | Recipe>, preserveEnergy: boolean = false): Nutrition {
+    let nutrition: Nutrition = new Nutrition();
+    items.forEach((item: Food) => {
+      // Sum the nutrients for each meal item
+      for (let nutrientKey in nutrition) {
+        nutrition[nutrientKey].value += (item.nutrition[nutrientKey].value * item.servings);
+        nutrition[nutrientKey].value = +(nutrition[nutrientKey].value).toFixed(2);
+      }
+    });
+
+    return nutrition;
+  }
+
+  /**
+   * Calculates the daily nutrition intake percentage of the daily requirements
+   */
+  public calculateNutritionPercent(items: Array<Food | Meal>, preserveEnergy: boolean = false): Nutrition {
+    let nutrition: Nutrition = new Nutrition(),
+      requirements: Nutrition = this._fitSvc.getUserRequirements();
+    items.forEach((item: Food) => {
+      // Sum the nutrients for each item
+      for (let nutrientKey in requirements) {
+        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
+      }
+    });
+
+    // Save the energy intake to calculate the left energy in activity plan
+    if (preserveEnergy) {
+      this._fitSvc.storeEnergyIntake(nutrition.energy.value);
+    }
+
+    // Establish the meal's nutritional value, based on the user's nutritional requirements (%)
+    for (let nutrientKey in nutrition) {
+      nutrition[nutrientKey].value = Math.round((nutrition[nutrientKey].value * 100) / (requirements[nutrientKey].value || 1));
+    }
+
+    return nutrition;
+  }
+
+  public calculateOmega36Ratio(nutrition: Nutrition): number {
+    return +((nutrition.ala.value || 1) / (nutrition.la.value || 1)).toFixed(2);
+  }
+
+  /**
+   * The PRAL formula designed by Dr. Thomas Remer
+   */
+  public calculatePRAL(nutrition: Nutrition): number {
+    return +(0.49 * nutrition.protein.value + 0.037 * nutrition.phosphorus.value - 0.021 * nutrition.potassium.value - 0.026 * nutrition.magnesium.value - 0.013 * nutrition.calcium.value).toFixed(2);
+  }
+
   public calculateQuantity(items: Array<Food | Recipe>): number {
     return items.reduce((acc: number, item: Food) => acc + (item.quantity * item.servings), 0);
   }
@@ -156,58 +209,5 @@ export class NutritionService {
     }
 
     return excesses;
-  }
-
-  /**
-   * Calculates the daily nutrition intake percentage of the daily requirements
-   */
-  public getPercentageNutrition(items: Array<Food | Meal>, preserveEnergy: boolean = false): Nutrition {
-    let nutrition: Nutrition = new Nutrition(),
-      requirements: Nutrition = this._fitSvc.getUserRequirements();
-    items.forEach((item: Food) => {
-      // Sum the nutrients for each item
-      for (let nutrientKey in requirements) {
-        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
-      }
-    });
-
-    // Save the energy intake to calculate the left energy in activity plan
-    if (preserveEnergy) {
-      this._fitSvc.storeEnergyIntake(nutrition.energy.value);
-    }
-
-    // Establish the meal's nutritional value, based on the user's nutritional requirements (%)
-    for (let nutrientKey in nutrition) {
-      nutrition[nutrientKey].value = Math.round((nutrition[nutrientKey].value * 100) / (requirements[nutrientKey].value || 1));
-    }
-
-    return nutrition;
-  }
-
-  public getOmega36Ratio(nutrition: Nutrition): number {
-    return +((nutrition.ala.value || 1) / (nutrition.la.value || 1)).toFixed(2);
-  }
-
-  /**
-   * The PRAL formula designed by Dr. Thomas Remer
-   */
-  public getPRAL(nutrition: Nutrition): number {
-    return +(0.49 * nutrition.protein.value + 0.037 * nutrition.phosphorus.value - 0.021 * nutrition.potassium.value - 0.026 * nutrition.magnesium.value - 0.013 * nutrition.calcium.value).toFixed(2);
-  }
-
-  /**
-   * Calculates the total nutritional values of an amount of foods based on their servings
-   */
-  public getTotalNutrition(items: Array<Food | Meal | Recipe>, preserveEnergy: boolean = false): Nutrition {
-    let nutrition: Nutrition = new Nutrition();
-    items.forEach((item: Food) => {
-      // Sum the nutrients for each meal item
-      for (let nutrientKey in item.nutrition) {
-        nutrition[nutrientKey].value += (item.nutrition[nutrientKey].value * item.servings);
-        nutrition[nutrientKey].value = +(nutrition[nutrientKey].value).toFixed(2);
-      }
-    });
-
-    return nutrition;
   }
 }

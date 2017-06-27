@@ -103,7 +103,6 @@
             "cordova-plugin-image-picker": {}
         },
         "platforms": [
-            "android",
             "browser",
             "windows"
         ]

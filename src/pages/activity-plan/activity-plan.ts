@@ -18,7 +18,7 @@ import { ActivityService, FitnessService } from '../../providers';
 })
 export class ActivityPlanPage {
   private _activityPlanSubscription: Subscription;
-  public activityPlan: ActivityPlan;
+  public activityPlan: ActivityPlan = new ActivityPlan();
   public activityPlanDetails: string = 'guidelines';
   public isDirty: boolean = false;
   public leftEnergy: number = 0;
@@ -32,8 +32,8 @@ export class ActivityPlanPage {
 
   private _updateActivityPlan(): void {
     this.isDirty = true;
-    this.activityPlan.totalDuration = this._activitySvc.getActivitiesDuration(this.activityPlan.activities);
-    this.activityPlan.totalEnergyBurn = this._activitySvc.getTotalEnergyBurn(this.activityPlan.activities);
+    this.activityPlan.totalDuration = this._activitySvc.calculateDurationTotal(this.activityPlan.activities);
+    this.activityPlan.totalEnergyBurn = this._activitySvc.calculateEnergyBurnTotal(this.activityPlan.activities);
   }
 
   public addNewActivity(): void {
@@ -66,7 +66,7 @@ export class ActivityPlanPage {
           text: 'Done',
           handler: data => {
             activity.duration = +data.duration;
-            activity.energyBurn = this._activitySvc.getActivityEnergyBurn(activity);
+            activity.energyBurn = this._activitySvc.calculateEnergyBurn(activity);
             this._activitySvc.checkActivity(activity, this.activityPlan);
             this._updateActivityPlan();
           }
@@ -125,5 +125,4 @@ export class ActivityPlanPage {
   ionViewWillLeave(): void {
     this._activityPlanSubscription.unsubscribe();
   }
-
 }

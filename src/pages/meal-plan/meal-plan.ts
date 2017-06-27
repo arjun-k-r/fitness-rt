@@ -1,6 +1,6 @@
 // App
 import { Component } from '@angular/core';
-import { Alert, AlertController, Loading, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, Loading, LoadingController, NavController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Third-party
@@ -22,11 +22,10 @@ import { FitnessService, MealService, NutritionService } from '../../providers';
 export class MealPlanPage {
   private _mealPlanSubscription: Subscription;
   public detailsPage: any = MealDetailsPage;
-  public mealPlan: MealPlan;
+  public favouriteMeals$: FirebaseListObservable<Array<Meal>>;
+  public isDirty: boolean = false;
+  public mealPlan: MealPlan = new MealPlan();
   public mealPlanDetails: string = 'guidelines';
-  public nourishingMeals$: FirebaseListObservable<Array<Meal>>;
-  public omega36Ratio: number;
-  public pral: number;
   constructor(
     private _alertCtrl: AlertController,
     private _fitSvc: FitnessService,
@@ -42,35 +41,17 @@ export class MealPlanPage {
   }
 
   public addToMealPlan(meal: Meal): void {
-    this._alertCtrl.create({
-      title: 'Meal hour',
-      subTitle: 'Please select the hour of serving',
-      inputs: [...this.mealPlan.meals.map((meal: Meal, mealIdx: number) => {
-        return {
-          type: 'radio',
-          label: meal.time,
-          value: mealIdx.toString()
-        }
-      })],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-        {
-          text: 'Done',
-          handler: (data: string) => {
-            let newMeal: Meal = Object.assign({}, meal);
-            newMeal.time = this.mealPlan.meals[+data].time;
-            newMeal.nourishingKey = '';
-            newMeal.nickname = '';
-            newMeal.wasNourishing = false;
-            this.mealPlan.meals[+data] = newMeal;
-            this._mealSvc.saveMeal(newMeal, this.mealPlan);
-          }
-        }
-      ]
-    }).present();
+    this.mealPlan.meals = [...this.mealPlan.meals, new Meal(
+      meal.favourite,
+      meal.favouriteKey,
+      meal.favouriteName,
+      meal.mealItems,
+      meal.nutrition,
+      meal.pral,
+      meal.quantity
+    )];
+    this.mealPlan.meals = [...this._mealSvc.sortMeals(this.mealPlan.meals)];
+    this.isDirty = true;
   }
 
   public clearMeal(meal: Meal): void {
@@ -78,59 +59,47 @@ export class MealPlanPage {
       updatedMeal: Meal = new Meal();
     updatedMeal.time = this.mealPlan.meals[mealIdx].time;
     this.mealPlan.meals[mealIdx] = updatedMeal;
-    this._mealSvc.saveMeal(updatedMeal, this.mealPlan);
-  }
-
-  public reorganizeMeals(): void {
-    this._mealSvc.reorganizeMeals(this.mealPlan);
+    this.isDirty = true;
   }
 
   public resetMealPlan(): void {
-    let newMealPlan: MealPlan = new MealPlan();
-    newMealPlan.meals = [...this._mealSvc.getMeals(this.mealPlan.breakfastTime)];
-    this.mealPlan = Object.assign({}, newMealPlan);
+    this.mealPlan = new MealPlan();
+    this.isDirty = true;
   }
 
   public saveMealPlan(): void {
-    this.mealPlan.dailyNutrition = this._nutritionSvc.getPercentageNutrition(this.mealPlan.meals, true);
+    this.isDirty = false;
+    this.mealPlan.dailyNutrition = this._nutritionSvc.calculateNutritionPercent(this.mealPlan.meals, true);
+    this.mealPlan.omega36Ratio = this._mealSvc.calculateOmega36RatioDaily(this.mealPlan.meals);
+    this.mealPlan.pral = this._mealSvc.calculatePRALDaily(this.mealPlan.meals);
     this._mealSvc.saveMealPlan(this.mealPlan);
   }
 
-  public toggleNourishing(meal: Meal): void {
-    meal.wasNourishing = !meal.wasNourishing;
-    if (!!meal.wasNourishing) {
-      let alert: Alert = this._alertCtrl.create({
-        title: 'Nickname',
-        subTitle: 'Please give a nickname to this nourishing meal',
-        inputs: [
-          {
-            name: 'nickname',
-            placeholder: 'e.g. My special healthy breakfast',
-            type: 'string'
-          }
-        ],
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              meal.wasNourishing = false;
+  ionViewCanLeave(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      if (this.isDirty) {
+        this._alertCtrl.create({
+          title: 'Discard changes',
+          message: 'Changes have been made. Are you sure you want to leave?',
+          buttons: [
+            {
+              text: 'Yes',
+              handler: () => {
+                resolve(true);
+              }
+            },
+            {
+              text: 'No',
+              handler: () => {
+                reject(true);
+              }
             }
-          },
-          {
-            text: 'Done',
-            handler: data => {
-              meal.nickname = data.nickname;
-              this._mealSvc.saveMeal(meal, this.mealPlan);
-            }
-          }
-        ]
-      });
-      alert.present();
-    } else {
-      meal.nickname = '';
-      this._mealSvc.saveMeal(meal, this.mealPlan);
-    }
+          ]
+        }).present();
+      } else {
+        resolve(true);
+      }
+    });
   }
 
   ionViewWillEnter(): void {
@@ -140,13 +109,9 @@ export class MealPlanPage {
     });
 
     loader.present();
-    this.nourishingMeals$ = this._mealSvc.getNourishingMeals$();
+    this.favouriteMeals$ = this._mealSvc.getFavouriteMeals$();
     this._mealPlanSubscription = this._mealSvc.getMealPlan$().subscribe((mealPlan: MealPlan) => {
-      console.log('Received meal plan: ', mealPlan);
       this.mealPlan = Object.assign({}, mealPlan);
-      this.omega36Ratio = this._nutritionSvc.getOmega36Ratio(this.mealPlan.dailyNutrition);
-      this.pral = this._mealSvc.getNutritionPral(this.mealPlan);
-      this.mealPlan.dailyNutrition = this._nutritionSvc.getPercentageNutrition(this.mealPlan.meals, true);
       loader.dismiss();
     });
   }

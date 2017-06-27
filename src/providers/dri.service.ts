@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class DRIService {
-
   constructor() { }
 
   public getALADri(energyConsumption: number): number {
@@ -343,13 +342,13 @@ export class DRIService {
 
   public getSeleniumDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (age <= 1) {
-      return 0.02;
+      return 20;
     } else if (age <= 14) {
-      return 0.03;
+      return 30;
     } else if (gender === 'male') {
-      return 0.055;
+      return 55;
     } else {
-      return lactating ? 0.07 : pregnant ? 0.06 : 0.055;
+      return lactating ? 70 : pregnant ? 60 : 55;
     }
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 import { User } from '@ionic/cloud-angular';
-import 'rxjs/add/operator/map';
 
 // Third-party
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
@@ -19,7 +19,7 @@ const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class ActivityService {
-  private _activities: FirebaseListObservable<Array<Activity>>;
+  private _activities$: FirebaseListObservable<Array<Activity>>;
   private _currentActivityPlan: FirebaseObjectObservable<ActivityPlan>;
   private _lastActivityPlan: FirebaseObjectObservable<ActivityPlan>;
   private _userWeight: number;
@@ -30,7 +30,7 @@ export class ActivityService {
     private _nutritionSvc: NutritionService,
     private _user: User
   ) {
-    this._activities = _db.list('/activities', {
+    this._activities$ = _db.list('/activities', {
       query: {
         orderByChild: 'name'
       }
@@ -69,6 +69,18 @@ export class ActivityService {
     }
   }
 
+  public calculateDurationTotal(activities: Array<Activity>): number {
+    return activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.duration, 0);
+  }
+
+  public calculateEnergyBurn(activity: Activity): number {
+    return Math.round((activity.met * 3.5 * this._userWeight / 200) * activity.duration);
+  }
+
+  public calculateEnergyBurnTotal(activities: Array<Activity>): number {
+    return activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.energyBurn, 0);
+  }
+
   public checkActivity(activity: Activity, activityPlan: ActivityPlan): void {
     if (activity.met >= 8 && activity.duration > 45) {
       activityPlan.warnings = [new WarningMessage(
@@ -81,52 +93,40 @@ export class ActivityService {
   }
 
   public getActivities$(): FirebaseListObservable<Array<Activity>> {
-    return this._activities;
-  }
-
-  public getActivitiesDuration(activities: Array<Activity>): number {
-    return activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.duration, 0);
-  }
-
-  public getActivityEnergyBurn(activity: Activity): number {
-    return Math.round((activity.met * 3.5 * this._userWeight / 200) * activity.duration);
+    return this._activities$;
   }
 
   public getActivityPlan$(): Observable<ActivityPlan> {
-    return this._currentActivityPlan.map((currActivityPlan: ActivityPlan) => {
-      if (currActivityPlan['$value'] === null) {
-        // Get the previous day activity plan to check for activity imbalances
-        this._lastActivityPlan.subscribe((lastActivityPlan: ActivityPlan) => {
-          let newActivityPlan: ActivityPlan = new ActivityPlan();
-          if (!lastActivityPlan.hasOwnProperty('$value')) {
-            this._checkInactivity(lastActivityPlan.totalDuration, newActivityPlan);
-            newActivityPlan.intenseDays = lastActivityPlan.intenseDays;
-            if (moment().day() < moment().dayOfYear(lastActivityPlan.date).day() || moment().day() === 1) {
-              this._checkIntenseRoutine(newActivityPlan);
-              newActivityPlan.intenseDays = 0;
+    return new Observable((observer: Observer<ActivityPlan>) => {
+      this._currentActivityPlan.subscribe((currActivityPlan: ActivityPlan) => {
+        if (currActivityPlan['$value'] === null) {
+          // Get the previous day activity plan to check for activity imbalances
+          this._lastActivityPlan.subscribe((lastActivityPlan: ActivityPlan) => {
+            currActivityPlan = new ActivityPlan();
+            if (!lastActivityPlan.hasOwnProperty('$value')) {
+              this._checkInactivity(lastActivityPlan.totalDuration, currActivityPlan);
+              currActivityPlan.intenseDays = lastActivityPlan.intenseDays;
+              if (moment().day() < moment().dayOfYear(lastActivityPlan.date).day() || moment().day() === 1) {
+                this._checkIntenseRoutine(currActivityPlan);
+                currActivityPlan.intenseDays = 0;
+              }
+
+              this._checkIntenseExercise(lastActivityPlan.activities, currActivityPlan);
+              observer.next(currActivityPlan);
             }
-
-            this._checkIntenseExercise(lastActivityPlan.activities, newActivityPlan);
-          }
-
-          currActivityPlan = Object.assign({}, newActivityPlan);
-        });
-      }
-
-      // Firebase removes empty objects on save
-      currActivityPlan.activities = currActivityPlan.activities || [];
-      currActivityPlan.warnings = currActivityPlan.warnings || [];
-
-      return currActivityPlan;
+          });
+        } else {
+          // Firebase removes empty objects on save
+          currActivityPlan.activities = currActivityPlan.activities || [];
+          currActivityPlan.warnings = currActivityPlan.warnings || [];
+          observer.next(currActivityPlan);
+        }
+      });
     });
   }
 
   public getLeftEnergy(): Promise<number> {
     return new Promise(resolve => Promise.all([this._fitSvc.restoreEnergyConsumption(), this._fitSvc.restoreEnergyIntake()]).then((data: Array<number>) => resolve(data[1] - data[0])));
-  }
-
-  public getTotalEnergyBurn(activities: Array<Activity>): number {
-    return activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.energyBurn, 0);
   }
 
   public saveActivityPlan(activityPlan: ActivityPlan): void {
@@ -150,5 +150,4 @@ export class ActivityService {
     userFitness.requirements = this._nutritionSvc.getDri(userFitness.age, userFitness.bmr + energyConsumption, userFitness.gender, userFitness.lactating, userFitness.pregnant, userFitness.weight);
     this._fitSvc.saveFitness(userFitness);
   }
-
 }

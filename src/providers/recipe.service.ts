@@ -121,6 +121,7 @@ export class RecipeService {
       portionNutrition[nutrientKey].value = totalNutrition[nutrientKey].value / portions;
       portionNutrition[nutrientKey].value = +(portionNutrition[nutrientKey].value).toFixed(2);
     }
+
     return portionNutrition;
   }
 
@@ -137,12 +138,15 @@ export class RecipeService {
   }
 
   public saveRecipe(recipe: Recipe): void {
+    let { image, name, username } = this._user.details;
+    recipe.chef = username || name;
+    recipe.chefAvatar = image;
     if (!recipe.hasOwnProperty('$key')) {
       recipe['$key'] = this._recipes.push(recipe).key;
     } else {
       this._recipes.update(recipe['$key'], {
-        chef: this._user.details.username || this._user.details.name,
-        chefAvatar: this._user.details.image,
+        chef: recipe.chef,
+        chefAvatar: recipe.chefAvatar,
         cookingMethod: recipe.cookingMethod,
         cookingTemperature: recipe.cookingTemperature,
         cookingTime: recipe.cookingTime,

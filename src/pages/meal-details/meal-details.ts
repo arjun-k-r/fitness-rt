@@ -87,8 +87,6 @@ export class MealDetailsPage {
     mealSelectModal.onDidDismiss((selection: Food | Recipe) => {
       if (!!selection) {
         this.meal.mealItems = [...this.meal.mealItems, selection];
-        console.log('My new foods: ', this.meal.mealItems);
-        // Update the meal details
         this._updateMealDetails();
       }
     })

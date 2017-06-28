@@ -45,8 +45,6 @@ export class RecipeDetailsPage {
     this.recipe.ingredients = this.recipe.ingredients || [];
     this.recipe.instructions = this.recipe.instructions || [];
     this.recipeInstructions = [...this.recipe.instructions];
-    console.log('Received recipe: ', this.recipe);
-
     this.recipeForm = _formBuilder.group({
       cookingMethod: [this.recipe.cookingMethod, Validators.required],
       cookingTemperature: [this.recipe.cookingTemperature, Validators.required],
@@ -61,7 +59,6 @@ export class RecipeDetailsPage {
     this.cookingTime = this.recipeForm.get('cookingTime');
     this.name = this.recipeForm.get('name');
     this.portions = this.recipeForm.get('portions');
-
     this.recipeForm.valueChanges.subscribe(() => this.isDirty = true);
   }
 
@@ -113,8 +110,6 @@ export class RecipeDetailsPage {
     ingredientSelectModal.onDidDismiss((selection: Food | Recipe) => {
       if (!!selection) {
         this.recipe.ingredients = [...this.recipe.ingredients, selection];
-        console.log('My new ingredients: ', this.recipe.ingredients);
-        // Update the meal details
         this._updateRecipeDetails();
       }
     });

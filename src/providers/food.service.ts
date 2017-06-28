@@ -59,7 +59,6 @@ export class FoodService {
     }
     this._setNutrientValue(foodReport['nutrients'], newFood);
     newFood.pral = this._nutritionSvc.calculatePRAL(newFood.nutrition);
-    console.log(newFood);
     return newFood;
   }
 
@@ -260,7 +259,6 @@ export class FoodService {
     let headers: Headers = new Headers({ 'Content-Type': 'application/json' }),
       options: RequestOptions = new RequestOptions(),
       params: URLSearchParams = new URLSearchParams();
-
     params.set('api_key', this._usdaApiKey);
     params.set('ndbno', foodId);
     params.set('type', 'f');
@@ -272,7 +270,6 @@ export class FoodService {
         let body = res.json();
         console.log(body);
         if (body.hasOwnProperty('errors')) {
-          console.log(body.errors);
           throw body.errors.error[0];
         }
 
@@ -284,11 +281,11 @@ export class FoodService {
     let headers: Headers = new Headers({ 'Content-Type': 'application/json' }),
       options: RequestOptions = new RequestOptions(),
       params: URLSearchParams = new URLSearchParams();
-
     params.set('api_key', this._usdaApiKey);
     if (foodGroupId !== '') {
       params.set('ds', 'Standard+Reference');
     }
+
     params.set('q', searhQuery);
     params.set('fg', foodGroupId);
     params.set('format', 'json');
@@ -303,7 +300,6 @@ export class FoodService {
         let body = res.json();
         console.log(body);
         if (body.hasOwnProperty('errors')) {
-          console.log(body.errors);
           throw body.errors.error[0];
         }
         return body['list']['item'];
@@ -314,7 +310,6 @@ export class FoodService {
     let headers: Headers = new Headers({ 'Content-Type': 'application/json' }),
       options: RequestOptions = new RequestOptions(),
       params: URLSearchParams = new URLSearchParams();
-
     params.set('api_key', this._usdaApiKey);
     params.set('nutrients', `${nutrientId}`);
     params.set('nutrients', `${nutrientId}`);
@@ -334,6 +329,7 @@ export class FoodService {
           console.log(body.errors);
           throw body.errors.error[0];
         }
+        
         return body['report']['foods'];
       }).catch((err: any) => Observable.throw(err));
   }

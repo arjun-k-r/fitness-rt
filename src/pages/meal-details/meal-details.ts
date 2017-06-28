@@ -34,7 +34,6 @@ export class MealDetailsPage {
     this.mealPlan = <MealPlan>_params.get('mealPlan');
     this.mealIdx = this.mealPlan.meals.indexOf(this.meal);
     this.meal.mealItems = this.meal.mealItems || [];
-    console.log('Received meal: ', this.meal);
   }
 
   private _changeServings(item: Food | Recipe): void {

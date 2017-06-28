@@ -244,7 +244,8 @@
         </ion-item>
         <ion-item>
           Sodium
-          <p item-right>{{ mealPlan.dailyNutrition.sodium?.value }}%</p>
+          <ion-icon color="{{mealPlan.dailyNutrition.sodium?.value < 100 ? 'secondary' : 'danger'}}" name="{{mealPlan.dailyNutrition.sodium?.value < 100 ? 'thumbs-up' : 'thumbs-down'}}" item-right></ion-icon>
+          <p item-right ion-text color="{{ mealPlan.dailyNutrition.sodium?.value < 100 ? 'secondary' : 'danger' }}">{{ mealPlan.dailyNutrition.sodium?.value }}%</p>
         </ion-item>
         <ion-item>
           Zinc

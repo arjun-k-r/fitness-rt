@@ -75,9 +75,6 @@ export class MealDetailsPage {
     this.meal.pral = this._mealSvc.calculatePRAL(this.meal.mealItems);
     this.meal.quantity = this._nutritionSvc.calculateQuantity(this.meal.mealItems);
     this._mealSvc.checkMeal(this.meal);
-    this.mealPlan.dailyNutrition = this._nutritionSvc.calculateNutritionPercent(this.mealPlan.meals, true);
-    this.mealPlan.omega36Ratio = this._mealSvc.calculateOmega36RatioDaily(this.mealPlan.meals);
-    this.mealPlan.pral = this._mealSvc.calculatePRALDaily(this.mealPlan.meals);
   }
 
   public addMealItems(): void {
@@ -118,9 +115,6 @@ export class MealDetailsPage {
 
   public removeMeal(): void {
     this.mealPlan.meals = [...this.mealPlan.meals.slice(0, this.mealIdx), ...this.mealPlan.meals.slice(this.mealIdx + 1)];
-    this.mealPlan.dailyNutrition = this._nutritionSvc.calculateNutritionPercent(this.mealPlan.meals, true);
-    this.mealPlan.omega36Ratio = this._mealSvc.calculateOmega36RatioDaily(this.mealPlan.meals);
-    this.mealPlan.pral = this._mealSvc.calculatePRALDaily(this.mealPlan.meals);
     this._mealSvc.saveMealPlan(this.mealPlan);
     this._navCtrl.pop();
   }
@@ -128,7 +122,10 @@ export class MealDetailsPage {
   public saveMeal(): void {
     this._updateMealDetails();
     this.mealPlan.meals = this._mealSvc.sortMeals(this.mealPlan.meals);
-    this._mealSvc.saveMeal(this.meal, this.mealPlan);
+    if (this.meal.favourite) {
+      this._mealSvc.updateFavouriteMeal(this.meal);
+    }
+    this._mealSvc.saveMealPlan(this.mealPlan);
     this.isDirty = false;
   }
 
@@ -156,15 +153,16 @@ export class MealDetailsPage {
             text: 'Done',
             handler: data => {
               this.meal.favouriteName = data.favouriteName;
-              this._mealSvc.saveMeal(this.meal, this.mealPlan);
+              this._mealSvc.updateFavouriteMeal(this.meal);
             }
           }
         ]
       });
       alert.present();
     } else {
-      this._mealSvc.saveMeal(this.meal, this.mealPlan);
+      this._mealSvc.updateFavouriteMeal(this.meal);
     }
+    this._mealSvc.saveMealPlan(this.mealPlan);
   }
 
   ionViewCanLeave(): Promise<boolean> {
@@ -177,24 +175,7 @@ export class MealDetailsPage {
             {
               text: 'Yes',
               handler: () => {
-                this._alertCtrl.create({
-                  title: 'Eat properly',
-                  message: 'Remember to eat slowly and chew properly for complete digestion, nutrient absorption, and to prevent overeating',
-                  buttons: [
-                    {
-                      text: 'I will',
-                      handler: () => {
-                        resolve(true);
-                      }
-                    },
-                    {
-                      text: "I won't",
-                      handler: () => {
-                        reject(true);
-                      }
-                    }
-                  ]
-                }).present();
+                resolve(true);
               }
             },
             {

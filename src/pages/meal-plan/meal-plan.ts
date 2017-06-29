@@ -54,25 +54,14 @@ export class MealPlanPage {
     this.isDirty = true;
   }
 
-  public clearMeal(meal: Meal): void {
-    let mealIdx: number = this.mealPlan.meals.indexOf(meal),
-      updatedMeal: Meal = new Meal();
-    updatedMeal.time = this.mealPlan.meals[mealIdx].time;
-    this.mealPlan.meals[mealIdx] = updatedMeal;
-    this.isDirty = true;
-  }
-
   public resetMealPlan(): void {
     this.mealPlan = new MealPlan();
     this.isDirty = true;
   }
 
   public saveMealPlan(): void {
-    this.isDirty = false;
-    this.mealPlan.dailyNutrition = this._nutritionSvc.calculateNutritionPercent(this.mealPlan.meals, true);
-    this.mealPlan.omega36Ratio = this._mealSvc.calculateOmega36RatioDaily(this.mealPlan.meals);
-    this.mealPlan.pral = this._mealSvc.calculatePRALDaily(this.mealPlan.meals);
     this._mealSvc.saveMealPlan(this.mealPlan);
+    this.isDirty = false;
   }
 
   ionViewCanLeave(): Promise<boolean> {

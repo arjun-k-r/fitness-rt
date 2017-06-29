@@ -21,49 +21,49 @@ export class NutritionService {
   private _checkExcessAlcohol(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
     return nutrition.alcohol.value > requirements.alcohol.value ? new WarningMessage(
       'Too much alcohol',
-      `Your daily requirements are ${Math.round(requirements.alcohol.value)}g of alcohol`
+      `Your daily requirements are ${Math.round(requirements.alcohol.value)}${requirements.alcohol.unit} of alcohol`
     ) : null;
   }
 
   private _checkExcessCaffeine(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
     return nutrition.caffeine.value > requirements.caffeine.value ? new WarningMessage(
       'Too much caffeine',
-      `Your daily requirements are ${Math.round(requirements.caffeine.value)}mg of caffeine`
+      `Your daily requirements are ${Math.round(requirements.caffeine.value)}${requirements.caffeine.unit} of caffeine`
     ) : null;
   }
 
   private _checkExcessCarbs(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
     return nutrition.carbs.value > requirements.carbs.value ? new WarningMessage(
       'Too much carbohydrates',
-      `Your daily requirements are ${Math.round(requirements.carbs.value)}g of carbohydrates`
+      `Your daily requirements are ${Math.round(requirements.carbs.value)}${requirements.carbs.unit} of carbohydrates`
     ) : null;
   }
 
   private _checkExcessEnergy(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
     return nutrition.energy.value > requirements.energy.value ? new WarningMessage(
       'Too much energy',
-      `Your daily requirements are ${Math.round(requirements.energy.value)}kcal`
+      `Your daily requirements are ${Math.round(requirements.energy.value)}${requirements.energy.unit} of energy`
     ) : null;
   }
 
   private _checkExcessSodium(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
     return nutrition.sodium.value > requirements.sodium.value ? new WarningMessage(
       'Too much sodium',
-      `Your daily requirements are ${Math.round(requirements.sodium.value)}mg of sodium`
+      `Your daily requirements are ${Math.round(requirements.sodium.value)}${requirements.sodium.unit} of sodium`
     ) : null;
   }
 
   private _checkExcessSugars(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
     return nutrition.sugars.value > requirements.sugars.value ? new WarningMessage(
       'Too much sugars',
-      `Your daily requirements are ${Math.round(requirements.sugars.value)}g of sugars`
+      `Your daily requirements are ${Math.round(requirements.sugars.value)}${requirements.sugars.unit} of sugars`
     ) : null;
   }
 
   private _checkExcessTransFat(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
     return nutrition.transFat.value > requirements.transFat.value ? new WarningMessage(
       'Too much trans fat',
-      `Your daily requirements are ${requirements.transFat.value}g of trans fat`
+      `Your daily requirements are ${Math.round(requirements.transFat.value)}${requirements.transFat.unit} of trans fat`
     ) : null;
   }
 
@@ -137,6 +137,28 @@ export class NutritionService {
     ]);
   }
 
+  public findDeficiencies(nutrition: Nutrition): NutrientDeficiencies {
+    let deficiencies: NutrientDeficiencies = new NutrientDeficiencies();
+    for (let nutrientKey in deficiencies) {
+      if (nutrition[nutrientKey].value < 75) {
+        deficiencies[nutrientKey]++;
+      }
+    }
+
+    return deficiencies;
+  }
+
+  public findExcesses(nutrition: Nutrition): NutrientExcesses {
+    let excesses: NutrientExcesses = new NutrientExcesses();
+    for (let nutrientKey in excesses) {
+      if (nutrition[nutrientKey].value > 100) {
+        excesses[nutrientKey]++;
+      }
+    }
+
+    return excesses;
+  }
+
   public getDri(age: number, energyConsumption: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): Nutrition {
     let requirements: Nutrition = new Nutrition();
     requirements.ala.value = this._driSvc.getALADri(energyConsumption);
@@ -187,27 +209,5 @@ export class NutritionService {
     requirements.zinc.value = this._driSvc.getZincDri(age, gender, lactating, pregnant);
 
     return requirements;
-  }
-
-  public getNutritionDeficiencies(nutrition: Nutrition): NutrientDeficiencies {
-    let deficiencies: NutrientDeficiencies = new NutrientDeficiencies();
-    for (let nutrientKey in deficiencies) {
-      if (nutrition[nutrientKey].value < 75) {
-        deficiencies[nutrientKey]++;
-      }
-    }
-
-    return deficiencies;
-  }
-
-  public getNutritionExcesses(nutrition: Nutrition): NutrientExcesses {
-    let excesses: NutrientExcesses = new NutrientExcesses();
-    for (let nutrientKey in excesses) {
-      if (nutrition[nutrientKey].value > 100) {
-        excesses[nutrientKey]++;
-      }
-    }
-
-    return excesses;
   }
 }

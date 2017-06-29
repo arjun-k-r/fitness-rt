@@ -90,9 +90,8 @@ export class MealService {
           //Get the previous day meal plan to check for deficiencies and excesses
           this._lastMealPlan.subscribe((lastMealPlan: MealPlan) => {
             if (!lastMealPlan.hasOwnProperty('$value')) {
-              let prevDeficiencies: NutrientDeficiencies = this._nutritionSvc.getNutritionDeficiencies(lastMealPlan.dailyNutrition),
-                prevExcesses: NutrientExcesses = this._nutritionSvc.getNutritionExcesses(lastMealPlan.dailyNutrition);
-
+              let prevDeficiencies: NutrientDeficiencies = this._nutritionSvc.findDeficiencies(lastMealPlan.dailyNutrition),
+                prevExcesses: NutrientExcesses = this._nutritionSvc.findExcesses(lastMealPlan.dailyNutrition);
               for (let nutrientKey in prevDeficiencies) {
                 currMealPlan.deficiency[nutrientKey] = prevDeficiencies[nutrientKey] === 1 ? prevDeficiencies[nutrientKey] + lastMealPlan.deficiency[nutrientKey] : 0;
                 if (currMealPlan.deficiency[nutrientKey] > 2) {
@@ -130,34 +129,10 @@ export class MealService {
     return this._favouriteMeals;
   }
 
-  public saveMeal(meal: Meal, mealPlan: MealPlan): void {
-    if (!!meal.favourite && meal.favouriteKey === '') {
-      // Meal is not added to favourites
-      meal.favouriteKey = this._favouriteMeals.push(meal).key;
-    } else if (!meal.favourite && meal.favouriteKey !== '') {
-      // Meal is no longer favourite
-      meal.favouriteName = '';
-      this._favouriteMeals.remove(meal.favouriteKey);
-      meal.favouriteKey = '';
-    } else if (!!meal.favourite && meal.favouriteKey !== '') {
-      // Meal already is favourite
-      this._favouriteMeals.update(meal['favouriteKey'], {
-        favourite: meal.favourite,
-        favouriteKey: meal.favouriteKey,
-        favouriteName: meal.favouriteName,
-        mealItems: meal.mealItems || [],
-        nutrition: meal.nutrition,
-        pral: meal.pral,
-        quantity: meal.quantity,
-        warnings: meal.warnings || []
-      });
-    }
-
-    mealPlan.dailyNutrition = this._nutritionSvc.calculateNutritionPercent(mealPlan.meals, true);
-    this.saveMealPlan(mealPlan);
-  }
-
   public saveMealPlan(mealPlan: MealPlan): void {
+    mealPlan.dailyNutrition = this._nutritionSvc.calculateNutritionPercent(mealPlan.meals, true);
+    mealPlan.omega36Ratio = this.calculateOmega36RatioDaily(mealPlan.meals);
+    mealPlan.pral = this.calculatePRALDaily(mealPlan.meals);
     this._currentMealPlan.update({
       dailyNutrition: mealPlan.dailyNutrition,
       date: mealPlan.date,
@@ -172,5 +147,26 @@ export class MealService {
 
   public sortMeals(meals: Array<Meal>): Array<Meal> {
     return _.sortBy(meals, (meal: Meal) => meal.time);
+  }
+
+  public updateFavouriteMeal(meal: Meal): void {
+    if (meal.favourite && meal.favouriteKey === '') {
+      // Meal is not added to favourites
+      meal.favouriteKey = this._favouriteMeals.push(meal).key;
+    } else if (!meal.favourite) {
+      // Meal is no longer favourite
+      meal.favouriteName = '';
+      this._favouriteMeals.remove(meal.favouriteKey);
+      meal.favouriteKey = '';
+    } else {
+      // Meal already is favourite
+      this._favouriteMeals.update(meal['favouriteKey'], {
+        mealItems: meal.mealItems || [],
+        nutrition: meal.nutrition,
+        pral: meal.pral,
+        quantity: meal.quantity,
+        warnings: meal.warnings || []
+      });
+    }
   }
 }

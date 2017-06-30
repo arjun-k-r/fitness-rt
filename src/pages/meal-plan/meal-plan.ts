@@ -116,7 +116,9 @@ export class MealPlanPage {
   }
 
   ionViewWillLeave(): void {
-    this._favouriteMealSubscription.unsubscribe();
+    if (this._favouriteMealSubscription) {
+      this._favouriteMealSubscription.unsubscribe();
+    }
     this._mealPlanSubscription.unsubscribe();
   }
 }

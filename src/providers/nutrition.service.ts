@@ -46,13 +46,6 @@ export class NutritionService {
     ) : null;
   }
 
-  private _checkExcessSodium(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
-    return nutrition.sodium.value > requirements.sodium.value ? new WarningMessage(
-      'Too much sodium',
-      `Your daily requirements are ${Math.round(requirements.sodium.value)}${requirements.sodium.unit} of sodium`
-    ) : null;
-  }
-
   private _checkExcessSugars(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
     return nutrition.sugars.value > requirements.sugars.value ? new WarningMessage(
       'Too much sugars',
@@ -131,7 +124,6 @@ export class NutritionService {
       this._checkExcessCaffeine(nutrition, requirements),
       this._checkExcessCarbs(nutrition, requirements),
       this._checkExcessEnergy(nutrition, requirements),
-      this._checkExcessSodium(nutrition, requirements),
       this._checkExcessSugars(nutrition, requirements),
       this._checkExcessTransFat(nutrition, requirements)
     ]);

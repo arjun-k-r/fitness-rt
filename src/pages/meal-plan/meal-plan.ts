@@ -3,9 +3,6 @@ import { Component } from '@angular/core';
 import { AlertController, Loading, LoadingController, NavController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
-// Third-party
-import { FirebaseListObservable } from 'angularfire2/database';
-
 // Models
 import { Meal, MealPlan } from '../../models';
 
@@ -20,9 +17,10 @@ import { FitnessService, MealService, NutritionService } from '../../providers';
   templateUrl: 'meal-plan.html'
 })
 export class MealPlanPage {
+  private _favouriteMealSubscription: Subscription;
   private _mealPlanSubscription: Subscription;
   public detailsPage: any = MealDetailsPage;
-  public favouriteMeals$: FirebaseListObservable<Array<Meal>>;
+  public favouriteMeals: Array<Meal>;
   public isDirty: boolean = false;
   public mealPlan: MealPlan = new MealPlan();
   public mealPlanDetails: string = 'guidelines';
@@ -52,6 +50,20 @@ export class MealPlanPage {
     )];
     this.mealPlan.meals = [...this._mealSvc.sortMeals(this.mealPlan.meals)];
     this.isDirty = true;
+  }
+
+  public loadFavourites(): void {
+    let loader: Loading = this._loadCtrl.create({
+      content: 'Loading...',
+      spinner: 'crescent'
+    });
+
+    loader.present();
+    this._favouriteMealSubscription = this._mealSvc.getFavouriteMeals$().subscribe((meals: Array<Meal>) => {
+      this.favouriteMeals = [...meals];
+      console.log(meals);
+      loader.dismiss();
+    });
   }
 
   public resetMealPlan(): void {
@@ -96,9 +108,7 @@ export class MealPlanPage {
       content: 'Loading...',
       spinner: 'crescent'
     });
-
     loader.present();
-    this.favouriteMeals$ = this._mealSvc.getFavouriteMeals$();
     this._mealPlanSubscription = this._mealSvc.getMealPlan$().subscribe((mealPlan: MealPlan) => {
       this.mealPlan = Object.assign({}, mealPlan);
       loader.dismiss();
@@ -106,6 +116,7 @@ export class MealPlanPage {
   }
 
   ionViewWillLeave(): void {
+    this._favouriteMealSubscription.unsubscribe();
     this._mealPlanSubscription.unsubscribe();
   }
 }

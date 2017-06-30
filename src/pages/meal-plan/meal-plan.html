@@ -27,7 +27,7 @@
       <ion-segment-button value="warnings">
         <ion-icon color="{{mealPlan?.warnings?.length ? 'danger' : ''}}"  name="warning"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button value="favourites">
+      <ion-segment-button (click)="loadFavourites()" value="favourites">
         <ion-icon name="heart"></ion-icon>
       </ion-segment-button>
     </ion-segment>
@@ -244,8 +244,7 @@
         </ion-item>
         <ion-item>
           Sodium
-          <ion-icon color="{{mealPlan.dailyNutrition.sodium?.value < 100 ? 'secondary' : 'danger'}}" name="{{mealPlan.dailyNutrition.sodium?.value < 100 ? 'thumbs-up' : 'thumbs-down'}}" item-right></ion-icon>
-          <p item-right ion-text color="{{ mealPlan.dailyNutrition.sodium?.value < 100 ? 'secondary' : 'danger' }}">{{ mealPlan.dailyNutrition.sodium?.value }}%</p>
+          <p item-right>{{ mealPlan.dailyNutrition.sodium?.value }}%</p>
         </ion-item>
         <ion-item>
           Zinc
@@ -311,7 +310,7 @@
 
     <!-- Start of segment -->
     <div *ngSwitchCase="'favourites'">
-      <ion-item-group *ngFor="let meal of (favouriteMeals$ | async)">
+      <ion-item-group *ngFor="let meal of favouriteMeals">
         <ion-item-divider color="primary">
           {{ meal.favouriteName }}
         </ion-item-divider>

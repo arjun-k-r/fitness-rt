@@ -161,6 +161,7 @@ export class MealService {
     } else {
       // Meal already is favourite
       this._favouriteMeals.update(meal['favouriteKey'], {
+        favouriteName: meal.favouriteName,
         mealItems: meal.mealItems || [],
         nutrition: meal.nutrition,
         pral: meal.pral,

@@ -113,6 +113,10 @@ export class MealDetailsPage {
     }).present();
   }
 
+  public markDirty(): void {
+    this.isDirty = true;
+  }
+
   public removeMeal(): void {
     this.mealPlan.meals = [...this.mealPlan.meals.slice(0, this.mealIdx), ...this.mealPlan.meals.slice(this.mealIdx + 1)];
     this._mealSvc.saveMealPlan(this.mealPlan);
@@ -154,6 +158,7 @@ export class MealDetailsPage {
             handler: data => {
               this.meal.favouriteName = data.favouriteName;
               this._mealSvc.updateFavouriteMeal(this.meal);
+              this.isDirty = true;
             }
           }
         ]
@@ -161,8 +166,8 @@ export class MealDetailsPage {
       alert.present();
     } else {
       this._mealSvc.updateFavouriteMeal(this.meal);
+      this.isDirty = true;
     }
-    this._mealSvc.saveMealPlan(this.mealPlan);
   }
 
   ionViewCanLeave(): Promise<boolean> {

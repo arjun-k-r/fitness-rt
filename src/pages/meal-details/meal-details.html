@@ -52,11 +52,15 @@
                 </ion-item>
                 <ion-item>
                     <ion-label floating>Meal time</ion-label>
-                    <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="meal.time"></ion-datetime>
+                    <ion-datetime displayFormat="hh:mm a" pickerFormat="hh mm a" [(ngModel)]="meal.time" (ionChange)="markDirty()"></ion-datetime>
                 </ion-item>
                 <ion-item>
                     <ion-label>Favourite</ion-label>
                     <ion-toggle [(ngModel)]="meal.favourite" (ionChange)="toggleFavourite()"></ion-toggle>
+                </ion-item>
+                <ion-item *ngIf="meal.favourite" text-wrap>
+                    <ion-label floating>Name</ion-label>
+                    <ion-input type="text" [(ngModel)]="meal.favouriteName" (change)="markDirty()"></ion-input>
                 </ion-item>
             </ion-list>
         </div>

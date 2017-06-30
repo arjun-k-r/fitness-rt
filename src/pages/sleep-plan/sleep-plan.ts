@@ -1,6 +1,6 @@
 // App
 import { Component } from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import { AlertController, Loading, LoadingController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
@@ -22,6 +22,7 @@ export class SleepPlanPage {
   constructor(
     private _alertCtrl: AlertController,
     private _fitSvc: FitnessService,
+    private _loadCtrl: LoadingController,
     private _sleepSvc: SleepService
   ) { }
 
@@ -65,9 +66,15 @@ export class SleepPlanPage {
   }
 
   ionViewWillEnter(): void {
+    let loader: Loading = this._loadCtrl.create({
+      content: 'Loading...',
+      spinner: 'crescent'
+    });
+    loader.present();
     this._sleepPlanSubscription = this._sleepSvc.getSleepPlan$().subscribe((sleepPlan: SleepPlan) => {
       this.sleepPlan = Object.assign({}, sleepPlan);
       this.currentSleep = Object.assign({}, this._sleepSvc.getCurrentSleep(this.sleepPlan));
+      loader.dismiss();
     });
   }
 

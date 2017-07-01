@@ -267,8 +267,13 @@ export class RecipeDetailsPage {
             closeButtonText: 'OK'
           }).present();
         } else {
-          toast.setMessage('Upload complete');
-          toast.setBackButtonText('OK');
+          toast.dismiss();
+          this._toastCtrl.create({
+            message: 'Upload complete!',
+            position: 'bottom',
+            showCloseButton: true,
+            closeButtonText: 'OK'
+          }).present();
           this.recipeForm.patchValue({ 'image': this.recipe.image });
         }
       });

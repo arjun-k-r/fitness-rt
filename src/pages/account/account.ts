@@ -162,8 +162,13 @@ export class AccountPage {
             closeButtonText: 'OK'
           }).present();
         } else {
-          toast.setMessage('Upload complete');
-          toast.setBackButtonText('OK');
+          toast.dismiss();
+          this._toastCtrl.create({
+            message: 'Upload complete!',
+            position: 'bottom',
+            showCloseButton: true,
+            closeButtonText: 'OK'
+          }).present();
         }
       });
   }

@@ -41,7 +41,7 @@ export class AccountPage {
     this._user.delete();
     this._user.unstore();
     this._auth.logout();
-    loader.dismiss();
+    loader.dismissAll();
     this._navCtrl.setRoot(RegistrationPage);
   }
 
@@ -116,7 +116,6 @@ export class AccountPage {
   public processWebImage(event: any) {
     let reader: FileReader = new FileReader();
     reader.onload = (readerEvent: Event) => {
-      this.avatar = (readerEvent.target as any).result;
       this.uploadImage(event.target.files[0]);
     };
 
@@ -136,7 +135,6 @@ export class AccountPage {
         showCloseButton: true,
         closeButtonText: 'Cancel'
       });
-
     toast.present();
     toast.onWillDismiss(() => {
       canceledUpload = true;
@@ -148,6 +146,8 @@ export class AccountPage {
         toast.setMessage(`Uploading ... ${data}%`);
       } else {
         this.avatar = data;
+        this._user.details.image = this.avatar;
+        this._user.save();
       }
     }, (err: Error) => {
       console.log('Error uploading avatar: ', err);
@@ -162,7 +162,7 @@ export class AccountPage {
             closeButtonText: 'OK'
           }).present();
         } else {
-          toast.dismiss();
+          toast.dismissAll();
           this._toastCtrl.create({
             message: 'Upload complete!',
             position: 'bottom',

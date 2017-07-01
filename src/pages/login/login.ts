@@ -61,11 +61,11 @@ export class LoginPage {
 
     this._auth.login('basic', details)
       .then(() => {
-        loader.dismiss();
+        loader.dismissAll();
         this._navCtrl.setRoot(FitnessPage);
       })
       .catch((err: IDetailedError<Array<string>>) => {
-        loader.dismiss();
+        loader.dismissAll();
         for (let e of err.details) {
           this._alertCtrl.create({
             title: 'Uhh ohh...',

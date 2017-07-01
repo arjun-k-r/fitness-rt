@@ -92,7 +92,7 @@ export class RecipeListPage {
     loader.present();
     this._recipesSubscription = this._recipeSvc.getRecipes$().subscribe((recipes: Array<Recipe>) => {
       this.recipes = [...recipes];
-      loader.dismiss();
+      loader.dismissAll();
     });
   }
 

@@ -30,12 +30,17 @@
 
 
 <ion-content padding>
+  <ion-fab right bottom *ngIf="activityPlanDetails === 'activities'">
+    <button ion-fab color="secondary" (click)="addNewActivity()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
   <div [ngSwitch]="activityPlanDetails">
     <!-- Start of segment -->
     <ion-list *ngSwitchCase="'guidelines'">
       <ion-item>
         <h2>Move every hour and every day</h2>
-        <p text-wrap>Sedentarism is one of the leading causes of aging (mortality) and all diseases (cardiovascular, diabetes, cancer, obesity, etc.)</p>
+        <p text-wrap>Sedentarism is one of the leading causes of aging (mortality) and all diseases (cardiovascular, diabetes, cancer,
+          obesity, etc.)</p>
       </ion-item>
       <ion-item>
         <h2>Develop a HIIT (High intensity interval training) routine</h2>
@@ -95,9 +100,5 @@
       </ion-list>
     </div>
     <!-- End of segment -->
-
-    <ion-fab right bottom>
-      <button ion-fab color="secondary" (click)="addNewActivity()"><ion-icon name="add"></ion-icon></button>
-    </ion-fab>
   </div>
 </ion-content>

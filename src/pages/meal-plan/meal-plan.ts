@@ -53,17 +53,19 @@ export class MealPlanPage {
   }
 
   public loadFavourites(): void {
-    let loader: Loading = this._loadCtrl.create({
-      content: 'Loading...',
-      spinner: 'crescent'
-    });
+    if (!this._favouriteMealSubscription) {
+      let loader: Loading = this._loadCtrl.create({
+        content: 'Loading...',
+        spinner: 'crescent'
+      });
 
-    loader.present();
-    this._favouriteMealSubscription = this._mealSvc.getFavouriteMeals$().subscribe((meals: Array<Meal>) => {
-      this.favouriteMeals = [...meals];
-      console.log(meals);
-      loader.dismiss();
-    });
+      loader.present();
+      this._favouriteMealSubscription = this._mealSvc.getFavouriteMeals$().subscribe((meals: Array<Meal>) => {
+        this.favouriteMeals = [...meals];
+        console.log(meals);
+        loader.dismissAll();
+      });
+    }
   }
 
   public resetMealPlan(): void {
@@ -111,7 +113,7 @@ export class MealPlanPage {
     loader.present();
     this._mealPlanSubscription = this._mealSvc.getMealPlan$().subscribe((mealPlan: MealPlan) => {
       this.mealPlan = Object.assign({}, mealPlan);
-      loader.dismiss();
+      loader.dismissAll();
     });
   }
 

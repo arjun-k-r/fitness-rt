@@ -31,7 +31,7 @@ export class FoodDetailsPage {
     loader.present();
     this._foodSvc.getFoodReports$(this._params.get('id')).subscribe((data: Food) => {
       this.food = Object.assign({}, data);
-      loader.dismiss();
+      loader.dismissAll();
     }, (err: Error) => {
       this._alertCtrl.create({
         title: 'Uhh ohh...',
@@ -39,7 +39,7 @@ export class FoodDetailsPage {
         message: err.toString(),
         buttons: ['OK']
       }).present();
-      loader.dismiss();
+      loader.dismissAll();
       this._navCtrl.pop();
     });
   }

@@ -268,7 +268,6 @@ export class FoodService {
     return this._http.get(this._foodNutritionUrl, options)
       .map((res: Response) => {
         let body = res.json();
-        console.log(body);
         if (body.hasOwnProperty('errors')) {
           throw body.errors.error[0];
         }
@@ -298,7 +297,6 @@ export class FoodService {
     return this._http.get(this._foodSearchUrl, options)
       .map((res: Response) => {
         let body = res.json();
-        console.log(body);
         if (body.hasOwnProperty('errors')) {
           throw body.errors.error[0];
         }
@@ -324,9 +322,7 @@ export class FoodService {
     return this._http.get(this._foodSortUrl, options)
       .map((res: Response) => {
         let body = res.json();
-        console.log(body);
         if (body.hasOwnProperty('errors')) {
-          console.log(body.errors);
           throw body.errors.error[0];
         }
         

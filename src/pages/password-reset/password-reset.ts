@@ -56,7 +56,7 @@ export class PasswordResetPage {
 
     this._auth.confirmPasswordReset(form.resetCode, form.password)
       .then(() => {
-        loader.dismiss();
+        loader.dismissAll();
         this._navCtrl.popToRoot();
       })
       .catch((err: Error) => this._alertCtrl.create({

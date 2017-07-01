@@ -202,7 +202,6 @@ export class RecipeDetailsPage {
   public processWebImage(event: any) {
     let reader: FileReader = new FileReader();
     reader.onload = (readerEvent: Event) => {
-      this.recipe.image = (readerEvent.target as any).result;
       this.uploadImage(event.target.files[0]);
     };
 
@@ -252,6 +251,7 @@ export class RecipeDetailsPage {
         toast.setMessage(`Uploading ... ${data}%`);
       } else {
         this.recipe.image = data;
+        this.recipeForm.patchValue({ 'image': this.recipe.image });
         this.isDirty = true;
       }
     }, (err: Error) => {
@@ -267,14 +267,13 @@ export class RecipeDetailsPage {
             closeButtonText: 'OK'
           }).present();
         } else {
-          toast.dismiss();
+          toast.dismissAll();
           this._toastCtrl.create({
             message: 'Upload complete!',
             position: 'bottom',
             showCloseButton: true,
             closeButtonText: 'OK'
           }).present();
-          this.recipeForm.patchValue({ 'image': this.recipe.image });
         }
       });
   }

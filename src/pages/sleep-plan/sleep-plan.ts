@@ -74,7 +74,7 @@ export class SleepPlanPage {
     this._sleepPlanSubscription = this._sleepSvc.getSleepPlan$().subscribe((sleepPlan: SleepPlan) => {
       this.sleepPlan = Object.assign({}, sleepPlan);
       this.currentSleep = Object.assign({}, this._sleepSvc.getCurrentSleep(this.sleepPlan));
-      loader.dismiss();
+      loader.dismissAll();
     });
   }
 

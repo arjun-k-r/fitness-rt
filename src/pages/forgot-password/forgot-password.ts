@@ -1,7 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, IonicPageMetadata, LoadingController, NavController } from 'ionic-angular';
 import { Auth } from '@ionic/cloud-angular';
 
 // Pages
@@ -18,7 +18,7 @@ export class ForgotPasswordPage {
   public forgotPasswordForm: FormGroup;
   public email: AbstractControl;
   public password: AbstractControl;
-  public pswResetPage: any = PasswordResetPage;
+  public pswResetPage: IonicPageMetadata = PasswordResetPage;
   constructor(
     private _alertCtrl: AlertController,
     private _auth: Auth,
@@ -34,7 +34,6 @@ export class ForgotPasswordPage {
         AuthValidator.noWhiteSpace])
       ]
     });
-
     this.email = this.forgotPasswordForm.get('email');
   }
 
@@ -44,19 +43,20 @@ export class ForgotPasswordPage {
       spinner: 'crescent',
       duration: 30000
     });
-
     loader.present();
-
     this._auth.requestPasswordReset(form.email)
       .then(() => {
         loader.dismissAll();
         this._navCtrl.push(PasswordResetPage, { email: form.email });
       })
-      .catch((err: Error) => this._alertCtrl.create({
-        title: 'Uhh ohh...',
-        subTitle: 'Something went wrong',
-        message: err.toString(),
-        buttons: ['OK']
-      }).present());
+      .catch(err => {
+        loader.dismissAll();
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.response.body.error.message,
+          buttons: ['OK']
+        }).present();
+      });
   }
 }

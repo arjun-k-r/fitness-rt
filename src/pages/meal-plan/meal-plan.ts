@@ -19,7 +19,7 @@ import { FitnessService, MealService, NutritionService } from '../../providers';
 export class MealPlanPage {
   private _favouriteMealSubscription: Subscription;
   private _mealPlanSubscription: Subscription;
-  public detailsPage: any = MealDetailsPage;
+  public detailsPage = MealDetailsPage;
   public favouriteMeals: Array<Meal>;
   public isDirty: boolean = false;
   public mealPlan: MealPlan = new MealPlan();

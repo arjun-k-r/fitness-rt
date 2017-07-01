@@ -273,7 +273,7 @@ export class FoodService {
         }
 
         return this._serializeFood(body['report']['food']);
-      }).catch((err: any) => Observable.throw(err));
+      }).catch(err => Observable.throw(err));
   }
 
   public getFoods$(searhQuery: string = '', start: number = 0, limit: number = 100, foodGroupId: string = ''): Observable<Array<IFoodSearchResult>> {
@@ -301,7 +301,7 @@ export class FoodService {
           throw body.errors.error[0];
         }
         return body['list']['item'];
-      }).catch((err: any) => Observable.throw(err));
+      }).catch(err => Observable.throw(err));
   }
 
   public getSortedFoods$(nutrientId: number, start: number = 0, limit: number = 100): Observable<Array<IFoodSearchResult>> {
@@ -327,6 +327,6 @@ export class FoodService {
         }
         
         return body['report']['foods'];
-      }).catch((err: any) => Observable.throw(err));
+      }).catch(err => Observable.throw(err));
   }
 }

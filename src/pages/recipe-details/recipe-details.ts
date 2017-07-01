@@ -193,7 +193,7 @@ export class RecipeDetailsPage {
   }
 
 
-  public processWebImage(event: any) {
+  public processWebImage(event) {
     let reader: FileReader = new FileReader();
     reader.onload = (readerEvent: Event) => {
       this.uploadImage(event.target.files[0]);

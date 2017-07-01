@@ -111,7 +111,7 @@ export class AccountPage {
     this._alertCtrl.create(alertOpt).present();
   }
 
-  public processWebImage(event: any) {
+  public processWebImage(event) {
     let reader: FileReader = new FileReader();
     reader.onload = (readerEvent: Event) => {
       this.uploadImage(event.target.files[0]);

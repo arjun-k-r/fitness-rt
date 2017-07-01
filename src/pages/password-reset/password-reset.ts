@@ -37,7 +37,6 @@ export class PasswordResetPage {
         AuthValidator.noWhiteSpace])
       ]
     });
-
     this.password = this.passwordResetForm.get('password');
     this.resetCode = this.passwordResetForm.get('resetCode');
   }
@@ -52,19 +51,20 @@ export class PasswordResetPage {
       spinner: 'crescent',
       duration: 30000
     });
-
     loader.present();
-
     this._auth.confirmPasswordReset(form.resetCode, form.password)
       .then(() => {
         loader.dismissAll();
         this._navCtrl.popToRoot();
       })
-      .catch((err: Error) => this._alertCtrl.create({
-        title: 'Uhh ohh...',
-        subTitle: 'Something went wrong',
-        message: err.toString(),
-        buttons: ['OK']
-      }).present());
+      .catch(err => {
+        loader.dismissAll();
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.response.body.error.message,
+          buttons: ['OK']
+        }).present();
+      });
   }
 }

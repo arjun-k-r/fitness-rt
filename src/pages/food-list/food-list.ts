@@ -1,6 +1,6 @@
 // App
 import { Component } from '@angular/core';
-import { ActionSheetController, AlertController, InfiniteScroll, Loading, LoadingController } from 'ionic-angular';
+import { ActionSheetController, AlertController, IonicPageMetadata, InfiniteScroll, Loading, LoadingController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
@@ -19,7 +19,7 @@ import { FOOD_GROUPS, FoodService } from '../../providers';
 export class FoodListPage {
   private _foodSubscription: Subscription;
   private _querying: boolean = false;
-  public detailsPage: any = FoodDetailsPage;
+  public detailsPage: IonicPageMetadata = FoodDetailsPage;
   public foods: Array<IFoodSearchResult>;
   public groups: Array<FoodGroup> = [...FOOD_GROUPS];
   public limit: number = 50;

@@ -1,6 +1,6 @@
 // App
 import { Component, ViewChild } from '@angular/core';
-import { AlertController, AlertOptions, Nav, Platform, ToastController } from 'ionic-angular';
+import { AlertController, AlertOptions, IonicPageMetadata, Nav, Platform, Toast, ToastController } from 'ionic-angular';
 import { Deploy } from '@ionic/cloud-angular';
 
 // Cordova
@@ -21,7 +21,7 @@ import {
 
 export interface IPageLink {
     title: string,
-    component: any,
+    component: Component,
     icon: string
 }
 
@@ -31,7 +31,7 @@ export interface IPageLink {
 export class MyApp {
     @ViewChild(Nav) private _nav: Nav;
     public pages: Array<IPageLink>;
-    public rootPage: any = RegistrationPage;
+    public rootPage: IonicPageMetadata = RegistrationPage;
     constructor(
         private _alertCtrl: AlertController,
         private _deploy: Deploy,
@@ -58,10 +58,6 @@ export class MyApp {
         this._deploy.channel = 'dev';
         this._deploy.check().then((snapshotAvailable: boolean) => {
             if (snapshotAvailable) {
-                /**
-                 * If a new snapshot is available,
-                 * download it, apply it, and reload the app
-                 */
                 let alertOpts: AlertOptions = {
                     title: 'There is an update available',
                     message: 'Do you want to update?',
@@ -70,15 +66,13 @@ export class MyApp {
                     }, {
                         text: 'Update',
                         handler: () => {
-
-                            let updateConfirmed = true,
-                                toast = this._toastCtrl.create({
+                            let updateConfirmed: boolean = true,
+                                toast: Toast = this._toastCtrl.create({
                                     message: 'Downloading ... 0%',
                                     position: 'bottom',
                                     showCloseButton: true,
                                     closeButtonText: 'Cancel'
                                 });
-
                             toast.onDidDismiss(() => updateConfirmed = false);
                             toast.present();
                             this._deploy.download({
@@ -97,12 +91,10 @@ export class MyApp {
                                         }
                                     }).catch(() => toast.setMessage('Uhh ohh, something went wrong!'))
                                 }
-
                             }).catch(() => toast.setMessage('Uhh ohh, something went wrong!'))
                         }
                     }]
                 };
-
                 this._alertCtrl.create(alertOpts).present();
             }
         });
@@ -110,8 +102,6 @@ export class MyApp {
 
     private _initializeApp() {
         this._platform.ready().then(() => {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
             this._statusBar.styleDefault();
             this._splashScreen.hide();
             if (this._platform.is('cordova')) {

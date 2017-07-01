@@ -14,8 +14,8 @@ export class AuthValidator {
         return EMAIL_REGEX.test(control.value) ? null : { 'invalidEmailAddress': true };
     }
 
-    static getErrorMessage(errorName: string, error?: any): string {
-        let validationMessages: any = {
+    static getErrorMessage(errorName: string, error?): string {
+        let validationMessages = {
             'invalidEmailAddress': 'Your email is not valid. It must be something like user@domain.com',
             'invalidPassword': 'Spaces are not allowed',
             'invalidUsername': 'Spaces, numbers, or special characters are not allowed',

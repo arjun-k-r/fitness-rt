@@ -1,6 +1,6 @@
 // App
 import { Component } from '@angular/core';
-import { AlertController, InfiniteScroll, Loading, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, InfiniteScroll, IonicPageMetadata, Loading, LoadingController, NavController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
@@ -18,7 +18,7 @@ import { RecipeService } from '../../providers';
 })
 export class RecipeListPage {
   private _recipesSubscription: Subscription;
-  public detailsPage: any = RecipeDetailsPage;
+  public detailsPage: IonicPageMetadata = RecipeDetailsPage;
   public limit: number = 50;
   public queryIngredients: Array<string> = [];
   public recipes: Array<Recipe> = [];

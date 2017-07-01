@@ -5,7 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Injectable()
 export class CustomValidationService {
 
-  static getErrorMessage(errorName: string, error?: any): string {
+  static getErrorMessage(errorName: string, error?): string {
     let config = {
       'required': 'Required',
       'minlength': `Minimum length ${error.requiredLength}`,
@@ -26,7 +26,7 @@ export class CustomValidationService {
     return (errorName in config) ? config[errorName] : 'Unknown Error';
   }
 
-  static noEmptyWhiteSpace(control: FormControl): any {
+  static noEmptyWhiteSpace(control: FormControl) {
     if (control.value != null && control.value.trim() !== '') {
       return null;
     } else {
@@ -34,7 +34,7 @@ export class CustomValidationService {
     }
   }
 
-  static emailValidator(control): any {
+  static emailValidator(control) {
     if (control.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) {
       return null;
     } else {
@@ -42,7 +42,7 @@ export class CustomValidationService {
     }
   }
 
-  static passwordValidator(control): any {
+  static passwordValidator(control) {
     // [^ ]* - Assert password has no spaces
     if (control.value.match(/^[^ ]*$/)) {
       return null;
@@ -51,7 +51,7 @@ export class CustomValidationService {
     }
   }
 
-  static usernameValidator(control): any {
+  static usernameValidator(control) {
     if (control.value.trim() === '' || control.value.match(/^[a-zA-Z]+$/)) {
       return null;
     } else {
@@ -59,11 +59,9 @@ export class CustomValidationService {
     }
   }
 
-  static passwordMatchValidator(group: FormGroup): any {
-    var password = group.get('password').value;
-    var confirmPassword = group.get('confirmPassword').value;
-
-
+  static passwordMatchValidator(group: FormGroup) {
+    let password = group.get('password').value,
+    confirmPassword = group.get('confirmPassword').value;
     if (password == confirmPassword) {
       return null;
     } else {

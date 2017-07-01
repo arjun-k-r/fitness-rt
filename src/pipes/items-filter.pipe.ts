@@ -13,7 +13,7 @@ export class ItemsFilterPipe implements PipeTransform {
     if (!!items && !!items.length) {
       if (!!queryItems && !!queryItems.length && !!prop) {
         let foundIt: number;
-        return items.filter((item: any) => {
+        return items.filter(item => {
           foundIt = 0;
           queryItems.forEach((query: string) => {
             if (!!item[prop].find((val: { name: string }) => val.name.toLocaleLowerCase().includes(query.toLocaleLowerCase()))) {

@@ -1,8 +1,8 @@
 // App
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, LoadingController, NavController } from 'ionic-angular';
-import { Auth, IDetailedError, User, UserDetails } from '@ionic/cloud-angular';
+import { AlertController, IonicPageMetadata, LoadingController, NavController } from 'ionic-angular';
+import { Auth, User, UserDetails } from '@ionic/cloud-angular';
 
 // Pages
 import { FitnessPage } from '../fitness/fitness';
@@ -16,7 +16,7 @@ import { AuthValidator } from '../../providers';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  public forgotPasswordPage: any = ForgotPasswordPage;
+  public forgotPasswordPage: IonicPageMetadata = ForgotPasswordPage;
   public email: AbstractControl;
   public loginForm: FormGroup;
   public password: AbstractControl;
@@ -28,7 +28,6 @@ export class LoginPage {
     private _navCtrl: NavController,
     private _user: User
   ) {
-
     this.loginForm = _formBuilder.group({
       email: [
         '',
@@ -41,7 +40,6 @@ export class LoginPage {
         AuthValidator.passwordValidator, AuthValidator.noWhiteSpace])
       ]
     });
-
     this.email = this.loginForm.get('email');
     this.password = this.loginForm.get('password');
   }
@@ -52,29 +50,24 @@ export class LoginPage {
       spinner: 'crescent',
       duration: 30000
     });
-
     loader.present();
-
     let details: UserDetails = {
       'email': form.email.trim(),
       'password': form.password.trim(),
     };
-
     this._auth.login('basic', details)
       .then(() => {
         loader.dismissAll();
         this._navCtrl.setRoot(FitnessPage);
       })
-      .catch((err: IDetailedError<Array<string>>) => {
+      .catch(err => {
         loader.dismissAll();
-        for (let e of err.details) {
-          this._alertCtrl.create({
-            title: 'Uhh ohh...',
-            subTitle: 'Something went wrong',
-            message: AuthValidator.getErrorMessage(e, err),
-            buttons: ['OK']
-          }).present();
-        }
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.response.body.error.message,
+          buttons: ['OK']
+        }).present();
       });
   }
 }

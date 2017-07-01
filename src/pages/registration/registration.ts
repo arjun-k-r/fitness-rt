@@ -1,7 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, Loading, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, IonicPageMetadata, Loading, LoadingController, NavController } from 'ionic-angular';
 import { Auth, IDetailedError, User, UserDetails } from '@ionic/cloud-angular';
 
 // Pages
@@ -19,7 +19,7 @@ export class RegistrationPage {
   public email: AbstractControl;
   public firstName: AbstractControl;
   public lastName: AbstractControl;
-  public loginPage: any = LoginPage;
+  public loginPage: IonicPageMetadata = LoginPage;
   public password: AbstractControl;
   public passwordConfirm: AbstractControl;
   public registerForm: FormGroup;
@@ -52,7 +52,6 @@ export class RegistrationPage {
       ],
       passwordConfirm: ['', Validators.required]
     }, { validator: AuthValidator.passwordMatchValidator });
-
     this.email = this.registerForm.get('email');
     this.firstName = this.registerForm.get('firstName');
     this.lastName = this.registerForm.get('lastName');
@@ -66,9 +65,7 @@ export class RegistrationPage {
       spinner: 'crescent',
       duration: 30000
     });
-
     loader.present();
-
     let details: UserDetails = {
       'custom': {
         'firstName': form.firstName,
@@ -80,7 +77,6 @@ export class RegistrationPage {
       'password': form.password.trim(),
       'username': `${form.firstName.trim().toLocaleLowerCase()}${form.lastName.trim().toLocaleLowerCase()}`
     };
-
     this._auth.signup(details)
       .then(() => {
         this._auth.login('basic', details)

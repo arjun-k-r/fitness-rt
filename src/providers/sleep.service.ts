@@ -1,6 +1,7 @@
 // App
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 import { User } from '@ionic/cloud-angular';
 import 'rxjs/add/operator/map';
 
@@ -50,12 +51,12 @@ export class SleepService {
   private _checkOscillation(sleepPlan: SleepPlan): boolean {
     let currBedHM: Array<number>,
       prevBedHM: Array<number>;
-      sleepPlan.sleepOscillation = 0;
+    sleepPlan.sleepOscillation = 0;
 
     for (let i = 0; i < 5; i++) {
       currBedHM = sleepPlan.sleepPattern[i].bedTime.split(':').map(item => +item);
       prevBedHM = sleepPlan.sleepPattern[i + 1].bedTime.split(':').map(item => +item);
-      sleepPlan.sleepOscillation += (currBedHM[0] + currBedHM[1] / 60) - (prevBedHM[0] + prevBedHM[1] / 60); 
+      sleepPlan.sleepOscillation += (currBedHM[0] + currBedHM[1] / 60) - (prevBedHM[0] + prevBedHM[1] / 60);
     }
 
     if ((sleepPlan.sleepOscillation > 1 || sleepPlan.sleepOscillation < -1)) {
@@ -79,20 +80,20 @@ export class SleepService {
   }
 
   public getCurrentSleep(sleepPlan: SleepPlan): SleepHabit {
-    if (!!sleepPlan.sleepPattern[0] && sleepPlan.sleepPattern[0].date === CURRENT_DAY) {
-      return sleepPlan.sleepPattern[0];
+    let lastSleep: SleepHabit = sleepPlan.sleepPattern[0];
+    if (lastSleep.date === CURRENT_DAY) {
+      return lastSleep;
     } else {
       if (sleepPlan.sleepPattern.length === 7) {
         sleepPlan.sleepPattern.pop();
       }
 
       sleepPlan.sleepPattern.unshift(new SleepHabit(
-        sleepPlan.sleepPattern[0].bedTime,
+        lastSleep.bedTime,
         CURRENT_DAY,
-        sleepPlan.sleepPattern[0].duration,
-        sleepPlan.sleepPattern[0].wakeUpTime
+        lastSleep.duration,
+        lastSleep.wakeUpTime
       ));
-
       if (sleepPlan.imbalancedSleep) {
         sleepPlan.daysOfImbalance++;
       } else {
@@ -110,7 +111,15 @@ export class SleepService {
   }
 
   public getSleepPlan$(): Observable<SleepPlan> {
-    return this._sleepPlan.map((sleepPlan: SleepPlan) => sleepPlan['$value'] === null ? new SleepPlan() : sleepPlan);
+    return new Observable((observer: Observer<SleepPlan>) => {
+      this._sleepPlan.subscribe((sleepPlan: SleepPlan) => {
+        if (sleepPlan['$value'] === null) {
+          this._sleepPlan.set(new SleepPlan());
+        } else {
+          observer.next(sleepPlan);
+        }
+      });
+    });
   }
 
   public saveSleep(sleepPlan: SleepPlan, sleepHabit: SleepHabit): void {

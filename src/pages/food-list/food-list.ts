@@ -3,11 +3,8 @@ import { Component } from '@angular/core';
 import { ActionSheetController, AlertController, InfiniteScroll, Loading, LoadingController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
-// Third-party
-import * as _ from 'lodash';
-
 // Models
-import { IFoodSearchResult, FoodGroup, Nutrient, Nutrition } from '../../models';
+import { IFoodSearchResult, FoodGroup } from '../../models';
 
 // Pages
 import { FoodDetailsPage } from '../food-details/food-details';

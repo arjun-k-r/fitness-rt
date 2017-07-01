@@ -41,9 +41,9 @@ export class ActivityService {
   }
 
   private _checkInactivity(duration: number, activityPlan: ActivityPlan): void {
-    if (duration === 0) {
+    if (duration < 2) {
       activityPlan.warnings = [...activityPlan.warnings, new WarningMessage(
-        'You have to move every day',
+        'You have to move 2 hours every day',
         'According to WHO, sedentary lifestyles increase all causes of mortality, double the risk of cardiovascular diseases, diabetes, and obesity, and increase the risks of colon cancer, high blood pressure, osteoporosis, lipid disorders, depression and anxiety'
       )];
     }

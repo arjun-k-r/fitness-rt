@@ -66,10 +66,7 @@ export class MyApp {
                     title: 'There is an update available',
                     message: 'Do you want to update?',
                     buttons: [{
-                        text: 'Cancel',
-                        handler: () => {
-                            console.log('Cancel clicked');
-                        }
+                        text: 'Cancel'
                     }, {
                         text: 'Update',
                         handler: () => {
@@ -87,14 +84,12 @@ export class MyApp {
                             this._deploy.download({
                                 onProgress: progress => {
                                     toast.setMessage(`Downloading ... ${progress}%`);
-                                    console.log(`Download progress: ${progress}%`);
                                 }
                             }).then(() => {
                                 if (updateConfirmed) {
                                     this._deploy.extract({
                                         onProgress: progress => {
                                             toast.setMessage(`Extracting ... ${progress}%`);
-                                            console.log(`Extract progress: ${progress}%`);
                                         }
                                     }).then(() => {
                                         if (updateConfirmed) {

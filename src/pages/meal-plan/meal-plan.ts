@@ -62,7 +62,6 @@ export class MealPlanPage {
       loader.present();
       this._favouriteMealSubscription = this._mealSvc.getFavouriteMeals$().subscribe((meals: Array<Meal>) => {
         this.favouriteMeals = [...meals];
-        console.log(meals);
         loader.dismissAll();
       });
     }

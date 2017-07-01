@@ -77,8 +77,6 @@ export class FoodListPage {
   }
 
   public loadMore(ev: InfiniteScroll) {
-    console.log('Begin async operation');
-
     setTimeout(() => {
       this.start += 50;
       this._foodSvc.getFoods$(this.searchQuery.toLocaleLowerCase(), this.start, this.limit, this.selectedGroup.id)
@@ -175,10 +173,7 @@ export class FoodListPage {
           }
         }, {
           text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
+          role: 'cancel'
         }
       ]
     }).present();

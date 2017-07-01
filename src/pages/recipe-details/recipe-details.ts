@@ -154,10 +154,7 @@ export class RecipeDetailsPage {
             }
           }, {
             text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
-            }
+            role: 'cancel'
           }
         ]
       }).present();
@@ -189,10 +186,7 @@ export class RecipeDetailsPage {
           }
         }, {
           text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
+          role: 'cancel'
         }
       ]
     }).present();
@@ -255,7 +249,6 @@ export class RecipeDetailsPage {
         this.isDirty = true;
       }
     }, (err: Error) => {
-      console.log('Error uploading avatar: ', err);
       toast.setMessage('Uhh ohh, something went wrong!');
     },
       () => {

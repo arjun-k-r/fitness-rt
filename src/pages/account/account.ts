@@ -78,10 +78,7 @@ export class AccountPage {
             }
           }, {
             text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
-            }
+            role: 'cancel'
           }
         ]
       }).present();
@@ -150,7 +147,6 @@ export class AccountPage {
         this._user.save();
       }
     }, (err: Error) => {
-      console.log('Error uploading avatar: ', err);
       toast.setMessage('Uhh ohh, something went wrong!');
     },
       () => {

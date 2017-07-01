@@ -257,7 +257,8 @@ export class RecipeDetailsPage {
             message: 'Upload canceled',
             position: 'bottom',
             showCloseButton: true,
-            closeButtonText: 'OK'
+            closeButtonText: 'OK',
+            duration: 10000
           }).present();
         } else {
           toast.dismissAll();
@@ -265,7 +266,8 @@ export class RecipeDetailsPage {
             message: 'Upload complete!',
             position: 'bottom',
             showCloseButton: true,
-            closeButtonText: 'OK'
+            closeButtonText: 'OK',
+            duration: 10000
           }).present();
         }
       });
@@ -299,7 +301,8 @@ export class RecipeDetailsPage {
           message: 'Ingredients are required',
           position: 'bottom',
           showCloseButton: true,
-          closeButtonText: 'OK'
+          closeButtonText: 'OK',
+          duration: 10000
         }).present();
 
         reject(true);
@@ -308,7 +311,8 @@ export class RecipeDetailsPage {
           message: 'Instructions are required',
           position: 'bottom',
           showCloseButton: true,
-          closeButtonText: 'OK'
+          closeButtonText: 'OK',
+          duration: 10000
         }).present();
 
         reject(true);
@@ -317,7 +321,8 @@ export class RecipeDetailsPage {
           message: 'Please complete all the recipe details',
           position: 'bottom',
           showCloseButton: true,
-          closeButtonText: 'OK'
+          closeButtonText: 'OK',
+          duration: 10000
         }).present();
 
         reject(true);
@@ -333,7 +338,8 @@ export class RecipeDetailsPage {
         message: 'Hint: Click the recipe image to change it',
         position: 'bottom',
         showCloseButton: true,
-        closeButtonText: 'OK'
+        closeButtonText: 'OK',
+        duration: 10000
       }).present();
     }
   }

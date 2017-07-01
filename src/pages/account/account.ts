@@ -34,7 +34,8 @@ export class AccountPage {
   private _deleteAccount(): void {
     let loader = this._loadCtrl.create({
       content: 'Deleting account...',
-      spinner: 'crescent'
+      spinner: 'crescent',
+      duration: 30000
     });
 
     loader.present();
@@ -155,7 +156,8 @@ export class AccountPage {
             message: 'Upload canceled',
             position: 'bottom',
             showCloseButton: true,
-            closeButtonText: 'OK'
+            closeButtonText: 'OK',
+            duration: 10000
           }).present();
         } else {
           toast.dismissAll();
@@ -163,7 +165,8 @@ export class AccountPage {
             message: 'Upload complete!',
             position: 'bottom',
             showCloseButton: true,
-            closeButtonText: 'OK'
+            closeButtonText: 'OK',
+            duration: 10000
           }).present();
         }
       });
@@ -175,7 +178,8 @@ export class AccountPage {
         message: 'Hint: Click the avatar to change it',
         position: 'bottom',
         showCloseButton: true,
-        closeButtonText: 'OK'
+        closeButtonText: 'OK',
+        duration: 10000
       }).present();
     }
   }

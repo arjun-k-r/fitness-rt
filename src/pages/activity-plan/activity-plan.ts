@@ -40,9 +40,11 @@ export class ActivityPlanPage {
     let activitySelectModal: Modal = this._modalCtrl.create(ActivitySelectPage);
     activitySelectModal.present();
     activitySelectModal.onDidDismiss((activities: Array<Activity>) => {
-      this.activityPlan.activities = [...this.activityPlan.activities, ...activities];
-      this.activityPlan.activities.forEach((activity: Activity) => this._activitySvc.checkActivity(activity, this.activityPlan));
-      this._updateActivityPlan();
+      if (!!activities.length) {
+        this.activityPlan.activities = [...this.activityPlan.activities, ...activities];
+        this.activityPlan.activities.forEach((activity: Activity) => this._activitySvc.checkActivity(activity, this.activityPlan));
+        this._updateActivityPlan();
+      }
     });
   }
 

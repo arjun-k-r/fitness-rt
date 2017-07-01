@@ -25,9 +25,9 @@ export class FoodDetailsPage {
   ionViewWillEnter(): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Loading...',
-      spinner: 'crescent'
+      spinner: 'crescent',
+      duration: 30000
     });
-
     loader.present();
     this._foodSvc.getFoodReports$(this._params.get('id')).subscribe((data: Food) => {
       this.food = Object.assign({}, data);

@@ -63,7 +63,8 @@ export class RegistrationPage {
   public register(form: { email: string, firstName: string, lastName: string, password: string }): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Creating your account...',
-      spinner: 'crescent'
+      spinner: 'crescent',
+      duration: 30000
     });
 
     loader.present();

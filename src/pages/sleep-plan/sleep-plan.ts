@@ -68,13 +68,14 @@ export class SleepPlanPage {
   ionViewWillEnter(): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Loading...',
-      spinner: 'crescent'
+      spinner: 'crescent',
+      duration: 30000
     });
     loader.present();
     this._sleepPlanSubscription = this._sleepSvc.getSleepPlan$().subscribe((sleepPlan: SleepPlan) => {
       this.sleepPlan = Object.assign({}, sleepPlan);
       this.currentSleep = Object.assign({}, this._sleepSvc.getCurrentSleep(this.sleepPlan));
-      loader.dismissAll();
+      loader.dismiss();
     });
   }
 

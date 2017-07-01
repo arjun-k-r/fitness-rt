@@ -49,7 +49,8 @@ export class PasswordResetPage {
   public resetPassword(form: { resetCode: number, password: string }): void {
     let loader = this._loadCtrl.create({
       content: 'Resetting your password...',
-      spinner: 'crescent'
+      spinner: 'crescent',
+      duration: 30000
     });
 
     loader.present();

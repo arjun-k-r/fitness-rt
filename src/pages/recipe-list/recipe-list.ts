@@ -86,7 +86,8 @@ export class RecipeListPage {
   ionViewWillEnter(): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Loading...',
-      spinner: 'crescent'
+      spinner: 'crescent',
+      duration: 30000
     });
 
     loader.present();

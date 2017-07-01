@@ -15,9 +15,9 @@
 
 
 <ion-content>
-    <ion-searchbar *ngIf="!sorting" debounce="2000" placeholder="Search foods" [(ngModel)]="searchQuery" (ionInput)="refreshItems()" (ionCancel)="clearSearch($event)">
+    <ion-searchbar debounce="2000" placeholder="Search foods" [(ngModel)]="searchQuery" (ionInput)="refreshItems()" (ionCancel)="clearSearch($event)">
     </ion-searchbar>
-    <ion-list *ngIf="!sorting">
+    <ion-list>
         <button ion-item *ngFor="let item of foods" [navPush]="detailsPage" [navParams]="itemParams(item.ndbno)">
             <h2 text-wrap>{{ item.name }}</h2>
             <p>{{ item.group }}</p>
@@ -25,14 +25,6 @@
                 View more
             </ion-note>
         </button>
-    </ion-list>
-
-    <ion-list *ngIf="sorting">
-        <ion-item *ngFor="let item of foods" [navPush]="detailsPage" [navParams]="itemParams(item.ndbno)">
-            <h2 text-wrap>{{ item.name }}</h2>
-            <p>{{ item.nutrients[0].nutrient }} content</p>
-            <p item-content>{{ item.nutrients[0].gm }}{{ item.nutrients[0].unit }}</p>
-        </ion-item>
     </ion-list>
 
     <ion-infinite-scroll (ionInfinite)="loadMore($event)">

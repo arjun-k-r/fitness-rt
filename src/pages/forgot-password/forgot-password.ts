@@ -41,7 +41,8 @@ export class ForgotPasswordPage {
   public reqestReset(form: { email: string }): void {
     let loader = this._loadCtrl.create({
       content: 'Sending request...',
-      spinner: 'crescent'
+      spinner: 'crescent',
+      duration: 30000
     });
 
     loader.present();

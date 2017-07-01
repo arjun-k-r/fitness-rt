@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
+import { Subscription } from 'rxjs/Subscription';
 import { User } from '@ionic/cloud-angular';
 
 // Third-party
@@ -88,7 +89,7 @@ export class MealService {
           currMealPlan = new MealPlan();
 
           //Get the previous day meal plan to check for deficiencies and excesses
-          this._lastMealPlan.subscribe((lastMealPlan: MealPlan) => {
+          let lastMealPlanSubscription: Subscription = this._lastMealPlan.subscribe((lastMealPlan: MealPlan) => {
             if (!lastMealPlan.hasOwnProperty('$value')) {
               let prevDeficiencies: NutrientDeficiencies = this._nutritionSvc.findDeficiencies(lastMealPlan.dailyNutrition),
                 prevExcesses: NutrientExcesses = this._nutritionSvc.findExcesses(lastMealPlan.dailyNutrition);
@@ -112,8 +113,8 @@ export class MealService {
                 }
               }
             }
-
-            observer.next(currMealPlan);
+            this._currentMealPlan.set(currMealPlan);
+            lastMealPlanSubscription.unsubscribe();
           });
         } else {
           // Firebase removes empty objects on save

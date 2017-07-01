@@ -56,7 +56,8 @@ export class MealPlanPage {
     if (!this._favouriteMealSubscription) {
       let loader: Loading = this._loadCtrl.create({
         content: 'Loading...',
-        spinner: 'crescent'
+        spinner: 'crescent',
+        duration: 30000
       });
 
       loader.present();
@@ -107,12 +108,13 @@ export class MealPlanPage {
   ionViewWillEnter(): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Loading...',
-      spinner: 'crescent'
+      spinner: 'crescent',
+      duration: 30000
     });
     loader.present();
     this._mealPlanSubscription = this._mealSvc.getMealPlan$().subscribe((mealPlan: MealPlan) => {
       this.mealPlan = Object.assign({}, mealPlan);
-      loader.dismissAll();
+      loader.dismiss();
     });
   }
 

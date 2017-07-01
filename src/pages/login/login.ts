@@ -49,7 +49,8 @@ export class LoginPage {
   public login(form: { email: string, password: string }): void {
     let loader = this._loadCtrl.create({
       content: 'Please wait...',
-      spinner: 'crescent'
+      spinner: 'crescent',
+      duration: 30000
     });
 
     loader.present();

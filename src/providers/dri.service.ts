@@ -41,7 +41,7 @@ export class DRIService {
   }
 
   public getCarbDri(energyConsumption: number): number {
-    return 0.4 * energyConsumption / 4;
+    return 0.45 * energyConsumption / 4;
   }
 
   public getChlorideDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
@@ -313,7 +313,7 @@ export class DRIService {
   }
 
   public getProteinDri(energyConsumption: number): number {
-    return 0.25 * energyConsumption / 4;
+    return 0.2 * energyConsumption / 4;
   }
 
   public getPyridoxineDri(age: number, gender: string, lactating: boolean, pregnant: boolean): number {

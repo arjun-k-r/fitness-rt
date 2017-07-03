@@ -94,151 +94,151 @@ export class FoodService {
           break;
 
         case '301':
-          food.nutrition.calcium.value = +nutrient.value;
+          food.nutrition.calcium.value = +nutrient.value * 0.75;
           break;
 
         case '303':
-          food.nutrition.iron.value = +nutrient.value;
+          food.nutrition.iron.value = +nutrient.value * 0.75;
           break;
 
         case '304':
-          food.nutrition.magnesium.value = +nutrient.value;
+          food.nutrition.magnesium.value = +nutrient.value * 0.75;
           break;
 
         case '305':
-          food.nutrition.phosphorus.value = +nutrient.value;
+          food.nutrition.phosphorus.value = +nutrient.value * 0.75;
           break;
 
         case '306':
-          food.nutrition.potassium.value = +nutrient.value;
+          food.nutrition.potassium.value = +nutrient.value * 0.75;
           break;
 
         case '307':
-          food.nutrition.sodium.value = +nutrient.value;
+          food.nutrition.sodium.value = +nutrient.value * 0.75;
           break;
 
         case '309':
-          food.nutrition.zinc.value = +nutrient.value;
+          food.nutrition.zinc.value = +nutrient.value * 0.75;
           break;
 
         case '312':
-          food.nutrition.copper.value = +nutrient.value;
+          food.nutrition.copper.value = +nutrient.value * 0.75;
           break;
 
         case '315':
-          food.nutrition.manganese.value = +nutrient.value;
+          food.nutrition.manganese.value = +nutrient.value * 0.75;
           break;
 
         case '317':
-          food.nutrition.selenium.value = +nutrient.value;
+          food.nutrition.selenium.value = +nutrient.value * 0.75;
           break;
 
         case '401':
-          food.nutrition.vitaminC.value = +nutrient.value;
+          food.nutrition.vitaminC.value = +nutrient.value * 0.75;
           break;
 
         case '404':
-          food.nutrition.vitaminB1.value = +nutrient.value;
+          food.nutrition.vitaminB1.value = +nutrient.value * 0.75;
           break;
 
         case '405':
-          food.nutrition.vitaminB2.value = +nutrient.value;
+          food.nutrition.vitaminB2.value = +nutrient.value * 0.75;
           break;
 
         case '406':
-          food.nutrition.vitaminB3.value = +nutrient.value;
+          food.nutrition.vitaminB3.value = +nutrient.value * 0.75;
           break;
 
         case '410':
-          food.nutrition.vitaminB5.value = +nutrient.value;
+          food.nutrition.vitaminB5.value = +nutrient.value * 0.75;
           break;
 
         case '415':
-          food.nutrition.vitaminB6.value = +nutrient.value;
+          food.nutrition.vitaminB6.value = +nutrient.value * 0.75;
           break;
 
         case '417':
-          food.nutrition.vitaminB9.value = +nutrient.value;
+          food.nutrition.vitaminB9.value = +nutrient.value * 0.75;
           break;
 
         case '421':
-          food.nutrition.choline.value = +nutrient.value;
+          food.nutrition.choline.value = +nutrient.value * 0.75;
           break;
 
         case '418':
-          food.nutrition.vitaminB12.value = +nutrient.value;
+          food.nutrition.vitaminB12.value = +nutrient.value * 0.75;
           break;
 
         case '320':
-          food.nutrition.vitaminA.value = +nutrient.value;
+          food.nutrition.vitaminA.value = +nutrient.value * 0.75;
           break;
 
         case '323':
-          food.nutrition.vitaminE.value = +nutrient.value;
+          food.nutrition.vitaminE.value = +nutrient.value * 0.75;
           break;
 
         case '328':
-          food.nutrition.vitaminD.value = +nutrient.value;
+          food.nutrition.vitaminD.value = +nutrient.value * 0.75;
           break;
 
         case '430':
-          food.nutrition.vitaminK.value = +nutrient.value;
+          food.nutrition.vitaminK.value = +nutrient.value * 0.75;
           break;
 
         case '605':
-          food.nutrition.transFat.value = +nutrient.value;
+          food.nutrition.transFat.value = +nutrient.value * 0.75;
           break;
 
         case '618':
-          food.nutrition.la.value = +nutrient.value;
+          food.nutrition.la.value = +nutrient.value * 0.75;
           break;
 
         case '619':
-          food.nutrition.ala.value = +nutrient.value;
+          food.nutrition.ala.value = +nutrient.value * 0.75;
           break;
 
         case '621':
-          food.nutrition.dha.value = +nutrient.value;
+          food.nutrition.dha.value = +nutrient.value * 0.75;
           break;
 
         case '629':
-          food.nutrition.epa.value = +nutrient.value;
+          food.nutrition.epa.value = +nutrient.value * 0.75;
           break;
 
         case '501':
-          food.nutrition.tryptophan.value = +nutrient.value;
+          food.nutrition.tryptophan.value = +nutrient.value * 0.75;
           break;
 
         case '502':
-          food.nutrition.threonine.value = +nutrient.value;
+          food.nutrition.threonine.value = +nutrient.value * 0.75;
           break;
 
         case '503':
-          food.nutrition.isoleucine.value = +nutrient.value;
+          food.nutrition.isoleucine.value = +nutrient.value * 0.75;
           break;
 
         case '504':
-          food.nutrition.leucine.value = +nutrient.value;
+          food.nutrition.leucine.value = +nutrient.value * 0.75;
           break;
 
         case '505':
-          food.nutrition.lysine.value = +nutrient.value;
+          food.nutrition.lysine.value = +nutrient.value * 0.75;
           break;
 
         case '506':
-          food.nutrition.methionine.value = +nutrient.value;
+          food.nutrition.methionine.value = +nutrient.value * 0.75;
           break;
 
         case '508':
-          food.nutrition.phenylalanine.value = +nutrient.value;
+          food.nutrition.phenylalanine.value = +nutrient.value * 0.75;
           break;
 
         case '510':
-          food.nutrition.valine.value = +nutrient.value;
+          food.nutrition.valine.value = +nutrient.value * 0.75;
           break;
 
         case '512':
-          food.nutrition.histidine.value = +nutrient.value;
+          food.nutrition.histidine.value = +nutrient.value * 0.75;
           break;
 
         case '262':

@@ -110,7 +110,7 @@ export class NutritionService {
    * The PRAL formula designed by Dr. Thomas Remer
    */
   public calculatePRAL(nutrition: Nutrition): number {
-    return +(0.49 * nutrition.protein.value + 0.037 * nutrition.phosphorus.value - 0.021 * nutrition.potassium.value - 0.026 * nutrition.magnesium.value - 0.013 * nutrition.calcium.value).toFixed(2);
+    return 0.49 * nutrition.protein.value + 0.037 * nutrition.phosphorus.value - 0.021 * nutrition.potassium.value - 0.026 * nutrition.magnesium.value - 0.013 * nutrition.calcium.value;
   }
 
   public calculateQuantity(items: Array<Food | Recipe>): number {

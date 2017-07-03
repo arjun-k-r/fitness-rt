@@ -32,6 +32,21 @@ export class RecipeService {
     });
   }
 
+  public calculateRecipeNutrition(items: Array<Food | Recipe>, portions: number): Nutrition {
+    let totalNutrition: Nutrition = this._nutritionSvc.calculateNutrition(items),
+      portionNutrition: Nutrition = new Nutrition();
+    for (let nutrientKey in totalNutrition) {
+      portionNutrition[nutrientKey].value = totalNutrition[nutrientKey].value / portions;
+      portionNutrition[nutrientKey].value = +(portionNutrition[nutrientKey].value).toFixed(2);
+    }
+
+    return portionNutrition;
+  }
+
+  public calculateRecipeSize(items: Array<Food | Recipe>, portions: number): number {
+    return Math.round(this._nutritionSvc.calculateQuantity(items) / portions);
+  }
+
   public checkCooking(recipe: Recipe): void {
     if (recipe.cookingMethod === 'Baking' || recipe.cookingMethod === 'Grilling' || recipe.cookingMethod === 'Roasting' || recipe.cookingMethod === 'Steaming') {
       // Dry heat cooking
@@ -113,24 +128,9 @@ export class RecipeService {
   public checkDifficulty(recipe: Recipe): number {
     return recipe.instructions.length < 5 ? 1 : recipe.instructions.length < 10 ? 2 : 3;
   }
-  
-  public getRecipeNutrition(items: Array<Food | Recipe>, portions: number): Nutrition {
-    let totalNutrition: Nutrition = this._nutritionSvc.calculateNutrition(items),
-      portionNutrition: Nutrition = new Nutrition();
-    for (let nutrientKey in totalNutrition) {
-      portionNutrition[nutrientKey].value = totalNutrition[nutrientKey].value / portions;
-      portionNutrition[nutrientKey].value = +(portionNutrition[nutrientKey].value).toFixed(2);
-    }
-
-    return portionNutrition;
-  }
 
   public getRecipes$(): FirebaseListObservable<Array<Recipe>> {
     return this._recipes;
-  }
-
-  public getRecipeSize(items: Array<Food | Recipe>, portions: number): number {
-    return Math.round(this._nutritionSvc.calculateQuantity(items) / portions);
   }
 
   public removeRecipe(recipe: Recipe): void {

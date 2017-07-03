@@ -97,10 +97,10 @@ export class RecipeDetailsPage {
 
   private _updateRecipeDetails(): void {
     this.isDirty = true;
-    this.recipe.nutrition = this._recipeSvc.getRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
+    this.recipe.nutrition = this._recipeSvc.calculateRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
     this._recipeSvc.checkCooking(this.recipe);
     this.recipe.pral = this._nutritionSvc.calculatePRAL(this.recipe.nutrition);
-    this.recipe.quantity = this._recipeSvc.getRecipeSize(this.recipe.ingredients, this.recipe.portions);
+    this.recipe.quantity = this._recipeSvc.calculateRecipeSize(this.recipe.ingredients, this.recipe.portions);
     this.recipe.difficulty = this._recipeSvc.checkDifficulty(this.recipe);
   }
 
@@ -165,8 +165,8 @@ export class RecipeDetailsPage {
 
   public changePortions(): void {
     this.recipe.portions = this.recipeForm.get('portions').value;
-    this.recipe.nutrition = this._recipeSvc.getRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
-    this.recipe.quantity = this._recipeSvc.getRecipeSize(this.recipe.ingredients, this.recipe.portions);
+    this.recipe.nutrition = this._recipeSvc.calculateRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
+    this.recipe.quantity = this._recipeSvc.calculateRecipeSize(this.recipe.ingredients, this.recipe.portions);
     this.isDirty = true;
   }
 

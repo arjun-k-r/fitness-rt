@@ -126,7 +126,7 @@ export class ActivityService {
   }
 
   public getLeftEnergy(): Promise<number> {
-    return new Promise(resolve => Promise.all([this._fitSvc.restoreEnergyConsumption(), this._fitSvc.restoreEnergyIntake()]).then((data: Array<number>) => resolve(data[1] - data[0])));
+    return new Promise(resolve => Promise.all([this._fitSvc.restoreEnergyConsumption(), this._fitSvc.restoreEnergyIntake()]).then((data: Array<number>) => resolve(Math.round(data[1] - data[0]))));
   }
 
   public saveActivityPlan(activityPlan: ActivityPlan): void {

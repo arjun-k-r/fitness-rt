@@ -2,9 +2,10 @@
 import { Component } from '@angular/core';
 import { ActionSheetController, AlertController, IonicPageMetadata, InfiniteScroll, Loading, LoadingController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs';
 
 // Models
-import { IFoodSearchResult, FoodGroup } from '../../models';
+import { IFoodSearchResult, Food, FoodGroup } from '../../models';
 
 // Pages
 import { FoodDetailsPage } from '../food-details/food-details';
@@ -31,7 +32,7 @@ export class FoodListPage {
     private _alertCtrl: AlertController,
     private _foodSvc: FoodService,
     private _loadCtrl: LoadingController
-  ) {}
+  ) { }
 
   private _selectGroup(): void {
     this._alertCtrl.create({
@@ -55,6 +56,21 @@ export class FoodListPage {
         }
       ]
     }).present();
+  }
+
+  public addToDb(): void {
+    this._foodSvc.getFoods$('', 2358, 1120, '').subscribe((data: Array<IFoodSearchResult>) => {
+      Observable
+        .interval(2000)
+        .timeInterval()
+        .take(data.length)
+        .map(({ value }) => data[value])
+        .forEach((iFood: IFoodSearchResult) => {
+          this._foodSvc.getFoodReports$(iFood.ndbno).subscribe((food: Food) => {
+            this._foodSvc.addFood(food);
+          });
+        });
+    });
   }
 
   public clearSearch(ev): void {

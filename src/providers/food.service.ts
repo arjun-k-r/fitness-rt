@@ -4,6 +4,9 @@ import { Http, URLSearchParams, Response, RequestOptions, Headers } from '@angul
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/operator/map';
 
+// Third-party
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
 // Models
 import { Food, FoodGroup, IFoodReportNutrient, IFoodReportSearchResult, IFoodSearchResult } from '../models';
 
@@ -43,12 +46,16 @@ export const FOOD_GROUPS: Array<FoodGroup> = [
 export class FoodService {
   private _usdaApiKey: string = '5nW8It7ORsxY212bV5wpleHkblTLbvpFTKVa010U';
   private _foodNutritionUrl: string = 'https://api.nal.usda.gov/ndb/reports/';
+  private _foods$: FirebaseListObservable<Array<Food>>;
   private _foodSearchUrl: string = 'https://api.nal.usda.gov/ndb/search/';
   private _foodSortUrl: string = 'https://api.nal.usda.gov/ndb/nutrients/';
   constructor(
+    private _db: AngularFireDatabase,
     private _http: Http,
     private _nutritionSvc: NutritionService,
-  ) { }
+  ) {
+    this._foods$ = this._db.list('/foods');
+  }
 
   private _serializeFood(foodReport: IFoodReportSearchResult): Food {
     let newFood: Food = new Food(foodReport.name, foodReport.ndbno);
@@ -255,6 +262,10 @@ export class FoodService {
     });
   }
 
+  public addFood(food: Food): void {
+    this._foods$.push(food);
+  }
+
   public getFoodReports$(foodId: string = ''): Observable<Food> {
     let headers: Headers = new Headers({ 'Content-Type': 'application/json' }),
       options: RequestOptions = new RequestOptions(),
@@ -281,9 +292,9 @@ export class FoodService {
       options: RequestOptions = new RequestOptions(),
       params: URLSearchParams = new URLSearchParams();
     params.set('api_key', this._usdaApiKey);
-    if (foodGroupId !== '') {
+    //if (foodGroupId !== '') {
       params.set('ds', 'Standard+Reference');
-    }
+   // }
 
     params.set('q', searhQuery);
     params.set('fg', foodGroupId);

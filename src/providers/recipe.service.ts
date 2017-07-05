@@ -18,14 +18,14 @@ import { NutritionService } from './nutrition.service';
 
 @Injectable()
 export class RecipeService {
-  private _recipes: FirebaseListObservable<Array<Recipe>>;
+  private _recipes$: FirebaseListObservable<Array<Recipe>>;
   constructor(
     private _db: AngularFireDatabase,
     private _foodSvc: FoodService,
     private _nutritionSvc: NutritionService,
     private _user: User
   ) {
-    this._recipes = _db.list(`/recipes/${_user.id}`, {
+    this._recipes$ = _db.list(`/recipes/${_user.id}`, {
       query: {
         orderByChild: 'name'
       }
@@ -130,11 +130,11 @@ export class RecipeService {
   }
 
   public getRecipes$(): FirebaseListObservable<Array<Recipe>> {
-    return this._recipes;
+    return this._recipes$;
   }
 
   public removeRecipe(recipe: Recipe): void {
-    this._recipes.remove(recipe['$key']);
+    this._recipes$.remove(recipe['$key']);
   }
 
   public saveRecipe(recipe: Recipe): void {
@@ -142,9 +142,9 @@ export class RecipeService {
     recipe.chef = username || name;
     recipe.chefAvatar = image;
     if (!recipe.hasOwnProperty('$key')) {
-      recipe['$key'] = this._recipes.push(recipe).key;
+      recipe['$key'] = this._recipes$.push(recipe).key;
     } else {
-      this._recipes.update(recipe['$key'], {
+      this._recipes$.update(recipe['$key'], {
         chef: recipe.chef,
         chefAvatar: recipe.chefAvatar,
         cookingMethod: recipe.cookingMethod,

@@ -27,6 +27,10 @@
         </button>
     </ion-list>
 
+    <ion-fab right bottom>
+        <button ion-fab color="secondary" (click)="addToDb()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+
     <ion-infinite-scroll (ionInfinite)="loadMore($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>

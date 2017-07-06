@@ -42,7 +42,7 @@ export class AccountPage {
     this._user.delete();
     this._user.unstore();
     this._auth.logout();
-    loader.dismissAll();
+    loader.dismiss();
     this._navCtrl.setRoot(RegistrationPage);
   }
 
@@ -160,7 +160,7 @@ export class AccountPage {
             duration: 10000
           }).present();
         } else {
-          toast.dismissAll();
+          toast.dismiss();
           this._toastCtrl.create({
             message: 'Upload complete!',
             position: 'bottom',

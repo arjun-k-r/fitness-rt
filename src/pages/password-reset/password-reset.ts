@@ -54,11 +54,11 @@ export class PasswordResetPage {
     loader.present();
     this._auth.confirmPasswordReset(form.resetCode, form.password)
       .then(() => {
-        loader.dismissAll();
+        loader.dismiss();
         this._navCtrl.popToRoot();
       })
       .catch(err => {
-        loader.dismissAll();
+        loader.dismiss();
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',

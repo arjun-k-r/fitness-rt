@@ -57,11 +57,11 @@ export class LoginPage {
     };
     this._auth.login('basic', details)
       .then(() => {
-        loader.dismissAll();
+        loader.dismiss();
         this._navCtrl.setRoot(FitnessPage);
       })
       .catch(err => {
-        loader.dismissAll();
+        loader.dismiss();
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',

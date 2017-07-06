@@ -59,7 +59,7 @@ export class FoodListPage {
   }
 
   public addToDb(): void {
-    this._foodSvc.getFoods$('', 2358, 1120, '').subscribe((data: Array<IFoodSearchResult>) => {
+    this._foodSvc.getFoods$('', 3478, 1120, '').subscribe((data: Array<IFoodSearchResult>) => {
       Observable
         .interval(2000)
         .timeInterval()
@@ -111,10 +111,10 @@ export class FoodListPage {
         .subscribe((data: Array<IFoodSearchResult>) => {
           this.foods = [...data];
           doneLoading = true;
-          loader.dismissAll();
+          loader.dismiss();
         }, (err: { status: string, message: string }) => {
           doneLoading = true;
-          loader.dismissAll();
+          loader.dismiss();
           this._alertCtrl.create({
             title: 'Uhh ohh...',
             subTitle: 'Something went wrong',

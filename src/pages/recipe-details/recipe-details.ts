@@ -261,7 +261,7 @@ export class RecipeDetailsPage {
             duration: 10000
           }).present();
         } else {
-          toast.dismissAll();
+          toast.dismiss();
           this._toastCtrl.create({
             message: 'Upload complete!',
             position: 'bottom',

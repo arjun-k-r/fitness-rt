@@ -110,10 +110,10 @@ export class FoodSelectPage {
         .subscribe((data: Array<IFoodSearchResult>) => {
           this.foods = [...data];
           doneLoading = true;
-          loader.dismissAll();
+          loader.dismiss();
         }, (err: { status: string, message: string }) => {
           doneLoading = true;
-          loader.dismissAll();
+          loader.dismiss();
           this._alertCtrl.create({
             title: 'Uhh ohh...',
             subTitle: 'Something went wrong',

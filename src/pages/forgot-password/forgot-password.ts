@@ -46,11 +46,11 @@ export class ForgotPasswordPage {
     loader.present();
     this._auth.requestPasswordReset(form.email)
       .then(() => {
-        loader.dismissAll();
+        loader.dismiss();
         this._navCtrl.push(PasswordResetPage, { email: form.email });
       })
       .catch(err => {
-        loader.dismissAll();
+        loader.dismiss();
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',

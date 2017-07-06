@@ -64,12 +64,11 @@
         <!-- Start of segment -->
         <div *ngSwitchCase="'warnings'">
             <ion-list>
-                <button ion-item *ngIf="sleepPlan.daysOfImbalance > 2" (click)="viewSymptoms()">
+                <ion-item *ngIf="sleepPlan.daysOfImbalance > 2">
                     <ion-icon color="danger" name="warning" item-left></ion-icon>
                     <h2 text-wrap>You have been having an imbalanced sleep for {{ sleepPlan.daysOfImbalance }} days</h2>
                     <p text-wrap>Try to reaorganize your sleep plan</p>
-                    <p item-content>Check symptoms</p>
-                </button>
+                </ion-item>
                 <ion-item *ngFor="let warning of currentSleep.warnings">
                     <ion-icon color="danger" name="warning" item-left></ion-icon>
                     <h2 text-wrap>{{ warning.message }}</h2>

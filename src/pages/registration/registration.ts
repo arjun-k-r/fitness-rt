@@ -81,11 +81,11 @@ export class RegistrationPage {
       .then(() => {
         this._auth.login('basic', details)
           .then(() => {
-            loader.dismissAll();
+            loader.dismiss();
             this._navCtrl.setRoot(FitnessPage);
           })
           .catch((err: IDetailedError<Array<string>>) => {
-            loader.dismissAll();
+            loader.dismiss();
             for (let e of err.details) {
               this._alertCtrl.create({
                 title: 'Uhh ohh...',
@@ -97,7 +97,7 @@ export class RegistrationPage {
           });
       })
       .catch((err: IDetailedError<Array<string>>) => {
-        loader.dismissAll();
+        loader.dismiss();
         for (let e of err.details) {
           this._alertCtrl.create({
             title: 'Uhh ohh...',

@@ -59,7 +59,7 @@ export class FoodListPage {
   }
 
   public addToDb(): void {
-    this._foodSvc.getFoods$('', 3478, 1120, '').subscribe((data: Array<IFoodSearchResult>) => {
+    this._foodSvc.getFoods$('', 4598, 1120, '').subscribe((data: Array<IFoodSearchResult>) => {
       Observable
         .interval(2000)
         .timeInterval()

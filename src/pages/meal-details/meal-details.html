@@ -40,7 +40,7 @@
         <div *ngSwitchCase="'details'">
             <ion-list>
                 <ion-item text-wrap>
-                    <h2>PRAL</h2>
+                    <h2>pH</h2>
                     <ion-icon color="{{meal.pral > 0 ? 'danger' : 'secondary'}}" name="{{meal.pral > 0 ? 'thumbs-down' : 'thumbs-up'}}" item-right></ion-icon>
                     <p item-right ion-text color="{{ meal.pral > 0 ? 'danger' : 'secondary' }}">{{ meal.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
                 </ion-item>

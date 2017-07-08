@@ -107,9 +107,9 @@ export class RecipeDetailsPage {
   public addIngredients(): void {
     let ingredientSelectModal: Modal = this._modalCtrl.create(FoodSelectPage);
     ingredientSelectModal.present();
-    ingredientSelectModal.onDidDismiss((selection: Food | Recipe) => {
-      if (!!selection) {
-        this.recipe.ingredients = [...this.recipe.ingredients, selection];
+    ingredientSelectModal.onDidDismiss((selections: Array<Food | Recipe>) => {
+      if (!!selections) {
+        this.recipe.ingredients = [...this.recipe.ingredients, ...selections];
         this._updateRecipeDetails();
       }
     });

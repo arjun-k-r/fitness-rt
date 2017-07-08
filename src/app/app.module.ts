@@ -69,7 +69,13 @@ import {
 } from '../pages';
 
 // Pipes
-import { CapitalizePipe, GroupPipe, ItemsFilterPipe, SearchPipe } from '../pipes'
+import {
+  CapitalizePipe,
+  GroupPipe,
+  ItemsFilterPipe,
+  SearchPipe,
+  SortByPipe
+} from '../pipes'
 
 // Providers
 import {
@@ -100,6 +106,7 @@ import {
     ForgotPasswordPage,
     GroupPipe,
     HomePage,
+    ItemsFilterPipe,
     LoginPage,
     MealDetailsPage,
     MealPlanPage,
@@ -109,8 +116,7 @@ import {
     RegistrationPage,
     SearchPipe,
     SleepPlanPage,
-    GroupPipe,
-    ItemsFilterPipe
+    SortByPipe
   ],
   imports: [
     BrowserModule,

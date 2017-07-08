@@ -2,10 +2,9 @@
 import { Component } from '@angular/core';
 import { ActionSheetController, AlertController, IonicPageMetadata, InfiniteScroll, Loading, LoadingController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs';
 
 // Models
-import { IFoodSearchResult, Food, FoodGroup } from '../../models';
+import { Food } from '../../models';
 
 // Pages
 import { FoodDetailsPage } from '../food-details/food-details';
@@ -18,131 +17,150 @@ import { FOOD_GROUPS, FoodService } from '../../providers';
   templateUrl: 'food-list.html'
 })
 export class FoodListPage {
+  private _dismissedLoader: boolean = false;
   private _foodSubscription: Subscription;
-  private _querying: boolean = false;
+  private _loader: Loading;
+  private _nutrients: Array<{ key: string, name: string }>;
   public detailsPage: IonicPageMetadata = FoodDetailsPage;
-  public foods: Array<IFoodSearchResult>;
-  public groups: Array<FoodGroup> = [...FOOD_GROUPS];
+  public foods: Array<Food>;
   public limit: number = 50;
   public searchQuery: string = '';
-  public selectedGroup: FoodGroup = this.groups[0];
-  public start: number;
+  public selectedGroup: string = FOOD_GROUPS[0];
+  public selectedNutrient = '';
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
     private _foodSvc: FoodService,
     private _loadCtrl: LoadingController
-  ) { }
+  ) {
+    let food: Food = new Food();
+    this._nutrients = Object.keys(food.nutrition).map((nutrientKey: string) => {
+      return {
+        key: nutrientKey,
+        name: food.nutrition[nutrientKey].name
+      }
+    })
+  }
 
   private _selectGroup(): void {
     this._alertCtrl.create({
       title: 'Filter by groups',
       subTitle: 'Pick a food group',
-      inputs: [...this.groups.map((item: FoodGroup) => {
+      inputs: [...FOOD_GROUPS.map((group: string) => {
         return {
           type: 'radio',
-          label: item.name,
-          value: item.id,
-          checked: this.selectedGroup.name === item.name
+          label: group,
+          value: group,
+          checked: this.selectedGroup === group
         }
       })],
       buttons: [
         {
           text: 'Done',
           handler: (data: string) => {
-            this.selectedGroup = this.groups.filter((item: FoodGroup) => item.id === data)[0];
-            this.refreshItems();
+            this.selectedGroup = data;
+            this._dismissedLoader = false;
+            this._foodSvc.changeFoodGroup(this.selectedGroup);
+            this._loader = this._loadCtrl.create({
+              content: 'Loading...',
+              spinner: 'crescent'
+            });
+            this._loader.present();
+            setTimeout(() => {
+              if (!this._dismissedLoader) {
+                this._loader.dismiss();
+              }
+            }, 30000);
           }
         }
       ]
     }).present();
   }
 
-  public addToDb(): void {
-    this._foodSvc.getFoods$('', 4598, 1120, '').subscribe((data: Array<IFoodSearchResult>) => {
-      Observable
-        .interval(2000)
-        .timeInterval()
-        .take(data.length)
-        .map(({ value }) => data[value])
-        .forEach((iFood: IFoodSearchResult) => {
-          this._foodSvc.getFoodReports$(iFood.ndbno).subscribe((food: Food) => {
-            this._foodSvc.addFood(food);
-          });
-        });
-    });
+  private _selectNutrient(): void {
+    this._alertCtrl.create({
+      title: 'Filter by nutrients',
+      subTitle: 'Pick a nutrient',
+      inputs: [...this._nutrients.map((nutrient: { key: string, name: string }) => {
+        return {
+          type: 'radio',
+          label: nutrient.name,
+          value: nutrient.key,
+          checked: this.selectedNutrient === `nutrition.${nutrient.key}.value`
+        }
+      })],
+      buttons: [
+        {
+          text: 'Done',
+          handler: (data: string) => {
+            this.selectedNutrient = `nutrition.${data}.value`;
+          }
+        }
+      ]
+    }).present();
   }
 
   public clearSearch(ev): void {
     this.searchQuery = '';
-    this.refreshItems();
-  }
-
-  public itemParams(id: string): Object {
-    return { id }
   }
 
   public loadMore(ev: InfiniteScroll) {
+    this.limit += 50;
     setTimeout(() => {
-      this.start += 50;
-      this._foodSvc.getFoods$(this.searchQuery.toLocaleLowerCase(), this.start, this.limit, this.selectedGroup.id)
-        .subscribe((data: Array<IFoodSearchResult>) => {
-          this.foods.push(...data);
-        });
       ev.complete();
-    }, 500);
-  }
-
-  public refreshItems(): void {
-    if (!this._querying) {
-      this._querying = true;
-      let loader: Loading = this._loadCtrl.create({
-        content: 'Loading...',
-        spinner: 'crescent',
-        duration: 30000
-      }), doneLoading: boolean = false;
-      loader.present();
-      this.start = 0;
-      if (!!this._foodSubscription) {
-        this._foodSubscription.unsubscribe();
-      }
-
-      this._foodSubscription = this._foodSvc.getFoods$(this.searchQuery.toLocaleLowerCase(), this.start, this.limit, this.selectedGroup.id)
-        .subscribe((data: Array<IFoodSearchResult>) => {
-          this.foods = [...data];
-          doneLoading = true;
-          loader.dismiss();
-        }, (err: { status: string, message: string }) => {
-          doneLoading = true;
-          loader.dismiss();
-          this._alertCtrl.create({
-            title: 'Uhh ohh...',
-            subTitle: 'Something went wrong',
-            message: `Error ${err.status}! ${err.message}`,
-            buttons: ['OK']
-          }).present();
-        });
-      loader.onDidDismiss(() => {
-        this._querying = false;
-        if (!doneLoading) {
-          this._foodSubscription.unsubscribe();
-          this._alertCtrl.create({
-            title: 'Uhh ohh...',
-            subTitle: 'Something went wrong',
-            message: 'The request has timed out. Try again in a few moments!',
-            buttons: ['OK']
-          }).present();
-        }
-      });
-    }
+    }, 1000);
   }
 
   public showFilter(): void {
-    this._selectGroup();
+    this._actionSheetCtrl.create({
+      title: 'Change ingredient',
+      buttons: [
+        {
+          text: 'Change food group',
+          handler: () => {
+            this._selectGroup();
+          }
+        }, {
+          text: 'Sort by nutrients',
+          handler: () => {
+            this._selectNutrient();
+          }
+        }, {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    }).present();
   }
 
   ionViewWillLoad(): void {
-    this.refreshItems();
+    this._loader = this._loadCtrl.create({
+      content: 'Loading...',
+      spinner: 'crescent'
+    });
+    this._loader.present();
+    setTimeout(() => {
+      if (!this._dismissedLoader) {
+        this._loader.dismiss();
+      }
+    }, 30000);
+    this._foodSubscription = this._foodSvc.getFoods$(this.selectedGroup).subscribe((data: Array<Food>) => {
+      this.foods = [...data];
+      if (!this._dismissedLoader) {
+        this._loader.dismiss();
+      }
+    }, (err: { status: string, message: string }) => {
+      if (!this._dismissedLoader) {
+        this._loader.dismiss();
+      }
+      this._alertCtrl.create({
+        title: 'Uhh ohh...',
+        subTitle: 'Something went wrong',
+        message: `Error ${err.status}! ${err.message}`,
+        buttons: ['OK']
+      }).present();
+    });
+    this._loader.onDidDismiss(() => this._dismissedLoader = true);
   }
 
   ionViewWillLeave(): void {

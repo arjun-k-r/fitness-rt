@@ -80,9 +80,9 @@ export class MealDetailsPage {
   public addMealItems(): void {
     let mealSelectModal: Modal = this._modalCtrl.create(FoodSelectPage);
     mealSelectModal.present();
-    mealSelectModal.onDidDismiss((selection: Food | Recipe) => {
-      if (!!selection) {
-        this.meal.mealItems = [...this.meal.mealItems, selection];
+    mealSelectModal.onDidDismiss((selections: Array<Food | Recipe>) => {
+      if (!!selections) {
+        this.meal.mealItems = [...this.meal.mealItems, ...selections];
         this._updateMealDetails();
       }
     })

@@ -29,7 +29,7 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col col-lg-4 col-md-6 *ngFor="let recipe of recipes | itemsFilter: 'ingredients': queryIngredients | search: searchQuery: limit">
+      <ion-col col-lg-4 col-md-6 *ngFor="let recipe of recipes | filter: 'ingredients': queryIngredients | search: searchQuery | limit: limit">
         <ion-card class="recipe-card" [navPush]="detailsPage" [navParams]="{ recipe: recipe }">
           <ion-item>
             <ion-avatar item-left>

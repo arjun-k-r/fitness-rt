@@ -59,6 +59,7 @@ export class FoodListPage {
           text: 'Done',
           handler: (data: string) => {
             this.selectedGroup = data;
+            this.selectedNutrient = '';
             this._dismissedLoader = false;
             this._foodSvc.changeFoodGroup(this.selectedGroup);
             this._loader = this._loadCtrl.create({

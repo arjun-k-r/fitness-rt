@@ -1,10 +1,10 @@
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'itemsFilter'
+  name: 'filter'
 })
 @Injectable()
-export class ItemsFilterPipe implements PipeTransform {
+export class FilterPipe implements PipeTransform {
 
   /**
    * Filters a set of items if they hold, within a property, a set of items (for instance, a recipe must have specific ingredients)

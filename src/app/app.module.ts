@@ -72,7 +72,8 @@ import {
 import {
   CapitalizePipe,
   GroupPipe,
-  ItemsFilterPipe,
+  FilterPipe,
+  LimitPipe,
   SearchPipe,
   SortByPipe
 } from '../pipes'
@@ -106,7 +107,8 @@ import {
     ForgotPasswordPage,
     GroupPipe,
     HomePage,
-    ItemsFilterPipe,
+    FilterPipe,
+    LimitPipe,
     LoginPage,
     MealDetailsPage,
     MealPlanPage,

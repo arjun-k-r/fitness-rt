@@ -89,11 +89,18 @@ export class RecipeListPage {
       spinner: 'crescent',
       duration: 30000
     });
-
     loader.present();
     this._recipesSubscription = this._recipeSvc.getRecipes$().subscribe((recipes: Array<Recipe>) => {
       this.recipes = [...recipes];
       loader.dismiss();
+    }, (error: Error) => {
+      loader.dismiss();
+      this._alertCtrl.create({
+        title: 'Uhh ohh...',
+        subTitle: 'Something went wrong',
+        message: error.toString(),
+        buttons: ['OK']
+      }).present();
     });
   }
 

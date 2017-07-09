@@ -1,6 +1,6 @@
 // App
 import { Component } from '@angular/core';
-import { Alert, AlertController, Modal, ModalController, NavController } from 'ionic-angular';
+import { Alert, AlertController, Loading, LoadingController, Modal, ModalController, NavController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
@@ -26,6 +26,7 @@ export class ActivityPlanPage {
     private _activitySvc: ActivityService,
     private _alertCtrl: AlertController,
     private _fitSvc: FitnessService,
+    private _loadCtrl: LoadingController,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController
   ) { }
@@ -118,9 +119,24 @@ export class ActivityPlanPage {
   }
 
   ionViewWillEnter(): void {
+    let loader: Loading = this._loadCtrl.create({
+      content: 'Loading...',
+      spinner: 'crescent',
+      duration: 30000
+    });
+    loader.present();
     this._activitySvc.getLeftEnergy().then((energy: number) => this.leftEnergy = energy);
     this._activityPlanSubscription = this._activitySvc.getActivityPlan$().subscribe((activityPlan: ActivityPlan) => {
       this.activityPlan = Object.assign({}, activityPlan);
+      loader.dismiss();
+    }, (error: Error) => {
+      loader.dismiss();
+      this._alertCtrl.create({
+        title: 'Uhh ohh...',
+        subTitle: 'Something went wrong',
+        message: error.toString(),
+        buttons: ['OK']
+      }).present();
     });
   }
 

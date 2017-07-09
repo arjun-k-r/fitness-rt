@@ -20,7 +20,7 @@
   <ion-searchbar debounce="2000" placeholder="Search activity" [(ngModel)]="searchQuery" (ionCancel)="clearSearch($event)">
   </ion-searchbar>
   <ion-list radio-group [(ngModel)]="selectedActivityName">
-    <ion-item *ngFor="let activity of (activities$ | async) | search: searchQuery | limit: limit">
+    <ion-item *ngFor="let activity of activities | search: searchQuery | limit: limit">
       <ion-label text-wrap>{{ activity.name }}</ion-label>
       <ion-checkbox #checkBox (click)="selectActivity(activity, checkBox)"></ion-checkbox>
     </ion-item>

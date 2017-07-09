@@ -1,9 +1,7 @@
 // App
 import { Component } from '@angular/core';
-import { AlertController, InfiniteScroll, ViewController } from 'ionic-angular';
-
-// Third-party
-import { FirebaseListObservable } from 'angularfire2/database';
+import { AlertController, InfiniteScroll, Loading, LoadingController, ViewController } from 'ionic-angular';
+import { Subscription } from 'rxjs/Subscription';
 
 // Models
 import { Activity } from '../../models';
@@ -17,13 +15,15 @@ import { ActivityService } from '../../providers';
   templateUrl: 'activity-select.html'
 })
 export class ActivitySelectPage {
-  public activities$: FirebaseListObservable<Array<Activity>>;
+  private _activitySubscription: Subscription;
+  public activities: Array<Activity> = [];
   public limit: number = 50;
   public searchQuery: string = '';
   public selectedActivities: Array<Activity> = [];
   constructor(
     private _activitySvc: ActivityService,
     private _alertCtrl: AlertController,
+    private _loadCtrl: LoadingController,
     private _viewCtrl: ViewController
   ) { }
 
@@ -84,6 +84,27 @@ export class ActivitySelectPage {
   }
 
   ionViewWillEnter(): void {
-    this.activities$ = this._activitySvc.getActivities$();
+    let loader: Loading = this._loadCtrl.create({
+      content: 'Loading...',
+      spinner: 'crescent',
+      duration: 30000
+    });
+    loader.present();
+    this._activitySubscription = this._activitySvc.getActivities$().subscribe((activities: Array<Activity>) => {
+      this.activities = [...activities];
+      loader.dismiss();
+    }, (error: Error) => {
+      loader.dismiss();
+      this._alertCtrl.create({
+        title: 'Uhh ohh...',
+        subTitle: 'Something went wrong',
+        message: error.toString(),
+        buttons: ['OK']
+      }).present();
+    });
+  }
+
+  ionViewWillLeave(): void {
+    this._activitySubscription.unsubscribe();
   }
 }

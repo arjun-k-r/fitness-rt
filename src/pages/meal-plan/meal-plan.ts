@@ -115,6 +115,14 @@ export class MealPlanPage {
     this._mealPlanSubscription = this._mealSvc.getMealPlan$().subscribe((mealPlan: MealPlan) => {
       this.mealPlan = Object.assign({}, mealPlan);
       loader.dismiss();
+    }, (error: Error) => {
+      loader.dismiss();
+      this._alertCtrl.create({
+        title: 'Uhh ohh...',
+        subTitle: 'Something went wrong',
+        message: error.toString(),
+        buttons: ['OK']
+      }).present();
     });
   }
 

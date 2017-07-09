@@ -76,6 +76,14 @@ export class SleepPlanPage {
       this.sleepPlan = Object.assign({}, sleepPlan);
       this.currentSleep = Object.assign({}, this._sleepSvc.getCurrentSleep(this.sleepPlan));
       loader.dismiss();
+    }, (error: Error) => {
+      loader.dismiss();
+      this._alertCtrl.create({
+        title: 'Uhh ohh...',
+        subTitle: 'Something went wrong',
+        message: error.toString(),
+        buttons: ['OK']
+      }).present();
     });
   }
 

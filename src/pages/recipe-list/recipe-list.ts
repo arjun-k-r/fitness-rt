@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Recipe } from '../../models';
 
 // Pages
-import { RecipeDetailsPage } from '../recipe-details/recipe-details';
+import { RecipeEditPage } from '../recipe-edit/recipe-edit';
 
 // Providers
 import { RecipeService } from '../../providers';
@@ -18,7 +18,7 @@ import { RecipeService } from '../../providers';
 })
 export class RecipeListPage {
   private _recipesSubscription: Subscription;
-  public detailsPage: IonicPageMetadata = RecipeDetailsPage;
+  public detailsPage: IonicPageMetadata = RecipeEditPage;
   public limit: number = 50;
   public queryIngredients: Array<string> = [];
   public recipes: Array<Recipe> = [];
@@ -61,7 +61,7 @@ export class RecipeListPage {
 
   public addNewRecipe(): void {
     let newRecipe: Recipe = new Recipe();
-    this._navCtrl.push(RecipeDetailsPage, { recipe: newRecipe, new: true });
+    this._navCtrl.push(RecipeEditPage, { recipe: newRecipe, new: true });
   }
 
   public clearSearch(ev: string): void {

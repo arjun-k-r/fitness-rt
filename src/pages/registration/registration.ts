@@ -1,7 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonicPageMetadata, Loading, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, IonicPage, IonicPageMetadata, Loading, LoadingController, NavController } from 'ionic-angular';
 import { Auth, IDetailedError, User, UserDetails } from '@ionic/cloud-angular';
 
 // Pages
@@ -11,6 +11,7 @@ import { FitnessPage } from '../fitness/fitness';
 // Providers
 import { AuthValidator } from '../../providers';
 
+@IonicPage()
 @Component({
   selector: 'page-registration',
   templateUrl: 'registration.html'
@@ -109,9 +110,5 @@ export class RegistrationPage {
       });
   }
 
-  ionViewWillEnter(): void {
-    if (this._auth.isAuthenticated()) {
-      this._navCtrl.setRoot(FitnessPage);
-    }
-  }
+  
 }

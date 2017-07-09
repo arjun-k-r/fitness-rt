@@ -1,7 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, NavController, NavParams, ToastController } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 // Models
 import { Fitness } from '../../models';
@@ -9,6 +9,9 @@ import { Fitness } from '../../models';
 // Providers
 import { FitnessService, NutritionService } from '../../providers';
 
+@IonicPage({
+  name: 'fitness'
+})
 @Component({
   selector: 'page-fitness',
   templateUrl: 'fitness.html'

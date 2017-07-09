@@ -7,18 +7,6 @@ import { Deploy } from '@ionic/cloud-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import {
-    AccountPage,
-    ActivityPlanPage,
-    FoodListPage,
-    HomePage,
-    MealPlanPage,
-    FitnessPage,
-    RecipeListPage,
-    RegistrationPage,
-    SleepPlanPage
-} from '../pages';
-
 export interface IPageLink {
     title: string,
     component: Component,
@@ -31,7 +19,7 @@ export interface IPageLink {
 export class MyApp {
     @ViewChild(Nav) private _nav: Nav;
     public pages: Array<IPageLink>;
-    public rootPage: IonicPageMetadata = RegistrationPage;
+    public rootPage: IonicPageMetadata = 'RegistrationPage';
     constructor(
         private _alertCtrl: AlertController,
         private _deploy: Deploy,
@@ -42,14 +30,14 @@ export class MyApp {
     ) {
         this._initializeApp();
         this.pages = [
-            { title: 'Home', component: HomePage, icon: 'home' },
-            { title: 'Fitness', component: FitnessPage, icon: 'body' },
-            { title: 'Sleep', component: SleepPlanPage, icon: 'moon' },
-            { title: 'Exercise', component: ActivityPlanPage, icon: 'walk' },
-            { title: 'Nutrition', component: MealPlanPage, icon: 'nutrition' },
-            { title: 'Foods', component: FoodListPage, icon: 'basket' },
-            { title: 'Recipes', component: RecipeListPage, icon: 'restaurant' },
-            { title: 'Account', component: AccountPage, icon: 'person' }
+            { title: 'Home', component: 'home', icon: 'home' },
+            { title: 'Fitness', component: 'fitness', icon: 'body' },
+            { title: 'Sleep', component: 'sleep-plan', icon: 'moon' },
+            { title: 'Exercise', component: 'activity-plan', icon: 'walk' },
+            { title: 'Nutrition', component: 'meal-plan', icon: 'nutrition' },
+            { title: 'Foods', component: 'food-list', icon: 'basket' },
+            { title: 'Recipes', component: 'recipe-list', icon: 'restaurant' },
+            { title: 'Account', component: 'account', icon: 'person' }
         ];
 
     }

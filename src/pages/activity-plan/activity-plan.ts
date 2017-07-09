@@ -1,17 +1,17 @@
 // App
 import { Component } from '@angular/core';
-import { Alert, AlertController, Loading, LoadingController, Modal, ModalController, NavController } from 'ionic-angular';
+import { Alert, AlertController, IonicPage, Loading, LoadingController, Modal, ModalController, NavController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
 import { Activity, ActivityPlan } from '../../models';
 
-// Pages
-import { ActivitySelectPage } from '../activity-select/activity-select';
-
 // Providers
 import { ActivityService, FitnessService } from '../../providers';
 
+@IonicPage({
+  name: 'activity-plan'
+})
 @Component({
   selector: 'page-activity-plan',
   templateUrl: 'activity-plan.html'
@@ -38,7 +38,7 @@ export class ActivityPlanPage {
   }
 
   public addNewActivity(): void {
-    let activitySelectModal: Modal = this._modalCtrl.create(ActivitySelectPage);
+    let activitySelectModal: Modal = this._modalCtrl.create('activity-select');
     activitySelectModal.present();
     activitySelectModal.onDidDismiss((activities: Array<Activity>) => {
       if (!!activities.length) {

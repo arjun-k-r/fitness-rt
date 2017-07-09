@@ -7,7 +7,7 @@ import { AuthValidator } from '../../providers';
 
 @Component({
   selector: 'error-message',
-  templateUrl: 'error-message.component.html'
+  templateUrl: 'error-message.html'
 })
 export class ErrorMessageComponent {
   @Input() control: FormControl;

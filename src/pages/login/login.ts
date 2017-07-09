@@ -1,7 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonicPageMetadata, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, IonicPage, IonicPageMetadata, LoadingController, NavController } from 'ionic-angular';
 import { Auth, User, UserDetails } from '@ionic/cloud-angular';
 
 // Pages
@@ -11,6 +11,7 @@ import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 // Providers
 import { AuthValidator } from '../../providers';
 
+@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'

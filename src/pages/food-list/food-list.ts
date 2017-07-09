@@ -1,17 +1,17 @@
 // App
 import { Component } from '@angular/core';
-import { ActionSheetController, AlertController, IonicPageMetadata, InfiniteScroll, Loading, LoadingController } from 'ionic-angular';
+import { ActionSheetController, AlertController, IonicPage, InfiniteScroll, Loading, LoadingController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
 import { Food } from '../../models';
 
-// Pages
-import { FoodDetailsPage } from '../food-details/food-details';
-
 // Providers
 import { FOOD_GROUPS, FoodService } from '../../providers';
 
+@IonicPage({
+  name: 'food-list'
+})
 @Component({
   selector: 'page-food-list',
   templateUrl: 'food-list.html'
@@ -21,7 +21,6 @@ export class FoodListPage {
   private _foodSubscription: Subscription;
   private _loader: Loading;
   private _nutrients: Array<{ key: string, name: string }>;
-  public detailsPage: IonicPageMetadata = FoodDetailsPage;
   public foods: Array<Food>;
   public limit: number = 50;
   public searchQuery: string = '';

@@ -44,81 +44,9 @@ const FIREBASE_CONFIG = {
   messagingSenderId: "493536537981"
 };
 
-// Components
-import { ErrorMessageComponent } from '../components';
-
-// Pages
-import {
-  AccountPage,
-  ActivityPlanPage,
-  ActivitySelectPage,
-  FitnessPage,
-  FoodDetailsPage,
-  FoodListPage,
-  FoodSelectPage,
-  ForgotPasswordPage,
-  HomePage,
-  LoginPage,
-  MealDetailsPage,
-  MealPlanPage,
-  PasswordResetPage,
-  RecipeDetailsPage,
-  RecipeListPage,
-  RegistrationPage,
-  SleepPlanPage
-} from '../pages';
-
-// Pipes
-import {
-  CapitalizePipe,
-  GroupPipe,
-  FilterPipe,
-  LimitPipe,
-  SearchPipe,
-  SortByPipe
-} from '../pipes'
-
-// Providers
-import {
-  ActivityService,
-  AuthValidator,
-  DRIService,
-  FitnessService,
-  FoodService,
-  MealService,
-  NutritionService,
-  PictureService,
-  RecipeService,
-  SleepService
-} from '../providers';
-
 @NgModule({
   declarations: [
-    MyApp,
-    AccountPage,
-    ActivityPlanPage,
-    ActivitySelectPage,
-    CapitalizePipe,
-    ErrorMessageComponent,
-    FitnessPage,
-    FoodDetailsPage,
-    FoodListPage,
-    FoodSelectPage,
-    ForgotPasswordPage,
-    GroupPipe,
-    HomePage,
-    FilterPipe,
-    LimitPipe,
-    LoginPage,
-    MealDetailsPage,
-    MealPlanPage,
-    PasswordResetPage,
-    RecipeDetailsPage,
-    RecipeListPage,
-    RegistrationPage,
-    SearchPipe,
-    SleepPlanPage,
-    SortByPipe
+    MyApp
   ],
   imports: [
     BrowserModule,
@@ -135,41 +63,14 @@ import {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    AccountPage,
-    ActivityPlanPage,
-    ActivitySelectPage,
-    FitnessPage,
-    FoodDetailsPage,
-    FoodListPage,
-    FoodSelectPage,
-    ForgotPasswordPage,
-    HomePage,
-    LoginPage,
-    MealDetailsPage,
-    MealPlanPage,
-    PasswordResetPage,
-    RecipeDetailsPage,
-    RecipeListPage,
-    RegistrationPage,
-    SleepPlanPage
+    MyApp
   ],
   providers: [
     Camera,
     ImagePicker,
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
-    ActivityService,
-    AuthValidator,
-    DRIService,
-    FitnessService,
-    FoodService,
-    MealService,
-    NutritionService,
-    PictureService,
-    RecipeService,
-    SleepService
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
 export class AppModule { }

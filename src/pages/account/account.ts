@@ -1,15 +1,15 @@
 // App
 import { Component, ViewChild } from '@angular/core';
-import { ActionSheetController, AlertController, AlertOptions, LoadingController, NavController, Toast, ToastController } from 'ionic-angular';
+import { ActionSheetController, AlertController, AlertOptions, IonicPage, LoadingController, NavController, Toast, ToastController } from 'ionic-angular';
 import { Auth, User } from '@ionic/cloud-angular';
 import { Camera } from '@ionic-native/camera';
-
-// Pages
-import { RegistrationPage } from '../registration/registration';
 
 // Providers
 import { PictureService } from '../../providers';
 
+@IonicPage({
+  name: 'account'
+})
 @Component({
   selector: 'page-account',
   templateUrl: 'account.html'
@@ -43,7 +43,7 @@ export class AccountPage {
     this._user.unstore();
     this._auth.logout();
     loader.dismiss();
-    this._navCtrl.setRoot(RegistrationPage);
+    this._navCtrl.setRoot('RegistrationPage');
   }
 
   public changeImage(): void {
@@ -122,7 +122,7 @@ export class AccountPage {
 
   public signout(): void {
     this._auth.logout();
-    this._navCtrl.setRoot(RegistrationPage);
+    this._navCtrl.setRoot('RegistrationPage');
   }
 
   public uploadImage(file?: File): void {

@@ -9,8 +9,8 @@ interface ValidationResult {
 }
 
 @Injectable()
-export class AuthValidator {
-    static emailValidator(control: AbstractControl): ValidationResult {
+export class AuthValidationService {
+    static emailValidation(control: AbstractControl): ValidationResult {
         return EMAIL_REGEX.test(control.value) ? null : { 'invalidEmailAddress': true };
     }
 
@@ -35,24 +35,22 @@ export class AuthValidator {
         return (errorName in validationMessages) ? validationMessages[errorName] : 'Unknown Error';
     }
 
-    static noWhiteSpace(control: AbstractControl): ValidationResult {
+    static noWhiteSpaceValidation(control: AbstractControl): ValidationResult {
         return (!!control.value && control.value.trim() !== '') ? null : { 'noWhiteSpace': true }
     }
 
-    static passwordValidator(control: AbstractControl): ValidationResult {
-        // [^ ]* - Assert password has no spaces
+    static passwordValidation(control: AbstractControl): ValidationResult {
         return control.value.match(/^[^ ]*$/) ? null : { 'invalidPassword': true };
     }
 
-    static passwordMatchValidator(control: AbstractControl): ValidationResult {
+    static passwordMatchValidation(control: AbstractControl): ValidationResult {
         let password: AbstractControl = control.get('password'),
             confirm: AbstractControl = control.get('passwordConfirm');
         
         return (password && confirm && password.value != confirm.value) ? { 'mismatchedPasswords': true } : null;
     }
 
-    static usernameValidator(control: AbstractControl): ValidationResult {
+    static usernameValidation(control: AbstractControl): ValidationResult {
         return (control.value.trim() === '' || control.value.match(/^[a-zA-Z]+$/)) ? null : { 'invalidUsername': true };
     }
-
 }

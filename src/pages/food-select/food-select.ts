@@ -1,17 +1,17 @@
 // App
 import { Component } from '@angular/core';
-import { ActionSheetController, AlertController, IonicPageMetadata, InfiniteScroll, Loading, LoadingController, NavController, ViewController } from 'ionic-angular';
+import { ActionSheetController, AlertController, IonicPage, InfiniteScroll, Loading, LoadingController, NavController, ViewController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
 import { Food, Recipe } from '../../models';
 
-// Pages
-import { FoodDetailsPage } from '../food-details/food-details';
-
 // Providers
 import { FOOD_GROUPS, FoodService, RecipeService } from '../../providers';
 
+@IonicPage({
+  name: 'food-select'
+})
 @Component({
   selector: 'page-food-select',
   templateUrl: 'food-select.html'
@@ -24,7 +24,6 @@ export class FoodSelectPage {
   private _nutrients: Array<{ key: string, name: string }>;
   private _recipeLoader: Loading;
   private _recipeSubscription: Subscription;
-  public detailsPage: IonicPageMetadata = FoodDetailsPage;
   public foods: Array<Food>;
   public foodLimit: number = 50;
   public recipeLimit: number = 50;
@@ -238,7 +237,7 @@ export class FoodSelectPage {
           handler: () => {
             checkBox.checked = false;
             if (item.hasOwnProperty('ndbno')) {
-              this._navCtrl.push(FoodDetailsPage, { food: item })
+              this._navCtrl.push('food-details', { id: item['ndbno'], food: item })
             }
           }
         }, {

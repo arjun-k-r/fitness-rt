@@ -1,6 +1,6 @@
 // App
 import { Component } from '@angular/core';
-import { AlertController, InfiniteScroll, Loading, LoadingController, ViewController } from 'ionic-angular';
+import { AlertController, InfiniteScroll, IonicPage, Loading, LoadingController, ViewController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
@@ -9,7 +9,9 @@ import { Activity } from '../../models';
 // Providers
 import { ActivityService } from '../../providers';
 
-
+@IonicPage({
+  name: 'activity-select'
+})
 @Component({
   selector: 'page-activity-select',
   templateUrl: 'activity-select.html'

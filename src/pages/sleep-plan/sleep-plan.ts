@@ -1,6 +1,6 @@
 // App
 import { Component } from '@angular/core';
-import { AlertController, Loading, LoadingController } from 'ionic-angular';
+import { AlertController, IonicPage, Loading, LoadingController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
@@ -9,6 +9,9 @@ import { SleepHabit, SleepPlan } from '../../models';
 // Providers
 import { FitnessService, SleepService } from '../../providers';
 
+@IonicPage({
+  name: 'sleep'
+})
 @Component({
   selector: 'page-sleep-plan',
   templateUrl: 'sleep-plan.html'

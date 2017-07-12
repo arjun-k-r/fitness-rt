@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-@IonicPage()
+@IonicPage({
+  name: 'recipe-details',
+  segment: 'details:/name'
+})
 @Component({
   selector: 'page-recipe-details',
   templateUrl: 'recipe-details.html',

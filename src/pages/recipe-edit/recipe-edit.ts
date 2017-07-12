@@ -1,18 +1,19 @@
 // App
 import { Component, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActionSheetController, Alert, AlertController, Modal, ModalController, NavController, NavParams, Toast, ToastController } from 'ionic-angular';
+import { ActionSheetController, Alert, AlertController, IonicPage, Modal, ModalController, NavController, NavParams, Toast, ToastController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 
 // Models
 import { Food, Recipe } from '../../models';
 
-// Pages
-import { FoodSelectPage } from '../food-select/food-select';
-
 // Providers
 import { NutritionService, PictureService, RecipeService } from '../../providers';
 
+@IonicPage({
+  name: 'recipe-edit',
+  segment: 'edit:/name'
+})
 @Component({
   selector: 'page-recipe-edit',
   templateUrl: 'recipe-edit.html'
@@ -105,7 +106,7 @@ export class RecipeEditPage {
   }
 
   public addIngredients(): void {
-    let ingredientSelectModal: Modal = this._modalCtrl.create(FoodSelectPage);
+    let ingredientSelectModal: Modal = this._modalCtrl.create('food-select');
     ingredientSelectModal.present();
     ingredientSelectModal.onDidDismiss((selections: Array<Food | Recipe>) => {
       if (!!selections) {

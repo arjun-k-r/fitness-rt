@@ -1,24 +1,23 @@
 // App
 import { Component } from '@angular/core';
-import { AlertController, InfiniteScroll, IonicPageMetadata, Loading, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, InfiniteScroll, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
 import { Recipe } from '../../models';
 
-// Pages
-import { RecipeEditPage } from '../recipe-edit/recipe-edit';
-
 // Providers
 import { RecipeService } from '../../providers';
 
+@IonicPage({
+  name: 'recipe-list'
+})
 @Component({
   selector: 'page-recipe-list',
   templateUrl: 'recipe-list.html'
 })
 export class RecipeListPage {
   private _recipesSubscription: Subscription;
-  public detailsPage: IonicPageMetadata = RecipeEditPage;
   public limit: number = 50;
   public queryIngredients: Array<string> = [];
   public recipes: Array<Recipe> = [];
@@ -61,7 +60,7 @@ export class RecipeListPage {
 
   public addNewRecipe(): void {
     let newRecipe: Recipe = new Recipe();
-    this._navCtrl.push(RecipeEditPage, { recipe: newRecipe, new: true });
+    this._navCtrl.push('recipe-edit', { name: newRecipe.name, recipe: newRecipe, new: true });
   }
 
   public clearSearch(ev: string): void {

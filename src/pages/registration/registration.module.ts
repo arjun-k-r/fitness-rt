@@ -1,8 +1,15 @@
+// App
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
+// Components
 import { ErrorMessageComponentModule } from '../../components';
+
+// Pages
 import { RegistrationPage } from './registration';
+
+// Providers
+import { AuthValidationServiceModule } from '../../providers';
 
 @NgModule({
   declarations: [
@@ -12,6 +19,7 @@ import { RegistrationPage } from './registration';
   ],
   imports: [
     IonicPageModule.forChild(RegistrationPage),
+    AuthValidationServiceModule,
     ErrorMessageComponentModule
   ],
   exports: [

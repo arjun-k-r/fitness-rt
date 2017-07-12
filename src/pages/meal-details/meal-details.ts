@@ -1,16 +1,17 @@
 // App
 import { Component } from '@angular/core';
-import { ActionSheetController, Alert, AlertController, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
+import { ActionSheetController, Alert, AlertController, IonicPage, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
 
 // Models
 import { Food, Meal, MealPlan, Recipe } from '../../models';
 
-// Pages
-import { FoodSelectPage } from '../food-select/food-select';
-
 // Providers
 import { MealService, NutritionService } from '../../providers';
 
+@IonicPage({
+  name: 'meal-details',
+  segment: 'details:/id'
+})
 @Component({
   selector: 'page-meal-details',
   templateUrl: 'meal-details.html'
@@ -32,7 +33,7 @@ export class MealDetailsPage {
   ) {
     this.meal = <Meal>_params.get('meal');
     this.mealPlan = <MealPlan>_params.get('mealPlan');
-    this.mealIdx = this.mealPlan.meals.indexOf(this.meal);
+    this.mealIdx = <number>_params.get('id');
     this.meal.mealItems = this.meal.mealItems || [];
   }
 
@@ -78,7 +79,7 @@ export class MealDetailsPage {
   }
 
   public addMealItems(): void {
-    let mealSelectModal: Modal = this._modalCtrl.create(FoodSelectPage);
+    let mealSelectModal: Modal = this._modalCtrl.create('food-select');
     mealSelectModal.present();
     mealSelectModal.onDidDismiss((selections: Array<Food | Recipe>) => {
       if (!!selections) {

@@ -1,12 +1,15 @@
 // App
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { Auth } from '@ionic/cloud-angular';
 
 // Providers
-import { AuthValidator } from '../../providers';
+import { AuthValidationService } from '../../providers';
 
+@IonicPage({
+  name: 'password-reset'
+})
 @Component({
   selector: 'page-password-reset',
   templateUrl: 'password-reset.html'
@@ -29,12 +32,12 @@ export class PasswordResetPage {
       password: [
         '',
         Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(16),
-        AuthValidator.passwordValidator, AuthValidator.noWhiteSpace])
+        AuthValidationService.passwordValidation, AuthValidationService.noWhiteSpaceValidation])
       ],
       resetCode: [
         '',
         Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(6),
-        AuthValidator.noWhiteSpace])
+        AuthValidationService.noWhiteSpaceValidation])
       ]
     });
     this.password = this.passwordResetForm.get('password');

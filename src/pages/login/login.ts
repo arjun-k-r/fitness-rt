@@ -1,7 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonicPage, IonicPageMetadata, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, IonicPage, LoadingController, NavController } from 'ionic-angular';
 import { Auth, User, UserDetails } from '@ionic/cloud-angular';
 
 // Pages
@@ -9,15 +9,16 @@ import { FitnessPage } from '../fitness/fitness';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
 // Providers
-import { AuthValidator } from '../../providers';
+import { AuthValidationService } from '../../providers';
 
-@IonicPage()
+@IonicPage({
+  name: 'login'
+})
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  public forgotPasswordPage: IonicPageMetadata = ForgotPasswordPage;
   public email: AbstractControl;
   public loginForm: FormGroup;
   public password: AbstractControl;
@@ -32,13 +33,13 @@ export class LoginPage {
     this.loginForm = _formBuilder.group({
       email: [
         '',
-        Validators.compose([Validators.required, AuthValidator.emailValidator,
-        AuthValidator.noWhiteSpace])
+        Validators.compose([Validators.required, AuthValidationService.emailValidation,
+        AuthValidationService.noWhiteSpaceValidation])
       ],
       password: [
         '',
         Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(16),
-        AuthValidator.passwordValidator, AuthValidator.noWhiteSpace])
+        AuthValidationService.passwordValidation, AuthValidationService.noWhiteSpaceValidation])
       ]
     });
     this.email = this.loginForm.get('email');

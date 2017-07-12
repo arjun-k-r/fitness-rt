@@ -6,22 +6,22 @@ import { IonicPageModule } from 'ionic-angular';
 import { ErrorMessageComponentModule } from '../../components';
 
 // Page
-import { LoginPage } from './login';
+import { PasswordResetPage } from './password-reset';
 
 // Providers
 import { AuthValidationServiceModule } from '../../providers';
 
 @NgModule({
   declarations: [
-    LoginPage,
+    PasswordResetPage,
   ],
   imports: [
-    IonicPageModule.forChild(LoginPage),
+    IonicPageModule.forChild(PasswordResetPage),
     AuthValidationServiceModule,
     ErrorMessageComponentModule
   ],
   exports: [
-    LoginPage
+    PasswordResetPage
   ]
 })
-export class LoginPageModule {}
+export class PasswordResetPageModule {}

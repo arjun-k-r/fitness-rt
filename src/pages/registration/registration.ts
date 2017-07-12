@@ -1,17 +1,15 @@
 // App
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonicPage, IonicPageMetadata, Loading, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
 import { Auth, IDetailedError, User, UserDetails } from '@ionic/cloud-angular';
 
-// Pages
-import { LoginPage } from '../login/login';
-import { FitnessPage } from '../fitness/fitness';
-
 // Providers
-import { AuthValidator } from '../../providers';
+import { AuthValidationService } from '../../providers';
 
-@IonicPage()
+@IonicPage({
+  name: 'registration'
+})
 @Component({
   selector: 'page-registration',
   templateUrl: 'registration.html'
@@ -20,7 +18,6 @@ export class RegistrationPage {
   public email: AbstractControl;
   public firstName: AbstractControl;
   public lastName: AbstractControl;
-  public loginPage: IonicPageMetadata = LoginPage;
   public password: AbstractControl;
   public passwordConfirm: AbstractControl;
   public registerForm: FormGroup;
@@ -35,24 +32,24 @@ export class RegistrationPage {
     this.registerForm = this._formBuilder.group({
       email: [
         '',
-        Validators.compose([Validators.required, AuthValidator.emailValidator,
-        AuthValidator.noWhiteSpace])
+        Validators.compose([Validators.required, AuthValidationService.emailValidation,
+        AuthValidationService.noWhiteSpaceValidation])
       ],
       firstName: [
         '',
-        Validators.compose([Validators.required, Validators.maxLength(20), AuthValidator.noWhiteSpace])
+        Validators.compose([Validators.required, Validators.maxLength(20), AuthValidationService.noWhiteSpaceValidation])
       ],
       lastName: [
         '',
-        Validators.compose([Validators.required, Validators.maxLength(20), AuthValidator.noWhiteSpace])
+        Validators.compose([Validators.required, Validators.maxLength(20), AuthValidationService.noWhiteSpaceValidation])
       ],
       password: [
         '',
         Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(16),
-        AuthValidator.passwordValidator, AuthValidator.noWhiteSpace])
+        AuthValidationService.passwordValidation, AuthValidationService.noWhiteSpaceValidation])
       ],
       passwordConfirm: ['', Validators.required]
-    }, { validator: AuthValidator.passwordMatchValidator });
+    }, { validator: AuthValidationService.passwordMatchValidation });
     this.email = this.registerForm.get('email');
     this.firstName = this.registerForm.get('firstName');
     this.lastName = this.registerForm.get('lastName');
@@ -83,7 +80,7 @@ export class RegistrationPage {
         this._auth.login('basic', details)
           .then(() => {
             loader.dismiss();
-            this._navCtrl.setRoot(FitnessPage);
+            this._navCtrl.setRoot('fitness');
           })
           .catch((err: IDetailedError<Array<string>>) => {
             loader.dismiss();
@@ -91,7 +88,7 @@ export class RegistrationPage {
               this._alertCtrl.create({
                 title: 'Uhh ohh...',
                 subTitle: 'Something went wrong',
-                message: AuthValidator.getErrorMessage(e, err),
+                message: AuthValidationService.getErrorMessage(e, err),
                 buttons: ['OK']
               }).present();
             }
@@ -103,7 +100,7 @@ export class RegistrationPage {
           this._alertCtrl.create({
             title: 'Uhh ohh...',
             subTitle: 'Something went wrong',
-            message: AuthValidator.getErrorMessage(e, err),
+            message: AuthValidationService.getErrorMessage(e, err),
             buttons: ['OK']
           }).present();
         }

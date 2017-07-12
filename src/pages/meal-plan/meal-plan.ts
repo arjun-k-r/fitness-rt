@@ -1,17 +1,17 @@
 // App
 import { Component } from '@angular/core';
-import { AlertController, Loading, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
 import { Meal, MealPlan } from '../../models';
 
-// Pages
-import { MealDetailsPage } from '../meal-details/meal-details';
-
 // Providers
 import { FitnessService, MealService, NutritionService } from '../../providers';
 
+@IonicPage({
+  name: 'meal-plan'
+})
 @Component({
   selector: 'page-meal-plan',
   templateUrl: 'meal-plan.html'
@@ -19,7 +19,6 @@ import { FitnessService, MealService, NutritionService } from '../../providers';
 export class MealPlanPage {
   private _favouriteMealSubscription: Subscription;
   private _mealPlanSubscription: Subscription;
-  public detailsPage = MealDetailsPage;
   public favouriteMeals: Array<Meal>;
   public isDirty: boolean = false;
   public mealPlan: MealPlan = new MealPlan();
@@ -34,8 +33,9 @@ export class MealPlanPage {
   ) { }
 
   public addNewMeal(): void {
+    let mealIdx: number = this.mealPlan.meals.length - 1;
     this.mealPlan.meals = [...this.mealPlan.meals, new Meal()];
-    this._navCtrl.push(this.detailsPage, { meal: this.mealPlan.meals[this.mealPlan.meals.length - 1], mealPlan: this.mealPlan });
+    this._navCtrl.push('meal-details', { id: mealIdx, meal: this.mealPlan.meals[mealIdx], mealPlan: this.mealPlan });
   }
 
   public addToMealPlan(meal: Meal): void {

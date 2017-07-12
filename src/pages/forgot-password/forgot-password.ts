@@ -1,15 +1,15 @@
 // App
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonicPageMetadata, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, IonicPage, LoadingController, NavController } from 'ionic-angular';
 import { Auth } from '@ionic/cloud-angular';
 
-// Pages
-import { PasswordResetPage } from '../password-reset/password-reset';
-
 // Providers
-import { AuthValidator } from '../../providers';
+import { AuthValidationService } from '../../providers';
 
+@IonicPage({
+  name: 'forgot-password'
+})
 @Component({
   selector: 'page-forgot-password',
   templateUrl: 'forgot-password.html'
@@ -18,7 +18,6 @@ export class ForgotPasswordPage {
   public forgotPasswordForm: FormGroup;
   public email: AbstractControl;
   public password: AbstractControl;
-  public pswResetPage: IonicPageMetadata = PasswordResetPage;
   constructor(
     private _alertCtrl: AlertController,
     private _auth: Auth,
@@ -30,8 +29,8 @@ export class ForgotPasswordPage {
     this.forgotPasswordForm = _fb.group({
       email: [
         '',
-        Validators.compose([Validators.required, AuthValidator.emailValidator,
-        AuthValidator.noWhiteSpace])
+        Validators.compose([Validators.required, AuthValidationService.emailValidation,
+        AuthValidationService.noWhiteSpaceValidation])
       ]
     });
     this.email = this.forgotPasswordForm.get('email');
@@ -47,7 +46,7 @@ export class ForgotPasswordPage {
     this._auth.requestPasswordReset(form.email)
       .then(() => {
         loader.dismiss();
-        this._navCtrl.push(PasswordResetPage, { email: form.email });
+        this._navCtrl.push('password-reset', { email: form.email });
       })
       .catch(err => {
         loader.dismiss();

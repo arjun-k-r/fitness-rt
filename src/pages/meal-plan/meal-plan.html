@@ -59,7 +59,7 @@
 
     <!-- Start of segment -->
     <div *ngSwitchCase="'meals'">
-      <ion-item-group *ngFor="let meal of mealPlan?.meals">
+      <ion-item-group *ngFor="let meal of mealPlan?.meals; let i = index">
         <ion-item-divider color="primary">
           {{ meal.time }}
         </ion-item-divider>
@@ -68,7 +68,7 @@
           <p text-wrap>{{ item.quantity * item.servings }}{{ item.unit }}</p>
           <p item-content>{{ item.servings }} servings</p>
         </ion-item>
-        <button ion-item [navPush]="detailsPage" [navParams]="{ meal: meal, mealPlan: mealPlan }">
+        <button ion-item [navPush]="'meal-details'" [navParams]="{ id: i, meal: meal, mealPlan: mealPlan }">
           <ion-note>
             View more
           </ion-note>

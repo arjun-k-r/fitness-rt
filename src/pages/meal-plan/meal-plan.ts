@@ -33,7 +33,7 @@ export class MealPlanPage {
   ) { }
 
   public addNewMeal(): void {
-    let mealIdx: number = this.mealPlan.meals.length - 1;
+    let mealIdx: number = this.mealPlan.meals.length;
     this.mealPlan.meals = [...this.mealPlan.meals, new Meal()];
     this._navCtrl.push('meal-details', { id: mealIdx, meal: this.mealPlan.meals[mealIdx], mealPlan: this.mealPlan });
   }

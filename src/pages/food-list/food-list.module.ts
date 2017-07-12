@@ -5,6 +5,9 @@ import { IonicPageModule } from 'ionic-angular';
 // Pages
 import { FoodListPage } from './food-list';
 
+// Pipes
+import { LimitPipeModule, SearchPipeModule, SortByPipeModule } from '../../pipes';
+
 // Providers
 import { FoodServiceModule } from '../../providers';
 
@@ -14,7 +17,10 @@ import { FoodServiceModule } from '../../providers';
   ],
   imports: [
     IonicPageModule.forChild(FoodListPage),
-    FoodServiceModule
+    FoodServiceModule,
+    LimitPipeModule,
+    SearchPipeModule,
+    SortByPipeModule
   ],
   exports: [
     FoodListPage

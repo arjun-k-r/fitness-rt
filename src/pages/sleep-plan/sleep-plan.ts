@@ -10,7 +10,7 @@ import { SleepHabit, SleepPlan } from '../../models';
 import { FitnessService, SleepService } from '../../providers';
 
 @IonicPage({
-  name: 'sleep'
+  name: 'sleep-plan'
 })
 @Component({
   selector: 'page-sleep-plan',

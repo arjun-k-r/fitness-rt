@@ -2,6 +2,9 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
+// Components
+import { ErrorMessageComponentModule } from '../../components';
+
 // Pages
 import { RecipeEditPage } from './recipe-edit';
 
@@ -14,6 +17,7 @@ import { NutritionServiceModule, PictureServiceModule, RecipeServiceModule } fro
   ],
   imports: [
     IonicPageModule.forChild(RecipeEditPage),
+    ErrorMessageComponentModule,
     NutritionServiceModule,
     PictureServiceModule,
     RecipeServiceModule

@@ -4,6 +4,9 @@
     ".write": true,
 
     "foods": {
+      ".indexOn": "group"
+    },
+    "recipes": {
       ".indexOn": "name"
     }
   }

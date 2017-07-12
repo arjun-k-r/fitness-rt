@@ -2,8 +2,11 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
+// Components
+import { ErrorMessageComponentModule } from '../../components';
+
 // Providers
-import { FitnessServiceModule, NutritionServiceModule } from '../../providers';
+import { DRIServiceModule, FitnessServiceModule, NutritionServiceModule } from '../../providers';
 
 // Pages
 import { FitnessPage } from './fitness';
@@ -14,6 +17,8 @@ import { FitnessPage } from './fitness';
   ],
   imports: [
     IonicPageModule.forChild(FitnessPage),
+    DRIServiceModule,
+    ErrorMessageComponentModule,
     FitnessServiceModule,
     NutritionServiceModule
   ],

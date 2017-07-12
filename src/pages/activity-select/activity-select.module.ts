@@ -2,11 +2,14 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
-// Providers
-import { ActivityServiceModule } from '../../providers';
-
 // Pages
 import { ActivitySelectPage } from './activity-select';
+
+// Pipes
+import { LimitPipeModule, SearchPipeModule } from '../../pipes';
+
+// Providers
+import { ActivityServiceModule } from '../../providers';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,9 @@ import { ActivitySelectPage } from './activity-select';
   ],
   imports: [
     IonicPageModule.forChild(ActivitySelectPage),
-    ActivityServiceModule
+    ActivityServiceModule,
+    LimitPipeModule,
+    SearchPipeModule
   ],
   exports: [
     ActivitySelectPage

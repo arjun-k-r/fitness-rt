@@ -107,5 +107,9 @@ export class RegistrationPage {
       });
   }
 
-  
+  ionViewWillEnter(): void {
+    if (this._auth.isAuthenticated) {
+      this._navCtrl.setRoot('fitness');
+    }
+  }
 }

@@ -2,11 +2,11 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
-// Providers
-import { PictureServiceModule } from '../../providers';
-
 // Pages
 import { AccountPage } from './account';
+
+// Providers
+import { PictureServiceModule } from '../../providers';
 
 @NgModule({
   declarations: [

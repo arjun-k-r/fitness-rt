@@ -2,6 +2,9 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
+// Components
+import { ErrorMessageComponentModule } from '../../components';
+
 // Pages
 import { ForgotPasswordPage } from './forgot-password';
 
@@ -14,7 +17,8 @@ import { AuthValidationServiceModule } from '../../providers';
   ],
   imports: [
     IonicPageModule.forChild(ForgotPasswordPage),
-    AuthValidationServiceModule
+    AuthValidationServiceModule,
+    ErrorMessageComponentModule
   ],
   exports: [
     ForgotPasswordPage

@@ -8,10 +8,10 @@ import 'rxjs/operator/map';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 // Models
-import { Food } from '../models';
+import { Food } from '../../models';
 
 // Providers
-import { NutritionService } from './nutrition.service';
+import { NutritionService } from '../nutrition/nutrition.service';
 
 export const FOOD_GROUPS: Array<string> = [
   'American Indian/Alaska Native Foods',

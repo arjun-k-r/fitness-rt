@@ -14,6 +14,9 @@ import { NutritionServiceModule, PictureServiceModule, RecipeServiceModule } fro
   ],
   imports: [
     IonicPageModule.forChild(RecipeEditPage),
+    NutritionServiceModule,
+    PictureServiceModule,
+    RecipeServiceModule
   ],
   exports: [
     RecipeEditPage

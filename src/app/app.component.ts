@@ -1,6 +1,6 @@
 // App
 import { Component, ViewChild } from '@angular/core';
-import { AlertController, AlertOptions, IonicPageMetadata, Nav, Platform, Toast, ToastController } from 'ionic-angular';
+import { AlertController, AlertOptions, Nav, Platform, Toast, ToastController } from 'ionic-angular';
 import { Deploy } from '@ionic/cloud-angular';
 
 // Cordova
@@ -9,7 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 export interface IPageLink {
     title: string,
-    component: Component,
+    component: string,
     icon: string
 }
 
@@ -19,7 +19,7 @@ export interface IPageLink {
 export class MyApp {
     @ViewChild(Nav) private _nav: Nav;
     public pages: Array<IPageLink>;
-    public rootPage: IonicPageMetadata = 'RegistrationPage';
+    public rootPage: string = 'registration';
     constructor(
         private _alertCtrl: AlertController,
         private _deploy: Deploy,

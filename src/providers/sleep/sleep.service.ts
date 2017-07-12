@@ -10,7 +10,7 @@ import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/data
 import * as moment from 'moment';
 
 // Models
-import { SleepHabit, SleepPlan, WarningMessage } from '../models';
+import { SleepHabit, SleepPlan, WarningMessage } from '../../models';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 

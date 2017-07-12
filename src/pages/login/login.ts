@@ -4,10 +4,6 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { AlertController, IonicPage, LoadingController, NavController } from 'ionic-angular';
 import { Auth, User, UserDetails } from '@ionic/cloud-angular';
 
-// Pages
-import { FitnessPage } from '../fitness/fitness';
-import { ForgotPasswordPage } from '../forgot-password/forgot-password';
-
 // Providers
 import { AuthValidationService } from '../../providers';
 
@@ -60,7 +56,7 @@ export class LoginPage {
     this._auth.login('basic', details)
       .then(() => {
         loader.dismiss();
-        this._navCtrl.setRoot(FitnessPage);
+        this._navCtrl.setRoot('fitness');
       })
       .catch(err => {
         loader.dismiss();

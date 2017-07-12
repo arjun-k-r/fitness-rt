@@ -10,9 +10,6 @@ import { FirebaseApp } from 'angularfire2';
 import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
-// Added plugin camera
-// To add npm camera
-
 @Injectable()
 export class PictureService {
   private _cameraOpts: CameraOptions;

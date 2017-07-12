@@ -10,11 +10,11 @@ import {
   Food,
   Nutrition,
   Recipe
-} from '../models';
+} from '../../models';
 
 // Providers
-import { FoodService } from './food.service';
-import { NutritionService } from './nutrition.service';
+import { FoodService } from '../food/food.service';
+import { NutritionService } from '../nutrition/nutrition.service';
 
 @Injectable()
 export class RecipeService {

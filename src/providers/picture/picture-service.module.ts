@@ -1,16 +1,15 @@
+// App
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
+// Providers
 import { PictureService } from './picture.service';
 
 @NgModule({
-  declarations: [
-    PictureService,
-  ],
   imports: [
     IonicPageModule.forChild(PictureService),
   ],
-  exports: [
+  providers: [
     PictureService
   ]
 })

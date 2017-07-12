@@ -7,7 +7,7 @@ import { User } from '@ionic/cloud-angular';
 import * as moment from 'moment';
 
 // Models
-import { Nutrition, Fitness } from '../models';
+import { Nutrition, Fitness } from '../../models';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 

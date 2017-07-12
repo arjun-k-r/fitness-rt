@@ -1,16 +1,15 @@
+// App
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
+// Providers
 import { RecipeService } from './recipe.service';
 
 @NgModule({
-  declarations: [
-    RecipeService,
-  ],
   imports: [
     IonicPageModule.forChild(RecipeService),
   ],
-  exports: [
+  providers: [
     RecipeService
   ]
 })

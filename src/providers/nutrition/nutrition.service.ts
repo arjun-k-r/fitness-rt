@@ -5,11 +5,19 @@ import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 
 // Models
-import { Food, Meal, Nutrition, NutrientDeficiencies, NutrientExcesses, Recipe, WarningMessage } from '../models';
+import {
+  Food,
+  Meal,
+  Nutrition,
+  NutrientDeficiencies,
+  NutrientExcesses,
+  Recipe,
+  WarningMessage
+} from '../../models';
 
 // Providers
-import { DRIService } from './dri.service';
-import { FitnessService } from './fitness.service';
+import { DRIService } from '../dri/dri.service';
+import { FitnessService } from '../fitness/fitness.service';
 
 @Injectable()
 export class NutritionService {

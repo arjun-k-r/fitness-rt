@@ -1,16 +1,15 @@
+// App
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
+// Providers
 import { AuthValidationService } from './auth-validation.service';
 
 @NgModule({
-  declarations: [
-    AuthValidationService,
-  ],
   imports: [
     IonicPageModule.forChild(AuthValidationService),
   ],
-  exports: [
+  providers: [
     AuthValidationService
   ]
 })

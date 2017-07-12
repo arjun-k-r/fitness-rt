@@ -19,10 +19,10 @@ import {
   NutrientExcesses,
   Recipe,
   WarningMessage
-} from '../models';
+} from '../../models';
 
 // Providers
-import { NutritionService } from './nutrition.service';
+import { NutritionService } from '../nutrition/nutrition.service';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 

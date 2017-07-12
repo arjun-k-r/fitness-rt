@@ -1,16 +1,15 @@
+// App
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
+// Providers
 import { NutritionService } from './nutrition.service';
 
 @NgModule({
-  declarations: [
-    NutritionService,
-  ],
   imports: [
     IonicPageModule.forChild(NutritionService),
   ],
-  exports: [
+  providers: [
     NutritionService
   ]
 })

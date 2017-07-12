@@ -8,12 +8,12 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import * as moment from 'moment';
 
 // Models
-import { Activity, ActivityPlan, Fitness, WarningMessage } from '../models';
+import { Activity, ActivityPlan, Fitness, WarningMessage } from '../../models';
 
 // Providers
-import { FitnessService } from './fitness.service';
-import { MealService } from './meal.service';
-import { NutritionService } from './nutrition.service';
+import { FitnessService } from '../fitness/fitness.service';
+import { MealService } from '../meal/meal.service';
+import { NutritionService } from '../nutrition/nutrition.service';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 

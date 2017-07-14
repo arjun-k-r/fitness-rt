@@ -1,6 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { Alert, AlertController, IonicPage, Loading, LoadingController, Modal, ModalController, NavController } from 'ionic-angular';
+import { Auth } from '@ionic/cloud-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
@@ -25,6 +26,7 @@ export class ActivityPlanPage {
   constructor(
     private _activitySvc: ActivityService,
     private _alertCtrl: AlertController,
+    private _auth: Auth,
     private _fitSvc: FitnessService,
     private _loadCtrl: LoadingController,
     private _modalCtrl: ModalController,
@@ -89,6 +91,14 @@ export class ActivityPlanPage {
     this._activitySvc.updateUserRequirements(this.activityPlan.totalEnergyBurn);
     setTimeout(() => this._activitySvc.getLeftEnergy().then((energy: number) => this.leftEnergy = energy), 1000);
     this.isDirty = false;
+  }
+
+  ionViewCanEnter(): void {
+    if (!this._auth.isAuthenticated()) {
+      this._navCtrl.setRoot('registration', {
+        history: 'activity-plan'
+      });
+    }
   }
 
   ionViewCanLeave(): Promise<boolean> {

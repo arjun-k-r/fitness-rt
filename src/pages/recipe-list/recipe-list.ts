@@ -1,6 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { AlertController, InfiniteScroll, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
+import { Auth } from '@ionic/cloud-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
@@ -24,6 +25,7 @@ export class RecipeListPage {
   public searchQuery: string = '';
   constructor(
     private _alertCtrl: AlertController,
+    private _auth: Auth,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
     private _recipeSvc: RecipeService,
@@ -80,6 +82,13 @@ export class RecipeListPage {
 
   public removeRecipe(recipe: Recipe): void {
     this._recipeSvc.removeRecipe(recipe);
+  }
+
+  ionViewCanEnter(): boolean {
+    if (!this._auth.isAuthenticated()) {
+      this._navCtrl.setRoot('registration');
+      return false;
+    }
   }
 
   ionViewWillEnter(): void {

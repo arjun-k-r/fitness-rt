@@ -1,6 +1,7 @@
 // App
 import { Component } from '@angular/core';
-import { AlertController, InfiniteScroll, IonicPage, Loading, LoadingController, ViewController } from 'ionic-angular';
+import { AlertController, InfiniteScroll, IonicPage, Loading, LoadingController, NavController, ViewController } from 'ionic-angular';
+import { Auth } from '@ionic/cloud-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
@@ -24,8 +25,10 @@ export class ActivitySelectPage {
   public selectedActivities: Array<Activity> = [];
   constructor(
     private _activitySvc: ActivityService,
+    private _auth: Auth,
     private _alertCtrl: AlertController,
     private _loadCtrl: LoadingController,
+    private _navCtrl: NavController,
     private _viewCtrl: ViewController
   ) { }
 
@@ -82,7 +85,13 @@ export class ActivitySelectPage {
     } else {
       this.selectedActivities = [...this.selectedActivities.slice(0, idx), ...this.selectedActivities.slice(idx + 1)];
     }
+  }
 
+  ionViewCanEnter(): boolean {
+    if (!this._auth.isAuthenticated()) {
+      this._navCtrl.setRoot('registration');
+      return false;
+    }
   }
 
   ionViewWillEnter(): void {

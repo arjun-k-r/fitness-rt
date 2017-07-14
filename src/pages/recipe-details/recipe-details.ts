@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Auth } from '@ionic/cloud-angular';
 
 @IonicPage({
   name: 'recipe-details',
@@ -10,12 +11,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'recipe-details.html',
 })
 export class RecipeDetailsPage {
+  constructor(
+    private _auth: Auth,
+    private _navCtrl: NavController,
+    private _params: NavParams
+  ) { }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  ionViewCanEnter(): boolean {
+    if (!this._auth.isAuthenticated()) {
+      this._navCtrl.setRoot('registration');
+      return false;
+    }
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RecipeDetailsPage');
-  }
-
 }

@@ -1,6 +1,7 @@
 // App
 import { Component } from '@angular/core';
-import { ActionSheetController, AlertController, IonicPage, InfiniteScroll, Loading, LoadingController } from 'ionic-angular';
+import { ActionSheetController, AlertController, IonicPage, InfiniteScroll, Loading, LoadingController, NavController } from 'ionic-angular';
+import { Auth } from '@ionic/cloud-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
@@ -29,8 +30,10 @@ export class FoodListPage {
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
+    private _auth: Auth,
     private _foodSvc: FoodService,
-    private _loadCtrl: LoadingController
+    private _loadCtrl: LoadingController,
+    private _navCtrl: NavController
   ) {
     let food: Food = new Food();
     this._nutrients = Object.keys(food.nutrition).map((nutrientKey: string) => {
@@ -131,6 +134,13 @@ export class FoodListPage {
         }
       ]
     }).present();
+  }
+
+  ionViewCanEnter(): boolean {
+    if (!this._auth.isAuthenticated()) {
+      this._navCtrl.setRoot('registration');
+      return false;
+    }
   }
 
   ionViewWillLoad(): void {

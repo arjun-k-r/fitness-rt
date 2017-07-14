@@ -1,6 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { ActionSheetController, Alert, AlertController, IonicPage, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
+import { Auth } from '@ionic/cloud-angular';
 
 // Models
 import { Food, Meal, MealPlan, Recipe } from '../../models';
@@ -10,7 +11,7 @@ import { MealService, NutritionService } from '../../providers';
 
 @IonicPage({
   name: 'meal-details',
-  segment: 'details:/id'
+  segment: 'meal-details/:id'
 })
 @Component({
   selector: 'page-meal-details',
@@ -25,6 +26,7 @@ export class MealDetailsPage {
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
+    private _auth: Auth,
     private _mealSvc: MealService,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
@@ -165,6 +167,13 @@ export class MealDetailsPage {
     } else {
       this._mealSvc.updateFavouriteMeal(this.meal);
       this.isDirty = true;
+    }
+  }
+
+  ionViewCanEnter(): boolean {
+    if (!this._auth.isAuthenticated()) {
+      this._navCtrl.setRoot('registration');
+      return false;
     }
   }
 

@@ -1,6 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { AlertController, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
+import { Auth } from '@ionic/cloud-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
@@ -25,6 +26,7 @@ export class MealPlanPage {
   public mealPlanDetails: string = 'guidelines';
   constructor(
     private _alertCtrl: AlertController,
+    private _auth: Auth,
     private _fitSvc: FitnessService,
     private _loadCtrl: LoadingController,
     private _mealSvc: MealService,
@@ -76,6 +78,13 @@ export class MealPlanPage {
   public saveMealPlan(): void {
     this._mealSvc.saveMealPlan(this.mealPlan);
     this.isDirty = false;
+  }
+
+  ionViewCanEnter(): boolean {
+    if (!this._auth.isAuthenticated()) {
+      this._navCtrl.setRoot('registration');
+      return false;
+    }
   }
 
   ionViewCanLeave(): Promise<boolean> {

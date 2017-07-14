@@ -1,6 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { ActionSheetController, AlertController, IonicPage, InfiniteScroll, Loading, LoadingController, NavController, ViewController } from 'ionic-angular';
+import { Auth } from '@ionic/cloud-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
@@ -37,6 +38,7 @@ export class FoodSelectPage {
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
+    private _auth: Auth,
     private _foodSvc: FoodService,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
@@ -254,6 +256,13 @@ export class FoodSelectPage {
         }
       ]
     }).present();
+  }
+
+  ionViewCanEnter(): boolean {
+    if (!this._auth.isAuthenticated()) {
+      this._navCtrl.setRoot('registration');
+      return false;
+    }
   }
 
   ionViewWillLoad(): void {

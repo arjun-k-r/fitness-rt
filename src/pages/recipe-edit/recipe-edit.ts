@@ -12,7 +12,7 @@ import { NutritionService, PictureService, RecipeService } from '../../providers
 
 @IonicPage({
   name: 'recipe-edit',
-  segment: 'edit:/name'
+  segment: 'recipe-edit/:name'
 })
 @Component({
   selector: 'page-recipe-edit',

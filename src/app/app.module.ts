@@ -37,11 +37,12 @@ const CLOUD_SETTINGS: CloudSettings = {
 };
 
 const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyAHAV3Jh_wkht6NQUcCjhnYFc8AVEZREc4",
-  authDomain: "the-health-guide-1.firebaseapp.com",
-  databaseURL: "https://the-health-guide-1.firebaseio.com",
-  storageBucket: "the-health-guide-1.appspot.com",
-  messagingSenderId: "493536537981"
+  apiKey: "AIzaSyCCiFuPGxiQ-uQnFH4IPybfQ2P_CvgLgKU",
+  authDomain: "live-fit-4u.firebaseapp.com",
+  databaseURL: "https://live-fit-4u.firebaseio.com",
+  projectId: "live-fit-4u",
+  storageBucket: "live-fit-4u.appspot.com",
+  messagingSenderId: "296711725329"
 };
 
 @NgModule({
@@ -53,7 +54,7 @@ const FIREBASE_CONFIG = {
     IonicModule.forRoot(MyApp),
     CloudModule.forRoot(CLOUD_SETTINGS),
     IonicStorageModule.forRoot(),
-    AngularFireModule.initializeApp(FIREBASE_CONFIG, 'the-health-guide-1'),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     CommonModule,

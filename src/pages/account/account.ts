@@ -122,7 +122,7 @@ export class AccountPage {
 
   public signout(): void {
     this._auth.logout();
-    this._navCtrl.setRoot('RegistrationPage');
+    this._navCtrl.setRoot('registration');
   }
 
   public uploadImage(file?: File): void {
@@ -170,6 +170,14 @@ export class AccountPage {
           }).present();
         }
       });
+  }
+
+  ionViewCanEnter(): void {
+    if (!this._auth.isAuthenticated()) {
+      this._navCtrl.setRoot('registration', {
+        history: 'account'
+      });
+    }
   }
 
   ionViewDidEnter(): void {

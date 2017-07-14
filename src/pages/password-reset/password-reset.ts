@@ -15,6 +15,7 @@ import { AuthValidationService } from '../../providers';
   templateUrl: 'password-reset.html'
 })
 export class PasswordResetPage {
+  private _history: string;
   public email: string;
   public password: AbstractControl;
   public passwordResetForm: FormGroup;
@@ -27,6 +28,7 @@ export class PasswordResetPage {
     private _navCtrl: NavController,
     private _params: NavParams
   ) {
+    this._history = _params.get('history');
     this.email = _params.get('email');
     this.passwordResetForm = _fb.group({
       password: [
@@ -44,8 +46,10 @@ export class PasswordResetPage {
     this.resetCode = this.passwordResetForm.get('resetCode');
   }
 
-  public backToLogin(): void {
-    this._navCtrl.popToRoot();
+  public login(): void {
+    this._navCtrl.setRoot('login', {
+      history: this._history
+    })
   }
 
   public resetPassword(form: { resetCode: number, password: string }): void {

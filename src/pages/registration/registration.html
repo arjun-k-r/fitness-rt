@@ -1,7 +1,7 @@
 <ion-content>
   <div class="auth-page" padding>
     <img src="assets/icon/favicon.ico" class="auth-page__image">
-    <h1 class="auth-page__title">The Health Guide</h1>
+    <h1 class="auth-page__title">L&Phi;ve fit</h1>
     <p class="auth-page__subtitle">Embrace your uniqueness</p>
     <form class="auth-form" [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
       <ion-list no-lines>
@@ -32,7 +32,7 @@
         <br>
         <button class="auth-page__button" ion-button block type="submit" [disabled]="registerForm.invalid">Sign Up</button>
         <div class="auth-page__links">
-          Already have an account? <a [navPush]="'login'">Log in</a>
+          Already have an account? <a (click)="login()">Log in</a>
         </div>
       </ion-list>
     </form>

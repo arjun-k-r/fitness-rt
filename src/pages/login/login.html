@@ -1,8 +1,8 @@
 <ion-content>
   <div class="auth-page" padding>
     <img src="assets/icon/favicon.ico" class="auth-page__image">
-    <h1 class="auth-page__title">Welcome back!</h1>
-    <p class="auth-page__subtitle">Moderation is the key to perfection</p>
+    <h1 class="auth-page__title">L&Phi;ve fit</h1>
+    <p class="auth-page__subtitle">Embrace your uniqueness</p>
     <form class="auth-form" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
       <ion-list no-lines>
         <ion-item class="auth-form__group">
@@ -18,8 +18,8 @@
         <br>
         <button class="auth-page__button" ion-button block type="submit" [disabled]="loginForm.invalid">Login</button>
         <div class="auth-page__links">
-          <button type="button" navPop ion-button clear>Sign Up</button>
-          <button type="button" [navPush]="'forgot-password'" ion-button clear>Forgot Password?</button>
+          <button type="button" (click)="register()" ion-button clear>Sign Up</button>
+          <button type="button" (click)="forgotPassword()" ion-button clear>Forgot Password?</button>
         </div>
       </ion-list>
     </form>

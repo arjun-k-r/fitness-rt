@@ -1,7 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonicPage, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { Auth } from '@ionic/cloud-angular';
 
 // Providers
@@ -15,6 +15,7 @@ import { AuthValidationService } from '../../providers';
   templateUrl: 'forgot-password.html'
 })
 export class ForgotPasswordPage {
+  private _history: string;
   public forgotPasswordForm: FormGroup;
   public email: AbstractControl;
   public password: AbstractControl;
@@ -23,9 +24,10 @@ export class ForgotPasswordPage {
     private _auth: Auth,
     private _loadCtrl: LoadingController,
     private _fb: FormBuilder,
-    private _navCtrl: NavController
+    private _navCtrl: NavController,
+    private _params: NavParams
   ) {
-
+    this._history = _params.get('history');
     this.forgotPasswordForm = _fb.group({
       email: [
         '',
@@ -34,6 +36,12 @@ export class ForgotPasswordPage {
       ]
     });
     this.email = this.forgotPasswordForm.get('email');
+  }
+
+  public login(): void {
+    this._navCtrl.setRoot('login', {
+      history: this._history
+    })
   }
 
   public reqestReset(form: { email: string }): void {

@@ -1,7 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, IonicPage, Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { Auth, IDetailedError, User, UserDetails } from '@ionic/cloud-angular';
 
 // Providers
@@ -15,6 +15,7 @@ import { AuthValidationService } from '../../providers';
   templateUrl: 'registration.html'
 })
 export class RegistrationPage {
+  private _history: string;
   public email: AbstractControl;
   public firstName: AbstractControl;
   public lastName: AbstractControl;
@@ -27,8 +28,10 @@ export class RegistrationPage {
     private _formBuilder: FormBuilder,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
+    private _params: NavParams,
     private _user: User
   ) {
+    this._history = _params.get('history');
     this.registerForm = this._formBuilder.group({
       email: [
         '',
@@ -57,6 +60,12 @@ export class RegistrationPage {
     this.passwordConfirm = this.registerForm.get('passwordConfirm');
   }
 
+  public login(): void {
+    this._navCtrl.setRoot('login', {
+      history: this._history
+    })
+  }
+
   public register(form: { email: string, firstName: string, lastName: string, password: string }): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Creating your account...',
@@ -80,7 +89,11 @@ export class RegistrationPage {
         this._auth.login('basic', details)
           .then(() => {
             loader.dismiss();
-            this._navCtrl.setRoot('fitness');
+            if (this._history) {
+              this._navCtrl.setRoot(this._history);
+            } else {
+              this._navCtrl.setRoot('fitness');
+            }
           })
           .catch((err: IDetailedError<Array<string>>) => {
             loader.dismiss();
@@ -108,7 +121,7 @@ export class RegistrationPage {
   }
 
   ionViewWillEnter(): void {
-    if (this._auth.isAuthenticated) {
+    if (this._auth.isAuthenticated()) {
       this._navCtrl.setRoot('fitness');
     }
   }

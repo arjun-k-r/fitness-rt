@@ -1,7 +1,7 @@
 // App
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonicPage, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { Auth, User, UserDetails } from '@ionic/cloud-angular';
 
 // Providers
@@ -15,6 +15,7 @@ import { AuthValidationService } from '../../providers';
   templateUrl: 'login.html'
 })
 export class LoginPage {
+  private _history: string;
   public email: AbstractControl;
   public loginForm: FormGroup;
   public password: AbstractControl;
@@ -24,8 +25,10 @@ export class LoginPage {
     private _formBuilder: FormBuilder,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
+    private _params: NavParams,
     private _user: User
   ) {
+    this._history = _params.get('history');
     this.loginForm = _formBuilder.group({
       email: [
         '',
@@ -42,6 +45,12 @@ export class LoginPage {
     this.password = this.loginForm.get('password');
   }
 
+  public forgotPassword(): void {
+    this._navCtrl.setRoot('forgot-password', {
+      history: this._history
+    })
+  }
+
   public login(form: { email: string, password: string }): void {
     let loader = this._loadCtrl.create({
       content: 'Please wait...',
@@ -56,7 +65,11 @@ export class LoginPage {
     this._auth.login('basic', details)
       .then(() => {
         loader.dismiss();
-        this._navCtrl.setRoot('fitness');
+        if (this._history) {
+          this._navCtrl.setRoot(this._history);
+        } else {
+          this._navCtrl.setRoot('fitness');
+        }
       })
       .catch(err => {
         loader.dismiss();
@@ -67,5 +80,11 @@ export class LoginPage {
           buttons: ['OK']
         }).present();
       });
+  }
+
+  public register(): void {
+    this._navCtrl.setRoot('registration', {
+      history: this._history
+    })
   }
 }

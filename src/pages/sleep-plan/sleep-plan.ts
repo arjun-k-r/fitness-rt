@@ -1,6 +1,7 @@
 // App
 import { Component } from '@angular/core';
-import { AlertController, IonicPage, Loading, LoadingController } from 'ionic-angular';
+import { AlertController, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
+import { Auth } from '@ionic/cloud-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 // Models
@@ -24,8 +25,10 @@ export class SleepPlanPage {
   public sleepPlanDetails: string = 'guidelines';
   constructor(
     private _alertCtrl: AlertController,
+    private _auth: Auth,
     private _fitSvc: FitnessService,
     private _loadCtrl: LoadingController,
+    private _navCtrl: NavController,
     private _sleepSvc: SleepService
   ) { }
 
@@ -39,6 +42,13 @@ export class SleepPlanPage {
   public saveSleep(): void {
     this._sleepSvc.saveSleep(this.sleepPlan, this.currentSleep);
     this.isDirty = false;
+  }
+
+  ionViewCanEnter(): boolean {
+    if (!this._auth.isAuthenticated()) {
+      this._navCtrl.setRoot('registration');
+      return false;
+    }
   }
 
   ionViewCanLeave(): Promise<boolean> {

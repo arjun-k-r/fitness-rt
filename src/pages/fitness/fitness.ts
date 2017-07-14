@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Auth } from '@ionic/cloud-angular';
 
 // Models
 import { Fitness } from '../../models';
@@ -27,9 +28,10 @@ export class FitnessPage {
   public fitnessForm: FormGroup;
   public heartRate: number;
   public isDirty: boolean = false;
-    public isFitness: boolean;
+  public isFitness: boolean;
   constructor(
     private _alertCtrl: AlertController,
+    private _auth: Auth,
     private _formBuilder: FormBuilder,
     private _fitSvc: FitnessService,
     private _navCtrl: NavController,
@@ -77,6 +79,14 @@ export class FitnessPage {
     this._fitSvc.storeEnergyConsumption(energyConsumption);
     this.isFitness = this._fitSvc.getBodyFatFlag(this.fitness.bodyFat, this.fitness.gender);
     this.isDirty = false;
+  }
+
+  ionViewCanEnter(): void {
+    if (!this._auth.isAuthenticated()) {
+      this._navCtrl.setRoot('registration', {
+        history: 'fitness'
+      });
+    }
   }
 
   ionViewCanLeave(): Promise<boolean> {

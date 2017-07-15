@@ -1,32 +1,33 @@
 <ion-content>
   <div class="auth-page" padding>
     <img src="assets/icon/favicon.ico" class="auth-page__image">
-    <h1 class="auth-page__title">L&Phi;ve fit</h1>
+    <h1 class="auth-page__title">Fit for Life</h1>
     <p class="auth-page__subtitle">Embrace your uniqueness</p>
     <form class="auth-form" [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
       <ion-list no-lines>
         <ion-item class="auth-form__group">
           <ion-label floating for="firstName">First name</ion-label>
-          <ion-input type="text" id="firstName" formControlName="firstName"></ion-input>
+          <ion-input type="text" id="firstName" formControlName="firstName" aria-required="true" required></ion-input>
         </ion-item>
+        <error-message [control]="firstName"></error-message>
         <ion-item class="auth-form__group">
           <ion-label floating for="lastName">Last name</ion-label>
-          <ion-input type="text" id="lastName" formControlName="lastName"></ion-input>
+          <ion-input type="text" id="lastName" formControlName="lastName" aria-required="true" required></ion-input>
         </ion-item>
-        <error-message [control]="username"></error-message>
+        <error-message [control]="lastName"></error-message>
         <ion-item class="auth-form__group">
           <ion-label floating for="email">Email</ion-label>
-          <ion-input type="email" id="email" formControlName="email"></ion-input>
+          <ion-input type="email" id="email" formControlName="email"  aria-required="true" required></ion-input>
         </ion-item>
         <error-message [control]="email"></error-message>
         <ion-item class="auth-form__group">
           <ion-label floating for="password">Password</ion-label>
-          <ion-input type="password" id="password" formControlName="password"></ion-input>
+          <ion-input type="password" id="password" formControlName="password" aria-required="true" required></ion-input>
         </ion-item>
         <error-message [control]="password"></error-message>
         <ion-item class="auth-form__group">
           <ion-label floating for="passwordConfirm">Confirm password</ion-label>
-          <ion-input type="password" id="passwordConfirm" formControlName="passwordConfirm"></ion-input>
+          <ion-input type="password" id="passwordConfirm" formControlName="passwordConfirm" aria-required="true" required></ion-input>
         </ion-item>
         <error-message [group]="registerForm"></error-message>
         <br>

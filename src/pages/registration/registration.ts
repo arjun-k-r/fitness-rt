@@ -2,7 +2,10 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, IonicPage, Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
-import { Auth, IDetailedError, User, UserDetails } from '@ionic/cloud-angular';
+
+// Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 // Providers
 import { AuthValidationService } from '../../providers';
@@ -23,13 +26,12 @@ export class RegistrationPage {
   public passwordConfirm: AbstractControl;
   public registerForm: FormGroup;
   constructor(
+    private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _auth: Auth,
     private _formBuilder: FormBuilder,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
-    private _params: NavParams,
-    private _user: User
+    private _params: NavParams
   ) {
     this._history = _params.get('history');
     this.registerForm = this._formBuilder.group({
@@ -73,56 +75,44 @@ export class RegistrationPage {
       duration: 30000
     });
     loader.present();
-    let details: UserDetails = {
-      'custom': {
-        'firstName': form.firstName,
-        'lastName': form.lastName
-      },
-      'email': form.email.trim(),
-      'image': '',
-      'name': `${form.firstName.trim()} ${form.lastName.trim()}`,
-      'password': form.password.trim(),
-      'username': `${form.firstName.trim().toLocaleLowerCase()}${form.lastName.trim().toLocaleLowerCase()}`
-    };
-    this._auth.signup(details)
-      .then(() => {
-        this._auth.login('basic', details)
-          .then(() => {
-            loader.dismiss();
-            if (this._history) {
-              this._navCtrl.setRoot(this._history);
-            } else {
-              this._navCtrl.setRoot('fitness');
-            }
-          })
-          .catch((err: IDetailedError<Array<string>>) => {
-            loader.dismiss();
-            for (let e of err.details) {
-              this._alertCtrl.create({
-                title: 'Uhh ohh...',
-                subTitle: 'Something went wrong',
-                message: AuthValidationService.getErrorMessage(e, err),
-                buttons: ['OK']
-              }).present();
-            }
-          });
-      })
-      .catch((err: IDetailedError<Array<string>>) => {
-        loader.dismiss();
-        for (let e of err.details) {
+
+    this._afAuth.auth.createUserWithEmailAndPassword(form.email.trim(), form.password.trim())
+      .then((user: firebase.User) => {
+        user.updateProfile({
+          displayName: `${form.firstName.trim()} ${form.lastName.trim()}`,
+          photoURL: ''
+        }).then(() => {
+          loader.dismiss();
+          if (this._history) {
+            this._navCtrl.setRoot(this._history);
+          } else {
+            this._navCtrl.setRoot('fitness');
+          }
+        }).catch((err: firebase.FirebaseError) => {
+          loader.dismiss();
           this._alertCtrl.create({
             title: 'Uhh ohh...',
             subTitle: 'Something went wrong',
-            message: AuthValidationService.getErrorMessage(e, err),
+            message: err.message,
             buttons: ['OK']
           }).present();
-        }
+        });
+      }).catch((err: firebase.FirebaseError) => {
+        loader.dismiss();
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.message,
+          buttons: ['OK']
+        }).present();
       });
   }
 
   ionViewWillEnter(): void {
-    if (this._auth.isAuthenticated()) {
-      this._navCtrl.setRoot('fitness');
-    }
+    this._afAuth.authState.subscribe((auth: firebase.User) => {
+      if (!!auth) {
+        this._navCtrl.setRoot('fitness');
+      }
+    })
   }
 }

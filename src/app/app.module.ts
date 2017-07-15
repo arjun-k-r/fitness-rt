@@ -23,26 +23,17 @@ import 'firebase/storage';
 
 const CLOUD_SETTINGS: CloudSettings = {
   'core': {
-    'app_id': 'af911689'
-  },
-  'auth': {
-    'facebook': {
-      'scope': ['email', 'public_profile', 'user_friends']
-    },
-    'google': {
-      'webClientId': '493536537981-gfrb9dtsnltvsslcv0os8foq8is80j67.apps.googleusercontent.com',
-      'scope': ['']
-    }
+    'app_id': '7d599801'
   }
 };
 
 const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyCCiFuPGxiQ-uQnFH4IPybfQ2P_CvgLgKU",
-  authDomain: "live-fit-4u.firebaseapp.com",
-  databaseURL: "https://live-fit-4u.firebaseio.com",
-  projectId: "live-fit-4u",
-  storageBucket: "live-fit-4u.appspot.com",
-  messagingSenderId: "296711725329"
+  apiKey: "AIzaSyBSRCjaqNBzwylAbxrwPpHde6eGTeyC5nQ",
+  authDomain: "fit-4-life.firebaseapp.com",
+  databaseURL: "https://fit-4-life.firebaseio.com",
+  projectId: "fit-4-life",
+  storageBucket: "fit-4-life.appspot.com",
+  messagingSenderId: "234322620896"
 };
 
 @NgModule({
@@ -54,7 +45,7 @@ const FIREBASE_CONFIG = {
     IonicModule.forRoot(MyApp),
     CloudModule.forRoot(CLOUD_SETTINGS),
     IonicStorageModule.forRoot(),
-    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG, 'fit-4-life'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     CommonModule,

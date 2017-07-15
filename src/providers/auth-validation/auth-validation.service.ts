@@ -25,11 +25,7 @@ export class AuthValidationService {
             'noWhiteSpace': 'Contains white spaces',
             'required': 'This field is required',
             'required_email': 'You need an email for registration',
-            'required_password': 'You need a password for registration',
-            'conflict_email': 'There already is an account with this email. Did you forgot your password?',
-            'conflict_username': 'There already is an account with this username',
-            'invalid_email': 'Your email is not valid. It must be something like user@domain.com',
-            'Unsuccessful HTTP response': 'There is no account with this email and password'
+            'required_password': 'You need a password for registration'
         };
 
         return (errorName in validationMessages) ? validationMessages[errorName] : 'Unknown Error';

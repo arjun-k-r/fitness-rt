@@ -2,7 +2,10 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
-import { Auth, User, UserDetails } from '@ionic/cloud-angular';
+
+// Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 // Providers
 import { AuthValidationService } from '../../providers';
@@ -20,13 +23,12 @@ export class LoginPage {
   public loginForm: FormGroup;
   public password: AbstractControl;
   constructor(
+    private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _auth: Auth,
     private _formBuilder: FormBuilder,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
-    private _params: NavParams,
-    private _user: User
+    private _params: NavParams
   ) {
     this._history = _params.get('history');
     this.loginForm = _formBuilder.group({
@@ -58,25 +60,20 @@ export class LoginPage {
       duration: 30000
     });
     loader.present();
-    let details: UserDetails = {
-      'email': form.email.trim(),
-      'password': form.password.trim(),
-    };
-    this._auth.login('basic', details)
-      .then(() => {
+    this._afAuth.auth.signInWithEmailAndPassword(form.email.trim(), form.password.trim())
+      .then((user: firebase.User) => {
         loader.dismiss();
         if (this._history) {
           this._navCtrl.setRoot(this._history);
         } else {
           this._navCtrl.setRoot('fitness');
         }
-      })
-      .catch(err => {
+      }).catch((err: firebase.FirebaseError) => {
         loader.dismiss();
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
-          message: err.response.body.error.message,
+          message: err.message,
           buttons: ['OK']
         }).present();
       });

@@ -12,13 +12,13 @@
   "scripts": {
     "build": "ionic-app-scripts build",
     "clean": "ionic-app-scripts clean",
-    "clear:osx": "rimraf platforms/the-health-guide-darwin-x64 && rimraf platforms/the-health-guide-mas-x64",
-    "clear:win": "rimraf platforms/the-health-guide-win32-x64 && rimraf platforms/the-health-guide-win32-ia32",
-    "clear:nix": "rimraf platforms/the-health-guide-linux-x64 && rimraf platforms/the-health-guide-linux-ia32",
+    "clear:osx": "rimraf platforms/fit-for-life-darwin-x64 && rimraf platforms/fit-for-life-mas-x64",
+    "clear:win": "rimraf platforms/fit-for-life-win32-x64 && rimraf platforms/fit-for-life-win32-ia32",
+    "clear:nix": "rimraf platforms/fit-for-life-linux-x64 && rimraf platforms/fit-for-life-linux-ia32",
     "electron": "electron .",
-    "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
+    "lint": "ionic-app-scripts lint",
     "pack:osx": "npm run clear:osx && copy electron-main.js www && copy package.json www && electron-packager ./www/ --platform=darwin,mas --arch=x64 --asar --out=platforms ",
     "pack:win": "npm run clear:win && copy electron-main.js www && copy package.json www && electron-packager ./www --platform=win32 --arch=ia32,x64 --asar --out=platforms ",
     "pack:nix": "npm run clear:nix && copy electron-main.js www && copy package.json www && electron-packager ./www/ --platform=linux --arch=ia32,x64 --asar --out=platforms "

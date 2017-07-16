@@ -1,8 +1,11 @@
 // App
 import { Component } from '@angular/core';
 import { Alert, AlertController, IonicPage, Loading, LoadingController, Modal, ModalController, NavController } from 'ionic-angular';
-import { Auth } from '@ionic/cloud-angular';
 import { Subscription } from 'rxjs/Subscription';
+
+// Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 // Models
 import { Activity, ActivityPlan } from '../../models';
@@ -25,8 +28,8 @@ export class ActivityPlanPage {
   public leftEnergy: number = 0;
   constructor(
     private _activitySvc: ActivityService,
+    private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _auth: Auth,
     private _fitSvc: FitnessService,
     private _loadCtrl: LoadingController,
     private _modalCtrl: ModalController,
@@ -94,11 +97,13 @@ export class ActivityPlanPage {
   }
 
   ionViewCanEnter(): void {
-    if (!this._auth.isAuthenticated()) {
-      this._navCtrl.setRoot('registration', {
-        history: 'activity-plan'
-      });
-    }
+    this._afAuth.authState.subscribe((auth: firebase.User) => {
+      if (!auth) {
+        this._navCtrl.setRoot('registration', {
+          history: 'activity-plan'
+        });
+      }
+    })
   }
 
   ionViewCanLeave(): Promise<boolean> {

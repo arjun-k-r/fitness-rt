@@ -21,6 +21,7 @@ import { FitnessService } from '../fitness/fitness.service';
 
 @Injectable()
 export class NutritionService {
+  public energyIntake: number = 0;
   constructor(
     private _driSvc: DRIService,
     private _fitSvc: FitnessService
@@ -87,27 +88,31 @@ export class NutritionService {
   /**
    * Calculates the daily nutrition intake percentage of the daily requirements
    */
-  public calculateNutritionPercent(items: Array<Food | Meal>, preserveEnergy: boolean = false): Nutrition {
-    let nutrition: Nutrition = new Nutrition(),
-      requirements: Nutrition = this._fitSvc.getUserRequirements();
-    items.forEach((item: Food) => {
-      // Sum the nutrients for each item
-      for (let nutrientKey in requirements) {
-        nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
-      }
+  public calculateNutritionPercent(items: Array<Food | Meal>, preserveEnergy: boolean = false): Promise<Nutrition> {
+    return new Promise((resolve, reject) => {
+      let nutrition: Nutrition = new Nutrition();
+      this._fitSvc.getUserRequirements()
+        .then((requirements: Nutrition) => {
+          items.forEach((item: Food) => {
+            // Sum the nutrients for each item
+            for (let nutrientKey in requirements) {
+              nutrition[nutrientKey].value += item.nutrition[nutrientKey].value;
+            }
+          });
+
+          // Save the energy intake to calculate the left energy in activity plan
+          if (preserveEnergy) {
+            this.energyIntake = nutrition.energy.value;
+          }
+
+          // Establish the meal's nutritional value, based on the user's nutritional requirements (%)
+          for (let nutrientKey in nutrition) {
+            nutrition[nutrientKey].value = Math.round((nutrition[nutrientKey].value * 100) / (requirements[nutrientKey].value || 1));
+          }
+          resolve(nutrition);
+        })
+        .catch((err: Error) => reject(err));
     });
-
-    // Save the energy intake to calculate the left energy in activity plan
-    if (preserveEnergy) {
-      this._fitSvc.storeEnergyIntake(nutrition.energy.value);
-    }
-
-    // Establish the meal's nutritional value, based on the user's nutritional requirements (%)
-    for (let nutrientKey in nutrition) {
-      nutrition[nutrientKey].value = Math.round((nutrition[nutrientKey].value * 100) / (requirements[nutrientKey].value || 1));
-    }
-
-    return nutrition;
   }
 
   public calculateOmega36Ratio(nutrition: Nutrition): number {
@@ -125,16 +130,21 @@ export class NutritionService {
     return items.reduce((acc: number, item: Food) => acc + (item.quantity * item.servings), 0);
   }
 
-  public checkNutrition(nutrition: Nutrition): Array<WarningMessage> {
-    let requirements: Nutrition = this._fitSvc.getUserRequirements()
-    return _.compact([
-      this._checkExcessAlcohol(nutrition, requirements),
-      this._checkExcessCaffeine(nutrition, requirements),
-      this._checkExcessCarbs(nutrition, requirements),
-      this._checkExcessEnergy(nutrition, requirements),
-      this._checkExcessSugars(nutrition, requirements),
-      this._checkExcessTransFat(nutrition, requirements)
-    ]);
+  public checkNutrition(nutrition: Nutrition): Promise<Array<WarningMessage>> {
+    return new Promise((resolve, reject) => {
+      this._fitSvc.getUserRequirements()
+        .then((requirements: Nutrition) => resolve(
+          _.compact([
+            this._checkExcessAlcohol(nutrition, requirements),
+            this._checkExcessCaffeine(nutrition, requirements),
+            this._checkExcessCarbs(nutrition, requirements),
+            this._checkExcessEnergy(nutrition, requirements),
+            this._checkExcessSugars(nutrition, requirements),
+            this._checkExcessTransFat(nutrition, requirements)
+          ])
+        ))
+        .catch((err: Error) => reject(err));
+    })
   }
 
   public findDeficiencies(nutrition: Nutrition): NutrientDeficiencies {

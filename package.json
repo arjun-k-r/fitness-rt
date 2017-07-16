@@ -34,6 +34,7 @@
     "@angular/platform-browser-dynamic": "4.1.0",
     "@ionic-native/camera": "^3.9.2",
     "@ionic-native/core": "3.7.0",
+    "@ionic-native/facebook": "^4.0.1",
     "@ionic-native/image-picker": "^3.9.2",
     "@ionic-native/splash-screen": "3.7.0",
     "@ionic-native/status-bar": "3.7.0",
@@ -93,8 +94,8 @@
       },
       "ionic-plugin-deploy": {},
       "cordova-plugin-facebook4": {
-        "APP_ID": "1751249775187803",
-        "APP_NAME": "The Health Guide"
+        "APP_ID": "1844081052587071",
+        "APP_NAME": "Fit for Life"
       },
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.493536537981-sur3vbbhkp6b8imijmlqmfidvfi5fhn0"

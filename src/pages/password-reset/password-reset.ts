@@ -2,7 +2,10 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
-import { Auth } from '@ionic/cloud-angular';
+
+// Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 // Providers
 import { AuthValidationService } from '../../providers';
@@ -21,8 +24,8 @@ export class PasswordResetPage {
   public passwordResetForm: FormGroup;
   public resetCode: AbstractControl;
   constructor(
+    private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _auth: Auth,
     private _fb: FormBuilder,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
@@ -52,24 +55,24 @@ export class PasswordResetPage {
     })
   }
 
-  public resetPassword(form: { resetCode: number, password: string }): void {
+  public resetPassword(form: { resetCode: string, password: string }): void {
     let loader = this._loadCtrl.create({
       content: 'Resetting your password...',
       spinner: 'crescent',
       duration: 30000
     });
     loader.present();
-    this._auth.confirmPasswordReset(form.resetCode, form.password)
+    this._afAuth.auth.confirmPasswordReset(form.resetCode, form.password)
       .then(() => {
         loader.dismiss();
         this._navCtrl.popToRoot();
       })
-      .catch(err => {
+      .catch((err: firebase.FirebaseError) => {
         loader.dismiss();
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
-          message: err.response.body.error.message,
+          message: err.message,
           buttons: ['OK']
         }).present();
       });

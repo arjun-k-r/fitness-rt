@@ -1,8 +1,11 @@
 // App
 import { Component, ViewChild } from '@angular/core';
 import { ActionSheetController, AlertController, AlertOptions, IonicPage, LoadingController, NavController, Toast, ToastController } from 'ionic-angular';
-import { Auth, User } from '@ionic/cloud-angular';
 import { Camera } from '@ionic-native/camera';
+
+// Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 // Providers
 import { PictureService } from '../../providers';
@@ -20,31 +23,13 @@ export class AccountPage {
   public uploadReady: boolean = false;
   constructor(
     private _actionSheetCtrl: ActionSheetController,
+    private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _auth: Auth,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
     private _picService: PictureService,
-    private _toastCtrl: ToastController,
-    private _user: User
-  ) {
-    this.avatar = _user.details.image;
-  }
-
-  private _deleteAccount(): void {
-    let loader = this._loadCtrl.create({
-      content: 'Deleting account...',
-      spinner: 'crescent',
-      duration: 30000
-    });
-
-    loader.present();
-    this._user.delete();
-    this._user.unstore();
-    this._auth.logout();
-    loader.dismiss();
-    this._navCtrl.setRoot('RegistrationPage');
-  }
+    private _toastCtrl: ToastController
+  ) {  }
 
   public changeImage(): void {
     if (Camera['installed']()) {
@@ -88,29 +73,6 @@ export class AccountPage {
     }
   }
 
-  public deleteAccountRequest(): void {
-    let alertOpt: AlertOptions = {
-      title: 'Are you sure you want this?',
-      message: 'Your account will be permanently erased and all data will be lost',
-      buttons: [
-        {
-          text: 'Maybe not',
-          role: 'cancel',
-          handler: () => {
-          }
-        },
-        {
-          text: "Yes, I'm sure",
-          handler: () => {
-            this._deleteAccount();
-          }
-        }
-      ]
-    };
-
-    this._alertCtrl.create(alertOpt).present();
-  }
-
   public processWebImage(event) {
     let reader: FileReader = new FileReader();
     reader.onload = (readerEvent: Event) => {
@@ -121,8 +83,8 @@ export class AccountPage {
   }
 
   public signout(): void {
-    this._auth.logout();
     this._navCtrl.setRoot('registration');
+    this._afAuth.auth.signOut();
   }
 
   public uploadImage(file?: File): void {
@@ -144,8 +106,10 @@ export class AccountPage {
         toast.setMessage(`Uploading ... ${data}%`);
       } else {
         this.avatar = data;
-        this._user.details.image = this.avatar;
-        this._user.save();
+        this._afAuth.auth.currentUser.updateProfile({
+          displayName: this._afAuth.auth.currentUser.displayName,
+          photoURL: this.avatar
+        });
       }
     }, (err: Error) => {
       toast.setMessage('Uhh ohh, something went wrong!');
@@ -173,11 +137,15 @@ export class AccountPage {
   }
 
   ionViewCanEnter(): void {
-    if (!this._auth.isAuthenticated()) {
-      this._navCtrl.setRoot('registration', {
-        history: 'account'
-      });
-    }
+    this._afAuth.authState.subscribe((auth: firebase.User) => {
+      if (!auth) {
+        this._navCtrl.setRoot('registration', {
+          history: 'account'
+        });
+      } else {
+        this.avatar = auth.photoURL;
+      }
+    })
   }
 
   ionViewDidEnter(): void {

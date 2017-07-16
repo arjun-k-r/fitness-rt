@@ -4,6 +4,10 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { ActionSheetController, Alert, AlertController, IonicPage, Modal, ModalController, NavController, NavParams, Toast, ToastController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 
+// Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+
 // Models
 import { Food, Recipe } from '../../models';
 
@@ -32,6 +36,7 @@ export class RecipeEditPage {
   public recipeInstructions: Array<string>;
   constructor(
     private _actionSheetCtrl: ActionSheetController,
+    private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
     private _formBuilder: FormBuilder,
     private _modalCtrl: ModalController,

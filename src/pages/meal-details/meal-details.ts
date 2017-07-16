@@ -1,7 +1,10 @@
 // App
 import { Component } from '@angular/core';
 import { ActionSheetController, Alert, AlertController, IonicPage, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
-import { Auth } from '@ionic/cloud-angular';
+
+// Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 // Models
 import { Food, Meal, MealPlan, Recipe } from '../../models';
@@ -25,8 +28,8 @@ export class MealDetailsPage {
   public mealPlan: MealPlan;
   constructor(
     private _actionSheetCtrl: ActionSheetController,
+    private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _auth: Auth,
     private _mealSvc: MealService,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
@@ -170,11 +173,14 @@ export class MealDetailsPage {
     }
   }
 
-  ionViewCanEnter(): boolean {
-    if (!this._auth.isAuthenticated()) {
-      this._navCtrl.setRoot('registration');
-      return false;
-    }
+  ionViewCanEnter(): void {
+    this._afAuth.authState.subscribe((auth: firebase.User) => {
+      if (!auth) {
+        this._navCtrl.setRoot('registration', {
+          history: 'meal-details'
+        });
+      }
+    })
   }
 
   ionViewCanLeave(): Promise<boolean> {

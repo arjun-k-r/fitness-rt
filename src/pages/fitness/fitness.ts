@@ -2,7 +2,10 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { Auth } from '@ionic/cloud-angular';
+
+// Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 // Models
 import { Fitness } from '../../models';
@@ -30,8 +33,8 @@ export class FitnessPage {
   public isDirty: boolean = false;
   public isFitness: boolean;
   constructor(
+    private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _auth: Auth,
     private _formBuilder: FormBuilder,
     private _fitSvc: FitnessService,
     private _navCtrl: NavController,
@@ -82,11 +85,13 @@ export class FitnessPage {
   }
 
   ionViewCanEnter(): void {
-    if (!this._auth.isAuthenticated()) {
-      this._navCtrl.setRoot('registration', {
-        history: 'fitness'
-      });
-    }
+    this._afAuth.authState.subscribe((auth: firebase.User) => {
+      if (!auth) {
+        this._navCtrl.setRoot('registration', {
+          history: 'fitness'
+        });
+      }
+    })
   }
 
   ionViewCanLeave(): Promise<boolean> {

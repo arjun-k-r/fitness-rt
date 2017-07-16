@@ -7,11 +7,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
-import { Camera } from '@ionic-native/camera';
-import { ImagePicker } from '@ionic-native/image-picker';
 import { MyApp } from './app.component';
 
 // Cordova
+import { Camera } from '@ionic-native/camera';
+import { Facebook } from '@ionic-native/facebook';
+import { ImagePicker } from '@ionic-native/image-picker';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -59,6 +60,7 @@ const FIREBASE_CONFIG = {
   ],
   providers: [
     Camera,
+    Facebook,
     ImagePicker,
     StatusBar,
     SplashScreen,

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.razvantomegea.fit4life" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Fit for Life</name>
     <description>Fitness cross-platform web application implemented with Ionic</description>
     <author email="razvan.tomegea@gmail.com" href="https://fit-4-life.firebaseapp.com">Razvan Tomegea</author>
@@ -98,4 +98,8 @@
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
     <plugin name="ionic-plugin-deploy" spec="^0.6.7" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <plugin name="cordova-plugin-facebook4" spec="^1.9.0">
+        <variable name="APP_ID" value="1844081052587071" />
+        <variable name="APP_NAME" value="Fit for Life" />
+    </plugin>
 </widget>

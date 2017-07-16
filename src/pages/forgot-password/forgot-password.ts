@@ -2,7 +2,10 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
-import { Auth } from '@ionic/cloud-angular';
+
+// Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 // Providers
 import { AuthValidationService } from '../../providers';
@@ -20,8 +23,8 @@ export class ForgotPasswordPage {
   public email: AbstractControl;
   public password: AbstractControl;
   constructor(
+    private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _auth: Auth,
     private _loadCtrl: LoadingController,
     private _fb: FormBuilder,
     private _navCtrl: NavController,
@@ -51,17 +54,17 @@ export class ForgotPasswordPage {
       duration: 30000
     });
     loader.present();
-    this._auth.requestPasswordReset(form.email)
+    this._afAuth.auth.sendPasswordResetEmail(form.email)
       .then(() => {
         loader.dismiss();
         this._navCtrl.push('password-reset', { email: form.email });
       })
-      .catch(err => {
+      .catch((err: firebase.FirebaseError) => {
         loader.dismiss();
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
-          message: err.response.body.error.message,
+          message: err.message,
           buttons: ['OK']
         }).present();
       });

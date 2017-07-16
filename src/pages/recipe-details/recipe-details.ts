@@ -1,6 +1,10 @@
+// App
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Auth } from '@ionic/cloud-angular';
+
+// Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @IonicPage({
   name: 'recipe-details',
@@ -12,15 +16,18 @@ import { Auth } from '@ionic/cloud-angular';
 })
 export class RecipeDetailsPage {
   constructor(
-    private _auth: Auth,
+    private _afAuth: AngularFireAuth,
     private _navCtrl: NavController,
     private _params: NavParams
   ) { }
 
-  ionViewCanEnter(): boolean {
-    if (!this._auth.isAuthenticated()) {
-      this._navCtrl.setRoot('registration');
-      return false;
-    }
+  ionViewCanEnter(): void {
+    this._afAuth.authState.subscribe((auth: firebase.User) => {
+      if (!auth) {
+        this._navCtrl.setRoot('registration', {
+          history: 'recipe-details'
+        });
+      }
+    })
   }
 }

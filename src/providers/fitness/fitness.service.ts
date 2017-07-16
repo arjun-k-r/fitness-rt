@@ -1,9 +1,10 @@
 // App
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
-import { User } from '@ionic/cloud-angular';
 
 // Third-party
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
@@ -13,7 +14,13 @@ const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class FitnessService {
-  constructor(private _storage: Storage, private _user: User) { }
+  private _fitness$: FirebaseObjectObservable<Fitness>;
+  constructor(
+    private _afAuth: AngularFireAuth,
+    private _db: AngularFireDatabase
+  ) {
+    this._afAuth.authState.subscribe((auth: firebase.User) => this._fitness$ = _db.object(`/fitness/${auth.uid}`));
+  }
 
   private _calculateTHRMax(hrMax: number, hrRest: number): number {
     return Math.round(0.85 * (hrMax - hrRest) + hrRest);
@@ -70,52 +77,23 @@ export class FitnessService {
     }
   }
 
-  public getFitness(): Fitness {
-    return <Fitness>this._user.get('fitness', new Fitness());
+  public getFitness$(): FirebaseObjectObservable<Fitness> {
+    return this._fitness$;
   }
 
-  public getUserRequirements(): Nutrition {
-    return <Nutrition>this.getFitness().requirements;
-  }
-
-  public getUserWeight(): number {
-    return <number>this.getFitness().weight;
-  }
-
-  public restoreEnergyConsumption(): Promise<number> {
-    return new Promise(resolve => {
-      this._storage.ready().then(() => this._storage.get('energyConsumption').then((energy: { date: number, consumption: number }) => {
-        if (!!energy && energy.date === CURRENT_DAY) {
-          resolve(energy.consumption);
-        } else {
-          resolve(0);
-        }
-      }));
+  public getUserRequirements(): Promise<Nutrition> {
+    return new Promise((resolve, reject) => {
+      this._fitness$.subscribe((fitness: Fitness) => resolve(fitness.requirements), (err: Error) => reject(err));
     });
   }
 
-  public restoreEnergyIntake(): Promise<number> {
-    return new Promise(resolve => {
-      this._storage.ready().then(() => this._storage.get('energyIntake').then((energy: { date: number, intake: number }) => {
-        if (!!energy && energy.date === CURRENT_DAY) {
-          resolve(energy.intake);
-        } else {
-          resolve(0);
-        }
-      }));
+  public getUserWeight(): Promise<number> {
+    return new Promise((resolve, reject) => {
+      this._fitness$.subscribe((fitness: Fitness) => resolve(fitness.weight), (err: Error) => reject(err));
     });
   }
 
   public saveFitness(fitness: Fitness): void {
-    this._user.set('fitness', fitness);
-    this._user.save();
-  }
-
-  public storeEnergyConsumption(energyConsumption: number): void {
-    this._storage.ready().then(() => this._storage.set('energyConsumption', { date: CURRENT_DAY, consumption: energyConsumption }));
-  }
-
-  public storeEnergyIntake(energyIntake: number): void {
-    this._storage.ready().then(() => this._storage.set('energyIntake', { date: CURRENT_DAY, intake: energyIntake }));
+    this._fitness$.update(fitness);
   }
 }

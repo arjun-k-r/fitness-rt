@@ -17,6 +17,7 @@
         <error-message [control]="password"></error-message>
         <br>
         <button class="auth-page__button" ion-button block type="submit" [disabled]="loginForm.invalid">Login</button>
+        <button class="auth-page__button" ion-button block type="button" (click)="signInWithFacebook()">Sig in with Facebook</button>
         <div class="auth-page__links">
           <button type="button" (click)="register()" ion-button clear>Sign Up</button>
           <button type="button" (click)="forgotPassword()" ion-button clear>Forgot Password?</button>

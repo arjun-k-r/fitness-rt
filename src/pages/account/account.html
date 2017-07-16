@@ -23,6 +23,7 @@
         </ion-row>
     </ion-grid>
     <input type="file" #fileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event)" />
+    <button (click)="connectToFacebook()" ion-button block>Coonect to Facebook</button>
     <button (click)="signout()" ion-button block>Sign out</button>
     <button (click)="deleteAccountRequest()" ion-button block>Delete account</button>
 

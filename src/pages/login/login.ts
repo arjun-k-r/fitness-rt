@@ -1,7 +1,8 @@
 // App
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, LoadingController, NavController, NavParams, Platform } from 'ionic-angular';
+import { Facebook } from '@ionic-native/facebook';
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -25,10 +26,12 @@ export class LoginPage {
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
+    private _fb: Facebook,
     private _formBuilder: FormBuilder,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
-    private _params: NavParams
+    private _params: NavParams,
+    private _platform: Platform
   ) {
     this._history = _params.get('history');
     this.loginForm = _formBuilder.group({
@@ -83,5 +86,40 @@ export class LoginPage {
     this._navCtrl.setRoot('registration', {
       history: this._history
     })
+  }
+
+  public signInWithFacebook() {
+    let loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      spinner: 'crescent',
+      duration: 30000
+    });
+    loader.present();
+    if (this._platform.is('cordova')) {
+      this._fb.login(['email', 'public_profile']).then(res => {
+        const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+        return firebase.auth().signInWithCredential(facebookCredential);
+      })
+    }
+    else {
+      return this._afAuth.auth
+        .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+        .then((user: firebase.User) => {
+          loader.dismiss();
+          if (this._history) {
+            this._navCtrl.setRoot(this._history);
+          } else {
+            this._navCtrl.setRoot('fitness');
+          }
+        }).catch((err: firebase.FirebaseError) => {
+          loader.dismiss();
+          this._alertCtrl.create({
+            title: 'Uhh ohh...',
+            subTitle: 'Something went wrong',
+            message: err.message,
+            buttons: ['OK']
+          }).present();
+        });
+    }
   }
 }

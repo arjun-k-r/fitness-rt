@@ -1,8 +1,11 @@
 // App
 import { Component } from '@angular/core';
 import { ActionSheetController, AlertController, IonicPage, InfiniteScroll, Loading, LoadingController, NavController, ViewController } from 'ionic-angular';
-import { Auth } from '@ionic/cloud-angular';
 import { Subscription } from 'rxjs/Subscription';
+
+// Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 // Models
 import { Food, Recipe } from '../../models';
@@ -37,8 +40,8 @@ export class FoodSelectPage {
   public selectionSegment: string = 'foods';
   constructor(
     private _actionSheetCtrl: ActionSheetController,
+    private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _auth: Auth,
     private _foodSvc: FoodService,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
@@ -258,11 +261,14 @@ export class FoodSelectPage {
     }).present();
   }
 
-  ionViewCanEnter(): boolean {
-    if (!this._auth.isAuthenticated()) {
-      this._navCtrl.setRoot('registration');
-      return false;
-    }
+  ionViewCanEnter(): void {
+    this._afAuth.authState.subscribe((auth: firebase.User) => {
+      if (!auth) {
+        this._navCtrl.setRoot('registration', {
+          history: 'food-select'
+        });
+      }
+    })
   }
 
   ionViewWillLoad(): void {

@@ -10,7 +10,7 @@ export class SortByPipe implements PipeTransform {
   /**
    * Sorts items by specific property
    */
-  transform(items: Array<any> = [], sortBy: string = '') {
-    return !!sortBy ? _.orderBy(items, sortBy, 'desc') : items;
+  transform(items: Array<any> = [], sortBy: string = '', order: string = 'desc') {
+    return !!sortBy ? _.orderBy(items, sortBy, order) : items;
   }
 }

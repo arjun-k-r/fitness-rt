@@ -29,7 +29,8 @@ export class FoodListPage {
   public limit: number = 50;
   public searchQuery: string = '';
   public selectedGroup: string = FOOD_GROUPS[0];
-  public selectedNutrient = '';
+  public sortOrder = 'desc';
+  public sortSelection = '';
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _afAuth: AngularFireAuth,
@@ -64,7 +65,8 @@ export class FoodListPage {
           text: 'Done',
           handler: (data: string) => {
             this.selectedGroup = data;
-            this.selectedNutrient = '';
+            this.sortSelection = '';
+            this.sortOrder = 'desc';
             this._dismissedLoader = false;
             this._foodSvc.changeFoodGroup(this.selectedGroup);
             this._loader = this._loadCtrl.create({
@@ -92,14 +94,15 @@ export class FoodListPage {
           type: 'radio',
           label: nutrient.name,
           value: nutrient.key,
-          checked: this.selectedNutrient === `nutrition.${nutrient.key}.value`
+          checked: this.sortSelection === `nutrition.${nutrient.key}.value`
         }
       })],
       buttons: [
         {
           text: 'Done',
           handler: (data: string) => {
-            this.selectedNutrient = `nutrition.${data}.value`;
+            this.sortSelection = `nutrition.${data}.value`;
+            this.sortOrder = 'desc';
           }
         }
       ]
@@ -127,9 +130,15 @@ export class FoodListPage {
             this._selectGroup();
           }
         }, {
-          text: 'Sort by nutrients',
+          text: 'Sort by nutrients (high to low)',
           handler: () => {
             this._selectNutrient();
+          }
+        }, {
+          text: 'Sort by alkalinity (alkaline to acid)',
+          handler: () => {
+            this.sortSelection = 'pral';
+            this.sortOrder = 'asc';
           }
         }, {
           text: 'Cancel',

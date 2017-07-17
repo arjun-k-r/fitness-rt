@@ -101,7 +101,7 @@ export class FitnessService {
       this._storage.set(`userRequirements${CURRENT_DAY}`, fitness.requirements)
         .then(() => {
           this._storage.set('userWeight', fitness.weight)
-            .then(() => this._fitness$.update(fitness))
+            .then(() => this._fitness$.update(fitness).catch((err: Error) => console.error(err)))
             .catch((err: Error) => console.error(err));
         })
         .catch((err: Error) => console.error(err));

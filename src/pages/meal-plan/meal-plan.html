@@ -92,13 +92,13 @@
           Potassium:Sodium ratio
           <ion-icon color="{{mealPlan.potassiumSodiumRatio > 3 ? 'secondary' : 'danger'}}" name="{{mealPlan.potassiumSodiumRatio > 3 ? 'thumbs-up' : 'thumbs-down'}}"
             item-right></ion-icon>
-          <p item-right ion-text color="{{ mealPlan.potassiumSodiumRatio > 3 ? 'secondary' : 'danger' }}">{{ mealPlan.omega36Ratio }}</p>
+          <p item-right ion-text color="{{ mealPlan.potassiumSodiumRatio > 3 ? 'secondary' : 'danger' }}">{{ mealPlan.potassiumSodiumRatio }}</p>
         </ion-item>
         <ion-item>
           pH
-          <ion-icon color="{{mealPlan.pral < 0 ? 'secondary' : 'danger'}}" name="{{mealPlan.pral < 0 ? 'thumbs-up' : 'thumbs-down'}}"
+          <ion-icon color="{{mealPlan.pral <= 0 ? 'secondary' : 'danger'}}" name="{{mealPlan.pral <= 0 ? 'thumbs-up' : 'thumbs-down'}}"
             item-right></ion-icon>
-          <p item-right ion-text color="{{ mealPlan.pral < 0 ? 'secondary' : 'danger' }}">{{ mealPlan.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
+          <p item-right ion-text color="{{ mealPlan.pral <= 0 ? 'secondary' : 'danger' }}">{{ mealPlan.pral > 0 ? 'Acid forming' : 'Alkaline forming'}}</p>
         </ion-item>
       </ion-item-group>
       <ion-item-group>
@@ -153,40 +153,41 @@
           <ion-icon color="{{mealPlan.dailyNutrition.sugars?.value < 115 ? 'secondary' : 'danger'}}" name="{{mealPlan.dailyNutrition.sugars?.value < 115 ? 'thumbs-up' : 'thumbs-down'}}"
             item-right></ion-icon>
           <p item-right ion-text color="{{ mealPlan.dailyNutrition.sugars?.value < 115 ? 'secondary' : 'danger' }}">{{ mealPlan.dailyNutrition.sugars?.value }}%</p>
-          <ion-item>
-            Trans fat
-            <ion-icon color="{{mealPlan.dailyNutrition.transFat?.value < 115 ? 'secondary' : 'danger'}}" name="{{mealPlan.dailyNutrition.transFat?.value < 115 ? 'thumbs-up' : 'thumbs-down'}}"
-              item-right></ion-icon>
-            <p item-right ion-text color="{{ mealPlan.dailyNutrition.transFat?.value < 115 ? 'secondary' : 'danger' }}">{{ mealPlan.dailyNutrition.transFat?.value }}%</p>
-          </ion-item>
+        </ion-item>
+        <ion-item>
+          Trans fat
+          <ion-icon color="{{mealPlan.dailyNutrition.transFat?.value < 115 ? 'secondary' : 'danger'}}" name="{{mealPlan.dailyNutrition.transFat?.value < 115 ? 'thumbs-up' : 'thumbs-down'}}"
+            item-right></ion-icon>
+          <p item-right ion-text color="{{ mealPlan.dailyNutrition.transFat?.value < 115 ? 'secondary' : 'danger' }}">{{ mealPlan.dailyNutrition.transFat?.value }}%</p>
         </ion-item>
       </ion-item-group>
       <ion-item-group>
         <ion-item-divider>Essential nutrients</ion-item-divider>
         <ion-item>
           Aminoacids
-          <ion-icon color="{{dailyEssentails.aminoacids === 100 ? 'secondary' : 'danger'}}" name="{{dailyEssentails.aminoacids === 100 ? 'thumbs-up' : 'thumbs-down'}}"
+          <ion-icon color="{{dailyEssentials.aminoacids === 100 ? 'secondary' : 'danger'}}" name="{{dailyEssentials.aminoacids === 100 ? 'thumbs-up' : 'thumbs-down'}}"
             item-right></ion-icon>
-          <p item-right ion-text color="{{ dailyEssentails.aminoacids === 100 ? 'secondary' : 'danger' }}">{{ dailyEssentails.aminoacids }}%</p>
+          <p item-right ion-text color="{{ dailyEssentials.aminoacids === 100 ? 'secondary' : 'danger' }}">{{ dailyEssentials.aminoacids }}%</p>
         </ion-item>
         <ion-item>
           Fatty acids
-          <ion-icon color="{{dailyEssentails.fattyAcids === 100 ? 'secondary' : 'danger'}}" name="{{dailyEssentails.fattyAcids === 100 ? 'thumbs-up' : 'thumbs-down'}}"
+          <ion-icon color="{{dailyEssentials.fattyAcids === 100 ? 'secondary' : 'danger'}}" name="{{dailyEssentials.fattyAcids === 100 ? 'thumbs-up' : 'thumbs-down'}}"
             item-right></ion-icon>
-          <p item-right ion-text color="{{ dailyEssentails.fattyAcids === 100 ? 'secondary' : 'danger' }}">{{ dailyEssentails.fattyAcids }}%</p>
+          <p item-right ion-text color="{{ dailyEssentials.fattyAcids === 100 ? 'secondary' : 'danger' }}">{{ dailyEssentials.fattyAcids }}%</p>
         </ion-item>
         <ion-item>
           Minerals
-          <ion-icon color="{{dailyEssentails.minerals === 100 ? 'secondary' : 'danger'}}" name="{{dailyEssentails.minerals === 100 ? 'thumbs-up' : 'thumbs-down'}}"
+          <ion-icon color="{{dailyEssentials.minerals === 100 ? 'secondary' : 'danger'}}" name="{{dailyEssentials.minerals === 100 ? 'thumbs-up' : 'thumbs-down'}}"
             item-right></ion-icon>
-          <p item-right ion-text color="{{ dailyEssentails.minerals === 100 ? 'secondary' : 'danger' }}">{{ dailyEssentails.minerals }}%</p>
+          <p item-right ion-text color="{{ dailyEssentials.minerals === 100 ? 'secondary' : 'danger' }}">{{ dailyEssentials.minerals }}%</p>
         </ion-item>
         <ion-item>
           Vitamins
-          <ion-icon color="{{dailyEssentails.vitamins === 100 ? 'secondary' : 'danger'}}" name="{{dailyEssentails.vitamins === 100 ? 'thumbs-up' : 'thumbs-down'}}"
+          <ion-icon color="{{dailyEssentials.vitamins === 100 ? 'secondary' : 'danger'}}" name="{{dailyEssentials.vitamins === 100 ? 'thumbs-up' : 'thumbs-down'}}"
             item-right></ion-icon>
-          <p item-right ion-text color="{{ dailyEssentails.vitamins === 100 ? 'secondary' : 'danger' }}">{{ dailyEssentails.vitamins }}%</p>
+          <p item-right ion-text color="{{ dailyEssentials.vitamins === 100 ? 'secondary' : 'danger' }}">{{ dailyEssentials.vitamins }}%</p>
         </ion-item>
+      </ion-item-group>
     </div>
     <!-- End of segment -->
 

@@ -133,6 +133,6 @@ export class SleepService {
       imbalancedSleep: sleepPlan.imbalancedSleep,
       sleepOscillation: sleepPlan.sleepOscillation,
       sleepPattern: sleepPlan.sleepPattern
-    });
+    }).catch((err: Error) => console.error(err));
   }
 }

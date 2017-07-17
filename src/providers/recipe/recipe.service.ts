@@ -174,7 +174,7 @@ export class RecipeService {
         pral: recipe.pral,
         quantity: recipe.quantity,
         servings: recipe.servings
-      });
+      }).catch((err: Error) => console.error(err));
     }
   }
 }

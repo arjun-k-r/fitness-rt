@@ -20,7 +20,7 @@ import { NutritionService } from '../nutrition/nutrition.service';
 @Injectable()
 export class ActivityService {
   private _activities$: FirebaseListObservable<Array<Activity>>;
-  private _currentActivityPlan$: FirebaseObjectObservable<ActivityPlan>;
+  private _activityPlan$: FirebaseObjectObservable<ActivityPlan>;
   constructor(
     private _afAuth: AngularFireAuth,
     private _db: AngularFireDatabase,
@@ -90,10 +90,10 @@ export class ActivityService {
     return new Observable((observer: Observer<ActivityPlan>) => {
       this._afAuth.authState.subscribe((auth: firebase.User) => {
         if (!!auth) {
-          this._currentActivityPlan$ = this._db.object(`/activity-plans/${auth.uid}/${CURRENT_DAY}`);
-          this._currentActivityPlan$.subscribe((currActivityPlan: ActivityPlan) => {
+          this._activityPlan$ = this._db.object(`/activity-plans/${auth.uid}/${CURRENT_DAY}`);
+          this._activityPlan$.subscribe((currActivityPlan: ActivityPlan) => {
             if (currActivityPlan['$value'] === null) {
-              this._currentActivityPlan$.set(new ActivityPlan());
+              this._activityPlan$.set(new ActivityPlan());
             } else {
               // Firebase removes empty objects on save
               currActivityPlan.activities = currActivityPlan.activities || [];
@@ -123,7 +123,7 @@ export class ActivityService {
       this._storage.ready().then(() => {
         this._storage.set(`energyOutput${CURRENT_DAY}`, activityPlan.totalEnergyBurn).then(() => {
           this._storage.get(`energyInput${CURRENT_DAY}`).then((energyInput: number = 0) => {
-            this._currentActivityPlan$.update({
+            this._activityPlan$.update({
               activities: activityPlan.activities,
               date: activityPlan.date,
               totalDuration: activityPlan.totalDuration,

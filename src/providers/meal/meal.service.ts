@@ -28,7 +28,7 @@ const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class MealService {
-  private _currentMealPlan$: FirebaseObjectObservable<MealPlan>;
+  private _mealPlan$: FirebaseObjectObservable<MealPlan>;
   constructor(
     private _afAuth: AngularFireAuth,
     private _db: AngularFireDatabase,
@@ -269,10 +269,10 @@ export class MealService {
     return new Observable((observer: Observer<MealPlan>) => {
       this._afAuth.authState.subscribe((auth: firebase.User) => {
         if (!!auth) {
-          this._currentMealPlan$ = this._db.object(`/meal-plans/${auth.uid}/${CURRENT_DAY}`);
-          this._currentMealPlan$.subscribe((currMealPlan: MealPlan) => {
+          this._mealPlan$ = this._db.object(`/meal-plans/${auth.uid}/${CURRENT_DAY}`);
+          this._mealPlan$.subscribe((currMealPlan: MealPlan) => {
             if (currMealPlan['$value'] === null) {
-              this._currentMealPlan$.set(new MealPlan());
+              this._mealPlan$.set(new MealPlan());
             } else {
               // Firebase removes empty objects on save
               currMealPlan.warnings = currMealPlan.warnings || [];
@@ -295,14 +295,14 @@ export class MealService {
         ...this._checkMealPlan(mealPlan),
         ...this._nutritionSvc.checkNutrition(mealPlan.dailyNutrition)
       ]);
-      this._currentMealPlan$.update({
+      this._mealPlan$.update({
         dailyNutrition: mealPlan.dailyNutrition,
         date: mealPlan.date,
         meals: mealPlan.meals,
         omega3omega6Ratio: mealPlan.omega3omega6Ratio,
         pral: mealPlan.pral,
         warnings: mealPlan.warnings
-      });
+      }).catch((err: Error) => console.error(err));
     }).catch((err: Error) => console.error(err));
   }
 

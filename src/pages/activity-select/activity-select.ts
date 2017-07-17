@@ -79,8 +79,19 @@ export class ActivitySelectPage {
             text: 'Done',
             handler: (data: { duration: number }) => {
               activity.duration = +data.duration;
-              activity.energyBurn = this._activitySvc.calculateEnergyBurn(activity);
-              this.selectedActivities = [...this.selectedActivities, activity];
+              this._activitySvc.calculateEnergyBurn(activity)
+                .then((energyBurn: number) => {
+                  activity.energyBurn = energyBurn;
+                  this.selectedActivities = [...this.selectedActivities, activity];
+                })
+                .catch((err: Error) => {
+                  this._alertCtrl.create({
+                    title: 'Uhh ohh...',
+                    subTitle: 'Something went wrong',
+                    message: err.toString(),
+                    buttons: ['OK']
+                  }).present();
+                });
             }
           }
         ]

@@ -21,7 +21,6 @@ import { NutritionService } from '../nutrition/nutrition.service';
 export class ActivityService {
   private _activities$: FirebaseListObservable<Array<Activity>>;
   private _currentActivityPlan$: FirebaseObjectObservable<ActivityPlan>;
-  private _userWeight: number;
   constructor(
     private _afAuth: AngularFireAuth,
     private _db: AngularFireDatabase,
@@ -50,8 +49,16 @@ export class ActivityService {
     return activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.duration, 0);
   }
 
-  public calculateEnergyBurn(activity: Activity): number {
-    return Math.round((activity.met * 3.5 * this._userWeight / 200) * activity.duration);
+  public calculateEnergyBurn(activity: Activity): Promise<number> {
+    return new Promise((resolve, reject) => {
+      this._storage.ready().then((storage: LocalForage) => {
+        this._storage.get('userWeight')
+          .then((userWeight: number) => {
+            resolve(Math.round((activity.met * 3.5 * userWeight / 200) * activity.duration))
+          })
+          .catch((err: Error) => reject(err));
+      });
+    });
   }
 
   public calculateEnergyBurnTotal(activities: Array<Activity>): number {

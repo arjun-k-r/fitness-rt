@@ -23,7 +23,6 @@ import { FitnessService, SleepService } from '../../providers';
 export class SleepPlanPage {
   private _sleepPlanSubscription: Subscription;
   public currentSleep: SleepHabit = new SleepHabit();
-  public isDirty: boolean = false;
   public sleepPlan: SleepPlan;
   public sleepPlanDetails: string = 'guidelines';
   constructor(
@@ -38,13 +37,8 @@ export class SleepPlanPage {
   public changedTime(): void {
     if (this.currentSleep.bedTime !== this.sleepPlan.sleepPattern[0].bedTime || this.currentSleep.wakeUpTime !== this.sleepPlan.sleepPattern[0].wakeUpTime) {
       this.currentSleep.duration = this._sleepSvc.getSleepDuration(this.currentSleep);
-      this.isDirty = true;
+      this._sleepSvc.saveSleep(this.sleepPlan, this.currentSleep);
     }
-  }
-
-  public saveSleep(): void {
-    this._sleepSvc.saveSleep(this.sleepPlan, this.currentSleep);
-    this.isDirty = false;
   }
 
   ionViewCanEnter(): void {
@@ -55,33 +49,6 @@ export class SleepPlanPage {
         });
       }
     })
-  }
-
-  ionViewCanLeave(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      if (this.isDirty) {
-        this._alertCtrl.create({
-          title: 'Discard changes',
-          message: 'Changes have been made. Are you sure you want to leave?',
-          buttons: [
-            {
-              text: 'Yes',
-              handler: () => {
-                resolve(true);
-              }
-            },
-            {
-              text: 'No',
-              handler: () => {
-                reject(true);
-              }
-            }
-          ]
-        }).present();
-      } else {
-        resolve(true);
-      }
-    });
   }
 
   ionViewWillEnter(): void {
@@ -95,12 +62,11 @@ export class SleepPlanPage {
       this.sleepPlan = Object.assign({}, sleepPlan);
       this.currentSleep = Object.assign({}, this._sleepSvc.getCurrentSleep(this.sleepPlan));
       loader.dismiss();
-    }, (error: Error) => {
-      loader.dismiss();
+    }, (err: firebase.FirebaseError) => {
       this._alertCtrl.create({
         title: 'Uhh ohh...',
         subTitle: 'Something went wrong',
-        message: error.toString(),
+        message: err.message,
         buttons: ['OK']
       }).present();
     });

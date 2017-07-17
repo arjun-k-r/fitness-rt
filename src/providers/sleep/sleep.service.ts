@@ -2,11 +2,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { User } from '@ionic/cloud-angular';
-import 'rxjs/add/operator/map';
 
 // Third-party
+import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
@@ -16,19 +16,20 @@ const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class SleepService {
-  private _sleepPlan: FirebaseObjectObservable<SleepPlan>;
+  private _sleepPlan$: FirebaseObjectObservable<SleepPlan>;
   constructor(
-    private _db: AngularFireDatabase,
-    private _user: User
+    private _afAuth: AngularFireAuth,
+    private _db: AngularFireDatabase
   ) {
-    this._sleepPlan = _db.object(`/sleep-plan/${_user.id}/`);
+    _afAuth.authState.subscribe((auth: firebase.User) => this._sleepPlan$ = _db.object(`/sleep-plan/${auth.uid}`),
+      (err: firebase.FirebaseError) => console.error(err));
   }
 
   private _checkBedtime(sleep: SleepHabit): boolean {
     if (moment(sleep.bedTime, 'hours').hours() > 22) {
       sleep.warnings = [...sleep.warnings, new WarningMessage(
         'Your bedtime is too late',
-        'You need to go to bed before 10:00 p.m., because between 10:00 p.m. and 01:00 a.m. our adrenal glands work to repair the body, including melatonin'
+        'Try to go to bed before 10:00 p.m.'
       )];
       return false;
     }
@@ -40,7 +41,7 @@ export class SleepService {
     if (sleep.duration < 7) {
       sleep.warnings = [...sleep.warnings, new WarningMessage(
         'Insufficient sleep',
-        'We need to catch 5 complete sleep cycles of 90-110 minutes (7-9 hours)'
+        'Try to catch 7-9 hours of sleep every night'
       )];
       return false;
     }
@@ -62,7 +63,7 @@ export class SleepService {
     if ((sleepPlan.sleepOscillation > 1 || sleepPlan.sleepOscillation < -1)) {
       sleepPlan.sleepPattern[0].warnings = [...sleepPlan.sleepPattern[0].warnings, new WarningMessage(
         'You bedtime is too variable',
-        'You need to go to bed around the same hour every night to set your circadian rhythm (internal clock)'
+        'Try to go to bed around the same hour every night'
       )];
       return false
     }
@@ -87,7 +88,6 @@ export class SleepService {
       if (sleepPlan.sleepPattern.length === 7) {
         sleepPlan.sleepPattern.pop();
       }
-
       sleepPlan.sleepPattern.unshift(new SleepHabit(
         lastSleep.bedTime,
         CURRENT_DAY,
@@ -112,20 +112,20 @@ export class SleepService {
 
   public getSleepPlan$(): Observable<SleepPlan> {
     return new Observable((observer: Observer<SleepPlan>) => {
-      this._sleepPlan.subscribe((sleepPlan: SleepPlan) => {
+      this._sleepPlan$.subscribe((sleepPlan: SleepPlan) => {
         if (sleepPlan['$value'] === null) {
-          this._sleepPlan.set(new SleepPlan());
+          this._sleepPlan$.set(new SleepPlan());
         } else {
           observer.next(sleepPlan);
         }
-      });
+      }, (err: firebase.FirebaseError) => observer.error(err));
     });
   }
 
   public saveSleep(sleepPlan: SleepPlan, sleepHabit: SleepHabit): void {
     sleepPlan.sleepPattern[0] = sleepHabit;
     sleepPlan.imbalancedSleep = !this._checkSleep(sleepPlan);
-    this._sleepPlan.update({
+    this._sleepPlan$.update({
       daysOfImbalance: sleepPlan.daysOfImbalance,
       imbalancedSleep: sleepPlan.imbalancedSleep,
       sleepOscillation: sleepPlan.sleepOscillation,

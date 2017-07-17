@@ -1,6 +1,6 @@
 // App
 import { Component } from '@angular/core';
-import { ActionSheetController, Alert, AlertController, IonicPage, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
+import { ActionSheetController, AlertController, IonicPage, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -21,7 +21,6 @@ import { MealService, NutritionService } from '../../providers';
   templateUrl: 'meal-details.html'
 })
 export class MealDetailsPage {
-  public isDirty: boolean = false;
   public meal: Meal;
   public mealIdx: number;
   public mealDetails: string = 'details';
@@ -43,7 +42,7 @@ export class MealDetailsPage {
   }
 
   private _changeServings(item: Food | Recipe): void {
-    let alert: Alert = this._alertCtrl.create({
+    this._alertCtrl.create({
       title: 'Servings',
       subTitle: `${item.name.toString()} (${item.quantity.toString()}${item.unit.toString()})`,
       inputs: [
@@ -66,8 +65,7 @@ export class MealDetailsPage {
           }
         }
       ]
-    });
-    alert.present();
+    }).present();
   }
 
   private _removeItem(idx: number): void {
@@ -76,11 +74,11 @@ export class MealDetailsPage {
   }
 
   private _updateMealDetails(): void {
-    this.isDirty = true;
     this.meal.nutrition = Object.assign({}, this._nutritionSvc.calculateNutrition(this.meal.mealItems));
     this.meal.pral = this._mealSvc.calculatePRAL(this.meal.mealItems);
     this.meal.quantity = this._nutritionSvc.calculateQuantity(this.meal.mealItems);
-    this._mealSvc.checkMeal(this.meal);
+    this.mealPlan.meals = this._mealSvc.sortMeals(this.mealPlan.meals);
+    this._mealSvc.saveMealPlan(this.mealPlan);
   }
 
   public addMealItems(): void {
@@ -116,10 +114,6 @@ export class MealDetailsPage {
     }).present();
   }
 
-  public markDirty(): void {
-    this.isDirty = true;
-  }
-
   public removeMeal(): void {
     this.mealPlan.meals = [...this.mealPlan.meals.slice(0, this.mealIdx), ...this.mealPlan.meals.slice(this.mealIdx + 1)];
     this._mealSvc.saveMealPlan(this.mealPlan);
@@ -127,50 +121,7 @@ export class MealDetailsPage {
   }
 
   public saveMeal(): void {
-    this._updateMealDetails();
-    this.mealPlan.meals = this._mealSvc.sortMeals(this.mealPlan.meals);
-    if (this.meal.favourite) {
-      this._mealSvc.updateFavouriteMeal(this.meal);
-    }
     this._mealSvc.saveMealPlan(this.mealPlan);
-    this.isDirty = false;
-  }
-
-  public toggleFavourite(): void {
-    if (!!this.meal.favourite) {
-      let alert: Alert = this._alertCtrl.create({
-        title: 'Favourite name',
-        subTitle: 'Please give a name to your favourite meal',
-        inputs: [
-          {
-            name: 'favouriteName',
-            placeholder: 'e.g. My special healthy breakfast',
-            type: 'string'
-          }
-        ],
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              this.meal.favourite = false;
-            }
-          },
-          {
-            text: 'Done',
-            handler: data => {
-              this.meal.favouriteName = data.favouriteName;
-              this._mealSvc.updateFavouriteMeal(this.meal);
-              this.isDirty = true;
-            }
-          }
-        ]
-      });
-      alert.present();
-    } else {
-      this._mealSvc.updateFavouriteMeal(this.meal);
-      this.isDirty = true;
-    }
   }
 
   ionViewCanEnter(): void {
@@ -181,32 +132,5 @@ export class MealDetailsPage {
         });
       }
     })
-  }
-
-  ionViewCanLeave(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      if (this.isDirty) {
-        this._alertCtrl.create({
-          title: 'Discard changes',
-          message: 'Changes have been made. Are you sure you want to leave?',
-          buttons: [
-            {
-              text: 'Yes',
-              handler: () => {
-                resolve(true);
-              }
-            },
-            {
-              text: 'No',
-              handler: () => {
-                reject(true);
-              }
-            }
-          ]
-        }).present();
-      } else {
-        resolve(true);
-      }
-    });
   }
 }

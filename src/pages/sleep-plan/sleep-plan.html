@@ -3,12 +3,7 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Sleep plan{{ isDirty ? '*' : ''}}</ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only (click)="saveSleep()">
-                <ion-icon name="sync"></ion-icon>
-            </button>
-        </ion-buttons>
+        <ion-title>Sleep plan</ion-title>
     </ion-navbar>
     <ion-toolbar>
         <ion-segment [(ngModel)]="sleepPlanDetails">
@@ -19,7 +14,7 @@
                 <ion-icon name="clock"></ion-icon>
             </ion-segment-button>
             <ion-segment-button value="warnings">
-                <ion-icon color="{{currentSleep.warnings?.length ? 'danger' : ''}}" name="warning"></ion-icon>
+                <ion-icon color="{{ currentSleep.warnings?.length ? 'danger' : '' }}" name="warning"></ion-icon>
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
@@ -31,19 +26,12 @@
         <ion-list *ngSwitchCase="'guidelines'">
             <ion-item>
                 <h2>Sleep 7-9 hours</h2>
-                <p text-wrap>We need to catch 5 complete sleep cycles of 90-110 minutes.</p>
             </ion-item>
             <ion-item>
                 <h2>Go to bed at the same hour</h2>
-                <p text-wrap>Set your circadian rhythm (biological clock)</p>
             </ion-item>
             <ion-item>
                 <h2>Go to bed before 10:00 p.m.</h2>
-                <p text-wrap>Between 10:00 p.m. and 01:00 a.m. our adrenal glands work to repair the body</p>
-            </ion-item>
-            <ion-item>
-                <h2>Avoid electronics before bed</h2>
-                <p text-wrap>Electronics emit blue light, which is perceived as sunlight.</p>
             </ion-item>
         </ion-list>
         <!-- End of segment -->
@@ -67,7 +55,7 @@
                 <ion-item *ngIf="sleepPlan.daysOfImbalance > 2">
                     <ion-icon color="danger" name="warning" item-left></ion-icon>
                     <h2 text-wrap>You have been having an imbalanced sleep for {{ sleepPlan.daysOfImbalance }} days</h2>
-                    <p text-wrap>Try to reaorganize your sleep plan</p>
+                    <p text-wrap>Try to discipline your sleep plan</p>
                 </ion-item>
                 <ion-item *ngFor="let warning of currentSleep.warnings">
                     <ion-icon color="danger" name="warning" item-left></ion-icon>

@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { User } from '@ionic/cloud-angular';
 
 // Third-party
+import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
 
 // Models
 import {
@@ -20,27 +22,32 @@ import { NutritionService } from '../nutrition/nutrition.service';
 export class RecipeService {
   private _recipes$: FirebaseListObservable<Array<Recipe>>;
   constructor(
+    private _afAuth: AngularFireAuth,
     private _db: AngularFireDatabase,
     private _foodSvc: FoodService,
     private _nutritionSvc: NutritionService,
     private _user: User
   ) {
-    this._recipes$ = _db.list(`/recipes/${_user.id}`, {
+    _afAuth.authState.subscribe((auth: firebase.User) => {
+       this._recipes$ = _db.list(`/recipes/${auth.uid}`, {
       query: {
         orderByChild: 'name'
       }
     });
+    }), (err: firebase.FirebaseError) => console.error(err);
   }
 
-  public calculateRecipeNutrition(items: Array<Food | Recipe>, portions: number): Nutrition {
-    let totalNutrition: Nutrition = this._nutritionSvc.calculateNutrition(items),
-      portionNutrition: Nutrition = new Nutrition();
-    for (let nutrientKey in totalNutrition) {
-      portionNutrition[nutrientKey].value = totalNutrition[nutrientKey].value / portions;
-      portionNutrition[nutrientKey].value = +(portionNutrition[nutrientKey].value).toFixed(2);
-    }
-
-    return portionNutrition;
+  public calculateRecipeNutrition(items: Array<Food | Recipe>, portions: number): Promise<Nutrition> {
+    return new Promise((resolve, reject) => {
+      this._nutritionSvc.calculateNutritionPercent(items).then((totalNutrition: Nutrition) => {
+        let portionNutrition: Nutrition = new Nutrition();
+        for (let nutrientKey in totalNutrition) {
+          portionNutrition[nutrientKey].value = totalNutrition[nutrientKey].value / portions;
+          portionNutrition[nutrientKey].value = +(portionNutrition[nutrientKey].value).toFixed(2);
+        }
+        resolve(portionNutrition);
+      }).catch((err: Error) => reject(err))
+    });
   }
 
   public calculateRecipeSize(items: Array<Food | Recipe>, portions: number): number {

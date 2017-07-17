@@ -1,5 +1,6 @@
 // App
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 // Third-party
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -10,16 +11,18 @@ import * as moment from 'moment';
 // Models
 import { Nutrition, Fitness } from '../../models';
 
-const CURRENT_DAY: number = moment().dayOfYear();
+export const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class FitnessService {
   private _fitness$: FirebaseObjectObservable<Fitness>;
   constructor(
     private _afAuth: AngularFireAuth,
-    private _db: AngularFireDatabase
+    private _db: AngularFireDatabase,
+    private _storage: Storage
   ) {
-    this._afAuth.authState.subscribe((auth: firebase.User) => this._fitness$ = _db.object(`/fitness/${auth.uid}`));
+    _afAuth.authState.subscribe((auth: firebase.User) => this._fitness$ = _db.object(`/fitness/${auth.uid}`),
+      (err: firebase.FirebaseError) => console.error(err));
   }
 
   private _calculateTHRMax(hrMax: number, hrRest: number): number {
@@ -81,19 +84,15 @@ export class FitnessService {
     return this._fitness$;
   }
 
-  public getUserRequirements(): Promise<Nutrition> {
-    return new Promise((resolve, reject) => {
-      this._fitness$.subscribe((fitness: Fitness) => resolve(fitness.requirements), (err: Error) => reject(err));
-    });
-  }
-
-  public getUserWeight(): Promise<number> {
-    return new Promise((resolve, reject) => {
-      this._fitness$.subscribe((fitness: Fitness) => resolve(fitness.weight), (err: Error) => reject(err));
-    });
-  }
-
   public saveFitness(fitness: Fitness): void {
-    this._fitness$.update(fitness);
+    this._storage.ready().then((storage: LocalForage) => {
+      this._storage.set(`userRequirements${CURRENT_DAY}`, fitness.requirements)
+        .then(() => {
+          this._storage.set('userWeight', fitness.weight)
+            .then(() => this._fitness$.update(fitness))
+            .catch((err: Error) => console.error(err));
+        })
+        .catch((err: Error) => console.error(err));
+    });
   }
 }

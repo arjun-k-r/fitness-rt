@@ -1,5 +1,6 @@
 // App
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 // Third-party
 import * as _ from 'lodash';
@@ -9,64 +10,77 @@ import {
   Food,
   Meal,
   Nutrition,
-  NutrientDeficiencies,
-  NutrientExcesses,
   Recipe,
   WarningMessage
 } from '../../models';
 
 // Providers
 import { DRIService } from '../dri/dri.service';
-import { FitnessService } from '../fitness/fitness.service';
+import { CURRENT_DAY, FitnessService } from '../fitness/fitness.service';
 
 @Injectable()
 export class NutritionService {
   public energyIntake: number = 0;
   constructor(
     private _driSvc: DRIService,
-    private _fitSvc: FitnessService
+    private _fitSvc: FitnessService,
+    private _storage: Storage
   ) { }
 
-  private _checkExcessAlcohol(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
-    return nutrition.alcohol.value > requirements.alcohol.value ? new WarningMessage(
-      'Too much alcohol',
-      `Your daily requirements are ${Math.round(requirements.alcohol.value)}${requirements.alcohol.unit} of alcohol`
-    ) : null;
+  private _checkDeficiencies(nutrition: Nutrition): Array<WarningMessage> {
+    let warnings: Array<WarningMessage> = [];
+    for (let nutrientKey in nutrition) {
+      if (nutrientKey !== 'alcohol' && nutrientKey !== 'caffeine' && nutrientKey !== 'carbs' && nutrientKey !== 'sugars' && nutrientKey !== 'transFat') {
+        if (nutrition[nutrientKey].value < 85) {
+          warnings.push(new WarningMessage(
+            `Your meal plan is deficient in ${nutrition[nutrientKey].name}`,
+            `Try to include more ${nutrition[nutrientKey].name} rich foods. Use the food list page to look for them.`
+          ));
+        }
+      }
+    }
+
+    return warnings;
   }
 
-  private _checkExcessCaffeine(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
-    return nutrition.caffeine.value > requirements.caffeine.value ? new WarningMessage(
-      'Too much caffeine',
-      `Your daily requirements are ${Math.round(requirements.caffeine.value)}${requirements.caffeine.unit} of caffeine`
-    ) : null;
-  }
+  private _checkExcesses(nutrition: Nutrition): Array<WarningMessage> {
+    let warnings: Array<WarningMessage> = [];
+    if (nutrition.alcohol.value > 115) {
+      warnings.push(new WarningMessage(
+        'Your meal plan has excess of Alcohol',
+        'Try to limit your intake of Alcohol per day'
+      ))
+    }
 
-  private _checkExcessCarbs(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
-    return nutrition.carbs.value > requirements.carbs.value ? new WarningMessage(
-      'Too much carbohydrates',
-      `Your daily requirements are ${Math.round(requirements.carbs.value)}${requirements.carbs.unit} of carbohydrates`
-    ) : null;
-  }
+    if (nutrition.caffeine.value > 115) {
+      warnings.push(new WarningMessage(
+        'Your meal plan has excess of Caffeine',
+        'Try to limit your intake of Caffeine per day'
+      ))
+    }
 
-  private _checkExcessEnergy(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
-    return nutrition.energy.value > requirements.energy.value ? new WarningMessage(
-      'Too much energy',
-      `Your daily requirements are ${Math.round(requirements.energy.value)}${requirements.energy.unit} of energy`
-    ) : null;
-  }
+    if (nutrition.carbs.value > 115) {
+      warnings.push(new WarningMessage(
+        'Your meal plan has excess of Carbohydrates',
+        'Try to limit your intake of Carbohydrates per day'
+      ))
+    }
 
-  private _checkExcessSugars(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
-    return nutrition.sugars.value > requirements.sugars.value ? new WarningMessage(
-      'Too much sugars',
-      `Your daily requirements are ${Math.round(requirements.sugars.value)}${requirements.sugars.unit} of sugars`
-    ) : null;
-  }
+    if (nutrition.sugars.value > 115) {
+      warnings.push(new WarningMessage(
+        'Your meal plan has excess of Sugars',
+        'Try to limit your intake of Sugars per day'
+      ))
+    }
 
-  private _checkExcessTransFat(nutrition: Nutrition, requirements: Nutrition): WarningMessage {
-    return nutrition.transFat.value > requirements.transFat.value ? new WarningMessage(
-      'Too much trans fat',
-      `Your daily requirements are ${Math.round(requirements.transFat.value)}${requirements.transFat.unit} of trans fat`
-    ) : null;
+    if (nutrition.transFat.value > 115) {
+      warnings.push(new WarningMessage(
+        'Your meal plan has excess of Trans fat',
+        'Try to limit your intake of Trans fat per day'
+      ))
+    }
+
+    return warnings;
   }
 
   /**
@@ -88,11 +102,11 @@ export class NutritionService {
   /**
    * Calculates the daily nutrition intake percentage of the daily requirements
    */
-  public calculateNutritionPercent(items: Array<Food | Meal>, preserveEnergy: boolean = false): Promise<Nutrition> {
+  public calculateNutritionPercent(items: Array<Food | Meal | Recipe>, preserveEnergy: boolean = false): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
       let nutrition: Nutrition = new Nutrition();
-      this._fitSvc.getUserRequirements()
-        .then((requirements: Nutrition) => {
+      this._storage.ready().then(() => {
+        this._storage.get(`userRequirements${CURRENT_DAY}`).then((requirements: Nutrition) => {
           items.forEach((item: Food) => {
             // Sum the nutrients for each item
             for (let nutrientKey in requirements) {
@@ -102,7 +116,7 @@ export class NutritionService {
 
           // Save the energy intake to calculate the left energy in activity plan
           if (preserveEnergy) {
-            this.energyIntake = nutrition.energy.value;
+            this._storage.set(`energyInput${CURRENT_DAY}`, nutrition.energy.value)
           }
 
           // Establish the meal's nutritional value, based on the user's nutritional requirements (%)
@@ -110,13 +124,9 @@ export class NutritionService {
             nutrition[nutrientKey].value = Math.round((nutrition[nutrientKey].value * 100) / (requirements[nutrientKey].value || 1));
           }
           resolve(nutrition);
-        })
-        .catch((err: Error) => reject(err));
+        }).catch((err: Error) => reject(err));
+      }).catch((err: Error) => reject(err));
     });
-  }
-
-  public calculateOmega36Ratio(nutrition: Nutrition): number {
-    return +((nutrition.ala.value || 1) / (nutrition.la.value || 1)).toFixed(2);
   }
 
   /**
@@ -130,94 +140,67 @@ export class NutritionService {
     return items.reduce((acc: number, item: Food) => acc + (item.quantity * item.servings), 0);
   }
 
-  public checkNutrition(nutrition: Nutrition): Promise<Array<WarningMessage>> {
+  public checkNutrition(nutrition: Nutrition): Array<WarningMessage> {
+    return _.compact([
+      ...this._checkDeficiencies(nutrition),
+      ...this._checkExcesses(nutrition)
+    ]);
+  }
+
+  public getDri(age: number, bmr: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
-      this._fitSvc.getUserRequirements()
-        .then((requirements: Nutrition) => resolve(
-          _.compact([
-            this._checkExcessAlcohol(nutrition, requirements),
-            this._checkExcessCaffeine(nutrition, requirements),
-            this._checkExcessCarbs(nutrition, requirements),
-            this._checkExcessEnergy(nutrition, requirements),
-            this._checkExcessSugars(nutrition, requirements),
-            this._checkExcessTransFat(nutrition, requirements)
-          ])
-        ))
-        .catch((err: Error) => reject(err));
-    })
-  }
-
-  public findDeficiencies(nutrition: Nutrition): NutrientDeficiencies {
-    let deficiencies: NutrientDeficiencies = new NutrientDeficiencies();
-    for (let nutrientKey in deficiencies) {
-      if (nutrition[nutrientKey].value < 75) {
-        deficiencies[nutrientKey]++;
-      }
-    }
-
-    return deficiencies;
-  }
-
-  public findExcesses(nutrition: Nutrition): NutrientExcesses {
-    let excesses: NutrientExcesses = new NutrientExcesses();
-    for (let nutrientKey in excesses) {
-      if (nutrition[nutrientKey].value > 100) {
-        excesses[nutrientKey]++;
-      }
-    }
-
-    return excesses;
-  }
-
-  public getDri(age: number, energyConsumption: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): Nutrition {
-    let requirements: Nutrition = new Nutrition();
-    requirements.ala.value = this._driSvc.getALADri(energyConsumption);
-    requirements.alcohol.value = this._driSvc.getAlcoholDri(age);
-    requirements.caffeine.value = this._driSvc.getCaffeine(age);
-    requirements.calcium.value = this._driSvc.getCalciumDri(age, gender, lactating, pregnant);
-    requirements.carbs.value = this._driSvc.getCarbDri(energyConsumption);
-    requirements.choline.value = this._driSvc.getCholineDri(age, gender, lactating, pregnant);
-    requirements.copper.value = this._driSvc.getCopperDri(age, gender, lactating, pregnant);
-    requirements.dha.value = this._driSvc.getDHADri(energyConsumption);
-    requirements.energy.value = energyConsumption;
-    requirements.epa.value = this._driSvc.getEPADri(energyConsumption);
-    requirements.fats.value = this._driSvc.getFatDri(energyConsumption);
-    requirements.fiber.value = this._driSvc.getFiberDri(weight);
-    requirements.histidine.value = this._driSvc.getHistidineDri(age, gender, lactating, pregnant, weight);
-    requirements.iron.value = this._driSvc.getIronDri(age, gender, lactating, pregnant);
-    requirements.isoleucine.value = this._driSvc.getIsoleucineDri(age, gender, lactating, pregnant, weight);
-    requirements.la.value = this._driSvc.getLADri(energyConsumption);
-    requirements.leucine.value = this._driSvc.getLeucineDri(age, gender, lactating, pregnant, weight);
-    requirements.lysine.value = this._driSvc.getLysineDri(age, gender, lactating, pregnant, weight);
-    requirements.magnesium.value = this._driSvc.getMagnesiumDri(age, gender, lactating, pregnant);
-    requirements.manganese.value = this._driSvc.getManganeseDri(age, gender, lactating, pregnant);
-    requirements.methionine.value = this._driSvc.getMethionineDri(age, gender, lactating, pregnant, weight);
-    requirements.phenylalanine.value = this._driSvc.getPhenylalanineDri(age, gender, lactating, pregnant, weight);
-    requirements.phosphorus.value = this._driSvc.getPhosphorusDri(age, gender, lactating, pregnant);
-    requirements.potassium.value = this._driSvc.getPotassiumDri(age, gender, lactating, pregnant);
-    requirements.protein.value = this._driSvc.getProteinDri(energyConsumption);
-    requirements.selenium.value = this._driSvc.getSeleniumDri(age, gender, lactating, pregnant);
-    requirements.sodium.value = this._driSvc.getSodiumDri(age, gender, lactating, pregnant);
-    requirements.sugars.value = this._driSvc.getSugarsDri(energyConsumption);
-    requirements.threonine.value = this._driSvc.getThreonineDri(age, gender, lactating, pregnant, weight);
-    requirements.transFat.value = this._driSvc.getTransFatDri(energyConsumption);
-    requirements.tryptophan.value = this._driSvc.getTryptophanDri(age, gender, lactating, pregnant, weight);
-    requirements.valine.value = this._driSvc.getValineDri(age, gender, lactating, pregnant, weight);
-    requirements.vitaminA.value = this._driSvc.getVitaminADri(age, gender, lactating, pregnant);
-    requirements.vitaminB1.value = this._driSvc.getThiamineDri(age, gender, lactating, pregnant);
-    requirements.vitaminB2.value = this._driSvc.getRiboflavinDri(age, gender, lactating, pregnant);
-    requirements.vitaminB3.value = this._driSvc.getNiacinDri(age, gender, lactating, pregnant);
-    requirements.vitaminB5.value = this._driSvc.getPantothenicAcidDri(age, gender, lactating, pregnant);
-    requirements.vitaminB6.value = this._driSvc.getRiboflavinDri(age, gender, lactating, pregnant);
-    requirements.vitaminB9.value = this._driSvc.getFolicAcidDri(age, gender, lactating, pregnant);
-    requirements.vitaminB12.value = this._driSvc.getCobalaminDri(age, gender, lactating, pregnant);
-    requirements.vitaminC.value = this._driSvc.getVitaminCDri(age, gender, lactating, pregnant);
-    requirements.vitaminD.value = this._driSvc.getVitaminDDri();
-    requirements.vitaminE.value = this._driSvc.getVitaminEDri(age, gender, lactating, pregnant);
-    requirements.vitaminK.value = this._driSvc.getVitaminKDri(age, gender, lactating, pregnant);
-    requirements.water.value = this._driSvc.getWater(energyConsumption);
-    requirements.zinc.value = this._driSvc.getZincDri(age, gender, lactating, pregnant);
-
-    return requirements;
+      this._storage.ready().then((storage: LocalForage) => {
+        this._storage.get(`energyOutput${CURRENT_DAY}`).then((energyOuptut: number = 0) => {
+          let requirements: Nutrition = new Nutrition();
+          requirements.ala.value = this._driSvc.getALADri(energyOuptut + bmr);
+          requirements.alcohol.value = this._driSvc.getAlcoholDri(age);
+          requirements.caffeine.value = this._driSvc.getCaffeine(age);
+          requirements.calcium.value = this._driSvc.getCalciumDri(age, gender, lactating, pregnant);
+          requirements.carbs.value = this._driSvc.getCarbDri(energyOuptut + bmr);
+          requirements.choline.value = this._driSvc.getCholineDri(age, gender, lactating, pregnant);
+          requirements.copper.value = this._driSvc.getCopperDri(age, gender, lactating, pregnant);
+          requirements.dha.value = this._driSvc.getDHADri(energyOuptut + bmr);
+          requirements.energy.value = energyOuptut + bmr;
+          requirements.epa.value = this._driSvc.getEPADri(energyOuptut + bmr);
+          requirements.fats.value = this._driSvc.getFatDri(energyOuptut + bmr);
+          requirements.fiber.value = this._driSvc.getFiberDri(weight);
+          requirements.histidine.value = this._driSvc.getHistidineDri(age, gender, lactating, pregnant, weight);
+          requirements.iron.value = this._driSvc.getIronDri(age, gender, lactating, pregnant);
+          requirements.isoleucine.value = this._driSvc.getIsoleucineDri(age, gender, lactating, pregnant, weight);
+          requirements.la.value = this._driSvc.getLADri(energyOuptut + bmr);
+          requirements.leucine.value = this._driSvc.getLeucineDri(age, gender, lactating, pregnant, weight);
+          requirements.lysine.value = this._driSvc.getLysineDri(age, gender, lactating, pregnant, weight);
+          requirements.magnesium.value = this._driSvc.getMagnesiumDri(age, gender, lactating, pregnant);
+          requirements.manganese.value = this._driSvc.getManganeseDri(age, gender, lactating, pregnant);
+          requirements.methionine.value = this._driSvc.getMethionineDri(age, gender, lactating, pregnant, weight);
+          requirements.phenylalanine.value = this._driSvc.getPhenylalanineDri(age, gender, lactating, pregnant, weight);
+          requirements.phosphorus.value = this._driSvc.getPhosphorusDri(age, gender, lactating, pregnant);
+          requirements.potassium.value = this._driSvc.getPotassiumDri(age, gender, lactating, pregnant);
+          requirements.protein.value = this._driSvc.getProteinDri(energyOuptut + bmr);
+          requirements.selenium.value = this._driSvc.getSeleniumDri(age, gender, lactating, pregnant);
+          requirements.sodium.value = this._driSvc.getSodiumDri(age, gender, lactating, pregnant);
+          requirements.sugars.value = this._driSvc.getSugarsDri(energyOuptut + bmr);
+          requirements.threonine.value = this._driSvc.getThreonineDri(age, gender, lactating, pregnant, weight);
+          requirements.transFat.value = this._driSvc.getTransFatDri(energyOuptut + bmr);
+          requirements.tryptophan.value = this._driSvc.getTryptophanDri(age, gender, lactating, pregnant, weight);
+          requirements.valine.value = this._driSvc.getValineDri(age, gender, lactating, pregnant, weight);
+          requirements.vitaminA.value = this._driSvc.getVitaminADri(age, gender, lactating, pregnant);
+          requirements.vitaminB1.value = this._driSvc.getThiamineDri(age, gender, lactating, pregnant);
+          requirements.vitaminB2.value = this._driSvc.getRiboflavinDri(age, gender, lactating, pregnant);
+          requirements.vitaminB3.value = this._driSvc.getNiacinDri(age, gender, lactating, pregnant);
+          requirements.vitaminB5.value = this._driSvc.getPantothenicAcidDri(age, gender, lactating, pregnant);
+          requirements.vitaminB6.value = this._driSvc.getRiboflavinDri(age, gender, lactating, pregnant);
+          requirements.vitaminB9.value = this._driSvc.getFolicAcidDri(age, gender, lactating, pregnant);
+          requirements.vitaminB12.value = this._driSvc.getCobalaminDri(age, gender, lactating, pregnant);
+          requirements.vitaminC.value = this._driSvc.getVitaminCDri(age, gender, lactating, pregnant);
+          requirements.vitaminD.value = this._driSvc.getVitaminDDri();
+          requirements.vitaminE.value = this._driSvc.getVitaminEDri(age, gender, lactating, pregnant);
+          requirements.vitaminK.value = this._driSvc.getVitaminKDri(age, gender, lactating, pregnant);
+          requirements.water.value = this._driSvc.getWater(energyOuptut + bmr);
+          requirements.zinc.value = this._driSvc.getZincDri(age, gender, lactating, pregnant);
+          resolve(requirements);
+        }).catch((err: Error) => reject(err));
+      }).catch((err: Error) => reject(err));
+    });
   }
 }

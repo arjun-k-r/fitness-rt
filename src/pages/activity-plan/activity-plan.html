@@ -3,12 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Activity plan{{ isDirty ? '*' : ''}}</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="saveActivityPlan()">
-          <ion-icon name="sync"></ion-icon>
-      </button>
-    </ion-buttons>
+    <ion-title>Activity plan</ion-title>
   </ion-navbar>
   <ion-toolbar>
     <ion-segment [(ngModel)]="activityPlanDetails">
@@ -38,35 +33,29 @@
     <!-- Start of segment -->
     <ion-list *ngSwitchCase="'guidelines'">
       <ion-item>
-        <h2>Move every hour and every day</h2>
-        <p text-wrap>Sedentarism is one of the leading causes of aging (mortality) and all diseases (cardiovascular, diabetes, cancer,
-          obesity, etc.)</p>
+        <h2>Stay active</h2>
       </ion-item>
       <ion-item>
         <h2>Develop a HIIT (High intensity interval training) routine</h2>
-        <p text-wrap>Increase metabolism and energy, improve cardiovascular output and endurance, burn fat</p>
       </ion-item>
       <ion-item>
-        <h2>Exercise all muscle groups every week</h2>
-        <p text-wrap>If you don't use it, you'll lose it</p>
+        <h2>Strenghten your muscles</h2>
       </ion-item>
       <ion-item>
         <h2>Walk everyday</h2>
-        <p text-wrap>Best exercise for recovery and recreation</p>
       </ion-item>
     </ion-list>
     <!-- End of segment -->
 
     <!-- Start of segment -->
     <ion-list *ngSwitchCase="'activities'">
-      <ion-item *ngFor="let activity of activityPlan?.activities; let i = index" (click)="changeDuration(activity)">
-        <ion-icon color="danger" name="trash" item-left (click)="removeActivity(i)"></ion-icon>
+      <button ion-item *ngFor="let activity of activityPlan?.activities; let i = index" (click)="changeActivity(i)">
         <h2>{{ activity.name }}</h2>
         <p>{{ activity.duration }} minutes</p>
         <p item-content>
           {{ activity.energyBurn }} kcal
         </p>
-      </ion-item>
+      </button>
     </ion-list>
     <!-- End of segment -->
 

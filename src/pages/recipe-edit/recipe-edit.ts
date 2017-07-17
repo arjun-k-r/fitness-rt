@@ -1,7 +1,7 @@
 // App
 import { Component, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActionSheetController, Alert, AlertController, IonicPage, Modal, ModalController, NavController, NavParams, Toast, ToastController } from 'ionic-angular';
+import { ActionSheetController, AlertController, IonicPage, Modal, ModalController, NavController, NavParams, Toast, ToastController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 
 // Firebase
@@ -9,7 +9,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { Food, Recipe } from '../../models';
+import { Food, Nutrition, Recipe } from '../../models';
 
 // Providers
 import { NutritionService, PictureService, RecipeService } from '../../providers';
@@ -27,7 +27,6 @@ export class RecipeEditPage {
   public cookingMethod: AbstractControl;
   public cookingTemperature: AbstractControl;
   public cookingTime: AbstractControl;
-  public isDirty: boolean = false;
   public name: AbstractControl;
   public portions: AbstractControl;
   public recipe: Recipe;
@@ -59,17 +58,16 @@ export class RecipeEditPage {
       name: [this.recipe.name, Validators.required],
       portions: [this.recipe.portions, Validators.required]
     });
-
     this.cookingMethod = this.recipeForm.get('cookingMethod');
     this.cookingTemperature = this.recipeForm.get('cookingTemperature');
     this.cookingTime = this.recipeForm.get('cookingTime');
     this.name = this.recipeForm.get('name');
     this.portions = this.recipeForm.get('portions');
-    this.recipeForm.valueChanges.subscribe(() => this.isDirty = true);
+    this.recipeForm.valueChanges.subscribe(() => this.saveRecipe());
   }
 
   private _changeServings(item: Food | Recipe): void {
-    let alert: Alert = this._alertCtrl.create({
+    this._alertCtrl.create({
       title: 'Servings',
       subTitle: `${item.name.toString()} (${item.quantity.toString()}${item.unit.toString()})`,
       inputs: [
@@ -88,26 +86,35 @@ export class RecipeEditPage {
           text: 'Done',
           handler: data => {
             item.servings = +data.servings;
-            this._updateRecipeEdit();
+            this.saveRecipe();
           }
         }
       ]
-    });
-    alert.present();
+    }).present();
   }
 
   private _removeIngredient(idx: number): void {
     this.recipe.ingredients = [...this.recipe.ingredients.slice(0, idx), ...this.recipe.ingredients.slice(idx + 1)];
-    this._updateRecipeEdit();
+    this.saveRecipe();
   }
 
   private _updateRecipeEdit(): void {
-    this.isDirty = true;
-    this.recipe.nutrition = this._recipeSvc.calculateRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
-    this._recipeSvc.checkCooking(this.recipe);
-    this.recipe.pral = this._nutritionSvc.calculatePRAL(this.recipe.nutrition);
-    this.recipe.quantity = this._recipeSvc.calculateRecipeSize(this.recipe.ingredients, this.recipe.portions);
     this.recipe.difficulty = this._recipeSvc.checkDifficulty(this.recipe);
+    this._recipeSvc.calculateRecipeNutrition(this.recipe.ingredients, this.recipe.portions)
+      .then((nutrition: Nutrition) => {
+        this.recipe.nutrition = nutrition;
+        this.recipe.pral = this._nutritionSvc.calculatePRAL(this.recipe.nutrition);
+        this.recipe.quantity = this._recipeSvc.calculateRecipeSize(this.recipe.ingredients, this.recipe.portions);
+        this._recipeSvc.checkCooking(this.recipe);
+        this._recipeSvc.saveRecipe(this.recipe);
+      }).catch((err: Error) => {
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.toString(),
+          buttons: ['OK']
+        }).present();
+      });
   }
 
   public addIngredients(): void {
@@ -116,15 +123,16 @@ export class RecipeEditPage {
     ingredientSelectModal.onDidDismiss((selections: Array<Food | Recipe>) => {
       if (!!selections) {
         this.recipe.ingredients = [...this.recipe.ingredients, ...selections];
-        this._updateRecipeEdit();
+        this.saveRecipe();
       }
     });
   }
 
   public addInstruction(): void {
-    this.recipe.instructions = [...this.recipe.instructions, ''];
+    this.recipe.instructions = [...this.recipeInstructions, ''];
     this.recipeInstructions = [...this.recipeInstructions, ''];
-    this.isDirty = true;
+    this._recipeSvc.checkDifficulty(this.recipe);
+    this._recipeSvc.saveRecipe(this.recipe);
   }
 
   public changeImage(): void {
@@ -170,10 +178,7 @@ export class RecipeEditPage {
   }
 
   public changePortions(): void {
-    this.recipe.portions = this.recipeForm.get('portions').value;
-    this.recipe.nutrition = this._recipeSvc.calculateRecipeNutrition(this.recipe.ingredients, this.recipe.portions);
-    this.recipe.quantity = this._recipeSvc.calculateRecipeSize(this.recipe.ingredients, this.recipe.portions);
-    this.isDirty = true;
+    this.saveRecipe();
   }
 
   public changeIngredient(idx: number): void {
@@ -209,9 +214,10 @@ export class RecipeEditPage {
   }
 
   public removeInstruction(idx: number): void {
-    this.recipe.instructions = [...this.recipe.instructions.slice(0, idx), ...this.recipe.instructions.slice(idx + 1)];
+    this.recipe.instructions = [...this.recipeInstructions.slice(0, idx), ...this.recipeInstructions.slice(idx + 1)];
     this.recipeInstructions = [...this.recipeInstructions.slice(0, idx), ...this.recipeInstructions.slice(idx + 1)];
-    this.isDirty = true;
+    this._recipeSvc.checkDifficulty(this.recipe);
+    this._recipeSvc.saveRecipe(this.recipe);
   }
 
   public removeRecipe(): void {
@@ -220,7 +226,6 @@ export class RecipeEditPage {
   }
 
   public saveRecipe(): void {
-    this.recipe.instructions = [...this.recipeInstructions];
     this.recipe.cookingMethod = this.recipeForm.get('cookingMethod').value;
     this.recipe.cookingTemperature = this.recipeForm.get('cookingTemperature').value;
     this.recipe.cookingTime = this.recipeForm.get('cookingTime').value;
@@ -228,7 +233,6 @@ export class RecipeEditPage {
     this.recipe.portions = this.recipeForm.get('portions').value;
     this._updateRecipeEdit();
     this._recipeSvc.saveRecipe(this.recipe);
-    this.isDirty = false;
   }
 
   public uploadImage(file?: File): void {
@@ -252,7 +256,7 @@ export class RecipeEditPage {
       } else {
         this.recipe.image = data;
         this.recipeForm.patchValue({ 'image': this.recipe.image });
-        this.isDirty = true;
+        this._recipeSvc.saveRecipe(this.recipe);
       }
     }, (err: Error) => {
       toast.setMessage('Uhh ohh, something went wrong!');
@@ -281,28 +285,7 @@ export class RecipeEditPage {
 
   ionViewCanLeave(): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      if (!!this._params.get('new') && !this.isDirty) {
-        resolve(true);
-      } else if (this.isDirty) {
-        this._alertCtrl.create({
-          title: 'Discard changes',
-          message: 'Changes have been made. Are you sure you want to leave?',
-          buttons: [
-            {
-              text: 'Yes',
-              handler: () => {
-                resolve(true);
-              }
-            },
-            {
-              text: 'No',
-              handler: () => {
-                reject(true);
-              }
-            }
-          ]
-        }).present();
-      } else if (this.recipe.ingredients.length === 0) {
+      if (this.recipe.ingredients.length === 0) {
         this._toastCtrl.create({
           message: 'Ingredients are required',
           position: 'bottom',
@@ -310,7 +293,6 @@ export class RecipeEditPage {
           closeButtonText: 'OK',
           duration: 10000
         }).present();
-
         reject(true);
       } else if (this.recipe.instructions.length === 0) {
         this._toastCtrl.create({
@@ -320,7 +302,6 @@ export class RecipeEditPage {
           closeButtonText: 'OK',
           duration: 10000
         }).present();
-
         reject(true);
       } else if (this.recipeForm.invalid) {
         this._toastCtrl.create({
@@ -330,7 +311,6 @@ export class RecipeEditPage {
           closeButtonText: 'OK',
           duration: 10000
         }).present();
-
         reject(true);
       } else {
         resolve(true);

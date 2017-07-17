@@ -8,7 +8,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { Fitness } from '../../models';
+import { Fitness, Nutrition } from '../../models';
 
 // Providers
 import { FitnessService, NutritionService } from '../../providers';
@@ -21,7 +21,6 @@ import { FitnessService, NutritionService } from '../../providers';
   templateUrl: 'fitness.html'
 })
 export class FitnessPage {
-  private _workEnergy: number;
   public age: AbstractControl;
   public gender: AbstractControl;
   public height: AbstractControl;
@@ -30,8 +29,7 @@ export class FitnessPage {
   public fitnessDetails: string = 'fitness';
   public fitnessForm: FormGroup;
   public heartRate: number;
-  public isDirty: boolean = false;
-  public isFitness: boolean;
+  public isFit: boolean;
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
@@ -41,18 +39,9 @@ export class FitnessPage {
     private _nutritionSvc: NutritionService,
     private _params: NavParams,
     private _toastCtrl: ToastController
-  ) {
-    if (!!_params.get('new')) {
-      this._toastCtrl.create({
-        message: 'Please complete the following form',
-        position: 'bottom',
-        showCloseButton: true,
-        closeButtonText: 'OK'
-      }).present();
-    }
-  }
+  ) { }
 
-  public saveFitness(): void {
+  private _saveFitness(): void {
     this.fitness.age = this.fitnessForm.get('age').value;
     this.fitness.gender = this.fitnessForm.get('gender').value;
     this.fitness.height = this.fitnessForm.get('height').value;
@@ -63,8 +52,7 @@ export class FitnessPage {
     this.fitness.pregnant = this.fitnessForm.get('pregnant').value;
     this.fitness.waist = this.fitnessForm.get('waist').value;
     this.fitness.weight = this.fitnessForm.get('weight').value;
-    let energyConsumption = this._workEnergy + this.fitness.bmr,
-      heartRateMax: number = this._fitSvc.calculateHRMax(this.fitness.age),
+    let heartRateMax: number = this._fitSvc.calculateHRMax(this.fitness.age),
       thrRange: { min: number, max: number } = this._fitSvc.calculateTHR(heartRateMax, this.fitness.heartRate.resting);
     this.fitness = Object.assign({}, this.fitness, {
       bmr: this._fitSvc.calculateBmr(this.fitness.age, this.fitness.gender, this.fitness.height, this.fitness.weight),
@@ -77,11 +65,20 @@ export class FitnessPage {
       }
     });
 
-    this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, energyConsumption, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
-    this._fitSvc.saveFitness(this.fitness);
-    this._fitSvc.storeEnergyConsumption(energyConsumption);
-    this.isFitness = this._fitSvc.getBodyFatFlag(this.fitness.bodyFat, this.fitness.gender);
-    this.isDirty = false;
+    this._nutritionSvc.getDri(this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
+      .then((requirements: Nutrition) => {
+        this.fitness.requirements = Object.assign({}, requirements);
+        this._fitSvc.saveFitness(this.fitness);
+      })
+      .catch((err: Error) => {
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.message,
+          buttons: ['OK']
+        }).present();
+      });
+    this.isFit = this._fitSvc.getBodyFatFlag(this.fitness.bodyFat, this.fitness.gender);
   }
 
   ionViewCanEnter(): void {
@@ -94,58 +91,47 @@ export class FitnessPage {
     })
   }
 
-  ionViewCanLeave(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      if (this.isDirty) {
-        this._alertCtrl.create({
-          title: 'Discard changes',
-          message: 'Changes have been made. Are you sure you want to leave?',
-          buttons: [
-            {
-              text: 'Yes',
-              handler: () => {
-                resolve(true);
-              }
-            },
-            {
-              text: 'No',
-              handler: () => {
-                reject(true);
-              }
-            }
-          ]
-        }).present();
-      } else {
-        resolve(true);
-      }
-    });
-  }
-
   ionViewWillEnter(): void {
-    this.fitness = Object.assign({}, this._fitSvc.getFitness());
-    this.fitnessForm = this._formBuilder.group({
-      age: [this.fitness.age, Validators.required],
-      gender: [this.fitness.gender, Validators.required],
-      height: [this.fitness.height, Validators.required],
-      hips: [this.fitness.hips],
-      lactating: [this.fitness.lactating],
-      neck: [this.fitness.neck],
-      pregnant: [this.fitness.pregnant],
-      rhr: [this.fitness.heartRate.resting],
-      waist: [this.fitness.waist],
-      weight: [this.fitness.weight, Validators.required]
+    this._fitSvc.getFitness$().subscribe((fitness: Fitness) => {
+      this.fitness = Object.assign({}, fitness);
+      this.fitnessForm = this._formBuilder.group({
+        age: [this.fitness.age, Validators.required],
+        gender: [this.fitness.gender, Validators.required],
+        height: [this.fitness.height, Validators.required],
+        hips: [this.fitness.hips],
+        lactating: [this.fitness.lactating],
+        neck: [this.fitness.neck],
+        pregnant: [this.fitness.pregnant],
+        rhr: [this.fitness.heartRate.resting],
+        waist: [this.fitness.waist],
+        weight: [this.fitness.weight, Validators.required]
+      });
+    }, (err: firebase.FirebaseError) => {
+      this._alertCtrl.create({
+        title: 'Uhh ohh...',
+        subTitle: 'Something went wrong',
+        message: err.message,
+        buttons: ['OK']
+      }).present();
     });
-
     this.age = this.fitnessForm.get('age');
     this.gender = this.fitnessForm.get('gender');
     this.height = this.fitnessForm.get('height');
     this.weight = this.fitnessForm.get('weight');
-    this.fitnessForm.valueChanges.subscribe(() => this.isDirty = true);
-    this._fitSvc.restoreEnergyConsumption().then((energyConsumption: number) => {
-      this.fitness.requirements = Object.assign({}, this._nutritionSvc.getDri(this.fitness.age, (energyConsumption > 0) ? energyConsumption : this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight));
-      this._workEnergy = energyConsumption > 0 ? energyConsumption - this.fitness.bmr : 0;
-    });
-
-    this.isFitness = this._fitSvc.getBodyFatFlag(this.fitness.bodyFat, this.fitness.gender);
+    this._nutritionSvc.getDri(this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
+      .then((requirements: Nutrition) => {
+        this.fitness.requirements = Object.assign({}, requirements);
+        this._fitSvc.saveFitness(this.fitness);
+      })
+      .catch((err: Error) => {
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.message,
+          buttons: ['OK']
+        }).present();
+      });
+    this.fitnessForm.valueChanges.subscribe(() => this._saveFitness);
+    this.isFit = this._fitSvc.getBodyFatFlag(this.fitness.bodyFat, this.fitness.gender);
   }
 }

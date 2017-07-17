@@ -8,7 +8,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { Meal, MealPlan } from '../../models';
+import { Essentials, Meal, MealPlan } from '../../models';
 
 // Providers
 import { FitnessService, MealService, NutritionService } from '../../providers';
@@ -21,10 +21,9 @@ import { FitnessService, MealService, NutritionService } from '../../providers';
   templateUrl: 'meal-plan.html'
 })
 export class MealPlanPage {
-  private _favouriteMealSubscription: Subscription;
   private _mealPlanSubscription: Subscription;
+  public dailyEssentials: Essentials = new Essentials();
   public favouriteMeals: Array<Meal>;
-  public isDirty: boolean = false;
   public mealPlan: MealPlan = new MealPlan();
   public mealPlanDetails: string = 'guidelines';
   constructor(
@@ -45,42 +44,13 @@ export class MealPlanPage {
 
   public addToMealPlan(meal: Meal): void {
     this.mealPlan.meals = [...this.mealPlan.meals, new Meal(
-      meal.favourite,
-      meal.favouriteKey,
-      meal.favouriteName,
       meal.mealItems,
       meal.nutrition,
       meal.pral,
       meal.quantity
     )];
     this.mealPlan.meals = [...this._mealSvc.sortMeals(this.mealPlan.meals)];
-    this.isDirty = true;
-  }
-
-  public loadFavourites(): void {
-    if (!this._favouriteMealSubscription) {
-      let loader: Loading = this._loadCtrl.create({
-        content: 'Loading...',
-        spinner: 'crescent',
-        duration: 30000
-      });
-
-      loader.present();
-      this._favouriteMealSubscription = this._mealSvc.getFavouriteMeals$().subscribe((meals: Array<Meal>) => {
-        this.favouriteMeals = [...meals];
-        loader.dismiss();
-      });
-    }
-  }
-
-  public resetMealPlan(): void {
-    this.mealPlan = new MealPlan();
-    this.isDirty = true;
-  }
-
-  public saveMealPlan(): void {
     this._mealSvc.saveMealPlan(this.mealPlan);
-    this.isDirty = false;
   }
 
   ionViewCanEnter(): void {
@@ -93,33 +63,6 @@ export class MealPlanPage {
     })
   }
 
-  ionViewCanLeave(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      if (this.isDirty) {
-        this._alertCtrl.create({
-          title: 'Discard changes',
-          message: 'Changes have been made. Are you sure you want to leave?',
-          buttons: [
-            {
-              text: 'Yes',
-              handler: () => {
-                resolve(true);
-              }
-            },
-            {
-              text: 'No',
-              handler: () => {
-                reject(true);
-              }
-            }
-          ]
-        }).present();
-      } else {
-        resolve(true);
-      }
-    });
-  }
-
   ionViewWillEnter(): void {
     let loader: Loading = this._loadCtrl.create({
       content: 'Loading...',
@@ -129,6 +72,7 @@ export class MealPlanPage {
     loader.present();
     this._mealPlanSubscription = this._mealSvc.getMealPlan$().subscribe((mealPlan: MealPlan) => {
       this.mealPlan = Object.assign({}, mealPlan);
+      this.dailyEssentials = this._mealSvc.calculateDailyEssentials(this.mealPlan.dailyNutrition);
       loader.dismiss();
     }, (error: Error) => {
       loader.dismiss();
@@ -142,9 +86,6 @@ export class MealPlanPage {
   }
 
   ionViewWillLeave(): void {
-    if (this._favouriteMealSubscription) {
-      this._favouriteMealSubscription.unsubscribe();
-    }
     this._mealPlanSubscription.unsubscribe();
   }
 }

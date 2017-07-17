@@ -2,16 +2,19 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import 'rxjs/operator/map';
+import { Storage } from '@ionic/storage';
 
 // Third-party
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import * as moment from 'moment';
 
 // Models
-import { Food } from '../../models';
+import { Food, Nutrition } from '../../models';
 
 // Providers
 import { NutritionService } from '../nutrition/nutrition.service';
+
+export const CURRENT_DAY: number = moment().dayOfYear();
 
 export const FOOD_GROUPS: Array<string> = [
   'American Indian/Alaska Native Foods',
@@ -47,13 +50,28 @@ export class FoodService {
   private _foods$: FirebaseListObservable<Array<Food>>;
   constructor(
     private _db: AngularFireDatabase,
-    private _nutritionSvc: NutritionService
+    private _nutritionSvc: NutritionService,
+    private _storage: Storage
   ) {
     this._foods$ = this._db.list('/foods', {
       query: {
         orderByChild: 'group',
         equalTo: this._foodGroupSubject
       }
+    });
+  }
+
+  public calculateFoodNutrition(food: Food): Promise<Nutrition> {
+    return new Promise((resolve, reject) => {
+      let nutrition: Nutrition = new Nutrition();
+      this._storage.ready().then(() => {
+        this._storage.get(`userRequirements${CURRENT_DAY}`).then((requirements: Nutrition) => {
+          for (let nutrientKey in food.nutrition) {
+            nutrition[nutrientKey].value = Math.round((food.nutrition[nutrientKey].value * 100) / (requirements[nutrientKey].value || 1));
+          }
+          resolve(nutrition);
+        }).catch((err: Error) => reject(err));
+      }).catch((err: Error) => reject(err));
     });
   }
 

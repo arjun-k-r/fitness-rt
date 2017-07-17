@@ -3,12 +3,7 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Fitness{{ isDirty ? '*' : ''}}</ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only (click)="saveFitness()">
-                <ion-icon name="sync"></ion-icon>
-            </button>
-        </ion-buttons>
+        <ion-title>Fitness</ion-title>
     </ion-navbar>
     <ion-toolbar>
         <ion-segment [(ngModel)]="fitnessDetails">
@@ -35,8 +30,8 @@
                     </ion-item>
                     <ion-item *ngIf="fitness?.bodyFat" text-wrap>
                         <h2>Body fat percentage</h2>
-                        <ion-icon color="{{isFitness ? 'secondary' : 'danger'}}" name="{{isFitness ? 'thumbs-up' : 'thumbs-down'}}" item-right></ion-icon>
-                        <p item-right ion-text color="{{ isFitness ? 'secondary' : 'danger' }}">{{ fitness?.bodyFat }}%</p>
+                        <ion-icon color="{{ isFit ? 'secondary' : 'danger' }}" name="{{ isFit ? 'thumbs-up' : 'thumbs-down' }}" item-right></ion-icon>
+                        <p item-right ion-text color="{{ isFit ? 'secondary' : 'danger' }}">{{ fitness?.bodyFat }}%</p>
                     </ion-item>
                     <ion-item *ngIf="fitness?.heartRate.max" text-wrap>
                         <h2>Maximum heart rate (HRMax)</h2>
@@ -121,16 +116,35 @@
                     <p item-content>{{ fitness.requirements.fats?.value.toFixed(2) }}{{ fitness.requirements.fats?.unit }}</p>
                 </ion-item>
                 <ion-item>
-                    Carbohydrates
-                    <p item-content>{{ fitness.requirements.carbs?.value.toFixed(2) }}{{ fitness.requirements.carbs?.unit }}</p>
-                </ion-item>
-                <ion-item>
                     Fiber
                     <p item-content>{{ fitness.requirements.fiber?.value.toFixed(2) }}{{ fitness.requirements.fiber?.unit }}</p>
                 </ion-item>
                 <ion-item>
                     Water
                     <p item-content>{{ fitness.requirements.water?.value.toFixed(2) }}{{ fitness.requirements.water?.unit }}</p>
+                </ion-item>
+            </ion-item-group>
+            <ion-item-group>
+                <ion-item-divider>Non-essential nutrients</ion-item-divider>
+                <ion-item>
+                    Alcohol
+                    <p item-content>{{ fitness.requirements.alcohol?.value.toFixed(2) }}{{ fitness.requirements.alcohol?.unit }}</p>
+                </ion-item>
+                <ion-item>
+                    Caffeine
+                    <p item-content>{{ fitness.requirements.caffeine?.value.toFixed(2) }}{{ fitness.requirements.caffeine?.unit }}</p>
+                </ion-item>
+                <ion-item>
+                    Carbohydrates
+                    <p item-content>{{ fitness.requirements.carbs?.value.toFixed(2) }}{{ fitness.requirements.carbs?.unit }}</p>
+                </ion-item>
+                <ion-item>
+                    Sugars
+                    <p item-content>{{ fitness.requirements.sugars?.value.toFixed(2) }}{{ fitness.requirements.sugars?.unit }}</p>
+                </ion-item>
+                <ion-item>
+                    Trans fat
+                    <p item-content>{{ fitness.requirements.transFat?.value.toFixed(2) }}{{ fitness.requirements.transFat?.unit }}</p>
                 </ion-item>
             </ion-item-group>
             <ion-item-group>
@@ -169,7 +183,6 @@
                     <p item-content>{{ fitness.requirements.tryptophan?.value.toFixed(2) }}{{ fitness.requirements.tryptophan?.unit }}</p>
                 </ion-item>
             </ion-item-group>
-
             <ion-item-group>
                 <ion-item-divider>Essential vitamins</ion-item-divider>
                 <ion-item>
@@ -225,7 +238,6 @@
                     <p item-content>{{ fitness.requirements.vitaminK?.value.toFixed(2) }}{{ fitness.requirements.vitaminK?.unit }}</p>
                 </ion-item>
             </ion-item-group>
-
             <ion-item-group>
                 <ion-item-divider>Essential minerals</ion-item-divider>
                 <ion-item>
@@ -269,7 +281,6 @@
                     <p item-content>{{ fitness.requirements.zinc?.value.toFixed(2) }}{{ fitness.requirements.zinc?.unit }}</p>
                 </ion-item>
             </ion-item-group>
-
             <ion-item-group>
                 <ion-item-divider>Essential fatty acids</ion-item-divider>
                 <ion-item>
@@ -289,28 +300,7 @@
                     <p item-content>{{ fitness.requirements.la?.value.toFixed(2) }}{{ fitness.requirements.la?.unit }}</p>
                 </ion-item>
             </ion-item-group>
-
-            <ion-item-group>
-                <ion-item-divider>Non-essential nutrients</ion-item-divider>
-                <ion-item>
-                    Alcohol
-                    <p item-content>{{ fitness.requirements.alcohol?.value.toFixed(2) }}{{ fitness.requirements.alcohol?.unit }}</p>
-                </ion-item>
-                <ion-item>
-                    Caffeine
-                    <p item-content>{{ fitness.requirements.caffeine?.value.toFixed(2) }}{{ fitness.requirements.caffeine?.unit }}</p>
-                </ion-item>
-                <ion-item>
-                    Trans fat
-                    <p item-content>{{ fitness.requirements.transFat?.value.toFixed(2) }}{{ fitness.requirements.transFat?.unit }}</p>
-                </ion-item>
-                <ion-item>
-                    Sugars
-                    <p item-content>{{ fitness.requirements.sugars?.value.toFixed(2) }}{{ fitness.requirements.sugars?.unit }}</p>
-                </ion-item>
-            </ion-item-group>
         </div>
         <!-- End of segment -->
-
     </div>
 </ion-content>

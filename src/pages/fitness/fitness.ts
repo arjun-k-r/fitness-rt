@@ -106,6 +106,25 @@ export class FitnessPage {
         waist: [this.fitness.waist],
         weight: [this.fitness.weight, Validators.required]
       });
+      this.age = this.fitnessForm.get('age');
+      this.gender = this.fitnessForm.get('gender');
+      this.height = this.fitnessForm.get('height');
+      this.weight = this.fitnessForm.get('weight');
+      this._nutritionSvc.getDri(this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
+        .then((requirements: Nutrition) => {
+          this.fitness.requirements = Object.assign({}, requirements);
+          this._fitSvc.saveFitness(this.fitness);
+        })
+        .catch((err: Error) => {
+          this._alertCtrl.create({
+            title: 'Uhh ohh...',
+            subTitle: 'Something went wrong',
+            message: err.message,
+            buttons: ['OK']
+          }).present();
+        });
+      this.fitnessForm.valueChanges.subscribe(() => this._saveFitness());
+      this.isFit = this._fitSvc.getBodyFatFlag(this.fitness.bodyFat, this.fitness.gender);
     }, (err: firebase.FirebaseError) => {
       this._alertCtrl.create({
         title: 'Uhh ohh...',
@@ -114,24 +133,5 @@ export class FitnessPage {
         buttons: ['OK']
       }).present();
     });
-    this.age = this.fitnessForm.get('age');
-    this.gender = this.fitnessForm.get('gender');
-    this.height = this.fitnessForm.get('height');
-    this.weight = this.fitnessForm.get('weight');
-    this._nutritionSvc.getDri(this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
-      .then((requirements: Nutrition) => {
-        this.fitness.requirements = Object.assign({}, requirements);
-        this._fitSvc.saveFitness(this.fitness);
-      })
-      .catch((err: Error) => {
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.message,
-          buttons: ['OK']
-        }).present();
-      });
-    this.fitnessForm.valueChanges.subscribe(() => this._saveFitness);
-    this.isFit = this._fitSvc.getBodyFatFlag(this.fitness.bodyFat, this.fitness.gender);
   }
 }

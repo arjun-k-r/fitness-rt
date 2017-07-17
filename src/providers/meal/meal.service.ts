@@ -2,11 +2,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { Subscription } from 'rxjs/Subscription';
 
 // Third-party
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 import * as _ from 'lodash';
@@ -34,11 +33,7 @@ export class MealService {
     private _afAuth: AngularFireAuth,
     private _db: AngularFireDatabase,
     private _nutritionSvc: NutritionService
-  ) {
-    _afAuth.authState.subscribe((auth: firebase.User) => {
-      this._currentMealPlan$ = _db.object(`/meal-plans/${auth.uid}/${CURRENT_DAY}`);
-    }), (err: firebase.FirebaseError) => console.error(err);
-  }
+  ) { }
 
   private _calculateDailyAminoacids(nutrition: Nutrition): number {
     let aminoacids: number = 0;
@@ -272,16 +267,21 @@ export class MealService {
 
   public getMealPlan$(): Observable<MealPlan> {
     return new Observable((observer: Observer<MealPlan>) => {
-      this._currentMealPlan$.subscribe((currMealPlan: MealPlan) => {
-        if (currMealPlan['$value'] === null) {
-          this._currentMealPlan$.set(new MealPlan());
-        } else {
-          // Firebase removes empty objects on save
-          currMealPlan.warnings = currMealPlan.warnings || [];
-          currMealPlan.meals = currMealPlan.meals || [];
-          observer.next(currMealPlan);
+      this._afAuth.authState.subscribe((auth: firebase.User) => {
+        if (!!auth) {
+          this._currentMealPlan$ = this._db.object(`/meal-plans/${auth.uid}/${CURRENT_DAY}`);
+          this._currentMealPlan$.subscribe((currMealPlan: MealPlan) => {
+            if (currMealPlan['$value'] === null) {
+              this._currentMealPlan$.set(new MealPlan());
+            } else {
+              // Firebase removes empty objects on save
+              currMealPlan.warnings = currMealPlan.warnings || [];
+              currMealPlan.meals = currMealPlan.meals || [];
+              observer.next(currMealPlan);
+            }
+          }, (err: firebase.FirebaseError) => observer.error(err));
         }
-      });
+      }), (err: firebase.FirebaseError) => observer.error(err);
     });
   }
 

@@ -1,6 +1,7 @@
 // App
 import { Injectable } from '@angular/core';
-import { User } from '@ionic/cloud-angular';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
 // Third-party
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -20,22 +21,15 @@ import { NutritionService } from '../nutrition/nutrition.service';
 
 @Injectable()
 export class RecipeService {
+  private _chef: string;
+  private _chefAvatar: string;
   private _recipes$: FirebaseListObservable<Array<Recipe>>;
   constructor(
     private _afAuth: AngularFireAuth,
     private _db: AngularFireDatabase,
     private _foodSvc: FoodService,
-    private _nutritionSvc: NutritionService,
-    private _user: User
-  ) {
-    _afAuth.authState.subscribe((auth: firebase.User) => {
-       this._recipes$ = _db.list(`/recipes/${auth.uid}`, {
-      query: {
-        orderByChild: 'name'
-      }
-    });
-    }), (err: firebase.FirebaseError) => console.error(err);
-  }
+    private _nutritionSvc: NutritionService
+  ) { }
 
   public calculateRecipeNutrition(items: Array<Food | Recipe>, portions: number): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
@@ -136,8 +130,22 @@ export class RecipeService {
     return recipe.instructions.length < 5 ? 1 : recipe.instructions.length < 10 ? 2 : 3;
   }
 
-  public getRecipes$(): FirebaseListObservable<Array<Recipe>> {
-    return this._recipes$;
+  public getRecipes$(): Observable<Array<Recipe>> {
+    return new Observable((observer: Observer<Array<Recipe>>) => {
+      this._afAuth.authState.subscribe((auth: firebase.User) => {
+        if (!!auth) {
+          this._chef = auth.displayName;
+          this._chefAvatar = auth.photoURL;
+          this._recipes$ = this._db.list(`/recipes/${auth.uid}`, {
+            query: {
+              orderByChild: 'name'
+            }
+          });
+          this._recipes$.subscribe((recipes: Array<Recipe>) => observer.next(recipes),
+            (err: firebase.FirebaseError) => observer.error(err));
+        }
+      }), (err: firebase.FirebaseError) => observer.error(err);
+    });
   }
 
   public removeRecipe(recipe: Recipe): void {
@@ -145,9 +153,8 @@ export class RecipeService {
   }
 
   public saveRecipe(recipe: Recipe): void {
-    let { image, name, username } = this._user.details;
-    recipe.chef = username || name;
-    recipe.chefAvatar = image;
+    recipe.chef = this._chef;
+    recipe.chefAvatar = this._chefAvatar;
     if (!recipe.hasOwnProperty('$key')) {
       recipe['$key'] = this._recipes$.push(recipe).key;
     } else {

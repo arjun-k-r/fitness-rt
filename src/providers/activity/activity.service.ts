@@ -8,10 +8,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import * as _ from 'lodash';
-import * as moment from 'moment';
 
 // Models
-import { Activity, ActivityPlan, Fitness, WarningMessage } from '../../models';
+import { Activity, ActivityPlan, WarningMessage } from '../../models';
 
 // Providers
 import { CURRENT_DAY, FitnessService } from '../fitness/fitness.service';
@@ -36,9 +35,6 @@ export class ActivityService {
         orderByChild: 'name'
       }
     });
-    _afAuth.authState.subscribe((auth: firebase.User) => {
-      this._currentActivityPlan$ = _db.object(`/activity-plans/${auth.uid}/${CURRENT_DAY}`);
-    }), (err: firebase.FirebaseError) => console.error(err);
   }
 
   private _checkInactivity(activityPlan: ActivityPlan): void {
@@ -85,16 +81,21 @@ export class ActivityService {
 
   public getActivityPlan$(): Observable<ActivityPlan> {
     return new Observable((observer: Observer<ActivityPlan>) => {
-      this._currentActivityPlan$.subscribe((currActivityPlan: ActivityPlan) => {
-        if (currActivityPlan['$value'] === null) {
-          this._currentActivityPlan$.set(new ActivityPlan());
-        } else {
-          // Firebase removes empty objects on save
-          currActivityPlan.activities = currActivityPlan.activities || [];
-          currActivityPlan.warnings = currActivityPlan.warnings || [];
-          observer.next(currActivityPlan);
+      this._afAuth.authState.subscribe((auth: firebase.User) => {
+        if (!!auth) {
+          this._currentActivityPlan$ = this._db.object(`/activity-plans/${auth.uid}/${CURRENT_DAY}`);
+          this._currentActivityPlan$.subscribe((currActivityPlan: ActivityPlan) => {
+            if (currActivityPlan['$value'] === null) {
+              this._currentActivityPlan$.set(new ActivityPlan());
+            } else {
+              // Firebase removes empty objects on save
+              currActivityPlan.activities = currActivityPlan.activities || [];
+              currActivityPlan.warnings = currActivityPlan.warnings || [];
+              observer.next(currActivityPlan);
+            }
+          }, (err: firebase.FirebaseError) => observer.error(err));
         }
-      });
+      }), (err: firebase.FirebaseError) => observer.error(err);
     });
   }
 

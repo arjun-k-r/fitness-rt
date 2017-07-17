@@ -21,8 +21,11 @@ export class SleepService {
     private _afAuth: AngularFireAuth,
     private _db: AngularFireDatabase
   ) {
-    _afAuth.authState.subscribe((auth: firebase.User) => this._sleepPlan$ = _db.object(`/sleep-plan/${auth.uid}`),
-      (err: firebase.FirebaseError) => console.error(err));
+    _afAuth.authState.subscribe((auth: firebase.User) => {
+      if (!!auth) {
+        this._sleepPlan$ = _db.object(`/sleep-plan/${auth.uid}`)
+      }
+    }, (err: firebase.FirebaseError) => console.error(err));
   }
 
   private _checkBedtime(sleep: SleepHabit): boolean {

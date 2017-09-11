@@ -1,44 +1,42 @@
-// App
+// Angular
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+// Ionic
+import {
+  AlertController,
+  IonicPage,
+  Loading,
+  LoadingController,
+  NavController,
+  NavParams
+} from 'ionic-angular';
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
-// Providers
-import { AuthValidationService } from '../../providers';
-
 @IonicPage({
   name: 'forgot-password'
 })
 @Component({
-  selector: 'page-forgot-password',
   templateUrl: 'forgot-password.html'
 })
 export class ForgotPasswordPage {
   private _history: string;
   public forgotPasswordForm: FormGroup;
-  public email: AbstractControl;
-  public password: AbstractControl;
+  public email: FormControl = new FormControl('', [Validators.required, Validators.email]);
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
     private _loadCtrl: LoadingController,
-    private _fb: FormBuilder,
     private _navCtrl: NavController,
     private _params: NavParams
   ) {
-    this._history = _params.get('history');
-    this.forgotPasswordForm = _fb.group({
-      email: [
-        '',
-        Validators.compose([Validators.required, AuthValidationService.emailValidation,
-        AuthValidationService.noWhiteSpaceValidation])
-      ]
+    this._history = this._params.get('history');
+    this.forgotPasswordForm = new FormGroup({
+      email: this.email
     });
-    this.email = this.forgotPasswordForm.get('email');
   }
 
   public login(): void {
@@ -47,17 +45,27 @@ export class ForgotPasswordPage {
     })
   }
 
-  public reqestReset(form: { email: string }): void {
-    let loader = this._loadCtrl.create({
+  public reqestReset(): void {
+    const loader: Loading = this._loadCtrl.create({
       content: 'Sending request...',
       spinner: 'crescent',
-      duration: 30000
+      duration: 10000
     });
     loader.present();
-    this._afAuth.auth.sendPasswordResetEmail(form.email)
+    this._afAuth.auth.sendPasswordResetEmail(this.forgotPasswordForm.get('email').value.trim())
       .then(() => {
         loader.dismiss();
-        this._navCtrl.push('password-reset', { email: form.email });
+        this._alertCtrl.create({
+          title: 'Request sent',
+          subTitle: 'An email with a password reset link has been sent',
+          message: 'Go to your email inbox, follow the instructions, and change the password of your account.',
+          buttons: [{
+            text: 'OK',
+            handler: () => {
+              this._navCtrl.push('login');
+            }
+          }]
+        }).present();
       })
       .catch((err: firebase.FirebaseError) => {
         loader.dismiss();
@@ -69,4 +77,5 @@ export class ForgotPasswordPage {
         }).present();
       });
   }
+
 }

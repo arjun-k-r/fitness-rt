@@ -1,29 +1,22 @@
-// App
 import { NgModule } from '@angular/core';
+
 import { IonicPageModule } from 'ionic-angular';
 
-// Pages
 import { RecipeListPage } from './recipe-list';
-
-// Pipes
-import { FilterPipeModule, LimitPipeModule, SearchPipeModule } from '../../pipes';
-
-// Providers
-import { RecipeServiceModule } from '../../providers';
+import { FilterPipeModule, LimitPipeModule, SearchPipeModule, SortByPipeModule } from '../../pipes';
+import { RecipeProviderModule } from '../../providers';
 
 @NgModule({
   declarations: [
-    RecipeListPage,
+    RecipeListPage
   ],
   imports: [
     IonicPageModule.forChild(RecipeListPage),
+    RecipeProviderModule,
     FilterPipeModule,
     LimitPipeModule,
-    RecipeServiceModule,
-    SearchPipeModule
+    SearchPipeModule,
+    SortByPipeModule
   ],
-  exports: [
-    RecipeListPage
-  ]
 })
 export class RecipeListPageModule {}

@@ -1,7 +1,20 @@
 // App
 import { Component } from '@angular/core';
-import { AlertController, InfiniteScroll, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
+
+// Rxjs
 import { Subscription } from 'rxjs/Subscription';
+
+// Ionic
+import {
+  AlertController,
+  IonicPage,
+  InfiniteScroll,
+  Loading,
+  LoadingController,
+  NavController,
+  Popover,
+  PopoverController
+} from 'ionic-angular';
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -11,27 +24,31 @@ import * as firebase from 'firebase/app';
 import { Recipe } from '../../models';
 
 // Providers
-import { RecipeService } from '../../providers';
+import { RecipeProvider } from '../../providers';
 
 @IonicPage({
-  name: 'recipe-list'
+  name: 'recipe-list',
+  segment: 'index.html'
 })
 @Component({
-  selector: 'page-recipe-list',
   templateUrl: 'recipe-list.html'
 })
 export class RecipeListPage {
-  private _recipesSubscription: Subscription;
-  public limit: number = 50;
-  public queryIngredients: Array<string> = [];
-  public recipes: Array<Recipe> = [];
-  public searchQuery: string = '';
+  private _authId: string;
+  private _authSubscription: Subscription;
+  private _recipeLoader: Loading;
+  private _recipeSubscription: Subscription;
+  public ingredientsFilter: string[] = [];
+  public recipeLimit: number = 50;
+  public recipes: Recipe[];
+  public recipeSearchQuery: string = '';
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
+    private _recipePvd: RecipeProvider,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
-    private _recipeSvc: RecipeService,
+    private _popoverCtrl: PopoverController
   ) { }
 
   public addIngredientFilter(): void {
@@ -53,9 +70,8 @@ export class RecipeListPage {
         {
           text: 'Done',
           handler: (data: { ingredient: string }) => {
-            if (!this.queryIngredients.find((query: string) => query.toLocaleLowerCase().includes(data.ingredient.toLocaleLowerCase()))) {
-              this.queryIngredients.push(data.ingredient);
-              this.queryIngredients = [...this.queryIngredients];
+            if (!this.ingredientsFilter.find((query: string) => query.toLocaleLowerCase().includes(data.ingredient.toLocaleLowerCase()))) {
+              this.ingredientsFilter = [...this.ingredientsFilter, data.ingredient];
             }
           }
         }
@@ -63,62 +79,82 @@ export class RecipeListPage {
     }).present();
   }
 
-  public addNewRecipe(): void {
-    let newRecipe: Recipe = new Recipe();
-    this._navCtrl.push('recipe-edit', { name: newRecipe.name, recipe: newRecipe, new: true });
+  public addRecipe(): void {
+    this._navCtrl.push('recipe-details', { recipe: new Recipe() });
   }
 
-  public clearSearch(ev: string): void {
-    this.searchQuery = '';
+  public clearSearchRecipes(evenet: string): void {
+    this.recipeSearchQuery = '';
   }
 
-  public loadMore(ev: InfiniteScroll) {
-    this.limit += 50;
-    setTimeout(() => {
-      ev.complete();
-    }, 1000);
+  public editRecipe(recipe: Recipe): void {
+    this._navCtrl.push('recipe-details', { recipe });
   }
 
-  public removeQueryIngredient(idx: number): void {
-    this.queryIngredients = [...this.queryIngredients.slice(0, idx), ...this.queryIngredients.slice(idx + 1)];
+  public loadMoreRecipes(ev: InfiniteScroll) {
+    this.recipeLimit += 50;
+    setTimeout(() => ev.complete(), 1000);
+  }
+
+  public removeIngredientQuery(idx: number): void {
+    this.ingredientsFilter = [...this.ingredientsFilter.slice(0, idx), ...this.ingredientsFilter.slice(idx + 1)];
   }
 
   public removeRecipe(recipe: Recipe): void {
-    this._recipeSvc.removeRecipe(recipe);
+    this._recipePvd.removeRecipe(this._authId, recipe);
+  }
+
+  public showSettings(event: Popover): void {
+    const popover: Popover = this._popoverCtrl.create('settings');
+    popover.present({
+      ev: event
+    });
   }
 
   ionViewCanEnter(): void {
-    this._afAuth.authState.subscribe((auth: firebase.User) => {
+    this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!auth) {
         this._navCtrl.setRoot('registration', {
-          history: 'recipe-list'
+          history: 'fitness'
         });
-      }
+      };
     })
   }
 
-  ionViewWillEnter(): void {
-    let loader: Loading = this._loadCtrl.create({
-      content: 'Loading...',
-      spinner: 'crescent',
-      duration: 30000
-    });
-    loader.present();
-    this._recipesSubscription = this._recipeSvc.getRecipes$().subscribe((recipes: Array<Recipe>) => {
-      this.recipes = [...recipes];
-      loader.dismiss();
-    }, (error: Error) => {
-      loader.dismiss();
-      this._alertCtrl.create({
-        title: 'Uhh ohh...',
-        subTitle: 'Something went wrong',
-        message: error.toString(),
-        buttons: ['OK']
-      }).present();
+  ionViewWillLoad(): void {
+    this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
+      if (!!auth) {
+        this._authId = auth.uid;
+        this._recipeLoader = this._loadCtrl.create({
+          content: 'Loading...',
+          duration: 30000,
+          spinner: 'crescent'
+        });
+        this._recipeLoader.present();
+        this._recipeSubscription = this._recipePvd.getRecipes$(this._authId).subscribe((recipes: Recipe[]) => {
+          this.recipes = [...recipes];
+          if (this._recipeLoader) {
+            this._recipeLoader.dismiss();
+            this._recipeLoader = null;
+          }
+        }, (err: firebase.FirebaseError) => {
+          if (this._recipeLoader) {
+            this._recipeLoader.dismiss();
+            this._recipeLoader = null;
+          }
+          this._alertCtrl.create({
+            title: 'Uhh ohh...',
+            subTitle: 'Something went wrong',
+            message: err.message,
+            buttons: ['OK']
+          }).present();
+        });
+      }
     });
   }
 
   ionViewWillLeave(): void {
-    this._recipesSubscription.unsubscribe();
+    this._authSubscription && this._authSubscription.unsubscribe();
+    this._recipeSubscription && this._recipeSubscription.unsubscribe();
   }
 }

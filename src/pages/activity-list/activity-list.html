@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar role="toolbar">
+    <ion-title>Activities</ion-title>
+    <ion-buttons end>
+      <button (click)="doneSelecting()" icon-only ion-button padding role="button">
+        <ion-icon aria-hidden="true" name="done-all"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-searchbar debounce="2000" (ionCancel)="clearSearchActivities($event)" [(ngModel)]="activitySearchQuery" placeholder="Search activities"  role="search">
+  </ion-searchbar>
+  <ion-list role="list">
+    <ion-item *ngFor="let activity of activities | search: activitySearchQuery | limit: activityLimit" role="checkbox">
+      <ion-label text-wrap>{{ activity.name }}</ion-label>
+      <ion-checkbox #checkBox (click)="selectActivity(activity, checkBox)"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadMoreActivities($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,5 +1,8 @@
 {
-  "name": "Fit for Life",
-  "app_id": "7d599801",
-  "type": "ionic-angular"
+  "name": "ifit",
+  "app_id": "6f751f99",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }

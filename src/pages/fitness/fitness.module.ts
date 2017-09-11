@@ -1,15 +1,9 @@
-// App
 import { NgModule } from '@angular/core';
+
 import { IonicPageModule } from 'ionic-angular';
 
-// Components
-import { ErrorMessageComponentModule } from '../../components';
-
-// Providers
-import { DRIServiceModule, FitnessServiceModule, NutritionServiceModule } from '../../providers';
-
-// Pages
 import { FitnessPage } from './fitness';
+import { FitnessProviderModule, NutritionProviderModule } from '../../providers';
 
 @NgModule({
   declarations: [
@@ -17,13 +11,8 @@ import { FitnessPage } from './fitness';
   ],
   imports: [
     IonicPageModule.forChild(FitnessPage),
-    DRIServiceModule,
-    ErrorMessageComponentModule,
-    FitnessServiceModule,
-    NutritionServiceModule
+    FitnessProviderModule,
+    NutritionProviderModule
   ],
-  exports: [
-    FitnessPage
-  ]
 })
 export class FitnessPageModule {}

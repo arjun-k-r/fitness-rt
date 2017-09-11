@@ -1,20 +1,22 @@
-// App
+// Angular
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { IonicStorageModule } from '@ionic/storage';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
-import { MyApp } from './app.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorHandler, NgModule } from '@angular/core';
 
-// Cordova
+// Ionic
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+import { IonicStorageModule } from '@ionic/storage';
+
+// Ionic Native
 import { Camera } from '@ionic-native/camera';
-import { Facebook } from '@ionic-native/facebook';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+
+// App
+import { MyApp } from './app.component';
 
 // Firebase
 import { AngularFireModule } from 'angularfire2';
@@ -24,17 +26,17 @@ import 'firebase/storage';
 
 const CLOUD_SETTINGS: CloudSettings = {
   'core': {
-    'app_id': '7d599801'
+    'app_id': '6f751f99'
   }
 };
 
 const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyBSRCjaqNBzwylAbxrwPpHde6eGTeyC5nQ",
-  authDomain: "fit-4-life.firebaseapp.com",
-  databaseURL: "https://fit-4-life.firebaseio.com",
-  projectId: "fit-4-life",
-  storageBucket: "fit-4-life.appspot.com",
-  messagingSenderId: "234322620896"
+  apiKey: 'AIzaSyCFuo3aDzAyF6LFgS9cyKQGvXBL7CE41zM',
+  authDomain: 'ifit-6f60e.firebaseapp.com',
+  databaseURL: 'https://ifit-6f60e.firebaseio.com',
+  projectId: 'ifit-6f60e',
+  storageBucket: 'ifit-6f60e.appspot.com',
+  messagingSenderId: '597263959509'
 };
 
 @NgModule({
@@ -46,12 +48,10 @@ const FIREBASE_CONFIG = {
     IonicModule.forRoot(MyApp),
     CloudModule.forRoot(CLOUD_SETTINGS),
     IonicStorageModule.forRoot(),
-    AngularFireModule.initializeApp(FIREBASE_CONFIG, 'fit-4-life'),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG, 'iFit'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     CommonModule,
-    FormsModule,
-    HttpModule,
     ReactiveFormsModule
   ],
   bootstrap: [IonicApp],
@@ -60,11 +60,10 @@ const FIREBASE_CONFIG = {
   ],
   providers: [
     Camera,
-    Facebook,
     ImagePicker,
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
-export class AppModule { }
+export class AppModule {}

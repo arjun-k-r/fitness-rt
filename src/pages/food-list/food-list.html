@@ -1,33 +1,62 @@
 <ion-header>
-    <ion-navbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title>Foods</ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only padding (click)="showFilter()">
-                <ion-icon name="funnel"></ion-icon>
-            </button>
-        </ion-buttons>
-    </ion-navbar>
-
+  <ion-navbar role="toolbar">
+    <ion-title>Foods</ion-title>
+    <ion-buttons end>
+      <button (click)="showFilter()" icon-only ion-button padding role="button">
+        <ion-icon aria-hidden="true" name="funnel"></ion-icon>
+      </button>
+      <button (click)="doneSelecting()" icon-only ion-button padding role="button">
+        <ion-icon aria-hidden="true" name="done-all"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar role="tablist">
+    <ion-segment [(ngModel)]="selectionSegment">
+      <ion-segment-button value="foods">
+        Foods
+      </ion-segment-button>
+      <ion-segment-button (click)="loadRecipes()" value="recipes">
+        Recipes
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-    <ion-searchbar debounce="2000" placeholder="Search foods" [(ngModel)]="searchQuery" (ionCancel)="clearSearch($event)">
-    </ion-searchbar>
-    <ion-list>
-        <button ion-item *ngFor="let food of foods | search: searchQuery | limit: limit | sortBy: sortSelection: sortOrder" [navPush]="'food-details'" [navParams]="{ id: food.ndbno, food: food }">
-            <h2 text-wrap>{{ food.name }}</h2>
-            <p>{{ food.group }}</p>
-            <ion-note item-right>
-                View more
-            </ion-note>
-        </button>
-    </ion-list>
-
-    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+  <ion-fab bottom *ngIf="selectionSegment === 'foods'" right>
+    <button (click)="addFood()" color="secondary" ion-fab><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+  <div [ngSwitch]="selectionSegment">
+    <div *ngSwitchCase="'foods'">
+      <ion-searchbar debounce="2000" (ionCancel)="clearSearchFoods($event)" [(ngModel)]="foodSearchQuery" placeholder="Search foods"
+        role="search">
+      </ion-searchbar>
+      <ion-list role="list">
+        <ion-item *ngFor="let food of foods | search: foodSearchQuery | limit: foodLimit | sortBy: selectedNutrient" role="checkbox">
+          <ion-label text-wrap>{{ food.name }}</ion-label>
+          <ion-checkbox #checkBox (click)="showOptions(food, checkBox)"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="loadMoreFoods($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+      </ion-infinite-scroll>
+    </div>
+
+    <div *ngSwitchCase="'recipes'">
+      <ion-searchbar debounce="2000" (ionCancel)="clearSearchRecipes($event)" [(ngModel)]="recipeSearchQuery" placeholder="Search recipes"
+        role="search">
+      </ion-searchbar>
+      <ion-list role="list">
+        <ion-item *ngFor="let recipe of recipes | search: recipeSearchQuery | limit: recipeLimit" role="checkbox">
+          <ion-label text-wrap>{{ recipe.name }}</ion-label>
+          <ion-checkbox #checkBox (click)="showOptions(recipe, checkBox)"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+
+      <ion-infinite-scroll (ionInfinite)="loadMoreRecipes($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
 </ion-content>

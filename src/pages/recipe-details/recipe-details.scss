@@ -1,3 +1,27 @@
-page-recipe-details {
+.recipe-image {
+    align-self: stretch;
+    background-position: center center;
+    background-size: cover;
+    flex: 0 1 auto;
+    height: 25rem;
+    margin: 0;
+    width: 100%;
+}
 
+.upload-placeholder {
+    align-items: center;
+    background-color: #eee;
+    border-radius: 50%;
+    display: flex;
+    height: 10rem;
+    justify-content: center;;
+    margin: 5em auto 0 auto;
+    width: 10rem;
+    
+    ion-icon {
+        font-size: 3rem;
+    }
+    &:hover {
+        cursor: pointer;
+    }
 }

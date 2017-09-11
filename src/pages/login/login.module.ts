@@ -1,15 +1,8 @@
-// App
 import { NgModule } from '@angular/core';
+
 import { IonicPageModule } from 'ionic-angular';
 
-// Components
-import { ErrorMessageComponentModule } from '../../components';
-
-// Page
 import { LoginPage } from './login';
-
-// Providers
-import { AuthValidationServiceModule } from '../../providers';
 
 @NgModule({
   declarations: [
@@ -17,11 +10,6 @@ import { AuthValidationServiceModule } from '../../providers';
   ],
   imports: [
     IonicPageModule.forChild(LoginPage),
-    AuthValidationServiceModule,
-    ErrorMessageComponentModule
   ],
-  exports: [
-    LoginPage
-  ]
 })
 export class LoginPageModule {}

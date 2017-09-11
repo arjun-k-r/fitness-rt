@@ -1,53 +1,44 @@
-// App
+// Angular
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonicPage, LoadingController, NavController, NavParams, Platform } from 'ionic-angular';
-import { Facebook } from '@ionic-native/facebook';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+// Ionic
+import {
+  AlertController,
+  IonicPage,
+  Loading,
+  LoadingController,
+  NavController,
+  NavParams
+} from 'ionic-angular';
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
-// Providers
-import { AuthValidationService } from '../../providers';
-
 @IonicPage({
   name: 'login'
 })
 @Component({
-  selector: 'page-login',
   templateUrl: 'login.html'
 })
 export class LoginPage {
   private _history: string;
-  public email: AbstractControl;
+  public email: FormControl = new FormControl('', [Validators.required, Validators.email]);
   public loginForm: FormGroup;
-  public password: AbstractControl;
+  public password: FormControl = new FormControl('', Validators.required);
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _fb: Facebook,
-    private _formBuilder: FormBuilder,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
-    private _params: NavParams,
-    private _platform: Platform
+    private _params: NavParams
   ) {
-    this._history = _params.get('history');
-    this.loginForm = _formBuilder.group({
-      email: [
-        '',
-        Validators.compose([Validators.required, AuthValidationService.emailValidation,
-        AuthValidationService.noWhiteSpaceValidation])
-      ],
-      password: [
-        '',
-        Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(16),
-        AuthValidationService.passwordValidation, AuthValidationService.noWhiteSpaceValidation])
-      ]
+    this._history = this._params.get('history');
+    this.loginForm = new FormGroup({
+      email: this.email,
+      password: this.password
     });
-    this.email = this.loginForm.get('email');
-    this.password = this.loginForm.get('password');
   }
 
   public forgotPassword(): void {
@@ -56,20 +47,20 @@ export class LoginPage {
     })
   }
 
-  public login(form: { email: string, password: string }): void {
-    let loader = this._loadCtrl.create({
+  public login(): void {
+    const loader: Loading = this._loadCtrl.create({
       content: 'Please wait...',
       spinner: 'crescent',
-      duration: 30000
+      duration: 10000
     });
     loader.present();
-    this._afAuth.auth.signInWithEmailAndPassword(form.email.trim(), form.password.trim())
+    this._afAuth.auth.signInWithEmailAndPassword(this.loginForm.get('email').value.trim(), this.loginForm.get('password').value.trim())
       .then((user: firebase.User) => {
         loader.dismiss();
         if (this._history) {
           this._navCtrl.setRoot(this._history);
         } else {
-          this._navCtrl.setRoot('fitness');
+          this._navCtrl.setRoot('tabs');
         }
       }).catch((err: firebase.FirebaseError) => {
         loader.dismiss();
@@ -88,38 +79,4 @@ export class LoginPage {
     })
   }
 
-  public signInWithFacebook() {
-    let loader = this._loadCtrl.create({
-      content: 'Please wait...',
-      spinner: 'crescent',
-      duration: 30000
-    });
-    loader.present();
-    if (this._platform.is('cordova')) {
-      this._fb.login(['email', 'public_profile']).then(res => {
-        const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
-        return firebase.auth().signInWithCredential(facebookCredential);
-      })
-    }
-    else {
-      return this._afAuth.auth
-        .signInWithPopup(new firebase.auth.FacebookAuthProvider())
-        .then((user: firebase.User) => {
-          loader.dismiss();
-          if (this._history) {
-            this._navCtrl.setRoot(this._history);
-          } else {
-            this._navCtrl.setRoot('fitness');
-          }
-        }).catch((err: firebase.FirebaseError) => {
-          loader.dismiss();
-          this._alertCtrl.create({
-            title: 'Uhh ohh...',
-            subTitle: 'Something went wrong',
-            message: err.message,
-            buttons: ['OK']
-          }).present();
-        });
-    }
-  }
 }

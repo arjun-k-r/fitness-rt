@@ -1,8 +1,6 @@
-export * from './activity-plan';
-export * from './food';
-export * from './meal-plan';
-export * from './nutrition';
-export * from './sleep-plan';
+export * from './activity';
 export { Fitness } from './fitness';
+export { Food } from './food';
+export * from './meal';
+export * from './nutrition';
 export { Recipe } from './recipe';
-export { WarningMessage } from './warning-message';

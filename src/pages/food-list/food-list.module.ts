@@ -1,29 +1,22 @@
-// App
 import { NgModule } from '@angular/core';
+
 import { IonicPageModule } from 'ionic-angular';
 
-// Pages
 import { FoodListPage } from './food-list';
-
-// Pipes
 import { LimitPipeModule, SearchPipeModule, SortByPipeModule } from '../../pipes';
-
-// Providers
-import { FoodServiceModule } from '../../providers';
+import { FoodProviderModule, RecipeProviderModule } from '../../providers';
 
 @NgModule({
   declarations: [
-    FoodListPage,
+    FoodListPage
   ],
   imports: [
     IonicPageModule.forChild(FoodListPage),
-    FoodServiceModule,
+    FoodProviderModule,
     LimitPipeModule,
+    RecipeProviderModule,
     SearchPipeModule,
     SortByPipeModule
   ],
-  exports: [
-    FoodListPage
-  ]
 })
 export class FoodListPageModule {}

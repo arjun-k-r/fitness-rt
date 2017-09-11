@@ -1,57 +1,82 @@
 // App
 import { Component } from '@angular/core';
-import { ActionSheetController, AlertController, IonicPage, InfiniteScroll, Loading, LoadingController, NavController } from 'ionic-angular';
+
+// Rxjs
 import { Subscription } from 'rxjs/Subscription';
 
+// Ionic
+import {
+  ActionSheetController,
+  AlertController,
+  IonicPage,
+  InfiniteScroll,
+  Loading,
+  LoadingController,
+  Modal,
+  ModalController,
+  NavController,
+  NavParams,
+  ViewController
+} from 'ionic-angular';
+
 // Firebase
-import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { Food } from '../../models';
+import { Food, Recipe } from '../../models';
 
 // Providers
-import { FOOD_GROUPS, FoodService } from '../../providers';
+import { FOOD_GROUPS, FoodProvider, RecipeProvider } from '../../providers';
 
 @IonicPage({
-  name: 'food-list'
+  name: 'food-list',
+  segment: 'index.html'
 })
 @Component({
-  selector: 'page-food-list',
   templateUrl: 'food-list.html'
 })
 export class FoodListPage {
-  private _dismissedLoader: boolean = false;
+  private _authId: string;
+  private _foodLoader: Loading;
   private _foodSubscription: Subscription;
-  private _loader: Loading;
-  private _nutrients: Array<{ key: string, name: string }>;
-  public foods: Array<Food>;
-  public limit: number = 50;
-  public searchQuery: string = '';
+  private _nutrients: { key: string, name: string }[];
+  private _recipeLoader: Loading;
+  private _recipeSubscription: Subscription;
+  public foodLimit: number = 50;
+  public foods: Food[];
+  public foodSearchQuery: string = '';
+  public recipeLimit: number = 50;
+  public recipes: Recipe[];
+  public recipeSearchQuery: string = '';
   public selectedGroup: string = FOOD_GROUPS[0];
-  public sortOrder = 'desc';
-  public sortSelection = '';
+  public selectedItems: (Food | Recipe)[] = [];
+  public selectedNutrient = '';
+  public selectionSegment: string = 'foods';
   constructor(
     private _actionSheetCtrl: ActionSheetController,
-    private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _foodSvc: FoodService,
+    private _foodPvd: FoodProvider,
     private _loadCtrl: LoadingController,
-    private _navCtrl: NavController
+    private _modalCtrl: ModalController,
+    private _navCtrl: NavController,
+    private _params: NavParams,
+    private _recipePvd: RecipeProvider,
+    private _viewCtrl: ViewController
   ) {
-    let food: Food = new Food();
+    this._authId = <string>this._params.get('authId');
+    const food: Food = new Food();
     this._nutrients = Object.keys(food.nutrition).map((nutrientKey: string) => {
       return {
         key: nutrientKey,
         name: food.nutrition[nutrientKey].name
       }
-    })
+    });
   }
 
   private _selectGroup(): void {
     this._alertCtrl.create({
-      title: 'Filter by groups',
-      subTitle: 'Pick a food group',
+      title: 'Filter foods by group',
+      subTitle: 'Select a food group',
       inputs: [...FOOD_GROUPS.map((group: string) => {
         return {
           type: 'radio',
@@ -65,80 +90,168 @@ export class FoodListPage {
           text: 'Done',
           handler: (data: string) => {
             this.selectedGroup = data;
-            this.sortSelection = '';
-            this.sortOrder = 'desc';
-            this._dismissedLoader = false;
-            this._foodSvc.changeFoodGroup(this.selectedGroup);
-            this._loader = this._loadCtrl.create({
+            this.selectedNutrient = '';
+            this._foodPvd.changeFoodGroup(this.selectedGroup);
+            this._foodLoader = this._loadCtrl.create({
               content: 'Loading...',
-              spinner: 'crescent'
+              spinner: 'crescent',
+              duration: 10000
             });
-            this._loader.present();
-            setTimeout(() => {
-              if (!this._dismissedLoader) {
-                this._loader.dismiss();
-              }
-            }, 30000);
+            this._foodLoader.present();
           }
         }
       ]
     }).present();
   }
 
+  public _selectItem(item: Food | Recipe, checkBox: HTMLInputElement): void {
+    const idx: number = this.selectedItems.indexOf(item);
+    if (idx === -1) {
+      this._alertCtrl.create({
+        title: 'Servings',
+        subTitle: `${item.name.toString()}`,
+        inputs: [
+          {
+            name: 'servings',
+            placeholder: item.hasOwnProperty('chef') ? `Servings x ${item.quantity.toString()} g` : 'Servings x 100g',
+            type: 'number',
+          }
+        ],
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              checkBox.checked = false;
+            }
+          },
+          {
+            text: 'Done',
+            handler: (data: { servings: number }) => {
+              item.servings = data.servings;
+              this.selectedItems = [...this.selectedItems, item];
+            }
+          }
+        ]
+      }).present();
+    } else {
+      this.selectedItems = [...this.selectedItems.slice(0, idx), ...this.selectedItems.slice(idx + 1)];
+    }
+  }
+
   private _selectNutrient(): void {
     this._alertCtrl.create({
-      title: 'Filter by nutrients',
-      subTitle: 'Pick a nutrient',
+      title: 'Filter foods by nutrients',
+      subTitle: 'Select a nutrient',
       inputs: [...this._nutrients.map((nutrient: { key: string, name: string }) => {
         return {
           type: 'radio',
           label: nutrient.name,
           value: nutrient.key,
-          checked: this.sortSelection === `nutrition.${nutrient.key}.value`
+          checked: this.selectedNutrient === `nutrition.${nutrient.key}.value`
         }
       })],
       buttons: [
         {
           text: 'Done',
           handler: (data: string) => {
-            this.sortSelection = `nutrition.${data}.value`;
-            this.sortOrder = 'desc';
+            this.selectedNutrient = `nutrition.${data}.value`;
           }
         }
       ]
     }).present();
   }
 
-  public clearSearch(ev): void {
-    this.searchQuery = '';
+  public addFood(): void {
+    const foodDetailsModal: Modal = this._modalCtrl.create('food-details', { authId: this._authId, food: new Food() });
+    foodDetailsModal.present();
+    foodDetailsModal.onWillDismiss(() => {
+      this._foodSubscription = this._foodPvd.getFoods$(this.selectedGroup).subscribe((foods: Food[]) => {
+        this.foods = [...foods];
+        if (this._foodLoader) {
+          this._foodLoader.dismiss();
+          this._foodLoader = null;
+        }
+      }, (err: firebase.FirebaseError) => {
+        if (this._foodLoader) {
+          this._foodLoader.dismiss();
+          this._foodLoader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.message,
+          buttons: ['OK']
+        }).present();
+      });
+    })
   }
 
-  public loadMore(ev: InfiniteScroll) {
-    this.limit += 50;
-    setTimeout(() => {
-      ev.complete();
-    }, 1000);
+  public clearSearchFoods(evenet: string): void {
+    this.foodSearchQuery = '';
   }
+
+  public clearSearchRecipes(evenet: string): void {
+    this.recipeSearchQuery = '';
+  }
+
+  public doneSelecting(): void {
+    this._viewCtrl.dismiss(this.selectedItems);
+  }
+
+  public loadMoreFoods(ev: InfiniteScroll) {
+    this.foodLimit += 50;
+    setTimeout(() => ev.complete(), 1000);
+  }
+
+  public loadMoreRecipes(ev: InfiniteScroll) {
+    this.recipeLimit += 50;
+    setTimeout(() => ev.complete(), 1000);
+  }
+
+  public loadRecipes(): void {
+    if (!this._recipeSubscription) {
+      this._recipeLoader = this._loadCtrl.create({
+        content: 'Loading...',
+        duration: 30000,
+        spinner: 'crescent'
+      });
+      this._recipeLoader.present();
+      this._recipeSubscription = this._recipePvd.getRecipes$(this._authId).subscribe((recipes: Recipe[]) => {
+        this.recipes = [...recipes];
+        if (this._recipeLoader) {
+          this._recipeLoader.dismiss();
+          this._recipeLoader = null;
+        }
+      }, (err: firebase.FirebaseError) => {
+        if (this._recipeLoader) {
+          this._recipeLoader.dismiss();
+          this._recipeLoader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.message,
+          buttons: ['OK']
+        }).present();
+      });
+    }
+  }
+
 
   public showFilter(): void {
     this._actionSheetCtrl.create({
-      title: 'Change ingredient',
+      title: 'Food list options',
       buttons: [
         {
-          text: 'Change food group',
+          text: 'Filter by food group',
           handler: () => {
             this._selectGroup();
           }
         }, {
-          text: 'Sort by nutrients (high to low)',
+          text: 'Sort by nutrients',
           handler: () => {
             this._selectNutrient();
-          }
-        }, {
-          text: 'Sort by alkalinity (alkaline to acid)',
-          handler: () => {
-            this.sortSelection = 'pral';
-            this.sortOrder = 'asc';
           }
         }, {
           text: 'Cancel',
@@ -148,47 +261,66 @@ export class FoodListPage {
     }).present();
   }
 
-  ionViewCanEnter(): void {
-    this._afAuth.authState.subscribe((auth: firebase.User) => {
-      if (!auth) {
-        this._navCtrl.setRoot('registration', {
-          history: 'food-list'
-        });
-      }
-    })
+  public showOptions(item: Food | Recipe, checkBox: HTMLInputElement): void {
+    this._actionSheetCtrl.create({
+      title: 'What to do with this item?',
+      buttons: [
+        {
+          text: 'View details',
+          handler: () => {
+            checkBox.checked = false;
+            if (item.hasOwnProperty('chef')) {
+              this._navCtrl.push('recipe-details', { item });
+            } else {
+              const foodDetailsModal: Modal = this._modalCtrl.create('food-details', { item });
+              foodDetailsModal.present();
+            }
+          }
+        }, {
+          text: 'Select it',
+          handler: () => {
+            this._selectItem(item, checkBox);
+          }
+        }, {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            checkBox.checked = false
+          }
+        }
+      ]
+    }).present();
   }
 
   ionViewWillLoad(): void {
-    this._loader = this._loadCtrl.create({
+    this._foodLoader = this._loadCtrl.create({
       content: 'Loading...',
+      duration: 30000,
       spinner: 'crescent'
     });
-    this._loader.present();
-    setTimeout(() => {
-      if (!this._dismissedLoader) {
-        this._loader.dismiss();
+    this._foodLoader.present();
+    this._foodSubscription = this._foodPvd.getFoods$(this.selectedGroup).subscribe((foods: Food[]) => {
+      this.foods = [...foods];
+      if (this._foodLoader) {
+        this._foodLoader.dismiss();
+        this._foodLoader = null;
       }
-    }, 30000);
-    this._foodSubscription = this._foodSvc.getFoods$(this.selectedGroup).subscribe((data: Array<Food>) => {
-      this.foods = [...data];
-      if (!this._dismissedLoader) {
-        this._loader.dismiss();
-      }
-    }, (err: { status: string, message: string }) => {
-      if (!this._dismissedLoader) {
-        this._loader.dismiss();
+    }, (err: firebase.FirebaseError) => {
+      if (this._foodLoader) {
+        this._foodLoader.dismiss();
+        this._foodLoader = null;
       }
       this._alertCtrl.create({
         title: 'Uhh ohh...',
         subTitle: 'Something went wrong',
-        message: `Error ${err.status}! ${err.message}`,
+        message: err.message,
         buttons: ['OK']
       }).present();
     });
-    this._loader.onDidDismiss(() => this._dismissedLoader = true);
   }
 
   ionViewWillLeave(): void {
-    this._foodSubscription.unsubscribe();
+    this._foodSubscription && this._foodSubscription.unsubscribe();
+    this._recipeSubscription && this._recipeSubscription.unsubscribe();
   }
 }

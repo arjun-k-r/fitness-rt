@@ -1,65 +1,51 @@
-// App
+// Angular
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonicPage, Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CustomValidators } from 'ng2-validation';
+
+// Ionic
+import {
+  AlertController,
+  IonicPage,
+  Loading,
+  LoadingController,
+  NavController,
+  NavParams
+} from 'ionic-angular';
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
-// Providers
-import { AuthValidationService } from '../../providers';
-
 @IonicPage({
   name: 'registration'
 })
 @Component({
-  selector: 'page-registration',
   templateUrl: 'registration.html'
 })
 export class RegistrationPage {
   private _history: string;
-  public email: AbstractControl;
-  public firstName: AbstractControl;
-  public lastName: AbstractControl;
-  public password: AbstractControl;
-  public passwordConfirm: AbstractControl;
-  public registerForm: FormGroup;
+  private _tabBarElement: any;
+  public email: FormControl = new FormControl('', [Validators.required, Validators.email]);
+  public name: FormControl = new FormControl('', [Validators.required, Validators.pattern(/[A-Za-z]+(\s[A-Za-z]+)?$/)]);
+  public password: FormControl = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  public passwordConfirm: FormControl = new FormControl('', [Validators.required, CustomValidators.equalTo(this.password)]);
+  public registrationForm: FormGroup;
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _formBuilder: FormBuilder,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
     private _params: NavParams
   ) {
-    this._history = _params.get('history');
-    this.registerForm = this._formBuilder.group({
-      email: [
-        '',
-        Validators.compose([Validators.required, AuthValidationService.emailValidation,
-        AuthValidationService.noWhiteSpaceValidation])
-      ],
-      firstName: [
-        '',
-        Validators.compose([Validators.required, Validators.maxLength(20), AuthValidationService.noWhiteSpaceValidation])
-      ],
-      lastName: [
-        '',
-        Validators.compose([Validators.required, Validators.maxLength(20), AuthValidationService.noWhiteSpaceValidation])
-      ],
-      password: [
-        '',
-        Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(16),
-        AuthValidationService.passwordValidation, AuthValidationService.noWhiteSpaceValidation])
-      ],
-      passwordConfirm: ['', Validators.required]
-    }, { validator: AuthValidationService.passwordMatchValidation });
-    this.email = this.registerForm.get('email');
-    this.firstName = this.registerForm.get('firstName');
-    this.lastName = this.registerForm.get('lastName');
-    this.password = this.registerForm.get('password');
-    this.passwordConfirm = this.registerForm.get('passwordConfirm');
+    this._tabBarElement = document.querySelector('.tabbar.show-tabbar');
+    this._history = this._params.get('history');
+    this.registrationForm = new FormGroup({
+      email: this.email,
+      name: this.name,
+      password: this.password,
+      passwordConfirm: this.passwordConfirm
+    });
   }
 
   public login(): void {
@@ -68,25 +54,24 @@ export class RegistrationPage {
     })
   }
 
-  public register(form: { email: string, firstName: string, lastName: string, password: string }): void {
-    let loader: Loading = this._loadCtrl.create({
+  public register(): void {
+    const loader: Loading = this._loadCtrl.create({
       content: 'Creating your account...',
       spinner: 'crescent',
-      duration: 30000
+      duration: 10000
     });
     loader.present();
-
-    this._afAuth.auth.createUserWithEmailAndPassword(form.email.trim(), form.password.trim())
+    this._afAuth.auth.createUserWithEmailAndPassword(this.registrationForm.get('email').value.trim(), this.registrationForm.get('password').value.trim())
       .then((user: firebase.User) => {
         user.updateProfile({
-          displayName: `${form.firstName.trim()} ${form.lastName.trim()}`,
+          displayName: this.registrationForm.get('name').value.trim(),
           photoURL: ''
         }).then(() => {
           loader.dismiss();
-          if (this._history) {
+          if (!!this._history) {
             this._navCtrl.setRoot(this._history);
           } else {
-            this._navCtrl.setRoot('fitness');
+            this._navCtrl.setRoot('tabs');
           }
         }).catch((err: firebase.FirebaseError) => {
           loader.dismiss();
@@ -109,10 +94,13 @@ export class RegistrationPage {
   }
 
   ionViewWillEnter(): void {
+    if (this._tabBarElement) {
+      this._tabBarElement.style.display = 'none';
+    }
     this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
-        this._navCtrl.setRoot('fitness');
+        this._navCtrl.setRoot('tabs');
       }
-    })
+    });
   }
 }

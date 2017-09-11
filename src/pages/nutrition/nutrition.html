@@ -1,0 +1,248 @@
+<ion-header>
+  <ion-navbar role="toolbar">
+    <ion-title>Nutrition</ion-title>
+    <ion-buttons end>
+      <button (click)="showSettings($event)" icon-only ion-button role="button">
+        <ion-icon aria-hidden="true" name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar role="tablist">
+    <ion-segment [(ngModel)]="nutritionSegment">
+      <ion-segment-button value="meals">
+        Meals
+      </ion-segment-button>
+      <ion-segment-button value="nutrition">
+        Nutrition
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-fab bottom *ngIf="nutritionSegment === 'meals'" right>
+    <button (click)="addMeal()" color="secondary" ion-fab role="button">
+      <ion-icon aria-hidden="true" name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <div [ngSwitch]="nutritionSegment">
+    <div *ngSwitchCase="'meals'">
+      <ion-item-group *ngFor="let meal of mealPlan?.meals; let i = index" role="group">
+        <ion-item-divider color="light" role="separator">
+          Meal {{ i + 1 }}
+        </ion-item-divider>
+        <ion-item role="listitem">
+          Energy
+          <p item-content>{{ nutrientPercent(meal.nutrition.energy.value, 'energy') }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Carbohydrates
+          <p item-content>{{ nutrientPercent(meal.nutrition.carbs.value, 'carbs') }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Fats
+          <p item-content>{{ nutrientPercent(meal.nutrition.fats.value, 'fats') }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Protein
+          <p item-content>{{ nutrientPercent(meal.nutrition.protein.value, 'protein') }}%</p>
+        </ion-item>
+        <button (click)="editMeal(i)" color="secondary" ion-item outline role="button">
+          Edit meal
+          <ion-icon aria-hidden="true" item-right name="open"></ion-icon>
+        </button>
+      </ion-item-group>
+    </div>
+    <div *ngSwitchCase="'nutrition'" padding>
+      <ion-item-group role="group">
+        <ion-item role="listitem">
+          Energy
+          <p item-content>{{ dailyNutrition.energy?.value }}%</p>
+        </ion-item>
+        <ion-item-divider>Proximates</ion-item-divider>
+        <ion-item role="listitem">
+          Water
+          <p item-content>{{ dailyNutrition.water?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Protein
+          <p item-content>{{ dailyNutrition.protein?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Carbohydrates
+          <p item-content>{{ dailyNutrition.carbs?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Fiber
+          <p item-content>{{ dailyNutrition.fiber?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Sugars
+          <p item-content>{{ dailyNutrition.sugars?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Fats
+          <p item-content>{{ dailyNutrition.fats?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Trans fat
+          <p item-content>{{ dailyNutrition.transFat?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group role="group">
+        <ion-item-divider>Essential amino acids</ion-item-divider>
+        <ion-item role="listitem">
+          Histidine
+          <p item-content>{{ dailyNutrition.histidine?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Isoleucine
+          <p item-content>{{ dailyNutrition.isoleucine?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Leucine
+          <p item-content>{{ dailyNutrition.leucine?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Lysine
+          <p item-content>{{ dailyNutrition.lysine?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Methionine
+          <p item-content>{{ dailyNutrition.methionine?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Phenylalanine
+          <p item-content>{{ dailyNutrition.phenylalanine?.value }}%
+          </p>
+        </ion-item>
+        <ion-item role="listitem">
+          Threonine
+          <p item-content>{{ dailyNutrition.threonine?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Tryptophan
+          <p item-content>{{ dailyNutrition.tryptophan?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group role="group">
+        <ion-item-divider>Essential vitamins</ion-item-divider>
+        <ion-item role="listitem">
+          Vitamin A
+          <p item-content>{{ dailyNutrition.vitaminA?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Vitamin B1 (Thiamine)
+          <p item-content>{{ dailyNutrition.vitaminB1?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Vitamin B2 (Riboflavin)
+          <p item-content>{{ dailyNutrition.vitaminB2?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Vitamin B3 (Niacin)
+          <p item-content>{{ dailyNutrition.vitaminB3?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Vitamin B5 (Pantothenic acid)
+          <p item-content>{{ dailyNutrition.vitaminB5?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Vitamin B6 (Pyridoxine)
+          <p item-content>{{ dailyNutrition.vitaminB6?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Vitamin B9 (Folate)
+          <p item-content>{{ dailyNutrition.vitaminB9?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Vitamin B12 (Cobalamin)
+          <p item-content>{{ dailyNutrition.vitaminB12?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Choline
+          <p item-content>{{ dailyNutrition.choline?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Vitamin C (Ascorbic acid)
+          <p item-content>{{ dailyNutrition.vitaminC?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Vitamin D (Cholecalciferol)
+          <p item-content>{{ dailyNutrition.vitaminD?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Vitamin E (Tocopherol)
+          <p item-content>{{ dailyNutrition.vitaminE?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Vitamin K
+          <p item-content>{{ dailyNutrition.vitaminK?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group role="group">
+        <ion-item-divider>Essential minerals</ion-item-divider>
+        <ion-item role="listitem">
+          Calcium
+          <p item-content>{{ dailyNutrition.calcium?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Copper
+          <p item-content>{{ dailyNutrition.copper?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Iron
+          <p item-content>{{ dailyNutrition.iron?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Magnesium
+          <p item-content>{{ dailyNutrition.magnesium?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Manganese
+          <p item-content>{{ dailyNutrition.manganese?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Phosphorus
+          <p item-content>{{ dailyNutrition.phosphorus?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Potassium
+          <p item-content>{{ dailyNutrition.potassium?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Selenium
+          <p item-content>{{ dailyNutrition.selenium?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Sodium
+          <p item-content>{{ dailyNutrition.sodium?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Zinc
+          <p item-content>{{ dailyNutrition.zinc?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group role="group">
+        <ion-item-divider>Essential fatty acids</ion-item-divider>
+        <ion-item role="listitem">
+          Omega-3 (ALA)
+          <p item-content>{{ dailyNutrition.ala?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Omega-3 (DHA)
+          <p item-content>{{ dailyNutrition.dha?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Omega-3 (EPA)
+          <p item-content>{{ dailyNutrition.epa?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Omega-6 (LA)
+          <p item-content>{{ dailyNutrition.la?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+    </div>
+  </div>
+</ion-content>

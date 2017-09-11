@@ -1,20 +1,19 @@
-<ion-menu [content]="content" swipeEnabled="false">
+<!-- <ion-menu [content]="content" swipeEnabled="false" role="navigation">
     <ion-header>
-        <ion-toolbar>
+        <ion-toolbar role="menubar">
             <ion-title>Menu</ion-title>
         </ion-toolbar>
     </ion-header>
 
     <ion-content>
-        <ion-list>
-            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-                <ion-icon [name]="p.icon" item-left></ion-icon>
-                {{p.title}}
-            </button>
+        <ion-list role="menu">
+            <button (click)="openPage(p)" ion-item menuClose *ngFor="let p of pages" role="menuitem">
+              <ion-icon aria-hidden="true" item-left [name]="p.icon"></ion-icon>
+              {{p.title}}
+          </button>
         </ion-list>
     </ion-content>
-
 </ion-menu>
 
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-nav #content role="presentation" [root]="rootPage" swipeBackEnabled="false"></ion-nav> -->
+<ion-nav [root]="rootPage" swipeBackEnabled="false"></ion-nav>

@@ -1,3 +1,28 @@
-page-recipe-list {
+.recipe-card {
+    position: relative;
+  }
 
+.recipe-card__overlay {
+    align-items: center;
+    background-color: rgba(0, 0, 0, .25);
+    bottom: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    z-index: 1;
+}
+
+.recipe-card__title {
+    color: rgb(255, 255, 255)!important;
+    font-size: 2rem!important;
+    font-weight: bold;
+}
+
+.recipe-card__subtitle {
+    color: rgb(255, 255, 255)!important;
 }

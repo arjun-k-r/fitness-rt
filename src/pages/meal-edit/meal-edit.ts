@@ -109,8 +109,10 @@ export class MealEditPage {
     const foodListModal: Modal = this._modalCtrl.create('food-list', { authId: this._authId });
     foodListModal.present();
     foodListModal.onDidDismiss((foods: (Food | Recipe)[]) => {
-      this.meal.foods = [...this.meal.foods, ...foods];
-      this._updateMeal();
+      if (!!foods) {
+        this.meal.foods = this.meal.foods ? [...this.meal.foods, ...foods] : [...foods];
+        this._updateMeal();
+      }
     });
   }
 

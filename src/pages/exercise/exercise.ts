@@ -118,8 +118,10 @@ export class ExercisePage {
     const activityListModal: Modal = this._modalCtrl.create('activity-list');
     activityListModal.present();
     activityListModal.onDidDismiss((activities: Activity[]) => {
-      this.activityPlan.activities = [...this.activityPlan.activities, ...activities];
-      this._updateActivityPlan();
+      if (!!activities) {
+        this.activityPlan.activities = this.activityPlan.activities ? [...this.activityPlan.activities, ...activities] : [...activities];
+        this._updateActivityPlan();
+      }
     });
   }
 

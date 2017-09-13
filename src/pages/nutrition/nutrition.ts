@@ -61,7 +61,7 @@ export class NutritionPage {
   }
 
   public nutrientPercent(nutrientValue: number, nutrientName: string): number {
-    return this._mealPvd.calculateNutrientPercentage(nutrientValue, this.dailyNutrition[nutrientName]);
+    return this._mealPvd.calculateNutrientPercentage(nutrientValue, nutrientName);
   }
 
   public showSettings(event: Popover): void {

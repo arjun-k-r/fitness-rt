@@ -270,9 +270,9 @@ export class FoodListPage {
           handler: () => {
             checkBox.checked = false;
             if (item.hasOwnProperty('chef')) {
-              this._navCtrl.push('recipe-details', { item });
+              this._navCtrl.push('recipe-details', { recipe: item });
             } else {
-              const foodDetailsModal: Modal = this._modalCtrl.create('food-details', { item });
+              const foodDetailsModal: Modal = this._modalCtrl.create('food-details', { authId: this._authId, food: item });
               foodDetailsModal.present();
             }
           }

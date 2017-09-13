@@ -180,6 +180,15 @@ export class RecipeDetailsPage {
     this.editMode = true;
   }
 
+  public processWebImage(event): void {
+    const reader: FileReader = new FileReader();
+    reader.onload = (readerEvent: Event) => {
+      this.uploadImage(event.target.files[0]);
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
   public removeRecipe(): void {
     this._recipePvd.removeRecipe(this.authId, this.recipe)
       .then(() => {
@@ -299,10 +308,23 @@ export class RecipeDetailsPage {
             name: changes.name,
             portions: changes.portions
           });
+
+          this.updateRecipe();
         }
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)
     );
+
+    this._recipePvd.calculateRecipeDRI(this.recipe)
+    .then((nutrition: Nutrition) => this.recipeDri = Object.assign({}, nutrition))
+    .catch((err: Error) => {
+      this._alertCtrl.create({
+        title: 'Uhh ohh...',
+        subTitle: 'Something went wrong',
+        message: err.toString(),
+        buttons: ['OK']
+      }).present();
+    });
   }
 
   ionViewWillLeave(): void {

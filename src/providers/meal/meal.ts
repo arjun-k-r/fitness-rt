@@ -12,12 +12,13 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Food, Meal, MealPlan, Nutrient, Nutrition, Recipe } from '../../models';
+import { Food, Meal, MealPlan, Nutrition, Recipe } from '../../models';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class MealProvider {
+  private _userRequirements: Nutrition;
   constructor(
     private _db: AngularFireDatabase,
     private _storage: Storage
@@ -26,14 +27,15 @@ export class MealProvider {
   public calculateDailyNutrition(mealPlan: MealPlan): Promise<Nutrition> {
     return new Promise(resolve => {
       const nutrition = new Nutrition();
-      this._storage.ready().then(() => {
-        this._storage.get(`userRequirements-${CURRENT_DAY}`).then((dailyRequirements: Nutrition) => {
-          for (let nutrientKey in nutrition) {
-            nutrition[nutrientKey].value = Math.round((nutrition[nutrientKey].value * 100) / (dailyRequirements[nutrientKey].value || 1));
-          }
-          resolve(nutrition);
-        }).catch((err: Error) => console.error(`Error getting user nutrition requirements: ${err}`));
-      }).catch((err: Error) => console.error(`Error loading storage: ${err}`));
+        this._storage.ready().then(() => {
+          this._storage.get(`userRequirements-${CURRENT_DAY}`).then((dailyRequirements: Nutrition) => {
+            this._userRequirements = dailyRequirements;
+            for (let nutrientKey in nutrition) {
+              nutrition[nutrientKey].value = Math.round((mealPlan.nutrition[nutrientKey].value * 100) / (dailyRequirements[nutrientKey].value || 1));
+            }
+            resolve(nutrition);
+          }).catch((err: Error) => console.error(`Error getting user nutrition requirements: ${err}`));
+        }).catch((err: Error) => console.error(`Error loading storage: ${err}`));
     });
   }
 
@@ -63,8 +65,8 @@ export class MealProvider {
     return nutrition;
   }
 
-  public calculateNutrientPercentage(nutrientPartial: number, nutrientTotal: Nutrient): number {
-    return Math.round((nutrientPartial * 100) / (nutrientTotal.value || 1));
+  public calculateNutrientPercentage(nutrientPartial: number, nutrientName: string): number {
+    return Math.round((nutrientPartial * 100) / (this._userRequirements && this._userRequirements[nutrientName].value || 1));
   }
 
   public getMealPlan$(authId: string): FirebaseObjectObservable<MealPlan> {

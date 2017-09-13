@@ -72,6 +72,7 @@ export class RecipeProvider {
     if (recipe.hasOwnProperty('$key')) {
       return this._db.list(`/recipes/${authId}`).update(recipe['$key'], recipe);
     } else {
+      recipe.chef = authId;
       return this._db.list(`/recipes/${authId}`).push(recipe);
     }
   }

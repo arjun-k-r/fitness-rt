@@ -18,9 +18,6 @@ import * as moment from 'moment';
 // Models
 import { Food, Nutrition } from '../../models';
 
-// Providers
-import { NutritionProvider } from '../nutrition/nutrition';
-
 export const FOOD_GROUPS: string[] = [
   'American Indian/Alaska Native Foods',
   'Baby Foods',
@@ -55,14 +52,12 @@ export class FoodProvider {
   private _foods$: FirebaseListObservable<Food[]>;
   constructor(
     private _db: AngularFireDatabase,
-    private _nutritionPvd: NutritionProvider,
     private _storage: Storage
   ) {
     this._foods$ = this._db.list('/foods', {
       query: {
-        //orderByChild: 'group',
-        //equalTo: this._foodGroupSubject
-        limitToLast: 100
+        orderByChild: 'group',
+        equalTo: this._foodGroupSubject
       }
     });
   }
@@ -87,7 +82,7 @@ export class FoodProvider {
   }
 
   public getFoods$(foodGroup: string): Observable<Food[]> {
-    //setTimeout(() => this.changeFoodGroup(foodGroup));
+    setTimeout(() => this.changeFoodGroup(foodGroup));
     return this._foods$;
   }
 

@@ -9,13 +9,11 @@ import { Subscription } from 'rxjs/Subscription';
 import {
   AlertController,
   IonicPage,
-  NavController,
   NavParams,
   ViewController
 } from 'ionic-angular';
 
 // Firebase
-import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
@@ -89,11 +87,9 @@ export class FoodDetailsPage {
   public alcohol: AbstractControl;
   public caffeine: AbstractControl;
   constructor(
-    private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
     private _foodPvd: FoodProvider,
     private _formBuilder: FormBuilder,
-    private _navCtrl: NavController,
     private _params: NavParams,
     private _viewCtrl: ViewController
   ) {

@@ -11,8 +11,6 @@ import {
   InfiniteScroll,
   Loading,
   LoadingController,
-  NavController,
-  NavParams,
   ViewController
 } from 'ionic-angular';
 
@@ -44,8 +42,6 @@ export class ActivityListPage {
     private _alertCtrl: AlertController,
     private _activityPvd: ActivityProvider,
     private _loadCtrl: LoadingController,
-    private _navCtrl: NavController,
-    private _params: NavParams,
     private _viewCtrl: ViewController
   ) { }
 

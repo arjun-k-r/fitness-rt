@@ -1,10 +1,6 @@
 // Angular
 import { Injectable } from '@angular/core';
 
-// Rxjs
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-
 // Ionic
 import { Storage } from '@ionic/storage';
 

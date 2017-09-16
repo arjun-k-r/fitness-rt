@@ -1,6 +1,11 @@
 <ion-header>
   <ion-navbar role="toolbar">
     <ion-title>Meal edit</ion-title>
+    <ion-buttons end>
+      <button (click)="removeMeal()" icon-only ion-button padding role="button">
+        <ion-icon aria-hidden="true" name="trash"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
   <ion-toolbar role="tablist">
     <ion-segment [(ngModel)]="mealSegment">

@@ -11,6 +11,7 @@ import {
   IonicPage,
   Modal,
   ModalController,
+  NavController,
   NavParams
 } from 'ionic-angular';
 
@@ -44,6 +45,7 @@ export class MealEditPage {
     private _alertCtrl: AlertController,
     private _mealPvd: MealProvider,
     private _modalCtrl: ModalController,
+    private _navCtrl: NavController,
     private _params: NavParams
   ) {
     this._mealIdx = <number>this._params.get('mealIdx');
@@ -87,6 +89,8 @@ export class MealEditPage {
   private _updateMeal(): void {
     this.meal.nutrition = this._mealPvd.calculateMealNutrition(this.meal.foods);
     this.meal.quantity = this._mealPvd.calculateMealQuantity(this.meal.foods);
+    this._mealPlan.meals = [...this._mealPlan.meals.slice(0, this._mealIdx), this.meal, ...this._mealPlan.meals.slice(this._mealIdx + 1)];
+    this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals)
     this._mealPvd.saveMealPlan(this._authId, this._mealPlan)
       .then(() => {
         this._alertCtrl.create({
@@ -136,6 +140,32 @@ export class MealEditPage {
         }
       ]
     }).present();
+  }
+
+  public removeMeal(): void {
+    this._mealPlan.meals = [...this._mealPlan.meals.slice(0, this._mealIdx), ...this._mealPlan.meals.slice(this._mealIdx + 1)];
+    this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals)
+    this._mealPvd.saveMealPlan(this._authId, this._mealPlan)
+      .then(() => {
+        this._alertCtrl.create({
+          title: 'Success!',
+          message: 'Meal removed successfully!',
+          buttons: [{
+            text: 'Great',
+            handler: () => {
+              this._navCtrl.pop();
+            }
+          }]
+        }).present();
+      })
+      .catch((err: Error) => {
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.toString(),
+          buttons: ['OK']
+        }).present();
+      });
   }
 
   ionViewWillEnter(): void {

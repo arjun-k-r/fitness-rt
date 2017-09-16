@@ -215,16 +215,19 @@ export class RecipeDetailsPage {
       });
   }
 
-  private updateRecipe(): void {
-    if (!!this.recipe.ingredients.length) {
-      this.recipe.nutrition = this._recipePvd.calculateRecipeNutrition(this.recipe);
-      this.recipe.quantity = this._recipePvd.calculateRecipeQuantity(this.recipe);
-      this._recipePvd.saveRecipe(this.authId, this.recipe)
+  public saveRecipe(): void {
+    this.updateRecipe();
+    this._recipePvd.saveRecipe(this.authId, this.recipe)
       .then(() => {
         this._alertCtrl.create({
           title: 'Success!',
           message: 'Recipe saved successfully!',
-          buttons: ['Great!']
+          buttons: [{
+            text: 'Great',
+            handler: () => {
+              this._navCtrl.pop();
+            }
+          }]
         }).present();
       })
       .catch((err: firebase.FirebaseError) => {
@@ -235,6 +238,12 @@ export class RecipeDetailsPage {
           buttons: ['OK']
         }).present();
       });
+  }
+
+  private updateRecipe(): void {
+    if (!!this.recipe.ingredients.length) {
+      this.recipe.nutrition = this._recipePvd.calculateRecipeNutrition(this.recipe);
+      this.recipe.quantity = this._recipePvd.calculateRecipeQuantity(this.recipe);
     }
   }
 

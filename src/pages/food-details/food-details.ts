@@ -31,6 +31,7 @@ import { FOOD_GROUPS, FoodProvider } from '../../providers';
 export class FoodDetailsPage {
   private _foodFormSubscription: Subscription;
   public authId: string;
+  public dataView: string = 'Percentages';
   public editMode: boolean = false;
   public food: Food;
   public foodDri: Nutrition = new Nutrition();
@@ -150,6 +151,10 @@ export class FoodDetailsPage {
     });
   }
 
+  public changeDataView(): void {
+    this.dataView = this.dataView === 'Percentages' ? 'Quantities' : 'Percentages';
+  }
+
   public dismiss(): void {
     this._viewCtrl.dismiss();
   }
@@ -188,7 +193,12 @@ export class FoodDetailsPage {
       this._alertCtrl.create({
         title: 'Success!',
         message: 'Food saved successfully!',
-        buttons: ['Great!']
+        buttons: [{
+          text: 'Great',
+          handler: () => {
+            this._viewCtrl.dismiss();
+          }
+        }]
       }).present();
     })
     .catch((err: firebase.FirebaseError) => {

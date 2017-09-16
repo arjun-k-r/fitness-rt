@@ -58,7 +58,12 @@ export class MealProvider {
     const nutrition = new Nutrition();
     meals.forEach((meal: Meal) => {
       for (let nutrientKey in nutrition) {
-        nutrition[nutrientKey].value += meal.nutrition[nutrientKey].value;
+        // Minerals and vitamins are easily degreaded and not completely absorbed
+        if (meal.nutrition[nutrientKey].group === 'Vitamins' || meal.nutrition[nutrientKey].group === 'Minerals') {
+          nutrition[nutrientKey].value += meal.nutrition[nutrientKey].value * 0.5;
+        } else {
+          nutrition[nutrientKey].value += meal.nutrition[nutrientKey].value;
+        }
       }
     });
 
@@ -74,7 +79,6 @@ export class MealProvider {
   }
 
   public saveMealPlan(authId: string, mealPlan: MealPlan): firebase.Promise<void> {
-    mealPlan.nutrition = this.calculateMealPlanNutrition(mealPlan.meals);
     return this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan);
   }
 }

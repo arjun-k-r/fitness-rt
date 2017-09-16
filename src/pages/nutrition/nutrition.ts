@@ -35,7 +35,7 @@ export class NutritionPage {
   private _authSubscription: Subscription;
   private _mealSubscription: Subscription;
   public dailyNutrition: Nutrition = new Nutrition();
-  public mealPlan: MealPlan;
+  public mealPlan: MealPlan = new MealPlan();
   public nutritionSegment: string = 'meals';
   constructor(
     private _afAuth: AngularFireAuth,
@@ -87,7 +87,7 @@ export class NutritionPage {
         this._authId = auth.uid;
         this._mealSubscription = this._mealPvd.getMealPlan$(this._authId).subscribe(
           (mealPlan: MealPlan) => {
-            this.mealPlan = Object.assign({}, mealPlan['$value'] === null ? new MealPlan() : mealPlan);
+            this.mealPlan = Object.assign({}, mealPlan['$value'] === null ? this.mealPlan : mealPlan);
             this._mealPvd.calculateDailyNutrition(this.mealPlan).then((dailyNutrition: Nutrition) => this.dailyNutrition = Object.assign({}, dailyNutrition))
               .catch((err: Error) => {
                 this._alertCtrl.create({

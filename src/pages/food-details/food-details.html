@@ -2,13 +2,17 @@
   <ion-navbar role="toolbar">
     <ion-title>{{ food.name || 'New food' }}</ion-title>
     <ion-buttons end>
-      <button (click)="editFood()" *ngIf="(food.uploader && food.uploader === authId) && !editMode" icon-only ion-button padding role="button">
+      <button (click)="editFood()" *ngIf="(food.uploader && food.uploader === authId) && !editMode" icon-only ion-button padding
+        role="button">
         <ion-icon aria-hidden="true" name="create"></ion-icon>
       </button>
-      <button (click)="dismiss()" icon-only ion-button padding role="button">
+      <button (click)="dismiss()" *ngIf="!editMode" icon-only ion-button padding role="button">
         <ion-icon aria-hidden="true" name="done-all"></ion-icon>
       </button>
-      <button (click)="removeFood()" *ngIf="editMode && food.uploader === authId" icon-only ion-button padding role="button">
+      <button (click)="saveFood()" [disabled]="foodForm.invalid" *ngIf="editMode" icon-only ion-button padding role="button">
+          <ion-icon aria-hidden="true" name="done-all"></ion-icon>
+        </button>
+      <button (click)="removeFood()" *ngIf="editMode" icon-only ion-button padding role="button">
         <ion-icon aria-hidden="true" name="trash"></ion-icon>
       </button>
     </ion-buttons>

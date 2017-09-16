@@ -2,6 +2,9 @@
   <ion-navbar role="toolbar">
     <ion-title>{{ recipe.name || 'New recipe' }}</ion-title>
     <ion-buttons end>
+        <button (click)="updateRecipe()" [disabled]="recipeForm.invalid || !recipe.ingredients.length" *ngIf="editMode" icon-only ion-button padding role="button">
+            <ion-icon aria-hidden="true" name="done-all"></ion-icon>
+          </button>
       <button (click)="editRecipe()" *ngIf="!editMode" icon-only ion-button padding role="button">
         <ion-icon aria-hidden="true" name="create"></ion-icon>
       </button>
@@ -34,10 +37,6 @@
           <ion-item role="listitem">
             Name
             <p item-content>{{ recipe.name }}</p>
-          </ion-item>
-          <ion-item role="listitem">
-            Chef
-            <p item-content>{{ recipe.chef }}</p>
           </ion-item>
           <ion-item role="listitem">
             Cooking temperature

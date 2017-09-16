@@ -121,7 +121,7 @@ export class RecipeListPage {
     })
   }
 
-  ionViewWillLoad(): void {
+  ionViewWillEnter(): void {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this._authId = auth.uid;

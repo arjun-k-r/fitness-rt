@@ -107,8 +107,10 @@ export class RecipeDetailsPage {
     const ingredientListModal: Modal = this._modalCtrl.create('food-list', { authId: this.authId });
     ingredientListModal.present();
     ingredientListModal.onDidDismiss((ingredients: (Food | Recipe)[]) => {
-      this.recipe.ingredients = [...this.recipe.ingredients, ...ingredients];
-      this.updateRecipe();
+      if (!!ingredients && !!ingredients.length) {
+        this.recipe.ingredients = [...this.recipe.ingredients, ...ingredients];
+        this.updateRecipe();
+      }
     });
   }
 
@@ -214,9 +216,10 @@ export class RecipeDetailsPage {
   }
 
   private updateRecipe(): void {
-    this.recipe.nutrition = this._recipePvd.calculateRecipeNutrition(this.recipe);
-    this.recipe.quantity = this._recipePvd.calculateRecipeQuantity(this.recipe);
-    this._recipePvd.saveRecipe(this.authId, this.recipe)
+    if (!!this.recipe.ingredients.length) {
+      this.recipe.nutrition = this._recipePvd.calculateRecipeNutrition(this.recipe);
+      this.recipe.quantity = this._recipePvd.calculateRecipeQuantity(this.recipe);
+      this._recipePvd.saveRecipe(this.authId, this.recipe)
       .then(() => {
         this._alertCtrl.create({
           title: 'Success!',
@@ -232,6 +235,7 @@ export class RecipeDetailsPage {
           buttons: ['OK']
         }).present();
       });
+    }
   }
 
   public uploadImage(file?: File): void {
@@ -308,23 +312,21 @@ export class RecipeDetailsPage {
             name: changes.name,
             portions: changes.portions
           });
-
-          this.updateRecipe();
         }
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)
     );
 
     this._recipePvd.calculateRecipeDRI(this.recipe)
-    .then((nutrition: Nutrition) => this.recipeDri = Object.assign({}, nutrition))
-    .catch((err: Error) => {
-      this._alertCtrl.create({
-        title: 'Uhh ohh...',
-        subTitle: 'Something went wrong',
-        message: err.toString(),
-        buttons: ['OK']
-      }).present();
-    });
+      .then((nutrition: Nutrition) => this.recipeDri = Object.assign({}, nutrition))
+      .catch((err: Error) => {
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.toString(),
+          buttons: ['OK']
+        }).present();
+      });
   }
 
   ionViewWillLeave(): void {

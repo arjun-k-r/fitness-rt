@@ -37,7 +37,7 @@ export class ExercisePage {
   private _authId: string;
   private _authSubscription: Subscription;
   private _activitySubscription: Subscription;
-  public activityPlan: ActivityPlan;
+  public activityPlan: ActivityPlan = new ActivityPlan();
   public exerciseSegment: string = 'activitys';
   constructor(
     private _actionSheetCtrl: ActionSheetController,
@@ -170,7 +170,7 @@ export class ExercisePage {
         this._authId = auth.uid;
         this._activitySubscription = this._activityPvd.getActivityPlan$(this._authId).subscribe(
           (activityPlan: ActivityPlan) => {
-            this.activityPlan = Object.assign({}, activityPlan['$value'] === null ? new ActivityPlan() : activityPlan);
+            this.activityPlan = Object.assign({}, activityPlan['$value'] === null ? this.activityPlan : activityPlan);
             this._activityPvd.saveActivityPlan(this._authId, this.activityPlan)
               .then(() => console.info('Activity plan saved successfully'))
               .catch((err: firebase.FirebaseError) => console.error('Error saving activity plan: ', err.message));

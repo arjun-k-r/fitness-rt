@@ -37,7 +37,7 @@ export class FitnessPage {
   private _fitnessSubscription: Subscription;
   private _fitnessFormSubscription: Subscription;
   public age: AbstractControl;
-  public fitness: Fitness;
+  public fitness: Fitness = new Fitness();
   public fitnessForm: FormGroup;
   public fitnessSegment: string = 'fitnessInfo';
   public gender: AbstractControl;
@@ -99,7 +99,7 @@ export class FitnessPage {
         this._authId = auth.uid;
         this._fitnessSubscription = this._fitnessPvd.getFitness$(this._authId).subscribe(
           (fitness: Fitness) => {
-            this.fitness = Object.assign({}, fitness['$value'] === null ? new Fitness() : fitness);
+            this.fitness = Object.assign({}, fitness['$value'] === null ? this.fitness : fitness);
             this._nutritionPvd.calculateDRI(this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
               .then((dri: Nutrition) => {
                 this.fitness.requirements = Object.assign({}, dri);

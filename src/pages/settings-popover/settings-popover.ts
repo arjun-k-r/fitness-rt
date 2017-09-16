@@ -76,7 +76,7 @@ export class SettingsPopoverPage {
       }).present());
   }
 
-  ionViewWillLoad(): void {
+  ionViewWillEnter(): void {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => this._auth = auth);
   }
 

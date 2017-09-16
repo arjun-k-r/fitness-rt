@@ -109,7 +109,7 @@ export class ActivityListPage {
     }
   }
 
-  ionViewWillLoad(): void {
+  ionViewWillEnter(): void {
     this._activityLoader = this._loadCtrl.create({
       content: 'Loading...',
       duration: 30000,

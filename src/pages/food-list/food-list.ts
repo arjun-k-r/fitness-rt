@@ -292,7 +292,7 @@ export class FoodListPage {
     }).present();
   }
 
-  ionViewWillLoad(): void {
+  ionViewWillEnter(): void {
     this._foodLoader = this._loadCtrl.create({
       content: 'Loading...',
       duration: 30000,

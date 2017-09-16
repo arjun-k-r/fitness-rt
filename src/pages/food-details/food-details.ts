@@ -186,6 +186,25 @@ export class FoodDetailsPage {
     });
   }
 
+  public saveFood(): void {
+    this._foodPvd.saveFood(this.food)
+    .then(() => {
+      this._alertCtrl.create({
+        title: 'Success!',
+        message: 'Food saved successfully!',
+        buttons: ['Great!']
+      }).present();
+    })
+    .catch((err: firebase.FirebaseError) => {
+      this._alertCtrl.create({
+        title: 'Uhh ohh...',
+        subTitle: 'Something went wrong',
+        message: err.message,
+        buttons: ['OK']
+      }).present();
+    });
+  }
+
   ionViewWillEnter(): void {
     this._foodFormSubscription = this.foodForm.valueChanges.subscribe(
       (changes: {
@@ -250,9 +269,6 @@ export class FoodDetailsPage {
             }
           }
           this.food = Object.assign(this.food, { uploader: this.authId });
-          this._foodPvd.saveFood( this.food)
-          .then(() => console.log('Food saved successfully!'))
-          .catch((err: Error) => console.error(`Error saving food: ${err}`));
         }
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)

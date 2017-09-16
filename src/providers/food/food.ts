@@ -60,8 +60,9 @@ export class FoodProvider {
   ) {
     this._foods$ = this._db.list('/foods', {
       query: {
-        orderByChild: 'group',
-        equalTo: this._foodGroupSubject
+        //orderByChild: 'group',
+        //equalTo: this._foodGroupSubject
+        limitToLast: 100
       }
     });
   }
@@ -86,7 +87,7 @@ export class FoodProvider {
   }
 
   public getFoods$(foodGroup: string): Observable<Food[]> {
-    setTimeout(() => this.changeFoodGroup(foodGroup));
+    //setTimeout(() => this.changeFoodGroup(foodGroup));
     return this._foods$;
   }
 

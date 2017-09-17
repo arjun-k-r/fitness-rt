@@ -1,18 +1,34 @@
+// Angular
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the SleepProvider provider.
+// Firebase
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
+// Third-party
+import * as moment from 'moment';
+
+// Models
+import { Sleep } from '../../models';
+
+const CURRENT_DAY: number = moment().dayOfYear();
+
 @Injectable()
 export class SleepProvider {
+  constructor(
+    private _db: AngularFireDatabase
+  ) { }
 
-  constructor(public http: Http) {
-    console.log('Hello SleepProvider Provider');
+  public getSleep$(authId: string): FirebaseObjectObservable<Sleep> {
+    return this._db.object(`/sleep/${authId}/${CURRENT_DAY}`);
   }
 
+  public saveSleep(authId: string, sleep: Sleep): firebase.Promise<void> {
+    if (!!sleep.weekPlan && !!sleep.weekPlan.length) {
+      if (sleep.date !== sleep.weekPlan[0].date) {
+        sleep.weekPlan = [sleep, ...sleep.weekPlan.slice(0, 6)];
+      }
+    }
+    return this._db.object(`/sleep/${authId}/${CURRENT_DAY}`).set(sleep);
+  }
 }

@@ -80,6 +80,11 @@ export class MealProvider {
   }
 
   public saveMealPlan(authId: string, mealPlan: MealPlan): firebase.Promise<void> {
+    if (!!mealPlan.weekPlan && !!mealPlan.weekPlan.length) {
+      if (mealPlan.date !== mealPlan.weekPlan[0].date) {
+        mealPlan.weekPlan = [mealPlan, ...mealPlan.weekPlan.slice(0, 6)];
+      }
+    }
     return this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan);
   }
 

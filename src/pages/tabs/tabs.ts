@@ -32,7 +32,8 @@ export class TabsPage {
       { component: 'fitness', icon: 'body', id: 'info', title: 'Fitness' },
       { component: 'exercise', icon: 'walk', id: CURRENT_DATE, title: 'Exercise' },
       { component: 'nutrition', icon: 'nutrition', id: CURRENT_DATE, title: 'Nutrition' },
-      { component: 'recipes', icon: 'restaurant',  id: 'list', title: 'Recipes' }
+      { component: 'recipes', icon: 'restaurant',  id: 'list', title: 'Recipes' },
+      { component: 'sleep', icon: 'moon',  id: CURRENT_DATE, title: 'Sleep' }
     ];
   }
 

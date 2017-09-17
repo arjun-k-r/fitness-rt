@@ -4,3 +4,4 @@ export { Food } from './food';
 export * from './meal';
 export * from './nutrition';
 export { Recipe } from './recipe';
+export { Sleep } from './sleep';

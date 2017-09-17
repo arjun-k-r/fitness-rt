@@ -12,3 +12,5 @@ export { PictureProvider } from './picture/picture';
 export { PictureProviderModule } from './picture/picture.module';
 export { RecipeProvider } from './recipe/recipe';
 export { RecipeProviderModule } from './recipe/recipe.module';
+export { SleepProvider } from './sleep/sleep';
+export { SleepProviderModule } from './sleep/sleep.module';

@@ -176,7 +176,7 @@ export class FitnessPage {
               this.fitness.requirements = Object.assign({}, dri);
               this._fitnessPvd.saveFitness(this._authId, this.fitness)
                 .then(() => console.log('Fitness saved successfully!'))
-                .catch((err: Error) => console.error(`Error saving fitness: ${err}`));
+                .catch((err: firebase.FirebaseError) => console.error(`Error saving fitness: ${err.message}`));
             })
             .catch((err: Error) => {
               this._alertCtrl.create({

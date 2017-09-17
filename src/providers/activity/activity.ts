@@ -62,6 +62,11 @@ export class ActivityProvider {
       this._storage.set(`energyConsumption-${CURRENT_DAY}`, activityPlan.totalEnergyConsumption)
         .catch((err: Error) => console.error(`Error storing energy consumption: ${err}`));
     }).catch((err: Error) => console.error(`Error loading storage: ${err}`));
+    if (!!activityPlan.weekPlan && !!activityPlan.weekPlan.length) {
+      if (activityPlan.date !== activityPlan.weekPlan[0].date) {
+        activityPlan.weekPlan = [activityPlan, ...activityPlan.weekPlan.slice(0, 6)];
+      }
+    }
     return this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`).set(activityPlan);
   }
 }

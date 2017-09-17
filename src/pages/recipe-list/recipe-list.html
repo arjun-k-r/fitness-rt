@@ -28,7 +28,7 @@
   </ion-searchbar>
   <ion-grid>
     <ion-row>
-      <ion-col col-lg-4 col-md-6 *ngFor="let recipe of recipes | filter: 'ingredients': ingredientsFilter | search: recipeSearchQuery | limit: recipeLimit">
+      <ion-col col-lg-4 col-md-6 col-sm-6 col-auto col-xs *ngFor="let recipe of recipes | filter: 'ingredients': ingredientsFilter | search: recipeSearchQuery | limit: recipeLimit">
         <ion-card class="recipe-card" (click)="editRecipe(recipe)">
           <img [alt]="recipe.name" [src]="recipe.image || 'https://firebasestorage.googleapis.com/v0/b/ifit-6f60e.appspot.com/o/recipes%2Ffood-and-cooking.png?alt=media&token=27592b8a-8fed-4e29-87e2-d71b885a2e3e'"
           />

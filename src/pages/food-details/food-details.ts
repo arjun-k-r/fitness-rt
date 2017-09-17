@@ -23,8 +23,7 @@ import { Food, Nutrition } from '../../models';
 import { FOOD_GROUPS, FoodProvider } from '../../providers';
 
 @IonicPage({
-  name: 'food-details',
-  segment: ':id'
+  name: 'food-details'
 })
 @Component({
   templateUrl: 'food-details.html'

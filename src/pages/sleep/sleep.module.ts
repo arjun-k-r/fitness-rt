@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
+
 import { IonicPageModule } from 'ionic-angular';
+
 import { SleepPage } from './sleep';
+import { SleepProviderModule } from '../../providers'
 
 @NgModule({
   declarations: [
@@ -8,6 +11,7 @@ import { SleepPage } from './sleep';
   ],
   imports: [
     IonicPageModule.forChild(SleepPage),
+    SleepProviderModule
   ],
 })
 export class SleepPageModule {}

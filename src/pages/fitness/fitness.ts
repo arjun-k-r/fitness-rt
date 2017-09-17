@@ -26,7 +26,7 @@ import { FitnessProvider, NutritionProvider } from '../../providers';
 
 @IonicPage({
   name: 'fitness',
-  segment: ':id'
+  segment: 'data'
 })
 @Component({
   templateUrl: 'fitness.html'
@@ -74,6 +74,27 @@ export class FitnessPage {
     this.lactating = this.fitnessForm.get('lactating');
     this.pregnant = this.fitnessForm.get('pregnant');
     this.weight = this.fitnessForm.get('weight');
+  }
+
+  public saveFitness(): void {
+    this._fitnessPvd.saveFitness(this._authId, this.fitness)
+      .then(() => {
+        this._alertCtrl.create({
+          title: 'Success!',
+          message: 'Fitness saved successfully!',
+          buttons: [{
+            text: 'Great'
+          }]
+        }).present();
+      })
+      .catch((err: firebase.FirebaseError) => {
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.message,
+          buttons: ['OK']
+        }).present();
+      });
   }
 
   public showSettings(event: Popover): void {
@@ -174,9 +195,6 @@ export class FitnessPage {
           this._nutritionPvd.calculateDRI(this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
             .then((dri: Nutrition) => {
               this.fitness.requirements = Object.assign({}, dri);
-              this._fitnessPvd.saveFitness(this._authId, this.fitness)
-                .then(() => console.log('Fitness saved successfully!'))
-                .catch((err: firebase.FirebaseError) => console.error(`Error saving fitness: ${err.message}`));
             })
             .catch((err: Error) => {
               this._alertCtrl.create({

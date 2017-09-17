@@ -18,9 +18,6 @@ import {
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
-// Third-party
-import * as moment from 'moment';
-
 // Models
 import { Sleep } from '../../models';
 
@@ -29,7 +26,7 @@ import { SleepProvider } from '../../providers';
 
 @IonicPage({
   name: 'sleep',
-  segment: ':id'
+  segment: 'plan'
 })
 @Component({
   templateUrl: 'sleep.html'
@@ -56,12 +53,12 @@ export class SleepPage {
     private _sleepPvd: SleepProvider
   ) {
     this.sleepForm = this._formBuilder.group({
-      bedTime: [moment().format('HH:mm'), Validators.required],
-      duration: [0, Validators.required],
-      noElectronics: [false, Validators.required],
-      noStimulants: [false, Validators.required],
-      refreshing: [false, Validators.required],
-      relaxation: [false, Validators.required]
+      bedTime: ['', Validators.required],
+      duration: ['', Validators.required],
+      noElectronics: ['', Validators.required],
+      noStimulants: ['', Validators.required],
+      refreshing: ['', Validators.required],
+      relaxation: ['', Validators.required]
     });
     this.bedTime = this.sleepForm.get('bedTime');
     this.duration = this.sleepForm.get('duration');
@@ -69,6 +66,27 @@ export class SleepPage {
     this.noStimulants = this.sleepForm.get('noStimulants');
     this.refreshing = this.sleepForm.get('refreshing');
     this.relaxation = this.sleepForm.get('relaxation');
+  }
+
+  public saveSleep(): void {
+    this._sleepPvd.saveSleep(this._authId, this.sleep)
+      .then(() => {
+        this._alertCtrl.create({
+          title: 'Success!',
+          message: 'Sleep saved successfully!',
+          buttons: [{
+            text: 'Great'
+          }]
+        }).present();
+      })
+      .catch((err: firebase.FirebaseError) => {
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.message,
+          buttons: ['OK']
+        }).present();
+      });
   }
 
   public showSettings(event: Popover): void {
@@ -134,9 +152,6 @@ export class SleepPage {
             },
             duration: changes.duration
           });
-          this._sleepPvd.saveSleep(this._authId, this.sleep)
-          .then(() => console.log('Sleep saved successfully!'))
-          .catch((err: firebase.FirebaseError) => console.error(`Error saving sleep: ${err.message}`));
         }
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)

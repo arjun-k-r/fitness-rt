@@ -111,7 +111,7 @@ export class MealEditPage {
   }
 
   public addFood(): void {
-    const foodListModal: Modal = this._modalCtrl.create('food', { authId: this._authId });
+    const foodListModal: Modal = this._modalCtrl.create('food-list', { authId: this._authId });
     foodListModal.present();
     foodListModal.onDidDismiss((foods: (Food | Recipe)[]) => {
       if (!!foods) {

@@ -23,7 +23,6 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import 'firebase/storage';
-import { SleepProvider } from '../providers/sleep/sleep';
 
 const CLOUD_SETTINGS: CloudSettings = {
   'core': {
@@ -64,8 +63,7 @@ const FIREBASE_CONFIG = {
     ImagePicker,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SleepProvider
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

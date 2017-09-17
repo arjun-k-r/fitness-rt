@@ -1,4 +1,7 @@
 .recipe-card {
+    &:hover {
+        cursor: pointer;
+    }
     position: relative;
   }
 

@@ -29,8 +29,7 @@ import { Food, Recipe } from '../../models';
 import { FOOD_GROUPS, FoodProvider, RecipeProvider } from '../../providers';
 
 @IonicPage({
-  name: 'food',
-  segment: 'list'
+  name: 'food-list'
 })
 @Component({
   templateUrl: 'food-list.html'

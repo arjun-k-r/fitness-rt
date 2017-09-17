@@ -25,8 +25,7 @@ import { Activity } from '../../models';
 import { ActivityProvider } from '../../providers';
 
 @IonicPage({
-  name: 'activity',
-  segment: 'list'
+  name: 'activity-list'
 })
 @Component({
   templateUrl: 'activity-list.html'

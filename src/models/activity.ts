@@ -17,7 +17,7 @@ export class ActivityPlan {
         public combos: {
             energy: boolean,
             hiit: boolean
-        } = { energy: false, hiit: false}
+        } = { energy: false, hiit: false},
         public date: number = moment().dayOfYear(),
         public totalDuration: number = 0,
         public totalEnergyConsumption: number = 0,

@@ -25,8 +25,8 @@ import { Activity } from '../../models';
 import { ActivityProvider } from '../../providers';
 
 @IonicPage({
-  name: 'activity-list',
-  segment: 'index.html'
+  name: 'activity',
+  segment: 'list'
 })
 @Component({
   templateUrl: 'activity-list.html'
@@ -35,6 +35,7 @@ export class ActivityListPage {
   private _activityLoader: Loading;
   private _activitySubscription: Subscription;
   public activityLimit: number = 50;
+  public activitySorting: string = 'name';
   public activities: Activity[];
   public activitySearchQuery: string = '';
   public selectedActivities: Activity[] = [];
@@ -44,6 +45,10 @@ export class ActivityListPage {
     private _loadCtrl: LoadingController,
     private _viewCtrl: ViewController
   ) { }
+
+  public changeActivityOrder(): void {
+    this.activitySorting = this.activitySorting === 'name' ? 'met' : 'name';
+  }
 
   public clearSearchActivities(evenet: string): void {
     this.activitySearchQuery = '';

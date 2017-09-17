@@ -18,10 +18,17 @@ const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class ActivityProvider {
+  private _activities$: FirebaseListObservable<Activity[]>;
   constructor(
     private _db: AngularFireDatabase,
     private _storage: Storage
-  ) { }
+  ) {
+    this._activities$ = this._db.list('/activities', {
+      query: {
+        orderByChild: 'name'
+      }
+    });
+  }
 
   public calculateActivityEnergyConsumption(activity: Activity): Promise<number> {
     return new Promise((resolve, reject) => {
@@ -43,7 +50,7 @@ export class ActivityProvider {
   }
 
   public getActivities$(): FirebaseListObservable<Activity[]> {
-    return this._db.list('/activities');
+    return this._activities$;
   }
 
   public getActivityPlan$(authId: string): FirebaseObjectObservable<ActivityPlan> {

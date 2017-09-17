@@ -10,6 +10,7 @@ import * as firebase from 'firebase/app';
 
 // Third-party
 import * as moment from 'moment';
+import { sortBy } from 'lodash';
 
 // Models
 import { Food, Meal, MealPlan, Nutrition, Recipe } from '../../models';
@@ -80,5 +81,9 @@ export class MealProvider {
 
   public saveMealPlan(authId: string, mealPlan: MealPlan): firebase.Promise<void> {
     return this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan);
+  }
+
+  public sortMeals(meals: Meal[]): Meal[] {
+    return sortBy(meals, (meal: Meal) => meal.hour);
   }
 }

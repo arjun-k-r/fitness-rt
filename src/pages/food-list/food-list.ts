@@ -29,8 +29,8 @@ import { Food, Recipe } from '../../models';
 import { FOOD_GROUPS, FoodProvider, RecipeProvider } from '../../providers';
 
 @IonicPage({
-  name: 'food-list',
-  segment: 'index.html'
+  name: 'food',
+  segment: 'list'
 })
 @Component({
   templateUrl: 'food-list.html'
@@ -163,7 +163,8 @@ export class FoodListPage {
   }
 
   public addFood(): void {
-    const foodDetailsModal: Modal = this._modalCtrl.create('food-details', { authId: this._authId, food: new Food() });
+    const newFood: Food = new Food();
+    const foodDetailsModal: Modal = this._modalCtrl.create('food-details', { authId: this._authId, food: newFood, id: newFood.name });
     foodDetailsModal.present();
     foodDetailsModal.onWillDismiss(() => {
       this._foodSubscription = this._foodPvd.getFoods$(this.selectedGroup).subscribe((foods: Food[]) => {
@@ -272,7 +273,7 @@ export class FoodListPage {
             if (item.hasOwnProperty('chef')) {
               this._navCtrl.push('recipe-details', { recipe: item });
             } else {
-              const foodDetailsModal: Modal = this._modalCtrl.create('food-details', { authId: this._authId, food: item });
+              const foodDetailsModal: Modal = this._modalCtrl.create('food-details', { authId: this._authId, food: item, id: item.name });
               foodDetailsModal.present();
             }
           }

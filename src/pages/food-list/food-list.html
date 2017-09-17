@@ -33,7 +33,7 @@
         role="search">
       </ion-searchbar>
       <ion-list role="list">
-        <ion-item *ngFor="let food of foods | search: foodSearchQuery | limit: foodLimit | sortBy: selectedNutrient" role="checkbox">
+        <ion-item *ngFor="let food of foods | search: foodSearchQuery | limit: foodLimit | sort: selectedNutrient" role="checkbox">
           <ion-label text-wrap>{{ food.name }}</ion-label>
           <ion-checkbox #checkBox (click)="showOptions(food, checkBox)"></ion-checkbox>
         </ion-item>

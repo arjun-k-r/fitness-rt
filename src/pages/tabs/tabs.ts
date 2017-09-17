@@ -1,11 +1,19 @@
+// Angular
 import { Component } from '@angular/core';
 
+// Ionic
 import { IonicPage, NavController } from 'ionic-angular';
 
+// Third-party
+import * as moment from 'moment';
+
+const CURRENT_DATE: string = moment().format('YYYY-MM-DD');
+
 interface IPageLink {
-  title: string,
   component: string,
-  icon: string
+  icon: string,
+  id: string,
+  title: string
 }
 
 @IonicPage({
@@ -21,15 +29,11 @@ export class TabsPage {
   constructor(private _navCtrl: NavController) {
     this._tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.pages = [
-      { title: 'Fitness', component: 'fitness', icon: 'body' },
-      { title: 'Exercise', component: 'exercise', icon: 'walk' },
-      { title: 'Nutrition', component: 'nutrition', icon: 'nutrition' },
-      { title: 'Recipes', component: 'recipe-list', icon: 'restaurant' }
+      { component: 'fitness', icon: 'body', id: 'info', title: 'Fitness' },
+      { component: 'exercise', icon: 'walk', id: CURRENT_DATE, title: 'Exercise' },
+      { component: 'nutrition', icon: 'nutrition', id: CURRENT_DATE, title: 'Nutrition' },
+      { component: 'recipes', icon: 'restaurant',  id: 'list', title: 'Recipes' }
     ];
-  }
-
-  public openPage(page: IPageLink): void {
-    this._navCtrl.setRoot(page.component);
   }
 
   ionViewWillEnter(): void {

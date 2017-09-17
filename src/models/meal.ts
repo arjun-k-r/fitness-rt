@@ -8,7 +8,13 @@ import { Recipe } from './recipe';
 
 export class Meal {
     constructor(
+        public combos: {
+            calmEating: boolean,
+            feeling: string,
+            slowEating: boolean
+        } = { calmEating: false, feeling: 'Sleepiness', slowEating: false },
         public foods: (Food | Recipe)[] = [],
+        public hour: string = moment().format('HH:mm'),
         public nutrition: Nutrition = new Nutrition(),
         public quantity: number = 0
     ) { }
@@ -18,6 +24,7 @@ export class MealPlan {
     constructor(
         public date: number = moment().dayOfYear(),
         public meals: Meal[] = [],
-        public nutrition: Nutrition = new Nutrition()
+        public nutrition: Nutrition = new Nutrition(),
+        public weekPlan: MealPlan[] = []
     ) { }
 }

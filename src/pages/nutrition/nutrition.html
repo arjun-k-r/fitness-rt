@@ -30,7 +30,7 @@
     <div *ngSwitchCase="'meals'">
       <ion-item-group *ngFor="let meal of mealPlan?.meals; let i = index" role="group">
         <ion-item-divider color="light" role="separator">
-          Meal {{ i + 1 }}
+          {{ meal.hour }}
         </ion-item-divider>
         <ion-item role="listitem">
           Energy

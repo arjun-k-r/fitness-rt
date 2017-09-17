@@ -27,8 +27,8 @@ import { Recipe } from '../../models';
 import { RecipeProvider } from '../../providers';
 
 @IonicPage({
-  name: 'recipe-list',
-  segment: 'index.html'
+  name: 'recipes',
+  segment: ':id'
 })
 @Component({
   templateUrl: 'recipe-list.html'
@@ -80,7 +80,8 @@ export class RecipeListPage {
   }
 
   public addRecipe(): void {
-    this._navCtrl.push('recipe-details', { recipe: new Recipe() });
+    const newRecipe: Recipe = new Recipe();
+    this._navCtrl.push('recipe-details', { id: newRecipe.name, recipe: newRecipe });
   }
 
   public clearSearchRecipes(evenet: string): void {
@@ -88,7 +89,7 @@ export class RecipeListPage {
   }
 
   public editRecipe(recipe: Recipe): void {
-    this._navCtrl.push('recipe-details', { recipe });
+    this._navCtrl.push('recipe-details', { id: recipe.name, recipe });
   }
 
   public loadMoreRecipes(ev: InfiniteScroll) {

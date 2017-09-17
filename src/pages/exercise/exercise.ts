@@ -28,7 +28,7 @@ import { ActivityProvider } from '../../providers';
 
 @IonicPage({
   name: 'exercise',
-  segment: 'index.html'
+  segment: 'plan/:id'
 })
 @Component({
   templateUrl: 'exercise.html',
@@ -115,7 +115,7 @@ export class ExercisePage {
   }
 
   public addActivity(): void {
-    const activityListModal: Modal = this._modalCtrl.create('activity-list');
+    const activityListModal: Modal = this._modalCtrl.create('activity');
     activityListModal.present();
     activityListModal.onDidDismiss((activities: Activity[]) => {
       if (!!activities) {

@@ -25,7 +25,7 @@ import { MealProvider } from '../../providers';
 
 @IonicPage({
   name: 'nutrition',
-  segment: 'index.html'
+  segment: 'plan/:id'
 })
 @Component({
   templateUrl: 'nutrition.html',
@@ -46,8 +46,10 @@ export class NutritionPage {
   ) { }
 
   public addMeal(): void {
-    this.mealPlan.meals = this.mealPlan.meals ? [...this.mealPlan.meals, new Meal()] : [new Meal()];
+    const newMeal: Meal = new Meal();
+    this.mealPlan.meals = this.mealPlan.meals ? [...this.mealPlan.meals, newMeal] : [newMeal];
     this._navCtrl.push('meal-edit', {
+      id: newMeal.hour,
       mealIdx: this.mealPlan.meals.length - 1,
       mealPlan: this.mealPlan
     });
@@ -55,6 +57,7 @@ export class NutritionPage {
 
   public editMeal(idx: number): void {
     this._navCtrl.push('meal-edit', {
+      id: this.mealPlan.meals[idx].hour,
       mealIdx: idx,
       mealPlan: this.mealPlan
     });

@@ -30,7 +30,8 @@ import { Food, Nutrition, Recipe } from '../../models';
 import { PictureProvider, RecipeProvider } from '../../providers';
 
 @IonicPage({
-  name: 'recipe-details'
+  name: 'recipe-details',
+  segment: ':id'
 })
 @Component({
   templateUrl: 'recipe-details.html'
@@ -104,7 +105,7 @@ export class RecipeDetailsPage {
   }
 
   public addIngredient(): void {
-    const ingredientListModal: Modal = this._modalCtrl.create('food-list', { authId: this.authId });
+    const ingredientListModal: Modal = this._modalCtrl.create('food', { authId: this.authId });
     ingredientListModal.present();
     ingredientListModal.onDidDismiss((ingredients: (Food | Recipe)[]) => {
       if (!!ingredients && !!ingredients.length) {

@@ -81,7 +81,7 @@ export class FoodProvider {
     this._foodGroupSubject.next(foodGroup);
   }
 
-  public getFoods$(foodGroup: string): Observable<Food[]> {
+  public getFoods$(foodGroup: string): FirebaseListObservable<Food[]> {
     setTimeout(() => this.changeFoodGroup(foodGroup));
     return this._foods$;
   }

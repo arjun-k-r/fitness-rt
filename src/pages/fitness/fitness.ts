@@ -26,7 +26,7 @@ import { FitnessProvider, NutritionProvider } from '../../providers';
 
 @IonicPage({
   name: 'fitness',
-  segment: 'index.html'
+  segment: ':id'
 })
 @Component({
   templateUrl: 'fitness.html'

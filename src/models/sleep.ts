@@ -7,8 +7,9 @@ export class Sleep {
         public combos: {
             noElectronics: boolean,
             noStimulants: boolean,
+            refreshing: boolean,
             relaxation: boolean
-        } = { noElectronics: false, noStimulants: false, relaxation: false },
+        } = { noElectronics: false, noStimulants: false, refreshing: false, relaxation: false },
         public date: number = moment().dayOfYear(),
         public duration: number = 0,
         public weekPlan: Sleep[] = []

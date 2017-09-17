@@ -38,7 +38,6 @@ export class ExercisePage {
   private _authSubscription: Subscription;
   private _activitySubscription: Subscription;
   public activityPlan: ActivityPlan = new ActivityPlan();
-  public exerciseSegment: string = 'activitys';
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _afAuth: AngularFireAuth,
@@ -147,6 +146,25 @@ export class ExercisePage {
     }).present();
   }
 
+  public saveActivityPlan(): void {
+    this._activityPvd.saveActivityPlan(this._authId, this.activityPlan)
+      .then(() => {
+        this._alertCtrl.create({
+          title: 'Success!',
+          message: 'Activity plan saved successfully!',
+          buttons: ['Great!']
+        }).present();
+      })
+      .catch((err: firebase.FirebaseError) => {
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.message,
+          buttons: ['OK']
+        }).present();
+      });
+  }
+
   public showSettings(event: Popover): void {
     const popover: Popover = this._popoverCtrl.create('settings');
     popover.present({
@@ -171,9 +189,6 @@ export class ExercisePage {
         this._activitySubscription = this._activityPvd.getActivityPlan$(this._authId).subscribe(
           (activityPlan: ActivityPlan) => {
             this.activityPlan = Object.assign({}, activityPlan['$value'] === null ? this.activityPlan : activityPlan);
-            this._activityPvd.saveActivityPlan(this._authId, this.activityPlan)
-              .then(() => console.info('Activity plan saved successfully'))
-              .catch((err: firebase.FirebaseError) => console.error('Error saving activity plan: ', err.message));
           },
           (err: firebase.FirebaseError) => {
             this._alertCtrl.create({

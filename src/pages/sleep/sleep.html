@@ -13,13 +13,15 @@
   <form [formGroup]="sleepForm" novalidate role="form">
     <ion-list no-lines>
       <ion-item>
-        <ion-label color="{{ +sleep.bedTime.split(':')[0] <= 22 ? 'secondary' : 'danger' }}" floating for="bedTime" id="bedTimeLabel">Bed time <ion-icon aria-hidden="true" color="{{ +sleep.bedTime.split(':')[0] <= 22 ? 'secondary' : 'danger' }}" item-right name="{{ +sleep.bedTime.split(':')[0] <= 22 ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>*</ion-label>
+        <ion-label color="{{ +sleep.bedTime.split(':')[0] <= 22 ? 'secondary' : 'danger' }}" floating for="bedTime" id="bedTimeLabel">Bed time
+          <ion-icon aria-hidden="true" color="{{ +sleep.bedTime.split(':')[0] <= 22 ? 'secondary' : 'danger' }}" item-right name="{{ +sleep.bedTime.split(':')[0] <= 22 ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>*</ion-label>
         <ion-datetime aria-live="assertive" aria-labelledby="bedTimeLabel" aria-required="true" displayFormat="HH:mm" id="bedTimeLabel"
           formControlName="bedTime" pickerFormat="HH mm"></ion-datetime>
       </ion-item>
       <div class="form__message" *ngIf="sleepForm.invalid && bedTime?.touched && bedTime.errors?.required">Please select your bed time.</div>
       <ion-item>
-        <ion-label color="{{ sleep.duration >= 7 ? 'secondary' : 'danger' }}" floating for="duration" id="durationLabel">Duration <ion-icon aria-hidden="true" color="{{ sleep.duration >= 7 ? 'secondary' : 'danger' }}" item-right name="{{ sleep.duration >= 7 ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>*</ion-label>
+        <ion-label color="{{ sleep.duration >= 7 ? 'secondary' : 'danger' }}" floating for="duration" id="durationLabel">Duration
+          <ion-icon aria-hidden="true" color="{{ sleep.duration >= 7 ? 'secondary' : 'danger' }}" item-right name="{{ sleep.duration >= 7 ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>*</ion-label>
         <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="durationLabel" aria-required="true" formControlName="duration"
           id="duration" required type="number"></ion-input>
       </ion-item>
@@ -47,6 +49,14 @@
         <ion-toggle aria-live="assertive" aria-labelledby="relaxationLabel" aria-required="true" formControlName="relaxation" id="relaxation"
           required role="switch">
         </ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label color="{{ sleep.combos.refreshing ? 'secondary' : 'danger' }}" for="refreshing" id="refreshingLabel">
+          {{ sleep.combos.refreshing ? 'I feeling energized and refreshing' : 'I am feeling exhausted and depressed' }}
+          <ion-icon aria-hidden="true" color="{{ sleep.combos.refreshing ? 'secondary' : 'danger' }}" item-right name="{{ sleep.combos.refreshing ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+        </ion-label>
+        <ion-toggle aria-live="assertive" aria-labelledby="refreshingLabel" aria-required="true" id="refreshing" formControlName="refreshing"
+          role="switch"></ion-toggle>
       </ion-item>
     </ion-list>
   </form>

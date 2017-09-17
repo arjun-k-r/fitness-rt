@@ -43,6 +43,7 @@ export class SleepPage {
   public duration: AbstractControl;
   public noElectronics: AbstractControl;
   public noStimulants: AbstractControl;
+  public refreshing: AbstractControl;
   public relaxation: AbstractControl;
   public sleep: Sleep = new Sleep();
   public sleepForm: FormGroup;
@@ -59,12 +60,14 @@ export class SleepPage {
       duration: [0, Validators.required],
       noElectronics: [false, Validators.required],
       noStimulants: [false, Validators.required],
+      refreshing: [false, Validators.required],
       relaxation: [false, Validators.required]
     });
     this.bedTime = this.sleepForm.get('bedTime');
     this.duration = this.sleepForm.get('duration');
     this.noElectronics = this.sleepForm.get('noElectronics');
     this.noStimulants = this.sleepForm.get('noStimulants');
+    this.refreshing = this.sleepForm.get('refreshing');
     this.relaxation = this.sleepForm.get('relaxation');
   }
 
@@ -96,6 +99,7 @@ export class SleepPage {
             this.sleepForm.controls['duration'].patchValue(this.sleep.duration);
             this.sleepForm.controls['noElectronics'].patchValue(this.sleep.combos.noElectronics);
             this.sleepForm.controls['noStimulants'].patchValue(this.sleep.combos.noStimulants);
+            this.sleepForm.controls['refreshing'].patchValue(this.sleep.combos.refreshing);
             this.sleepForm.controls['relaxation'].patchValue(this.sleep.combos.relaxation);
           },
           (err: firebase.FirebaseError) => {
@@ -115,6 +119,7 @@ export class SleepPage {
         duration: number;
         noElectronics: boolean;
         noStimulants: boolean;
+        refreshing: boolean;
         relaxation: boolean;
       }
       ) => {
@@ -124,6 +129,7 @@ export class SleepPage {
             combos: {
               noElectronics: changes.noElectronics,
               noStimulants: changes.noStimulants,
+              refreshing: changes.refreshing,
               relaxation: changes.relaxation
             },
             duration: changes.duration

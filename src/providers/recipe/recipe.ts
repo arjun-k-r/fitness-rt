@@ -14,28 +14,45 @@ import * as moment from 'moment';
 
 // Models
 import {
+  Fitness,
   Food,
   Nutrition,
   Recipe
 } from '../../models';
+
+// Providers
+import { FitnessProvider } from '../fitness/fitness';
+
 @Injectable()
 export class RecipeProvider {
   constructor(
     private _afAuth: AngularFireAuth,
     private _db: AngularFireDatabase,
+    private _fitPvd: FitnessProvider,
     private _storage: Storage
   ) { }
 
-  public calculateRecipeDRI(recipe: Recipe): Promise<Nutrition> {
+  public calculateRecipeDRI(authId: string, recipe: Recipe): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
       const nutrition: Nutrition = new Nutrition();
       const currentDay: number = moment().dayOfYear();
       this._storage.ready().then(() => {
         this._storage.get(`userRequirements-${currentDay}`).then((dri: Nutrition) => {
-          for (let nutrientKey in recipe.nutrition) {
-            nutrition[nutrientKey].value = Math.round((recipe.nutrition[nutrientKey].value * 100) / (dri[nutrientKey].value || 1));
+          if (!!dri) {
+            for (let nutrientKey in recipe.nutrition) {
+              nutrition[nutrientKey].value = Math.round((recipe.nutrition[nutrientKey].value * 100) / (dri[nutrientKey].value || 1));
+              resolve(nutrition);
+            }
+          } else {
+            this._fitPvd.getFitness$(authId).toPromise().then((fitness: Fitness) => {
+              this._storage.set(`userRequirements-${currentDay}`, fitness.requirements).then(() => {
+                for (let nutrientKey in recipe.nutrition) {
+                  nutrition[nutrientKey].value = Math.round((recipe.nutrition[nutrientKey].value * 100) / (fitness.requirements[nutrientKey].value || 1));
+                }
+                resolve(nutrition);
+              }).catch((err: Error) => reject(err));
+            }).catch((err: firebase.FirebaseError) => reject(err));
           }
-          resolve(nutrition);
         }).catch((err: Error) => reject(err));
       }).catch((err: Error) => reject(err));
     });

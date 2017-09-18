@@ -27,7 +27,11 @@ export class SleepProvider {
     if (!!sleep.weekPlan && !!sleep.weekPlan.length) {
       if (sleep.date !== sleep.weekPlan[0].date) {
         sleep.weekPlan = [sleep, ...sleep.weekPlan.slice(0, 6)];
+      } else {
+        sleep.weekPlan[0] = Object.assign({}, sleep);
       }
+    } else {
+      sleep.weekPlan = [sleep];
     }
     return this._db.object(`/sleep/${authId}/${CURRENT_DAY}`).set(sleep);
   }

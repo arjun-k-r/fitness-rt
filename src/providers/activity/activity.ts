@@ -65,7 +65,11 @@ export class ActivityProvider {
     if (!!activityPlan.weekPlan && !!activityPlan.weekPlan.length) {
       if (activityPlan.date !== activityPlan.weekPlan[0].date) {
         activityPlan.weekPlan = [activityPlan, ...activityPlan.weekPlan.slice(0, 6)];
+      } else {
+        activityPlan.weekPlan[0] = Object.assign({}, activityPlan);
       }
+    } else {
+      activityPlan.weekPlan = [activityPlan];
     }
     return this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`).set(activityPlan);
   }

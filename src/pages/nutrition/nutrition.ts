@@ -91,7 +91,7 @@ export class NutritionPage {
         this._mealSubscription = this._mealPvd.getMealPlan$(this._authId).subscribe(
           (mealPlan: MealPlan) => {
             this.mealPlan = Object.assign({}, mealPlan['$value'] === null ? this.mealPlan : mealPlan);
-            this._mealPvd.calculateDailyNutrition(this.mealPlan).then((dailyNutrition: Nutrition) => this.dailyNutrition = Object.assign({}, dailyNutrition))
+            this._mealPvd.calculateDailyNutrition(this._authId, this.mealPlan).then((dailyNutrition: Nutrition) => this.dailyNutrition = Object.assign({}, dailyNutrition))
               .catch((err: Error) => {
                 this._alertCtrl.create({
                   title: 'Uhh ohh...',

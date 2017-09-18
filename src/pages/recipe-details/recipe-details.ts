@@ -271,7 +271,6 @@ export class RecipeDetailsPage {
         toast.setMessage(`Uploading ... ${data}%`);
       } else {
         this.recipe = Object.assign(this.recipe, { image: data });
-        this._recipePvd.saveRecipe(this.authId, this.recipe);
       }
     }, (err: firebase.FirebaseError) => {
       toast.setMessage(err.message);
@@ -327,7 +326,7 @@ export class RecipeDetailsPage {
       (err: Error) => console.error(`Error fetching form changes: ${err}`)
     );
 
-    this._recipePvd.calculateRecipeDRI(this.recipe)
+    this._recipePvd.calculateRecipeDRI(this.authId, this.recipe)
       .then((nutrition: Nutrition) => this.recipeDri = Object.assign({}, nutrition))
       .catch((err: Error) => {
         this._alertCtrl.create({

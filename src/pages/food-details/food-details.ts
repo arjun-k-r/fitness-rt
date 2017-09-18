@@ -279,7 +279,7 @@ export class FoodDetailsPage {
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)
     );
-    this._foodPvd.calculateFoodDRI(this.food)
+    this._foodPvd.calculateFoodDRI(this.authId, this.food)
       .then((nutrition: Nutrition) => this.foodDri = Object.assign({}, nutrition))
       .catch((err: Error) => {
         this._alertCtrl.create({

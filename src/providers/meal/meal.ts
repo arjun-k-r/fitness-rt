@@ -13,7 +13,17 @@ import * as moment from 'moment';
 import { sortBy } from 'lodash';
 
 // Models
-import { Food, Meal, MealPlan, Nutrition, Recipe } from '../../models';
+import {
+  Fitness,
+  Food,
+  Meal,
+  MealPlan,
+  Nutrition,
+  Recipe
+} from '../../models';
+
+// Providers
+import { FitnessProvider } from '../fitness/fitness';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 
@@ -22,21 +32,34 @@ export class MealProvider {
   private _userRequirements: Nutrition;
   constructor(
     private _db: AngularFireDatabase,
+    private _fitPvd: FitnessProvider,
     private _storage: Storage
   ) { }
 
-  public calculateDailyNutrition(mealPlan: MealPlan): Promise<Nutrition> {
-    return new Promise(resolve => {
+  public calculateDailyNutrition(authId: string, mealPlan: MealPlan): Promise<Nutrition> {
+    return new Promise((resolve, reject) => {
       const nutrition = new Nutrition();
-        this._storage.ready().then(() => {
-          this._storage.get(`userRequirements-${CURRENT_DAY}`).then((dailyRequirements: Nutrition) => {
-            this._userRequirements = dailyRequirements;
-            for (let nutrientKey in nutrition) {
-              nutrition[nutrientKey].value = Math.round((mealPlan.nutrition[nutrientKey].value * 100) / (dailyRequirements[nutrientKey].value || 1));
+      this._storage.ready().then(() => {
+        this._storage.get(`userRequirements-${CURRENT_DAY}`).then((dri: Nutrition) => {
+          if (!!dri) {
+            this._userRequirements = dri;
+            for (let nutrientKey in mealPlan.nutrition) {
+              nutrition[nutrientKey].value = Math.round((mealPlan.nutrition[nutrientKey].value * 100) / (dri[nutrientKey].value || 1));
+              resolve(nutrition);
             }
-            resolve(nutrition);
-          }).catch((err: Error) => console.error(`Error getting user nutrition requirements: ${err}`));
-        }).catch((err: Error) => console.error(`Error loading storage: ${err}`));
+          } else {
+            this._fitPvd.getFitness$(authId).toPromise().then((fitness: Fitness) => {
+              this._storage.set(`userRequirements-${CURRENT_DAY}`, fitness.requirements).then(() => {
+                this._userRequirements = fitness.requirements;
+                for (let nutrientKey in mealPlan.nutrition) {
+                  nutrition[nutrientKey].value = Math.round((mealPlan.nutrition[nutrientKey].value * 100) / (fitness.requirements[nutrientKey].value || 1));
+                }
+                resolve(nutrition);
+              }).catch((err: Error) => reject(err));
+            }).catch((err: firebase.FirebaseError) => reject(err));
+          }
+        }).catch((err: Error) => reject(err));
+      }).catch((err: Error) => reject(err));
     });
   }
 
@@ -83,7 +106,11 @@ export class MealProvider {
     if (!!mealPlan.weekPlan && !!mealPlan.weekPlan.length) {
       if (mealPlan.date !== mealPlan.weekPlan[0].date) {
         mealPlan.weekPlan = [mealPlan, ...mealPlan.weekPlan.slice(0, 6)];
+      } else {
+        mealPlan.weekPlan[0] = Object.assign({}, mealPlan);
       }
+    } else {
+      mealPlan.weekPlan = [mealPlan];
     }
     return this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan);
   }

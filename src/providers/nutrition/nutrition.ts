@@ -1,19 +1,31 @@
 // Angular
 import { Injectable } from '@angular/core';
 
+// Rxjs
+import { Subscription } from 'rxjs/Subscription';
+
 // Ionic
 import { Storage } from '@ionic/storage';
+
+// Firebase
+import * as firebase from 'firebase/app';
 
 // Third-party
 import * as moment from 'moment';
 
 // Models
-import { Nutrition } from '../../models';
+import { ActivityPlan, Nutrition } from '../../models';
+
+// Providers
+import { ActivityProvider } from '../activity/activity';
 
 @Injectable()
 export class NutritionProvider {
 
-  constructor(private _storage: Storage) { }
+  constructor(
+    private _activityPvd: ActivityProvider,
+    private _storage: Storage
+  ) { }
 
   private _calculateALADRI(energyConsumption: number): number {
     return 0.005 * energyConsumption / 9;
@@ -540,7 +552,7 @@ export class NutritionProvider {
       } else if (age <= 13) {
         return 0.015 * weight;
       } else if (age <= 18) {
-        return 0.014 * weight; 
+        return 0.014 * weight;
       } else if (age <= 30) {
         return 0.014 * weight;
       } else if (age <= 50) {
@@ -2222,59 +2234,72 @@ export class NutritionProvider {
     }
   }
 
-  public calculateDRI(age: number, bmr: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): Promise<Nutrition> {
+  public calculateDRI(authId: string, age: number, bmr: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
       const currentDay: number = moment().dayOfYear();
       this._storage.ready().then((storage: LocalForage) => {
-        this._storage.get(`energyConsumption-${currentDay}`).then((energyOuptut: number = 0) => {
-          const requirements: Nutrition = new Nutrition();
-          requirements.ala.value = this._calculateALADRI(energyOuptut + bmr);
-          requirements.alcohol.value = this._calculateAlcoholDRI(age);
-          requirements.caffeine.value = this._calculateCaffeine(age);
-          requirements.calcium.value = this._calculateCalciumDRI(age, gender, lactating, pregnant);
-          requirements.carbs.value = this._calculateCarbDRI(energyOuptut + bmr);
-          requirements.choline.value = this._calculateCholineDRI(age, gender, lactating, pregnant);
-          requirements.copper.value = this._calculateCopperDRI(age, gender, lactating, pregnant);
-          requirements.dha.value = this._calculateDHADRI(energyOuptut + bmr);
-          requirements.energy.value = energyOuptut + bmr;
-          requirements.epa.value = this._calculateEPADRI(energyOuptut + bmr);
-          requirements.fats.value = this._calculateFatDRI(energyOuptut + bmr);
-          requirements.fiber.value = this._calculateFiberDRI(age, gender, lactating, pregnant);
-          requirements.histidine.value = this._calculateHistidineDRI(age, gender, lactating, pregnant, weight);
-          requirements.iron.value = this._calculateIronDRI(age, gender, lactating, pregnant);
-          requirements.isoleucine.value = this._calculateIsoleucineDRI(age, gender, lactating, pregnant, weight);
-          requirements.la.value = this._calculateLADRI(energyOuptut + bmr);
-          requirements.leucine.value = this._calculateLeucineDRI(age, gender, lactating, pregnant, weight);
-          requirements.lysine.value = this._calculateLysineDRI(age, gender, lactating, pregnant, weight);
-          requirements.magnesium.value = this._calculateMagnesiumDRI(age, gender, lactating, pregnant);
-          requirements.manganese.value = this._calculateManganeseDRI(age, gender, lactating, pregnant);
-          requirements.methionine.value = this._calculateMethionineDRI(age, gender, lactating, pregnant, weight);
-          requirements.phenylalanine.value = this._calculatePhenylalanineDRI(age, gender, lactating, pregnant, weight);
-          requirements.phosphorus.value = this._calculatePhosphorusDRI(age, gender, lactating, pregnant);
-          requirements.potassium.value = this._calculatePotassiumDRI(age, gender, lactating, pregnant);
-          requirements.protein.value = this._calculateProteinDRI(energyOuptut + bmr);
-          requirements.selenium.value = this._calculateSeleniumDRI(age, gender, lactating, pregnant);
-          requirements.sodium.value = this._calculateSodiumDRI(age, gender, lactating, pregnant);
-          requirements.sugars.value = this._calculateSugarsDRI(energyOuptut + bmr);
-          requirements.threonine.value = this._calculateThreonineDRI(age, gender, lactating, pregnant, weight);
-          requirements.transFat.value = this._calculateTransFatDRI();
-          requirements.tryptophan.value = this._calculateTryptophanDRI(age, gender, lactating, pregnant, weight);
-          requirements.valine.value = this._calculateValineDRI(age, gender, lactating, pregnant, weight);
-          requirements.vitaminA.value = this._calculateVitaminADRI(age, gender, lactating, pregnant);
-          requirements.vitaminB1.value = this._calculateThiamineDRI(age, gender, lactating, pregnant);
-          requirements.vitaminB2.value = this._calculateRiboflavinDRI(age, gender, lactating, pregnant);
-          requirements.vitaminB3.value = this._calculateNiacinDRI(age, gender, lactating, pregnant);
-          requirements.vitaminB5.value = this._calculatePantothenicAcidDRI(age, gender, lactating, pregnant);
-          requirements.vitaminB6.value = this._calculateRiboflavinDRI(age, gender, lactating, pregnant);
-          requirements.vitaminB9.value = this._calculateFolicAcidDRI(age, gender, lactating, pregnant);
-          requirements.vitaminB12.value = this._calculateCobalaminDRI(age, gender, lactating, pregnant);
-          requirements.vitaminC.value = this._calculateVitaminCDRI(age, gender, lactating, pregnant);
-          requirements.vitaminD.value = this._calculateVitaminDDRI(age, gender, lactating, pregnant);
-          requirements.vitaminE.value = this._calculateVitaminEDRI(age, gender, lactating, pregnant);
-          requirements.vitaminK.value = this._calculateVitaminKDRI(age, gender, lactating, pregnant);
-          requirements.water.value = this._calculateWater(age, gender, lactating, pregnant);
-          requirements.zinc.value = this._calculateZincDRI(age, gender, lactating, pregnant);
-          resolve(requirements);
+        this._storage.get(`energyConsumption-${currentDay}`).then((energyOuptut: number) => {
+          if (!energyOuptut) {
+            const subscription: Subscription = this._activityPvd.getActivityPlan$(authId).subscribe((activityPlan: ActivityPlan) => {
+              if (activityPlan['$value'] === null) {
+                energyOuptut = 0;
+              } else {
+                energyOuptut = activityPlan.totalEnergyConsumption;
+                this._storage.set(`energyConsumption-${currentDay}`, energyOuptut)
+                .catch((err: Error) => reject(err));
+              }
+              const requirements: Nutrition = new Nutrition();
+              requirements.ala.value = this._calculateALADRI(energyOuptut + bmr);
+              requirements.alcohol.value = this._calculateAlcoholDRI(age);
+              requirements.caffeine.value = this._calculateCaffeine(age);
+              requirements.calcium.value = this._calculateCalciumDRI(age, gender, lactating, pregnant);
+              requirements.carbs.value = this._calculateCarbDRI(energyOuptut + bmr);
+              requirements.choline.value = this._calculateCholineDRI(age, gender, lactating, pregnant);
+              requirements.copper.value = this._calculateCopperDRI(age, gender, lactating, pregnant);
+              requirements.dha.value = this._calculateDHADRI(energyOuptut + bmr);
+              requirements.energy.value = energyOuptut + bmr;
+              requirements.epa.value = this._calculateEPADRI(energyOuptut + bmr);
+              requirements.fats.value = this._calculateFatDRI(energyOuptut + bmr);
+              requirements.fiber.value = this._calculateFiberDRI(age, gender, lactating, pregnant);
+              requirements.histidine.value = this._calculateHistidineDRI(age, gender, lactating, pregnant, weight);
+              requirements.iron.value = this._calculateIronDRI(age, gender, lactating, pregnant);
+              requirements.isoleucine.value = this._calculateIsoleucineDRI(age, gender, lactating, pregnant, weight);
+              requirements.la.value = this._calculateLADRI(energyOuptut + bmr);
+              requirements.leucine.value = this._calculateLeucineDRI(age, gender, lactating, pregnant, weight);
+              requirements.lysine.value = this._calculateLysineDRI(age, gender, lactating, pregnant, weight);
+              requirements.magnesium.value = this._calculateMagnesiumDRI(age, gender, lactating, pregnant);
+              requirements.manganese.value = this._calculateManganeseDRI(age, gender, lactating, pregnant);
+              requirements.methionine.value = this._calculateMethionineDRI(age, gender, lactating, pregnant, weight);
+              requirements.phenylalanine.value = this._calculatePhenylalanineDRI(age, gender, lactating, pregnant, weight);
+              requirements.phosphorus.value = this._calculatePhosphorusDRI(age, gender, lactating, pregnant);
+              requirements.potassium.value = this._calculatePotassiumDRI(age, gender, lactating, pregnant);
+              requirements.protein.value = this._calculateProteinDRI(energyOuptut + bmr);
+              requirements.selenium.value = this._calculateSeleniumDRI(age, gender, lactating, pregnant);
+              requirements.sodium.value = this._calculateSodiumDRI(age, gender, lactating, pregnant);
+              requirements.sugars.value = this._calculateSugarsDRI(energyOuptut + bmr);
+              requirements.threonine.value = this._calculateThreonineDRI(age, gender, lactating, pregnant, weight);
+              requirements.transFat.value = this._calculateTransFatDRI();
+              requirements.tryptophan.value = this._calculateTryptophanDRI(age, gender, lactating, pregnant, weight);
+              requirements.valine.value = this._calculateValineDRI(age, gender, lactating, pregnant, weight);
+              requirements.vitaminA.value = this._calculateVitaminADRI(age, gender, lactating, pregnant);
+              requirements.vitaminB1.value = this._calculateThiamineDRI(age, gender, lactating, pregnant);
+              requirements.vitaminB2.value = this._calculateRiboflavinDRI(age, gender, lactating, pregnant);
+              requirements.vitaminB3.value = this._calculateNiacinDRI(age, gender, lactating, pregnant);
+              requirements.vitaminB5.value = this._calculatePantothenicAcidDRI(age, gender, lactating, pregnant);
+              requirements.vitaminB6.value = this._calculateRiboflavinDRI(age, gender, lactating, pregnant);
+              requirements.vitaminB9.value = this._calculateFolicAcidDRI(age, gender, lactating, pregnant);
+              requirements.vitaminB12.value = this._calculateCobalaminDRI(age, gender, lactating, pregnant);
+              requirements.vitaminC.value = this._calculateVitaminCDRI(age, gender, lactating, pregnant);
+              requirements.vitaminD.value = this._calculateVitaminDDRI(age, gender, lactating, pregnant);
+              requirements.vitaminE.value = this._calculateVitaminEDRI(age, gender, lactating, pregnant);
+              requirements.vitaminK.value = this._calculateVitaminKDRI(age, gender, lactating, pregnant);
+              requirements.water.value = this._calculateWater(age, gender, lactating, pregnant);
+              requirements.zinc.value = this._calculateZincDRI(age, gender, lactating, pregnant);
+              resolve(requirements);
+              subscription.unsubscribe();
+            },
+              (err: firebase.FirebaseError) => reject(err.message))
+          }
         }).catch((err: Error) => reject(err));
       }).catch((err: Error) => reject(err));
     });

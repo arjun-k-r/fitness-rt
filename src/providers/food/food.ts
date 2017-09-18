@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 // Rxjs
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
 
 // Ionic
 import { Storage } from '@ionic/storage';
@@ -78,14 +79,15 @@ export class FoodProvider {
               resolve(nutrition);
             }
           } else {
-            this._fitPvd.getFitness$(authId).toPromise().then((fitness: Fitness) => {
+            const subscription: Subscription = this._fitPvd.getFitness$(authId).subscribe((fitness: Fitness) => {
               this._storage.set(`userRequirements-${currentDay}`, fitness.requirements).then(() => {
                 for (let nutrientKey in food.nutrition) {
                   nutrition[nutrientKey].value = Math.round((food.nutrition[nutrientKey].value * 100) / (fitness.requirements[nutrientKey].value || 1));
                 }
+                subscription.unsubscribe();
                 resolve(nutrition);
               }).catch((err: Error) => reject(err));
-            }).catch((err: firebase.FirebaseError) => reject(err));
+            }, (err: firebase.FirebaseError) => reject(err.message));
           }
         }).catch((err: Error) => reject(err));
       }).catch((err: Error) => reject(err));

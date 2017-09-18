@@ -2,6 +2,9 @@
   <ion-navbar role="toolbar">
     <ion-title>Meal edit</ion-title>
     <ion-buttons end>
+      <button (click)="saveMeal()" [disabled]="!meal.foods.length" ion-button padding role="button">
+        Save
+      </button>
       <button (click)="removeMeal()" icon-only ion-button padding role="button">
         <ion-icon aria-hidden="true" name="trash"></ion-icon>
       </button>
@@ -42,16 +45,16 @@
             {{ meal.combos.calmEating ? 'I am relaxed while eating and in a peacefull environment' : 'I am stressed, nervous, excited, or anxious while eating and in a noisy, agitated environment'}}
             <ion-icon aria-hidden="true" color="{{ meal.combos.calmEating ? 'secondary' : 'danger' }}" item-right name="{{ meal.combos.calmEating ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
           </ion-label>
-          <ion-toggle aria-live="assertive" aria-labelledby="calmEatingLabel" aria-required="true" id="calmEating" (ionChange)="saveMeal()" [(ngModel)]="meal.combos.calmEating" role="switch"></ion-toggle>
+          <ion-toggle aria-live="assertive" aria-labelledby="calmEatingLabel" aria-required="true" id="calmEating" [(ngModel)]="meal.combos.calmEating" role="switch"></ion-toggle>
         </ion-item>
         <ion-item>
           <ion-label color="{{ meal.combos.slowEating ? 'secondary' : 'danger' }}" for="slowEating" id="slowEatingLabel" text-wrap>{{ meal.combos.slowEating ? 'I eat slowly and chew until fluid (> 20 min)' : 'I eat in a rush without chewing properly (< 20min)' }}
             <ion-icon aria-hidden="true" color="{{ meal.combos.slowEating ? 'secondary' : 'danger' }}" item-right name="{{ meal.combos.slowEating ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon></ion-label>
-          <ion-toggle aria-live="assertive" aria-labelledby="slowEatingLabel" aria-required="true" id="slowEating" (ionChange)="saveMeal()" [(ngModel)]="meal.combos.slowEating" role="switch"></ion-toggle>
+          <ion-toggle aria-live="assertive" aria-labelledby="slowEatingLabel" aria-required="true" id="slowEating" [(ngModel)]="meal.combos.slowEating" role="switch"></ion-toggle>
           </ion-item>
           <ion-item>
             <ion-label color="{{ meal.combos.feeling === 'Energy' ? 'secondary' : 'danger' }}" for="feeling" id="feelingLabel">Feeling <ion-icon aria-hidden="true" color="{{ meal.combos.feeling === 'Energy' ? 'secondary' : 'danger' }}" item-right name="{{ meal.combos.feeling === 'Energy' ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon></ion-label>
-            <ion-select aria-live="assertive" aria-labelledby="feelingLabel" aria-required="true" id="feeling" (ionChange)="saveMeal()" [(ngModel)]="meal.combos.feeling" required>
+            <ion-select aria-live="assertive" aria-labelledby="feelingLabel" aria-required="true" id="feeling" [(ngModel)]="meal.combos.feeling" required>
               <ion-option role="option" value="Acidity & burns">Acidity & burns</ion-option>
               <ion-option role="option" value="Constipation">Constipation</ion-option>
               <ion-option role="option" value="Diarrhea">Diarrhea</ion-option>

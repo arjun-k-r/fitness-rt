@@ -2,7 +2,7 @@
   <ion-navbar role="toolbar">
     <ion-title>{{ recipe.name || 'New recipe' }}</ion-title>
     <ion-buttons end>
-      <button (click)="saveRecipe()" [disabled]="recipeForm.invalid || !recipe.ingredients.length" *ngIf="editMode" icon-only ion-button
+      <button (click)="saveRecipe()" [disabled]="recipeForm.invalid || !recipe.ingredients.length" *ngIf="editMode" ion-button
         padding role="button">
             Save
           </button>

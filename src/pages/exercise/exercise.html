@@ -2,9 +2,12 @@
   <ion-navbar role="toolbar">
     <ion-title>Exercise</ion-title>
     <ion-buttons end>
+      <button (click)="saveActivityPlan()" [disabled]="!activityPlan.activities.length" ion-button padding role="button">
+        Save
+      </button>
       <button (click)="showSettings($event)" icon-only ion-button role="button">
-          <ion-icon aria-hidden="true" name="more"></ion-icon>
-        </button>
+        <ion-icon aria-hidden="true" name="more"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -30,8 +33,8 @@
         {{ activityPlan.combos.energy ? 'I feeling energized and fresh' : 'I am feeling exhausted and depressed' }}
         <ion-icon aria-hidden="true" color="{{ activityPlan.combos.energy ? 'secondary' : 'danger' }}" item-right name="{{ activityPlan.combos.energy ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
       </ion-label>
-      <ion-toggle aria-live="assertive" aria-labelledby="energyLabel" aria-required="true" id="energy" (ionChange)="saveActivityPlan()"
-        [(ngModel)]="activityPlan.combos.energy" role="switch"></ion-toggle>
+      <ion-toggle aria-live="assertive" aria-labelledby="energyLabel" aria-required="true" id="energy" [(ngModel)]="activityPlan.combos.energy"
+        role="switch"></ion-toggle>
     </ion-item>
   </ion-list>
   <ion-fab bottom right>

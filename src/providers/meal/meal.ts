@@ -1,6 +1,9 @@
 // Angular
 import { Injectable } from '@angular/core';
 
+// Rxjs
+import { Subscription } from 'rxjs/Subscription';
+
 // Ionic
 import { Storage } from '@ionic/storage';
 
@@ -60,15 +63,16 @@ export class MealProvider {
               resolve(nutrition);
             }
           } else {
-            this._fitPvd.getFitness$(authId).toPromise().then((fitness: Fitness) => {
+            const subscription: Subscription = this._fitPvd.getFitness$(authId).subscribe((fitness: Fitness) => {
               this._storage.set(`userRequirements-${CURRENT_DAY}`, fitness.requirements).then(() => {
                 this._userRequirements = fitness.requirements;
                 for (let nutrientKey in mealPlan.nutrition) {
                   nutrition[nutrientKey].value = Math.round((mealPlan.nutrition[nutrientKey].value * 100) / (fitness.requirements[nutrientKey].value || 1));
                 }
+                subscription.unsubscribe();
                 resolve(nutrition);
               }).catch((err: Error) => reject(err));
-            }).catch((err: firebase.FirebaseError) => reject(err));
+            }, (err: firebase.FirebaseError) => reject(err.message));
           }
         }).catch((err: Error) => reject(err));
       }).catch((err: Error) => reject(err));
@@ -119,7 +123,7 @@ export class MealProvider {
         lifePoints -= 5;
       }
 
-      if (meal.combos.feeling === 'Energized') {
+      if (meal.combos.feeling === 'Energy') {
         lifePoints += 15;
       } else {
         lifePoints -= 15;
@@ -195,19 +199,36 @@ export class MealProvider {
     return lifePoints;
   }
 
-  public checkFoodIntolerance(mealPlan: MealPlan): void {
+  public checkFoodIntolerance(foundIntolerance: Food[], foods: (Food | Recipe)[], intoleranceList: Food[]): Food[] {
+    foods.forEach((food: Food | Recipe) => {
+      if (food.hasOwnProperty('chef')) {
+        foundIntolerance = [...this.checkFoodIntolerance(foundIntolerance, (<Recipe>food).ingredients, intoleranceList)];
+      } else {
+        let intolerantFood: Food = intoleranceList.filter((intolerance: Food) => intolerance.name === food.name)[0];
+        if (!!intolerantFood) {
+          foundIntolerance = [...foundIntolerance, intolerantFood];
+        }
+      }
+    });
+
+    return foundIntolerance;
+  }
+
+  public getFoodIntolerance(mealPlan: MealPlan): Food[] {
+    let intoleranceList: Food[] = [];
     mealPlan.meals.forEach((meal: Meal) => {
-      if (meal.combos.calmEating && meal.combos.slowEating && meal.quantity < 700 && meal.combos.feeling !== 'Energized') {
+      if (meal.combos.calmEating && meal.combos.slowEating && meal.quantity < 700 && meal.combos.feeling !== 'Energy') {
         meal.foods.forEach((food: Food | Recipe) => {
           if (food.hasOwnProperty('chef')) {
-            this._getRecipeFoods([], (<Recipe>food).ingredients);
-            mealPlan.intoleranceList = [...mealPlan.intoleranceList , ...this._getRecipeFoods([], (<Recipe>food).ingredients)];
+            intoleranceList = [...mealPlan.intoleranceList , ...this._getRecipeFoods([], (<Recipe>food).ingredients)];
           } else {
-            mealPlan.intoleranceList = [...mealPlan.intoleranceList , <Food>food];
+            intoleranceList = [...mealPlan.intoleranceList , <Food>food];
           }
         });
       }
-    })
+    });
+
+    return intoleranceList;
   }
 
   public getMealPlan$(authId: string): FirebaseObjectObservable<MealPlan> {

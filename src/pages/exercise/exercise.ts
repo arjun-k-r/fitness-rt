@@ -9,8 +9,6 @@ import {
   ActionSheetController,
   AlertController,
   IonicPage,
-  Loading,
-  LoadingController,
   Modal,
   ModalController,
   NavController,
@@ -45,7 +43,6 @@ export class ExercisePage {
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
     private _activityPvd: ActivityProvider,
-    private _loadCtrl: LoadingController,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
     private _popoverCtrl: PopoverController
@@ -96,33 +93,8 @@ export class ExercisePage {
   }
 
   private _updateActivityPlan(): void {
-    const exerciseLoader: Loading = this._loadCtrl.create({
-      content: 'Please wait...',
-      duration: 30000,
-      spinner: 'crescent'
-    });
-    exerciseLoader.present();
     this.activityPlan.totalDuration = this._activityPvd.calculateActivityPlanDuration(this.activityPlan.activities);
     this.activityPlan.totalEnergyConsumption = this._activityPvd.calculateActivityPlanEnergyConsumption(this.activityPlan.activities);
-    this._activityPvd.saveActivityPlan(this._authId, this.activityPlan)
-      .then(() => {
-        if (exerciseLoader) {
-          exerciseLoader.dismiss();
-        }
-        this._alertCtrl.create({
-          title: 'Success!',
-          message: 'Activity plan saved successfully!',
-          buttons: ['Great!']
-        }).present();
-      })
-      .catch((err: firebase.FirebaseError) => {
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.message,
-          buttons: ['OK']
-        }).present();
-      });
   }
 
   public addActivity(): void {

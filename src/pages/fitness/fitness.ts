@@ -122,7 +122,7 @@ export class FitnessPage {
         this._fitnessSubscription = this._fitnessPvd.getFitness$(this._authId).subscribe(
           (fitness: Fitness) => {
             this.fitness = Object.assign({}, fitness['$value'] === null ? this.fitness : fitness);
-            this._nutritionPvd.calculateDRI(this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
+            this._nutritionPvd.calculateDRI(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
               .then((dri: Nutrition) => {
                 this.fitness.requirements = Object.assign({}, dri);
               })
@@ -134,7 +134,7 @@ export class FitnessPage {
                   buttons: ['OK']
                 }).present();
               });
-            this._fitnessPvd.getLifePoints(this.fitness.lifePoints)
+            this._fitnessPvd.getLifePoints(this.fitness.lifePoints || new LifePoints())
               .then((lifePoints: LifePoints) => {
                 this.fitness.lifePoints = Object.assign({}, lifePoints);
                 this.currentLifePoints = lifePoints.totalPoints + lifePoints.exercise + lifePoints.nutrition + lifePoints.sleep
@@ -206,7 +206,7 @@ export class FitnessPage {
             weight: changes.weight
           });
           this.isFit = this._fitnessPvd.checkFatPercentage(this.fitness.bodyFat, this.fitness.gender);
-          this._nutritionPvd.calculateDRI(this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
+          this._nutritionPvd.calculateDRI(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
             .then((dri: Nutrition) => {
               this.fitness.requirements = Object.assign({}, dri);
             })

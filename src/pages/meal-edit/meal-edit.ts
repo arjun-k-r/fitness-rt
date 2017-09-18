@@ -9,8 +9,6 @@ import {
   ActionSheetController,
   AlertController,
   IonicPage,
-  Loading,
-  LoadingController,
   Modal,
   ModalController,
   NavController,
@@ -45,7 +43,6 @@ export class MealEditPage {
     private _actionSheetCtrl: ActionSheetController,
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _loadCtrl: LoadingController,
     private _mealPvd: MealProvider,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
@@ -90,36 +87,11 @@ export class MealEditPage {
   }
 
   private _updateMeal(): void {
-    const mealLoader: Loading = this._loadCtrl.create({
-      content: 'Please wait...',
-      duration: 30000,
-      spinner: 'crescent'
-    });
-    mealLoader.present();
     this.meal.nutrition = this._mealPvd.calculateMealNutrition(this.meal.foods);
     this.meal.quantity = this._mealPvd.calculateMealQuantity(this.meal.foods);
     this._mealPlan.meals = [...this._mealPlan.meals.slice(0, this._mealIdx), this.meal, ...this._mealPlan.meals.slice(this._mealIdx + 1)];
     this._mealPlan.meals = this._mealPvd.sortMeals(this._mealPlan.meals);
     this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals)
-    this._mealPvd.saveMealPlan(this._authId, this._mealPlan)
-      .then(() => {
-        if (mealLoader) {
-          mealLoader.dismiss();
-        }
-        this._alertCtrl.create({
-          title: 'Success!',
-          message: 'Meals saved successfully!',
-          buttons: ['Great!']
-        }).present();
-      })
-      .catch((err: Error) => {
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.toString(),
-          buttons: ['OK']
-        }).present();
-      });
   }
 
   public addFood(): void {
@@ -182,8 +154,6 @@ export class MealEditPage {
   }
 
   public saveMeal(): void {
-    this._mealPlan.meals = [...this._mealPlan.meals.slice(0, this._mealIdx), this.meal, ...this._mealPlan.meals.slice(this._mealIdx + 1)];
-    this._mealPlan.meals = this._mealPvd.sortMeals(this._mealPlan.meals);
     this._mealPvd.saveMealPlan(this._authId, this._mealPlan)
       .then(() => {
         this._alertCtrl.create({

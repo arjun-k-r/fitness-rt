@@ -7,11 +7,11 @@ import { FitnessProviderModule } from '../fitness/fitness.module';
 
 @NgModule({
   imports: [
-    IonicPageModule.forChild(FoodProvider)
+    IonicPageModule.forChild(FoodProvider),
+    FitnessProviderModule
   ],
   providers: [
-    FoodProvider,
-    FitnessProviderModule
+    FoodProvider
   ]
 })
 export class FoodProviderModule {}

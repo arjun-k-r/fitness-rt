@@ -12,7 +12,7 @@
       <button (click)="dismiss()" *ngIf="!editMode" icon-only ion-button padding role="button">
         <ion-icon aria-hidden="true" name="done-all"></ion-icon>
       </button>
-      <button (click)="saveFood()" [disabled]="foodForm.invalid" *ngIf="editMode" icon-only ion-button padding role="button">
+      <button (click)="saveFood()" [disabled]="foodForm.invalid" *ngIf="editMode" ion-button padding role="button">
         Save
       </button>
       <button (click)="removeFood()" *ngIf="editMode" icon-only ion-button padding role="button">

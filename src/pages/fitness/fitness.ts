@@ -19,7 +19,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { Fitness, Nutrition } from '../../models';
+import { Fitness, LifePoints, Nutrition } from '../../models';
 
 // Providers
 import { FitnessProvider, NutritionProvider } from '../../providers';
@@ -37,6 +37,7 @@ export class FitnessPage {
   private _fitnessSubscription: Subscription;
   private _fitnessFormSubscription: Subscription;
   public age: AbstractControl;
+  public currentLifePoints: number = 0;
   public fitness: Fitness = new Fitness();
   public fitnessForm: FormGroup;
   public fitnessSegment: string = 'fitnessInfo';
@@ -124,6 +125,19 @@ export class FitnessPage {
             this._nutritionPvd.calculateDRI(this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
               .then((dri: Nutrition) => {
                 this.fitness.requirements = Object.assign({}, dri);
+              })
+              .catch((err: Error) => {
+                this._alertCtrl.create({
+                  title: 'Uhh ohh...',
+                  subTitle: 'Something went wrong',
+                  message: err.toString(),
+                  buttons: ['OK']
+                }).present();
+              });
+            this._fitnessPvd.getLifePoints(this.fitness.lifePoints)
+              .then((lifePoints: LifePoints) => {
+                this.fitness.lifePoints = Object.assign({}, lifePoints);
+                this.currentLifePoints = lifePoints.totalPoints + lifePoints.exercise + lifePoints.nutrition + lifePoints.sleep
               })
               .catch((err: Error) => {
                 this._alertCtrl.create({

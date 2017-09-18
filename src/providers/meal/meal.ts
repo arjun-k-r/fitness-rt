@@ -98,11 +98,100 @@ export class MealProvider {
     return Math.round((nutrientPartial * 100) / (this._userRequirements && this._userRequirements[nutrientName].value || 1));
   }
 
+  public checkLifePoints(mealPlan: MealPlan): number {
+    let lifePoints: number = 0;
+    mealPlan.meals.forEach((meal: Meal) => {
+      if (meal.combos.calmEating) {
+        lifePoints += 5;
+      } else {
+        lifePoints -= 5;
+      }
+
+      if (meal.combos.feeling === 'Energized') {
+        lifePoints += 15;
+      } else {
+        lifePoints -= 15;
+      }
+
+      if (meal.combos.slowEating) {
+        lifePoints += 5;
+      } else {
+        lifePoints -= 5;
+      }
+
+      if (meal.quantity < 700) {
+        lifePoints += 15;
+      } else {
+        lifePoints -= 15;
+      }
+    });
+
+    if (mealPlan.nutrition.protein.value === this._userRequirements.protein.value) {
+      lifePoints += 10;
+    } else {
+      lifePoints -= 10;
+    }
+
+    if (mealPlan.nutrition.carbs.value === this._userRequirements.carbs.value) {
+      lifePoints += 10;
+    } else {
+      lifePoints -= 10;
+    }
+
+    if (mealPlan.nutrition.fats.value === this._userRequirements.fats.value) {
+      lifePoints += 10;
+    } else {
+      lifePoints -= 10;
+    }
+
+    if (mealPlan.nutrition.fiber.value >= this._userRequirements.fiber.value) {
+      lifePoints += 10;
+    } else {
+      lifePoints -= 10;
+    }
+
+    if (mealPlan.nutrition.sugars.value <= this._userRequirements.sugars.value) {
+      lifePoints += 15;
+    } else {
+      lifePoints -= 15;
+    }
+
+    if (mealPlan.nutrition.transFat.value <= this._userRequirements.transFat.value) {
+      lifePoints += 15;
+    } else {
+      lifePoints -= 15;
+    }
+
+    if (mealPlan.nutrition.sodium.value <= this._userRequirements.sodium.value) {
+      lifePoints += 10;
+    } else {
+      lifePoints -= 10;
+    }
+
+    if (mealPlan.nutrition.alcohol.value <= this._userRequirements.alcohol.value) {
+      lifePoints += 10;
+    } else {
+      lifePoints -= 10;
+    }
+
+    if (mealPlan.nutrition.caffeine.value <= this._userRequirements.caffeine.value) {
+      lifePoints += 5;
+    } else {
+      lifePoints -= 5;
+    }
+
+    return lifePoints;
+  }
+
   public getMealPlan$(authId: string): FirebaseObjectObservable<MealPlan> {
     return this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`);
   }
 
   public saveMealPlan(authId: string, mealPlan: MealPlan): firebase.Promise<void> {
+    this._storage.ready().then(() => {
+      this._storage.set(`nutritionLifePoints-${CURRENT_DAY}`, mealPlan.lifePoints)
+        .catch((err: Error) => console.error(`Error storing nutrition lifepoints: ${err.toString()}`));
+    }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
     if (!!mealPlan.weekPlan && !!mealPlan.weekPlan.length) {
       if (mealPlan.date !== mealPlan.weekPlan[0].date) {
         mealPlan.weekPlan = [mealPlan, ...mealPlan.weekPlan.slice(0, 6)];

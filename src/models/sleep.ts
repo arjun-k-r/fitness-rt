@@ -12,6 +12,7 @@ export class Sleep {
         } = { noElectronics: false, noStimulants: false, refreshing: false, relaxation: false },
         public date: number = moment().dayOfYear(),
         public duration: number = 0,
+        public lifePoints: number = 0,
         public weekPlan: Sleep[] = []
     ) { }
 }

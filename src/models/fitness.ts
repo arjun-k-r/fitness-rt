@@ -1,4 +1,5 @@
 // Models
+import { LifePoints } from './lifepoints';
 import { Nutrition } from './nutrition';
 
 export class Fitness {
@@ -16,6 +17,7 @@ export class Fitness {
         public height: number = 0,
         public hips: number = 0,
         public lactating: boolean = false,
+        public lifePoints: LifePoints = new LifePoints(),
         public neck: number = 0,
         public pregnant: boolean = false,
         public requirements: Nutrition = new Nutrition(),

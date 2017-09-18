@@ -19,6 +19,7 @@ export class ActivityPlan {
             hiit: boolean
         } = { energy: false, hiit: false},
         public date: number = moment().dayOfYear(),
+        public lifePoints: number = 0,
         public totalDuration: number = 0,
         public totalEnergyConsumption: number = 0,
         public weekPlan: ActivityPlan[] = []

@@ -36,8 +36,8 @@ export class ActivityProvider {
         this._storage.get('weight')
           .then((weight: number) => {
             resolve(Math.round((activity.met * 3.5 * weight / 200) * activity.duration))
-          }).catch((err: Error) => console.error(`Error getting user nutrition requirements: ${err}`));
-      }).catch((err: Error) => console.error(`Error loading storage: ${err}`));
+          }).catch((err: Error) => console.error(`Error getting user nutrition requirements: ${err.toString()}`));
+      }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
     });
   }
 
@@ -47,6 +47,29 @@ export class ActivityProvider {
 
   public calculateActivityPlanEnergyConsumption(activities: Activity[]): number {
     return activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.energyConsumption, 0);
+  }
+
+  public checkLifePoints(activityPlan: ActivityPlan): number {
+    let lifePoints: number = 0;
+    if (activityPlan.totalDuration > 120 && activityPlan.totalEnergyConsumption > 600) {
+      lifePoints += 10;
+    } else {
+      lifePoints -= 10;
+    }
+
+    if (activityPlan.combos.energy) {
+      lifePoints += 10;
+    } else {
+      lifePoints -= 10;
+    }
+
+    if (activityPlan.combos.hiit) {
+      lifePoints += 10;
+    } else {
+      lifePoints -= 10;
+    }
+
+    return lifePoints;
   }
 
   public getActivities$(): FirebaseListObservable<Activity[]> {
@@ -60,8 +83,10 @@ export class ActivityProvider {
   public saveActivityPlan(authId: string, activityPlan: ActivityPlan): firebase.Promise<void> {
     this._storage.ready().then(() => {
       this._storage.set(`energyConsumption-${CURRENT_DAY}`, activityPlan.totalEnergyConsumption)
-        .catch((err: Error) => console.error(`Error storing energy consumption: ${err}`));
-    }).catch((err: Error) => console.error(`Error loading storage: ${err}`));
+        .catch((err: Error) => console.error(`Error storing energy consumption: ${err.toString()}`));
+        this._storage.set(`exerciseLifePoints-${CURRENT_DAY}`, activityPlan.lifePoints)
+        .catch((err: Error) => console.error(`Error storing exercise lifepoints: ${err.toString()}`));
+    }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
     if (!!activityPlan.weekPlan && !!activityPlan.weekPlan.length) {
       if (activityPlan.date !== activityPlan.weekPlan[0].date) {
         activityPlan.weekPlan = [activityPlan, ...activityPlan.weekPlan.slice(0, 6)];

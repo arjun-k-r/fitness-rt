@@ -26,6 +26,10 @@
   <div [ngSwitch]="fitnessSegment">
     <form [formGroup]="fitnessForm" *ngSwitchCase="'fitnessInfo'" novalidate role="form">
       <ion-item-group role="group">
+        <ion-item>
+          <h2>Life points</h2>
+          <p item-right>{{ currentLifePoints }} points</p>
+        </ion-item>
         <ion-item-divider color="secondary" role="separator">Primary info</ion-item-divider>
         <ion-item>
           <ion-label floating for="age" id="ageLabel">Age (years) *</ion-label>

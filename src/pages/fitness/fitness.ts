@@ -125,6 +125,9 @@ export class FitnessPage {
             this._nutritionPvd.calculateDRI(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
               .then((dri: Nutrition) => {
                 this.fitness.requirements = Object.assign({}, dri);
+                this._fitnessPvd.saveFitness(this._authId, this.fitness)
+                .then(() => console.info('Dri updated successfully'))
+                .catch((err: Error) => console.error('Error updating dri: ', err));
               })
               .catch((err: Error) => {
                 this._alertCtrl.create({
@@ -137,6 +140,9 @@ export class FitnessPage {
             this._fitnessPvd.getLifePoints(this.fitness.lifePoints || new LifePoints())
               .then((lifePoints: LifePoints) => {
                 this.fitness.lifePoints = Object.assign({}, lifePoints);
+                this._fitnessPvd.saveFitness(this._authId, this.fitness)
+                .then(() => console.info('Life points updated successfully'))
+                .catch((err: Error) => console.error('Error updating life points: ', err));
                 this.currentLifePoints = lifePoints.totalPoints + lifePoints.exercise + lifePoints.nutrition + lifePoints.sleep
               })
               .catch((err: Error) => {

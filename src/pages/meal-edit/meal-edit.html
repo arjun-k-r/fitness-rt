@@ -38,14 +38,14 @@
             [(ngModel)]="meal.hour" pickerFormat="HH mm"></ion-datetime>
         </ion-item>
         <ion-item>
-          <ion-label color="{{ meal.combos.calmEating ? 'secondary' : 'danger' }}" for="calmEating" id="calmEatingLabel">
+          <ion-label color="{{ meal.combos.calmEating ? 'secondary' : 'danger' }}" for="calmEating" id="calmEatingLabel" text-wrap>
             {{ meal.combos.calmEating ? 'I am relaxed while eating and in a peacefull environment' : 'I am stressed, nervous, excited, or anxious while eating and in a noisy, agitated environment'}}
             <ion-icon aria-hidden="true" color="{{ meal.combos.calmEating ? 'secondary' : 'danger' }}" item-right name="{{ meal.combos.calmEating ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
           </ion-label>
           <ion-toggle aria-live="assertive" aria-labelledby="calmEatingLabel" aria-required="true" id="calmEating" (ionChange)="saveMeal()" [(ngModel)]="meal.combos.calmEating" role="switch"></ion-toggle>
         </ion-item>
         <ion-item>
-          <ion-label color="{{ meal.combos.slowEating ? 'secondary' : 'danger' }}" for="slowEating" id="slowEatingLabel">{{ meal.combos.slowEating ? 'I eat slowly and chew until fluid (> 20 min)' : 'I eat in a rush without chewing properly (< 20min)' }}
+          <ion-label color="{{ meal.combos.slowEating ? 'secondary' : 'danger' }}" for="slowEating" id="slowEatingLabel" text-wrap>{{ meal.combos.slowEating ? 'I eat slowly and chew until fluid (> 20 min)' : 'I eat in a rush without chewing properly (< 20min)' }}
             <ion-icon aria-hidden="true" color="{{ meal.combos.slowEating ? 'secondary' : 'danger' }}" item-right name="{{ meal.combos.slowEating ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon></ion-label>
           <ion-toggle aria-live="assertive" aria-labelledby="slowEatingLabel" aria-required="true" id="slowEating" (ionChange)="saveMeal()" [(ngModel)]="meal.combos.slowEating" role="switch"></ion-toggle>
           </ion-item>

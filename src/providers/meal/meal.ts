@@ -36,6 +36,18 @@ export class MealProvider {
     private _storage: Storage
   ) { }
 
+  private _getRecipeFoods(foods: Food[], ingredients: (Food | Recipe)[]): Food[] {
+    ingredients.forEach((food : Food | Recipe) => {
+      if (food.hasOwnProperty('chef')) {
+        foods = [...this._getRecipeFoods(foods, (<Recipe>food).ingredients)];
+      } else {
+        foods = [...foods, (<Food>food)];
+      }
+    });
+
+    return foods;
+  }
+
   public calculateDailyNutrition(authId: string, mealPlan: MealPlan): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
       const nutrition = new Nutrition();
@@ -181,6 +193,21 @@ export class MealProvider {
     }
 
     return lifePoints;
+  }
+
+  public checkFoodIntolerance(mealPlan: MealPlan): void {
+    mealPlan.meals.forEach((meal: Meal) => {
+      if (meal.combos.calmEating && meal.combos.slowEating && meal.quantity < 700 && meal.combos.feeling !== 'Energized') {
+        meal.foods.forEach((food: Food | Recipe) => {
+          if (food.hasOwnProperty('chef')) {
+            this._getRecipeFoods([], (<Recipe>food).ingredients);
+            mealPlan.intoleranceList = [...mealPlan.intoleranceList , ...this._getRecipeFoods([], (<Recipe>food).ingredients)];
+          } else {
+            mealPlan.intoleranceList = [...mealPlan.intoleranceList , <Food>food];
+          }
+        });
+      }
+    })
   }
 
   public getMealPlan$(authId: string): FirebaseObjectObservable<MealPlan> {

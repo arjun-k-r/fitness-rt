@@ -30,7 +30,7 @@
       </ion-item>
       <div class="form__message" *ngIf="sleepForm.invalid && duration?.touched && duration.errors?.required">Please enter your sleep duration.</div>
       <ion-item>
-        <ion-label color="{{ sleep.combos.noElectronics ? 'secondary' : 'danger' }}" for="noElectronics" id="noElectronicsLabel">No electronics
+        <ion-label color="{{ sleep.combos.noElectronics ? 'secondary' : 'danger' }}" for="noElectronics" id="noElectronicsLabel" >No electronics
           <ion-icon aria-hidden="true" color="{{ sleep.combos.noElectronics ? 'secondary' : 'danger' }}" item-right name="{{ sleep.combos.noElectronics ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
         </ion-label>
         <ion-toggle aria-live="assertive" aria-labelledby="noElectronicsLabel" aria-required="true" formControlName="noElectronics"
@@ -54,7 +54,7 @@
         </ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label color="{{ sleep.combos.refreshing ? 'secondary' : 'danger' }}" for="refreshing" id="refreshingLabel">
+        <ion-label color="{{ sleep.combos.refreshing ? 'secondary' : 'danger' }}" for="refreshing" id="refreshingLabel" text-wrap>
           {{ sleep.combos.refreshing ? 'I feeling energized and refreshing' : 'I am feeling exhausted and depressed' }}
           <ion-icon aria-hidden="true" color="{{ sleep.combos.refreshing ? 'secondary' : 'danger' }}" item-right name="{{ sleep.combos.refreshing ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
         </ion-label>

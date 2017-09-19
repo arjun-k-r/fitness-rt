@@ -152,6 +152,22 @@ export class SleepPage {
             },
             duration: changes.duration
           });
+
+          const lifePoints = this._sleepPvd.checkLifePoints(this.sleep);
+          if (this.sleep.lifePoints > lifePoints) {
+            this._alertCtrl.create({
+              title: 'Watch your sleep!',
+              message: 'You are losing life points!',
+              buttons: ['I will']
+            }).present();
+          } else {
+            this._alertCtrl.create({
+              title: 'You have improved your sleep!',
+              message: 'You are gaining life points!',
+              buttons: ['Great!']
+            }).present();
+          }
+          this.sleep.lifePoints = lifePoints;
         }
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)

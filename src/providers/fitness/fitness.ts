@@ -92,11 +92,11 @@ export class FitnessProvider {
         ])
           .then((lifePoints: number[]) => {
             resolve(new LifePoints(
-              lifePoints[2],
-              lifePoints[1],
-              lifePoints[0],
+              lifePoints[2] || 0,
+              lifePoints[1] || 0,
+              lifePoints[0] || 0,
               CURRENT_DAY,
-              currentPoints.timestamp === CURRENT_DAY ? currentPoints.totalPoints : currentPoints.totalPoints + currentPoints.exercise + currentPoints.nutrition + currentPoints.sleep
+              currentPoints.timestamp === CURRENT_DAY ? currentPoints.totalPoints || 0 : (currentPoints.totalPoints + currentPoints.exercise + currentPoints.nutrition + currentPoints.sleep) || 0
             ));
           })
           .catch((err: Error) => reject(err));

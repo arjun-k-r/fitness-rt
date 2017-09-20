@@ -73,15 +73,15 @@ export class SleepProvider {
       this._storage.set(`sleepLifePoints-${CURRENT_DAY}`, sleep.lifePoints)
         .catch((err: Error) => console.error(`Error storing sleep lifepoints: ${err.toString()}`));
     }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
-    if (!!sleep.weekPlan && !!sleep.weekPlan.length) {
-      if (sleep.date !== sleep.weekPlan[0].date) {
-        sleep.weekPlan = [sleep, ...sleep.weekPlan.slice(0, 6)];
-      } else {
-        sleep.weekPlan[0] = Object.assign({}, sleep);
-      }
-    } else {
-      sleep.weekPlan = [sleep];
-    }
+    // if (!!sleep.weekPlan && !!sleep.weekPlan.length) {
+    //   if (sleep.date !== sleep.weekPlan[0].date) {
+    //     sleep.weekPlan = [sleep, ...sleep.weekPlan.slice(0, 6)];
+    //   } else {
+    //     sleep.weekPlan[0] = Object.assign({}, sleep);
+    //   }
+    // } else {
+    //   sleep.weekPlan = [sleep];
+    // }
     return this._db.object(`/sleep/${authId}/${CURRENT_DAY}`).set(sleep);
   }
 }

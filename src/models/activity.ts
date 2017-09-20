@@ -20,7 +20,7 @@ export class ActivityPlan {
             lowActivity: boolean,
             overtraining: boolean,
             sedentarism: boolean
-        } = { energy: false, hiit: false, lowActivity: true, overtraining: false, sedentarism: true},
+        } = { energy: false, hiit: false, lowActivity: false, overtraining: false, sedentarism: true},
         public date: number = moment().dayOfYear(),
         public lifePoints: number = 0,
         public totalDuration: number = 0,

@@ -16,6 +16,7 @@
 <ion-content>
   <ion-list padding role="list">
     <button (click)="changeActivity(i)" ion-item *ngFor="let activity of activityPlan?.activities; let i = index" role="button">
+      <ion-icon aria-hidden="true" color="primary" item-start name="create"></ion-icon>
       <h2 text-wrap>{{ activity.name }}</h2>
       <p text-wrap>{{ activity.duration }} minutes</p>
       <p item-content>{{ activity.energyConsumption }} kcal</p>
@@ -29,34 +30,34 @@
       <p item-content>{{ activityPlan?.totalEnergyConsumption }} kcal</p>
     </ion-item>
     <ion-item>
-      <ion-label color="{{ activityPlan.combos.energy ? 'secondary' : 'danger' }}" for="energy" id="energyLabel" text-wrap>
-        {{ activityPlan.combos.energy ? 'I feeling energized and fresh' : 'I am feeling exhausted and depressed' }}
-        <ion-icon aria-hidden="true" color="{{ activityPlan.combos.energy ? 'secondary' : 'danger' }}" item-right name="{{ activityPlan.combos.energy ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+      <ion-label color="{{ activityPlan?.combos.energy ? 'secondary' : 'danger' }}" for="energy" id="energyLabel" text-wrap>
+        {{ activityPlan?.combos.energy ? 'I feeling energized and fresh' : 'I am feeling exhausted and depressed' }}
+        <ion-icon aria-hidden="true" color="{{ activityPlan?.combos.energy ? 'secondary' : 'danger' }}" item-right name="{{ activityPlan?.combos.energy ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
       </ion-label>
-      <ion-toggle aria-live="assertive" aria-labelledby="energyLabel" aria-required="true" id="energy" [(ngModel)]="activityPlan.combos.energy"
+      <ion-toggle aria-live="assertive" aria-labelledby="energyLabel" aria-required="true" id="energy" [(ngModel)]="activityPlan?.combos.energy"
         role="switch"></ion-toggle>
     </ion-item>
-    <ion-item *ngIf="activityPlan.combos.hiit" role="listitem">
+    <ion-item *ngIf="activityPlan?.combos.hiit" role="listitem">
       <ion-icon aria-hidden="true" color="secondary" item-start name="thumbs-up"></ion-icon>
       <h2 text-wrap>You reached your training heart rate</h2>
       <p item-content>You have increased your metabolism and fat burning mode.</p>
     </ion-item>
-    <ion-item *ngIf="activityPlan.combos.lowActivity" role="listitem">
+    <ion-item *ngIf="activityPlan?.combos.lowActivity" role="listitem">
       <ion-icon aria-hidden="true" color="danger" item-start name="thumbs-down"></ion-icon>
       <h2 text-wrap>Your activities are to light</h2>
       <p item-content>You need to achieve your target heart rate zone every day.</p>
     </ion-item>
-    <ion-item *ngIf="activityPlan.combos.overtraining" role="listitem">
+    <ion-item *ngIf="activityPlan?.combos.overtraining" role="listitem">
       <ion-icon aria-hidden="true" color="danger" item-start name="thumbs-down"></ion-icon>
       <h2 text-wrap>Overtraining</h2>
       <p item-content>You are doing too much intense exercise in a singrle day.</p>
     </ion-item>
-    <ion-item *ngIf="activityPlan.combos.sedentarism" role="listitem">
+    <ion-item *ngIf="activityPlan?.combos.sedentarism" role="listitem">
       <ion-icon aria-hidden="true" color="danger" item-start name="thumbs-down"></ion-icon>
       <h2 text-wrap>Sedentarism</h2>
       <p item-content>You are inactive and predisposed to all organ diseases.</p>
     </ion-item>
-    <ion-item *ngIf="!(activityPlan.combos.lowActivity || activityPlan.combos.overtraining || activityPlan.combos.sedentarism)"
+    <ion-item *ngIf="!(activityPlan?.combos.lowActivity || activityPlan?.combos.overtraining || activityPlan?.combos.sedentarism)"
       role="listitem">
       <ion-icon aria-hidden="true" color="secondary" item-start name="thumbs-up"></ion-icon>
       <h2 text-wrap>You are active</h2>

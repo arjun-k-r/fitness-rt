@@ -310,6 +310,7 @@
       <div *ngSwitchCase="'ingredients'">
         <ion-list role="list">
           <button (click)="changeIngredient(i)" ion-item *ngFor="let ingredient of recipe.ingredients; let i = index" role="button">
+            <ion-icon aria-hidden="true" color="primary" item-start name="create"></ion-icon>
             <h2 text-wrap>{{ ingredient.name }}</h2>
             <p text-wrap>{{ ingredient.quantity * ingredient.servings }} g</p>
              <p item-content>{{ ingredient.servings }} servings</p>

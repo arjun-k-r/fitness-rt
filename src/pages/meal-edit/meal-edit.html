@@ -37,8 +37,7 @@
       <ion-list>
         <ion-item>
           <ion-label floating for="mealTime" id="mealTimeLabel">Meal time</ion-label>
-          <ion-datetime aria-live="assertive" aria-labelledby="mealTimeLabel" aria-required="true" displayFormat="HH:mm" id="mealTimeLabel" (ionChange)="saveMeal()"
-            [(ngModel)]="meal.hour" pickerFormat="HH mm"></ion-datetime>
+          <ion-datetime aria-live="assertive" aria-labelledby="mealTimeLabel" aria-required="true" displayFormat="HH:mm" id="mealTimeLabel" [(ngModel)]="meal.hour" pickerFormat="HH mm"></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label color="{{ meal.combos.calmEating ? 'secondary' : 'danger' }}" for="calmEating" id="calmEatingLabel" text-wrap>
@@ -65,8 +64,8 @@
               <ion-option role="option" value="Sleepiness">Sleepiness</ion-option>
             </ion-select>
           </ion-item>
-          <ion-item *ngIf="mealPlan.combos.overeating" role="listitem">
-            <ion-icon aria-hidden="true" color="danger" item-right name="thumbs-down"></ion-icon>
+          <ion-item *ngIf="meal.combos.overeating" role="listitem">
+            <ion-icon aria-hidden="true" color="danger" item-start name="thumbs-down"></ion-icon>
             <h2 text-wrap>Overeating</h2>
             <p item-content>You are eating too much at a time, hence, not digest well. Try too eat frequent small meals, rather than rarely large ones.</p>
           </ion-item>
@@ -75,13 +74,14 @@
     <div *ngSwitchCase="'foods'">
       <ion-list role="list">
         <button (click)="changeFood(i)" ion-item *ngFor="let food of meal.foods; let i = index" role="button">
+          <ion-icon aria-hidden="true" color="primary" item-start name="create"></ion-icon>
           <h2 text-wrap>{{ food.name }}</h2>
           <p text-wrap>{{ food.quantity * food.servings }} g</p>
           <p item-content>{{ food.servings }} servings</p>
         </button>
         <ion-item role="listitem">
           <h2 text-wrap>Total quantity</h2>
-          <p color="{{ meal.combos.overeating ? 'secondary' : 'danger' }}" ion-text item-content><ion-icon aria-hidden="true" color="{{ meal.combos.overeating ? 'secondary' : 'danger' }}" item-right name="{{ meal.combos.overeating ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon> {{ meal.quantity }} g</p>
+          <p color="{{ !meal.combos.overeating ? 'secondary' : 'danger' }}" ion-text item-content><ion-icon aria-hidden="true" color="{{ !meal.combos.overeating ? 'secondary' : 'danger' }}" item-right name="{{ !meal.combos.overeating ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon> {{ meal.quantity }} g</p>
         </ion-item>
       </ion-list>
     </div>

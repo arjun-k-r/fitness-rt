@@ -93,21 +93,6 @@ export class MealEditPage {
     this._mealPlan.meals = this._mealPvd.sortMeals(this._mealPlan.meals);
     this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals);
     this.meal.combos.overeating = this._mealPvd.checkOvereating(this.meal);
-    const lifePoints = this._mealPvd.checkLifePoints(this._mealPlan);
-    if (this._mealPlan.lifePoints > lifePoints) {
-      this._alertCtrl.create({
-        title: 'Watch your nutrition and eating habits!',
-        message: 'You are losing life points!',
-        buttons: ['I will']
-      }).present();
-    } else {
-      this._alertCtrl.create({
-        title: 'You have improved your nutrition and eating habits!',
-        message: 'You are gaining life points!',
-        buttons: ['Great!']
-      }).present();
-    }
-    this._mealPlan.lifePoints = lifePoints;
     this._mealPlan.intoleranceList = this._mealPvd.checkMealPlanFoodIntolerance(this._mealPlan);
   }
 
@@ -120,15 +105,16 @@ export class MealEditPage {
         if (!!antinutrientFoods.length) {
           this._alertCtrl.create({
             title: 'Watch out!',
-            message: `${antinutrientFoods.reduce((strList: string, food: Food, idx: number) => strList += `${food.name}${idx < intoleratedFoods.length - 2 && ', '}`, '')} are plant seeds and contain antinutrients.`,
+            message: `${antinutrientFoods.reduce((strList: string, food: Food, idx: number) => strList += `${food.name}${idx < antinutrientFoods.length - 1 ? ', ' : ''}`, '')} are plant seeds and contain antinutrients.`,
             buttons: ['I will']
           }).present();
         }
         const intoleratedFoods: Food[] = this._mealPvd.checkMealFoodIntolerance([], foods, this._mealPlan.intoleranceList);
+        console.log(intoleratedFoods)
         if (!!intoleratedFoods.length) {
           this._alertCtrl.create({
             title: 'Watch out!',
-            message: `${intoleratedFoods.reduce((strList: string, food: Food, idx: number) => strList += `${food.name}${idx < intoleratedFoods.length - 2 && ', '}`, '')} seem to have caused you digestive problems in the past`,
+            message: `${intoleratedFoods.reduce((strList: string, food: Food, idx: number) => strList += `${food.name}${idx < intoleratedFoods.length - 1 ? ', ' : ''}`, '')} seem to have caused you digestive problems in the past`,
             buttons: ['I will']
           }).present();
         }
@@ -187,24 +173,67 @@ export class MealEditPage {
   }
 
   public saveMeal(): void {
-    this._mealPvd.saveMealPlan(this._authId, this._mealPlan)
-      .then(() => {
-        this._alertCtrl.create({
-          title: 'Success!',
-          message: 'Meals saved successfully!',
-          buttons: ['Great!']
-        }).present();
-      })
-      .catch((err: Error) => {
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.toString(),
-          buttons: ['OK']
-        }).present();
-      });
+    const lifePoints = this._mealPvd.checkLifePoints(this._mealPlan);
+    if (this._mealPlan.lifePoints > lifePoints) {
+      this._alertCtrl.create({
+        title: 'Watch your nutrition and eating habits!',
+        message: 'You are losing life points!',
+        buttons: [
+          {
+            text: 'I will',
+            handler: () => {
+              this._mealPlan.lifePoints = lifePoints;
+              this._mealPvd.saveMealPlan(this._authId, this._mealPlan)
+                .then(() => {
+                  this._alertCtrl.create({
+                    title: 'Success!',
+                    message: 'Meals saved successfully!',
+                    buttons: ['Great!']
+                  }).present();
+                })
+                .catch((err: Error) => {
+                  this._alertCtrl.create({
+                    title: 'Uhh ohh...',
+                    subTitle: 'Something went wrong',
+                    message: err.toString(),
+                    buttons: ['OK']
+                  }).present();
+                });
+            }
+          }
+        ]
+      }).present();
+    } else {
+      this._alertCtrl.create({
+        title: 'You have improved your nutrition and eating habits!',
+        message: 'You are gaining life points!',
+        buttons: [{
+          text: 'Great',
+          handler: () => {
+            this._mealPlan.lifePoints = lifePoints;
+            this._mealPvd.saveMealPlan(this._authId, this._mealPlan)
+              .then(() => {
+                this._alertCtrl.create({
+                  title: 'Success!',
+                  message: 'Meals saved successfully!',
+                  buttons: ['Great!']
+                }).present();
+              })
+              .catch((err: Error) => {
+                this._alertCtrl.create({
+                  title: 'Uhh ohh...',
+                  subTitle: 'Something went wrong',
+                  message: err.toString(),
+                  buttons: ['OK']
+                }).present();
+              });
+          }
+        }]
+      }).present();
+    }
   }
 
+  
   ionViewWillEnter(): void {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {

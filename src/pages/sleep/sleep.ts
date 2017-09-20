@@ -69,24 +69,64 @@ export class SleepPage {
   }
 
   public saveSleep(): void {
-    this._sleepPvd.saveSleep(this._authId, this.sleep)
-      .then(() => {
-        this._alertCtrl.create({
-          title: 'Success!',
-          message: 'Sleep saved successfully!',
-          buttons: [{
-            text: 'Great'
-          }]
-        }).present();
-      })
-      .catch((err: firebase.FirebaseError) => {
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.message,
-          buttons: ['OK']
-        }).present();
-      });
+    const lifePoints = this._sleepPvd.checkLifePoints(this.sleep);
+    if (this.sleep.lifePoints > lifePoints) {
+      this._alertCtrl.create({
+        title: 'Watch your sleep!',
+        message: 'You are losing life points!',
+        buttons: [
+          {
+            text: 'I will',
+            handler: () => {
+              this.sleep.lifePoints = lifePoints;
+              this._sleepPvd.saveSleep(this._authId, this.sleep)
+                .then(() => {
+                  this._alertCtrl.create({
+                    title: 'Success!',
+                    message: 'Sleep saved successfully!',
+                    buttons: ['Great']
+                  }).present();
+                })
+                .catch((err: firebase.FirebaseError) => {
+                  this._alertCtrl.create({
+                    title: 'Uhh ohh...',
+                    subTitle: 'Something went wrong',
+                    message: err.message,
+                    buttons: ['OK']
+                  }).present();
+                });
+            }
+          }
+        ]
+      }).present();
+    } else {
+      this._alertCtrl.create({
+        title: 'You have improved your sleep!',
+        message: 'You are gaining life points!',
+        buttons: [{
+          text: 'Great',
+          handler: () => {
+            this.sleep.lifePoints = lifePoints;
+            this._sleepPvd.saveSleep(this._authId, this.sleep)
+              .then(() => {
+                this._alertCtrl.create({
+                  title: 'Success!',
+                  message: 'Sleep saved successfully!',
+                  buttons: ['Great']
+                }).present();
+              })
+              .catch((err: firebase.FirebaseError) => {
+                this._alertCtrl.create({
+                  title: 'Uhh ohh...',
+                  subTitle: 'Something went wrong',
+                  message: err.message,
+                  buttons: ['OK']
+                }).present();
+              });
+          }
+        }]
+      }).present();
+    }
   }
 
   public showSettings(event: Popover): void {
@@ -152,22 +192,6 @@ export class SleepPage {
             },
             duration: changes.duration
           });
-
-          const lifePoints = this._sleepPvd.checkLifePoints(this.sleep);
-          if (this.sleep.lifePoints > lifePoints) {
-            this._alertCtrl.create({
-              title: 'Watch your sleep!',
-              message: 'You are losing life points!',
-              buttons: ['I will']
-            }).present();
-          } else {
-            this._alertCtrl.create({
-              title: 'You have improved your sleep!',
-              message: 'You are gaining life points!',
-              buttons: ['Great!']
-            }).present();
-          }
-          this.sleep.lifePoints = lifePoints;
         }
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)

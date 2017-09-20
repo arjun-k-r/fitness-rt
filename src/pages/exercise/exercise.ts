@@ -99,21 +99,6 @@ export class ExercisePage {
     this.activityPlan.combos.lowActivity = this._activityPvd.checkLowActivity(this.activityPlan.activities);
     this.activityPlan.combos.overtraining = this._activityPvd.checkOvertraining(this.activityPlan.activities);
     this.activityPlan.combos.sedentarism = this._activityPvd.checkSedentarism(this.activityPlan);
-    const lifePoints: number = this._activityPvd.checkLifePoints(this.activityPlan);
-    if (this.activityPlan.lifePoints > lifePoints) {
-      this._alertCtrl.create({
-        title: 'Watch your exercise routine!',
-        message: 'You are losing life points!',
-        buttons: ['I will']
-      }).present();
-    } else {
-      this._alertCtrl.create({
-        title: 'You have improved your activity levels!',
-        message: 'You are gaining life points!',
-        buttons: ['Great!']
-      }).present();
-    }
-    this.activityPlan.lifePoints = lifePoints;
   }
 
   public addActivity(): void {
@@ -150,22 +135,64 @@ export class ExercisePage {
   }
 
   public saveActivityPlan(): void {
-    this._activityPvd.saveActivityPlan(this._authId, this.activityPlan)
-      .then(() => {
-        this._alertCtrl.create({
-          title: 'Success!',
-          message: 'Activity plan saved successfully!',
-          buttons: ['Great!']
-        }).present();
-      })
-      .catch((err: firebase.FirebaseError) => {
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.message,
-          buttons: ['OK']
-        }).present();
-      });
+    const lifePoints = this._activityPvd.checkLifePoints(this.activityPlan);
+    if (this.activityPlan.lifePoints > lifePoints) {
+      this._alertCtrl.create({
+        title: 'Watch your exercise routine!',
+        message: 'You are losing life points!',
+        buttons: [
+          {
+            text: 'I will',
+            handler: () => {
+              this.activityPlan.lifePoints = lifePoints;
+              this._activityPvd.saveActivityPlan(this._authId, this.activityPlan)
+                .then(() => {
+                  this._alertCtrl.create({
+                    title: 'Success!',
+                    message: 'Activity plan saved successfully!',
+                    buttons: ['Great']
+                  }).present();
+                })
+                .catch((err: firebase.FirebaseError) => {
+                  this._alertCtrl.create({
+                    title: 'Uhh ohh...',
+                    subTitle: 'Something went wrong',
+                    message: err.message,
+                    buttons: ['OK']
+                  }).present();
+                });
+            }
+          }
+        ]
+      }).present();
+    } else {
+      this._alertCtrl.create({
+        title: 'You have improved your activity levels!',
+        message: 'You are gaining life points!',
+        buttons: [{
+          text: 'Great',
+          handler: () => {
+            this.activityPlan.lifePoints = lifePoints;
+            this._activityPvd.saveActivityPlan(this._authId, this.activityPlan)
+              .then(() => {
+                this._alertCtrl.create({
+                  title: 'Success!',
+                  message: 'Activity plan saved successfully!',
+                  buttons: ['Great']
+                }).present();
+              })
+              .catch((err: firebase.FirebaseError) => {
+                this._alertCtrl.create({
+                  title: 'Uhh ohh...',
+                  subTitle: 'Something went wrong',
+                  message: err.message,
+                  buttons: ['OK']
+                }).present();
+              });
+          }
+        }]
+      }).present();
+    }
   }
 
   public showSettings(event: Popover): void {

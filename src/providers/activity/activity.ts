@@ -95,7 +95,7 @@ export class ActivityProvider {
   }
 
   public checkLowActivity(activities: Activity[]): boolean {
-    return activities.map((activity: Activity) => activity.met < 4).length === activities.length;
+    return activities.reduce((lowIntensity: boolean, activity: Activity) => lowIntensity = lowIntensity && activity.met < 4, true);
   }
 
   public checkOvertraining(activities: Activity[]): boolean {
@@ -121,15 +121,15 @@ export class ActivityProvider {
         this._storage.set(`exerciseLifePoints-${CURRENT_DAY}`, activityPlan.lifePoints)
         .catch((err: Error) => console.error(`Error storing exercise lifepoints: ${err.toString()}`));
     }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
-    if (!!activityPlan.weekPlan && !!activityPlan.weekPlan.length) {
-      if (activityPlan.date !== activityPlan.weekPlan[0].date) {
-        activityPlan.weekPlan = [activityPlan, ...activityPlan.weekPlan.slice(0, 6)];
-      } else {
-        activityPlan.weekPlan[0] = Object.assign({}, activityPlan);
-      }
-    } else {
-      activityPlan.weekPlan = [activityPlan];
-    }
+    // if (!!activityPlan.weekPlan && !!activityPlan.weekPlan.length) {
+    //   if (activityPlan.date !== activityPlan.weekPlan[0].date) {
+    //     activityPlan.weekPlan = [activityPlan, ...activityPlan.weekPlan.slice(0, 6)];
+    //   } else {
+    //     activityPlan.weekPlan[0] = Object.assign({}, activityPlan);
+    //   }
+    // } else {
+    //   activityPlan.weekPlan = [activityPlan];
+    // }
     return this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`).set(activityPlan);
   }
 }

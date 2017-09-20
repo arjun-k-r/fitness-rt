@@ -91,7 +91,24 @@ export class MealEditPage {
     this.meal.quantity = this._mealPvd.calculateMealQuantity(this.meal.foods);
     this._mealPlan.meals = [...this._mealPlan.meals.slice(0, this._mealIdx), this.meal, ...this._mealPlan.meals.slice(this._mealIdx + 1)];
     this._mealPlan.meals = this._mealPvd.sortMeals(this._mealPlan.meals);
-    this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals)
+    this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals);
+    this.meal.combos.overeating = this._mealPvd.checkOvereating(this.meal);
+    const lifePoints = this._mealPvd.checkLifePoints(this._mealPlan);
+    if (this._mealPlan.lifePoints > lifePoints) {
+      this._alertCtrl.create({
+        title: 'Watch your nutrition and eating habits!',
+        message: 'You are losing life points!',
+        buttons: ['I will']
+      }).present();
+    } else {
+      this._alertCtrl.create({
+        title: 'You have improved your nutrition and eating habits!',
+        message: 'You are gaining life points!',
+        buttons: ['Great!']
+      }).present();
+    }
+    this._mealPlan.lifePoints = lifePoints;
+    this._mealPlan.intoleranceList = this._mealPvd.checkMealPlanFoodIntolerance(this._mealPlan);
   }
 
   public addFood(): void {
@@ -99,6 +116,22 @@ export class MealEditPage {
     foodListModal.present();
     foodListModal.onDidDismiss((foods: (Food | Recipe)[]) => {
       if (!!foods) {
+        const antinutrientFoods: Food[] = this._mealPvd.checkMealFoodAntinutrients([], foods);
+        if (!!antinutrientFoods.length) {
+          this._alertCtrl.create({
+            title: 'Watch out!',
+            message: `${antinutrientFoods.reduce((strList: string, food: Food, idx: number) => strList += `${food.name}${idx < intoleratedFoods.length - 2 && ', '}`, '')} are plant seeds and contain antinutrients.`,
+            buttons: ['I will']
+          }).present();
+        }
+        const intoleratedFoods: Food[] = this._mealPvd.checkMealFoodIntolerance([], foods, this._mealPlan.intoleranceList);
+        if (!!intoleratedFoods.length) {
+          this._alertCtrl.create({
+            title: 'Watch out!',
+            message: `${intoleratedFoods.reduce((strList: string, food: Food, idx: number) => strList += `${food.name}${idx < intoleratedFoods.length - 2 && ', '}`, '')} seem to have caused you digestive problems in the past`,
+            buttons: ['I will']
+          }).present();
+        }
         this.meal.foods = this.meal.foods ? [...this.meal.foods, ...foods] : [...foods];
         this._updateMeal();
       }

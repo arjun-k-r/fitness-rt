@@ -39,7 +39,7 @@
       </ion-item>
       <ion-item>
         <ion-label color="{{ sleep.combos.noStimulants ? 'secondary' : 'danger' }}" for="noStimulants" id="noStimulantsLabel">No stimulants
-          <ion-icon aria-hidden="true" color="{{ sleep.combos.noStimulants ? 'secondary' : 'danger' }}" item-right name="{{ sleep.combos.noStimulants ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+          <ion-icon aria-hidden="true" color="{{ sleep.combos.noStimulants ? 'secondary' : 'danger' }}" item-start name="{{ sleep.combos.noStimulants ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
         </ion-label>
         <ion-toggle aria-live="assertive" aria-labelledby="noStimulantsLabel" aria-required="true" formControlName="noStimulants"
           id="noStimulants" required role="switch">
@@ -47,7 +47,7 @@
       </ion-item>
       <ion-item>
         <ion-label color="{{ sleep.combos.relaxation ? 'secondary' : 'danger' }}" for="relaxation" id="relaxationLabel">Relaxation
-          <ion-icon aria-hidden="true" color="{{ sleep.combos.relaxation ? 'secondary' : 'danger' }}" item-right name="{{ sleep.combos.relaxation ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+          <ion-icon aria-hidden="true" color="{{ sleep.combos.relaxation ? 'secondary' : 'danger' }}" item-start name="{{ sleep.combos.relaxation ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
         </ion-label>
         <ion-toggle aria-live="assertive" aria-labelledby="relaxationLabel" aria-required="true" formControlName="relaxation" id="relaxation"
           required role="switch">
@@ -56,7 +56,7 @@
       <ion-item>
         <ion-label color="{{ sleep.combos.refreshing ? 'secondary' : 'danger' }}" for="refreshing" id="refreshingLabel" text-wrap>
           {{ sleep.combos.refreshing ? 'I feeling energized and refreshing' : 'I am feeling exhausted and depressed' }}
-          <ion-icon aria-hidden="true" color="{{ sleep.combos.refreshing ? 'secondary' : 'danger' }}" item-right name="{{ sleep.combos.refreshing ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+          <ion-icon aria-hidden="true" color="{{ sleep.combos.refreshing ? 'secondary' : 'danger' }}" item-start name="{{ sleep.combos.refreshing ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
         </ion-label>
         <ion-toggle aria-live="assertive" aria-labelledby="refreshingLabel" aria-required="true" id="refreshing" formControlName="refreshing"
           role="switch"></ion-toggle>

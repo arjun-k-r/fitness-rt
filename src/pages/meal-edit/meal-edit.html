@@ -65,6 +65,11 @@
               <ion-option role="option" value="Sleepiness">Sleepiness</ion-option>
             </ion-select>
           </ion-item>
+          <ion-item *ngIf="mealPlan.combos.overeating" role="listitem">
+            <ion-icon aria-hidden="true" color="danger" item-right name="thumbs-down"></ion-icon>
+            <h2 text-wrap>Overeating</h2>
+            <p item-content>You are eating too much at a time, hence, not digest well. Try too eat frequent small meals, rather than rarely large ones.</p>
+          </ion-item>
       </ion-list>
     </div>
     <div *ngSwitchCase="'foods'">
@@ -76,7 +81,7 @@
         </button>
         <ion-item role="listitem">
           <h2 text-wrap>Total quantity</h2>
-          <p color="{{ meal.quantity < 700 ? 'secondary' : 'danger' }}" ion-text item-content><ion-icon aria-hidden="true" color="{{ meal.quantity < 700 ? 'secondary' : 'danger' }}" item-right name="{{ meal.quantity < 700 ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon> {{ meal.quantity }} g</p>
+          <p color="{{ meal.combos.overeating ? 'secondary' : 'danger' }}" ion-text item-content><ion-icon aria-hidden="true" color="{{ meal.combos.overeating ? 'secondary' : 'danger' }}" item-right name="{{ meal.combos.overeating ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon> {{ meal.quantity }} g</p>
         </ion-item>
       </ion-list>
     </div>

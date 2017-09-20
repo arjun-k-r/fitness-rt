@@ -95,6 +95,25 @@ export class ExercisePage {
   private _updateActivityPlan(): void {
     this.activityPlan.totalDuration = this._activityPvd.calculateActivityPlanDuration(this.activityPlan.activities);
     this.activityPlan.totalEnergyConsumption = this._activityPvd.calculateActivityPlanEnergyConsumption(this.activityPlan.activities);
+    this.activityPlan.combos.hiit = this._activityPvd.checkHiit(this.activityPlan.activities);
+    this.activityPlan.combos.lowActivity = this._activityPvd.checkLowActivity(this.activityPlan.activities);
+    this.activityPlan.combos.overtraining = this._activityPvd.checkOvertraining(this.activityPlan.activities);
+    this.activityPlan.combos.sedentarism = this._activityPvd.checkSedentarism(this.activityPlan);
+    const lifePoints: number = this._activityPvd.checkLifePoints(this.activityPlan);
+    if (this.activityPlan.lifePoints > lifePoints) {
+      this._alertCtrl.create({
+        title: 'Watch your exercise routine!',
+        message: 'You are losing life points!',
+        buttons: ['I will']
+      }).present();
+    } else {
+      this._alertCtrl.create({
+        title: 'You have improved your activity levels!',
+        message: 'You are gaining life points!',
+        buttons: ['Great!']
+      }).present();
+    }
+    this.activityPlan.lifePoints = lifePoints;
   }
 
   public addActivity(): void {

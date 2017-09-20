@@ -49,6 +49,10 @@ export class ActivityProvider {
     return activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.energyConsumption, 0);
   }
 
+  public checkHiit(activities: Activity[]): boolean {
+    return activities.map((activity: Activity) => activity.met > 8)[0];
+  }
+
   public checkLifePoints(activityPlan: ActivityPlan): number {
     let lifePoints: number = 0;
     if (activityPlan.totalDuration > 120 && activityPlan.totalEnergyConsumption > 600) {
@@ -69,7 +73,37 @@ export class ActivityProvider {
       lifePoints -= 10;
     }
 
+    if (!activityPlan.combos.lowActivity) {
+      lifePoints += 10;
+    } else {
+      lifePoints -= 10;
+    }
+
+    if (!activityPlan.combos.overtraining) {
+      lifePoints += 10;
+    } else {
+      lifePoints -= 10;
+    }
+
+    if (!activityPlan.combos.sedentarism) {
+      lifePoints += 15;
+    } else {
+      lifePoints -= 15;
+    }
+
     return lifePoints;
+  }
+
+  public checkLowActivity(activities: Activity[]): boolean {
+    return activities.map((activity: Activity) => activity.met < 4).length === activities.length;
+  }
+
+  public checkOvertraining(activities: Activity[]): boolean {
+    return activities.reduce((acc: number, activity: Activity) => acc += activity.met >= 6 ? activity.duration : 0, 0) > 60;
+  }
+
+  public checkSedentarism(activityPlan: ActivityPlan): boolean {
+    return activityPlan.totalDuration < 120;
   }
 
   public getActivities$(): FirebaseListObservable<Activity[]> {

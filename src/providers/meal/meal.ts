@@ -40,7 +40,7 @@ export class MealProvider {
   ) { }
 
   private _getRecipeFoods(foods: Food[], ingredients: (Food | Recipe)[]): Food[] {
-    ingredients.forEach((food : Food | Recipe) => {
+    ingredients.forEach((food: Food | Recipe) => {
       if (food.hasOwnProperty('chef')) {
         foods = [...this._getRecipeFoods(foods, (<Recipe>food).ingredients)];
       } else {
@@ -135,74 +135,43 @@ export class MealProvider {
         lifePoints -= 5;
       }
 
-      if (meal.quantity < 700) {
+      if (!meal.combos.overeating) {
         lifePoints += 15;
       } else {
         lifePoints -= 15;
       }
     });
 
-    if (mealPlan.nutrition.protein.value === this._userRequirements.protein.value) {
-      lifePoints += 10;
-    } else {
-      lifePoints -= 10;
-    }
-
-    if (mealPlan.nutrition.carbs.value === this._userRequirements.carbs.value) {
-      lifePoints += 10;
-    } else {
-      lifePoints -= 10;
-    }
-
-    if (mealPlan.nutrition.fats.value === this._userRequirements.fats.value) {
-      lifePoints += 10;
-    } else {
-      lifePoints -= 10;
-    }
-
-    if (mealPlan.nutrition.fiber.value >= this._userRequirements.fiber.value) {
-      lifePoints += 10;
-    } else {
-      lifePoints -= 10;
-    }
-
-    if (mealPlan.nutrition.sugars.value <= this._userRequirements.sugars.value) {
-      lifePoints += 15;
-    } else {
-      lifePoints -= 15;
-    }
-
-    if (mealPlan.nutrition.transFat.value <= this._userRequirements.transFat.value) {
-      lifePoints += 15;
-    } else {
-      lifePoints -= 15;
-    }
-
-    if (mealPlan.nutrition.sodium.value <= this._userRequirements.sodium.value) {
-      lifePoints += 10;
-    } else {
-      lifePoints -= 10;
-    }
-
-    if (mealPlan.nutrition.alcohol.value <= this._userRequirements.alcohol.value) {
-      lifePoints += 10;
-    } else {
-      lifePoints -= 10;
-    }
-
-    if (mealPlan.nutrition.caffeine.value <= this._userRequirements.caffeine.value) {
-      lifePoints += 5;
-    } else {
-      lifePoints -= 5;
+    for (let nutrientKey in mealPlan.nutrition) {
+      if (mealPlan.nutrition[nutrientKey].group !== 'Vitamins') {
+        let nutrientPercentageIntake: number = mealPlan.nutrition[nutrientKey].value * 100 / (this._userRequirements[nutrientKey].value || 1);
+        if (nutrientPercentageIntake > 115 || nutrientPercentageIntake < 75) {
+          lifePoints -= 15;
+        } else {
+          lifePoints -= 10;
+        }
+      }
     }
 
     return lifePoints;
   }
 
-  public checkFoodIntolerance(foundIntolerance: Food[], foods: (Food | Recipe)[], intoleranceList: Food[]): Food[] {
+  public checkMealFoodAntinutrients(foundAntinutrientFoods: Food[], foods: (Food | Recipe)[]): Food[] {
     foods.forEach((food: Food | Recipe) => {
       if (food.hasOwnProperty('chef')) {
-        foundIntolerance = [...this.checkFoodIntolerance(foundIntolerance, (<Recipe>food).ingredients, intoleranceList)];
+        foundAntinutrientFoods = [...this.checkMealFoodAntinutrients(foundAntinutrientFoods, (<Recipe>food).ingredients)];
+      } else if ((<Food>food).group === 'Cereal Grains and Pasta' || (<Food>food).group === 'Legumes and Legume Products' || (<Food>food).group === 'Nut and Seed Products') {
+        foundAntinutrientFoods = [...foundAntinutrientFoods, <Food>food];
+      }
+    });
+
+    return foundAntinutrientFoods;
+  }
+
+  public checkMealFoodIntolerance(foundIntolerance: Food[], foods: (Food | Recipe)[], intoleranceList: Food[]): Food[] {
+    foods.forEach((food: Food | Recipe) => {
+      if (food.hasOwnProperty('chef')) {
+        foundIntolerance = [...this.checkMealFoodIntolerance(foundIntolerance, (<Recipe>food).ingredients, intoleranceList)];
       } else {
         let intolerantFood: Food = intoleranceList.filter((intolerance: Food) => intolerance.name === food.name)[0];
         if (!!intolerantFood) {
@@ -214,21 +183,25 @@ export class MealProvider {
     return foundIntolerance;
   }
 
-  public getFoodIntolerance(mealPlan: MealPlan): Food[] {
+  public checkMealPlanFoodIntolerance(mealPlan: MealPlan): Food[] {
     let intoleranceList: Food[] = [];
     mealPlan.meals.forEach((meal: Meal) => {
-      if (meal.combos.calmEating && meal.combos.slowEating && meal.quantity < 700 && meal.combos.feeling !== 'Energy') {
+      if (meal.combos.calmEating && meal.combos.slowEating && meal.combos.overeating && meal.combos.feeling !== 'Energy') {
         meal.foods.forEach((food: Food | Recipe) => {
           if (food.hasOwnProperty('chef')) {
-            intoleranceList = [...mealPlan.intoleranceList , ...this._getRecipeFoods([], (<Recipe>food).ingredients)];
+            intoleranceList = [...mealPlan.intoleranceList, ...this._getRecipeFoods([], (<Recipe>food).ingredients)];
           } else {
-            intoleranceList = [...mealPlan.intoleranceList , <Food>food];
+            intoleranceList = [...mealPlan.intoleranceList, <Food>food];
           }
         });
       }
     });
 
     return intoleranceList;
+  }
+
+  public checkOvereating(meal: Meal): boolean {
+    return meal.quantity < 700;
   }
 
   public getMealPlan$(authId: string): FirebaseObjectObservable<MealPlan> {

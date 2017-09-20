@@ -11,8 +11,9 @@ export class Meal {
         public combos: {
             calmEating: boolean,
             feeling: string,
+            overeating: boolean,
             slowEating: boolean
-        } = { calmEating: false, feeling: 'Sleepiness', slowEating: false },
+        } = { calmEating: false, feeling: 'Sleepiness', overeating: false, slowEating: false },
         public foods: (Food | Recipe)[] = [],
         public hour: string = moment().format('HH:mm'),
         public nutrition: Nutrition = new Nutrition(),

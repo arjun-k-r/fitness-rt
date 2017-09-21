@@ -115,11 +115,13 @@ export class ActivityProvider {
   }
 
   public saveActivityPlan(authId: string, activityPlan: ActivityPlan): firebase.Promise<void> {
+    const lifePoints: number = activityPlan.lifePoints;
+    activityPlan.lifePoints = 0;
     this._storage.ready().then(() => {
-      this._storage.set(`energyConsumption-${CURRENT_DAY}`, activityPlan.totalEnergyConsumption)
-        .catch((err: Error) => console.error(`Error storing energy consumption: ${err.toString()}`));
-        this._storage.set(`exerciseLifePoints-${CURRENT_DAY}`, activityPlan.lifePoints)
-        .catch((err: Error) => console.error(`Error storing exercise lifepoints: ${err.toString()}`));
+      Promise.all([
+        this._storage.set(`energyConsumption-${CURRENT_DAY}`, activityPlan.totalEnergyConsumption),
+        this._storage.set(`exerciseLifePoints-${CURRENT_DAY}`, lifePoints)
+      ]).catch((err: Error) => console.error(`Error storing energy consumption and life points: ${err.toString()}`));
     }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
     // if (!!activityPlan.weekPlan && !!activityPlan.weekPlan.length) {
     //   if (activityPlan.date !== activityPlan.weekPlan[0].date) {

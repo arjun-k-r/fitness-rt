@@ -211,8 +211,10 @@ export class MealProvider {
   }
 
   public saveMealPlan(authId: string, mealPlan: MealPlan): firebase.Promise<void> {
+    const lifePoints: number = mealPlan.lifePoints;
+    mealPlan.lifePoints = 0;
     this._storage.ready().then(() => {
-      this._storage.set(`nutritionLifePoints-${CURRENT_DAY}`, mealPlan.lifePoints)
+      this._storage.set(`nutritionLifePoints-${CURRENT_DAY}`, lifePoints)
         .catch((err: Error) => console.error(`Error storing nutrition lifepoints: ${err.toString()}`));
     }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
     // if (!!mealPlan.weekPlan && !!mealPlan.weekPlan.length) {

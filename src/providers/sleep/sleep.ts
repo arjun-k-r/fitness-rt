@@ -69,8 +69,10 @@ export class SleepProvider {
   }
 
   public saveSleep(authId: string, sleep: Sleep): firebase.Promise<void> {
+    const lifePoints: number = sleep.lifePoints;
+    sleep.lifePoints = 0;
     this._storage.ready().then(() => {
-      this._storage.set(`sleepLifePoints-${CURRENT_DAY}`, sleep.lifePoints)
+      this._storage.set(`sleepLifePoints-${CURRENT_DAY}`, lifePoints)
         .catch((err: Error) => console.error(`Error storing sleep lifepoints: ${err.toString()}`));
     }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
     // if (!!sleep.weekPlan && !!sleep.weekPlan.length) {

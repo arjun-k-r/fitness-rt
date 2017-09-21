@@ -27,17 +27,20 @@
     <form [formGroup]="fitnessForm" *ngSwitchCase="'fitnessInfo'" novalidate role="form">
       <ion-item-group role="group">
         <ion-item>
+          <ion-icon aria-hidden="true" color="secondary" item-start name="star"></ion-icon>
           <h2>Life points</h2>
-          <p item-right>{{ currentLifePoints }} points</p>
+          <p color="{{ currentLifePoints > 0 ? 'secondary' : 'danger' }}" ion-text item-right>{{ currentLifePoints }} points</p>
         </ion-item>
-        <ion-item-divider color="secondary" role="separator">Primary info</ion-item-divider>
+        <ion-item-divider color="primary" role="separator">Primary info</ion-item-divider>
         <ion-item>
+          <ion-icon aria-hidden="true" color="secondary" item-start name="{{ age < 14 ? 'egg' : 'man' }}"></ion-icon>
           <ion-label floating for="age" id="ageLabel">Age (years) *</ion-label>
           <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="ageLabel" aria-required="true" formControlName="age"
             id="age" required type="number"></ion-input>
         </ion-item>
         <div class="form__message" *ngIf="fitnessForm.invalid && age?.touched && age.errors?.required">Please enter your age.</div>
         <ion-item>
+          <ion-icon aria-hidden="true" color="secondary" item-start name="{{ gender === 'male' ? 'male' : 'female' }}"></ion-icon>
           <ion-label for="gender" id="genderLabel">Gender *</ion-label>
           <ion-select aria-live="assertive" aria-labelledby="genderLabel" aria-required="true" formControlName="gender" id="gender"
             required>
@@ -47,24 +50,28 @@
         </ion-item>
         <div class="form__message" *ngIf="fitnessForm.invalid && gender?.touched && gender.errors?.required">Please select your gender.</div>
         <ion-item>
+          <ion-icon aria-hidden="true" color="secondary" item-start name="trending-up"></ion-icon>
           <ion-label floating for="height" id="heightLabel">Height (centimeters)*</ion-label>
           <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="heightLabel" aria-required="true" formControlName="height"
             id="height" required type="number"></ion-input>
         </ion-item>
         <div class="form__message" *ngIf="fitnessForm.invalid && height?.touched && height.errors?.required">Please enter your height.</div>
         <ion-item *ngIf="gender.value === 'female' && pregnant.value === false">
+          <ion-icon aria-hidden="true" color="secondary" item-start name="cart"></ion-icon>
           <ion-label for="lactating" id="lactatingLabel">Lactating</ion-label>
           <ion-toggle aria-live="assertive" aria-labelledby="lactatingLabel" aria-required="true" formControlName="lactating" id="lactating"
             required role="switch">
           </ion-toggle>
         </ion-item>
         <ion-item *ngIf="gender.value === 'female' && lactating.value === false">
+          <ion-icon aria-hidden="true" color="secondary" item-start name="cart"></ion-icon>
           <ion-label for="pregnant" id="pregnantLabel">Pregnant</ion-label>
           <ion-toggle aria-live="assertive" aria-labelledby="pregnantLabel" aria-required="true" formControlName="pregnant" id="pregnant"
             required role="switch">
           </ion-toggle>
         </ion-item>
         <ion-item>
+          <ion-icon aria-hidden="true" color="secondary" item-start name="trending-down"></ion-icon>
           <ion-label floating for="weight" id="weightLabel">Weight (kilograms)*</ion-label>
           <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="weightLabel" aria-required="true" formControlName="weight"
             id="weight" required type="number"></ion-input>
@@ -73,23 +80,27 @@
       </ion-item-group>
       <br />
       <ion-item-group role="group">
-        <ion-item-divider color="secondary" role="separator">Body fat percentage info</ion-item-divider>
+        <ion-item-divider color="primary" role="separator">Body fat percentage info</ion-item-divider>
         <ion-item>
+          <ion-icon aria-hidden="true" color="secondary" item-start name="bowtie"></ion-icon>
           <ion-label floating for="neck" id="neckLabel">Neck size (centimeters)</ion-label>
           <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="neckLabel" aria-required="true" formControlName="neck"
             id="neck" required type="number"></ion-input>
         </ion-item>
         <ion-item *ngIf="gender.value === 'female'">
+          <ion-icon aria-hidden="true" color="secondary" item-start name="body"></ion-icon>
           <ion-label floating for="hips" id="hipsLabel">Hips size (centimeters)</ion-label>
           <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="hipsLabel" aria-required="true" formControlName="hips"
             id="hips" required type="number"></ion-input>
         </ion-item>
         <ion-item>
+          <ion-icon aria-hidden="true" color="secondary" item-start name="body"></ion-icon>
           <ion-label floating for="waist" id="waistLabel">Waistline (centimeters)</ion-label>
           <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="waistLabel" aria-required="true" formControlName="waist"
             id="waist" required type="number"></ion-input>
         </ion-item>
         <ion-item>
+          <ion-icon aria-hidden="true" color="secondary" item-start name="flask"></ion-icon>
           <h2>Body fat percentage</h2>
           <ion-icon aria-hidden="true" color="{{ isFit ? 'secondary' : 'danger' }}" item-right name="{{ isFit ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
           <p item-right ion-text color="{{ isFit ? 'secondary' : 'danger' }}">{{ fitness?.bodyFat }}%</p>
@@ -97,17 +108,20 @@
       </ion-item-group>
       <br />
       <ion-item-group role="group">
-        <ion-item-divider color="secondary" role="separator">Heart rate info</ion-item-divider>
+        <ion-item-divider color="primary" role="separator">Heart rate info</ion-item-divider>
         <ion-item>
+          <ion-icon aria-hidden="true" color="secondary" item-start name="pulse"></ion-icon>
           <ion-label floating for="restingHeartRate" id="restingHeartRateLabel">Resting heart rate (bpm)</ion-label>
           <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="restingHeartRateLabel" aria-required="true" formControlName="restingHeartRate"
             id="restingHeartRate" required type="number"></ion-input>
         </ion-item>
         <ion-item text-wrap>
+          <ion-icon aria-hidden="true" color="secondary" item-start name="speedometer"></ion-icon>
           <h2>Maximum heart rate (HRMax)</h2>
           <p item-content>{{ fitness?.heartRate.max }} bpm</p>
         </ion-item>
         <ion-item text-wrap>
+          <ion-icon aria-hidden="true" color="secondary" item-start name="flame"></ion-icon>
           <h2>Training heart rate (THR)</h2>
           <p item-content>{{ fitness?.heartRate.trainingMin }}-{{ fitness?.heartRate.trainingMax }} bpm</p>
         </ion-item>

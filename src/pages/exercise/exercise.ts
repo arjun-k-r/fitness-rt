@@ -135,6 +135,7 @@ export class ExercisePage {
   }
 
   public saveActivityPlan(): void {
+    this._updateActivityPlan();
     const lifePoints = this._activityPvd.checkLifePoints(this.activityPlan);
     if (this.activityPlan.lifePoints > lifePoints) {
       this._alertCtrl.create({

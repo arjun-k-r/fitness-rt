@@ -173,6 +173,7 @@ export class MealEditPage {
   }
 
   public saveMeal(): void {
+    this._updateMeal();
     const lifePoints = this._mealPvd.checkLifePoints(this._mealPlan);
     if (this._mealPlan.lifePoints > lifePoints) {
       this._alertCtrl.create({

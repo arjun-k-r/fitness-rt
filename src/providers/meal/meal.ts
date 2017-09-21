@@ -188,17 +188,21 @@ export class MealProvider {
   public checkMealPlanFoodIntolerance(mealPlan: MealPlan): Food[] {
     let newIntoleranceList: Food[] = [],
       tempIntoleranceList: Food[] = [];
+    mealPlan.intoleranceList = mealPlan.intoleranceList || [];
     mealPlan.meals.forEach((meal: Meal) => {
       if (meal.combos.calmEating && meal.combos.slowEating && !meal.combos.overeating && meal.combos.feeling !== 'Energy') {
         // Add new intolerated food
         meal.foods.forEach((food: Food | Recipe) => {
           if (food.hasOwnProperty('chef')) {
-            newIntoleranceList = [...mealPlan.intoleranceList || [], ...this._getRecipeFoods([], (<Recipe>food).ingredients)];
-          } else if (!newIntoleranceList.filter((intoleration: Food) => food.name === intoleration.name)[0]) {
-            newIntoleranceList = [...mealPlan.intoleranceList || [], <Food>food];
+            newIntoleranceList = [...mealPlan.intoleranceList, ...this._getRecipeFoods([], (<Recipe>food).ingredients)];
+          } else  {
+            console.log(mealPlan.intoleranceList.filter((intoleration: Food) => food.name === intoleration.name))
+            if (!mealPlan.intoleranceList.filter((intoleration: Food) => food.name === intoleration.name)[0]) {
+              newIntoleranceList = [...mealPlan.intoleranceList, <Food>food];
+            }
           }
         });
-      } else if (meal.combos.feeling === 'Energy' && mealPlan.intoleranceList && mealPlan.intoleranceList.length) {
+      } else if (meal.combos.feeling === 'Energy' && mealPlan.intoleranceList.length) {
         // Remove no longer intolerated food
         let mealRecipeIngredients: Food[];
         meal.foods.forEach((food: Food | Recipe) => {
@@ -210,7 +214,6 @@ export class MealProvider {
               tempIntoleranceList.forEach((intoleratedFood: Food, idx: number) => {
                 if (ingredient.name === intoleratedFood.name) {
                   mealPlan.intoleranceList = [...mealPlan.intoleranceList.slice(0, idx), ...mealPlan.intoleranceList.slice(idx + 1)];
-                  return;
                 }
               });
             })
@@ -218,7 +221,6 @@ export class MealProvider {
             tempIntoleranceList.forEach((intoleratedFood: Food, idx: number) => {
               if (food.name === intoleratedFood.name) {
                 mealPlan.intoleranceList = [...mealPlan.intoleranceList.slice(0, idx), ...mealPlan.intoleranceList.slice(idx + 1)];
-                return;
               }
             });
           }

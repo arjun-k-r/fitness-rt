@@ -186,20 +186,47 @@ export class MealProvider {
   }
 
   public checkMealPlanFoodIntolerance(mealPlan: MealPlan): Food[] {
-    let intoleranceList: Food[] = [];
+    let newIntoleranceList: Food[] = [],
+      tempIntoleranceList: Food[] = [];
     mealPlan.meals.forEach((meal: Meal) => {
       if (meal.combos.calmEating && meal.combos.slowEating && !meal.combos.overeating && meal.combos.feeling !== 'Energy') {
+        // Add new intolerated food
         meal.foods.forEach((food: Food | Recipe) => {
           if (food.hasOwnProperty('chef')) {
-            intoleranceList = [...mealPlan.intoleranceList || [], ...this._getRecipeFoods([], (<Recipe>food).ingredients)];
-          } else if (!intoleranceList.filter((intoleration: Food) => food.name === intoleration.name)[0]) {
-            intoleranceList = [...mealPlan.intoleranceList || [], <Food>food];
+            newIntoleranceList = [...mealPlan.intoleranceList || [], ...this._getRecipeFoods([], (<Recipe>food).ingredients)];
+          } else if (!newIntoleranceList.filter((intoleration: Food) => food.name === intoleration.name)[0]) {
+            newIntoleranceList = [...mealPlan.intoleranceList || [], <Food>food];
+          }
+        });
+      } else if (meal.combos.feeling === 'Energy') {
+        // Remove no longer intolerated food
+        let mealRecipeIngredients: Food[];
+        meal.foods.forEach((food: Food | Recipe) => {
+          tempIntoleranceList = [...mealPlan.intoleranceList];
+          if (food.hasOwnProperty('chef')) {
+            mealRecipeIngredients = this._getRecipeFoods([], (<Recipe>food).ingredients);
+            mealRecipeIngredients.forEach((ingredient: Food) => {
+              tempIntoleranceList = [...mealPlan.intoleranceList];
+              tempIntoleranceList.forEach((intoleratedFood: Food, idx: number) => {
+                if (ingredient.name === intoleratedFood.name) {
+                  mealPlan.intoleranceList = [...mealPlan.intoleranceList.slice(0, idx), ...mealPlan.intoleranceList.slice(idx + 1)];
+                  return;
+                }
+              });
+            })
+          } else {
+            tempIntoleranceList.forEach((intoleratedFood: Food, idx: number) => {
+              if (food.name === intoleratedFood.name) {
+                mealPlan.intoleranceList = [...mealPlan.intoleranceList.slice(0, idx), ...mealPlan.intoleranceList.slice(idx + 1)];
+                return;
+              }
+            });
           }
         });
       }
     });
 
-    return intoleranceList;
+    return newIntoleranceList;
   }
 
   public checkOvereating(meal: Meal): boolean {

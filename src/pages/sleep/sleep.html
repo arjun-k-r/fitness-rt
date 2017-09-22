@@ -27,6 +27,10 @@
 
 <ion-content>
   <div [ngSwitch]="sleepSegment">
+    <ion-item *ngSwitchCase="'dayLog'" padding>
+      <ion-label for="date" id="dateLabel">Date</ion-label>
+      <ion-datetime [(ngModel)]="sleepDate" (ionChange)="changeSleepDate()" aria-live="assertive" aria-labelledby="dateLabel" displayFormat="D MMM YYYY" id="date" [max]="maxDate" [min]="minDate" pickerFormat="D MMM YYYY"></ion-datetime>
+    </ion-item>
     <form *ngSwitchCase="'dayLog'" [formGroup]="sleepForm" novalidate role="form">
       <ion-list no-lines>
         <ion-item-divider color="primary" role="separator">
@@ -88,6 +92,15 @@
       </ion-list>
     </form>
     <div *ngSwitchCase="'weekLog'">
+      <ion-item padding>
+        <ion-label for="chartDataSelection" id="chartDataSelectionLabel">Sleep data</ion-label>
+        <ion-select [(ngModel)]="chartDataSelection" (ionChange)="changeChartData()" aria-live="assertive" aria-labelledby="chartDataSelectionLabel"
+          aria-required="true" id="chartDataSelection">
+          <ion-option role="option" value="duration">Sleep duration</ion-option>
+          <ion-option role="option" value="bedTime">Bed time</ion-option>
+          <ion-option role="option" value="quality">Sleep quality</ion-option>
+        </ion-select>
+      </ion-item>
       <canvas baseChart class="chart" [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [legend]="true" [options]="chartOpts">
       </canvas>
     </div>

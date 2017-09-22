@@ -64,8 +64,8 @@ export class SleepProvider {
     return lifePoints;
   }
 
-  public getSleep$(authId: string): FirebaseObjectObservable<Sleep> {
-    return this._db.object(`/sleep/${authId}/${CURRENT_DAY}`);
+  public getSleep$(authId: string, date: number): FirebaseObjectObservable<Sleep> {
+    return this._db.object(`/sleep/${authId}/${date}`);
   }
 
   public saveSleep(authId: string, sleep: Sleep): firebase.Promise<void> {
@@ -84,6 +84,6 @@ export class SleepProvider {
       sleep.weekLog = [newSleepLog];
     }
     
-    return this._db.object(`/sleep/${authId}/${CURRENT_DAY}`).set(sleep);
+    return this._db.object(`/sleep/${authId}/${sleep.date}`).set(sleep);
   }
 }

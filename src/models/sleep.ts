@@ -7,12 +7,21 @@ export class Sleep {
         public combos: {
             noElectronics: boolean,
             noStimulants: boolean,
-            refreshing: boolean,
+            quality: number,
             relaxation: boolean
-        } = { noElectronics: false, noStimulants: false, refreshing: false, relaxation: false },
+        } = { noElectronics: false, noStimulants: false, quality: 0, relaxation: false },
         public date: number = moment().dayOfYear(),
         public duration: number = 0,
         public lifePoints: number = 0,
-        public weekPlan: Sleep[] = []
+        public weekLog: SleepLog[] = []
+    ) { }
+}
+
+export class SleepLog {
+    constructor(
+        public bedTime: string,
+        public date: number,
+        public duration: number,
+        public quality: number
     ) { }
 }

@@ -31,7 +31,7 @@ import { PictureProvider, RecipeProvider } from '../../providers';
 
 @IonicPage({
   name: 'recipe-details',
-  segment: 'details/:id'
+  segment: 'recipes/:id'
 })
 @Component({
   templateUrl: 'recipe-details.html'

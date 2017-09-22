@@ -1,5 +1,8 @@
 <ion-header>
   <ion-navbar role="toolbar">
+    <button ion-button menuToggle role="button">
+      <ion-icon aria-hidden="true" name="menu"></ion-icon>
+    </button>
     <ion-title>Exercise</ion-title>
     <ion-buttons end>
       <button (click)="saveActivityPlan()" [disabled]="!activityPlan.activities.length" ion-button padding role="button">

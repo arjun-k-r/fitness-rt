@@ -18,15 +18,17 @@ import {
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
+// Third-party
+import * as moment from 'moment';
+
 // Models
-import { Sleep } from '../../models';
+import { ILineChartEntry, Sleep, SleepLog } from '../../models';
 
 // Providers
 import { SleepProvider } from '../../providers';
 
 @IonicPage({
-  name: 'sleep',
-  segment: 'plan'
+  name: 'sleep'
 })
 @Component({
   templateUrl: 'sleep.html'
@@ -37,13 +39,17 @@ export class SleepPage {
   private _sleepSubscription: Subscription;
   private _sleepFormSubscription: Subscription;
   public bedTime: AbstractControl;
+  public chartData: ILineChartEntry[] = [];
+  public chartLabels: string[] = [];
+  public chartOpts: any = { responsive: true };
   public duration: AbstractControl;
   public noElectronics: AbstractControl;
   public noStimulants: AbstractControl;
-  public refreshing: AbstractControl;
+  public quality: AbstractControl;
   public relaxation: AbstractControl;
   public sleep: Sleep = new Sleep();
   public sleepForm: FormGroup;
+  public sleepSegment: string = 'dayLog';
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
@@ -57,14 +63,14 @@ export class SleepPage {
       duration: ['', Validators.required],
       noElectronics: ['', Validators.required],
       noStimulants: ['', Validators.required],
-      refreshing: ['', Validators.required],
+      quality: ['', Validators.required],
       relaxation: ['', Validators.required]
     });
     this.bedTime = this.sleepForm.get('bedTime');
     this.duration = this.sleepForm.get('duration');
     this.noElectronics = this.sleepForm.get('noElectronics');
     this.noStimulants = this.sleepForm.get('noStimulants');
-    this.refreshing = this.sleepForm.get('refreshing');
+    this.quality = this.sleepForm.get('quality');
     this.relaxation = this.sleepForm.get('relaxation');
   }
 
@@ -157,7 +163,7 @@ export class SleepPage {
             this.sleepForm.controls['duration'].patchValue(this.sleep.duration);
             this.sleepForm.controls['noElectronics'].patchValue(this.sleep.combos.noElectronics);
             this.sleepForm.controls['noStimulants'].patchValue(this.sleep.combos.noStimulants);
-            this.sleepForm.controls['refreshing'].patchValue(this.sleep.combos.refreshing);
+            this.sleepForm.controls['quality'].patchValue(this.sleep.combos.quality);
             this.sleepForm.controls['relaxation'].patchValue(this.sleep.combos.relaxation);
           },
           (err: firebase.FirebaseError) => {
@@ -177,7 +183,7 @@ export class SleepPage {
         duration: number;
         noElectronics: boolean;
         noStimulants: boolean;
-        refreshing: boolean;
+        quality: number;
         relaxation: boolean;
       }
       ) => {
@@ -187,11 +193,18 @@ export class SleepPage {
             combos: {
               noElectronics: changes.noElectronics,
               noStimulants: changes.noStimulants,
-              refreshing: changes.refreshing,
+              quality: changes.quality,
               relaxation: changes.relaxation
             },
             duration: changes.duration
           });
+
+
+          this.chartLabels = [...this.sleep.weekLog.map((log: SleepLog) => moment(log.date).format('dddd'))];
+          this.chartData = [{
+            data: [...this.sleep.weekLog.map((log: SleepLog) => log.duration)],
+            label: 'Sleep duration'
+          }];
         }
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)

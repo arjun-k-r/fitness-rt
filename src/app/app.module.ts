@@ -24,6 +24,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import 'firebase/storage';
 
+// Charts
+import { ChartsModule } from 'ng2-charts';
+
 const CLOUD_SETTINGS: CloudSettings = {
   'core': {
     'app_id': '6f751f99'
@@ -44,14 +47,15 @@ const FIREBASE_CONFIG = {
     MyApp
   ],
   imports: [
-    BrowserModule,
     IonicModule.forRoot(MyApp),
-    CloudModule.forRoot(CLOUD_SETTINGS),
-    IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(FIREBASE_CONFIG, 'iFit'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    BrowserModule,
+    ChartsModule,
+    CloudModule.forRoot(CLOUD_SETTINGS),
     CommonModule,
+    IonicStorageModule.forRoot(),
     ReactiveFormsModule
   ],
   bootstrap: [IonicApp],

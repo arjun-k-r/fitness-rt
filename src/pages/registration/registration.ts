@@ -71,7 +71,7 @@ export class RegistrationPage {
           if (!!this._history) {
             this._navCtrl.setRoot(this._history);
           } else {
-            this._navCtrl.setRoot('tabs');
+            this._navCtrl.setRoot('fitness');
           }
         }).catch((err: firebase.FirebaseError) => {
           loader.dismiss();
@@ -99,7 +99,7 @@ export class RegistrationPage {
     }
     this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
-        this._navCtrl.setRoot('tabs');
+        this._navCtrl.setRoot('fitness');
       }
     });
   }

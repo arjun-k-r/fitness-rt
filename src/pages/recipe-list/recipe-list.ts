@@ -27,8 +27,7 @@ import { Recipe } from '../../models';
 import { RecipeProvider } from '../../providers';
 
 @IonicPage({
-  name: 'recipes',
-  segment: 'list'
+  name: 'recipes'
 })
 @Component({
   templateUrl: 'recipe-list.html'

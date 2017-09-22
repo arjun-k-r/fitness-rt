@@ -24,8 +24,7 @@ import { Meal, MealPlan, Nutrition } from '../../models';
 import { MealProvider } from '../../providers';
 
 @IonicPage({
-  name: 'nutrition',
-  segment: 'plan'
+  name: 'nutrition'
 })
 @Component({
   templateUrl: 'nutrition.html',

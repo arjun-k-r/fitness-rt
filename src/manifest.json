@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "iFit",
+  "short_name": "iFit",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

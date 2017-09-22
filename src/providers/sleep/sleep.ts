@@ -12,7 +12,7 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Sleep } from '../../models';
+import { Sleep, SleepLog } from '../../models';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 
@@ -43,7 +43,7 @@ export class SleepProvider {
       lifePoints -= 5;
     }
 
-    if (sleep.combos.refreshing) {
+    if (sleep.combos.quality > 5) {
       lifePoints += 10;
     } else {
       lifePoints -= 10;
@@ -73,15 +73,17 @@ export class SleepProvider {
       this._storage.set(`sleepLifePoints-${CURRENT_DAY}`, sleep.lifePoints)
         .catch((err: Error) => console.error(`Error storing sleep lifepoints: ${err.toString()}`));
     }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
-    // if (!!sleep.weekPlan && !!sleep.weekPlan.length) {
-    //   if (sleep.date !== sleep.weekPlan[0].date) {
-    //     sleep.weekPlan = [sleep, ...sleep.weekPlan.slice(0, 6)];
-    //   } else {
-    //     sleep.weekPlan[0] = Object.assign({}, sleep);
-    //   }
-    // } else {
-    //   sleep.weekPlan = [sleep];
-    // }
+    const newSleepLog: SleepLog = new SleepLog(sleep.bedTime, sleep.date, sleep.duration, sleep.combos.quality);
+    if (!!sleep.weekLog && !!sleep.weekLog.length) {
+      if (sleep.date !== sleep.weekLog[0].date) {
+        sleep.weekLog = [newSleepLog, ...sleep.weekLog.slice(0, 6)];
+      } else {
+        sleep.weekLog[0] = newSleepLog;
+      }
+    } else {
+      sleep.weekLog = [newSleepLog];
+    }
+    
     return this._db.object(`/sleep/${authId}/${CURRENT_DAY}`).set(sleep);
   }
 }

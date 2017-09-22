@@ -1,4 +1,4 @@
-<!-- <ion-menu [content]="content" swipeEnabled="false" role="navigation">
+<ion-menu [content]="content" swipeEnabled="false" role="navigation">
     <ion-header>
         <ion-toolbar role="menubar">
             <ion-title>Menu</ion-title>
@@ -8,12 +8,11 @@
     <ion-content>
         <ion-list role="menu">
             <button (click)="openPage(p)" ion-item menuClose *ngFor="let p of pages" role="menuitem">
-              <ion-icon aria-hidden="true" item-left [name]="p.icon"></ion-icon>
+              <ion-icon aria-hidden="true" color="secondary" item-left [name]="p.icon"></ion-icon>
               {{p.title}}
           </button>
         </ion-list>
     </ion-content>
 </ion-menu>
 
-<ion-nav #content role="presentation" [root]="rootPage" swipeBackEnabled="false"></ion-nav> -->
-<ion-nav [root]="rootPage" swipeBackEnabled="false"></ion-nav>
+<ion-nav #content role="presentation" [root]="rootPage" swipeBackEnabled="false"></ion-nav>

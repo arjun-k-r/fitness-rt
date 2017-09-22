@@ -25,8 +25,7 @@ import { Fitness, LifePoints, Nutrition } from '../../models';
 import { FitnessProvider, NutritionProvider } from '../../providers';
 
 @IonicPage({
-  name: 'fitness',
-  segment: 'data'
+  name: 'fitness'
 })
 @Component({
   templateUrl: 'fitness.html'

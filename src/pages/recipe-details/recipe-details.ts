@@ -92,7 +92,7 @@ export class RecipeDetailsPage {
           text: 'Done',
           handler: (data: { servings: string }) => {
             ingredient.servings = +data.servings;
-            this.updateRecipe();
+            this._updateRecipe();
           }
         }
       ]
@@ -101,7 +101,14 @@ export class RecipeDetailsPage {
 
   private _removeIngredient(idx: number): void {
     this.recipe.ingredients = [...this.recipe.ingredients.slice(0, idx), ...this.recipe.ingredients.slice(idx + 1)];
-    this.updateRecipe();
+    this._updateRecipe();
+  }
+
+  private _updateRecipe(): void {
+    if (!!this.recipe.ingredients.length) {
+      this.recipe.nutrition = this._recipePvd.calculateRecipeNutrition(this.recipe);
+      this.recipe.quantity = this._recipePvd.calculateRecipeQuantity(this.recipe);
+    }
   }
 
   public addIngredient(): void {
@@ -110,7 +117,7 @@ export class RecipeDetailsPage {
     ingredientListModal.onDidDismiss((ingredients: (Food | Recipe)[]) => {
       if (!!ingredients && !!ingredients.length) {
         this.recipe.ingredients = [...this.recipe.ingredients, ...ingredients];
-        this.updateRecipe();
+        this._updateRecipe();
       }
     });
   }
@@ -217,7 +224,7 @@ export class RecipeDetailsPage {
   }
 
   public saveRecipe(): void {
-    this.updateRecipe();
+    this._updateRecipe();
     this._recipePvd.saveRecipe(this.authId, this.recipe)
       .then(() => {
         this._alertCtrl.create({
@@ -239,13 +246,6 @@ export class RecipeDetailsPage {
           buttons: ['OK']
         }).present();
       });
-  }
-
-  private updateRecipe(): void {
-    if (!!this.recipe.ingredients.length) {
-      this.recipe.nutrition = this._recipePvd.calculateRecipeNutrition(this.recipe);
-      this.recipe.quantity = this._recipePvd.calculateRecipeQuantity(this.recipe);
-    }
   }
 
   public uploadImage(file?: File): void {
@@ -321,6 +321,8 @@ export class RecipeDetailsPage {
             name: changes.name,
             portions: changes.portions
           });
+
+          this._updateRecipe();
         }
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)

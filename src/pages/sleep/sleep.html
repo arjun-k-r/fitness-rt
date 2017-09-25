@@ -27,10 +27,6 @@
 
 <ion-content>
   <div [ngSwitch]="sleepSegment">
-    <ion-item *ngSwitchCase="'dayLog'" padding>
-      <ion-label for="date" id="dateLabel">Date</ion-label>
-      <ion-datetime [(ngModel)]="sleepDate" (ionChange)="changeSleepDate()" aria-live="assertive" aria-labelledby="dateLabel" displayFormat="D MMM YYYY" id="date" [max]="maxDate" [min]="minDate" pickerFormat="D MMM YYYY"></ion-datetime>
-    </ion-item>
     <form *ngSwitchCase="'dayLog'" [formGroup]="sleepForm" novalidate role="form">
       <ion-list no-lines>
         <ion-item-divider color="primary" role="separator">
@@ -55,24 +51,24 @@
           Preparation
         </ion-item-divider>
         <ion-item>
-          <ion-label color="{{ sleep.combos.noElectronics ? 'secondary' : 'danger' }}" for="noElectronics" id="noElectronicsLabel">No electronics
-            <ion-icon aria-hidden="true" color="{{ sleep.combos.noElectronics ? 'secondary' : 'danger' }}" item-right name="{{ sleep.combos.noElectronics ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+          <ion-label color="{{ sleep.combos.noElectronics && 'secondary' }}" for="noElectronics" id="noElectronicsLabel">No electronics
+            <ion-icon *ngIf="sleep.combos.noElectronics" aria-hidden="true" color="secondary" item-right name="thumbs-up"></ion-icon>
           </ion-label>
           <ion-toggle aria-live="assertive" aria-labelledby="noElectronicsLabel" aria-required="true" formControlName="noElectronics"
             id="noElectronics" required role="switch">
           </ion-toggle>
         </ion-item>
         <ion-item>
-          <ion-label color="{{ sleep.combos.noStimulants ? 'secondary' : 'danger' }}" for="noStimulants" id="noStimulantsLabel">No stimulants
-            <ion-icon aria-hidden="true" color="{{ sleep.combos.noStimulants ? 'secondary' : 'danger' }}" item-start name="{{ sleep.combos.noStimulants ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+          <ion-label color="{{ sleep.combos.noStimulants && 'secondary' }}" for="noStimulants" id="noStimulantsLabel">No stimulants
+            <ion-icon *ngIf="sleep.combos.noStimulants" aria-hidden="true" color="secondary" item-right name="thumbs-up"></ion-icon>
           </ion-label>
           <ion-toggle aria-live="assertive" aria-labelledby="noStimulantsLabel" aria-required="true" formControlName="noStimulants"
             id="noStimulants" required role="switch">
           </ion-toggle>
         </ion-item>
         <ion-item>
-          <ion-label color="{{ sleep.combos.relaxation ? 'secondary' : 'danger' }}" for="relaxation" id="relaxationLabel">Relaxation
-            <ion-icon aria-hidden="true" color="{{ sleep.combos.relaxation ? 'secondary' : 'danger' }}" item-start name="{{ sleep.combos.relaxation ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+          <ion-label color="{{ sleep.combos.relaxation && 'secondary' }} }}" for="relaxation" id="relaxationLabel">Relaxation
+            <ion-icon *ngIf="sleep.combos.relaxation" aria-hidden="true" color="secondary" item-right name="thumbs-up"></ion-icon>
           </ion-label>
           <ion-toggle aria-live="assertive" aria-labelledby="relaxationLabel" aria-required="true" formControlName="relaxation" id="relaxation"
             required role="switch">
@@ -89,6 +85,9 @@
             <ion-icon color="secondary" range-right name="happy"></ion-icon>
           </ion-range>
         </ion-item>
+        <ion-item-divider color="light" role="separator">
+          Suggestions
+        </ion-item-divider>
       </ion-list>
     </form>
     <div *ngSwitchCase="'weekLog'">

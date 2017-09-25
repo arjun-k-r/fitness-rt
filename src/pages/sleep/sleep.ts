@@ -44,14 +44,11 @@ export class SleepPage {
   public chartLabels: string[] = [];
   public chartOpts: any = { responsive: true };
   public duration: AbstractControl;
-  public maxDate: string = moment().format('YYYY-MM-DD');
-  public minDate: string = moment().format('YYYY');
   public noElectronics: AbstractControl;
   public noStimulants: AbstractControl;
   public quality: AbstractControl;
   public relaxation: AbstractControl;
   public sleep: Sleep = new Sleep();
-  public sleepDate: string = moment().format('YYYY-MM-DD');
   public sleepForm: FormGroup;
   public sleepSegment: string = 'dayLog';
   constructor(
@@ -82,13 +79,10 @@ export class SleepPage {
     if (!!this._sleepSubscription) {
       this._sleepSubscription.unsubscribe();
     }
-    this._sleepSubscription = this._sleepPvd.getSleep$(this._authId, moment(this.sleepDate).dayOfYear()).subscribe(
+    this._sleepSubscription = this._sleepPvd.getSleep$(this._authId).subscribe(
       (sleep: Sleep) => {
         this.sleep = Object.assign({}, sleep['$value'] === null ? this.sleep : sleep);
-        // Temporary workaround
-        this.sleep.weekLog = this.sleep.weekLog || [];
-        this.sleepDate = moment().dayOfYear(this.sleep.date).format('YYYY-MM-DD');
-        this.chartLabels = [...this.sleep.weekLog.map((log: SleepLog) => moment(log.date).format('dddd'))];
+        this.chartLabels = [...this.sleep.weekLog.map((log: SleepLog) => log.date)];
         this.chartData = [{
           data: [...this.sleep.weekLog.map((log: SleepLog) => log.duration)],
           label: 'Sleep duration'

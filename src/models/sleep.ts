@@ -20,7 +20,7 @@ export class Sleep {
 export class SleepLog {
     constructor(
         public bedTime: string,
-        public date: number,
+        public date: string,
         public duration: number,
         public quality: number
     ) { }

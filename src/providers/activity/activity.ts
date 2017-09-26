@@ -12,7 +12,7 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Activity, ActivityPlan } from '../../models';
+import { Activity, ActivityPlan, ExerciseLog } from '../../models';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 
@@ -114,22 +114,31 @@ export class ActivityProvider {
     return this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`);
   }
 
-  public saveActivityPlan(authId: string, activityPlan: ActivityPlan): firebase.Promise<void> {
+  public getExerciseLog$(authId: string): FirebaseListObservable<ExerciseLog[]> {
+    return this._db.list(`/exercise-log/${authId}/`, {
+      query: {
+        limitToLast: 7
+      }
+    });
+  }
+
+  public saveActivityPlan(authId: string, activityPlan: ActivityPlan, weekLog: ExerciseLog[]): firebase.Promise<void> {
     this._storage.ready().then(() => {
       Promise.all([
         this._storage.set(`energyConsumption-${CURRENT_DAY}`, activityPlan.totalEnergyConsumption),
         this._storage.set(`exerciseLifePoints-${CURRENT_DAY}`, activityPlan.lifePoints)
       ]).catch((err: Error) => console.error(`Error storing energy consumption and life points: ${err.toString()}`));
     }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
-    // if (!!activityPlan.weekPlan && !!activityPlan.weekPlan.length) {
-    //   if (activityPlan.date !== activityPlan.weekPlan[0].date) {
-    //     activityPlan.weekPlan = [activityPlan, ...activityPlan.weekPlan.slice(0, 6)];
-    //   } else {
-    //     activityPlan.weekPlan[0] = Object.assign({}, activityPlan);
-    //   }
-    // } else {
-    //   activityPlan.weekPlan = [activityPlan];
-    // }
+    const newExerciseLog: ExerciseLog = new ExerciseLog(moment().format('dddd'), activityPlan.totalDuration, activityPlan.totalEnergyConsumption);
+    if (!!weekLog.length) {
+     if (newExerciseLog.date !== weekLog[0].date) {
+      this._db.list(`/exercise-log/${authId}/`).push(newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
+     } else {
+      this._db.list(`/exercise-log/${authId}/`).update(weekLog[0]['$key'], newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
+     }
+    } else {
+      this._db.list(`/exercise-log/${authId}/`).push(newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
+    }
     return this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`).set(activityPlan);
   }
 }

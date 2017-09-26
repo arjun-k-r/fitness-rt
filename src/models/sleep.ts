@@ -12,8 +12,7 @@ export class Sleep {
         } = { noElectronics: false, noStimulants: false, quality: 0, relaxation: false },
         public date: number = moment().dayOfYear(),
         public duration: number = 0,
-        public lifePoints: number = 0,
-        public weekLog: SleepLog[] = []
+        public lifePoints: number = 0
     ) { }
 }
 

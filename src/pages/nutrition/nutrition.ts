@@ -18,7 +18,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { Meal, MealPlan, Nutrition } from '../../models';
+import { ILineChartEntry, Meal, MealPlan, Nutrition, NutritionLog } from '../../models';
 
 // Providers
 import { MealProvider } from '../../providers';
@@ -33,9 +33,16 @@ export class NutritionPage {
   private _authId: string;
   private _authSubscription: Subscription;
   private _mealSubscription: Subscription;
+  private _weekLogSubscription: Subscription;
+  private _weekLog: NutritionLog[] = [];
+  public chartData: ILineChartEntry[] = [];
+  public chartDataSelection: string = 'energy';
+  public chartLabels: string[] = [];
+  public chartOpts: any = { responsive: true };
   public dailyNutrition: Nutrition = new Nutrition();
   public mealPlan: MealPlan = new MealPlan();
   public nutritionSegment: string = 'meals';
+  public nutrientKeys: string[] = [];
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
@@ -50,15 +57,24 @@ export class NutritionPage {
     this._navCtrl.push('meal-edit', {
       id: newMeal.hour,
       mealIdx: this.mealPlan.meals.length - 1,
-      mealPlan: this.mealPlan
+      mealPlan: this.mealPlan,
+      nutritionLog: this._weekLog
     });
+  }
+
+  public changeChartData(): void {
+    this.chartData = [{
+      data: [...this._weekLog.map((log: NutritionLog) => log.nutrition[this.chartDataSelection].value)],
+      label: `${this.mealPlan.nutrition[this.chartDataSelection].name} intake`
+    }];
   }
 
   public editMeal(idx: number): void {
     this._navCtrl.push('meal-edit', {
       id: this.mealPlan.meals[idx].hour,
       mealIdx: idx,
-      mealPlan: this.mealPlan
+      mealPlan: this.mealPlan,
+      nutritionLog: this._weekLog
     });
   }
 
@@ -90,6 +106,7 @@ export class NutritionPage {
         this._mealSubscription = this._mealPvd.getMealPlan$(this._authId).subscribe(
           (mealPlan: MealPlan) => {
             this.mealPlan = Object.assign({}, mealPlan['$value'] === null ? this.mealPlan : mealPlan);
+            this.nutrientKeys = Object.keys(this.mealPlan.nutrition);
             this._mealPvd.calculateDailyNutrition(this._authId, this.mealPlan).then((dailyNutrition: Nutrition) => this.dailyNutrition = Object.assign({}, dailyNutrition))
               .catch((err: Error) => {
                 this._alertCtrl.create({
@@ -109,6 +126,25 @@ export class NutritionPage {
             }).present();
           }
         );
+
+        this._weekLogSubscription = this._mealPvd.getNutritionLog$(this._authId).subscribe(
+          (weekLog: NutritionLog[] = []) => {
+            this._weekLog = [...weekLog.reverse()];
+            this.chartLabels = [...this._weekLog.map((log: NutritionLog) => log.date)];
+            this.chartData = [{
+              data: [...this._weekLog.map((log: NutritionLog) => log.nutrition.energy.value)],
+              label: 'Energy intake'
+            }];
+          },
+          (err: firebase.FirebaseError) => {
+            this._alertCtrl.create({
+              title: 'Uhh ohh...',
+              subTitle: 'Something went wrong',
+              message: err.message,
+              buttons: ['OK']
+            }).present();
+          }
+        );
       }
     });
   }
@@ -116,5 +152,6 @@ export class NutritionPage {
   ionViewWillLeave(): void {
     this._authSubscription && this._authSubscription.unsubscribe();
     this._mealSubscription && this._mealSubscription.unsubscribe();
+    this._weekLogSubscription && this._weekLogSubscription.unsubscribe();
   }
 }

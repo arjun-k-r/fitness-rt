@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Storage } from '@ionic/storage';
 
 // Firebase
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 
 // Third-party
@@ -22,6 +22,7 @@ import {
   Meal,
   MealPlan,
   Nutrition,
+  NutritionLog,
   Recipe
 } from '../../models';
 
@@ -239,20 +240,29 @@ export class MealProvider {
     return this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`);
   }
 
-  public saveMealPlan(authId: string, mealPlan: MealPlan): firebase.Promise<void> {
+  public getNutritionLog$(authId: string): FirebaseListObservable<NutritionLog[]> {
+    return this._db.list(`/nutrition-log/${authId}/`, {
+      query: {
+        limitToLast: 7
+      }
+    });
+  }
+
+  public saveMealPlan(authId: string, mealPlan: MealPlan, weekLog: NutritionLog[]): firebase.Promise<void> {
     this._storage.ready().then(() => {
       this._storage.set(`nutritionLifePoints-${CURRENT_DAY}`, mealPlan.lifePoints)
         .catch((err: Error) => console.error(`Error storing nutrition lifepoints: ${err.toString()}`));
     }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
-    // if (!!mealPlan.weekPlan && !!mealPlan.weekPlan.length) {
-    //   if (mealPlan.date !== mealPlan.weekPlan[0].date) {
-    //     mealPlan.weekPlan = [mealPlan, ...mealPlan.weekPlan.slice(0, 6)];
-    //   } else {
-    //     mealPlan.weekPlan[0] = Object.assign({}, mealPlan);
-    //   }
-    // } else {
-    //   mealPlan.weekPlan = [mealPlan];
-    // }
+    const newNutritionLog: NutritionLog = new NutritionLog(moment().format('dddd'), mealPlan.nutrition);
+    if (!!weekLog.length) {
+     if (newNutritionLog.date !== weekLog[0].date) {
+      this._db.list(`/nutrition-log/${authId}/`).push(newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
+     } else {
+      this._db.list(`/nutrition-log/${authId}/`).update(weekLog[0]['$key'], newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
+     }
+    } else {
+      this._db.list(`/nutrition-log/${authId}/`).push(newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
+    }
     return this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan);
   }
 

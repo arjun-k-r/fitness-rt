@@ -38,6 +38,8 @@ export class SleepPage {
   private _authSubscription: Subscription;
   private _sleepSubscription: Subscription;
   private _sleepFormSubscription: Subscription;
+  private _weekLogSubscription: Subscription;
+  private _weekLog: SleepLog[] = [];
   public bedTime: AbstractControl;
   public chartData: ILineChartEntry[] = [];
   public chartDataSelection: string = 'duration';
@@ -75,55 +77,25 @@ export class SleepPage {
     this.relaxation = this.sleepForm.get('relaxation');
   }
 
-  private _getSleep(): void {
-    if (!!this._sleepSubscription) {
-      this._sleepSubscription.unsubscribe();
-    }
-    this._sleepSubscription = this._sleepPvd.getSleep$(this._authId).subscribe(
-      (sleep: Sleep) => {
-        this.sleep = Object.assign({}, sleep['$value'] === null ? this.sleep : sleep);
-        this.chartLabels = [...this.sleep.weekLog.map((log: SleepLog) => log.date)];
-        this.chartData = [{
-          data: [...this.sleep.weekLog.map((log: SleepLog) => log.duration)],
-          label: 'Sleep duration'
-        }];
-        this.sleepForm.controls['bedTime'].patchValue(this.sleep.bedTime);
-        this.sleepForm.controls['duration'].patchValue(this.sleep.duration);
-        this.sleepForm.controls['noElectronics'].patchValue(this.sleep.combos.noElectronics);
-        this.sleepForm.controls['noStimulants'].patchValue(this.sleep.combos.noStimulants);
-        this.sleepForm.controls['quality'].patchValue(this.sleep.combos.quality);
-        this.sleepForm.controls['relaxation'].patchValue(this.sleep.combos.relaxation);
-      },
-      (err: firebase.FirebaseError) => {
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.message,
-          buttons: ['OK']
-        }).present();
-      }
-    );
-  }
-
   public changeChartData(): void {
     switch (this.chartDataSelection) {
       case 'duration':
         this.chartData = [{
-          data: [...this.sleep.weekLog.map((log: SleepLog) => log.duration)],
+          data: [...this._weekLog.map((log: SleepLog) => log.duration)],
           label: 'Sleep duration'
         }];
         break;
 
       case 'bedTime':
         this.chartData = [{
-          data: [...this.sleep.weekLog.map((log: SleepLog) => moment.duration(log.bedTime).asMinutes() / 60)],
+          data: [...this._weekLog.map((log: SleepLog) => moment.duration(log.bedTime).asMinutes() / 60)],
           label: 'Bed time'
         }];
         break;
 
       case 'quality':
         this.chartData = [{
-          data: [...this.sleep.weekLog.map((log: SleepLog) => log.quality)],
+          data: [...this._weekLog.map((log: SleepLog) => log.quality)],
           label: 'Sleep quality'
         }];
         break;
@@ -132,10 +104,6 @@ export class SleepPage {
       default:
         break;
     }
-  }
-
-  public changeSleepDate(): void {
-    this._getSleep();
   }
 
   public saveSleep(): void {
@@ -149,7 +117,7 @@ export class SleepPage {
             text: 'I will',
             handler: () => {
               this.sleep.lifePoints = lifePoints;
-              this._sleepPvd.saveSleep(this._authId, this.sleep)
+              this._sleepPvd.saveSleep(this._authId, this.sleep, this._weekLog)
                 .then(() => {
                   this._alertCtrl.create({
                     title: 'Success!',
@@ -177,7 +145,7 @@ export class SleepPage {
           text: 'Great',
           handler: () => {
             this.sleep.lifePoints = lifePoints;
-            this._sleepPvd.saveSleep(this._authId, this.sleep)
+            this._sleepPvd.saveSleep(this._authId, this.sleep, this._weekLog)
               .then(() => {
                 this._alertCtrl.create({
                   title: 'Success!',
@@ -220,7 +188,44 @@ export class SleepPage {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this._authId = auth.uid;
-        this._getSleep();
+        this._sleepSubscription = this._sleepPvd.getSleep$(this._authId).subscribe(
+          (sleep: Sleep) => {
+            this.sleep = Object.assign({}, sleep['$value'] === null ? this.sleep : sleep);
+            this.sleepForm.controls['bedTime'].patchValue(this.sleep.bedTime);
+            this.sleepForm.controls['duration'].patchValue(this.sleep.duration);
+            this.sleepForm.controls['noElectronics'].patchValue(this.sleep.combos.noElectronics);
+            this.sleepForm.controls['noStimulants'].patchValue(this.sleep.combos.noStimulants);
+            this.sleepForm.controls['quality'].patchValue(this.sleep.combos.quality);
+            this.sleepForm.controls['relaxation'].patchValue(this.sleep.combos.relaxation);
+          },
+          (err: firebase.FirebaseError) => {
+            this._alertCtrl.create({
+              title: 'Uhh ohh...',
+              subTitle: 'Something went wrong',
+              message: err.message,
+              buttons: ['OK']
+            }).present();
+          }
+        );
+
+        this._weekLogSubscription = this._sleepPvd.getSleepLog$(this._authId).subscribe(
+          (weekLog: SleepLog[] = []) => {
+            this._weekLog = [...weekLog.reverse()];
+            this.chartLabels = [...this._weekLog.map((log: SleepLog) => log.date)];
+            this.chartData = [{
+              data: [...this._weekLog.map((log: SleepLog) => log.duration)],
+              label: 'Sleep duration'
+            }];
+          },
+          (err: firebase.FirebaseError) => {
+            this._alertCtrl.create({
+              title: 'Uhh ohh...',
+              subTitle: 'Something went wrong',
+              message: err.message,
+              buttons: ['OK']
+            }).present();
+          }
+        );
       }
     });
     this._sleepFormSubscription = this.sleepForm.valueChanges.subscribe(
@@ -254,5 +259,6 @@ export class SleepPage {
     this._authSubscription && this._authSubscription.unsubscribe();
     this._sleepSubscription && this._sleepSubscription.unsubscribe();
     this._sleepFormSubscription && this._sleepFormSubscription.unsubscribe();
+    this._weekLogSubscription && this._weekLogSubscription.unsubscribe();
   }
 }

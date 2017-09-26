@@ -25,6 +25,14 @@ export class ActivityPlan {
         public lifePoints: number = 0,
         public totalDuration: number = 0,
         public totalEnergyConsumption: number = 0,
-        public weekPlan: ActivityPlan[] = []
+        public weekLog: ExerciseLog[] = []
+    ) { }
+}
+
+export class ExerciseLog {
+    constructor(
+        public date: string,
+        public totalDuration: number = 0,
+        public totalEnergyConsumption: number = 0
     ) { }
 }

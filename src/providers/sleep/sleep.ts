@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 // Firebase
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 
 // Third-party
@@ -68,22 +68,29 @@ export class SleepProvider {
     return this._db.object(`/sleep/${authId}/${CURRENT_DAY}`);
   }
 
-  public saveSleep(authId: string, sleep: Sleep): firebase.Promise<void> {
+  public getSleepLog$(authId: string): FirebaseListObservable<SleepLog[]> {
+    return this._db.list(`/sleep-log/${authId}/`, {
+      query: {
+        limitToLast: 7
+      }
+    });
+  }
+
+  public saveSleep(authId: string, sleep: Sleep, weekLog: SleepLog[]): firebase.Promise<void> {
     this._storage.ready().then(() => {
       this._storage.set(`sleepLifePoints-${CURRENT_DAY}`, sleep.lifePoints)
         .catch((err: Error) => console.error(`Error storing sleep lifepoints: ${err.toString()}`));
     }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
     const newSleepLog: SleepLog = new SleepLog(sleep.bedTime, moment().format('dddd'), sleep.duration, sleep.combos.quality);
-    if (!!sleep.weekLog && !!sleep.weekLog.length) {
-      if (newSleepLog.date !== sleep.weekLog[0].date) {
-        sleep.weekLog = [newSleepLog, ...sleep.weekLog.slice(0, 6)];
-      } else {
-        sleep.weekLog = [newSleepLog, ...sleep.weekLog.slice(1, 7)];
-      }
+    if (!!weekLog.length) {
+     if (newSleepLog.date !== weekLog[0].date) {
+      this._db.list(`/sleep-log/${authId}/`).push(newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
+     } else {
+      this._db.list(`/sleep-log/${authId}/`).update(weekLog[0]['$key'], newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
+     }
     } else {
-      sleep.weekLog = [newSleepLog];
+      this._db.list(`/sleep-log/${authId}/`).push(newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
     }
-    
     return this._db.object(`/sleep/${authId}/${CURRENT_DAY}`).set(sleep);
   }
 }

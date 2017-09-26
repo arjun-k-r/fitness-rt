@@ -21,7 +21,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { Activity, ActivityPlan } from '../../models';
+import { Activity, ActivityPlan, ExerciseLog, ILineChartEntry } from '../../models';
 
 // Providers
 import { ActivityProvider } from '../../providers';
@@ -36,7 +36,14 @@ export class ExercisePage {
   private _authId: string;
   private _authSubscription: Subscription;
   private _activitySubscription: Subscription;
+  private _weekLogSubscription: Subscription;
+  private _weekLog: ExerciseLog[] = [];
   public activityPlan: ActivityPlan = new ActivityPlan();
+  public chartData: ILineChartEntry[] = [];
+  public chartDataSelection: string = 'duration';
+  public chartLabels: string[] = [];
+  public chartOpts: any = { responsive: true };
+  public exerciseSegment: string = 'activities';
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _afAuth: AngularFireAuth,
@@ -133,6 +140,28 @@ export class ExercisePage {
     }).present();
   }
 
+  public changeChartData(): void {
+    switch (this.chartDataSelection) {
+      case 'duration':
+        this.chartData = [{
+          data: [...this._weekLog.map((log: ExerciseLog) => log.totalDuration)],
+          label: 'Total duration'
+        }];
+        break;
+
+      case 'energy':
+        this.chartData = [{
+          data: [...this._weekLog.map((log: ExerciseLog) => log.totalEnergyConsumption)],
+          label: 'Total energy consumption'
+        }];
+        break;
+
+
+      default:
+        break;
+    }
+  }
+
   public saveActivityPlan(): void {
     this._updateActivityPlan();
     const lifePoints = this._activityPvd.checkLifePoints(this.activityPlan);
@@ -145,7 +174,7 @@ export class ExercisePage {
             text: 'I will',
             handler: () => {
               this.activityPlan.lifePoints = lifePoints;
-              this._activityPvd.saveActivityPlan(this._authId, this.activityPlan)
+              this._activityPvd.saveActivityPlan(this._authId, this.activityPlan, this._weekLog)
                 .then(() => {
                   this._alertCtrl.create({
                     title: 'Success!',
@@ -173,7 +202,7 @@ export class ExercisePage {
           text: 'Great',
           handler: () => {
             this.activityPlan.lifePoints = lifePoints;
-            this._activityPvd.saveActivityPlan(this._authId, this.activityPlan)
+            this._activityPvd.saveActivityPlan(this._authId, this.activityPlan, this._weekLog)
               .then(() => {
                 this._alertCtrl.create({
                   title: 'Success!',
@@ -229,6 +258,25 @@ export class ExercisePage {
             }).present();
           }
         );
+
+        this._weekLogSubscription = this._activityPvd.getExerciseLog$(this._authId).subscribe(
+          (weekLog: ExerciseLog[] = []) => {
+            this._weekLog = [...weekLog.reverse()];
+            this.chartLabels = [...this._weekLog.map((log: ExerciseLog) => log.date)];
+            this.chartData = [{
+              data: [...this._weekLog.map((log: ExerciseLog) => log.totalDuration)],
+              label: 'Total duration'
+            }];
+          },
+          (err: firebase.FirebaseError) => {
+            this._alertCtrl.create({
+              title: 'Uhh ohh...',
+              subTitle: 'Something went wrong',
+              message: err.message,
+              buttons: ['OK']
+            }).present();
+          }
+        );
       }
     });
   }
@@ -236,5 +284,6 @@ export class ExercisePage {
   ionViewWillLeave(): void {
     this._authSubscription && this._authSubscription.unsubscribe();
     this._activitySubscription && this._activitySubscription.unsubscribe();
+    this._weekLogSubscription && this._weekLogSubscription.unsubscribe();
   }
 }

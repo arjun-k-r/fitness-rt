@@ -20,7 +20,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { Food, Meal, MealPlan, Recipe } from '../../models';
+import { Food, Meal, MealPlan, NutritionLog, Recipe } from '../../models';
 
 // Providers
 import { MealProvider } from '../../providers';
@@ -37,6 +37,7 @@ export class MealEditPage {
   private _authSubscription: Subscription;
   private _mealIdx: number;
   private _mealPlan: MealPlan;
+  private _nutritionLog: NutritionLog[];
   public meal: Meal;
   public mealSegment: string = 'info';
   constructor(
@@ -50,6 +51,7 @@ export class MealEditPage {
   ) {
     this._mealIdx = <number>this._params.get('mealIdx');
     this._mealPlan = <MealPlan>this._params.get('mealPlan');
+    this._nutritionLog = <NutritionLog[]>this._params.get('nutritionLog');
     this.meal = this._mealPlan.meals[this._mealIdx];
     this.meal.foods = this.meal.foods || [];
   }
@@ -149,7 +151,7 @@ export class MealEditPage {
   public removeMeal(): void {
     this._mealPlan.meals = [...this._mealPlan.meals.slice(0, this._mealIdx), ...this._mealPlan.meals.slice(this._mealIdx + 1)];
     this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals)
-    this._mealPvd.saveMealPlan(this._authId, this._mealPlan)
+    this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog)
       .then(() => {
         this._alertCtrl.create({
           title: 'Success!',
@@ -184,7 +186,7 @@ export class MealEditPage {
             text: 'I will',
             handler: () => {
               this._mealPlan.lifePoints = lifePoints;
-              this._mealPvd.saveMealPlan(this._authId, this._mealPlan)
+              this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog)
                 .then(() => {
                   this._alertCtrl.create({
                     title: 'Success!',
@@ -212,7 +214,7 @@ export class MealEditPage {
           text: 'Great',
           handler: () => {
             this._mealPlan.lifePoints = lifePoints;
-            this._mealPvd.saveMealPlan(this._authId, this._mealPlan)
+            this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog)
               .then(() => {
                 this._alertCtrl.create({
                   title: 'Success!',

@@ -18,6 +18,9 @@
       <ion-segment-button value="nutrition">
         Nutrition
       </ion-segment-button>
+      <ion-segment-button value="weekLog">
+        Week log
+      </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
@@ -247,16 +250,27 @@
         </ion-item>
       </ion-item-group>
       <ion-item-group role="group">
-          <ion-item-divider>Other</ion-item-divider>
-          <ion-item role="listitem">
-            Alcohol
-            <p item-content>{{ dailyNutrition.alcohol?.value }}%</p>
-          </ion-item>
-          <ion-item role="listitem">
-            Caffeine
-            <p item-content>{{ dailyNutrition.caffeine?.value }}%</p>
-          </ion-item>
-        </ion-item-group>
+        <ion-item-divider>Other</ion-item-divider>
+        <ion-item role="listitem">
+          Alcohol
+          <p item-content>{{ dailyNutrition.alcohol?.value }}%</p>
+        </ion-item>
+        <ion-item role="listitem">
+          Caffeine
+          <p item-content>{{ dailyNutrition.caffeine?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+    </div>
+    <div *ngSwitchCase="'weekLog'">
+      <ion-item padding>
+        <ion-label for="chartDataSelection" id="chartDataSelectionLabel">Nutrition data</ion-label>
+        <ion-select [(ngModel)]="chartDataSelection" (ionChange)="changeChartData()" aria-live="assertive" aria-labelledby="chartDataSelectionLabel"
+          aria-required="true" id="chartDataSelection">
+          <ion-option *ngFor="let nutrientKey of nutrientKeys" role="option" [value]="nutrientKey">{{mealPlan?.nutrition[nutrientKey].name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <canvas baseChart class="chart" [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [legend]="true" [options]="chartOpts">
+      </canvas>
     </div>
   </div>
 </ion-content>

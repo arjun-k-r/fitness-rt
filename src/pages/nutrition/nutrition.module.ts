@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { IonicPageModule } from 'ionic-angular';
 
+import { ChartsModule } from 'ng2-charts';
+
 import { NutritionPage } from './nutrition';
 import { MealProviderModule } from '../../providers';
 
@@ -11,6 +13,7 @@ import { MealProviderModule } from '../../providers';
   ],
   imports: [
     IonicPageModule.forChild(NutritionPage),
+    ChartsModule,
     MealProviderModule
   ],
 })

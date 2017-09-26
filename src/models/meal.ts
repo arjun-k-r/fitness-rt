@@ -28,6 +28,13 @@ export class MealPlan {
         public lifePoints: number = 0,
         public meals: Meal[] = [],
         public nutrition: Nutrition = new Nutrition(),
-        public weekPlan: MealPlan[] = []
+        public weekLog: NutritionLog[] = []
+    ) { }
+}
+
+export class NutritionLog {
+    constructor(
+        public date: string,
+        public nutrition: Nutrition
     ) { }
 }

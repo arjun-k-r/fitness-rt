@@ -15,8 +15,8 @@
   </ion-navbar>
   <ion-toolbar role="tablist">
     <ion-segment [(ngModel)]="exerciseSegment">
-      <ion-segment-button value="activities">
-        Activities
+      <ion-segment-button value="dayLog">
+        Today
       </ion-segment-button>
       <ion-segment-button value="weekLog">
         Week log
@@ -27,13 +27,13 @@
 
 
 <ion-content>
-  <ion-fab *ngIf="exerciseSegment === 'activities'" bottom right>
+  <ion-fab *ngIf="exerciseSegment === 'dayLog'" bottom right>
     <button (click)="addActivity()" color="secondary" ion-fab role="button">
           <ion-icon aria-hidden="true" name="add"></ion-icon>
         </button>
   </ion-fab>
   <div [ngSwitch]="exerciseSegment">
-    <ion-list *ngSwitchCase="'activities'" padding role="list">
+    <ion-list *ngSwitchCase="'dayLog'" padding role="list">
       <button (click)="changeActivity(i)" ion-item *ngFor="let activity of activityPlan?.activities; let i = index" role="button">
       <ion-icon aria-hidden="true" color="primary" item-start name="create"></ion-icon>
       <h2 text-wrap>{{ activity.name }}</h2>

@@ -43,7 +43,7 @@ export class ExercisePage {
   public chartDataSelection: string = 'duration';
   public chartLabels: string[] = [];
   public chartOpts: any = { responsive: true };
-  public exerciseSegment: string = 'activities';
+  public exerciseSegment: string = 'dayLog';
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _afAuth: AngularFireAuth,

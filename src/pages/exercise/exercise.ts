@@ -261,7 +261,7 @@ export class ExercisePage {
 
         this._weekLogSubscription = this._activityPvd.getExerciseLog$(this._authId).subscribe(
           (weekLog: ExerciseLog[] = []) => {
-            this._weekLog = [...weekLog.reverse()];
+            this._weekLog = [...weekLog];
             this.chartLabels = [...this._weekLog.map((log: ExerciseLog) => log.date)];
             this.chartData = [{
               data: [...this._weekLog.map((log: ExerciseLog) => log.totalDuration)],

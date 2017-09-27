@@ -129,7 +129,7 @@ export class NutritionPage {
 
         this._weekLogSubscription = this._mealPvd.getNutritionLog$(this._authId).subscribe(
           (weekLog: NutritionLog[] = []) => {
-            this._weekLog = [...weekLog.reverse()];
+            this._weekLog = [...weekLog];
             this.chartLabels = [...this._weekLog.map((log: NutritionLog) => log.date)];
             this.chartData = [{
               data: [...this._weekLog.map((log: NutritionLog) => log.nutrition.energy.value)],

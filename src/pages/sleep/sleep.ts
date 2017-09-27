@@ -210,8 +210,8 @@ export class SleepPage {
 
         this._weekLogSubscription = this._sleepPvd.getSleepLog$(this._authId).subscribe(
           (weekLog: SleepLog[] = []) => {
-            this._weekLog = [...weekLog];
-            this.chartLabels = [...this._weekLog.map((log: SleepLog) => log.date)];
+            this._weekLog = [...weekLog.reverse()];
+            this.chartLabels = [...weekLog.reverse().map((log: SleepLog) => log.date)];
             this.chartData = [{
               data: [...this._weekLog.map((log: SleepLog) => log.duration)],
               label: 'Sleep duration'

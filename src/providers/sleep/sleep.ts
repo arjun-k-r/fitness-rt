@@ -78,10 +78,10 @@ export class SleepProvider {
         .then(() => {
           const newSleepLog: SleepLog = new SleepLog(sleep.bedTime, moment().format('dddd'), sleep.duration, sleep.combos.quality);
           if (!!weekLog.length) {
-           if (newSleepLog.date !== weekLog.reverse()[0].date) {
+           if (newSleepLog.date !== weekLog[0].date) {
             this._db.list(`/sleep-log/${authId}/`).push(newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
            } else {
-            this._db.list(`/sleep-log/${authId}/`).update(weekLog.reverse()[0]['$key'], newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
+            this._db.list(`/sleep-log/${authId}/`).update(weekLog[0]['$key'], newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
            }
           } else {
             this._db.list(`/sleep-log/${authId}/`).push(newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));

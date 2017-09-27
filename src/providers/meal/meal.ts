@@ -243,10 +243,10 @@ export class MealProvider {
         .then(() => {
           const newNutritionLog: NutritionLog = new NutritionLog(moment().format('dddd'), mealPlan.nutrition);
           if (!!weekLog.length) {
-            if (newNutritionLog.date !== weekLog.reverse()[0].date) {
+            if (newNutritionLog.date !== weekLog[0].date) {
               this._db.list(`/nutrition-log/${authId}/`).push(newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
             } else {
-              this._db.list(`/nutrition-log/${authId}/`).update(weekLog.reverse()[0]['$key'], newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
+              this._db.list(`/nutrition-log/${authId}/`).update(weekLog[0]['$key'], newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
             }
           } else {
             this._db.list(`/nutrition-log/${authId}/`).push(newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));

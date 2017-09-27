@@ -128,7 +128,7 @@ export class NutritionProvider {
     return 0.45 * energyConsumption / 4;
   }
 
-   /**
+  /**
    * Redundant for now
   private _calculateChlorideDRI(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
@@ -243,6 +243,8 @@ export class NutritionProvider {
     }
   }
 
+  /**
+   * Redundant for now
   private _calculateChromiumDRI(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
@@ -298,6 +300,7 @@ export class NutritionProvider {
       }
     }
   }
+  */
 
   private _calculateCobalaminDRI(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
@@ -591,7 +594,7 @@ export class NutritionProvider {
     }
   }
 
-   /**
+  /**
    * Redundant for now
   private _calculateIodineDRI(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
@@ -1050,6 +1053,8 @@ export class NutritionProvider {
     }
   }
 
+  /**
+   * Redundant for now
   private _calculateMolybdenumDRI(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
@@ -1105,6 +1110,7 @@ export class NutritionProvider {
       }
     }
   }
+  */
 
   private _calculateNiacinDRI(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {

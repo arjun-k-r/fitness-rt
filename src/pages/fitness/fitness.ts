@@ -37,6 +37,7 @@ export class FitnessPage {
   private _fitnessFormSubscription: Subscription;
   public age: AbstractControl;
   public currentLifePoints: number = 0;
+  public dailyRequirements: Nutrition = new Nutrition();
   public fitness: Fitness = new Fitness();
   public fitnessForm: FormGroup;
   public fitnessSegment: string = 'fitnessInfo';
@@ -46,6 +47,7 @@ export class FitnessPage {
   public isFit: boolean;
   public lactating: AbstractControl;
   public pregnant: AbstractControl;
+  public totalLifePoints: LifePoints = new LifePoints();
   public weight: AbstractControl;
   constructor(
     private _afAuth: AngularFireAuth,
@@ -123,32 +125,44 @@ export class FitnessPage {
             this.fitness = Object.assign({}, fitness['$value'] === null ? this.fitness : fitness);
             this._nutritionPvd.calculateDRI(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
               .then((dri: Nutrition) => {
-                this.fitness.requirements = Object.assign({}, dri);
-                this._fitnessPvd.saveFitness(this._authId, this.fitness)
-                .then(() => console.info('Dri updated successfully'))
-                .catch((err: Error) => console.error('Error updating dri: ', err));
+                this.dailyRequirements = Object.assign({}, dri);
               })
-              .catch((err: Error) => {
+              .catch((err: firebase.FirebaseError) => {
                 this._alertCtrl.create({
                   title: 'Uhh ohh...',
                   subTitle: 'Something went wrong',
-                  message: err.toString(),
+                  message: err.message,
                   buttons: ['OK']
                 }).present();
               });
-            this._fitnessPvd.getLifePoints(this.fitness.lifePoints || new LifePoints())
+            this._fitnessPvd.getLifePoints(this._authId, this.totalLifePoints)
               .then((lifePoints: LifePoints) => {
-                this.fitness.lifePoints = Object.assign({}, lifePoints);
-                this._fitnessPvd.saveFitness(this._authId, this.fitness)
-                .then(() => console.info('Life points updated successfully'))
-                .catch((err: Error) => console.error('Error updating life points: ', err));
+                this.totalLifePoints = Object.assign({}, lifePoints);
+                this._fitnessPvd.saveLifePoints(this._authId, this.totalLifePoints)
+                  .then(() => {
+                    this._alertCtrl.create({
+                      title: 'Success!',
+                      message: 'Life points updated successfully!',
+                      buttons: [{
+                        text: 'Great'
+                      }]
+                    }).present();
+                  })
+                  .catch((err: firebase.FirebaseError) => {
+                    this._alertCtrl.create({
+                      title: 'Uhh ohh...',
+                      subTitle: 'Something went wrong',
+                      message: err.message,
+                      buttons: ['OK']
+                    }).present();
+                  });
                 this.currentLifePoints = lifePoints.totalPoints + lifePoints.exercise + lifePoints.nutrition + lifePoints.sleep
               })
-              .catch((err: Error) => {
+              .catch((err: firebase.FirebaseError) => {
                 this._alertCtrl.create({
                   title: 'Uhh ohh...',
                   subTitle: 'Something went wrong',
-                  message: err.toString(),
+                  message: err.message,
                   buttons: ['OK']
                 }).present();
               });
@@ -213,7 +227,7 @@ export class FitnessPage {
           this.isFit = this._fitnessPvd.checkFatPercentage(this.fitness.bodyFat, this.fitness.gender);
           this._nutritionPvd.calculateDRI(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
             .then((dri: Nutrition) => {
-              this.fitness.requirements = Object.assign({}, dri);
+              this.dailyRequirements = Object.assign({}, dri);
             })
             .catch((err: Error) => {
               this._alertCtrl.create({

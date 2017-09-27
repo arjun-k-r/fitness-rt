@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
 import { MealProvider } from './meal';
-import { FitnessProviderModule } from '../fitness/fitness.module';
+import { NutritionProviderModule } from '../nutrition/nutrition.module';
+
 
 @NgModule({
   imports: [
     IonicPageModule.forChild(MealProvider),
-    FitnessProviderModule
+    NutritionProviderModule
   ],
   providers: [
     MealProvider

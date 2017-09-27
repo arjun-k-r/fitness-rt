@@ -1,8 +1,8 @@
 // Angular
 import { Injectable } from '@angular/core';
 
-// Ionic
-import { Storage } from '@ionic/storage';
+// Rxjs
+import { Subscription } from 'rxjs/Subscription';
 
 // Firebase
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
@@ -14,14 +14,18 @@ import * as moment from 'moment';
 // Models
 import { Activity, ActivityPlan, ExerciseLog } from '../../models';
 
+// Providers
+import { FitnessProvider } from '../fitness/fitness';
+
 const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class ActivityProvider {
   private _activities$: FirebaseListObservable<Activity[]>;
+  private _userWeight: number;
   constructor(
     private _db: AngularFireDatabase,
-    private _storage: Storage
+    private _fitPvd: FitnessProvider
   ) {
     this._activities$ = this._db.list('/activities', {
       query: {
@@ -30,14 +34,18 @@ export class ActivityProvider {
     });
   }
 
-  public calculateActivityEnergyConsumption(activity: Activity): Promise<number> {
+  public calculateActivityEnergyConsumption(activity: Activity, authId: string): Promise<number> {
     return new Promise((resolve, reject) => {
-      this._storage.ready().then((storage: LocalForage) => {
-        this._storage.get('weight')
-          .then((weight: number) => {
-            resolve(Math.round((activity.met * 3.5 * weight / 200) * activity.duration))
-          }).catch((err: Error) => console.error(`Error getting user nutrition requirements: ${err.toString()}`));
-      }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
+      if (!this._userWeight) {
+        const subscription: Subscription = this._fitPvd.getUserWeight$(authId).subscribe((weight: number) => {
+          weight = weight['$value'] === null ? 0 : weight['$value'];
+          this._userWeight = weight;
+          subscription.unsubscribe();
+          resolve(Math.round((activity.met * 3.5 * weight / 200) * activity.duration))
+        }, (err: firebase.FirebaseError) => reject(err.message));
+      } else {
+        resolve(Math.round((activity.met * 3.5 * this._userWeight / 200) * activity.duration))
+      }
     });
   }
 
@@ -114,6 +122,10 @@ export class ActivityProvider {
     return this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`);
   }
 
+  public getEnergyConsumption$(authId: string): FirebaseObjectObservable<number> {
+    return this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}/totalEnergyConsumption`);
+  }
+
   public getExerciseLog$(authId: string): FirebaseListObservable<ExerciseLog[]> {
     return this._db.list(`/exercise-log/${authId}/`, {
       query: {
@@ -122,23 +134,28 @@ export class ActivityProvider {
     });
   }
 
-  public saveActivityPlan(authId: string, activityPlan: ActivityPlan, weekLog: ExerciseLog[]): firebase.Promise<void> {
-    this._storage.ready().then(() => {
+  public saveActivityPlan(authId: string, activityPlan: ActivityPlan, weekLog: ExerciseLog[]): Promise<{}> {
+    return new Promise((resolve, reject) => {
       Promise.all([
-        this._storage.set(`energyConsumption-${CURRENT_DAY}`, activityPlan.totalEnergyConsumption),
-        this._storage.set(`exerciseLifePoints-${CURRENT_DAY}`, activityPlan.lifePoints)
-      ]).catch((err: Error) => console.error(`Error storing energy consumption and life points: ${err.toString()}`));
-    }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
-    const newExerciseLog: ExerciseLog = new ExerciseLog(moment().format('dddd'), activityPlan.totalDuration, activityPlan.totalEnergyConsumption);
-    if (!!weekLog.length) {
-     if (newExerciseLog.date !== weekLog[0].date) {
-      this._db.list(`/exercise-log/${authId}/`).push(newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
-     } else {
-      this._db.list(`/exercise-log/${authId}/`).update(weekLog[0]['$key'], newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
-     }
-    } else {
-      this._db.list(`/exercise-log/${authId}/`).push(newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
-    }
-    return this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`).set(activityPlan);
+        this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}/totalEnergyConsumption`).set(activityPlan.totalEnergyConsumption),
+        this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/exercise`).set(activityPlan.lifePoints)
+      ])
+        .then(() => {
+          const newExerciseLog: ExerciseLog = new ExerciseLog(moment().format('dddd'), activityPlan.totalDuration, activityPlan.totalEnergyConsumption);
+          if (!!weekLog.length) {
+            if (newExerciseLog.date !== weekLog[0].date) {
+              this._db.list(`/exercise-log/${authId}/`).push(newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
+            } else {
+              this._db.list(`/exercise-log/${authId}/`).update(weekLog[0]['$key'], newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
+            }
+          } else {
+            this._db.list(`/exercise-log/${authId}/`).push(newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
+          }
+          this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`).set(activityPlan).then(() => {
+            resolve();
+          }).catch((err: firebase.FirebaseError) => reject(err));
+        })
+        .catch((err: Error) => console.error(`Error storing energy consumption and life points: ${err.toString()}`));
+    });
   }
 }

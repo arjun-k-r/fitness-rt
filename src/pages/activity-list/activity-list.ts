@@ -11,6 +11,7 @@ import {
   InfiniteScroll,
   Loading,
   LoadingController,
+  NavParams,
   ViewController
 } from 'ionic-angular';
 
@@ -33,6 +34,7 @@ import { ActivityProvider } from '../../providers';
 export class ActivityListPage {
   private _activityLoader: Loading;
   private _activitySubscription: Subscription;
+  private _authId: string;
   public activityLimit: number = 50;
   public activitySorting: string = 'name';
   public activities: Activity[];
@@ -42,8 +44,11 @@ export class ActivityListPage {
     private _alertCtrl: AlertController,
     private _activityPvd: ActivityProvider,
     private _loadCtrl: LoadingController,
+    private _params: NavParams,
     private _viewCtrl: ViewController
-  ) { }
+  ) {
+    this._authId = this._params.get('authId');
+  }
 
   public changeActivityOrder(): void {
     this.activitySorting = this.activitySorting === 'name' ? 'met' : 'name';
@@ -87,7 +92,7 @@ export class ActivityListPage {
             text: 'Done',
             handler: (data: { duration: number }) => {
               activity.duration = +data.duration;
-              this._activityPvd.calculateActivityEnergyConsumption(activity)
+              this._activityPvd.calculateActivityEnergyConsumption(activity, this._authId)
                 .then((energyConsumption: number) => {
                   activity.energyConsumption = energyConsumption;
                   this.selectedActivities = [...this.selectedActivities, activity];

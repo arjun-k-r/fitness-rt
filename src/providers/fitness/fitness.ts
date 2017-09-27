@@ -1,8 +1,9 @@
 // Angular
 import { Injectable } from '@angular/core';
 
-// Ionic
-import { Storage } from '@ionic/storage';
+// Rxjs
+import { Observable } from 'rxjs/Rx';
+import { Observer } from 'rxjs/Observer';
 
 // Firebase
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
@@ -12,15 +13,14 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Fitness, LifePoints } from '../../models';
+import { Fitness, LifePoints, Nutrition } from '../../models';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class FitnessProvider {
   constructor(
-    private _db: AngularFireDatabase,
-    private _storage: Storage
+    private _db: AngularFireDatabase
   ) { }
 
   private _calculateTHRMax(hrMax: number = 0, hrRest: number = 0): number {
@@ -82,34 +82,33 @@ export class FitnessProvider {
     return this._db.object(`/fitness/${authId}`);
   }
 
-  public getLifePoints(currentPoints: LifePoints): Promise<LifePoints> {
+  public getLifePoints(authId: string, currentPoints: LifePoints): Promise<LifePoints> {
     return new Promise((resolve, reject) => {
-      this._storage.ready().then(() => {
-        Promise.all([
-          this._storage.get(`sleepLifePoints-${CURRENT_DAY}`),
-          this._storage.get(`nutritionLifePoints-${CURRENT_DAY}`),
-          this._storage.get(`exerciseLifePoints-${CURRENT_DAY}`)
-        ])
-          .then((lifePoints: number[]) => {
-            resolve(new LifePoints(
-              lifePoints[2] || 0,
-              lifePoints[1] || 0,
-              lifePoints[0] || 0,
-              CURRENT_DAY,
-              currentPoints.timestamp === CURRENT_DAY ? currentPoints.totalPoints || 0 : (currentPoints.totalPoints + currentPoints.exercise + currentPoints.nutrition + currentPoints.sleep) || 0
-            ));
-          })
-          .catch((err: Error) => reject(err));
-      }).catch((err: Error) => reject(err));
+      Observable.combineLatest(
+        this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/sleep`),
+        this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/nutrition`),
+        this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/exercise`)
+      ).subscribe(([sleepPoints, nutritionPoints, exercisePoints]: [number, number, number]) => {
+        resolve(new LifePoints(
+          sleepPoints['$value'] === null ? 0 : sleepPoints['$value'],
+          nutritionPoints['$value'] === null ? 0 : nutritionPoints['$value'],
+          exercisePoints['$value'] === null ? 0 : exercisePoints['$value'],
+          CURRENT_DAY,
+          currentPoints.timestamp === CURRENT_DAY ? currentPoints.totalPoints || 0 : (currentPoints.totalPoints + currentPoints.exercise + currentPoints.nutrition + currentPoints.sleep) || 0
+        ));
+      }, (err: firebase.FirebaseError) => reject(err));
     });
   }
 
+  public getUserWeight$(authId: string): FirebaseObjectObservable<number> {
+    return this._db.object(`/fitness/${authId}/weight`);
+  }
+
   public saveFitness(authId: string, fitness: Fitness): firebase.Promise<void> {
-    this._storage.ready().then(() => {
-      this._storage.set(`userRequirements-${CURRENT_DAY}`, fitness.requirements).then(() => {
-        this._storage.set('weight', fitness.weight).catch((err: Error) => console.error(`Error storing user weight: ${err}`));
-      }).catch((err: Error) => console.error(`Error storing user nutrition requirements: ${err}`));
-    }).catch((err: Error) => console.error(`Error loading storage: ${err}`));
     return this._db.object(`/fitness/${authId}`).set(fitness);
+  }
+
+  public saveLifePoints(authId: string, lifepoints: LifePoints): firebase.Promise<void> {
+    return this._db.object(`/lifepoints/${authId}/total`).set(lifepoints);
   }
 }

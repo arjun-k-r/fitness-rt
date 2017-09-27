@@ -4,9 +4,6 @@ import { Injectable } from '@angular/core';
 // Rxjs
 import { Subscription } from 'rxjs/Subscription';
 
-// Ionic
-import { Storage } from '@ionic/storage';
-
 // Firebase
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
@@ -27,7 +24,7 @@ import {
 } from '../../models';
 
 // Providers
-import { FitnessProvider } from '../fitness/fitness';
+import { NutritionProvider } from '../nutrition/nutrition';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 
@@ -36,8 +33,7 @@ export class MealProvider {
   private _userRequirements: Nutrition;
   constructor(
     private _db: AngularFireDatabase,
-    private _fitPvd: FitnessProvider,
-    private _storage: Storage
+    private _nutritionPvd: NutritionProvider
   ) { }
 
   private _getRecipeFoods(foods: Food[], ingredients: (Food | Recipe)[]): Food[] {
@@ -55,28 +51,22 @@ export class MealProvider {
   public calculateDailyNutrition(authId: string, mealPlan: MealPlan): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
       const nutrition = new Nutrition();
-      this._storage.ready().then(() => {
-        this._storage.get(`userRequirements-${CURRENT_DAY}`).then((dri: Nutrition) => {
-          if (!!dri) {
-            this._userRequirements = dri;
-            for (let nutrientKey in mealPlan.nutrition) {
-              nutrition[nutrientKey].value = Math.round((mealPlan.nutrition[nutrientKey].value * 100) / (dri[nutrientKey].value || 1));
-              resolve(nutrition);
-            }
-          } else {
-            const subscription: Subscription = this._fitPvd.getFitness$(authId).subscribe((fitness: Fitness) => {
-              this._storage.set(`userRequirements-${CURRENT_DAY}`, fitness.requirements).then(() => {
-                this._userRequirements = fitness.requirements;
-                for (let nutrientKey in mealPlan.nutrition) {
-                  nutrition[nutrientKey].value = Math.round((mealPlan.nutrition[nutrientKey].value * 100) / (fitness.requirements[nutrientKey].value || 1));
-                }
-                subscription.unsubscribe();
-                resolve(nutrition);
-              }).catch((err: Error) => reject(err));
-            }, (err: firebase.FirebaseError) => reject(err.message));
+      if (!this._userRequirements) {
+        const subscription: Subscription = this._nutritionPvd.getDri$(authId).subscribe((dri: Nutrition) => {
+          dri = dri['$value'] === null ? new Nutrition() : dri;
+          this._userRequirements = dri;
+          for (let nutrientKey in mealPlan.nutrition) {
+            nutrition[nutrientKey].value = Math.round((mealPlan.nutrition[nutrientKey].value * 100) / (dri[nutrientKey].value || 1));
           }
-        }).catch((err: Error) => reject(err));
-      }).catch((err: Error) => reject(err));
+          subscription.unsubscribe();
+          resolve(nutrition);
+        }, (err: firebase.FirebaseError) => reject(err.message));
+      } else {
+        for (let nutrientKey in mealPlan.nutrition) {
+          nutrition[nutrientKey].value = Math.round((mealPlan.nutrition[nutrientKey].value * 100) / (this._userRequirements[nutrientKey].value || 1));
+        }
+        resolve(nutrition);
+      }
     });
   }
 
@@ -196,7 +186,7 @@ export class MealProvider {
         meal.foods.forEach((food: Food | Recipe) => {
           if (food.hasOwnProperty('chef')) {
             newIntoleranceList = [...mealPlan.intoleranceList, ...this._getRecipeFoods([], (<Recipe>food).ingredients)];
-          } else  {
+          } else {
             console.log(mealPlan.intoleranceList.filter((intoleration: Food) => food.name === intoleration.name))
             if (!mealPlan.intoleranceList.filter((intoleration: Food) => food.name === intoleration.name)[0]) {
               newIntoleranceList = [...mealPlan.intoleranceList, <Food>food];
@@ -248,22 +238,26 @@ export class MealProvider {
     });
   }
 
-  public saveMealPlan(authId: string, mealPlan: MealPlan, weekLog: NutritionLog[]): firebase.Promise<void> {
-    this._storage.ready().then(() => {
-      this._storage.set(`nutritionLifePoints-${CURRENT_DAY}`, mealPlan.lifePoints)
-        .catch((err: Error) => console.error(`Error storing nutrition lifepoints: ${err.toString()}`));
-    }).catch((err: Error) => console.error(`Error loading storage: ${err.toString()}`));
-    const newNutritionLog: NutritionLog = new NutritionLog(moment().format('dddd'), mealPlan.nutrition);
-    if (!!weekLog.length) {
-     if (newNutritionLog.date !== weekLog[0].date) {
-      this._db.list(`/nutrition-log/${authId}/`).push(newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
-     } else {
-      this._db.list(`/nutrition-log/${authId}/`).update(weekLog[0]['$key'], newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
-     }
-    } else {
-      this._db.list(`/nutrition-log/${authId}/`).push(newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
-    }
-    return this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan);
+  public saveMealPlan(authId: string, mealPlan: MealPlan, weekLog: NutritionLog[]): Promise<{}> {
+    return new Promise((resolve, reject) => {
+      this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/nutrition`).set(mealPlan.lifePoints)
+        .then(() => {
+          const newNutritionLog: NutritionLog = new NutritionLog(moment().format('dddd'), mealPlan.nutrition);
+          if (!!weekLog.length) {
+            if (newNutritionLog.date !== weekLog[0].date) {
+              this._db.list(`/nutrition-log/${authId}/`).push(newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
+            } else {
+              this._db.list(`/nutrition-log/${authId}/`).update(weekLog[0]['$key'], newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
+            }
+          } else {
+            this._db.list(`/nutrition-log/${authId}/`).push(newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
+          }
+          this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan).then(() => {
+            resolve();
+          }).catch((err: firebase.FirebaseError) => reject(err));
+        })
+        .catch((err: Error) => console.error(`Error storing energy consumption and life points: ${err.toString()}`));
+    });
   }
 
   public sortMeals(meals: Meal[]): Meal[] {

@@ -74,7 +74,7 @@ export class ExercisePage {
           text: 'Done',
           handler: (data: { duration: string }) => {
             activity.duration = +data.duration;
-            this._activityPvd.calculateActivityEnergyConsumption(activity)
+            this._activityPvd.calculateActivityEnergyConsumption(activity, this._authId)
               .then((energyConsumption: number) => {
                 activity.energyConsumption = energyConsumption;
                 this._updateActivityPlan();
@@ -108,7 +108,9 @@ export class ExercisePage {
   }
 
   public addActivity(): void {
-    const activityListModal: Modal = this._modalCtrl.create('activity-list');
+    const activityListModal: Modal = this._modalCtrl.create('activity-list', {
+      authId: this._authId
+    });
     activityListModal.present();
     activityListModal.onDidDismiss((activities: Activity[]) => {
       if (!!activities) {

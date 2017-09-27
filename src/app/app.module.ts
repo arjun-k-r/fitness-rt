@@ -7,7 +7,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 // Ionic
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
-import { IonicStorageModule } from '@ionic/storage';
 
 // Ionic Native
 import { Camera } from '@ionic-native/camera';
@@ -55,7 +54,6 @@ const FIREBASE_CONFIG = {
     ChartsModule,
     CloudModule.forRoot(CLOUD_SETTINGS),
     CommonModule,
-    IonicStorageModule.forRoot(),
     ReactiveFormsModule
   ],
   bootstrap: [IonicApp],

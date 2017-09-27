@@ -6,9 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 
-// Ionic
-import { Storage } from '@ionic/storage';
-
 // Firebase
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
@@ -20,7 +17,7 @@ import * as moment from 'moment';
 import { Fitness, Food, Nutrition } from '../../models';
 
 // Providers
-import { FitnessProvider } from '../fitness/fitness';
+import { NutritionProvider } from '../nutrition/nutrition';
 
 export const FOOD_GROUPS: string[] = [
   'American Indian/Alaska Native Foods',
@@ -56,8 +53,7 @@ export class FoodProvider {
   private _foods$: FirebaseListObservable<Food[]>;
   constructor(
     private _db: AngularFireDatabase,
-    private _fitPvd: FitnessProvider,
-    private _storage: Storage
+    private _nutritionPvd: NutritionProvider,
   ) {
     this._foods$ = this._db.list('/foods', {
       query: {
@@ -71,26 +67,14 @@ export class FoodProvider {
     return new Promise((resolve, reject) => {
       const nutrition: Nutrition = new Nutrition();
       const currentDay: number = moment().dayOfYear();
-      this._storage.ready().then(() => {
-        this._storage.get(`userRequirements-${currentDay}`).then((dri: Nutrition) => {
-          if (!!dri) {
-            for (let nutrientKey in food.nutrition) {
-              nutrition[nutrientKey].value = Math.round((food.nutrition[nutrientKey].value * 100) / (dri[nutrientKey].value || 1));
-              resolve(nutrition);
-            }
-          } else {
-            const subscription: Subscription = this._fitPvd.getFitness$(authId).subscribe((fitness: Fitness) => {
-              this._storage.set(`userRequirements-${currentDay}`, fitness.requirements).then(() => {
-                for (let nutrientKey in food.nutrition) {
-                  nutrition[nutrientKey].value = Math.round((food.nutrition[nutrientKey].value * 100) / (fitness.requirements[nutrientKey].value || 1));
-                }
-                subscription.unsubscribe();
-                resolve(nutrition);
-              }).catch((err: Error) => reject(err));
-            }, (err: firebase.FirebaseError) => reject(err.message));
-          }
-        }).catch((err: Error) => reject(err));
-      }).catch((err: Error) => reject(err));
+      const subscription: Subscription = this._nutritionPvd.getDri$(authId).subscribe((dri: Nutrition) => {
+        dri = dri['$value'] === null ? new Nutrition() : dri;
+        for (let nutrientKey in food.nutrition) {
+          nutrition[nutrientKey].value = Math.round((food.nutrition[nutrientKey].value * 100) / (dri[nutrientKey].value || 1));
+        }
+        subscription.unsubscribe();
+        resolve(nutrition);
+      }, (err: firebase.FirebaseError) => reject(err.message));
     });
   }
 

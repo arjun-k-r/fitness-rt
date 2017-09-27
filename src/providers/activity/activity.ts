@@ -143,10 +143,10 @@ export class ActivityProvider {
         .then(() => {
           const newExerciseLog: ExerciseLog = new ExerciseLog(moment().format('dddd'), activityPlan.totalDuration, activityPlan.totalEnergyConsumption);
           if (!!weekLog.length) {
-            if (newExerciseLog.date !== weekLog[0].date) {
+            if (newExerciseLog.date !== weekLog.reverse()[0].date) {
               this._db.list(`/exercise-log/${authId}/`).push(newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
             } else {
-              this._db.list(`/exercise-log/${authId}/`).update(weekLog[0]['$key'], newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
+              this._db.list(`/exercise-log/${authId}/`).update(weekLog.reverse()[0]['$key'], newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
             }
           } else {
             this._db.list(`/exercise-log/${authId}/`).push(newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));

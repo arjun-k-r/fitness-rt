@@ -1,7 +1,3 @@
-// Models
-import { LifePoints } from './lifepoints';
-import { Nutrition } from './nutrition';
-
 export class Fitness {
     constructor(
         public age: number = 0,

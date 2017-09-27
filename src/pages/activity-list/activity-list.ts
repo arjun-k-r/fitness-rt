@@ -16,7 +16,6 @@ import {
 } from 'ionic-angular';
 
 // Firebase
-import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models

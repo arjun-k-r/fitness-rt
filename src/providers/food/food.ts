@@ -2,7 +2,6 @@
 import { Injectable } from '@angular/core';
 
 // Rxjs
-import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -66,7 +65,6 @@ export class FoodProvider {
   public calculateFoodDRI(authId: string, food: Food): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
       const nutrition: Nutrition = new Nutrition();
-      const currentDay: number = moment().dayOfYear();
       const subscription: Subscription = this._nutritionPvd.getDri$(authId).subscribe((dri: Nutrition) => {
         dri = dri['$value'] === null ? new Nutrition() : dri;
         for (let nutrientKey in food.nutrition) {

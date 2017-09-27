@@ -14,7 +14,6 @@ import { sortBy } from 'lodash';
 
 // Models
 import {
-  Fitness,
   Food,
   Meal,
   MealPlan,

@@ -12,7 +12,7 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { ActivityPlan, Nutrition } from '../../models';
+import { Nutrition } from '../../models';
 
 // Providers
 import { ActivityProvider } from '../activity/activity';
@@ -35,6 +35,8 @@ export class NutritionProvider {
     return age > 18 ? 10 : 0;
   }
 
+  /**
+   * Redundant for now
   private _calculateBiotinDRI(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       return 35;
@@ -60,6 +62,7 @@ export class NutritionProvider {
       return 30;
     }
   }
+  */
 
   private _calculateCaffeine(age: number): number {
     return age > 14 ? 300 : 0;
@@ -125,6 +128,8 @@ export class NutritionProvider {
     return 0.45 * energyConsumption / 4;
   }
 
+   /**
+   * Redundant for now
   private _calculateChlorideDRI(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
@@ -180,6 +185,7 @@ export class NutritionProvider {
       }
     }
   }
+  */
 
   private _calculateCholineDRI(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
@@ -585,6 +591,8 @@ export class NutritionProvider {
     }
   }
 
+   /**
+   * Redundant for now
   private _calculateIodineDRI(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
@@ -640,6 +648,7 @@ export class NutritionProvider {
       }
     }
   }
+  */
 
   private _calculateIronDRI(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
@@ -2276,7 +2285,7 @@ export class NutritionProvider {
         requirements.vitaminB2.value = this._calculateRiboflavinDRI(age, gender, lactating, pregnant);
         requirements.vitaminB3.value = this._calculateNiacinDRI(age, gender, lactating, pregnant);
         requirements.vitaminB5.value = this._calculatePantothenicAcidDRI(age, gender, lactating, pregnant);
-        requirements.vitaminB6.value = this._calculateRiboflavinDRI(age, gender, lactating, pregnant);
+        requirements.vitaminB6.value = this._calculatePyridoxineDRI(age, gender, lactating, pregnant);
         requirements.vitaminB9.value = this._calculateFolicAcidDRI(age, gender, lactating, pregnant);
         requirements.vitaminB12.value = this._calculateCobalaminDRI(age, gender, lactating, pregnant);
         requirements.vitaminC.value = this._calculateVitaminCDRI(age, gender, lactating, pregnant);

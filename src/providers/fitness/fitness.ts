@@ -2,8 +2,7 @@
 import { Injectable } from '@angular/core';
 
 // Rxjs
-import { Observable } from 'rxjs/Rx';
-import { Observer } from 'rxjs/Observer';
+import { Observable } from 'rxjs/Observable';
 
 // Firebase
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
@@ -13,7 +12,7 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Fitness, LifePoints, Nutrition } from '../../models';
+import { Fitness, LifePoints } from '../../models';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 

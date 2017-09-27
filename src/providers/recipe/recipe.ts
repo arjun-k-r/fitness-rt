@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 // Firebase
-import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 
@@ -14,7 +13,6 @@ import * as moment from 'moment';
 
 // Models
 import {
-  Fitness,
   Food,
   Nutrition,
   Recipe
@@ -26,7 +24,6 @@ import { NutritionProvider } from '../nutrition/nutrition';
 @Injectable()
 export class RecipeProvider {
   constructor(
-    private _afAuth: AngularFireAuth,
     private _db: AngularFireDatabase,
     private _nutritionPvd: NutritionProvider
   ) { }
@@ -34,7 +31,6 @@ export class RecipeProvider {
   public calculateRecipeDRI(authId: string, recipe: Recipe): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
       const nutrition: Nutrition = new Nutrition();
-      const currentDay: number = moment().dayOfYear();
       const subscription: Subscription = this._nutritionPvd.getDri$(authId).subscribe((dri: Nutrition) => {
         dri = dri['$value'] === null ? new Nutrition() : dri;
         for (let nutrientKey in recipe.nutrition) {

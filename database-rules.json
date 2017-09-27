@@ -3,7 +3,9 @@
     ".read": "auth != null",
     ".write": "auth != null",
     "foods": {
-      ".indexOn": "group"
+      ".indexOn": "group",
+      ".read": "auth != null",
+      ".write": "auth != null"
     },
     "recipes": {
       ".indexOn": "name",

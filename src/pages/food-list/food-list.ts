@@ -96,12 +96,12 @@ export class FoodListPage {
             this.selectedGroup = data;
             this.selectedNutrient = '';
             this._foodPvd.changeFoodGroup(this.selectedGroup);
-            this._foodLoader = this._loadCtrl.create({
+            this._usdaFoodLoader = this._loadCtrl.create({
               content: 'Loading...',
               spinner: 'crescent',
               duration: 10000
             });
-            this._foodLoader.present();
+            this._usdaFoodLoader.present();
           }
         }
       ]

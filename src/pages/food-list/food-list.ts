@@ -41,6 +41,8 @@ export class FoodListPage {
   private _nutrients: { key: string, name: string }[];
   private _recipeLoader: Loading;
   private _recipeSubscription: Subscription;
+  private _usdaFoodLoader: Loading;
+  private _usdaFoodSubscription: Subscription;
   public foodLimit: number = 50;
   public foods: Food[];
   public foodSearchQuery: string = '';
@@ -51,6 +53,9 @@ export class FoodListPage {
   public selectedItems: (Food | Recipe)[] = [];
   public selectedNutrient = '';
   public selectionSegment: string = 'foods';
+  public usdaFoods: Food[];
+  public usdaFoodLimit: number = 50;
+  public usdaFoodSearchQuery: string = '';
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
@@ -163,28 +168,7 @@ export class FoodListPage {
 
   public addFood(): void {
     const newFood: Food = new Food();
-    const foodDetailsModal: Modal = this._modalCtrl.create('food-details', { authId: this._authId, food: newFood, id: newFood.name });
-    foodDetailsModal.present();
-    foodDetailsModal.onWillDismiss(() => {
-      this._foodSubscription = this._foodPvd.getFoods$(this.selectedGroup).subscribe((foods: Food[]) => {
-        this.foods = [...foods];
-        if (this._foodLoader) {
-          this._foodLoader.dismiss();
-          this._foodLoader = null;
-        }
-      }, (err: firebase.FirebaseError) => {
-        if (this._foodLoader) {
-          this._foodLoader.dismiss();
-          this._foodLoader = null;
-        }
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.message,
-          buttons: ['OK']
-        }).present();
-      });
-    })
+    this._modalCtrl.create('food-details', { authId: this._authId, food: newFood, id: newFood.name }).present();
   }
 
   public clearSearchFoods(evenet: string): void {
@@ -193,6 +177,10 @@ export class FoodListPage {
 
   public clearSearchRecipes(evenet: string): void {
     this.recipeSearchQuery = '';
+  }
+
+  public clearSearchUsdaFoods(evenet: string): void {
+    this.foodSearchQuery = '';
   }
 
   public doneSelecting(): void {
@@ -206,6 +194,11 @@ export class FoodListPage {
 
   public loadMoreRecipes(ev: InfiniteScroll) {
     this.recipeLimit += 50;
+    setTimeout(() => ev.complete(), 1000);
+  }
+
+  public loadMoreUsdaFoods(ev: InfiniteScroll) {
+    this.usdaFoodLimit += 50;
     setTimeout(() => ev.complete(), 1000);
   }
 
@@ -238,6 +231,34 @@ export class FoodListPage {
     }
   }
 
+  public loadUsdaFoods(): void {
+    if (!this._usdaFoodSubscription) {
+      this._usdaFoodLoader = this._loadCtrl.create({
+        content: 'Loading...',
+        duration: 30000,
+        spinner: 'crescent'
+      });
+      this._usdaFoodLoader.present();
+      this._usdaFoodSubscription = this._foodPvd.getUsdaFoods$(this.selectedGroup).subscribe((foods: Food[]) => {
+        this.usdaFoods = [...foods];
+        if (this._usdaFoodLoader) {
+          this._usdaFoodLoader.dismiss();
+          this._usdaFoodLoader = null;
+        }
+      }, (err: firebase.FirebaseError) => {
+        if (this._usdaFoodLoader) {
+          this._usdaFoodLoader.dismiss();
+          this._usdaFoodLoader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.message,
+          buttons: ['OK']
+        }).present();
+      });
+    }
+  }
 
   public showFilter(): void {
     this._actionSheetCtrl.create({
@@ -299,7 +320,7 @@ export class FoodListPage {
       spinner: 'crescent'
     });
     this._foodLoader.present();
-    this._foodSubscription = this._foodPvd.getFoods$(this.selectedGroup).subscribe((foods: Food[]) => {
+    this._foodSubscription = this._foodPvd.getMyFoods$(this._authId).subscribe((foods: Food[]) => {
       this.foods = [...foods];
       if (this._foodLoader) {
         this._foodLoader.dismiss();
@@ -322,5 +343,6 @@ export class FoodListPage {
   ionViewWillLeave(): void {
     this._foodSubscription && this._foodSubscription.unsubscribe();
     this._recipeSubscription && this._recipeSubscription.unsubscribe();
+    this._usdaFoodSubscription && this._usdaFoodSubscription.unsubscribe();
   }
 }

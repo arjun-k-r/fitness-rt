@@ -54,7 +54,7 @@ export class FoodProvider {
     private _db: AngularFireDatabase,
     private _nutritionPvd: NutritionProvider,
   ) {
-    this._foods$ = this._db.list('/foods', {
+    this._foods$ = this._db.list('/foods/usda', {
       query: {
         orderByChild: 'group',
         equalTo: this._foodGroupSubject
@@ -80,20 +80,24 @@ export class FoodProvider {
     this._foodGroupSubject.next(foodGroup);
   }
 
-  public getFoods$(foodGroup: string): FirebaseListObservable<Food[]> {
+  public getMyFoods$(authId: string): FirebaseListObservable<Food[]> {
+    return this._db.list(`/foods/${authId}`);
+  }
+
+  public getUsdaFoods$(foodGroup: string): FirebaseListObservable<Food[]> {
     setTimeout(() => this.changeFoodGroup(foodGroup));
     return this._foods$;
   }
 
-  public removeFood(food: Food): firebase.Promise<void> {
-    return this._foods$.remove(food['$key']);
+  public removeFood(authId: string, food: Food): firebase.Promise<void> {
+    return this._db.list(`/foods/${authId}`).remove(food['$key']);
   }
 
-  public saveFood(food: Food): firebase.Promise<void> {
+  public saveFood(authId: string, food: Food): firebase.Promise<void> {
     if (food.hasOwnProperty('$key')) {
-      return this._foods$.update(food['$key'], food);
+      return this._db.list(`/foods/${authId}`).update(food['$key'], food);
     } else {
-      return this._foods$.push(food);
+      return this._db.list(`/foods/${authId}`).push(food);
     }
   }
 }

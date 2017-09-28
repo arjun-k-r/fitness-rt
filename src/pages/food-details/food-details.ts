@@ -164,7 +164,7 @@ export class FoodDetailsPage {
   }
 
   public removeFood(): void {
-    this._foodPvd.removeFood(this.food)
+    this._foodPvd.removeFood(this.authId, this.food)
     .then(() => {
       this._alertCtrl.create({
         title: 'Success!',
@@ -188,7 +188,7 @@ export class FoodDetailsPage {
   }
 
   public saveFood(): void {
-    this._foodPvd.saveFood(this.food)
+    this._foodPvd.saveFood(this.authId, this.food)
     .then(() => {
       this._alertCtrl.create({
         title: 'Success!',

@@ -13,7 +13,10 @@
   <ion-toolbar role="tablist">
     <ion-segment [(ngModel)]="selectionSegment">
       <ion-segment-button value="foods">
-        Foods
+        My foods
+      </ion-segment-button>
+      <ion-segment-button (click)="loadUsdaFoods()" value="usdaFoods">
+        USDA Database
       </ion-segment-button>
       <ion-segment-button (click)="loadRecipes()" value="recipes">
         Recipes
@@ -39,6 +42,21 @@
         </ion-item>
       </ion-list>
       <ion-infinite-scroll (ionInfinite)="loadMoreFoods($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+
+    <div *ngSwitchCase="'usdaFoods'">
+      <ion-searchbar debounce="2000" (ionCancel)="clearSearchUsdaFoods($event)" [(ngModel)]="usdaFoodSearchQuery" placeholder="Search USDA foods"
+        role="search">
+      </ion-searchbar>
+      <ion-list role="list">
+        <ion-item *ngFor="let food of usdaFood | search: usdaFoodSearchQuery | limit: usdaFoodLimit | sort: selectedNutrient" role="checkbox">
+          <ion-label text-wrap>{{ food.name }}</ion-label>
+          <ion-checkbox #checkBox (click)="showOptions(food, checkBox)"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="loadMoreUsdaFoods($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
       </ion-infinite-scroll>
     </div>

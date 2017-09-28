@@ -1,19 +1,79 @@
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null",
-    "foods": {
-      ".indexOn": "group",
-      ".read": "auth != null",
-      ".write": "auth != null"
-    },
-    "recipes": {
+    "activities": {
       ".indexOn": "name",
+      ".read": "auth != null",
+      ".write": "false"
+    },
+    "activity-plan": {
       "$user_id": {
+        ".read": "$user_id === auth.uid",
+        ".write": "$user_id === auth.uid"
+      }
+    },
+    "dri": {
+      ".read": "auth != null",
+      "$user_id": {
+        ".read": "$user_id === auth.uid",
+        ".write": "$user_id === auth.uid"
+      }
+    },
+    "exercise-log": {
+      "$user_id": {
+        ".read": "$user_id === auth.uid",
         ".write": "$user_id === auth.uid"
       }
     },
     "fitness": {
+      "$user_id": {
+        ".read": "$user_id === auth.uid",
+        ".write": "$user_id === auth.uid"
+      }
+    },
+    "foods": {
+      "$user_id": {
+        ".read": "$user_id === auth.uid",
+        ".write": "$user_id === auth.uid"
+      },
+      "usda": {
+        ".indexOn": "group",
+        ".read": "true",
+        ".write": "false"
+      }
+    },
+    "lifepoints": {
+      ".read": "auth != null",
+      "$user_id": {
+        ".read": "$user_id === auth.uid",
+        ".write": "$user_id === auth.uid"
+      }
+    },
+    "meal-plan": {
+      "$user_id": {
+        ".read": "$user_id === auth.uid",
+        ".write": "$user_id === auth.uid"
+      }
+    },
+    "nutrition-log": {
+      "$user_id": {
+        ".read": "$user_id === auth.uid",
+        ".write": "$user_id === auth.uid"
+      }
+    },
+    "recipes": {
+      ".indexOn": "name",
+      "$user_id": {
+        ".read": "$user_id === auth.uid",
+        ".write": "$user_id === auth.uid"
+      }
+    },
+    "sleep": {
+      "$user_id": {
+        ".read": "$user_id === auth.uid",
+        ".write": "$user_id === auth.uid"
+      }
+    },
+    "sleep-log": {
       "$user_id": {
         ".read": "$user_id === auth.uid",
         ".write": "$user_id === auth.uid"

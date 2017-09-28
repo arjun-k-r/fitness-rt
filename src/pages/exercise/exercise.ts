@@ -164,6 +164,23 @@ export class ExercisePage {
     }
   }
 
+  public getPrevPlan(): void {
+    const subscription: Subscription = this._activityPvd.getPrevActivityPlan$(this._authId).subscribe(
+      (activityPlan: ActivityPlan) => {
+        this.activityPlan = Object.assign({}, activityPlan['$value'] === null ? this.activityPlan : activityPlan);
+        subscription.unsubscribe();
+      },
+      (err: firebase.FirebaseError) => {
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.message,
+          buttons: ['OK']
+        }).present();
+      }
+    );
+  }
+
   public saveActivityPlan(): void {
     this._updateActivityPlan();
     const lifePoints = this._activityPvd.checkLifePoints(this.activityPlan);
@@ -263,8 +280,8 @@ export class ExercisePage {
 
         this._weekLogSubscription = this._activityPvd.getExerciseLog$(this._authId).subscribe(
           (weekLog: ExerciseLog[] = []) => {
-            this._weekLog = [...weekLog.reverse()];
-            this.chartLabels = [...weekLog.reverse().map((log: ExerciseLog) => log.date)];
+            this.chartLabels = [...weekLog.map((log: ExerciseLog) => log.date)];
+            this._weekLog = [...weekLog];
             this.chartData = [{
               data: [...this._weekLog.map((log: ExerciseLog) => log.totalDuration)],
               label: 'Total duration'

@@ -237,12 +237,17 @@ export class MealProvider {
     });
   }
 
+  public getPrevMealPlan$(authId: string): FirebaseObjectObservable<MealPlan> {
+    return this._db.object(`/meal-plan/${authId}/${CURRENT_DAY - 1}`);
+  }
+
   public saveMealPlan(authId: string, mealPlan: MealPlan, weekLog: NutritionLog[]): Promise<{}> {
     return new Promise((resolve, reject) => {
       this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/nutrition`).set(mealPlan.lifePoints)
         .then(() => {
           const newNutritionLog: NutritionLog = new NutritionLog(moment().format('dddd'), mealPlan.nutrition);
           if (!!weekLog.length) {
+            weekLog.reverse();
             if (newNutritionLog.date !== weekLog[0].date) {
               this._db.list(`/nutrition-log/${authId}/`).push(newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
             } else {

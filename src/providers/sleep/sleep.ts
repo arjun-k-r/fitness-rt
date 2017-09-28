@@ -60,6 +60,10 @@ export class SleepProvider {
     return lifePoints;
   }
 
+  public getPrevSleep$(authId: string): FirebaseObjectObservable<Sleep> {
+    return this._db.object(`/sleep/${authId}/${CURRENT_DAY - 1}`);
+  }
+
   public getSleep$(authId: string): FirebaseObjectObservable<Sleep> {
     return this._db.object(`/sleep/${authId}/${CURRENT_DAY}`);
   }
@@ -78,6 +82,7 @@ export class SleepProvider {
         .then(() => {
           const newSleepLog: SleepLog = new SleepLog(sleep.bedTime, moment().format('dddd'), sleep.duration, sleep.combos.quality);
           if (!!weekLog.length) {
+            weekLog.reverse();
            if (newSleepLog.date !== weekLog[0].date) {
             this._db.list(`/sleep-log/${authId}/`).push(newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
            } else {

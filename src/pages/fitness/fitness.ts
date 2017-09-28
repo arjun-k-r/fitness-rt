@@ -135,7 +135,7 @@ export class FitnessPage {
                   buttons: ['OK']
                 }).present();
               });
-            this._fitnessPvd.getLifePoints(this._authId, this.totalLifePoints)
+            this._fitnessPvd.getLifePoints(this._authId)
               .then((lifePoints: LifePoints) => {
                 this.totalLifePoints = Object.assign({}, lifePoints);
                 this._fitnessPvd.saveLifePoints(this._authId, this.totalLifePoints)

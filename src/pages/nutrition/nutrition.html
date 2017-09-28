@@ -5,6 +5,9 @@
     </button>
     <ion-title>Nutrition</ion-title>
     <ion-buttons end>
+      <button (click)="getPrevPlan()" ion-button padding role="button">
+        Copy from yesterday
+      </button>
       <button (click)="showSettings($event)" icon-only ion-button role="button">
         <ion-icon aria-hidden="true" name="more"></ion-icon>
       </button>

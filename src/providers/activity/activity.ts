@@ -134,6 +134,10 @@ export class ActivityProvider {
     });
   }
 
+  public getPrevActivityPlan$(authId: string): FirebaseObjectObservable<ActivityPlan> {
+    return this._db.object(`/activity-plan/${authId}/${CURRENT_DAY - 1}`);
+  }
+
   public saveActivityPlan(authId: string, activityPlan: ActivityPlan, weekLog: ExerciseLog[]): Promise<{}> {
     return new Promise((resolve, reject) => {
       Promise.all([
@@ -143,6 +147,7 @@ export class ActivityProvider {
         .then(() => {
           const newExerciseLog: ExerciseLog = new ExerciseLog(moment().format('dddd'), activityPlan.totalDuration, activityPlan.totalEnergyConsumption);
           if (!!weekLog.length) {
+            weekLog.reverse();
             if (newExerciseLog.date !== weekLog[0].date) {
               this._db.list(`/exercise-log/${authId}/`).push(newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
             } else {

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 // Rxjs
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 // Firebase
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
@@ -81,19 +82,24 @@ export class FitnessProvider {
     return this._db.object(`/fitness/${authId}`);
   }
 
-  public getLifePoints(authId: string, currentPoints: LifePoints): Promise<LifePoints> {
+  public getLifePoints(authId: string): Promise<LifePoints> {
     return new Promise((resolve, reject) => {
-      Observable.combineLatest(
+      const subscription: Subscription = Observable.combineLatest(
         this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/sleep`),
         this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/nutrition`),
-        this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/exercise`)
-      ).subscribe(([sleepPoints, nutritionPoints, exercisePoints]: [number, number, number]) => {
+        this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/exercise`),
+        this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/total`)
+      ).subscribe(([sleepPoints, nutritionPoints, exercisePoints, totalLifePoints]: [number, number, number, LifePoints]) => {
+        sleepPoints = sleepPoints['$value'] === null ? 0 : sleepPoints['$value'];
+        nutritionPoints = nutritionPoints['$value'] === null ? 0 : nutritionPoints['$value'];
+        exercisePoints = exercisePoints['$value'] === null ? 0 : exercisePoints['$value'];
+        subscription.unsubscribe();
         resolve(new LifePoints(
-          sleepPoints['$value'] === null ? 0 : sleepPoints['$value'],
-          nutritionPoints['$value'] === null ? 0 : nutritionPoints['$value'],
-          exercisePoints['$value'] === null ? 0 : exercisePoints['$value'],
+          sleepPoints,
+          nutritionPoints,
+          exercisePoints,
           CURRENT_DAY,
-          currentPoints.timestamp === CURRENT_DAY ? currentPoints.totalPoints || 0 : (currentPoints.totalPoints + currentPoints.exercise + currentPoints.nutrition + currentPoints.sleep) || 0
+          totalLifePoints.timestamp !== CURRENT_DAY ? (totalLifePoints.totalPoints + totalLifePoints.sleep + totalLifePoints.nutrition + totalLifePoints.exercise) || 0 : (totalLifePoints.totalPoints + sleepPoints + nutritionPoints + exercisePoints) || 0
         ));
       }, (err: firebase.FirebaseError) => reject(err));
     });

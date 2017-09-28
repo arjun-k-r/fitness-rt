@@ -78,6 +78,24 @@ export class NutritionPage {
     });
   }
 
+  public getPrevPlan(): void {
+    const subscription: Subscription = this._mealPvd.getPrevMealPlan$(this._authId).subscribe(
+      (mealPlan: MealPlan) => {
+        this.mealPlan = Object.assign({}, mealPlan['$value'] === null ? this.mealPlan : mealPlan);
+        this._mealPvd.saveMealPlan(this._authId, this.mealPlan, this._weekLog);
+        subscription.unsubscribe();
+      },
+      (err: firebase.FirebaseError) => {
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.message,
+          buttons: ['OK']
+        }).present();
+      }
+    );
+  }
+
   public nutrientPercent(nutrientValue: number, nutrientName: string): number {
     return this._mealPvd.calculateNutrientPercentage(nutrientValue, nutrientName);
   }
@@ -129,8 +147,8 @@ export class NutritionPage {
 
         this._weekLogSubscription = this._mealPvd.getNutritionLog$(this._authId).subscribe(
           (weekLog: NutritionLog[] = []) => {
-            this._weekLog = [...weekLog.reverse()];
-            this.chartLabels = [...weekLog.reverse().map((log: NutritionLog) => log.date)];
+            this.chartLabels = [...weekLog.map((log: NutritionLog) => log.date)];
+            this._weekLog = [...weekLog];
             this.chartData = [{
               data: [...this._weekLog.map((log: NutritionLog) => log.nutrition.energy.value)],
               label: 'Energy intake'

@@ -5,6 +5,9 @@
     </button>
     <ion-title>Sleep</ion-title>
     <ion-buttons end>
+      <button (click)="getPrevPlan()" ion-button padding role="button">
+        Copy from yesterday
+      </button>
       <button (click)="saveSleep()" [disabled]="sleepForm.invalid" icon-only ion-button padding role="button">
         <ion-icon aria-hidden="true" name="done-all"></ion-icon>
       </button>

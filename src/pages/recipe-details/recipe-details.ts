@@ -304,6 +304,16 @@ export class RecipeDetailsPage {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this.authId = auth.uid;
+        this._recipePvd.calculateRecipeDRI(this.authId, this.recipe)
+          .then((nutrition: Nutrition) => this.recipeDri = Object.assign({}, nutrition))
+          .catch((err: Error) => {
+            this._alertCtrl.create({
+              title: 'Uhh ohh...',
+              subTitle: 'Something went wrong',
+              message: err.toString(),
+              buttons: ['OK']
+            }).present();
+          });
       }
     });
     this._recipeFormSubscription = this.recipeForm.valueChanges.subscribe(
@@ -327,17 +337,6 @@ export class RecipeDetailsPage {
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)
     );
-
-    this._recipePvd.calculateRecipeDRI(this.authId, this.recipe)
-      .then((nutrition: Nutrition) => this.recipeDri = Object.assign({}, nutrition))
-      .catch((err: Error) => {
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.toString(),
-          buttons: ['OK']
-        }).present();
-      });
   }
 
   ionViewWillLeave(): void {

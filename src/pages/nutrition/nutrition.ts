@@ -34,6 +34,7 @@ import { MealProvider } from '../../providers';
 export class NutritionPage {
   private _authId: string;
   private _authSubscription: Subscription;
+  private _loader: Loading;
   private _mealSubscription: Subscription;
   private _weekLogSubscription: Subscription;
   private _weekLog: NutritionLog[] = [];
@@ -48,6 +49,7 @@ export class NutritionPage {
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
+    private _loadCtrl: LoadingController,
     private _mealPvd: MealProvider,
     private _navCtrl: NavController,
     private _popoverCtrl: PopoverController
@@ -81,13 +83,27 @@ export class NutritionPage {
   }
 
   public getPrevPlan(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     const subscription: Subscription = this._mealPvd.getPrevMealPlan$(this._authId).subscribe(
       (mealPlan: MealPlan) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this.mealPlan = Object.assign({}, mealPlan['$value'] === null ? this.mealPlan : mealPlan);
         this._mealPvd.saveMealPlan(this._authId, this.mealPlan, this._weekLog);
         subscription.unsubscribe();
       },
       (err: firebase.FirebaseError) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
@@ -120,6 +136,12 @@ export class NutritionPage {
   }
 
   ionViewWillEnter(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Loading...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this._authId = auth.uid;
@@ -127,8 +149,18 @@ export class NutritionPage {
           (mealPlan: MealPlan) => {
             this.mealPlan = Object.assign({}, mealPlan['$value'] === null ? this.mealPlan : mealPlan);
             this.nutrientKeys = Object.keys(this.mealPlan.nutrition);
-            this._mealPvd.calculateDailyNutrition(this._authId, this.mealPlan).then((dailyNutrition: Nutrition) => this.dailyNutrition = Object.assign({}, dailyNutrition))
+            this._mealPvd.calculateDailyNutrition(this._authId, this.mealPlan).then((dailyNutrition: Nutrition) => {
+              this.dailyNutrition = Object.assign({}, dailyNutrition);
+              if (this._loader) {
+                this._loader.dismiss();
+                this._loader = null;
+              }
+            })
               .catch((err: Error) => {
+                if (this._loader) {
+                  this._loader.dismiss();
+                  this._loader = null;
+                }
                 this._alertCtrl.create({
                   title: 'Uhh ohh...',
                   subTitle: 'Something went wrong',
@@ -138,6 +170,10 @@ export class NutritionPage {
               });
           },
           (err: firebase.FirebaseError) => {
+            if (this._loader) {
+              this._loader.dismiss();
+              this._loader = null;
+            }
             this._alertCtrl.create({
               title: 'Uhh ohh...',
               subTitle: 'Something went wrong',

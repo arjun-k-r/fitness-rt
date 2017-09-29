@@ -10,6 +10,8 @@ import {
   ActionSheetController,
   AlertController,
   IonicPage,
+  Loading,
+  LoadingController,
   Modal,
   ModalController,
   NavController,
@@ -39,6 +41,7 @@ import { PictureProvider, RecipeProvider } from '../../providers';
 export class RecipeDetailsPage {
   @ViewChild('fileInput') fileInput;
   private _authSubscription: Subscription;
+  private _loader: Loading;
   private _recipeFormSubscription: Subscription;
   public authId: string;
   public cookingTemperature: AbstractControl;
@@ -54,12 +57,13 @@ export class RecipeDetailsPage {
     private _actionSheetCtrl: ActionSheetController,
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _recipePvd: RecipeProvider,
     private _formBuilder: FormBuilder,
+    private _loadCtrl: LoadingController,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
     private _params: NavParams,
     private _picPvd: PictureProvider,
+    private _recipePvd: RecipeProvider,
     private _toastCtrl: ToastController
   ) {
     this.recipe = <Recipe>this._params.get('recipe');
@@ -200,8 +204,18 @@ export class RecipeDetailsPage {
   }
 
   public removeRecipe(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     this._recipePvd.removeRecipe(this.authId, this.recipe)
       .then(() => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Success!',
           message: 'Recipe removed successfully!',
@@ -214,6 +228,10 @@ export class RecipeDetailsPage {
         }).present();
       })
       .catch((err: Error) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
@@ -224,9 +242,19 @@ export class RecipeDetailsPage {
   }
 
   public saveRecipe(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     this._updateRecipe();
     this._recipePvd.saveRecipe(this.authId, this.recipe)
       .then(() => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Success!',
           message: 'Recipe saved successfully!',
@@ -239,6 +267,10 @@ export class RecipeDetailsPage {
         }).present();
       })
       .catch((err: firebase.FirebaseError) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
@@ -301,9 +333,35 @@ export class RecipeDetailsPage {
   }
 
   ionViewWillEnter(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this.authId = auth.uid;
+        this._recipePvd.calculateRecipeDRI(this.authId, this.recipe)
+          .then((nutrition: Nutrition) => {
+            if (this._loader) {
+              this._loader.dismiss();
+              this._loader = null;
+            }
+            this.recipeDri = Object.assign({}, nutrition);
+          })
+          .catch((err: Error) => {
+            if (this._loader) {
+              this._loader.dismiss();
+              this._loader = null;
+            }
+            this._alertCtrl.create({
+              title: 'Uhh ohh...',
+              subTitle: 'Something went wrong',
+              message: err.toString(),
+              buttons: ['OK']
+            }).present();
+          });
       }
     });
     this._recipeFormSubscription = this.recipeForm.valueChanges.subscribe(
@@ -327,17 +385,6 @@ export class RecipeDetailsPage {
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)
     );
-
-    this._recipePvd.calculateRecipeDRI(this.authId, this.recipe)
-      .then((nutrition: Nutrition) => this.recipeDri = Object.assign({}, nutrition))
-      .catch((err: Error) => {
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.toString(),
-          buttons: ['OK']
-        }).present();
-      });
   }
 
   ionViewWillLeave(): void {

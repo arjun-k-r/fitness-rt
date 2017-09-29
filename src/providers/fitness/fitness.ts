@@ -93,6 +93,7 @@ export class FitnessProvider {
         sleepPoints = sleepPoints['$value'] === null ? 0 : sleepPoints['$value'];
         nutritionPoints = nutritionPoints['$value'] === null ? 0 : nutritionPoints['$value'];
         exercisePoints = exercisePoints['$value'] === null ? 0 : exercisePoints['$value'];
+        totalLifePoints = totalLifePoints['$value'] === null ? new LifePoints() : totalLifePoints;
         subscription.unsubscribe();
         resolve(new LifePoints(
           sleepPoints,

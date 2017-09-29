@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs/Subscription';
 import {
   AlertController,
   IonicPage,
+  Loading,
+  LoadingController,
   NavController,
   Popover,
   PopoverController
@@ -36,6 +38,7 @@ import { SleepProvider } from '../../providers';
 export class SleepPage {
   private _authId: string;
   private _authSubscription: Subscription;
+  private _loader: Loading;
   private _sleepSubscription: Subscription;
   private _sleepFormSubscription: Subscription;
   private _weekLogSubscription: Subscription;
@@ -57,6 +60,7 @@ export class SleepPage {
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
     private _formBuilder: FormBuilder,
+    private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
     private _popoverCtrl: PopoverController,
     private _sleepPvd: SleepProvider
@@ -107,6 +111,12 @@ export class SleepPage {
   }
 
   public getPrevPlan(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     this._sleepFormSubscription.unsubscribe();
     this.sleepForm = this._formBuilder.group({
       bedTime: ['', Validators.required],
@@ -157,8 +167,16 @@ export class SleepPage {
         this.sleepForm.controls['quality'].patchValue(this.sleep.combos.quality);
         this.sleepForm.controls['relaxation'].patchValue(this.sleep.combos.relaxation);
         subscription.unsubscribe();
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
       },
       (err: firebase.FirebaseError) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
@@ -180,8 +198,18 @@ export class SleepPage {
             text: 'I will',
             handler: () => {
               this.sleep.lifePoints = lifePoints;
+              this._loader = this._loadCtrl.create({
+                content: 'Please wait...',
+                duration: 30000,
+                spinner: 'crescent'
+              });
+              this._loader.present();
               this._sleepPvd.saveSleep(this._authId, this.sleep, this._weekLog)
                 .then(() => {
+                  if (this._loader) {
+                    this._loader.dismiss();
+                    this._loader = null;
+                  }
                   this._alertCtrl.create({
                     title: 'Success!',
                     message: 'Sleep saved successfully!',
@@ -189,6 +217,10 @@ export class SleepPage {
                   }).present();
                 })
                 .catch((err: firebase.FirebaseError) => {
+                  if (this._loader) {
+                    this._loader.dismiss();
+                    this._loader = null;
+                  }
                   this._alertCtrl.create({
                     title: 'Uhh ohh...',
                     subTitle: 'Something went wrong',
@@ -208,8 +240,18 @@ export class SleepPage {
           text: 'Great',
           handler: () => {
             this.sleep.lifePoints = lifePoints;
+            this._loader = this._loadCtrl.create({
+              content: 'Please wait...',
+              duration: 30000,
+              spinner: 'crescent'
+            });
+            this._loader.present();
             this._sleepPvd.saveSleep(this._authId, this.sleep, this._weekLog)
               .then(() => {
+                if (this._loader) {
+                  this._loader.dismiss();
+                  this._loader = null;
+                }
                 this._alertCtrl.create({
                   title: 'Success!',
                   message: 'Sleep saved successfully!',
@@ -217,6 +259,10 @@ export class SleepPage {
                 }).present();
               })
               .catch((err: firebase.FirebaseError) => {
+                if (this._loader) {
+                  this._loader.dismiss();
+                  this._loader = null;
+                }
                 this._alertCtrl.create({
                   title: 'Uhh ohh...',
                   subTitle: 'Something went wrong',
@@ -229,7 +275,7 @@ export class SleepPage {
       }).present();
     }
   }
-
+  
   public showSettings(event: Popover): void {
     const popover: Popover = this._popoverCtrl.create('settings');
     popover.present({
@@ -248,6 +294,12 @@ export class SleepPage {
   }
 
   ionViewWillEnter(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Loading...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this._authId = auth.uid;
@@ -260,8 +312,16 @@ export class SleepPage {
             this.sleepForm.controls['noStimulants'].patchValue(this.sleep.combos.noStimulants);
             this.sleepForm.controls['quality'].patchValue(this.sleep.combos.quality);
             this.sleepForm.controls['relaxation'].patchValue(this.sleep.combos.relaxation);
+            if (this._loader) {
+              this._loader.dismiss();
+              this._loader = null;
+            }
           },
           (err: firebase.FirebaseError) => {
+            if (this._loader) {
+              this._loader.dismiss();
+              this._loader = null;
+            }
             this._alertCtrl.create({
               title: 'Uhh ohh...',
               subTitle: 'Something went wrong',

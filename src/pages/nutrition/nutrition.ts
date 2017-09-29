@@ -8,6 +8,8 @@ import { Subscription } from 'rxjs/Subscription';
 import {
   AlertController,
   IonicPage,
+  Loading,
+  LoadingController,
   NavController,
   Popover,
   PopoverController

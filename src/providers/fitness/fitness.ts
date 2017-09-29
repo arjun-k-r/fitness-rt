@@ -100,7 +100,7 @@ export class FitnessProvider {
           nutritionPoints,
           exercisePoints,
           CURRENT_DAY,
-          totalLifePoints.timestamp !== CURRENT_DAY ? (totalLifePoints.totalPoints + totalLifePoints.sleep + totalLifePoints.nutrition + totalLifePoints.exercise) || 0 : (totalLifePoints.totalPoints + sleepPoints + nutritionPoints + exercisePoints) || 0
+          totalLifePoints.timestamp === CURRENT_DAY ? totalLifePoints.totalPoints || 0 : (totalLifePoints.totalPoints + totalLifePoints.sleep + totalLifePoints.nutrition + totalLifePoints.exercise) || 0
         ));
       }, (err: firebase.FirebaseError) => reject(err));
     });

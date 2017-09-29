@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs/Subscription';
 import {
   AlertController,
   IonicPage,
+  Loading,
+  LoadingController,
   NavController,
   Popover,
   PopoverController
@@ -33,6 +35,7 @@ import { FitnessProvider, NutritionProvider } from '../../providers';
 export class FitnessPage {
   private _authId: string;
   private _authSubscription: Subscription;
+  private _loader: Loading;
   private _fitnessSubscription: Subscription;
   private _fitnessFormSubscription: Subscription;
   public age: AbstractControl;
@@ -47,13 +50,13 @@ export class FitnessPage {
   public isFit: boolean;
   public lactating: AbstractControl;
   public pregnant: AbstractControl;
-  public totalLifePoints: LifePoints = new LifePoints();
   public weight: AbstractControl;
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
     private _fitnessPvd: FitnessProvider,
     private _formBuilder: FormBuilder,
+    private _loadCtrl: LoadingController,
     private _nutritionPvd: NutritionProvider,
     private _navCtrl: NavController,
     private _popoverCtrl: PopoverController
@@ -79,8 +82,18 @@ export class FitnessPage {
   }
 
   public saveFitness(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     this._fitnessPvd.saveFitness(this._authId, this.fitness)
       .then(() => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Success!',
           message: 'Fitness saved successfully!',
@@ -90,6 +103,10 @@ export class FitnessPage {
         }).present();
       })
       .catch((err: firebase.FirebaseError) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
@@ -117,17 +134,37 @@ export class FitnessPage {
   }
 
   ionViewWillEnter(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Loading...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this._authId = auth.uid;
         this._fitnessSubscription = this._fitnessPvd.getFitness$(this._authId).subscribe(
           (fitness: Fitness) => {
+            if (this._loader) {
+              this._loader.dismiss();
+              this._loader = null;
+            }
+            this._loader = this._loadCtrl.create({
+              content: 'Please wait...',
+              duration: 30000,
+              spinner: 'crescent'
+            });
+            this._loader.present();
             this.fitness = Object.assign({}, fitness['$value'] === null ? this.fitness : fitness);
             this._nutritionPvd.calculateDRI(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
               .then((dri: Nutrition) => {
                 this.dailyRequirements = Object.assign({}, dri);
               })
               .catch((err: firebase.FirebaseError) => {
+                if (this._loader) {
+                  this._loader.dismiss();
+                  this._loader = null;
+                }
                 this._alertCtrl.create({
                   title: 'Uhh ohh...',
                   subTitle: 'Something went wrong',
@@ -137,9 +174,13 @@ export class FitnessPage {
               });
             this._fitnessPvd.getLifePoints(this._authId)
               .then((lifePoints: LifePoints) => {
-                this.totalLifePoints = Object.assign({}, lifePoints);
-                this._fitnessPvd.saveLifePoints(this._authId, this.totalLifePoints)
+                this.currentLifePoints = lifePoints.totalPoints + lifePoints.exercise + lifePoints.nutrition + lifePoints.sleep
+                this._fitnessPvd.saveLifePoints(this._authId, lifePoints)
                   .then(() => {
+                    if (this._loader) {
+                      this._loader.dismiss();
+                      this._loader = null;
+                    }
                     this._alertCtrl.create({
                       title: 'Success!',
                       message: 'Life points updated successfully!',
@@ -149,6 +190,10 @@ export class FitnessPage {
                     }).present();
                   })
                   .catch((err: firebase.FirebaseError) => {
+                    if (this._loader) {
+                      this._loader.dismiss();
+                      this._loader = null;
+                    }
                     this._alertCtrl.create({
                       title: 'Uhh ohh...',
                       subTitle: 'Something went wrong',
@@ -156,9 +201,12 @@ export class FitnessPage {
                       buttons: ['OK']
                     }).present();
                   });
-                this.currentLifePoints = lifePoints.totalPoints + lifePoints.exercise + lifePoints.nutrition + lifePoints.sleep
               })
               .catch((err: firebase.FirebaseError) => {
+                if (this._loader) {
+                  this._loader.dismiss();
+                  this._loader = null;
+                }
                 this._alertCtrl.create({
                   title: 'Uhh ohh...',
                   subTitle: 'Something went wrong',

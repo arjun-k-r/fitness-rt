@@ -37,6 +37,7 @@ import { MealProvider } from '../../providers';
 export class MealEditPage {
   private _authId: string;
   private _authSubscription: Subscription;
+  private _loader: Loading;
   private _mealIdx: number;
   private _mealPlan: MealPlan;
   private _nutritionLog: NutritionLog[];
@@ -152,10 +153,19 @@ export class MealEditPage {
   }
 
   public removeMeal(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
     this._mealPlan.meals = [...this._mealPlan.meals.slice(0, this._mealIdx), ...this._mealPlan.meals.slice(this._mealIdx + 1)];
     this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals)
     this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog)
       .then(() => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Success!',
           message: 'Meal removed successfully!',
@@ -168,6 +178,10 @@ export class MealEditPage {
         }).present();
       })
       .catch((err: Error) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
@@ -178,6 +192,11 @@ export class MealEditPage {
   }
 
   public saveMeal(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
     this._updateMeal();
     const lifePoints = this._mealPvd.checkLifePoints(this._mealPlan);
     if (this._mealPlan.lifePoints > lifePoints) {
@@ -191,13 +210,26 @@ export class MealEditPage {
               this._mealPlan.lifePoints = lifePoints;
               this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog)
                 .then(() => {
+                  if (this._loader) {
+                    this._loader.dismiss();
+                    this._loader = null;
+                  }
                   this._alertCtrl.create({
                     title: 'Success!',
                     message: 'Meals saved successfully!',
-                    buttons: ['Great!']
+                    buttons: [{
+                      text: 'Great',
+                      handler: () => {
+                        this._navCtrl.pop();
+                      }
+                    }]
                   }).present();
                 })
                 .catch((err: Error) => {
+                  if (this._loader) {
+                    this._loader.dismiss();
+                    this._loader = null;
+                  }
                   this._alertCtrl.create({
                     title: 'Uhh ohh...',
                     subTitle: 'Something went wrong',
@@ -219,13 +251,26 @@ export class MealEditPage {
             this._mealPlan.lifePoints = lifePoints;
             this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog)
               .then(() => {
+                if (this._loader) {
+                  this._loader.dismiss();
+                  this._loader = null;
+                }
                 this._alertCtrl.create({
                   title: 'Success!',
                   message: 'Meals saved successfully!',
-                  buttons: ['Great!']
+                  buttons: [{
+                    text: 'Great',
+                    handler: () => {
+                      this._navCtrl.pop();
+                    }
+                  }]
                 }).present();
               })
               .catch((err: Error) => {
+                if (this._loader) {
+                  this._loader.dismiss();
+                  this._loader = null;
+                }
                 this._alertCtrl.create({
                   title: 'Uhh ohh...',
                   subTitle: 'Something went wrong',

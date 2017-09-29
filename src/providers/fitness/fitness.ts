@@ -88,7 +88,7 @@ export class FitnessProvider {
         this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/sleep`),
         this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/nutrition`),
         this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/exercise`),
-        this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/total`)
+        this._db.object(`/lifepoints/${authId}/total`)
       ).subscribe(([sleepPoints, nutritionPoints, exercisePoints, totalLifePoints]: [number, number, number, LifePoints]) => {
         sleepPoints = sleepPoints['$value'] === null ? 0 : sleepPoints['$value'];
         nutritionPoints = nutritionPoints['$value'] === null ? 0 : nutritionPoints['$value'];

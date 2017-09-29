@@ -50,22 +50,15 @@ export class MealProvider {
   public calculateDailyNutrition(authId: string, mealPlan: MealPlan): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
       const nutrition = new Nutrition();
-      if (!this._userRequirements) {
-        const subscription: Subscription = this._nutritionPvd.getDri$(authId).subscribe((dri: Nutrition) => {
-          dri = dri['$value'] === null ? new Nutrition() : dri;
-          this._userRequirements = dri;
-          for (let nutrientKey in mealPlan.nutrition) {
-            nutrition[nutrientKey].value = Math.round((mealPlan.nutrition[nutrientKey].value * 100) / (dri[nutrientKey].value || 1));
-          }
-          subscription.unsubscribe();
-          resolve(nutrition);
-        }, (err: firebase.FirebaseError) => reject(err.message));
-      } else {
+      const subscription: Subscription = this._nutritionPvd.getDri$(authId).subscribe((dri: Nutrition) => {
+        dri = dri['$value'] === null ? new Nutrition() : dri;
+        this._userRequirements = dri;
         for (let nutrientKey in mealPlan.nutrition) {
-          nutrition[nutrientKey].value = Math.round((mealPlan.nutrition[nutrientKey].value * 100) / (this._userRequirements[nutrientKey].value || 1));
+          nutrition[nutrientKey].value = Math.round((mealPlan.nutrition[nutrientKey].value * 100) / (dri[nutrientKey].value || 1));
         }
+        subscription.unsubscribe();
         resolve(nutrition);
-      }
+      }, (err: firebase.FirebaseError) => reject(err.message));
     });
   }
 

@@ -192,11 +192,6 @@ export class MealEditPage {
   }
 
   public saveMeal(): void {
-    this._loader = this._loadCtrl.create({
-      content: 'Please wait...',
-      duration: 30000,
-      spinner: 'crescent'
-    });
     this._updateMeal();
     const lifePoints = this._mealPvd.checkLifePoints(this._mealPlan);
     if (this._mealPlan.lifePoints > lifePoints) {
@@ -207,6 +202,11 @@ export class MealEditPage {
           {
             text: 'I will',
             handler: () => {
+              this._loader = this._loadCtrl.create({
+                content: 'Please wait...',
+                duration: 30000,
+                spinner: 'crescent'
+              });
               this._mealPlan.lifePoints = lifePoints;
               this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog)
                 .then(() => {
@@ -248,6 +248,11 @@ export class MealEditPage {
         buttons: [{
           text: 'Great',
           handler: () => {
+            this._loader = this._loadCtrl.create({
+              content: 'Please wait...',
+              duration: 30000,
+              spinner: 'crescent'
+            });
             this._mealPlan.lifePoints = lifePoints;
             this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog)
               .then(() => {

@@ -52,9 +52,9 @@
         <p item-content>{{ activityPlan?.totalEnergyConsumption }} kcal</p>
       </ion-item>
       <ion-item>
-        <ion-label color="{{ activityPlan?.combos.energy ? 'secondary' : 'danger' }}" for="energy" id="energyLabel" text-wrap>
-          {{ activityPlan?.combos.energy ? 'I feeling energized and fresh' : 'I am feeling exhausted and depressed' }}
-          <ion-icon aria-hidden="true" color="{{ activityPlan?.combos.energy ? 'secondary' : 'danger' }}" item-right name="{{ activityPlan?.combos.energy ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+        <ion-label color="{{ activityPlan?.combos?.energy ? 'secondary' : 'danger' }}" for="energy" id="energyLabel" text-wrap>
+          {{ activityPlan?.combos?.energy ? 'I feeling energized and fresh' : 'I am feeling exhausted and depressed' }}
+          <ion-icon aria-hidden="true" color="{{ activityPlan?.combos?.energy ? 'secondary' : 'danger' }}" item-right name="{{ activityPlan?.combos?.energy ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
         </ion-label>
         <ion-toggle aria-live="assertive" aria-labelledby="energyLabel" aria-required="true" id="energy" [(ngModel)]="activityPlan?.combos.energy"
           role="switch"></ion-toggle>

@@ -9,11 +9,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 
-// Third-party
-import * as moment from 'moment';
-
 // Models
-import { Fitness, Food, Nutrition } from '../../models';
+import { Food, Nutrition } from '../../models';
 
 // Providers
 import { NutritionProvider } from '../nutrition/nutrition';

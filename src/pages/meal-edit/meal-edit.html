@@ -37,37 +37,65 @@
       <ion-list>
         <ion-item>
           <ion-label floating for="mealTime" id="mealTimeLabel">Meal time</ion-label>
-          <ion-datetime aria-live="assertive" aria-labelledby="mealTimeLabel" aria-required="true" displayFormat="HH:mm" id="mealTimeLabel" [(ngModel)]="meal.hour" pickerFormat="HH mm"></ion-datetime>
+          <ion-datetime aria-live="assertive" aria-labelledby="mealTimeLabel" aria-required="true" displayFormat="HH:mm" id="mealTimeLabel"
+            [(ngModel)]="meal.hour" pickerFormat="HH mm"></ion-datetime>
         </ion-item>
         <ion-item>
-          <ion-label color="{{ meal.combos.calmEating ? 'secondary' : 'danger' }}" for="calmEating" id="calmEatingLabel" text-wrap>
-            {{ meal.combos.calmEating ? 'I am relaxed while eating and in a peacefull environment' : 'I am stressed, nervous, excited, or anxious while eating and in a noisy, agitated environment'}}
-            <ion-icon aria-hidden="true" color="{{ meal.combos.calmEating ? 'secondary' : 'danger' }}" item-right name="{{ meal.combos.calmEating ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+          <ion-label color="{{ meal.combos.calmEating && 'secondary' }}" for="calmEating" id="calmEatingLabel" text-wrap>
+            I am relaxed while eating in a peacefull environment
+            <ion-icon *ngIf="meal.combos.calmEating" aria-hidden="true" color="secondary" item-right name="thumbs-up"></ion-icon>
           </ion-label>
-          <ion-toggle aria-live="assertive" aria-labelledby="calmEatingLabel" aria-required="true" id="calmEating" [(ngModel)]="meal.combos.calmEating" role="switch"></ion-toggle>
+          <ion-toggle aria-live="assertive" aria-labelledby="calmEatingLabel" aria-required="true" id="calmEating" [(ngModel)]="meal.combos.calmEating"
+            role="switch"></ion-toggle>
         </ion-item>
         <ion-item>
-          <ion-label color="{{ meal.combos.slowEating ? 'secondary' : 'danger' }}" for="slowEating" id="slowEatingLabel" text-wrap>{{ meal.combos.slowEating ? 'I eat slowly and chew until fluid (> 20 min)' : 'I eat in a rush without chewing properly (< 20min)' }}
-            <ion-icon aria-hidden="true" color="{{ meal.combos.slowEating ? 'secondary' : 'danger' }}" item-right name="{{ meal.combos.slowEating ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon></ion-label>
-          <ion-toggle aria-live="assertive" aria-labelledby="slowEatingLabel" aria-required="true" id="slowEating" [(ngModel)]="meal.combos.slowEating" role="switch"></ion-toggle>
-          </ion-item>
-          <ion-item>
-            <ion-label color="{{ meal.combos.feeling === 'Energy' ? 'secondary' : 'danger' }}" for="feeling" id="feelingLabel">Feeling <ion-icon aria-hidden="true" color="{{ meal.combos.feeling === 'Energy' ? 'secondary' : 'danger' }}" item-right name="{{ meal.combos.feeling === 'Energy' ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon></ion-label>
-            <ion-select aria-live="assertive" aria-labelledby="feelingLabel" aria-required="true" id="feeling" [(ngModel)]="meal.combos.feeling" required>
-              <ion-option role="option" value="Acidity & burns">Acidity & burns</ion-option>
-              <ion-option role="option" value="Constipation">Constipation</ion-option>
-              <ion-option role="option" value="Diarrhea">Diarrhea</ion-option>
-              <ion-option role="option" value="Energy">Energy</ion-option>
-              <ion-option role="option" value="Gas">Gas</ion-option>
-              <ion-option role="option" value="Heaviness">Heaviness</ion-option>
-              <ion-option role="option" value="Indigestion">Indigestion</ion-option>
-              <ion-option role="option" value="Sleepiness">Sleepiness</ion-option>
-            </ion-select>
-          </ion-item>
-          <ion-item *ngIf="meal.combos.overeating" role="listitem">
-            <ion-icon aria-hidden="true" color="danger" item-start name="thumbs-down"></ion-icon>
-            <h2 text-wrap>Overeating</h2>
-            <p item-content>You are eating too much at a time, hence, not digest well. Try too eat frequent small meals, rather than rarely large ones.</p>
+          <ion-label color="{{ meal.combos.slowEating && 'secondary' }}" for="slowEating" id="slowEatingLabel" text-wrap>
+            I eat slowly and chew until fluid (> 20 min)
+            <ion-icon *ngIf="meal.combos.slowEating" aria-hidden="true" color="secondary" item-right name="thumbs-up"></ion-icon>
+          </ion-label>
+          <ion-toggle aria-live="assertive" aria-labelledby="slowEatingLabel" aria-required="true" id="slowEating" [(ngModel)]="meal.combos.slowEating"
+            role="switch"></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-label color="{{ meal.combos.feeling === 'Energy' && 'secondary' }}" for="feeling" id="feelingLabel">Feeling
+            <ion-icon *ngIf="meal.combos.feeling === 'Energy'" aria-hidden="true" color="secondary" item-right name="thumbs-up"></ion-icon>
+          </ion-label>
+          <ion-select aria-live="assertive" aria-labelledby="feelingLabel" aria-required="true" id="feeling" [(ngModel)]="meal.combos.feeling"
+            required>
+            <ion-option role="option" value="Acidity & burns">Acidity & burns</ion-option>
+            <ion-option role="option" value="Constipation">Constipation</ion-option>
+            <ion-option role="option" value="Diarrhea">Diarrhea</ion-option>
+            <ion-option role="option" value="Energy">Energy</ion-option>
+            <ion-option role="option" value="Gas">Gas</ion-option>
+            <ion-option role="option" value="Heaviness">Heaviness</ion-option>
+            <ion-option role="option" value="Indigestion">Indigestion</ion-option>
+            <ion-option role="option" value="Sleepiness">Sleepiness</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item-divider color="light" role="separator">
+          Suggestions
+        </ion-item-divider>
+        <ion-item *ngIf="!meal.combos.calmEating" role="listitem">
+          <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+          <h2 text-wrap>Calm down before, during, and after eating</h2>
+          <p text-wrap>Put your body in a 'rest and digest' response, not 'fight or flight' response. Stress inhibits digestion!</p>
+        </ion-item>
+        <ion-item *ngIf="!meal.combos.slowEating" role="listitem">
+          <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+          <h2 text-wrap>Slow down and chew carefully</h2>
+          <p text-wrap>Digestion begins in the mouth with chewing and salivation. Also, the feeling of fullness (leptin response) happens
+            after 20 minutes of eating. If you eat fast you will take big bites, swallow partially chewed food, overeat,
+            and suffer from indigestion and weight gain.</p>
+        </ion-item>
+        <ion-item *ngIf="meal.combos.feeling !== 'Energy'" role="listitem">
+          <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+          <h2 text-wrap>You need goog quality food and good quality digestion</h2>
+          <p text-wrap>Food must provide energy and nourishment. Any feeling besides energy means you haven't digested the food properly. This happens if you didn't eat properly or if you have intolerence to some specific food.</p>
+        </ion-item>
+        <ion-item *ngIf="meal.combos.overeating" role="listitem">
+            <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+            <h2 text-wrap>Reduce your portion size</h2>
+            <p text-wrap>Processing is done better with freqent small portions, rather than rare large portions. Digestion is food processing and is done better with small meals. Also, eating small freqeunt meals leads to better nutrient absorption.</p>
           </ion-item>
       </ion-list>
     </div>
@@ -81,7 +109,8 @@
         </button>
         <ion-item role="listitem">
           <h2 text-wrap>Total quantity</h2>
-          <p color="{{ !meal.combos.overeating ? 'secondary' : 'danger' }}" ion-text item-content><ion-icon aria-hidden="true" color="{{ !meal.combos.overeating ? 'secondary' : 'danger' }}" item-right name="{{ !meal.combos.overeating ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon> {{ meal.quantity }} g</p>
+          <p color="{{ !meal.combos.overeating ? 'secondary' : 'danger' }}" ion-text item-content>
+            <ion-icon aria-hidden="true" color="{{ !meal.combos.overeating ? 'secondary' : 'danger' }}" item-right name="{{ !meal.combos.overeating ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon> {{ meal.quantity }} g</p>
         </ion-item>
       </ion-list>
     </div>

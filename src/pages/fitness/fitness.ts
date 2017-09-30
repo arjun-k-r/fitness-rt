@@ -149,22 +149,12 @@ export class FitnessPage {
               this._loader.dismiss();
               this._loader = null;
             }
-            this._loader = this._loadCtrl.create({
-              content: 'Please wait...',
-              duration: 30000,
-              spinner: 'crescent'
-            });
-            this._loader.present();
             this.fitness = Object.assign({}, fitness['$value'] === null ? this.fitness : fitness);
             this._nutritionPvd.calculateDRI(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
               .then((dri: Nutrition) => {
                 this.dailyRequirements = Object.assign({}, dri);
               })
               .catch((err: firebase.FirebaseError) => {
-                if (this._loader) {
-                  this._loader.dismiss();
-                  this._loader = null;
-                }
                 this._alertCtrl.create({
                   title: 'Uhh ohh...',
                   subTitle: 'Something went wrong',
@@ -177,10 +167,6 @@ export class FitnessPage {
                 this.currentLifePoints = lifePoints.totalPoints + lifePoints.exercise + lifePoints.nutrition + lifePoints.sleep
                 this._fitnessPvd.saveLifePoints(this._authId, lifePoints)
                   .then(() => {
-                    if (this._loader) {
-                      this._loader.dismiss();
-                      this._loader = null;
-                    }
                     this._alertCtrl.create({
                       title: 'Success!',
                       message: 'Life points updated successfully!',
@@ -190,10 +176,6 @@ export class FitnessPage {
                     }).present();
                   })
                   .catch((err: firebase.FirebaseError) => {
-                    if (this._loader) {
-                      this._loader.dismiss();
-                      this._loader = null;
-                    }
                     this._alertCtrl.create({
                       title: 'Uhh ohh...',
                       subTitle: 'Something went wrong',
@@ -203,10 +185,6 @@ export class FitnessPage {
                   });
               })
               .catch((err: firebase.FirebaseError) => {
-                if (this._loader) {
-                  this._loader.dismiss();
-                  this._loader = null;
-                }
                 this._alertCtrl.create({
                   title: 'Uhh ohh...',
                   subTitle: 'Something went wrong',

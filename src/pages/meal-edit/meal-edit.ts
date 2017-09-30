@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 // Ionic
 import {
   ActionSheetController,
+  Alert,
   AlertController,
   IonicPage,
   Loading,
@@ -90,6 +91,44 @@ export class MealEditPage {
   private _removeFood(idx: number): void {
     this.meal.foods = [...this.meal.foods.slice(0, idx), ...this.meal.foods.slice(idx + 1)];
     this._updateMeal();
+  }
+
+  private _saveToDb(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
+    this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog)
+      .then(() => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Success!',
+          message: 'Meals saved successfully!',
+          buttons: [{
+            text: 'Great',
+            handler: () => {
+              this._navCtrl.pop();
+            }
+          }]
+        }).present();
+      })
+      .catch((err: Error) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.toString(),
+          buttons: ['OK']
+        }).present();
+      });
   }
 
   private _updateMeal(): void {
@@ -195,97 +234,27 @@ export class MealEditPage {
     this._updateMeal();
     const lifePoints = this._mealPvd.checkLifePoints(this._mealPlan);
     if (this._mealPlan.lifePoints > lifePoints) {
-      this._alertCtrl.create({
+      const alert: Alert = this._alertCtrl.create({
         title: 'Watch your nutrition and eating habits!',
         message: 'You are losing life points!',
-        buttons: [
-          {
-            text: 'I will',
-            handler: () => {
-              this._loader = this._loadCtrl.create({
-                content: 'Please wait...',
-                duration: 30000,
-                spinner: 'crescent'
-              });
-              this._mealPlan.lifePoints = lifePoints;
-              this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog)
-                .then(() => {
-                  if (this._loader) {
-                    this._loader.dismiss();
-                    this._loader = null;
-                  }
-                  this._alertCtrl.create({
-                    title: 'Success!',
-                    message: 'Meals saved successfully!',
-                    buttons: [{
-                      text: 'Great',
-                      handler: () => {
-                        this._navCtrl.pop();
-                      }
-                    }]
-                  }).present();
-                })
-                .catch((err: Error) => {
-                  if (this._loader) {
-                    this._loader.dismiss();
-                    this._loader = null;
-                  }
-                  this._alertCtrl.create({
-                    title: 'Uhh ohh...',
-                    subTitle: 'Something went wrong',
-                    message: err.toString(),
-                    buttons: ['OK']
-                  }).present();
-                });
-            }
-          }
-        ]
-      }).present();
+        buttons: ['I will']
+      });
+      alert.present();
+      alert.onDidDismiss(() => {
+        this._mealPlan.lifePoints = lifePoints;
+        this._saveToDb();
+      });
     } else {
-      this._alertCtrl.create({
+      const alert: Alert = this._alertCtrl.create({
         title: 'You have improved your nutrition and eating habits!',
         message: 'You are gaining life points!',
-        buttons: [{
-          text: 'Great',
-          handler: () => {
-            this._loader = this._loadCtrl.create({
-              content: 'Please wait...',
-              duration: 30000,
-              spinner: 'crescent'
-            });
-            this._mealPlan.lifePoints = lifePoints;
-            this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog)
-              .then(() => {
-                if (this._loader) {
-                  this._loader.dismiss();
-                  this._loader = null;
-                }
-                this._alertCtrl.create({
-                  title: 'Success!',
-                  message: 'Meals saved successfully!',
-                  buttons: [{
-                    text: 'Great',
-                    handler: () => {
-                      this._navCtrl.pop();
-                    }
-                  }]
-                }).present();
-              })
-              .catch((err: Error) => {
-                if (this._loader) {
-                  this._loader.dismiss();
-                  this._loader = null;
-                }
-                this._alertCtrl.create({
-                  title: 'Uhh ohh...',
-                  subTitle: 'Something went wrong',
-                  message: err.toString(),
-                  buttons: ['OK']
-                }).present();
-              });
-          }
-        }]
-      }).present();
+        buttons: ['Great!']
+      });
+      alert.present();
+      alert.onDidDismiss(() => {
+        this._mealPlan.lifePoints = lifePoints;
+        this._saveToDb();
+      })
     }
   }
 

@@ -119,12 +119,7 @@ export class ExercisePage {
         this._alertCtrl.create({
           title: 'Success!',
           message: 'Activities saved successfully!',
-          buttons: [{
-            text: 'Great',
-            handler: () => {
-              this._navCtrl.pop();
-            }
-          }]
+          buttons: ['Great!']
         }).present();
       })
       .catch((err: Error) => {

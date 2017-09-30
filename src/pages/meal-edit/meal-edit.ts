@@ -191,6 +191,7 @@ export class MealEditPage {
       duration: 30000,
       spinner: 'crescent'
     });
+    this._loader.present();
     this._mealPlan.meals = [...this._mealPlan.meals.slice(0, this._mealIdx), ...this._mealPlan.meals.slice(this._mealIdx + 1)];
     this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals)
     this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog)

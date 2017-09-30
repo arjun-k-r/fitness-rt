@@ -344,9 +344,17 @@ export class FoodListPage {
     this._foodSubscription && this._foodSubscription.unsubscribe();
     this._recipeSubscription && this._recipeSubscription.unsubscribe();
     this._usdaFoodSubscription && this._usdaFoodSubscription.unsubscribe();
-    if (this._loader) {
-      this._loader.dismiss();
-      this._loader = null;
+    if (this._foodLoader) {
+      this._foodLoader.dismiss();
+      this._foodLoader = null;
+    }
+    if (this._recipeLoader) {
+      this._recipeLoader.dismiss();
+      this._recipeLoader = null;
+    }
+    if (this._usdaFoodLoader) {
+      this._usdaFoodLoader.dismiss();
+      this._usdaFoodLoader = null;
     }
   }
 }

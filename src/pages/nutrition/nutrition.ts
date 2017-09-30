@@ -79,35 +79,45 @@ export class NutritionPage {
   }
 
   public getPrevPlan(): void {
-    this._loader = this._loadCtrl.create({
-      content: 'Please wait...',
-      duration: 30000,
-      spinner: 'crescent'
-    });
-    this._loader.present();
-    const subscription: Subscription = this._mealPvd.getPrevMealPlan$(this._authId).subscribe(
-      (mealPlan: MealPlan) => {
-        if (this._loader) {
-          this._loader.dismiss();
-          this._loader = null;
+    this._alertCtrl.create({
+      title: 'Copy yesterday meals?',
+      buttons: [{
+        text: 'Yes',
+        handler: () => {
+          this._loader = this._loadCtrl.create({
+            content: 'Please wait...',
+            duration: 30000,
+            spinner: 'crescent'
+          });
+          this._loader.present();
+          const subscription: Subscription = this._mealPvd.getPrevMealPlan$(this._authId).subscribe(
+            (mealPlan: MealPlan) => {
+              if (this._loader) {
+                this._loader.dismiss();
+                this._loader = null;
+              }
+              this.mealPlan = Object.assign({}, mealPlan['$value'] === null ? this.mealPlan : mealPlan);
+              this._mealPvd.saveMealPlan(this._authId, this.mealPlan, this._weekLog);
+              subscription.unsubscribe();
+            },
+            (err: firebase.FirebaseError) => {
+              if (this._loader) {
+                this._loader.dismiss();
+                this._loader = null;
+              }
+              this._alertCtrl.create({
+                title: 'Uhh ohh...',
+                subTitle: 'Something went wrong',
+                message: err.message,
+                buttons: ['OK']
+              }).present();
+            }
+          );
         }
-        this.mealPlan = Object.assign({}, mealPlan['$value'] === null ? this.mealPlan : mealPlan);
-        this._mealPvd.saveMealPlan(this._authId, this.mealPlan, this._weekLog);
-        subscription.unsubscribe();
-      },
-      (err: firebase.FirebaseError) => {
-        if (this._loader) {
-          this._loader.dismiss();
-          this._loader = null;
-        }
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.message,
-          buttons: ['OK']
-        }).present();
-      }
-    );
+      }, {
+        text: 'No'
+      }]
+    }).present();
   }
 
   public nutrientPercent(nutrientValue: number, nutrientName: string): number {

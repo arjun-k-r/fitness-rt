@@ -6,10 +6,10 @@
     <ion-title>Exercise</ion-title>
     <ion-buttons end>
       <button (click)="getPrevPlan()" ion-button padding role="button">
-        Copy from yesterday
+        <ion-icon aria-hidden="true" name="rewind"></ion-icon>
       </button>
       <button (click)="saveActivityPlan()" [disabled]="!activityPlan.activities.length" ion-button padding role="button">
-        Save
+        <ion-icon aria-hidden="true" name="cloud-upload"></ion-icon>
       </button>
       <button (click)="showSettings($event)" icon-only ion-button role="button">
         <ion-icon aria-hidden="true" name="more"></ion-icon>
@@ -52,38 +52,40 @@
         <p item-content>{{ activityPlan?.totalEnergyConsumption }} kcal</p>
       </ion-item>
       <ion-item>
-        <ion-label color="{{ activityPlan?.combos?.energy ? 'secondary' : 'danger' }}" for="energy" id="energyLabel" text-wrap>
-          {{ activityPlan?.combos?.energy ? 'I feeling energized and fresh' : 'I am feeling exhausted and depressed' }}
-          <ion-icon aria-hidden="true" color="{{ activityPlan?.combos?.energy ? 'secondary' : 'danger' }}" item-right name="{{ activityPlan?.combos?.energy ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+        <ion-label color="{{ activityPlan?.combos?.energy && 'secondary'}}" for="energy" id="energyLabel" text-wrap>
+          I am feeling energized and fresh!
+          <ion-icon *ngIf="activityPlan?.combos?.energy" aria-hidden="true" color="secondary" item-right name="thumbs-up"></ion-icon>
         </ion-label>
         <ion-toggle aria-live="assertive" aria-labelledby="energyLabel" aria-required="true" id="energy" [(ngModel)]="activityPlan?.combos.energy"
           role="switch"></ion-toggle>
       </ion-item>
-      <ion-item *ngIf="activityPlan?.combos.hiit" role="listitem">
-        <ion-icon aria-hidden="true" color="secondary" item-start name="thumbs-up"></ion-icon>
-        <h2 text-wrap>You reached your training heart rate</h2>
-        <p item-content>You have increased your metabolism and fat burning mode.</p>
-      </ion-item>
+      <ion-item-divider color="light" role="separator">
+        Suggestions
+      </ion-item-divider>
       <ion-item *ngIf="activityPlan?.combos.lowActivity" role="listitem">
-        <ion-icon aria-hidden="true" color="danger" item-start name="thumbs-down"></ion-icon>
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
         <h2 text-wrap>Your activities are to light</h2>
-        <p item-content>You need to achieve your target heart rate zone every day.</p>
+        <p text-wrap>You need to reach your target heart rate zone every day the get the best of your exercise routine.</p>
       </ion-item>
       <ion-item *ngIf="activityPlan?.combos.overtraining" role="listitem">
-        <ion-icon aria-hidden="true" color="danger" item-start name="thumbs-down"></ion-icon>
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
         <h2 text-wrap>Overtraining</h2>
-        <p item-content>You are doing too much intense exercise in a singrle day.</p>
+        <p text-wrap>You are doing too much intense exercise in a single day and may damage your cardiovascular system, nervous ystem,
+          and skeletal muscles. Split your intense exercise routine throughout the week in short, but intense sessions.</p>
       </ion-item>
       <ion-item *ngIf="activityPlan?.combos.sedentarism" role="listitem">
-        <ion-icon aria-hidden="true" color="danger" item-start name="thumbs-down"></ion-icon>
-        <h2 text-wrap>Sedentarism</h2>
-        <p item-content>You are inactive and predisposed to all organ diseases.</p>
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+        <h2 text-wrap>Stay active</h2>
+        <p text-wrap>Sedentarism puts you on a risk of all major organ diseases. Walk instead of taking a ride, take the stairs instead
+          of the elevator, stretch every 45 minutes, do anything you can to avoid standing in one place. Everything counts!</p>
       </ion-item>
-      <ion-item *ngIf="!(activityPlan?.combos.lowActivity || activityPlan?.combos.overtraining || activityPlan?.combos.sedentarism)"
-        role="listitem">
-        <ion-icon aria-hidden="true" color="secondary" item-start name="thumbs-up"></ion-icon>
-        <h2 text-wrap>You are active</h2>
-        <p item-content>You are increasing your longevity and improving your health.</p>
+      <ion-item *ngIf="!activityPlan?.combos.energy" role="listitem">
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+        <h2 text-wrap>Train smart</h2>
+        <p text-wrap>Exercise must help your body get rid of toxins and increase oxygen intake. As a result, you'll feel energized and
+          fresh. Not having this feeling means you are not breathing correctly during exercise, you are not reaching your
+          target heart rate, your are not resting/sleeping properly, overtraining, not having the right nutrition, or doing
+          the wrong exercise for your body.</p>
       </ion-item>
     </ion-list>
 

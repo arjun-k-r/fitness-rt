@@ -6,7 +6,7 @@
     <ion-title>Nutrition</ion-title>
     <ion-buttons end>
       <button (click)="getPrevPlan()" ion-button padding role="button">
-        Copy from yesterday
+        <ion-icon aria-hidden="true" name="rewind"></ion-icon>
       </button>
       <button (click)="showSettings($event)" icon-only ion-button role="button">
         <ion-icon aria-hidden="true" name="more"></ion-icon>
@@ -64,6 +64,26 @@
       </ion-item-group>
     </div>
     <div *ngSwitchCase="'dayLog'" padding>
+      <ion-item-group role="group">
+        <ion-item-divider color="light" role="separator">
+          Suggestions
+        </ion-item-divider>
+        <ion-item role="listitem">
+          <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+          <h2 text-wrap>Daily reccomended intakes</h2>
+          <p text-wrap>Try stay between 75% and 125% of you nutrient requiremnts for best nourishment.</p>
+        </ion-item>
+        <ion-item *ngIf="dailyNutrition.ala?.value / dailyNutrition.la?.value < 1" role="listitem">
+          <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+          <h2 text-wrap>Omega-3:Omega-6 ratio</h2>
+          <p text-wrap>It is important to have 1:1 ALA:LA ratio. Try to reduce your LA intake or increase your ALA intake. Visit food list and sort them by nutrient content to find the proper foods.</p>
+        </ion-item>
+        <ion-item *ngIf="dailyNutrition.potassiom?.value / dailyNutrition.sodium?.value < 3" role="listitem">
+          <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+          <h2 text-wrap>Potassium:Sodium ratio</h2>
+          <p text-wrap>It is important to have 3:1 potassium:sodium ratio. Try to reduce your sodium intake or increase your potassium intake. Visit food list and sort them by nutrient content to find the proper foods.</p>
+        </ion-item>
+      </ion-item-group>
       <ion-item-group role="group">
         <ion-item role="listitem">
           Energy

@@ -6,7 +6,7 @@
     <ion-title>Fitness</ion-title>
     <ion-buttons end>
       <button (click)="saveFitness()" [disabled]="fitnessForm.invalid" ion-button padding role="button">
-        Save
+        <ion-icon aria-hidden="true" name="cloud-upload"></ion-icon>
       </button>
       <button (click)="showSettings($event)" icon-only ion-button role="button">
         <ion-icon aria-hidden="true" name="more"></ion-icon>

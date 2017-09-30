@@ -6,7 +6,7 @@
     <ion-title>Sleep</ion-title>
     <ion-buttons end>
       <button (click)="getPrevPlan()" ion-button padding role="button">
-        Copy from yesterday
+        <ion-icon aria-hidden="true" name="rewind"></ion-icon>
       </button>
       <button (click)="saveSleep()" [disabled]="sleepForm.invalid" icon-only ion-button padding role="button">
         <ion-icon aria-hidden="true" name="done-all"></ion-icon>
@@ -109,7 +109,8 @@
         <ion-item *ngIf="sleep.combos.quality <= 5" role="listitem">
           <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
           <h2 text-wrap>Focus on good quality sleep, not on quantity.</h2>
-          <p text-wrap>Make a sleep routine by going to bed and waking up at the same hours every day, and avoid stimulants, electronics or stressfull activities before bed time.</p>
+          <p text-wrap>Make a sleep routine by going to bed and waking up at the same hours every day, and avoid stimulants, electronics
+            or stressfull activities before bed time.</p>
         </ion-item>
       </ion-list>
     </form>

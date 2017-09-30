@@ -203,34 +203,44 @@ export class ExercisePage {
   }
 
   public getPrevPlan(): void {
-    this._loader = this._loadCtrl.create({
-      content: 'Please wait...',
-      duration: 30000,
-      spinner: 'crescent'
-    });
-    this._loader.present();
-    const subscription: Subscription = this._activityPvd.getPrevActivityPlan$(this._authId).subscribe(
-      (activityPlan: ActivityPlan) => {
-        this.activityPlan = Object.assign({}, activityPlan['$value'] === null ? this.activityPlan : activityPlan);
-        if (this._loader) {
-          this._loader.dismiss();
-          this._loader = null;
+    this._alertCtrl.create({
+      title: 'Copy yesterday activities?',
+      buttons: [{
+        text: 'Yes',
+        handler: () => {
+          this._loader = this._loadCtrl.create({
+            content: 'Please wait...',
+            duration: 30000,
+            spinner: 'crescent'
+          });
+          this._loader.present();
+          const subscription: Subscription = this._activityPvd.getPrevActivityPlan$(this._authId).subscribe(
+            (activityPlan: ActivityPlan) => {
+              this.activityPlan = Object.assign({}, activityPlan['$value'] === null ? this.activityPlan : activityPlan);
+              if (this._loader) {
+                this._loader.dismiss();
+                this._loader = null;
+              }
+              subscription.unsubscribe();
+            },
+            (err: firebase.FirebaseError) => {
+              if (this._loader) {
+                this._loader.dismiss();
+                this._loader = null;
+              }
+              this._alertCtrl.create({
+                title: 'Uhh ohh...',
+                subTitle: 'Something went wrong',
+                message: err.message,
+                buttons: ['OK']
+              }).present();
+            }
+          );
         }
-        subscription.unsubscribe();
-      },
-      (err: firebase.FirebaseError) => {
-        if (this._loader) {
-          this._loader.dismiss();
-          this._loader = null;
-        }
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.message,
-          buttons: ['OK']
-        }).present();
-      }
-    );
+      }, {
+        text: 'No'
+      }]
+    }).present();
   }
 
   public saveActivityPlan(): void {

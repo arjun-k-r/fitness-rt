@@ -3,7 +3,7 @@
     <ion-title>Meal edit</ion-title>
     <ion-buttons end>
       <button (click)="saveMeal()" [disabled]="!meal.foods.length" ion-button padding role="button">
-        Save
+        <ion-icon aria-hidden="true" name="cloud-upload"></ion-icon>
       </button>
       <button (click)="removeMeal()" icon-only ion-button padding role="button">
         <ion-icon aria-hidden="true" name="trash"></ion-icon>
@@ -90,19 +90,21 @@
         <ion-item *ngIf="meal.combos.feeling !== 'Energy'" role="listitem">
           <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
           <h2 text-wrap>You need goog quality food and good quality digestion</h2>
-          <p text-wrap>Food must provide energy and nourishment. Any feeling besides energy means you haven't digested the food properly. This happens if you didn't eat properly or if you have intolerence to some specific food.</p>
+          <p text-wrap>Food must provide energy and nourishment. Any feeling besides energy means you haven't digested the food properly.
+            This happens if you didn't eat properly or if you have intolerence to some specific food.</p>
         </ion-item>
         <ion-item *ngIf="meal.combos.overeating" role="listitem">
-            <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
-            <h2 text-wrap>Reduce your portion size</h2>
-            <p text-wrap>Processing is done better with freqent small portions, rather than rare large portions. Digestion is food processing and is done better with small meals. Also, eating small freqeunt meals leads to better nutrient absorption.</p>
-          </ion-item>
+          <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+          <h2 text-wrap>Reduce your portion size</h2>
+          <p text-wrap>Processing is done better with freqent small portions, rather than rare large portions. Digestion is food processing
+            and is done better with small meals. Also, eating small freqeunt meals leads to better nutrient absorption.</p>
+        </ion-item>
       </ion-list>
     </div>
     <div *ngSwitchCase="'foods'">
       <ion-list role="list">
         <button (click)="changeFood(i)" ion-item *ngFor="let food of meal.foods; let i = index" role="button">
-          <ion-icon aria-hidden="true" color="primary" item-start name="create"></ion-icon>
+          <ion-icon aria-hidden="true" color=s"primary" item-start name="create"></ion-icon>
           <h2 text-wrap>{{ food.name }}</h2>
           <p text-wrap>{{ food.quantity * food.servings }} g</p>
           <p item-content>{{ food.servings }} servings</p>

@@ -127,12 +127,18 @@ export class MealProvider {
 
     if (this._userRequirements) {
       for (let nutrientKey in mealPlan.nutrition) {
+        let nutrientPercentageIntake: number = mealPlan.nutrition[nutrientKey].value * 100 / (this._userRequirements[nutrientKey].value || 1);
         if (mealPlan.nutrition[nutrientKey].group !== 'Vitamins') {
-          let nutrientPercentageIntake: number = mealPlan.nutrition[nutrientKey].value * 100 / (this._userRequirements[nutrientKey].value || 1);
           if (nutrientPercentageIntake > 115 || nutrientPercentageIntake < 75) {
             lifePoints -= 15;
           } else {
-            lifePoints -= 10;
+            lifePoints += 10;
+          }
+        } else {
+          if (nutrientPercentageIntake < 75) {
+            lifePoints -= 15;
+          } else {
+            lifePoints += 10;
           }
         }
       }

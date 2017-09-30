@@ -56,11 +56,7 @@ export class NutritionPage {
   ) { }
 
   public addMeal(): void {
-    const newMeal: Meal = new Meal();
-    this.mealPlan.meals = this.mealPlan.meals ? [...this.mealPlan.meals, newMeal] : [newMeal];
     this._navCtrl.push('meal-edit', {
-      id: newMeal.hour,
-      mealIdx: this.mealPlan.meals.length - 1,
       mealPlan: this.mealPlan,
       nutritionLog: this._weekLog
     });
@@ -128,6 +124,10 @@ export class NutritionPage {
   ionViewCanEnter(): void {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!auth) {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._navCtrl.setRoot('registration', {
           history: 'nutrition'
         });
@@ -209,5 +209,9 @@ export class NutritionPage {
     this._authSubscription && this._authSubscription.unsubscribe();
     this._mealSubscription && this._mealSubscription.unsubscribe();
     this._weekLogSubscription && this._weekLogSubscription.unsubscribe();
+    if (this._loader) {
+      this._loader.dismiss();
+      this._loader = null;
+    }
   }
 }

@@ -96,9 +96,9 @@ export class FitnessProvider {
         totalLifePoints = totalLifePoints['$value'] === null ? new LifePoints() : totalLifePoints;
         subscription.unsubscribe();
         resolve(new LifePoints(
-          sleepPoints,
-          nutritionPoints,
           exercisePoints,
+          nutritionPoints,
+          sleepPoints,
           CURRENT_DAY,
           totalLifePoints.timestamp === CURRENT_DAY ? totalLifePoints.totalPoints || 0 : (totalLifePoints.totalPoints + totalLifePoints.sleep + totalLifePoints.nutrition + totalLifePoints.exercise) || 0
         ));

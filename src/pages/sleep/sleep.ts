@@ -286,6 +286,10 @@ export class SleepPage {
   ionViewCanEnter(): void {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!auth) {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._navCtrl.setRoot('registration', {
           history: 'sleep'
         });
@@ -383,5 +387,9 @@ export class SleepPage {
     this._sleepSubscription && this._sleepSubscription.unsubscribe();
     this._sleepFormSubscription && this._sleepFormSubscription.unsubscribe();
     this._weekLogSubscription && this._weekLogSubscription.unsubscribe();
+    if (this._loader) {
+      this._loader.dismiss();
+      this._loader = null;
+    }
   }
 }

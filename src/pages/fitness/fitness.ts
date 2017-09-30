@@ -126,6 +126,10 @@ export class FitnessPage {
   ionViewCanEnter(): void {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!auth) {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._navCtrl.setRoot('registration', {
           history: 'fitness'
         });
@@ -273,5 +277,9 @@ export class FitnessPage {
     this._authSubscription && this._authSubscription.unsubscribe();
     this._fitnessSubscription && this._fitnessSubscription.unsubscribe();
     this._fitnessFormSubscription && this._fitnessFormSubscription.unsubscribe();
+    if (this._loader) {
+      this._loader.dismiss();
+      this._loader = null;
+    }
   }
 }

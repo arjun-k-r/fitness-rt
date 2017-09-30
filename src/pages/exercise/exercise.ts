@@ -7,8 +7,11 @@ import { Subscription } from 'rxjs/Subscription';
 // Ionic
 import {
   ActionSheetController,
+  Alert,
   AlertController,
   IonicPage,
+  Loading,
+  LoadingController,
   Modal,
   ModalController,
   NavController,
@@ -36,6 +39,7 @@ export class ExercisePage {
   private _authId: string;
   private _authSubscription: Subscription;
   private _activitySubscription: Subscription;
+  private _loader: Loading;
   private _weekLogSubscription: Subscription;
   private _weekLog: ExerciseLog[] = [];
   public activityPlan: ActivityPlan = new ActivityPlan();
@@ -49,6 +53,7 @@ export class ExercisePage {
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
     private _activityPvd: ActivityProvider,
+    private _loadCtrl: LoadingController,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
     private _popoverCtrl: PopoverController
@@ -96,6 +101,44 @@ export class ExercisePage {
   private _removeActivity(idx: number): void {
     this.activityPlan.activities = [...this.activityPlan.activities.slice(0, idx), ...this.activityPlan.activities.slice(idx + 1)];
     this._updateActivityPlan();
+  }
+
+  private _saveToDb(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
+    this._activityPvd.saveActivityPlan(this._authId, this.activityPlan, this._weekLog)
+      .then(() => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Success!',
+          message: 'Activities saved successfully!',
+          buttons: [{
+            text: 'Great',
+            handler: () => {
+              this._navCtrl.pop();
+            }
+          }]
+        }).present();
+      })
+      .catch((err: Error) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.toString(),
+          buttons: ['OK']
+        }).present();
+      });
   }
 
   private _updateActivityPlan(): void {
@@ -165,12 +208,26 @@ export class ExercisePage {
   }
 
   public getPrevPlan(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     const subscription: Subscription = this._activityPvd.getPrevActivityPlan$(this._authId).subscribe(
       (activityPlan: ActivityPlan) => {
         this.activityPlan = Object.assign({}, activityPlan['$value'] === null ? this.activityPlan : activityPlan);
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         subscription.unsubscribe();
       },
       (err: firebase.FirebaseError) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
@@ -183,64 +240,27 @@ export class ExercisePage {
 
   public saveActivityPlan(): void {
     this._updateActivityPlan();
+    let alert: Alert;
     const lifePoints = this._activityPvd.checkLifePoints(this.activityPlan);
     if (this.activityPlan.lifePoints > lifePoints) {
-      this._alertCtrl.create({
+      alert = this._alertCtrl.create({
         title: 'Watch your exercise routine!',
         message: 'You are losing life points!',
-        buttons: [
-          {
-            text: 'I will',
-            handler: () => {
-              this.activityPlan.lifePoints = lifePoints;
-              this._activityPvd.saveActivityPlan(this._authId, this.activityPlan, this._weekLog)
-                .then(() => {
-                  this._alertCtrl.create({
-                    title: 'Success!',
-                    message: 'Activity plan saved successfully!',
-                    buttons: ['Great']
-                  }).present();
-                })
-                .catch((err: firebase.FirebaseError) => {
-                  this._alertCtrl.create({
-                    title: 'Uhh ohh...',
-                    subTitle: 'Something went wrong',
-                    message: err.message,
-                    buttons: ['OK']
-                  }).present();
-                });
-            }
-          }
-        ]
-      }).present();
+        buttons: ['I will']
+      });
     } else {
-      this._alertCtrl.create({
+      alert = this._alertCtrl.create({
         title: 'You have improved your activity levels!',
         message: 'You are gaining life points!',
-        buttons: [{
-          text: 'Great',
-          handler: () => {
-            this.activityPlan.lifePoints = lifePoints;
-            this._activityPvd.saveActivityPlan(this._authId, this.activityPlan, this._weekLog)
-              .then(() => {
-                this._alertCtrl.create({
-                  title: 'Success!',
-                  message: 'Activity plan saved successfully!',
-                  buttons: ['Great']
-                }).present();
-              })
-              .catch((err: firebase.FirebaseError) => {
-                this._alertCtrl.create({
-                  title: 'Uhh ohh...',
-                  subTitle: 'Something went wrong',
-                  message: err.message,
-                  buttons: ['OK']
-                }).present();
-              });
-          }
-        }]
-      }).present();
+        buttons: ['Great!']
+      });
     }
+
+    alert.present();
+    alert.onDidDismiss(() => {
+      this.activityPlan.lifePoints = lifePoints;
+      this._saveToDb();
+    });
   }
 
   public showSettings(event: Popover): void {
@@ -253,6 +273,10 @@ export class ExercisePage {
   ionViewCanEnter(): void {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!auth) {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._navCtrl.setRoot('registration', {
           history: 'exercise'
         });
@@ -261,14 +285,28 @@ export class ExercisePage {
   }
 
   ionViewWillEnter(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Loading...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this._authId = auth.uid;
         this._activitySubscription = this._activityPvd.getActivityPlan$(this._authId).subscribe(
           (activityPlan: ActivityPlan) => {
             this.activityPlan = Object.assign({}, activityPlan['$value'] === null ? this.activityPlan : activityPlan);
+            if (this._loader) {
+              this._loader.dismiss();
+              this._loader = null;
+            }
           },
           (err: firebase.FirebaseError) => {
+            if (this._loader) {
+              this._loader.dismiss();
+              this._loader = null;
+            }
             this._alertCtrl.create({
               title: 'Uhh ohh...',
               subTitle: 'Something went wrong',
@@ -304,5 +342,9 @@ export class ExercisePage {
     this._authSubscription && this._authSubscription.unsubscribe();
     this._activitySubscription && this._activitySubscription.unsubscribe();
     this._weekLogSubscription && this._weekLogSubscription.unsubscribe();
+    if (this._loader) {
+      this._loader.dismiss();
+      this._loader = null;
+    }
   }
 }

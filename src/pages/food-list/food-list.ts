@@ -344,5 +344,9 @@ export class FoodListPage {
     this._foodSubscription && this._foodSubscription.unsubscribe();
     this._recipeSubscription && this._recipeSubscription.unsubscribe();
     this._usdaFoodSubscription && this._usdaFoodSubscription.unsubscribe();
+    if (this._loader) {
+      this._loader.dismiss();
+      this._loader = null;
+    }
   }
 }

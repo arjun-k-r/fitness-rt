@@ -390,5 +390,9 @@ export class RecipeDetailsPage {
   ionViewWillLeave(): void {
     this._authSubscription && this._authSubscription.unsubscribe();
     this._recipeFormSubscription && this._recipeFormSubscription.unsubscribe();
+    if (this._loader) {
+      this._loader.dismiss();
+      this._loader = null;
+    }
   }
 }

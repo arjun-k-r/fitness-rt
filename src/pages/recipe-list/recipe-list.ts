@@ -35,7 +35,7 @@ import { RecipeProvider } from '../../providers';
 export class RecipeListPage {
   private _authId: string;
   private _authSubscription: Subscription;
-  private _recipeLoader: Loading;
+  private _loader: Loading;
   private _recipeSubscription: Subscription;
   public ingredientsFilter: string[] = [];
   public recipeLimit: number = 50;
@@ -114,6 +114,10 @@ export class RecipeListPage {
   ionViewCanEnter(): void {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!auth) {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._navCtrl.setRoot('registration', {
           history: 'fitness'
         });
@@ -125,22 +129,22 @@ export class RecipeListPage {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this._authId = auth.uid;
-        this._recipeLoader = this._loadCtrl.create({
+        this._loader = this._loadCtrl.create({
           content: 'Loading...',
           duration: 30000,
           spinner: 'crescent'
         });
-        this._recipeLoader.present();
+        this._loader.present();
         this._recipeSubscription = this._recipePvd.getRecipes$(this._authId).subscribe((recipes: Recipe[]) => {
           this.recipes = [...recipes];
-          if (this._recipeLoader) {
-            this._recipeLoader.dismiss();
-            this._recipeLoader = null;
+          if (this._loader) {
+            this._loader.dismiss();
+            this._loader = null;
           }
         }, (err: firebase.FirebaseError) => {
-          if (this._recipeLoader) {
-            this._recipeLoader.dismiss();
-            this._recipeLoader = null;
+          if (this._loader) {
+            this._loader.dismiss();
+            this._loader = null;
           }
           this._alertCtrl.create({
             title: 'Uhh ohh...',
@@ -156,5 +160,9 @@ export class RecipeListPage {
   ionViewWillLeave(): void {
     this._authSubscription && this._authSubscription.unsubscribe();
     this._recipeSubscription && this._recipeSubscription.unsubscribe();
+    if (this._loader) {
+      this._loader.dismiss();
+      this._loader = null;
+    }
   }
 }

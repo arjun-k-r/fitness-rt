@@ -7,8 +7,11 @@ import { Subscription } from 'rxjs/Subscription';
 
 // Ionic
 import {
+  Alert,
   AlertController,
   IonicPage,
+  Loading,
+  LoadingController,
   NavParams,
   ViewController
 } from 'ionic-angular';
@@ -30,6 +33,7 @@ import { FOOD_GROUPS, FoodProvider } from '../../providers';
 })
 export class FoodDetailsPage {
   private _foodFormSubscription: Subscription;
+  private _loader: Loading;
   public authId: string;
   public dataView: string = 'Percentages';
   public editMode: boolean = false;
@@ -91,6 +95,7 @@ export class FoodDetailsPage {
     private _alertCtrl: AlertController,
     private _foodPvd: FoodProvider,
     private _formBuilder: FormBuilder,
+    private _loadCtrl: LoadingController,
     private _params: NavParams,
     private _viewCtrl: ViewController
   ) {
@@ -164,8 +169,18 @@ export class FoodDetailsPage {
   }
 
   public removeFood(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     this._foodPvd.removeFood(this.authId, this.food)
     .then(() => {
+      if (this._loader) {
+        this._loader.dismiss();
+        this._loader = null;
+      }
       this._alertCtrl.create({
         title: 'Success!',
         message: 'Food removed successfully!',
@@ -178,6 +193,10 @@ export class FoodDetailsPage {
       }).present();
     })
     .catch((err: Error) => {
+      if (this._loader) {
+        this._loader.dismiss();
+        this._loader = null;
+      }
       this._alertCtrl.create({
         title: 'Uhh ohh...',
         subTitle: 'Something went wrong',
@@ -188,8 +207,18 @@ export class FoodDetailsPage {
   }
 
   public saveFood(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     this._foodPvd.saveFood(this.authId, this.food)
     .then(() => {
+      if (this._loader) {
+        this._loader.dismiss();
+        this._loader = null;
+      }
       this._alertCtrl.create({
         title: 'Success!',
         message: 'Food saved successfully!',
@@ -202,6 +231,10 @@ export class FoodDetailsPage {
       }).present();
     })
     .catch((err: firebase.FirebaseError) => {
+      if (this._loader) {
+        this._loader.dismiss();
+        this._loader = null;
+      }
       this._alertCtrl.create({
         title: 'Uhh ohh...',
         subTitle: 'Something went wrong',
@@ -212,6 +245,12 @@ export class FoodDetailsPage {
   }
 
   ionViewWillEnter(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Loading...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     this._foodFormSubscription = this.foodForm.valueChanges.subscribe(
       (changes: {
         group: string;
@@ -282,6 +321,10 @@ export class FoodDetailsPage {
     this._foodPvd.calculateFoodDRI(this.authId, this.food)
       .then((nutrition: Nutrition) => this.foodDri = Object.assign({}, nutrition))
       .catch((err: Error) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
@@ -293,5 +336,9 @@ export class FoodDetailsPage {
 
   ionViewWillLeave(): void {
     this._foodFormSubscription && this._foodFormSubscription.unsubscribe();
+    if (this._loader) {
+      this._loader.dismiss();
+      this._loader = null;
+    }
   }
 }

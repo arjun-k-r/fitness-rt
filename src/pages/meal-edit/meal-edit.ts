@@ -42,7 +42,7 @@ export class MealEditPage {
   private _mealIdx: number;
   private _mealPlan: MealPlan;
   private _nutritionLog: NutritionLog[];
-  public meal: Meal;
+  public meal: Meal = new Meal();
   public mealSegment: string = 'info';
   constructor(
     private _actionSheetCtrl: ActionSheetController,
@@ -53,13 +53,7 @@ export class MealEditPage {
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
     private _params: NavParams
-  ) {
-    this._mealIdx = <number>this._params.get('mealIdx');
-    this._mealPlan = <MealPlan>this._params.get('mealPlan');
-    this._nutritionLog = <NutritionLog[]>this._params.get('nutritionLog');
-    this.meal = this._mealPlan.meals[this._mealIdx];
-    this.meal.foods = this.meal.foods || [];
-  }
+  ) { }
 
   private _changeServings(food: Food | Recipe): void {
     this._alertCtrl.create({
@@ -232,30 +226,27 @@ export class MealEditPage {
 
   public saveMeal(): void {
     this._updateMeal();
+    let alert: Alert;
     const lifePoints = this._mealPvd.checkLifePoints(this._mealPlan);
     if (this._mealPlan.lifePoints > lifePoints) {
-      const alert: Alert = this._alertCtrl.create({
+      alert = this._alertCtrl.create({
         title: 'Watch your nutrition and eating habits!',
         message: 'You are losing life points!',
         buttons: ['I will']
       });
-      alert.present();
-      alert.onDidDismiss(() => {
-        this._mealPlan.lifePoints = lifePoints;
-        this._saveToDb();
-      });
     } else {
-      const alert: Alert = this._alertCtrl.create({
+      alert = this._alertCtrl.create({
         title: 'You have improved your nutrition and eating habits!',
         message: 'You are gaining life points!',
         buttons: ['Great!']
       });
-      alert.present();
-      alert.onDidDismiss(() => {
-        this._mealPlan.lifePoints = lifePoints;
-        this._saveToDb();
-      })
     }
+    
+    alert.present();
+    alert.onDidDismiss(() => {
+      this._mealPlan.lifePoints = lifePoints;
+      this._saveToDb();
+    });
   }
 
   
@@ -265,9 +256,20 @@ export class MealEditPage {
         this._authId = auth.uid;
       }
     });
+
+    this._mealIdx = <number>this._params.get('mealIdx') || 0;
+    this._mealPlan = <MealPlan>this._params.get('mealPlan');
+    this._mealPlan.meals = this._mealPlan.meals || [];
+    this._nutritionLog = <NutritionLog[]>this._params.get('nutritionLog');
+    this.meal = Object.assign({}, this._mealPlan.meals[this._mealIdx]) ||  this.meal;
+    this.meal.foods = this.meal.foods || [];
   }
 
   ionViewWillLeave(): void {
     this._authSubscription && this._authSubscription.unsubscribe();
+    if (this._loader) {
+      this._loader.dismiss();
+      this._loader = null;
+    }
   }
 }

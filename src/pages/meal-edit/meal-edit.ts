@@ -149,7 +149,6 @@ export class MealEditPage {
           }).present();
         }
         const intoleratedFoods: Food[] = this._mealPvd.checkMealFoodIntolerance([], foods, this._mealPlan.intoleranceList);
-        console.log(intoleratedFoods)
         if (!!intoleratedFoods.length) {
           this._alertCtrl.create({
             title: 'Watch out!',
@@ -260,7 +259,7 @@ export class MealEditPage {
 
     this._mealPlan = <MealPlan>this._params.get('mealPlan');
     this._mealPlan.meals = this._mealPlan.meals || [];
-    this._mealIdx = <number>this._params.get('mealIdx') || this._mealPlan.meals.length;
+    this._mealIdx = <number>this._params.get('mealIdx');
     this._mealIdx = this._mealIdx === undefined ? this._mealPlan.meals.length : this._mealIdx;
     this._nutritionLog = <NutritionLog[]>this._params.get('nutritionLog');
     this.meal = Object.assign({}, this._mealPlan.meals[this._mealIdx] || this.meal);

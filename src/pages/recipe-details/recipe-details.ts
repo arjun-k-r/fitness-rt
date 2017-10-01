@@ -45,6 +45,7 @@ export class RecipeDetailsPage {
   private _recipeFormSubscription: Subscription;
   public authId: string;
   public cookingTemperature: AbstractControl;
+  public dataView: string = 'Percentages';
   public duration: AbstractControl;
   public editMode: boolean = false;
   public name: AbstractControl;
@@ -124,6 +125,10 @@ export class RecipeDetailsPage {
         this._updateRecipe();
       }
     });
+  }
+
+  public changeDataView(): void {
+    this.dataView = this.dataView === 'Percentages' ? 'Quantities' : 'Percentages';
   }
 
   public changeImage(): void {

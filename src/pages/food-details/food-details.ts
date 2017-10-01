@@ -7,7 +7,6 @@ import { Subscription } from 'rxjs/Subscription';
 
 // Ionic
 import {
-  Alert,
   AlertController,
   IonicPage,
   Loading,

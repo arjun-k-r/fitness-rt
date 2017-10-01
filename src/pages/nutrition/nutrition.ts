@@ -20,7 +20,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { ILineChartEntry, Meal, MealPlan, Nutrition, NutritionLog } from '../../models';
+import { ILineChartEntry, MealPlan, Nutrition, NutritionLog } from '../../models';
 
 // Providers
 import { MealProvider } from '../../providers';

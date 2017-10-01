@@ -63,7 +63,7 @@
         </button>
       </ion-item-group>
     </div>
-    <div *ngSwitchCase="'dayLog'" padding>
+    <div *ngSwitchCase="'dayLog'">
       <ion-item-group role="group">
         <ion-item-divider color="light" role="separator">
           Suggestions
@@ -84,7 +84,7 @@
           <p text-wrap>It is important to have 3:1 potassium:sodium ratio. Try to reduce your sodium intake or increase your potassium intake. Visit food list and sort them by nutrient content to find the proper foods.</p>
         </ion-item>
       </ion-item-group>
-      <ion-item-group role="group">
+      <ion-item-group padding role="group">
         <ion-item role="listitem">
           Energy
           <p item-content>{{ dailyNutrition.energy?.value }}%</p>
@@ -119,7 +119,7 @@
           <p item-content>{{ dailyNutrition.transFat?.value }}%</p>
         </ion-item>
       </ion-item-group>
-      <ion-item-group role="group">
+      <ion-item-group padding role="group">
         <ion-item-divider>Essential amino acids</ion-item-divider>
         <ion-item role="listitem">
           Histidine
@@ -155,7 +155,7 @@
           <p item-content>{{ dailyNutrition.tryptophan?.value }}%</p>
         </ion-item>
       </ion-item-group>
-      <ion-item-group role="group">
+      <ion-item-group padding role="group">
         <ion-item-divider>Essential vitamins</ion-item-divider>
         <ion-item role="listitem">
           Vitamin A
@@ -210,7 +210,7 @@
           <p item-content>{{ dailyNutrition.vitaminK?.value }}%</p>
         </ion-item>
       </ion-item-group>
-      <ion-item-group role="group">
+      <ion-item-group padding role="group">
         <ion-item-divider>Essential minerals</ion-item-divider>
         <ion-item role="listitem">
           Calcium
@@ -253,7 +253,7 @@
           <p item-content>{{ dailyNutrition.zinc?.value }}%</p>
         </ion-item>
       </ion-item-group>
-      <ion-item-group role="group">
+      <ion-item-group padding role="group">
         <ion-item-divider>Essential fatty acids</ion-item-divider>
         <ion-item role="listitem">
           Omega-3 (ALA)
@@ -272,7 +272,7 @@
           <p item-content>{{ dailyNutrition.la?.value }}%</p>
         </ion-item>
       </ion-item-group>
-      <ion-item-group role="group">
+      <ion-item-group padding role="group">
         <ion-item-divider>Other</ion-item-divider>
         <ion-item role="listitem">
           Alcohol

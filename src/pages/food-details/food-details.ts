@@ -176,34 +176,34 @@ export class FoodDetailsPage {
     });
     this._loader.present();
     this._foodPvd.removeFood(this.authId, this.food)
-    .then(() => {
-      if (this._loader) {
-        this._loader.dismiss();
-        this._loader = null;
-      }
-      this._alertCtrl.create({
-        title: 'Success!',
-        message: 'Food removed successfully!',
-        buttons: [{
-          text: 'Great',
-          handler: () => {
-            this._viewCtrl.dismiss();
-          }
-        }]
-      }).present();
-    })
-    .catch((err: Error) => {
-      if (this._loader) {
-        this._loader.dismiss();
-        this._loader = null;
-      }
-      this._alertCtrl.create({
-        title: 'Uhh ohh...',
-        subTitle: 'Something went wrong',
-        message: err.toString(),
-        buttons: ['OK']
-      }).present();
-    });
+      .then(() => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Success!',
+          message: 'Food removed successfully!',
+          buttons: [{
+            text: 'Great',
+            handler: () => {
+              this._viewCtrl.dismiss();
+            }
+          }]
+        }).present();
+      })
+      .catch((err: Error) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.toString(),
+          buttons: ['OK']
+        }).present();
+      });
   }
 
   public saveFood(): void {
@@ -214,34 +214,34 @@ export class FoodDetailsPage {
     });
     this._loader.present();
     this._foodPvd.saveFood(this.authId, this.food)
-    .then(() => {
-      if (this._loader) {
-        this._loader.dismiss();
-        this._loader = null;
-      }
-      this._alertCtrl.create({
-        title: 'Success!',
-        message: 'Food saved successfully!',
-        buttons: [{
-          text: 'Great',
-          handler: () => {
-            this._viewCtrl.dismiss();
-          }
-        }]
-      }).present();
-    })
-    .catch((err: firebase.FirebaseError) => {
-      if (this._loader) {
-        this._loader.dismiss();
-        this._loader = null;
-      }
-      this._alertCtrl.create({
-        title: 'Uhh ohh...',
-        subTitle: 'Something went wrong',
-        message: err.message,
-        buttons: ['OK']
-      }).present();
-    });
+      .then(() => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Success!',
+          message: 'Food saved successfully!',
+          buttons: [{
+            text: 'Great',
+            handler: () => {
+              this._viewCtrl.dismiss();
+            }
+          }]
+        }).present();
+      })
+      .catch((err: firebase.FirebaseError) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.message,
+          buttons: ['OK']
+        }).present();
+      });
   }
 
   ionViewWillEnter(): void {
@@ -319,7 +319,13 @@ export class FoodDetailsPage {
       (err: Error) => console.error(`Error fetching form changes: ${err}`)
     );
     this._foodPvd.calculateFoodDRI(this.authId, this.food)
-      .then((nutrition: Nutrition) => this.foodDri = Object.assign({}, nutrition))
+      .then((nutrition: Nutrition) => {
+        this.foodDri = Object.assign({}, nutrition);
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
+      })
       .catch((err: Error) => {
         if (this._loader) {
           this._loader.dismiss();

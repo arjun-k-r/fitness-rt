@@ -25,6 +25,7 @@ import * as firebase from 'firebase/app';
 })
 export class RegistrationPage {
   private _history: string;
+  private _loader: Loading;
   private _tabBarElement: any;
   public email: FormControl = new FormControl('', [Validators.required, Validators.email]);
   public name: FormControl = new FormControl('', [Validators.required, Validators.pattern(/[A-Za-z]+(\s[A-Za-z]+)?$/)]);
@@ -55,26 +56,32 @@ export class RegistrationPage {
   }
 
   public register(): void {
-    const loader: Loading = this._loadCtrl.create({
-      content: 'Creating your account...',
-      spinner: 'crescent',
-      duration: 10000
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
     });
-    loader.present();
+    this._loader.present();
     this._afAuth.auth.createUserWithEmailAndPassword(this.registrationForm.get('email').value.trim(), this.registrationForm.get('password').value.trim())
       .then((user: firebase.User) => {
         user.updateProfile({
           displayName: this.registrationForm.get('name').value.trim(),
           photoURL: ''
         }).then(() => {
-          loader.dismiss();
+          if (this._loader) {
+            this._loader.dismiss();
+            this._loader = null;
+          }
           if (!!this._history) {
             this._navCtrl.setRoot(this._history);
           } else {
             this._navCtrl.setRoot('fitness');
           }
         }).catch((err: firebase.FirebaseError) => {
-          loader.dismiss();
+          if (this._loader) {
+            this._loader.dismiss();
+            this._loader = null;
+          }
           this._alertCtrl.create({
             title: 'Uhh ohh...',
             subTitle: 'Something went wrong',
@@ -83,7 +90,10 @@ export class RegistrationPage {
           }).present();
         });
       }).catch((err: firebase.FirebaseError) => {
-        loader.dismiss();
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
@@ -94,13 +104,30 @@ export class RegistrationPage {
   }
 
   ionViewWillEnter(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 5000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
     if (this._tabBarElement) {
       this._tabBarElement.style.display = 'none';
     }
     this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._navCtrl.setRoot('fitness');
       }
     });
+  }
+
+  ionViewWillLeave(): void {
+    if (this._loader) {
+      this._loader.dismiss();
+      this._loader = null;
+    }
   }
 }

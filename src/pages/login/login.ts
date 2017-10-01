@@ -24,6 +24,7 @@ import * as firebase from 'firebase/app';
 })
 export class LoginPage {
   private _history: string;
+  private _loader: Loading;
   public email: FormControl = new FormControl('', [Validators.required, Validators.email]);
   public loginForm: FormGroup;
   public password: FormControl = new FormControl('', Validators.required);
@@ -48,22 +49,28 @@ export class LoginPage {
   }
 
   public login(): void {
-    const loader: Loading = this._loadCtrl.create({
+    this._loader = this._loadCtrl.create({
       content: 'Please wait...',
-      spinner: 'crescent',
-      duration: 10000
+      duration: 30000,
+      spinner: 'crescent'
     });
-    loader.present();
+    this._loader.present();
     this._afAuth.auth.signInWithEmailAndPassword(this.loginForm.get('email').value.trim(), this.loginForm.get('password').value.trim())
       .then((user: firebase.User) => {
-        loader.dismiss();
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         if (this._history) {
           this._navCtrl.setRoot(this._history);
         } else {
           this._navCtrl.setRoot('fitness');
         }
       }).catch((err: firebase.FirebaseError) => {
-        loader.dismiss();
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
@@ -77,6 +84,13 @@ export class LoginPage {
     this._navCtrl.setRoot('registration', {
       history: this._history
     })
+  }
+
+  ionViewWillLeave(): void {
+    if (this._loader) {
+      this._loader.dismiss();
+      this._loader = null;
+    }
   }
 
 }

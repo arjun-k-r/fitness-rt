@@ -4,7 +4,7 @@
     <ion-buttons end>
       <button (click)="saveRecipe()" [disabled]="recipeForm.invalid || !recipe.ingredients.length" *ngIf="editMode" ion-button
         padding role="button">
-        <ion-icon aria-hidden="true" name="cloud-upload"></ion-icon>
+        <ion-icon aria-hidden="true" name="cloud-done"></ion-icon>
       </button>
       <button (click)="editRecipe()" *ngIf="!editMode" icon-only ion-button padding role="button">
         <ion-icon aria-hidden="true" name="create"></ion-icon>

@@ -9,7 +9,7 @@
         <ion-icon aria-hidden="true" name="rewind"></ion-icon>
       </button>
       <button (click)="saveSleep()" [disabled]="sleepForm.invalid" icon-only ion-button padding role="button">
-        <ion-icon aria-hidden="true" name="done-all"></ion-icon>
+        <ion-icon aria-hidden="true" name="cloud-done"></ion-icon>
       </button>
       <button (click)="showSettings($event)" icon-only ion-button role="button">
         <ion-icon aria-hidden="true" name="more"></ion-icon>
@@ -91,6 +91,11 @@
         <ion-item-divider color="light" role="separator">
           Suggestions
         </ion-item-divider>
+        <ion-item *ngIf="!sleep.duration < 7" role="listitem">
+          <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+          <h2 text-wrap>You need 7-9 hours of good quality sleep per night</h2>
+          <p text-wrap>Although our sleep need is relative to hour daily effort intelectual and physical effort, we generaly need 5 complete sleep cycles per night (90-110 minutes/cycle).</p>
+        </ion-item>
         <ion-item *ngIf="!sleep.combos.noElectronics" role="listitem">
           <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
           <h2 text-wrap>Avoid electronics 1 hour before bed time.</h2>

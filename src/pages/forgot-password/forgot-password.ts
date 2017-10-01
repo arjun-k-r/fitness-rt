@@ -24,6 +24,7 @@ import * as firebase from 'firebase/app';
 })
 export class ForgotPasswordPage {
   private _history: string;
+  private _loader: Loading;
   public forgotPasswordForm: FormGroup;
   public email: FormControl = new FormControl('', [Validators.required, Validators.email]);
   constructor(
@@ -46,15 +47,18 @@ export class ForgotPasswordPage {
   }
 
   public reqestReset(): void {
-    const loader: Loading = this._loadCtrl.create({
-      content: 'Sending request...',
-      spinner: 'crescent',
-      duration: 10000
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
     });
-    loader.present();
+    this._loader.present();
     this._afAuth.auth.sendPasswordResetEmail(this.forgotPasswordForm.get('email').value.trim())
       .then(() => {
-        loader.dismiss();
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Request sent',
           subTitle: 'An email with a password reset link has been sent',
@@ -68,7 +72,10 @@ export class ForgotPasswordPage {
         }).present();
       })
       .catch((err: firebase.FirebaseError) => {
-        loader.dismiss();
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
@@ -76,6 +83,13 @@ export class ForgotPasswordPage {
           buttons: ['OK']
         }).present();
       });
+  }
+
+  ionViewWillLeave(): void {
+    if (this._loader) {
+      this._loader.dismiss();
+      this._loader = null;
+    }
   }
 
 }

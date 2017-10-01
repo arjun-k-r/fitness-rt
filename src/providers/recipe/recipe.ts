@@ -67,11 +67,13 @@ export class RecipeProvider {
   }
 
   public saveRecipe(authId: string, recipe: Recipe): firebase.Promise<void> {
-    if (recipe.hasOwnProperty('$key')) {
-      return this._db.list(`/recipes/${authId}`).update(recipe['$key'], recipe);
-    } else {
-      recipe.chef = authId;
-      return this._db.list(`/recipes/${authId}`).push(recipe);
+    if (recipe.ingredients && recipe.ingredients.length) {
+      if (recipe.hasOwnProperty('$key')) {
+        return this._db.list(`/recipes/${authId}`).update(recipe['$key'], recipe);
+      } else {
+        recipe.chef = authId;
+        return this._db.list(`/recipes/${authId}`).push(recipe);
+      }
     }
   }
 

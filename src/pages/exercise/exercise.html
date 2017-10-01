@@ -9,7 +9,7 @@
         <ion-icon aria-hidden="true" name="rewind"></ion-icon>
       </button>
       <button (click)="saveActivityPlan()" [disabled]="!activityPlan.activities.length" ion-button padding role="button">
-        <ion-icon aria-hidden="true" name="cloud-upload"></ion-icon>
+        <ion-icon aria-hidden="true" name="cloud-done"></ion-icon>
       </button>
       <button (click)="showSettings($event)" icon-only ion-button role="button">
         <ion-icon aria-hidden="true" name="more"></ion-icon>
@@ -59,6 +59,8 @@
         <ion-toggle aria-live="assertive" aria-labelledby="energyLabel" aria-required="true" id="energy" [(ngModel)]="activityPlan?.combos.energy"
           role="switch"></ion-toggle>
       </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'dayLog'" role="list">
       <ion-item-divider color="light" role="separator">
         Suggestions
       </ion-item-divider>

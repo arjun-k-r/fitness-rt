@@ -3,7 +3,7 @@
     <ion-title>Meal edit</ion-title>
     <ion-buttons end>
       <button (click)="saveMeal()" [disabled]="!meal.foods.length" ion-button padding role="button">
-        <ion-icon aria-hidden="true" name="cloud-upload"></ion-icon>
+        <ion-icon aria-hidden="true" name="cloud-done"></ion-icon>
       </button>
       <button (click)="removeMeal()" icon-only ion-button padding role="button">
         <ion-icon aria-hidden="true" name="trash"></ion-icon>
@@ -26,7 +26,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-fab bottom *ngIf="mealSegment === 'foods'" right>
     <button (click)="addFood()" color="secondary" ion-fab role="button">
       <ion-icon aria-hidden="true" name="add"></ion-icon>
@@ -34,7 +34,7 @@
   </ion-fab>
   <div [ngSwitch]="mealSegment">
     <div *ngSwitchCase="'info'">
-      <ion-list>
+      <ion-list padding>
         <ion-item>
           <ion-label floating for="mealTime" id="mealTimeLabel">Meal time</ion-label>
           <ion-datetime aria-live="assertive" aria-labelledby="mealTimeLabel" aria-required="true" displayFormat="HH:mm" id="mealTimeLabel"
@@ -72,6 +72,8 @@
             <ion-option role="option" value="Sleepiness">Sleepiness</ion-option>
           </ion-select>
         </ion-item>
+      </ion-list>
+      <ion-list role="list">
         <ion-item-divider color="light" role="separator">
           Suggestions
         </ion-item-divider>
@@ -101,7 +103,7 @@
         </ion-item>
       </ion-list>
     </div>
-    <div *ngSwitchCase="'foods'">
+    <div *ngSwitchCase="'foods'" padding>
       <ion-list role="list">
         <button (click)="changeFood(i)" ion-item *ngFor="let food of meal.foods; let i = index" role="button">
           <ion-icon aria-hidden="true" color=s"primary" item-start name="create"></ion-icon>
@@ -116,7 +118,7 @@
         </ion-item>
       </ion-list>
     </div>
-    <div *ngSwitchCase="'nutrition'">
+    <div *ngSwitchCase="'nutrition'" padding>
       <ion-item-group role="group">
         <ion-item role="listitem">
           Energy

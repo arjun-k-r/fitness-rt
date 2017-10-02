@@ -24,7 +24,6 @@ export class Meal {
 export class MealPlan {
     constructor(
         public date: number = moment().dayOfYear(),
-        public intoleranceList: Food[] = [],
         public lifePoints: number = 0,
         public meals: Meal[] = [],
         public nutrition: Nutrition = new Nutrition(),

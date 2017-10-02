@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar role="toolbar">
+    <ion-title>Warning</ion-title>
+    <ion-buttons end>
+      <button (click)="dismiss()" ion-button padding role="button">
+          <ion-icon aria-hidden="true" name="done-all"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <p *ngIf="warningView === 'antinutrients'">
+    These foods are plant seeds and contain antinutrients. Antinutrients interfere with nutrient absorptiona and cause gut inflammation
+  </p>
+  <p *ngIf="warningView === 'intolerance'">
+    These foods seem to hve cause you digestive problems in the past. If you have an intolerance to these foods, reduce or avoid
+    them. Intolerance means you cannot digest these foods properly and they putrefy in gut eliminating toxins. They also
+    cause inflammation. On the long-term, this leads to disease.
+  </p>
+
+  <ion-list role="list">
+    <ion-item *ngFor="let food of foods" role="checkbox">
+      <ion-icon aria-hidden="true" color="danger" item-start name="warning"></ion-icon>
+      <h2 text-wrap>{{ food.name }}</h2>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

@@ -10,7 +10,7 @@ import * as firebase from 'firebase/app';
 
 // Third-party
 import * as moment from 'moment';
-import { sortBy } from 'lodash';
+import { sortBy, uniqBy } from 'lodash';
 
 // Models
 import {
@@ -174,42 +174,38 @@ export class MealProvider {
     return foundIntolerance;
   }
 
-  public checkMealPlanFoodIntolerance(mealPlan: MealPlan): Food[] {
+  public checkMealPlanFoodIntolerance(intoleranceList: Food[] = [], meals: Meal[]): Food[] {
     let newIntoleranceList: Food[] = [],
       tempIntoleranceList: Food[] = [];
-    mealPlan.intoleranceList = mealPlan.intoleranceList || [];
-    mealPlan.meals.forEach((meal: Meal) => {
+    meals.forEach((meal: Meal) => {
       if (meal.combos.calmEating && meal.combos.slowEating && !meal.combos.overeating && meal.combos.feeling !== 'Energy') {
         // Add new intolerated food
         meal.foods.forEach((food: Food | Recipe) => {
           if (food.hasOwnProperty('chef')) {
-            newIntoleranceList = [...mealPlan.intoleranceList, ...this._getRecipeFoods([], (<Recipe>food).ingredients)];
+            newIntoleranceList = [...intoleranceList, ...this._getRecipeFoods([], (<Recipe>food).ingredients)];
           } else {
-            console.log(mealPlan.intoleranceList.filter((intoleration: Food) => food.name === intoleration.name))
-            if (!mealPlan.intoleranceList.filter((intoleration: Food) => food.name === intoleration.name)[0]) {
-              newIntoleranceList = [...mealPlan.intoleranceList, <Food>food];
-            }
+            newIntoleranceList = [...intoleranceList, <Food>food];
           }
         });
-      } else if (meal.combos.feeling === 'Energy' && mealPlan.intoleranceList.length) {
+      } else if (meal.combos.feeling === 'Energy' && intoleranceList.length) {
         // Remove no longer intolerated food
         let mealRecipeIngredients: Food[];
         meal.foods.forEach((food: Food | Recipe) => {
-          tempIntoleranceList = [...mealPlan.intoleranceList];
+          tempIntoleranceList = [...intoleranceList];
           if (food.hasOwnProperty('chef')) {
             mealRecipeIngredients = this._getRecipeFoods([], (<Recipe>food).ingredients);
             mealRecipeIngredients.forEach((ingredient: Food) => {
-              tempIntoleranceList = [...mealPlan.intoleranceList];
+              tempIntoleranceList = [...intoleranceList];
               tempIntoleranceList.forEach((intoleratedFood: Food, idx: number) => {
                 if (ingredient.name === intoleratedFood.name) {
-                  mealPlan.intoleranceList = [...mealPlan.intoleranceList.slice(0, idx), ...mealPlan.intoleranceList.slice(idx + 1)];
+                  intoleranceList = [...intoleranceList.slice(0, idx), ...intoleranceList.slice(idx + 1)];
                 }
               });
             })
           } else {
             tempIntoleranceList.forEach((intoleratedFood: Food, idx: number) => {
               if (food.name === intoleratedFood.name) {
-                mealPlan.intoleranceList = [...mealPlan.intoleranceList.slice(0, idx), ...mealPlan.intoleranceList.slice(idx + 1)];
+                intoleranceList = [...intoleranceList.slice(0, idx), ...intoleranceList.slice(idx + 1)];
               }
             });
           }
@@ -217,11 +213,15 @@ export class MealProvider {
       }
     });
 
-    return newIntoleranceList;
+    return uniqBy(newIntoleranceList, 'name');
   }
 
   public checkOvereating(meal: Meal): boolean {
     return meal.quantity > 700;
+  }
+
+  public getIntoleratedFoods$(authId: string): FirebaseListObservable<Food[]> {
+    return this._db.list(`/food-intolerance/${authId}`);
   }
 
   public getMealPlan$(authId: string): FirebaseObjectObservable<MealPlan> {
@@ -240,7 +240,7 @@ export class MealProvider {
     return this._db.object(`/meal-plan/${authId}/${CURRENT_DAY - 1}`);
   }
 
-  public saveMealPlan(authId: string, mealPlan: MealPlan, weekLog: NutritionLog[]): Promise<{}> {
+  public saveMealPlan(authId: string, mealPlan: MealPlan, weekLog: NutritionLog[], intoleratedFoods?: Food[]): Promise<{}> {
     return new Promise((resolve, reject) => {
       this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/nutrition`).set(mealPlan.lifePoints)
         .then(() => {
@@ -255,9 +255,18 @@ export class MealProvider {
           } else {
             this._db.list(`/nutrition-log/${authId}/`).push(newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
           }
-          this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan).then(() => {
-            resolve();
-          }).catch((err: firebase.FirebaseError) => reject(err));
+          if (!intoleratedFoods) {
+            this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan).then(() => {
+              resolve();
+            }).catch((err: firebase.FirebaseError) => reject(err));
+          } else {
+            Promise.all([
+              this._db.object(`/food-intolerance/${authId}`).set(intoleratedFoods),
+              this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan)
+            ]).then(() => {
+              resolve();
+            }).catch((err: firebase.FirebaseError) => reject(err));
+          }
         })
         .catch((err: Error) => console.error(`Error storing energy consumption and life points: ${err.toString()}`));
     });

@@ -105,6 +105,13 @@
     </div>
     <div *ngSwitchCase="'foods'" padding>
       <ion-list role="list">
+        <button (click)="viewIntoleratedFoods()" ion-item role="button">
+          <ion-icon aria-hidden="true" color="danger" item-start name="warning"></ion-icon>
+          <h2 text-wrap>Watch out for intolerated foods</h2>
+          <ion-note item-right>
+            <ion-icon aria-hidden="true" name="open"></ion-icon>
+          </ion-note>
+        </button>
         <button (click)="changeFood(i)" ion-item *ngFor="let food of meal.foods; let i = index" role="button">
           <ion-icon aria-hidden="true" color="primary" item-start name="create"></ion-icon>
           <h2 text-wrap>{{ food.name }}</h2>

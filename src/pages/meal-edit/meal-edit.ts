@@ -38,9 +38,12 @@ import { MealProvider } from '../../providers';
 export class MealEditPage {
   private _authId: string;
   private _authSubscription: Subscription;
+  private _foodIntoleranceSubscription: Subscription;
+  private _intoleratedFoods: Food[] = [];
   private _loader: Loading;
   private _mealIdx: number;
   private _mealPlan: MealPlan;
+  private _mealPlanFoodIntolerance: Food[] = [];
   private _nutritionLog: NutritionLog[];
   public meal: Meal = new Meal();
   public mealSegment: string = 'info';
@@ -94,7 +97,7 @@ export class MealEditPage {
       spinner: 'crescent'
     });
     this._loader.present();
-    this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog)
+    this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog, this._mealPlanFoodIntolerance)
       .then(() => {
         if (this._loader) {
           this._loader.dismiss();
@@ -111,7 +114,7 @@ export class MealEditPage {
           }]
         }).present();
       })
-      .catch((err: Error) => {
+      .catch((err: firebase.FirebaseError) => {
         if (this._loader) {
           this._loader.dismiss();
           this._loader = null;
@@ -119,7 +122,7 @@ export class MealEditPage {
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
-          message: err.toString(),
+          message: err.message,
           buttons: ['OK']
         }).present();
       });
@@ -132,7 +135,7 @@ export class MealEditPage {
     this._mealPlan.meals = this._mealPvd.sortMeals(this._mealPlan.meals);
     this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals);
     this.meal.combos.overeating = this._mealPvd.checkOvereating(this.meal);
-    this._mealPlan.intoleranceList = this._mealPvd.checkMealPlanFoodIntolerance(this._mealPlan);
+    this._mealPlanFoodIntolerance = this._mealPvd.checkMealPlanFoodIntolerance(this._intoleratedFoods, this._mealPlan.meals);
   }
 
   public addFood(): void {
@@ -142,18 +145,16 @@ export class MealEditPage {
       if (!!foods) {
         const antinutrientFoods: Food[] = this._mealPvd.checkMealFoodAntinutrients([], foods);
         if (!!antinutrientFoods.length) {
-          this._alertCtrl.create({
-            title: 'Watch out!',
-            message: `${antinutrientFoods.reduce((strList: string, food: Food, idx: number) => strList += `${food.name}${idx < antinutrientFoods.length - 1 ? ', ' : ''}`, '')} are plant seeds and contain antinutrients.`,
-            buttons: ['I will']
+          this._modalCtrl.create('food-warning', {
+            foods: antinutrientFoods,
+            warning: 'antinutrients'
           }).present();
         }
-        const intoleratedFoods: Food[] = this._mealPvd.checkMealFoodIntolerance([], foods, this._mealPlan.intoleranceList);
-        if (!!intoleratedFoods.length) {
-          this._alertCtrl.create({
-            title: 'Watch out!',
-            message: `${intoleratedFoods.reduce((strList: string, food: Food, idx: number) => strList += `${food.name}${idx < intoleratedFoods.length - 1 ? ', ' : ''}`, '')} seem to have caused you digestive problems in the past`,
-            buttons: ['I will']
+        this._mealPlanFoodIntolerance = this._mealPvd.checkMealFoodIntolerance([], foods, this._intoleratedFoods);
+        if (!!this._mealPlanFoodIntolerance.length) {
+          this._modalCtrl.create('food-warning', {
+            foods: this._mealPlanFoodIntolerance,
+            warning: 'intolerance'
           }).present();
         }
         this.meal.foods = this.meal.foods ? [...this.meal.foods, ...foods] : [...foods];
@@ -193,7 +194,7 @@ export class MealEditPage {
     this._loader.present();
     this._mealPlan.meals = [...this._mealPlan.meals.slice(0, this._mealIdx), ...this._mealPlan.meals.slice(this._mealIdx + 1)];
     this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals)
-    this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog)
+    this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog, this._mealPlanFoodIntolerance, )
       .then(() => {
         if (this._loader) {
           this._loader.dismiss();
@@ -210,7 +211,7 @@ export class MealEditPage {
           }]
         }).present();
       })
-      .catch((err: Error) => {
+      .catch((err: firebase.FirebaseError) => {
         if (this._loader) {
           this._loader.dismiss();
           this._loader = null;
@@ -218,7 +219,7 @@ export class MealEditPage {
         this._alertCtrl.create({
           title: 'Uhh ohh...',
           subTitle: 'Something went wrong',
-          message: err.toString(),
+          message: err.message,
           buttons: ['OK']
         }).present();
       });
@@ -249,11 +250,26 @@ export class MealEditPage {
     });
   }
 
+  public viewIntoleratedFoods(): void {
+    this._modalCtrl.create('food-intolerance', { foods: this._intoleratedFoods }).present();
+  }
+
   
   ionViewWillEnter(): void {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this._authId = auth.uid;
+        this._foodIntoleranceSubscription = this._mealPvd.getIntoleratedFoods$(this._authId).subscribe(
+          (foods: Food[]) => this._intoleratedFoods = [...foods],
+          (err: firebase.FirebaseError) => {
+            this._alertCtrl.create({
+              title: 'Uhh ohh...',
+              subTitle: 'Something went wrong',
+              message: err.message,
+              buttons: ['OK']
+            }).present();
+          }
+        )
       }
     });
 
@@ -268,6 +284,7 @@ export class MealEditPage {
 
   ionViewWillLeave(): void {
     this._authSubscription && this._authSubscription.unsubscribe();
+    this._foodIntoleranceSubscription && this._foodIntoleranceSubscription.unsubscribe();
     if (this._loader) {
       this._loader.dismiss();
       this._loader = null;

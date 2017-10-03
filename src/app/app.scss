@@ -103,6 +103,8 @@
     bottom: 0;
     color: color($colors, secondary);
     display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
     left: 0;
     position: absolute;
     right: 0;

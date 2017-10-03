@@ -106,7 +106,7 @@ export class RegistrationPage {
   ionViewWillEnter(): void {
     this._loader = this._loadCtrl.create({
       content: 'Please wait...',
-      duration: 5000,
+      duration: 15000,
       spinner: 'crescent'
     });
     this._loader.present();

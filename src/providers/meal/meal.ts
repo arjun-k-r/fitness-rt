@@ -187,7 +187,7 @@ export class MealProvider {
             newIntoleranceList = [...intoleranceList, <Food>food];
           }
         });
-      } else if (meal.combos.feeling === 'Energy' && intoleranceList.length) {
+      } else if (meal.combos.feeling === 'Energy' && !!intoleranceList.length) {
         // Remove no longer intolerated food
         let mealRecipeIngredients: Food[];
         meal.foods.forEach((food: Food | Recipe) => {

@@ -9,7 +9,7 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Sleep, SleepLog } from '../../models';
+import { Sleep, SleepGoals, SleepLog } from '../../models';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 
@@ -19,8 +19,29 @@ export class SleepProvider {
     private _db: AngularFireDatabase
   ) { }
 
+  public checkGoalAchievements(goals: SleepGoals, sleep: Sleep): boolean {
+    let bedTimeAchieved: boolean = false;
+    let sleepDurationAchieved: boolean = false;
+    if (goals.bedTime.isSelected && moment.duration(goals.bedTime.value).asHours() === moment.duration(sleep.bedTime).asHours()) {
+      bedTimeAchieved = true;
+    } else if (goals.duration.isSelected && goals.duration.value === sleep.duration) {
+      sleepDurationAchieved = true;
+    }
+
+    return bedTimeAchieved || sleepDurationAchieved;
+  }
+
+  public checkGoodSleep(sleep: Sleep): boolean {
+    return sleep.combos.noElectronics && sleep.combos.noElectronics && sleep.combos.noStimulants && sleep.combos.quality > 5 && sleep.combos.relaxation && sleep.duration > 7 && moment(sleep.bedTime, 'HH:mm').hours() < 22;
+  }
+
   public checkLifePoints(sleep: Sleep): number {
     let lifePoints: number = 0;
+
+    if (sleep.combos.goalsAchieved) {
+      lifePoints += 5;
+    }
+
     if (sleep.combos.noElectronics) {
       lifePoints += 5;
     } else {
@@ -60,6 +81,10 @@ export class SleepProvider {
     return lifePoints;
   }
 
+  public getSleepGoals$(authId: string): FirebaseObjectObservable<SleepGoals> {
+    return this._db.object(`/sleep/${authId}/goals`);
+  }
+
   public getPrevSleep$(authId: string): FirebaseObjectObservable<Sleep> {
     return this._db.object(`/sleep/${authId}/${CURRENT_DAY - 1}`);
   }
@@ -83,11 +108,11 @@ export class SleepProvider {
           const newSleepLog: SleepLog = new SleepLog(sleep.bedTime, moment().format('dddd'), sleep.duration, sleep.combos.quality);
           if (!!weekLog.length) {
             weekLog.reverse();
-           if (newSleepLog.date !== weekLog[0].date) {
-            this._db.list(`/sleep-log/${authId}/`).push(newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
-           } else {
-            this._db.list(`/sleep-log/${authId}/`).update(weekLog[0]['$key'], newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
-           }
+            if (newSleepLog.date !== weekLog[0].date) {
+              this._db.list(`/sleep-log/${authId}/`).push(newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
+            } else {
+              this._db.list(`/sleep-log/${authId}/`).update(weekLog[0]['$key'], newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
+            }
           } else {
             this._db.list(`/sleep-log/${authId}/`).push(newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
           }
@@ -97,5 +122,9 @@ export class SleepProvider {
         })
         .catch((err: Error) => console.error(`Error storing life points: ${err.toString()}`));
     });
+  }
+
+  public saveSleepGoals(authId: string, goals: SleepGoals): firebase.Promise<void> {
+    return this._db.object(`/sleep/${authId}/goals`).set(goals);
   }
 }

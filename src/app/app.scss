@@ -75,6 +75,33 @@
     width: 100%;
 }
 
+.rewards-page__layer {
+    height: 100%;
+    width: 100%;
+    &::after {
+        align-items: center;
+        color: rgb(220, 220, 220);
+        content: '\f06b';
+        display: flex;
+        font-family: FontAwesome;
+        font-size: 25rem;
+        font-style: normal;
+        font-weight: normal;
+        height: 100%;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+    }
+}
+
+.rewards-page__inner {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+  }
+
 .upload-placeholder {
     align-items: center;
     background-color: rgb(220, 220, 220);

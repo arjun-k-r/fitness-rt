@@ -44,8 +44,9 @@ export class NutritionPage {
   public chartOpts: any = { responsive: true };
   public dailyNutrition: Nutrition = new Nutrition();
   public mealPlan: MealPlan = new MealPlan();
-  public nutritionSegment: string = 'meals';
   public nutrientKeys: string[] = [];
+  public nutritionSegment: string = 'dayLog';
+  public nutritionView: string = 'meals';
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
@@ -67,6 +68,10 @@ export class NutritionPage {
       data: [...this._weekLog.map((log: NutritionLog) => log.nutrition[this.chartDataSelection].value)],
       label: `${this.mealPlan.nutrition[this.chartDataSelection].name} intake`
     }];
+  }
+
+  public changeView(): void {
+    this.nutritionView = this.nutritionView === 'meals' ? 'nutrition' : 'meals';
   }
 
   public editMeal(idx: number): void {

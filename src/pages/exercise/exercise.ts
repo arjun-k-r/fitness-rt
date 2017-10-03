@@ -118,7 +118,7 @@ export class ExercisePage {
         }
         this._alertCtrl.create({
           title: 'Success!',
-          message: 'Activities saved successfully!',
+          message: 'Activity plan saved successfully!',
           buttons: ['Great!']
         }).present();
       })

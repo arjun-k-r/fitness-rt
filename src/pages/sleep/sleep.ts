@@ -11,6 +11,7 @@ import {
   IonicPage,
   Loading,
   LoadingController,
+  ModalController,
   NavController,
   Popover,
   PopoverController
@@ -24,7 +25,7 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { ILineChartEntry, Sleep, SleepLog } from '../../models';
+import { ILineChartEntry, Sleep, SleepGoals, SleepLog } from '../../models';
 
 // Providers
 import { SleepProvider } from '../../providers';
@@ -41,6 +42,7 @@ export class SleepPage {
   private _loader: Loading;
   private _sleepSubscription: Subscription;
   private _sleepFormSubscription: Subscription;
+  private _sleepGoalSubscription: Subscription;
   private _weekLogSubscription: Subscription;
   private _weekLog: SleepLog[] = [];
   public bedTime: AbstractControl;
@@ -55,12 +57,14 @@ export class SleepPage {
   public relaxation: AbstractControl;
   public sleep: Sleep = new Sleep();
   public sleepForm: FormGroup;
+  public sleepGoals: SleepGoals = new SleepGoals();
   public sleepSegment: string = 'dayLog';
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
     private _formBuilder: FormBuilder,
     private _loadCtrl: LoadingController,
+    private _modalCtrl: ModalController,
     private _navCtrl: NavController,
     private _popoverCtrl: PopoverController,
     private _sleepPvd: SleepProvider
@@ -198,92 +202,57 @@ export class SleepPage {
   }
 
   public saveSleep(): void {
-    const lifePoints = this._sleepPvd.checkLifePoints(this.sleep);
-    if (this.sleep.lifePoints > lifePoints) {
-      this._alertCtrl.create({
-        title: 'Watch your sleep!',
-        message: 'You are losing life points!',
-        buttons: [
-          {
-            text: 'I will',
+    this.sleep.combos.goalsAchieved = this._sleepPvd.checkGoalAchievements(this.sleepGoals, this.sleep);
+    this.sleep.lifePoints = this._sleepPvd.checkLifePoints(this.sleep);
+
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
+
+    Promise.all([
+      this._sleepPvd.saveSleepGoals(this._authId, this.sleepGoals),
+      this._sleepPvd.saveSleep(this._authId, this.sleep, this._weekLog)
+    ]).then(() => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Success!',
+          message: 'Sleep plan saved successfully!',
+          buttons: [{
+            text: 'Great!',
             handler: () => {
-              this.sleep.lifePoints = lifePoints;
-              this._loader = this._loadCtrl.create({
-                content: 'Please wait...',
-                duration: 30000,
-                spinner: 'crescent'
-              });
-              this._loader.present();
-              this._sleepPvd.saveSleep(this._authId, this.sleep, this._weekLog)
-                .then(() => {
-                  if (this._loader) {
-                    this._loader.dismiss();
-                    this._loader = null;
-                  }
-                  this._alertCtrl.create({
-                    title: 'Success!',
-                    message: 'Sleep saved successfully!',
-                    buttons: ['Great']
-                  }).present();
-                })
-                .catch((err: firebase.FirebaseError) => {
-                  if (this._loader) {
-                    this._loader.dismiss();
-                    this._loader = null;
-                  }
-                  this._alertCtrl.create({
-                    title: 'Uhh ohh...',
-                    subTitle: 'Something went wrong',
-                    message: err.message,
-                    buttons: ['OK']
-                  }).present();
-                });
+              if (this.sleep.combos.goalsAchieved && this.sleep.lifePoints > 0) {
+                this._modalCtrl.create('sleep-reward', {
+                  goalsAchieved: true,
+                  lifepoints: this.sleep.lifePoints
+                }).present();
+              } else if (this._sleepPvd.checkGoodSleep(this.sleep)) {
+                this._modalCtrl.create('sleep-reward', {
+                  goodSleep: true,
+                  lifepoints: this.sleep.lifePoints
+                }).present();
+              }
             }
-          }
-        ]
-      }).present();
-    } else {
-      this._alertCtrl.create({
-        title: 'You have improved your sleep!',
-        message: 'You are gaining life points!',
-        buttons: [{
-          text: 'Great',
-          handler: () => {
-            this.sleep.lifePoints = lifePoints;
-            this._loader = this._loadCtrl.create({
-              content: 'Please wait...',
-              duration: 30000,
-              spinner: 'crescent'
-            });
-            this._loader.present();
-            this._sleepPvd.saveSleep(this._authId, this.sleep, this._weekLog)
-              .then(() => {
-                if (this._loader) {
-                  this._loader.dismiss();
-                  this._loader = null;
-                }
-                this._alertCtrl.create({
-                  title: 'Success!',
-                  message: 'Sleep saved successfully!',
-                  buttons: ['Great']
-                }).present();
-              })
-              .catch((err: firebase.FirebaseError) => {
-                if (this._loader) {
-                  this._loader.dismiss();
-                  this._loader = null;
-                }
-                this._alertCtrl.create({
-                  title: 'Uhh ohh...',
-                  subTitle: 'Something went wrong',
-                  message: err.message,
-                  buttons: ['OK']
-                }).present();
-              });
-          }
-        }]
-      }).present();
-    }
+          }]
+        }).present();
+      })
+      .catch((err: firebase.FirebaseError) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.message,
+          buttons: ['OK']
+        }).present();
+      });
   }
 
   public showSettings(event: Popover): void {
@@ -317,6 +286,24 @@ export class SleepPage {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this._authId = auth.uid;
+        this._sleepGoalSubscription = this._sleepPvd.getSleepGoals$(this._authId).subscribe(
+          (goals: SleepGoals) => {
+            this.sleepGoals = Object.assign({}, goals['$value'] === null ? this.sleepGoals : goals);
+          },
+          (err: firebase.FirebaseError) => {
+            if (this._loader) {
+              this._loader.dismiss();
+              this._loader = null;
+            }
+            this._alertCtrl.create({
+              title: 'Uhh ohh...',
+              subTitle: 'Something went wrong',
+              message: err.message,
+              buttons: ['OK']
+            }).present();
+          }
+        );
+
         this._sleepSubscription = this._sleepPvd.getSleep$(this._authId).subscribe(
           (sleep: Sleep) => {
             this.sleep = Object.assign({}, sleep['$value'] === null ? this.sleep : sleep);
@@ -395,6 +382,7 @@ export class SleepPage {
   ionViewWillLeave(): void {
     this._authSubscription && this._authSubscription.unsubscribe();
     this._sleepSubscription && this._sleepSubscription.unsubscribe();
+    this._sleepGoalSubscription && this._sleepGoalSubscription.unsubscribe();
     this._sleepFormSubscription && this._sleepFormSubscription.unsubscribe();
     this._weekLogSubscription && this._weekLogSubscription.unsubscribe();
     if (this._loader) {

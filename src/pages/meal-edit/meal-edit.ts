@@ -105,7 +105,7 @@ export class MealEditPage {
         }
         this._alertCtrl.create({
           title: 'Success!',
-          message: 'Meals saved successfully!',
+          message: 'Meal plan saved successfully!',
           buttons: [{
             text: 'Great',
             handler: () => {

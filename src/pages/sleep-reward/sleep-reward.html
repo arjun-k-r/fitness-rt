@@ -13,7 +13,8 @@
 <ion-content>
   <div class="rewards-page__layer"></div>
   <div class="rewards-page__inner" padding>
-    <h2 *ngIf="goalsAchieved">You have achieved your goals and earned {{ lifepoints }} lifepoints</h2>
-    <h2 *ngIf="goodSleep">You had a good quality sleep and earned {{ lifepoints }} lifepoints</h2>
+    <h2 *ngIf="goalsAchieved">You have achieved your goals and earned {{ lifepoints }} lifepoints!</h2>
+    <h2 *ngIf="goodSleep">You respected all sleep suggestions and earned {{ lifepoints }} lifepoints!</h2>
+    <h2 *ngIf="goodSleep && goalsAchieved">You respected all sleep suggestions, achived your goals earned {{ lifepoints }} lifepoints!</h2>
   </div>
 </ion-content>

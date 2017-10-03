@@ -33,7 +33,7 @@
 
 <ion-content>
   <div [ngSwitch]="sleepSegment">
-    <ion-list *ngSwitchCase="'goals'">
+    <ion-list *ngSwitchCase="'goals'" padding>
       <ion-item>
         <ion-label for="bedTimeGoalSwitch" id="bedTimeGoalSwitchLabel">Bed time goal</ion-label>
         <ion-toggle aria-live="assertive" aria-labelledby="bedTimeGoalSwitchLabel" aria-required="false" id="bedTimeGoalSwitch" [(ngModel)]="sleepGoals.bedTime.isSelected"
@@ -48,7 +48,7 @@
       <ion-item>
         <ion-label for="sleepDurationSwitch" id="sleepDurationSwitchLabel">Sleep duration goal</ion-label>
         <ion-toggle aria-live="assertive" aria-labelledby="sleepDurationSwitchLabel" aria-required="false" id="sleepDurationSwitch"
-          [(ngModel)]="sleepGoals.bedTime.value" role="switch">
+          [(ngModel)]="sleepGoals.duration.isSelected" role="switch">
         </ion-toggle>
       </ion-item>
       <ion-item *ngIf="sleepGoals.duration.isSelected">
@@ -118,7 +118,7 @@
         <ion-item-divider color="light" role="separator">
           Suggestions
         </ion-item-divider>
-        <ion-item *ngIf="!sleep.duration < 7" role="listitem">
+        <ion-item *ngIf="sleep.duration < 7" role="listitem">
           <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
           <h2 text-wrap>You need 7-9 hours of good quality sleep per night</h2>
           <p text-wrap>Although our sleep need is relative to hour daily effort intelectual and physical effort, we generaly need 5 complete

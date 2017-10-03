@@ -58,7 +58,7 @@ export class SleepPage {
   public sleep: Sleep = new Sleep();
   public sleepForm: FormGroup;
   public sleepGoals: SleepGoals = new SleepGoals();
-  public sleepSegment: string = 'dayLog';
+  public sleepSegment: string = 'goals';
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
@@ -226,12 +226,19 @@ export class SleepPage {
           buttons: [{
             text: 'Great!',
             handler: () => {
-              if (this.sleep.combos.goalsAchieved && this.sleep.lifePoints > 0) {
+              const goodSleep: boolean = this._sleepPvd.checkGoodSleep(this.sleep);
+              if (this.sleep.combos.goalsAchieved && goodSleep) {
+                this._modalCtrl.create('sleep-reward', {
+                  goalsAchieved: true,
+                  goodSleep: true,
+                  lifepoints: this.sleep.lifePoints
+                }).present();
+              } else if (this.sleep.combos.goalsAchieved && this.sleep.lifePoints > 0) {
                 this._modalCtrl.create('sleep-reward', {
                   goalsAchieved: true,
                   lifepoints: this.sleep.lifePoints
                 }).present();
-              } else if (this._sleepPvd.checkGoodSleep(this.sleep)) {
+              } else if (goodSleep) {
                 this._modalCtrl.create('sleep-reward', {
                   goodSleep: true,
                   lifepoints: this.sleep.lifePoints

@@ -30,7 +30,7 @@
 
 
 <ion-content>
-  <ion-fab bottom *ngIf="nutritionSegment === 'meals'" right>
+  <ion-fab bottom *ngIf="nutritionSegment === 'dayLog' && nutritionView === 'meals'" right>
     <button (click)="addMeal()" color="secondary" ion-fab role="button">
       <ion-icon aria-hidden="true" name="add"></ion-icon>
     </button>
@@ -39,9 +39,10 @@
     <div *ngSwitchCase="'dayLog'">
       <div *ngIf="nutritionView === 'meals'">
         <ion-item-group *ngFor="let meal of mealPlan?.meals; let i = index" role="group">
-          <ion-item-divider color="primary" role="separator">
-            {{ meal.hour }}
-          </ion-item-divider>
+          <button (click)="editMeal(i)" color="primary" detail-push ion-item role="button">
+            <h2>{{ meal.hour }}</h2>
+            <ion-icon aria-hidden="true" item-right name="open"></ion-icon>
+          </button>
           <ion-item role="listitem">
             Energy
             <p item-content>{{ nutrientPercent(meal.nutrition.energy.value, 'energy') }}%</p>
@@ -58,9 +59,6 @@
             Protein
             <p item-content>{{ nutrientPercent(meal.nutrition.protein.value, 'protein') }}%</p>
           </ion-item>
-          <button (click)="editMeal(i)" detail-push ion-item role="button">
-            Edit meal
-          </button>
         </ion-item-group>
       </div>
       <div *ngIf="nutritionView === 'nutrition'">

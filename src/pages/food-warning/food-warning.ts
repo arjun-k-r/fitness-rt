@@ -21,7 +21,6 @@ import { Food } from '../../models';
 export class FoodWarningPage {
   public antinutrientFoods: Food[];
   public intoleratedFoods: Food[];
-  public warningView: string;
   constructor(
     private _params: NavParams,
     private _viewCtrl: ViewController

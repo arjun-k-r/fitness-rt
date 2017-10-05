@@ -11,7 +11,7 @@
 
 
 <ion-content padding>
-  <p *ngIf="antinutrientFoods">
+  <p *ngIf="antinutrientFoods?.length">
     These foods are plant seeds and contain antinutrients. Antinutrients interfere with nutrient absorptiona and cause gut inflammation
   </p>
   <ion-list role="list">
@@ -20,7 +20,7 @@
       <h2 text-wrap>{{ food.name }}</h2>
     </ion-item>
   </ion-list>
-  <p *ngIf="intoleratedFoods">
+  <p *ngIf="intoleratedFoods?.length">
     These foods seem to have caused you digestive problems in the past. If you have an intolerance to these foods, reduce or avoid
     them. Intolerance means you cannot digest these foods properly and they putrefy in gut eliminating toxins. They also
     cause inflammation. On the long-term, this leads to disease.

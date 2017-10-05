@@ -12,7 +12,7 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Activity, ActivityPlan, ExerciseLog } from '../../models';
+import { Activity, ActivityPlan, ExerciseGoals, ExerciseLog } from '../../models';
 
 // Providers
 import { FitnessProvider } from '../fitness/fitness';
@@ -55,6 +55,22 @@ export class ActivityProvider {
 
   public calculateActivityPlanEnergyConsumption(activities: Activity[]): number {
     return activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.energyConsumption, 0);
+  }
+
+  public checkGoalAchievements(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
+    let energyConsumptionAchieved: boolean = false;
+    let exerciseDurationAchieved: boolean = false;
+    if (goals.duration.isSelected && activityPlan.totalDuration >= goals.duration.value) {
+      exerciseDurationAchieved = true;
+    } else if (goals.energy.isSelected && activityPlan.totalEnergyConsumption >= goals.energy.value) {
+      energyConsumptionAchieved = true;
+    }
+
+    return energyConsumptionAchieved || exerciseDurationAchieved;
+  }
+
+  public checkGoodExercise(activityPlan: ActivityPlan): boolean {
+    return activityPlan.totalDuration > 120 && activityPlan.totalEnergyConsumption > 600 && activityPlan.combos.energy && activityPlan.combos.hiit && !activityPlan.combos.lowActivity && !activityPlan.combos.overtraining && !activityPlan.combos.sedentarism;
   }
 
   public checkHiit(activities: Activity[]): boolean {
@@ -107,7 +123,7 @@ export class ActivityProvider {
   }
 
   public checkOvertraining(activities: Activity[]): boolean {
-    return activities.reduce((acc: number, activity: Activity) => acc += activity.met >= 6 ? activity.duration : 0, 0) > 60;
+    return activities.reduce((acc: number, activity: Activity) => acc += activity.met >= 6 ? activity.duration : 0, 0) > 45 || activities.reduce((acc: number, activity: Activity) => acc += activity.met > 8 ? activity.duration : 0, 0) > 20;
   }
 
   public checkSedentarism(activityPlan: ActivityPlan): boolean {
@@ -124,6 +140,10 @@ export class ActivityProvider {
 
   public getEnergyConsumption$(authId: string): FirebaseObjectObservable<number> {
     return this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}/totalEnergyConsumption`);
+  }
+
+  public getExerciseGoals$(authId: string): FirebaseObjectObservable<ExerciseGoals> {
+    return this._db.object(`/activity-plan/${authId}/goals`);
   }
 
   public getExerciseLog$(authId: string): FirebaseListObservable<ExerciseLog[]> {
@@ -162,5 +182,9 @@ export class ActivityProvider {
         })
         .catch((err: Error) => console.error(`Error storing energy consumption and life points: ${err.toString()}`));
     });
+  }
+
+  public saveExerciseGoals(authId: string, goals: ExerciseGoals): firebase.Promise<void> {
+    return this._db.object(`/activity-plan/${authId}/goals`).set(goals);
   }
 }

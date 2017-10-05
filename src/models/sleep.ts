@@ -22,8 +22,8 @@ export class Sleep {
 
 export class SleepGoals {
     constructor(
-        public bedTime: Goal = new Goal(false, 'Bed time', ''),
-        public duration: Goal = new Goal(false, 'Duration', 0)
+        public bedTime: Goal = new Goal(false, ''),
+        public duration: Goal = new Goal(false, 0)
     ) { }
 }
 

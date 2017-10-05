@@ -52,7 +52,7 @@
         </ion-toggle>
       </ion-item>
       <ion-item *ngIf="sleepGoals.duration.isSelected">
-        <ion-label floating for="sleepDuration" id="sleepDurationLabel">Sleep duration</ion-label>
+        <ion-label floating for="sleepDuration" id="sleepDurationLabel">Sleep duration (hours)</ion-label>
         <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="sleepDurationLabel" aria-required="true" id="sleepDuration"
           [(ngModel)]="sleepGoals.duration.value" type="number"></ion-input>
       </ion-item>

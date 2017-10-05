@@ -18,6 +18,9 @@
   </ion-navbar>
   <ion-toolbar role="tablist">
     <ion-segment [(ngModel)]="exerciseSegment">
+      <ion-segment-button value="goals">
+        Goals
+      </ion-segment-button>
       <ion-segment-button value="dayLog">
         Today
       </ion-segment-button>
@@ -32,10 +35,34 @@
 <ion-content>
   <ion-fab *ngIf="exerciseSegment === 'dayLog'" bottom right>
     <button (click)="addActivity()" color="secondary" ion-fab role="button">
-          <ion-icon aria-hidden="true" name="add"></ion-icon>
-        </button>
+      <ion-icon aria-hidden="true" name="add"></ion-icon>
+    </button>
   </ion-fab>
   <div [ngSwitch]="exerciseSegment">
+    <ion-list *ngSwitchCase="'goals'" padding>
+      <ion-item>
+        <ion-label for="exerciseDurationSwitch" id="exerciseDurationSwitchLabel">Exercise duration</ion-label>
+        <ion-toggle aria-live="assertive" aria-labelledby="exerciseDurationSwitchLabel" aria-required="false" id="exerciseDurationSwitch"
+          [(ngModel)]="exerciseGoals.duration.isSelected" role="switch">
+        </ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="exerciseGoals.duration.isSelected">
+        <ion-label floating for="exerciseDuration" id="exerciseDurationLabel">Exercise duration (minutes)</ion-label>
+        <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="exerciseDurationLabel" aria-required="true" id="exerciseDuration"
+          [(ngModel)]="exerciseGoals.duration.value" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label for="exerciseEnergySwitch" id="exerciseEnergySwitchLabel">Energy consumption goal</ion-label>
+        <ion-toggle aria-live="assertive" aria-labelledby="exerciseEnergySwitchLabel" aria-required="false" id="exerciseEnergySwitch"
+          [(ngModel)]="exerciseGoals.duration.isSelected" role="switch">
+        </ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="exerciseGoals.duration.isSelected">
+        <ion-label floating for="exerciseEnergy" id="exerciseEnergyLabel">Energy consumption (kcal)</ion-label>
+        <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="exerciseEnergyLabel" aria-required="true" id="exerciseEnergy"
+          [(ngModel)]="exerciseGoals.duration.value" type="number"></ion-input>
+      </ion-item>
+    </ion-list>
     <ion-list *ngSwitchCase="'dayLog'" padding role="list">
       <button (click)="changeActivity(i)" ion-item *ngFor="let activity of activityPlan?.activities; let i = index" role="button">
       <ion-icon aria-hidden="true" color="primary" item-start name="create"></ion-icon>
@@ -86,8 +113,8 @@
         <h2 text-wrap>Train smart</h2>
         <p text-wrap>Exercise must help your body get rid of toxins and increase oxygen intake. As a result, you'll feel energized and
           fresh. Not having this feeling means you are not breathing correctly during exercise, you are not reaching your
-          target heart rate, your are not resting/sleeping properly, overtraining, not having the right nutrition, or doing
-          the wrong exercise for your body.</p>
+          target heart rate, your are not resting/exerciseing properly, overtraining, not having the right nutrition, or
+          doing the wrong exercise for your body.</p>
       </ion-item>
     </ion-list>
 

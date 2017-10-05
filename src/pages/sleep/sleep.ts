@@ -228,19 +228,22 @@ export class SleepPage {
             handler: () => {
               const goodSleep: boolean = this._sleepPvd.checkGoodSleep(this.sleep);
               if (this.sleep.combos.goalsAchieved && goodSleep) {
-                this._modalCtrl.create('sleep-reward', {
+                this._modalCtrl.create('rewards', {
+                  context: 'sleep',
                   goalsAchieved: true,
-                  goodSleep: true,
+                  goodQuality: true,
                   lifepoints: this.sleep.lifePoints
                 }).present();
               } else if (this.sleep.combos.goalsAchieved && this.sleep.lifePoints > 0) {
-                this._modalCtrl.create('sleep-reward', {
+                this._modalCtrl.create('rewards', {
+                  context: 'sleep',
                   goalsAchieved: true,
                   lifepoints: this.sleep.lifePoints
                 }).present();
               } else if (goodSleep) {
-                this._modalCtrl.create('sleep-reward', {
-                  goodSleep: true,
+                this._modalCtrl.create('rewards', {
+                  context: 'sleep',
+                  goodQuality: true,
                   lifepoints: this.sleep.lifePoints
                 }).present();
               }

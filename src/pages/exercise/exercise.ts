@@ -24,7 +24,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { Activity, ActivityPlan, ExerciseLog, ILineChartEntry } from '../../models';
+import { Activity, ActivityPlan, ExerciseGoals, ExerciseLog, ILineChartEntry } from '../../models';
 
 // Providers
 import { ActivityProvider } from '../../providers';
@@ -39,6 +39,7 @@ export class ExercisePage {
   private _authId: string;
   private _authSubscription: Subscription;
   private _activitySubscription: Subscription;
+  private _exerciseGoalSubscription: Subscription;
   private _loader: Loading;
   private _weekLogSubscription: Subscription;
   private _weekLog: ExerciseLog[] = [];
@@ -47,6 +48,7 @@ export class ExercisePage {
   public chartDataSelection: string = 'duration';
   public chartLabels: string[] = [];
   public chartOpts: any = { responsive: true };
+  public exerciseGoals: ExerciseGoals = new ExerciseGoals();
   public exerciseSegment: string = 'dayLog';
   constructor(
     private _actionSheetCtrl: ActionSheetController,
@@ -103,46 +105,15 @@ export class ExercisePage {
     this._updateActivityPlan();
   }
 
-  private _saveToDb(): void {
-    this._loader = this._loadCtrl.create({
-      content: 'Please wait...',
-      duration: 30000,
-      spinner: 'crescent'
-    });
-    this._loader.present();
-    this._activityPvd.saveActivityPlan(this._authId, this.activityPlan, this._weekLog)
-      .then(() => {
-        if (this._loader) {
-          this._loader.dismiss();
-          this._loader = null;
-        }
-        this._alertCtrl.create({
-          title: 'Success!',
-          message: 'Activity plan saved successfully!',
-          buttons: ['Great!']
-        }).present();
-      })
-      .catch((err: Error) => {
-        if (this._loader) {
-          this._loader.dismiss();
-          this._loader = null;
-        }
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.toString(),
-          buttons: ['OK']
-        }).present();
-      });
-  }
-
   private _updateActivityPlan(): void {
     this.activityPlan.totalDuration = this._activityPvd.calculateActivityPlanDuration(this.activityPlan.activities);
     this.activityPlan.totalEnergyConsumption = this._activityPvd.calculateActivityPlanEnergyConsumption(this.activityPlan.activities);
+    this.activityPlan.combos.goalsAchieved = this._activityPvd.checkGoalAchievements(this.exerciseGoals, this.activityPlan);
     this.activityPlan.combos.hiit = this._activityPvd.checkHiit(this.activityPlan.activities);
     this.activityPlan.combos.lowActivity = this._activityPvd.checkLowActivity(this.activityPlan.activities);
     this.activityPlan.combos.overtraining = this._activityPvd.checkOvertraining(this.activityPlan.activities);
     this.activityPlan.combos.sedentarism = this._activityPvd.checkSedentarism(this.activityPlan);
+    this.activityPlan.lifePoints = this._activityPvd.checkLifePoints(this.activityPlan);
   }
 
   public addActivity(): void {
@@ -245,27 +216,63 @@ export class ExercisePage {
 
   public saveActivityPlan(): void {
     this._updateActivityPlan();
-    let alert: Alert;
-    const lifePoints = this._activityPvd.checkLifePoints(this.activityPlan);
-    if (this.activityPlan.lifePoints > lifePoints) {
-      alert = this._alertCtrl.create({
-        title: 'Watch your exercise routine!',
-        message: 'You are losing life points!',
-        buttons: ['I will']
-      });
-    } else {
-      alert = this._alertCtrl.create({
-        title: 'You have improved your activity levels!',
-        message: 'You are gaining life points!',
-        buttons: ['Great!']
-      });
-    }
-
-    alert.present();
-    alert.onDidDismiss(() => {
-      this.activityPlan.lifePoints = lifePoints;
-      this._saveToDb();
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
     });
+    this._loader.present();
+    Promise.all([
+      this._activityPvd.saveExerciseGoals(this._authId, this.exerciseGoals),
+      this._activityPvd.saveActivityPlan(this._authId, this.activityPlan, this._weekLog)
+    ]).then(() => {
+      if (this._loader) {
+        this._loader.dismiss();
+        this._loader = null;
+      }
+      this._alertCtrl.create({
+        title: 'Success!',
+        message: 'Activity plan saved successfully!',
+        buttons: [{
+          text: 'Great!',
+          handler: () => {
+            const goodExercise: boolean = this._activityPvd.checkGoodExercise(this.activityPlan);
+            if (this.activityPlan.combos.goalsAchieved && goodExercise) {
+              this._modalCtrl.create('rewards', {
+                context: 'exercise',
+                goalsAchieved: true,
+                goodQuality: true,
+                lifepoints: this.activityPlan.lifePoints
+              }).present();
+            } else if (this.activityPlan.combos.goalsAchieved && this.activityPlan.lifePoints > 0) {
+              this._modalCtrl.create('rewards', {
+                context: 'exercise',
+                goalsAchieved: true,
+                lifepoints: this.activityPlan.lifePoints
+              }).present();
+            } else if (goodExercise) {
+              this._modalCtrl.create('rewards', {
+                context: 'exercise',
+                goodQuality: true,
+                lifepoints: this.activityPlan.lifePoints
+              }).present();
+            }
+          }
+        }]
+      }).present();
+    })
+      .catch((err: Error) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.toString(),
+          buttons: ['OK']
+        }).present();
+      });
   }
 
   public showSettings(event: Popover): void {
@@ -299,6 +306,23 @@ export class ExercisePage {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this._authId = auth.uid;
+        this._exerciseGoalSubscription = this._activityPvd.getExerciseGoals$(this._authId).subscribe(
+          (goals: ExerciseGoals) => {
+            this.exerciseGoals = Object.assign({}, goals['$value'] === null ? this.exerciseGoals : goals);
+          },
+          (err: firebase.FirebaseError) => {
+            if (this._loader) {
+              this._loader.dismiss();
+              this._loader = null;
+            }
+            this._alertCtrl.create({
+              title: 'Uhh ohh...',
+              subTitle: 'Something went wrong',
+              message: err.message,
+              buttons: ['OK']
+            }).present();
+          }
+        );
         this._activitySubscription = this._activityPvd.getActivityPlan$(this._authId).subscribe(
           (activityPlan: ActivityPlan) => {
             this.activityPlan = Object.assign({}, activityPlan['$value'] === null ? this.activityPlan : activityPlan);
@@ -346,6 +370,7 @@ export class ExercisePage {
   ionViewWillLeave(): void {
     this._authSubscription && this._authSubscription.unsubscribe();
     this._activitySubscription && this._activitySubscription.unsubscribe();
+    this._exerciseGoalSubscription && this._exerciseGoalSubscription.unsubscribe();
     this._weekLogSubscription && this._weekLogSubscription.unsubscribe();
     if (this._loader) {
       this._loader.dismiss();

@@ -10,21 +10,23 @@ import {
 } from 'ionic-angular';
 
 @IonicPage({
-  name: 'sleep-reward'
+  name: 'rewards'
 })
 @Component({
-  templateUrl: 'sleep-reward.html',
+  templateUrl: 'rewards.html',
 })
-export class SleepRewardPage {
+export class RewardsPage {
+  public context: string;
   public goalsAchieved: boolean;
-  public goodSleep: boolean;
+  public goodQuality: boolean;
   public lifepoints: number;
   constructor(
     private _params: NavParams,
     private _viewCtrl: ViewController
   ) {
+    this.context = <string>this._params.get('context');
     this.goalsAchieved = <boolean>this._params.get('goalsAchieved');
-    this.goodSleep = <boolean>this._params.get('goodSleep');
+    this.goodQuality = <boolean>this._params.get('goodQuality');
     this.lifepoints = <number>this._params.get('lifepoints');
   }
 

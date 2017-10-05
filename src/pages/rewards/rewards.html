@@ -14,9 +14,9 @@
   <!-- <div class="rewards-page__layer"></div> -->
   <div class="rewards-page__inner" padding>
     <img alt="Reward cup" src="assets/icon/if_cup_416372.png" />
-    <h2 *ngIf="goalsAchieved && !goodSleep">You have achieved your goals and earned {{ lifepoints }} lifepoints!</h2>
-    <h2 *ngIf="!goalsAchieved && goodSleep">You respected all sleep suggestions and earned {{ lifepoints }} lifepoints!</h2>
-    <h2 *ngIf="goalsAchieved && goodSleep">You respected all sleep suggestions, achived your goals earned {{ lifepoints }} lifepoints!</h2>
+    <h2 *ngIf="goalsAchieved && !goodQuality">You have achieved your goals and earned {{ lifepoints }} lifepoints!</h2>
+    <h2 *ngIf="!goalsAchieved && goodQuality">You respected all {{ context }} suggestions and earned {{ lifepoints }} lifepoints!</h2>
+    <h2 *ngIf="goalsAchieved && goodQuality">You respected {{ context }} sleep suggestions, achived your goals earned {{ lifepoints }} lifepoints!</h2>
     <!-- 
       https://www.flaticon.com/packs/healthy-lifestyle-11
       <img alt="Night moon" src="assets/icon/night-256.png" />

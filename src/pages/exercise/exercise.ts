@@ -7,7 +7,6 @@ import { Subscription } from 'rxjs/Subscription';
 // Ionic
 import {
   ActionSheetController,
-  Alert,
   AlertController,
   IonicPage,
   Loading,
@@ -49,7 +48,7 @@ export class ExercisePage {
   public chartLabels: string[] = [];
   public chartOpts: any = { responsive: true };
   public exerciseGoals: ExerciseGoals = new ExerciseGoals();
-  public exerciseSegment: string = 'dayLog';
+  public exerciseSegment: string = 'goals';
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _afAuth: AngularFireAuth,

@@ -54,13 +54,13 @@
       <ion-item>
         <ion-label for="exerciseEnergySwitch" id="exerciseEnergySwitchLabel">Energy consumption goal</ion-label>
         <ion-toggle aria-live="assertive" aria-labelledby="exerciseEnergySwitchLabel" aria-required="false" id="exerciseEnergySwitch"
-          [(ngModel)]="exerciseGoals.duration.isSelected" role="switch">
+          [(ngModel)]="exerciseGoals.energy.isSelected" role="switch">
         </ion-toggle>
       </ion-item>
-      <ion-item *ngIf="exerciseGoals.duration.isSelected">
+      <ion-item *ngIf="exerciseGoals.energy.isSelected">
         <ion-label floating for="exerciseEnergy" id="exerciseEnergyLabel">Energy consumption (kcal)</ion-label>
         <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="exerciseEnergyLabel" aria-required="true" id="exerciseEnergy"
-          [(ngModel)]="exerciseGoals.duration.value" type="number"></ion-input>
+          [(ngModel)]="exerciseGoals.energy.value" type="number"></ion-input>
       </ion-item>
     </ion-list>
     <ion-list *ngSwitchCase="'dayLog'" padding role="list">

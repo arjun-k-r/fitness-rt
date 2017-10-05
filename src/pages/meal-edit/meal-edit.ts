@@ -132,7 +132,6 @@ export class MealEditPage {
     this.meal.nutrition = this._mealPvd.calculateMealNutrition(this.meal.foods);
     this.meal.quantity = this._mealPvd.calculateMealQuantity(this.meal.foods);
     this._mealPlan.meals = [...this._mealPlan.meals.slice(0, this._mealIdx), this.meal, ...this._mealPlan.meals.slice(this._mealIdx + 1)];
-    this._mealPlan.meals = this._mealPvd.sortMeals(this._mealPlan.meals);
     this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals);
     this.meal.combos.overeating = this._mealPvd.checkOvereating(this.meal);
     this._mealPlanFoodIntolerance = this._mealPvd.checkMealPlanFoodIntolerance(this._intoleratedFoods, this._mealPlan.meals);
@@ -144,17 +143,11 @@ export class MealEditPage {
     foodListModal.onDidDismiss((foods: (Food | Recipe)[]) => {
       if (!!foods) {
         const antinutrientFoods: Food[] = this._mealPvd.checkMealFoodAntinutrients([], foods);
-        if (!!antinutrientFoods.length) {
-          this._modalCtrl.create('food-warning', {
-            foods: antinutrientFoods,
-            warning: 'antinutrients'
-          }).present();
-        }
         this._mealPlanFoodIntolerance = this._mealPvd.checkMealFoodIntolerance([], foods, this._intoleratedFoods);
-        if (!!this._mealPlanFoodIntolerance.length) {
+        if (!!antinutrientFoods.length || !!this._mealPlanFoodIntolerance.length) {
           this._modalCtrl.create('food-warning', {
-            foods: this._mealPlanFoodIntolerance,
-            warning: 'intolerance'
+            antinutrientFoods: antinutrientFoods,
+            intoleratedFoods: this._mealPlanFoodIntolerance
           }).present();
         }
         this.meal.foods = this.meal.foods ? [...this.meal.foods, ...foods] : [...foods];
@@ -193,8 +186,8 @@ export class MealEditPage {
     });
     this._loader.present();
     this._mealPlan.meals = [...this._mealPlan.meals.slice(0, this._mealIdx), ...this._mealPlan.meals.slice(this._mealIdx + 1)];
-    this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals)
-    this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog, this._mealPlanFoodIntolerance, )
+    this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals);
+    this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog, this._mealPlanFoodIntolerance)
       .then(() => {
         if (this._loader) {
           this._loader.dismiss();
@@ -242,7 +235,7 @@ export class MealEditPage {
         buttons: ['Great!']
       });
     }
-    
+
     alert.present();
     alert.onDidDismiss(() => {
       this._mealPlan.lifePoints = lifePoints;
@@ -254,7 +247,7 @@ export class MealEditPage {
     this._modalCtrl.create('food-intolerance', { foods: this._intoleratedFoods }).present();
   }
 
-  
+
   ionViewWillEnter(): void {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {

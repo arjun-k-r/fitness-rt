@@ -19,14 +19,15 @@ import { Food } from '../../models';
   templateUrl: 'food-warning.html',
 })
 export class FoodWarningPage {
-  public foods: Food[];
+  public antinutrientFoods: Food[];
+  public intoleratedFoods: Food[];
   public warningView: string;
   constructor(
     private _params: NavParams,
     private _viewCtrl: ViewController
   ) {
-    this.foods = <Food[]>this._params.get('foods');
-    this.warningView = <string>this._params.get('warning');
+    this.antinutrientFoods = <Food[]>this._params.get('antinutrientFoods');
+    this.intoleratedFoods = <Food[]>this._params.get('intoleratedFoods');
   }
 
   public dismiss(): void {

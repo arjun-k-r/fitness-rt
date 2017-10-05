@@ -255,6 +255,7 @@ export class MealProvider {
           } else {
             this._db.list(`/nutrition-log/${authId}/`).push(newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
           }
+          mealPlan.meals = sortBy(mealPlan.meals, (meal: Meal) => meal.hour);
           if (!intoleratedFoods) {
             this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan).then(() => {
               resolve();
@@ -270,9 +271,5 @@ export class MealProvider {
         })
         .catch((err: Error) => console.error(`Error storing energy consumption and life points: ${err.toString()}`));
     });
-  }
-
-  public sortMeals(meals: Meal[]): Meal[] {
-    return sortBy(meals, (meal: Meal) => meal.hour);
   }
 }

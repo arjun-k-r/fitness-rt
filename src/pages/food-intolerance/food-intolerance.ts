@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 
 // Ionic
 import {
-  AlertController,
   IonicPage,
   NavParams,
   ViewController

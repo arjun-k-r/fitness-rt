@@ -22,9 +22,11 @@ export class SleepProvider {
   public checkGoalAchievements(goals: SleepGoals, sleep: Sleep): boolean {
     let bedTimeAchieved: boolean = false;
     let sleepDurationAchieved: boolean = false;
-    if (goals.bedTime.isSelected && moment.duration(goals.bedTime.value).asHours() === moment.duration(sleep.bedTime).asHours()) {
+    const bedTimeGoal: number = moment.duration(goals.bedTime.value).asMinutes() / 60;
+    const bedTime: number = moment.duration(sleep.bedTime).asMinutes() / 60;
+    if (goals.bedTime.isSelected && (bedTime => bedTimeGoal - 0.5 || bedTime <= bedTimeGoal + 0.5)) {
       bedTimeAchieved = true;
-    } else if (goals.duration.isSelected && goals.duration.value === sleep.duration) {
+    } else if (goals.duration.isSelected && (sleep.duration >= goals.duration.value - 0.5 || sleep.duration <= goals.duration.value + 0.5)) {
       sleepDurationAchieved = true;
     }
 

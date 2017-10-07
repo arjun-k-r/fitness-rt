@@ -12,7 +12,7 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Nutrition } from '../../models';
+import { Fitness, Nutrition } from '../../models';
 
 // Providers
 import { ActivityProvider } from '../activity/activity';
@@ -2309,7 +2309,21 @@ export class NutritionProvider {
     });
   }
 
-  public getDri$(authId: string): FirebaseObjectObservable<Nutrition> {
-    return this._db.object(`/dri/${authId}/${CURRENT_DAY}`);
+  public getDri$(authId: string): Promise<Nutrition> {
+    return new Promise((resolve, reject) => {
+      const driSubscription: Subscription = this._db.object(`/dri/${authId}/${CURRENT_DAY}`).subscribe((dri: Nutrition) => {
+        driSubscription.unsubscribe();
+        if (dri['$value'] === null) {
+          const fitnessSubscription: Subscription = this._db.object(`/fitness/${authId}`).subscribe((fitness: Fitness) => {
+            fitnessSubscription.unsubscribe();
+            if (fitness['$value'] !== null) {
+              this.calculateDRI(authId, fitness.age, fitness.bmr, fitness.gender, fitness.lactating, fitness.pregnant, fitness.weight)
+              .then((dri: Nutrition) => resolve(dri))
+              .catch((err: firebase.FirebaseError) => reject(err));
+            }
+          }, (err: firebase.FirebaseError) => reject(err));
+        }
+      }, (err: firebase.FirebaseError) => reject(err));
+    });
   }
 }

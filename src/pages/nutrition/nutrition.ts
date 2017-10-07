@@ -20,10 +20,10 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { ILineChartEntry, MealPlan, Nutrition, NutritionLog } from '../../models';
+import { ILineChartEntry, MealPlan, Nutrition, NutritionGoals, NutritionLog } from '../../models';
 
 // Providers
-import { MealProvider } from '../../providers';
+import { FOOD_GROUPS, MealProvider } from '../../providers';
 
 @IonicPage({
   name: 'nutrition'
@@ -44,8 +44,9 @@ export class NutritionPage {
   public chartOpts: any = { responsive: true };
   public dailyNutrition: Nutrition = new Nutrition();
   public mealPlan: MealPlan = new MealPlan();
+  public nutritionGoals: NutritionGoals = new NutritionGoals();
   public nutrientKeys: string[] = [];
-  public nutritionSegment: string = 'dayLog';
+  public nutritionSegment: string = 'goals';
   public nutritionView: string = 'meals';
   constructor(
     private _afAuth: AngularFireAuth,
@@ -127,6 +128,28 @@ export class NutritionPage {
 
   public nutrientPercent(nutrientValue: number, nutrientName: string): number {
     return this._mealPvd.calculateNutrientPercentage(nutrientValue, nutrientName);
+  }
+
+  public selectFoodGroup(): void {
+    this._alertCtrl.create({
+      title: 'Select food groups',
+      inputs: [...FOOD_GROUPS.map((group: string) => {
+        return {
+          type: 'checkbox',
+          label: group,
+          value: group,
+          checked: this.nutritionGoals.foodGroupRestrictions.value.indexOf(group) !== -1
+        }
+      })],
+      buttons: [
+        {
+          text: 'Done',
+          handler: (foodGroups: string[]) => {
+            this.nutritionGoals.foodGroupRestrictions.value = [...foodGroups];
+          }
+        }
+      ]
+    }).present();
   }
 
   public showSettings(event: Popover): void {

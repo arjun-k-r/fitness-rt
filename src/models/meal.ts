@@ -3,6 +3,7 @@ import * as moment from 'moment';
 
 // Models
 import { Food } from './food';
+import { Goal } from './goal';
 import { Nutrition } from './nutrition';
 import { Recipe } from './recipe';
 
@@ -28,6 +29,17 @@ export class MealPlan {
         public meals: Meal[] = [],
         public nutrition: Nutrition = new Nutrition(),
         public weekLog: NutritionLog[] = []
+    ) { }
+}
+
+export class NutritionGoals {
+    constructor (
+        public breakfastTime: Goal = new Goal(false, ''),
+        public dinnerTime: Goal = new Goal(false, ''),
+        public foodGroupRestrictions: Goal = new Goal(false, []),
+        public macronutrientRatios: Goal = new Goal(false, { carbohydrates: 0, fats: 0, protein: 0 }),
+        public mealInterval: Goal = new Goal(false, 0),
+        public nutrition: Goal = new Goal(false, new Nutrition()),
     ) { }
 }
 

@@ -62,7 +62,7 @@ export class ActivityProvider {
       exerciseDurationAchieved: boolean = false;
 
     if (goals.duration.isSelected) {
-      if (activityPlan.totalDuration >= goals.duration.value) {
+      if (activityPlan.totalDuration >= +goals.duration.value) {
         exerciseDurationAchieved = true;
       }
     } else {
@@ -70,7 +70,7 @@ export class ActivityProvider {
     }
 
     if (goals.energy.isSelected) {
-      if (activityPlan.totalEnergyConsumption >= goals.energy.value) {
+      if (activityPlan.totalEnergyConsumption >= +goals.energy.value) {
         energyConsumptionAchieved = true;
       }
     } else {
@@ -81,7 +81,7 @@ export class ActivityProvider {
   }
 
   public checkGoodExercise(activityPlan: ActivityPlan): boolean {
-    return activityPlan.totalDuration > 120 && activityPlan.totalEnergyConsumption > 600 && activityPlan.combos.energy && activityPlan.combos.hiit && !activityPlan.combos.lowActivity && !activityPlan.combos.overtraining && !activityPlan.combos.sedentarism;
+    return activityPlan.totalDuration > 120 && activityPlan.totalEnergyConsumption > 600 && activityPlan.combos.energy && !activityPlan.combos.lowActivity && !activityPlan.combos.overtraining && !activityPlan.combos.sedentarism;
   }
 
   public checkHiit(activities: Activity[]): boolean {
@@ -177,17 +177,20 @@ export class ActivityProvider {
       ])
         .then(() => {
           const newExerciseLog: ExerciseLog = new ExerciseLog(moment().format('dddd'), activityPlan.totalDuration, activityPlan.totalEnergyConsumption);
-          if (!!weekLog.length) {
-            weekLog.reverse();
-            if (newExerciseLog.date !== weekLog[0].date) {
-              this._db.list(`/exercise-log/${authId}/`).push(newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
+          const weekLength: number = weekLog.length;
+          if (!!weekLength) {
+            if (newExerciseLog.date !== weekLog[weekLength - 1].date) {
+              weekLog.push(newExerciseLog);
             } else {
-              this._db.list(`/exercise-log/${authId}/`).update(weekLog[0]['$key'], newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
+              weekLog[weekLength - 1] = Object.assign({}, newExerciseLog);
             }
           } else {
-            this._db.list(`/exercise-log/${authId}/`).push(newExerciseLog).catch((err: firebase.FirebaseError) => console.error(`Error saving exercise log: ${err.message}`));
+            weekLog.push(newExerciseLog);
           }
-          this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`).set(activityPlan).then(() => {
+          Promise.all([
+            this._db.object(`/exercise-log/${authId}/`).set(weekLog),
+            this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`).set(activityPlan)
+          ]).then(() => {
             resolve();
           }).catch((err: firebase.FirebaseError) => reject(err));
         })

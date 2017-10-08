@@ -324,7 +324,7 @@ export class FoodDetailsPage {
             if (this.food.hasOwnProperty(key)) {
               this.food = Object.assign(this.food, { [key]: changes[key] });
             } else if (this.food.nutrition.hasOwnProperty(key)) {
-              this.food.nutrition[key] = Object.assign(this.food.nutrition[key], { value: changes[key] });
+              this.food.nutrition[key] = Object.assign(this.food.nutrition[key], { value: +changes[key] });
             }
           }
           this.food = Object.assign(this.food, { uploader: this.authId });

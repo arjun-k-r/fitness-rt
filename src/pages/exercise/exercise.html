@@ -79,9 +79,9 @@
         <p item-content>{{ activityPlan?.totalEnergyConsumption }} kcal</p>
       </ion-item>
       <ion-item>
-        <ion-label color="{{ activityPlan?.combos?.energy && 'secondary'}}" for="energy" id="energyLabel" text-wrap>
+        <ion-label color="{{ activityPlan?.combos.energy && 'secondary'}}" for="energy" id="energyLabel" text-wrap>
           I am feeling energized and fresh!
-          <ion-icon *ngIf="activityPlan?.combos?.energy" aria-hidden="true" color="secondary" item-right name="thumbs-up"></ion-icon>
+          <ion-icon *ngIf="activityPlan?.combos.energy" aria-hidden="true" color="secondary" item-right name="thumbs-up"></ion-icon>
         </ion-label>
         <ion-toggle aria-live="assertive" aria-labelledby="energyLabel" aria-required="true" id="energy" [(ngModel)]="activityPlan?.combos.energy"
           role="switch"></ion-toggle>

@@ -113,16 +113,16 @@ export class FitnessPage {
     private _popoverCtrl: PopoverController
   ) {
     this.fitnessForm = this._formBuilder.group({
-      age: ['', Validators.required],
+      age: [null, Validators.required],
       gender: ['', Validators.required],
-      height: ['', Validators.required],
-      hips: [0],
+      height: [null, Validators.required],
+      hips: [null],
       lactating: [false, Validators.required],
-      neck: [0],
+      neck: [null],
       pregnant: [false, Validators.required],
-      restingHeartRate: [0],
-      waist: [0],
-      weight: ['', Validators.required]
+      restingHeartRate: [null],
+      waist: [null],
+      weight: [null, Validators.required]
     });
     this.age = this.fitnessForm.get('age');
     this.gender = this.fitnessForm.get('gender');
@@ -229,23 +229,23 @@ export class FitnessPage {
                   const hrMax: number = this._fitnessPvd.calculateHRMax(this.fitness.age);
                   const thr: { min: number, max: number } = this._fitnessPvd.calculateTHR(hrMax, changes.restingHeartRate);
                   this.fitness = Object.assign(this.fitness, {
-                    age: changes.age,
+                    age: +changes.age,
                     bmr: this._fitnessPvd.calculateBmr(changes.age, changes.gender, changes.height, changes.weight),
                     bodyFat: this._fitnessPvd.calculateBodyFat(changes.age, changes.gender, changes.height, changes.hips, changes.neck, changes.waist),
                     gender: changes.gender,
                     heartRate: {
                       max: hrMax,
-                      resting: changes.restingHeartRate || 0,
+                      resting: +changes.restingHeartRate || 0,
                       trainingMin: thr.min,
                       trainingMax: thr.max
                     },
-                    height: changes.height,
-                    hips: changes.hips || 0,
+                    height: +changes.height,
+                    hips: +changes.hips || 0,
                     lactating: changes.lactating,
-                    neck: changes.neck || 0,
+                    neck: +changes.neck || 0,
                     pregnant: changes.pregnant,
-                    waist: changes.waist || 0,
-                    weight: changes.weight
+                    waist: +changes.waist || 0,
+                    weight: +changes.weight
                   });
                   this.isFit = this._fitnessPvd.checkFatPercentage(this.fitness.bodyFat, this.fitness.gender);
                   if (!this.fitness.customRequirements) {
@@ -386,7 +386,7 @@ export class FitnessPage {
                     if (this.dailyRequirementsForm.valid) {
                       for (let key in changes) {
                         if (this.customRequirements.hasOwnProperty(key)) {
-                          this.customRequirements = Object.assign(this.customRequirements, { [key]: changes[key] });
+                          this.customRequirements = Object.assign(this.customRequirements, { [key]: +changes[key] });
                         }
                       }
                     }

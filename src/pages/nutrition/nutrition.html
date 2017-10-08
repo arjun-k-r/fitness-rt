@@ -8,6 +8,9 @@
       <button (click)="changeView()" ion-button padding role="button">
         <ion-icon aria-hidden="true" name="{{ nutritionView === 'meals' ? 'list-box' : 'stats' }}"></ion-icon>
       </button>
+      <button (click)="saveMealPlan()" icon-only ion-button padding role="button">
+        <ion-icon aria-hidden="true" name="cloud-done"></ion-icon>
+      </button>
       <button (click)="getPrevPlan()" ion-button padding role="button">
         <ion-icon aria-hidden="true" name="rewind"></ion-icon>
       </button>
@@ -47,8 +50,7 @@
         </ion-toggle>
       </ion-item>
       <ion-item *ngIf="nutritionGoals.breakfastTime.isSelected">
-        <ion-label for="breakfastTimeGoalSwitch" id="breakfastTimeGoalSwitchLabel">Breakfast time goal</ion-label>
-        <ion-label floating for="breakfastTimeGoal" id="breakfastTimeGoalLabel">Bed time</ion-label>
+        <ion-label floating for="breakfastTimeGoalSwitch" id="breakfastTimeGoalSwitchLabel">Breakfast time</ion-label>
         <ion-datetime aria-live="assertive" aria-labelledby="breakfastTimeLabel" aria-required="false" displayFormat="HH:mm" id="breakfastTimeLabel"
           [(ngModel)]="nutritionGoals.breakfastTime.value" pickerFormat="HH mm"></ion-datetime>
       </ion-item>
@@ -82,6 +84,17 @@
         <ion-label floating for="mealInterval" id="mealIntervalLabel">Meal interval (hours)</ion-label>
         <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="mealIntervalLabel" aria-required="true" id="mealInterval"
           [(ngModel)]="nutritionGoals.mealInterval.value" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label for="mealSizeSwitch" id="mealSizeSwitchLabel">Meal size goal</ion-label>
+        <ion-toggle aria-live="assertive" aria-labelledby="mealSizeSwitchLabel" aria-required="false" id="mealSizeSwitch"
+          [(ngModel)]="nutritionGoals.mealSize.isSelected" role="switch">
+        </ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="nutritionGoals.mealSize.isSelected">
+        <ion-label floating for="mealSize" id="mealSizeLabel">Meal size (g)</ion-label>
+        <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="mealSizeLabel" aria-required="true" id="mealSize"
+          [(ngModel)]="nutritionGoals.mealSize.value" type="number"></ion-input>
       </ion-item>
     </ion-list>
     <div *ngSwitchCase="'dayLog'">

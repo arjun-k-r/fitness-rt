@@ -99,7 +99,7 @@ export class MealEditPage {
     this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals);
     this.meal.combos.overeating = this._mealPvd.checkOvereating(this.meal, this.nutritionGoals.mealSize);
     this._mealPlanFoodIntolerance = this._mealPvd.checkMealPlanFoodIntolerance(this._intoleratedFoods, this._mealPlan.meals);
-    this.meal.combos.goalsAchieved = this._mealPvd.checkGoalAchievements(this.nutritionGoals, this._mealPlan);
+    this._mealPlan.goalsAchieved = this._mealPvd.checkGoalAchievements(this.nutritionGoals, this._mealPlan);
     this._mealPlan.lifePoints = this._mealPvd.checkLifePoints(this._mealPlan);
   }
 
@@ -207,14 +207,14 @@ export class MealEditPage {
           text: 'Great!',
           handler: () => {
             const goodMeal: boolean = this._mealPvd.checkGoodMeal(this.meal);
-            if (this.meal.combos.goalsAchieved && goodMeal) {
+            if (this._mealPlan.goalsAchieved && goodMeal) {
               this._modalCtrl.create('rewards', {
                 context: 'nutrition',
                 goalsAchieved: true,
                 goodQuality: true,
                 lifepoints: this._mealPlan.lifePoints
               }).present();
-            } else if (this.meal.combos.goalsAchieved && this._mealPlan.lifePoints > 0) {
+            } else if (this._mealPlan.goalsAchieved && this._mealPlan.lifePoints > 0) {
               this._modalCtrl.create('rewards', {
                 context: 'nutrition',
                 goalsAchieved: true,

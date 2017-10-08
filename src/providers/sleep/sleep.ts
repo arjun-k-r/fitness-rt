@@ -24,6 +24,8 @@ export class SleepProvider {
       sleepDurationAchieved: boolean = false;
     const bedTimeGoal: number = moment.duration(goals.bedTime.value).asMinutes();
     const bedTime: number = moment.duration(sleep.bedTime).asMinutes();
+    sleep.duration = +sleep.duration;
+
     if (goals.bedTime.isSelected) {
       if (bedTime => bedTimeGoal - 30 && bedTime <= bedTimeGoal + 30) {
         bedTimeAchieved = true;
@@ -33,7 +35,7 @@ export class SleepProvider {
     }
 
     if (goals.duration.isSelected) {
-      if (sleep.duration >= goals.duration.value - 0.5 && sleep.duration <= goals.duration.value + 0.5) {
+      if (sleep.duration >= +goals.duration.value - 0.5 && sleep.duration <= +goals.duration.value + 0.5) {
         sleepDurationAchieved = true;
       }
     } else {
@@ -78,7 +80,7 @@ export class SleepProvider {
       lifePoints -= 10;
     }
 
-    if (sleep.duration > 7) {
+    if (+sleep.duration > 7) {
       lifePoints += 20;
     } else {
       lifePoints -= 20;
@@ -118,17 +120,20 @@ export class SleepProvider {
       this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/sleep`).set(sleep.lifePoints)
         .then(() => {
           const newSleepLog: SleepLog = new SleepLog(sleep.bedTime, moment().format('dddd'), sleep.duration, sleep.combos.quality);
-          if (!!weekLog.length) {
-            weekLog.reverse();
-            if (newSleepLog.date !== weekLog[0].date) {
-              this._db.list(`/sleep-log/${authId}/`).push(newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
+          const weekLength: number = weekLog.length;
+          if (!!weekLength) {
+            if (newSleepLog.date !== weekLog[weekLength - 1].date) {
+              weekLog.push(newSleepLog);
             } else {
-              this._db.list(`/sleep-log/${authId}/`).update(weekLog[0]['$key'], newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
+              weekLog[weekLength - 1] = Object.assign({}, newSleepLog);
             }
           } else {
-            this._db.list(`/sleep-log/${authId}/`).push(newSleepLog).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
+            weekLog.push(newSleepLog);
           }
-          this._db.object(`/sleep/${authId}/${CURRENT_DAY}`).set(sleep).then(() => {
+          Promise.all([
+            this._db.object(`/sleep-log/${authId}/`).set(weekLog),
+            this._db.object(`/sleep/${authId}/${CURRENT_DAY}`).set(sleep)
+          ]).then(() => {
             resolve();
           }).catch((err: firebase.FirebaseError) => reject(err));
         })

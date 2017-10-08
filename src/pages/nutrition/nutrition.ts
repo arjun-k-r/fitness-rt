@@ -10,6 +10,7 @@ import {
   IonicPage,
   Loading,
   LoadingController,
+  ModalController,
   NavController,
   Popover,
   PopoverController
@@ -36,6 +37,7 @@ export class NutritionPage {
   private _authSubscription: Subscription;
   private _loader: Loading;
   private _mealSubscription: Subscription;
+  private _nutritionGoalSubscription: Subscription;
   private _weekLogSubscription: Subscription;
   private _weekLog: NutritionLog[] = [];
   public chartData: ILineChartEntry[] = [];
@@ -53,6 +55,7 @@ export class NutritionPage {
     private _alertCtrl: AlertController,
     private _loadCtrl: LoadingController,
     private _mealPvd: MealProvider,
+    private _modalCtrl: ModalController,
     private _navCtrl: NavController,
     private _popoverCtrl: PopoverController
   ) { }
@@ -152,6 +155,55 @@ export class NutritionPage {
     }).present();
   }
 
+  public saveMealPlan(): void {
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
+    });
+    this._loader.present();
+    this.mealPlan.lifePoints = this._mealPvd.checkLifePoints(this.mealPlan);
+    this.mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this.mealPlan.meals);
+    this.mealPlan.goalsAchieved = this._mealPvd.checkGoalAchievements(this.nutritionGoals, this.mealPlan);
+    Promise.all([
+      this._mealPvd.saveNutritionGoals(this._authId, this.nutritionGoals),
+      this._mealPvd.saveMealPlan(this._authId, this.mealPlan, this._weekLog)
+    ]).then(() => {
+      if (this._loader) {
+        this._loader.dismiss();
+        this._loader = null;
+      }
+      this._alertCtrl.create({
+        title: 'Success!',
+        message: 'Meal plan saved successfully!',
+        buttons: [{
+          text: 'Great!',
+          handler: () => {
+            if (this.mealPlan.goalsAchieved && this.mealPlan.lifePoints > 0) {
+              this._modalCtrl.create('rewards', {
+                context: 'nutrition',
+                goalsAchieved: true,
+                lifepoints: this.mealPlan.lifePoints
+              }).present();
+            }
+          }
+        }]
+      }).present();
+    })
+      .catch((err: Error) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.toString(),
+          buttons: ['OK']
+        }).present();
+      });
+  }
+
   public showSettings(event: Popover): void {
     const popover: Popover = this._popoverCtrl.create('settings');
     popover.present({
@@ -186,6 +238,7 @@ export class NutritionPage {
         this._mealSubscription = this._mealPvd.getMealPlan$(this._authId).subscribe(
           (mealPlan: MealPlan) => {
             this.mealPlan = Object.assign({}, mealPlan['$value'] === null ? this.mealPlan : mealPlan);
+            this.mealPlan.meals = this.mealPlan.meals || [];
             this.nutrientKeys = Object.keys(this.mealPlan.nutrition);
             this._mealPvd.calculateDailyNutrition(this._authId, this.mealPlan).then((dailyNutrition: Nutrition) => {
               this.dailyNutrition = Object.assign({}, dailyNutrition);
@@ -206,6 +259,24 @@ export class NutritionPage {
                   buttons: ['OK']
                 }).present();
               });
+          },
+          (err: firebase.FirebaseError) => {
+            if (this._loader) {
+              this._loader.dismiss();
+              this._loader = null;
+            }
+            this._alertCtrl.create({
+              title: 'Uhh ohh...',
+              subTitle: 'Something went wrong',
+              message: err.message,
+              buttons: ['OK']
+            }).present();
+          }
+        );
+
+        this._nutritionGoalSubscription = this._mealPvd.getNutritionGoals$(this._authId).subscribe(
+          (goals: NutritionGoals) => {
+            this.nutritionGoals = Object.assign({}, goals['$value'] === null ? this.nutritionGoals : goals);
           },
           (err: firebase.FirebaseError) => {
             if (this._loader) {
@@ -246,6 +317,7 @@ export class NutritionPage {
   ionViewWillLeave(): void {
     this._authSubscription && this._authSubscription.unsubscribe();
     this._mealSubscription && this._mealSubscription.unsubscribe();
+    this._nutritionGoalSubscription && this._nutritionGoalSubscription.unsubscribe();
     this._weekLogSubscription && this._weekLogSubscription.unsubscribe();
     if (this._loader) {
       this._loader.dismiss();

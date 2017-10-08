@@ -110,11 +110,13 @@ export class MealProvider {
         mealSizeAchieved = false
       }
 
-      goals.foodGroupRestrictions.value.forEach((group: string) => {
-        if (goals.foodGroupRestrictions.isSelected && !!find(meal.foods, (food: Food) => food.group === group)) {
-          foodGroupRestrictionsAchieved = false
-        }
-      });
+      if (goals.foodGroupRestrictions.isSelected) {
+        goals.foodGroupRestrictions.value.forEach((group: string) => {
+          if (!!find(meal.foods, (food: Food) => food.group === group)) {
+            foodGroupRestrictionsAchieved = false
+          }
+        });
+      }
     });
 
     const mealNr: number = mealPlan.meals.length;
@@ -143,12 +145,12 @@ export class MealProvider {
       }
 
       let initialMealTime: number,
-      currentMealTime: number;
+        currentMealTime: number;
 
       for (let i = 1; i < mealNr - 1; i++) {
         initialMealTime = moment.duration(mealPlan.meals[i - 1].hour).asMinutes() / 60;
         currentMealTime = moment.duration(mealPlan.meals[i].hour).asMinutes() / 60;
-        if (!(currentMealTime <= initialMealTime + goals.mealInterval.value + 0.5 && currentMealTime >= initialMealTime + goals.mealInterval.value - 0.5)) {
+        if (!(currentMealTime <= initialMealTime + +goals.mealInterval.value + 0.5 && currentMealTime >= initialMealTime + +goals.mealInterval.value - 0.5)) {
           mealIntervalAchieved = false;
         }
       }
@@ -282,7 +284,7 @@ export class MealProvider {
 
   public checkOvereating(meal: Meal, mealSizeGoal: Goal): boolean {
     if (mealSizeGoal.isSelected) {
-      return meal.quantity > mealSizeGoal.value + 50;
+      return meal.quantity > +mealSizeGoal.value + 50;
     }
 
     return meal.quantity > 700;
@@ -317,23 +319,27 @@ export class MealProvider {
       this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/nutrition`).set(mealPlan.lifePoints)
         .then(() => {
           const newNutritionLog: NutritionLog = new NutritionLog(moment().format('dddd'), mealPlan.nutrition);
-          if (!!weekLog.length) {
-            weekLog.reverse();
-            if (newNutritionLog.date !== weekLog[0].date) {
-              this._db.list(`/nutrition-log/${authId}/`).push(newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
+          const weekLength: number = weekLog.length;
+          if (!!weekLength) {
+            if (newNutritionLog.date !== weekLog[weekLength - 1].date) {
+              weekLog.push(newNutritionLog);
             } else {
-              this._db.list(`/nutrition-log/${authId}/`).update(weekLog[0]['$key'], newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
+              weekLog[weekLength - 1] = Object.assign({}, newNutritionLog);
             }
           } else {
-            this._db.list(`/nutrition-log/${authId}/`).push(newNutritionLog).catch((err: firebase.FirebaseError) => console.error(`Error saving nutrition log: ${err.message}`));
+            weekLog.push(newNutritionLog);
           }
           mealPlan.meals = sortBy(mealPlan.meals, (meal: Meal) => meal.hour);
           if (!intoleratedFoods) {
-            this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan).then(() => {
+            Promise.all([
+              this._db.object(`/nutrition-log/${authId}`).set(weekLog),
+              this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan)
+            ]).then(() => {
               resolve();
             }).catch((err: firebase.FirebaseError) => reject(err));
           } else {
             Promise.all([
+              this._db.object(`/nutrition-log/${authId}`).set(weekLog),
               this._db.object(`/food-intolerance/${authId}`).set(intoleratedFoods),
               this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan)
             ]).then(() => {

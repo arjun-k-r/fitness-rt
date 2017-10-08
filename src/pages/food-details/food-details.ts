@@ -166,6 +166,7 @@ export class FoodDetailsPage {
     this.carbs = this.foodForm.get('carbs');
     this.fiber = this.foodForm.get('fiber');
     this.sugars = this.foodForm.get('sugars');
+    
 
   }
 

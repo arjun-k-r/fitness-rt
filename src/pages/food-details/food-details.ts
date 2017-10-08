@@ -37,7 +37,7 @@ export class FoodDetailsPage {
   public dataView: string = 'Percentages';
   public editMode: boolean = false;
   public food: Food;
-  public foodDri: Nutrition = new Nutrition();
+  public foodDailyRequirements: Nutrition = new Nutrition();
   public foodForm: FormGroup;
   public foodGroups: string[] = [...FOOD_GROUPS];
   public group: AbstractControl;
@@ -153,6 +153,20 @@ export class FoodDetailsPage {
       alcohol: [this.food.nutrition.alcohol.value, Validators.required],
       caffeine: [this.food.nutrition.caffeine.value, Validators.required],
     });
+
+    this.group = this.foodForm.get('group');
+    this.name = this.foodForm.get('name');
+    this.quantity = this.foodForm.get('quantity');
+    this.energy = this.foodForm.get('energy');
+    this.water = this.foodForm.get('water');
+    this.protein = this.foodForm.get('protein');
+    this.fats = this.foodForm.get('fats');
+    this.satFat = this.foodForm.get('satFat');
+    this.transFat = this.foodForm.get('transFat');
+    this.carbs = this.foodForm.get('carbs');
+    this.fiber = this.foodForm.get('fiber');
+    this.sugars = this.foodForm.get('sugars');
+
   }
 
   public changeDataView(): void {
@@ -317,9 +331,9 @@ export class FoodDetailsPage {
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)
     );
-    this._foodPvd.calculateFoodDRI(this.authId, this.food)
+    this._foodPvd.calculateFoodDailyRequirements(this.authId, this.food)
       .then((nutrition: Nutrition) => {
-        this.foodDri = Object.assign({}, nutrition);
+        this.foodDailyRequirements = Object.assign({}, nutrition);
         if (this._loader) {
           this._loader.dismiss();
           this._loader = null;

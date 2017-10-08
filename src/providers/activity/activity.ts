@@ -58,15 +58,26 @@ export class ActivityProvider {
   }
 
   public checkGoalAchievements(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
-    let energyConsumptionAchieved: boolean = false;
-    let exerciseDurationAchieved: boolean = false;
-    if (goals.duration.isSelected && activityPlan.totalDuration >= goals.duration.value) {
+    let energyConsumptionAchieved: boolean = false,
+      exerciseDurationAchieved: boolean = false;
+
+    if (goals.duration.isSelected) {
+      if (activityPlan.totalDuration >= goals.duration.value) {
+        exerciseDurationAchieved = true;
+      }
+    } else {
       exerciseDurationAchieved = true;
-    } else if (goals.energy.isSelected && activityPlan.totalEnergyConsumption >= goals.energy.value) {
+    }
+
+    if (goals.energy.isSelected) {
+      if (activityPlan.totalEnergyConsumption >= goals.energy.value) {
+        energyConsumptionAchieved = true;
+      }
+    } else {
       energyConsumptionAchieved = true;
     }
 
-    return energyConsumptionAchieved || exerciseDurationAchieved;
+    return energyConsumptionAchieved && exerciseDurationAchieved && (goals.duration.isSelected || goals.energy.isSelected);
   }
 
   public checkGoodExercise(activityPlan: ActivityPlan): boolean {

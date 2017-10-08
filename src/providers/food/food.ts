@@ -59,17 +59,16 @@ export class FoodProvider {
     });
   }
 
-  public calculateFoodDRI(authId: string, food: Food): Promise<Nutrition> {
+  public calculateFoodDailyRequirements(authId: string, food: Food): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
       const nutrition: Nutrition = new Nutrition();
-      const subscription: Subscription = this._nutritionPvd.getDri$(authId).subscribe((dri: Nutrition) => {
-        dri = dri['$value'] === null ? new Nutrition() : dri;
+      this._nutritionPvd.getDailyRequirements(authId).then((dailyRequirements: Nutrition) => {
+        dailyRequirements = dailyRequirements['$value'] === null ? new Nutrition() : dailyRequirements;
         for (let nutrientKey in food.nutrition) {
-          nutrition[nutrientKey].value = Math.round((food.nutrition[nutrientKey].value * 100) / (dri[nutrientKey].value || 1));
+          nutrition[nutrientKey].value = Math.round((food.nutrition[nutrientKey].value * 100) / (dailyRequirements[nutrientKey].value || 1));
         }
-        subscription.unsubscribe();
         resolve(nutrition);
-      }, (err: firebase.FirebaseError) => reject(err.message));
+      }).catch((err: firebase.FirebaseError) => reject(err.message));
     });
   }
 

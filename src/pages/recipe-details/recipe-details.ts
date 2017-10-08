@@ -51,7 +51,7 @@ export class RecipeDetailsPage {
   public name: AbstractControl;
   public portions: AbstractControl;
   public recipe: Recipe;
-  public recipeDri: Nutrition = new Nutrition();
+  public recipeDailyRequirements: Nutrition = new Nutrition();
   public recipeForm: FormGroup;
   public recipeSegment: string = 'recipeInfo';
   constructor(
@@ -347,13 +347,13 @@ export class RecipeDetailsPage {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this.authId = auth.uid;
-        this._recipePvd.calculateRecipeDRI(this.authId, this.recipe)
+        this._recipePvd.calculateRecipeDailyRequirements(this.authId, this.recipe)
           .then((nutrition: Nutrition) => {
             if (this._loader) {
               this._loader.dismiss();
               this._loader = null;
             }
-            this.recipeDri = Object.assign({}, nutrition);
+            this.recipeDailyRequirements = Object.assign({}, nutrition);
           })
           .catch((err: Error) => {
             if (this._loader) {

@@ -12,9 +12,10 @@ export class Meal {
         public combos: {
             calmEating: boolean,
             feeling: string,
+            goalsAchieved: boolean,
             overeating: boolean,
             slowEating: boolean
-        } = { calmEating: false, feeling: 'Sleepiness', overeating: false, slowEating: false },
+        } = { calmEating: false, feeling: 'Sleepiness', goalsAchieved: false, overeating: false, slowEating: false },
         public foods: (Food | Recipe)[] = [],
         public hour: string = moment().format('HH:mm'),
         public nutrition: Nutrition = new Nutrition(),
@@ -37,9 +38,8 @@ export class NutritionGoals {
         public breakfastTime: Goal = new Goal(false, ''),
         public dinnerTime: Goal = new Goal(false, ''),
         public foodGroupRestrictions: Goal = new Goal(false, []),
-        public macronutrientRatios: Goal = new Goal(false, { carbohydrates: 0, fats: 0, protein: 0 }),
         public mealInterval: Goal = new Goal(false, 0),
-        public nutrition: Goal = new Goal(false, new Nutrition()),
+        public mealSize: Goal = new Goal(false, 0)
     ) { }
 }
 

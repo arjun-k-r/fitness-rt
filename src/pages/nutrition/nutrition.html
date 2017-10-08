@@ -83,214 +83,6 @@
         <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="mealIntervalLabel" aria-required="true" id="mealInterval"
           [(ngModel)]="nutritionGoals.mealInterval.value" type="number"></ion-input>
       </ion-item>
-      <div>
-        <ion-item-group role="group">
-          <ion-item-divider color="secondary" role="separator">Proximates</ion-item-divider>
-          <ion-item>
-            <ion-label floating for="energy" id="energyLabel">Energy (kcal)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="energyLabel" aria-required="true" id="energy" [(ngModel)]="nutritionGoals.nutrition.value.energy.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="water" id="waterLabel">Water (ml)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="waterLabel" aria-required="true" id="water" [(ngModel)]="nutritionGoals.nutrition.value.water.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="protein" id="proteinLabel">Protein (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="proteinLabel" aria-required="true" id="protein" [(ngModel)]="nutritionGoals.nutrition.value.protein.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="fats" id="fatsLabel">Total fat (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="fatsLabel" aria-required="true" id="fats" [(ngModel)]="nutritionGoals.nutrition.value.fats.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="satFat" id="satFatLabel">Saturated fat (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="satFatLabel" aria-required="true" id="satFat" [(ngModel)]="nutritionGoals.nutrition.value.satFat.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="transFat" id="transFatLabel">Trans fat (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="transFatLabel" aria-required="true" id="transFat" [(ngModel)]="nutritionGoals.nutrition.value.transFat.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="carbs" id="carbsLabel">Carbohydrates (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="carbsLabel" aria-required="true" id="carbs" [(ngModel)]="nutritionGoals.nutrition.value.carbs.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="fiber" id="fiberLabel">Fiber (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="fiberLabel" aria-required="true" id="fiber" [(ngModel)]="nutritionGoals.nutrition.value.fiber.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="sugars" id="sugarsLabel">Sugars (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="sugarsLabel" aria-required="true" id="sugars" [(ngModel)]="nutritionGoals.nutrition.value.sugars.value" required type="number"></ion-input>
-          </ion-item>
-        </ion-item-group>
-        <ion-item-group role="group">
-          <ion-item-divider color="secondary" role="separator">Essential amino acids</ion-item-divider>
-          <ion-item>
-            <ion-label floating for="histidine" id="histidineLabel">Histidine (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="histidineLabel" aria-required="true" id="histidine" [(ngModel)]="nutritionGoals.nutrition.value.histidine.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="isoleucine" id="isoleucineLabel">Isoleucine (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="isoleucineLabel" aria-required="true" id="isoleucine" [(ngModel)]="nutritionGoals.nutrition.value.isoleucine.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="leucine" id="leucineLabel">Leucine (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="leucineLabel" aria-required="true" id="leucine" [(ngModel)]="nutritionGoals.nutrition.value.leucine.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="lysine" id="lysineLabel">Lysine (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="lysineLabel" aria-required="true" id="lysine" [(ngModel)]="nutritionGoals.nutrition.value.lysine.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="methionine" id="methionineLabel">Methionine (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="methionineLabel" aria-required="true" id="methionine" [(ngModel)]="nutritionGoals.nutrition.value.methionine.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="phenylalanine" id="phenylalanineLabel">Phenylalanine (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="phenylalanineLabel" aria-required="true" id="phenylalanine" [(ngModel)]="nutritionGoals.nutrition.value.phenylalanine.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="tryptophan" id="tryptophanLabel">Tryptophan (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="tryptophanLabel" aria-required="true" id="tryptophan" [(ngModel)]="nutritionGoals.nutrition.value.tryptophan.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="threonine" id="threonineLabel">Threonine (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="threonineLabel" aria-required="true" id="threonine" [(ngModel)]="nutritionGoals.nutrition.value.threonine.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="valine" id="valineLabel">Valine (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="valineLabel" aria-required="true" id="valine" [(ngModel)]="nutritionGoals.nutrition.value.valine.value" required type="number"></ion-input>
-          </ion-item>
-        </ion-item-group>
-        <ion-item-group role="group">
-          <ion-item-divider color="secondary" role="separator">Essential fatty acids</ion-item-divider>
-          <ion-item>
-            <ion-label floating for="la" id="laLabel">Linoleic acid (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="laLabel" aria-required="true" id="la" [(ngModel)]="nutritionGoals.nutrition.value.la.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="ala" id="alaLabel">alpha-Linolenic acid (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="alaLabel" aria-required="true" id="ala" [(ngModel)]="nutritionGoals.nutrition.value.ala.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="dha" id="dhaLabel">Docosahexaenoic acid (g)*</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="dhaLabel" aria-required="true" id="dha" [(ngModel)]="nutritionGoals.nutrition.value.dha.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="epa" id="epaLabel">Eicosapentaenoic acid (g)*</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="epaLabel" aria-required="true" id="epa" [(ngModel)]="nutritionGoals.nutrition.value.epa.value" required type="number"></ion-input>
-          </ion-item>
-        </ion-item-group>
-        <ion-item-group role="group">
-          <ion-item-divider color="secondary" role="separator">Minerals</ion-item-divider>
-          <ion-item>
-            <ion-label floating for="calcium" id="calciumLabel">Calcium (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="calciumLabel" aria-required="true" id="calcium" [(ngModel)]="nutritionGoals.nutrition.value.calcium.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="copper" id="copperLabel">Copper (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="copperLabel" aria-required="true" id="copper" [(ngModel)]="nutritionGoals.nutrition.value.copper.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="iron" id="ironLabel">Iron (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="ironLabel" aria-required="true" id="iron" [(ngModel)]="nutritionGoals.nutrition.value.iron.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="magnesium" id="magnesiumLabel">Magnesium (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="magnesiumLabel" aria-required="true" id="magnesium" [(ngModel)]="nutritionGoals.nutrition.value.magnesium.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="manganese" id="manganeseLabel">Manganese (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="manganeseLabel" aria-required="true" id="manganese" [(ngModel)]="nutritionGoals.nutrition.value.manganese.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="phosphorus" id="phosphorusLabel">Phosphorus (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="phosphorusLabel" aria-required="true" id="phosphorus" [(ngModel)]="nutritionGoals.nutrition.value.phosphorus.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="potassium" id="potassiumLabel">Potassium (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="potassiumLabel" aria-required="true" id="potassium" [(ngModel)]="nutritionGoals.nutrition.value.potassium.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="selenium" id="seleniumLabel">Selenium (ug)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="seleniumLabel" aria-required="true" id="selenium" [(ngModel)]="nutritionGoals.nutrition.value.selenium.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="sodium" id="sodiumLabel">Sodium (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="sodiumLabel" aria-required="true" id="sodium" [(ngModel)]="nutritionGoals.nutrition.value.sodium.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="zinc" id="zincLabel">Zinc (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="zincLabel" aria-required="true" id="zinc" [(ngModel)]="nutritionGoals.nutrition.value.zinc.value" required type="number"></ion-input>
-          </ion-item>
-        </ion-item-group>
-        <ion-item-group role="group">
-          <ion-item-divider color="secondary" role="separator">Vitamins</ion-item-divider>
-          <ion-item>
-            <ion-label floating for="vitaminA" id="vitaminALabel">Vitamin A (ug)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminALabel" aria-required="true" id="vitaminA" [(ngModel)]="nutritionGoals.nutrition.value.vitaminA.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="vitaminB1" id="vitaminB1Label">Vitamin B1 (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminB1Label" aria-required="true" id="vitaminB1" [(ngModel)]="nutritionGoals.nutrition.value.vitaminB1.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="vitaminB2" id="vitaminB2Label">Vitamin B2 (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminB2Label" aria-required="true" id="vitaminB2" [(ngModel)]="nutritionGoals.nutrition.value.vitaminB2.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="vitaminB3" id="vitaminB3Label">Vitamin B3 (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminB3Label" aria-required="true" id="vitaminB3" [(ngModel)]="nutritionGoals.nutrition.value.vitaminB3.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="vitaminB5" id="vitaminB5Label">Vitamin B5 (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminB5Label" aria-required="true" id="vitaminB5" [(ngModel)]="nutritionGoals.nutrition.value.vitaminB5.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="vitaminB6" id="vitaminB6Label">Vitamin B6 (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminB6Label" aria-required="true" id="vitaminB6" [(ngModel)]="nutritionGoals.nutrition.value.vitaminB6.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="vitaminB9" id="vitaminB9Label">Vitamin B9 (ug)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminB9Label" aria-required="true" id="vitaminB9" [(ngModel)]="nutritionGoals.nutrition.value.vitaminB9.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="vitaminB12" id="vitaminB12Label">Vitamin B12 (ug)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminB12Label" aria-required="true" id="vitaminB12" [(ngModel)]="nutritionGoals.nutrition.value.vitaminB12.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="choline" id="cholineLabel">Choline (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="cholineLabel" aria-required="true" id="choline" [(ngModel)]="nutritionGoals.nutrition.value.choline.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="vitaminC" id="vitaminCLabel">Vitaminc C (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminCLabel" aria-required="true" id="vitaminC" [(ngModel)]="nutritionGoals.nutrition.value.vitaminC.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="vitaminD" id="vitaminDLabel">Vitamin D (ug)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminDLabel" aria-required="true" id="vitaminD" [(ngModel)]="nutritionGoals.nutrition.value.vitaminD.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="vitaminE" id="vitaminELabel">Vitamin E (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminELabel" aria-required="true" id="vitaminE" [(ngModel)]="nutritionGoals.nutrition.value.vitaminE.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="vitaminK" id="vitaminKLabel">Vitamin K (ug)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminKLabel" aria-required="true" id="vitaminK" [(ngModel)]="nutritionGoals.nutrition.value.vitaminK.value" required type="number"></ion-input>
-          </ion-item>
-        </ion-item-group>
-        <ion-item-group role="group">
-          <ion-item-divider color="secondary" role="separator">Other</ion-item-divider>
-          <ion-item>
-            <ion-label floating for="alcohol" id="alcoholLabel">Alcohol (g)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="alcoholLabel" aria-required="true" id="alcohol" [(ngModel)]="nutritionGoals.nutrition.value.alcohol.value" required type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label floating for="caffeine" id="caffeineLabel">Caffeine (mg)</ion-label>
-            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="caffeineLabel" aria-required="true" id="caffeine" [(ngModel)]="nutritionGoals.nutrition.value.caffeine.value" required type="number"></ion-input>
-          </ion-item>
-        </ion-item-group>
-      </div>
     </ion-list>
     <div *ngSwitchCase="'dayLog'">
       <div *ngIf="nutritionView === 'meals'">
@@ -340,12 +132,12 @@
               intake. Visit food list and sort them by nutrient content to find the proper foods.</p>
           </ion-item>
         </ion-item-group>
-        <ion-item-group padding role="group">
+        <ion-item-group role="group">
           <ion-item role="listitem">
             Energy
             <p item-content>{{ dailyNutrition.energy?.value }}%</p>
           </ion-item>
-          <ion-item-divider>Proximates</ion-item-divider>
+          <ion-item-divider color="primary" role="separator">Proximates</ion-item-divider>
           <ion-item role="listitem">
             Water
             <p item-content>{{ dailyNutrition.water?.value }}%</p>
@@ -375,8 +167,8 @@
             <p item-content>{{ dailyNutrition.transFat?.value }}%</p>
           </ion-item>
         </ion-item-group>
-        <ion-item-group padding role="group">
-          <ion-item-divider>Essential amino acids</ion-item-divider>
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Essential amino acids</ion-item-divider>
           <ion-item role="listitem">
             Histidine
             <p item-content>{{ dailyNutrition.histidine?.value }}%</p>
@@ -411,8 +203,8 @@
             <p item-content>{{ dailyNutrition.tryptophan?.value }}%</p>
           </ion-item>
         </ion-item-group>
-        <ion-item-group padding role="group">
-          <ion-item-divider>Essential vitamins</ion-item-divider>
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Essential vitamins</ion-item-divider>
           <ion-item role="listitem">
             Vitamin A
             <p item-content>{{ dailyNutrition.vitaminA?.value }}%</p>
@@ -466,8 +258,8 @@
             <p item-content>{{ dailyNutrition.vitaminK?.value }}%</p>
           </ion-item>
         </ion-item-group>
-        <ion-item-group padding role="group">
-          <ion-item-divider>Essential minerals</ion-item-divider>
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Essential minerals</ion-item-divider>
           <ion-item role="listitem">
             Calcium
             <p item-content>{{ dailyNutrition.calcium?.value }}%</p>
@@ -509,8 +301,8 @@
             <p item-content>{{ dailyNutrition.zinc?.value }}%</p>
           </ion-item>
         </ion-item-group>
-        <ion-item-group padding role="group">
-          <ion-item-divider>Essential fatty acids</ion-item-divider>
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Essential fatty acids</ion-item-divider>
           <ion-item role="listitem">
             Omega-3 (ALA)
             <p item-content>{{ dailyNutrition.ala?.value }}%</p>
@@ -528,8 +320,8 @@
             <p item-content>{{ dailyNutrition.la?.value }}%</p>
           </ion-item>
         </ion-item-group>
-        <ion-item-group padding role="group">
-          <ion-item-divider>Other</ion-item-divider>
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Other</ion-item-divider>
           <ion-item role="listitem">
             Alcohol
             <p item-content>{{ dailyNutrition.alcohol?.value }}%</p>

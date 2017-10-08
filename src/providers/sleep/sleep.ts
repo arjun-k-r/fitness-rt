@@ -20,17 +20,27 @@ export class SleepProvider {
   ) { }
 
   public checkGoalAchievements(goals: SleepGoals, sleep: Sleep): boolean {
-    let bedTimeAchieved: boolean = false;
-    let sleepDurationAchieved: boolean = false;
-    const bedTimeGoal: number = moment.duration(goals.bedTime.value).asMinutes() / 60;
-    const bedTime: number = moment.duration(sleep.bedTime).asMinutes() / 60;
-    if (goals.bedTime.isSelected && (bedTime => bedTimeGoal - 0.5 || bedTime <= bedTimeGoal + 0.5)) {
+    let bedTimeAchieved: boolean = false,
+      sleepDurationAchieved: boolean = false;
+    const bedTimeGoal: number = moment.duration(goals.bedTime.value).asMinutes();
+    const bedTime: number = moment.duration(sleep.bedTime).asMinutes();
+    if (goals.bedTime.isSelected) {
+      if (bedTime => bedTimeGoal - 30 && bedTime <= bedTimeGoal + 30) {
+        bedTimeAchieved = true;
+      }
+    } else {
       bedTimeAchieved = true;
-    } else if (goals.duration.isSelected && (sleep.duration >= goals.duration.value - 0.5 || sleep.duration <= goals.duration.value + 0.5)) {
+    }
+
+    if (goals.duration.isSelected) {
+      if (sleep.duration >= goals.duration.value - 0.5 && sleep.duration <= goals.duration.value + 0.5) {
+        sleepDurationAchieved = true;
+      }
+    } else {
       sleepDurationAchieved = true;
     }
 
-    return bedTimeAchieved || sleepDurationAchieved;
+    return bedTimeAchieved && sleepDurationAchieved && (goals.duration.isSelected || goals.bedTime.isSelected);
   }
 
   public checkGoodSleep(sleep: Sleep): boolean {

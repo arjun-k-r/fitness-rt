@@ -3,6 +3,7 @@ export class Fitness {
         public age: number = 0,
         public bmr: number = 0,
         public bodyFat: number = 0,
+        public customRequirements: boolean = false,
         public gender: string = '',
         public heartRate: { max: number, resting: number, trainingMin: number, trainingMax: number } = {
             max: 0,

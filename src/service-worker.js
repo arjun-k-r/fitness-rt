@@ -11,17 +11,31 @@ self.toolbox.options.cache = {
   name: 'ionic-cache'
 };
 
+const cacheList = [
+  './build/main.js',
+  './build/vendor.js',
+  './build/main.css',
+  './build/polyfills.js',
+  'index.html',
+  'manifest.json'
+];
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheList.indexOf('ionic-cache') !== -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+
 // pre-cache our key assets
-self.toolbox.precache(
-  [
-    './build/main.js',
-    './build/vendor.js',
-    './build/main.css',
-    './build/polyfills.js',
-    'index.html',
-    'manifest.json'
-  ]
-);
+self.toolbox.precache(cacheList);
 
 // dynamically cache any other local assets
 self.toolbox.router.any('/*', self.toolbox.cacheFirst);

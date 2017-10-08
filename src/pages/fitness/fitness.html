@@ -18,8 +18,8 @@
       <ion-segment-button value="fitnessInfo">
         Info
       </ion-segment-button>
-      <ion-segment-button value="dri">
-        DRI
+      <ion-segment-button value="dailyRequirements">
+        Daily requirements
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -130,195 +130,504 @@
         </ion-item>
       </ion-item-group>
     </form>
-    <div *ngSwitchCase="'dri'" padding>
-      <ion-item-group role="group">
-        <ion-item role="listitem">
-          Energy
-          <p item-content>{{ dailyRequirements.energy?.value.toFixed(2) }}{{ dailyRequirements.energy?.unit }}</p>
-        </ion-item>
-        <ion-item-divider>Proximates</ion-item-divider>
-        <ion-item role="listitem">
-          Water
-          <p item-content>{{ dailyRequirements.water?.value.toFixed(2) }}{{ dailyRequirements.water?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Protein
-          <p item-content>{{ dailyRequirements.protein?.value.toFixed(2) }}{{ dailyRequirements.protein?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Carbohydrates
-          <p item-content>{{ dailyRequirements.carbs?.value.toFixed(2) }}{{ dailyRequirements.carbs?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Fiber
-          <p item-content>{{ dailyRequirements.fiber?.value.toFixed(2) }}{{ dailyRequirements.fiber?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Sugars
-          <p item-content>{{ dailyRequirements.sugars?.value.toFixed(2) }}{{ dailyRequirements.sugars?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Fats
-          <p item-content>{{ dailyRequirements.fats?.value.toFixed(2) }}{{ dailyRequirements.fats?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Trans fat
-          <p item-content>{{ dailyRequirements.transFat?.value.toFixed(2) }}{{ dailyRequirements.transFat?.unit }}</p>
-        </ion-item>
-      </ion-item-group>
-      <ion-item-group role="group">
-        <ion-item-divider>Essential amino acids</ion-item-divider>
-        <ion-item role="listitem">
-          Histidine
-          <p item-content>{{ dailyRequirements.histidine?.value.toFixed(2) }}{{ dailyRequirements.histidine?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Isoleucine
-          <p item-content>{{ dailyRequirements.isoleucine?.value.toFixed(2) }}{{ dailyRequirements.isoleucine?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Leucine
-          <p item-content>{{ dailyRequirements.leucine?.value.toFixed(2) }}{{ dailyRequirements.leucine?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Lysine
-          <p item-content>{{ dailyRequirements.lysine?.value.toFixed(2) }}{{ dailyRequirements.lysine?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Methionine
-          <p item-content>{{ dailyRequirements.methionine?.value.toFixed(2) }}{{ dailyRequirements.methionine?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Phenylalanine
-          <p item-content>{{ dailyRequirements.phenylalanine?.value.toFixed(2) }}{{ dailyRequirements.phenylalanine?.unit }}
-          </p>
-        </ion-item>
-        <ion-item role="listitem">
-          Threonine
-          <p item-content>{{ dailyRequirements.threonine?.value.toFixed(2) }}{{ dailyRequirements.threonine?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Tryptophan
-          <p item-content>{{ dailyRequirements.tryptophan?.value.toFixed(2) }}{{ dailyRequirements.tryptophan?.unit }}</p>
-        </ion-item>
-      </ion-item-group>
-      <ion-item-group role="group">
-        <ion-item-divider>Essential vitamins</ion-item-divider>
-        <ion-item role="listitem">
-          Vitamin A
-          <p item-content>{{ dailyRequirements.vitaminA?.value.toFixed(2) }}{{ dailyRequirements.vitaminA?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Vitamin B1 (Thiamine)
-          <p item-content>{{ dailyRequirements.vitaminB1?.value.toFixed(2) }}{{ dailyRequirements.vitaminB1?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Vitamin B2 (Riboflavin)
-          <p item-content>{{ dailyRequirements.vitaminB2?.value.toFixed(2) }}{{ dailyRequirements.vitaminB2?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Vitamin B3 (Niacin)
-          <p item-content>{{ dailyRequirements.vitaminB3?.value.toFixed(2) }}{{ dailyRequirements.vitaminB3?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Vitamin B5 (Pantothenic acid)
-          <p item-content>{{ dailyRequirements.vitaminB5?.value.toFixed(2) }}{{ dailyRequirements.vitaminB5?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Vitamin B6 (Pyridoxine)
-          <p item-content>{{ dailyRequirements.vitaminB6?.value.toFixed(2) }}{{ dailyRequirements.vitaminB6?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Vitamin B9 (Folate)
-          <p item-content>{{ dailyRequirements.vitaminB9?.value.toFixed(2) }}{{ dailyRequirements.vitaminB9?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Vitamin B12 (Cobalamin)
-          <p item-content>{{ dailyRequirements.vitaminB12?.value.toFixed(2) }}{{ dailyRequirements.vitaminB12?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Choline
-          <p item-content>{{ dailyRequirements.choline?.value.toFixed(2) }}{{ dailyRequirements.choline?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Vitamin C (Ascorbic acid)
-          <p item-content>{{ dailyRequirements.vitaminC?.value.toFixed(2) }}{{ dailyRequirements.vitaminC?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Vitamin D (Cholecalciferol)
-          <p item-content>{{ dailyRequirements.vitaminD?.value.toFixed(2) }}{{ dailyRequirements.vitaminD?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Vitamin E (Tocopherol)
-          <p item-content>{{ dailyRequirements.vitaminE?.value.toFixed(2) }}{{ dailyRequirements.vitaminE?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Vitamin K
-          <p item-content>{{ dailyRequirements.vitaminK?.value.toFixed(2) }}{{ dailyRequirements.vitaminK?.unit }}</p>
-        </ion-item>
-      </ion-item-group>
-      <ion-item-group role="group">
-        <ion-item-divider>Essential minerals</ion-item-divider>
-        <ion-item role="listitem">
-          Calcium
-          <p item-content>{{ dailyRequirements.calcium?.value.toFixed(2) }}{{ dailyRequirements.calcium?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Copper
-          <p item-content>{{ dailyRequirements.copper?.value.toFixed(2) }}{{ dailyRequirements.copper?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Iron
-          <p item-content>{{ dailyRequirements.iron?.value.toFixed(2) }}{{ dailyRequirements.iron?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Magnesium
-          <p item-content>{{ dailyRequirements.magnesium?.value.toFixed(2) }}{{ dailyRequirements.magnesium?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Manganese
-          <p item-content>{{ dailyRequirements.manganese?.value.toFixed(2) }}{{ dailyRequirements.manganese?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Phosphorus
-          <p item-content>{{ dailyRequirements.phosphorus?.value.toFixed(2) }}{{ dailyRequirements.phosphorus?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Potassium
-          <p item-content>{{ dailyRequirements.potassium?.value.toFixed(2) }}{{ dailyRequirements.potassium?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Selenium
-          <p item-content>{{ dailyRequirements.selenium?.value.toFixed(2) }}{{ dailyRequirements.selenium?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Sodium
-          <p item-content>{{ dailyRequirements.sodium?.value.toFixed(2) }}{{ dailyRequirements.sodium?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Zinc
-          <p item-content>{{ dailyRequirements.zinc?.value.toFixed(2) }}{{ dailyRequirements.zinc?.unit }}</p>
-        </ion-item>
-      </ion-item-group>
-      <ion-item-group role="group">
-        <ion-item-divider>Essential fatty acids</ion-item-divider>
-        <ion-item role="listitem">
-          Omega-3 (ALA)
-          <p item-content>{{ dailyRequirements.ala?.value.toFixed(2) }}{{ dailyRequirements.ala?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Omega-3 (DHA)
-          <p item-content>{{ dailyRequirements.dha?.value.toFixed(2) }}{{ dailyRequirements.dha?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Omega-3 (EPA)
-          <p item-content>{{ dailyRequirements.epa?.value.toFixed(2) }}{{ dailyRequirements.epa?.unit }}</p>
-        </ion-item>
-        <ion-item role="listitem">
-          Omega-6 (LA)
-          <p item-content>{{ dailyRequirements.la?.value.toFixed(2) }}{{ dailyRequirements.la?.unit }}</p>
-        </ion-item>
-      </ion-item-group>
+    <div *ngSwitchCase="'dailyRequirements'">
+      <ion-item>
+        <ion-label for="customRequirementsSwitch" id="customRequirementsSwitchLabel">Custom requirements</ion-label>
+        <ion-toggle aria-live="assertive" aria-labelledby="customRequirementsSwitchLabel" aria-required="false" id="customRequirementsSwitch" [(ngModel)]="fitness.customRequirements" role="switch">
+        </ion-toggle>
+      </ion-item>
+      <form [formGroup]="dailyRequirementsForm" *ngIf="fitness.customRequirements" novalidate role="form">
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Proximates</ion-item-divider>
+          <ion-item>
+            <ion-label floating for="energy" id="energyLabel">Energy (kcal)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="energyLabel" aria-required="true" formControlName="energy"
+              id="energy" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && energy?.touched && energy.errors?.required">Please enter the energy content.</div>
+          <ion-item>
+            <ion-label floating for="water" id="waterLabel">Water (ml)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="waterLabel" aria-required="true" formControlName="water"
+              id="water" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && water?.touched && water.errors?.required">Please enter the water content.</div>
+          <ion-item>
+            <ion-label floating for="protein" id="proteinLabel">Protein (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="proteinLabel" aria-required="true" formControlName="protein"
+              id="protein" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && protein?.touched && protein.errors?.required">Please enter the protein content.</div>
+          <ion-item>
+            <ion-label floating for="fats" id="fatsLabel">Total fat (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="fatsLabel" aria-required="true" formControlName="fats"
+              id="fats" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && fats?.touched && fats.errors?.required">Please enter the fat content.</div>
+          <ion-item>
+            <ion-label floating for="satFat" id="satFatLabel">Saturated fat (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="satFatLabel" aria-required="true" formControlName="satFat"
+              id="satFat" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && satFat?.touched && satFat.errors?.required">Please enter the saturated fat content.</div>
+          <ion-item>
+            <ion-label floating for="transFat" id="transFatLabel">Trans fat (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="transFatLabel" aria-required="true" formControlName="transFat"
+              id="transFat" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && transFat?.touched && transFat.errors?.required">Please enter the trans fat content.</div>
+          <ion-item>
+            <ion-label floating for="carbs" id="carbsLabel">Carbohydrates (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="carbsLabel" aria-required="true" formControlName="carbs"
+              id="carbs" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && carbs?.touched && carbs.errors?.required">Please enter the carbohydrate content.</div>
+          <ion-item>
+            <ion-label floating for="fiber" id="fiberLabel">Fiber (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="fiberLabel" aria-required="true" formControlName="fiber"
+              id="fiber" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && fiber?.touched && fiber.errors?.required">Please enter the fiber content.</div>
+          <ion-item>
+            <ion-label floating for="sugars" id="sugarsLabel">Sugars (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="sugarsLabel" aria-required="true" formControlName="sugars"
+              id="sugars" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && sugars?.touched && sugars.errors?.required">Please enter the sugar content.</div>
+        </ion-item-group>
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Essential amino acids</ion-item-divider>
+          <ion-item>
+            <ion-label floating for="histidine" id="histidineLabel">Histidine (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="histidineLabel" aria-required="true" formControlName="histidine"
+              id="histidine" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && histidine?.touched && histidine.errors?.required">Please enter the histidine content.</div>
+          <ion-item>
+            <ion-label floating for="isoleucine" id="isoleucineLabel">Isoleucine (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="isoleucineLabel" aria-required="true" formControlName="isoleucine"
+              id="isoleucine" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && isoleucine?.touched && isoleucine.errors?.required">Please enter the isoleucine content.</div>
+          <ion-item>
+            <ion-label floating for="leucine" id="leucineLabel">Leucine (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="leucineLabel" aria-required="true" formControlName="leucine"
+              id="leucine" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && leucine?.touched && leucine.errors?.required">Please enter the leucine content.</div>
+          <ion-item>
+            <ion-label floating for="lysine" id="lysineLabel">Lysine (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="lysineLabel" aria-required="true" formControlName="lysine"
+              id="lysine" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && lysine?.touched && lysine.errors?.required">Please enter the lysine content.</div>
+          <ion-item>
+            <ion-label floating for="methionine" id="methionineLabel">Methionine (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="methionineLabel" aria-required="true" formControlName="methionine"
+              id="methionine" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && methionine?.touched && methionine.errors?.required">Please enter the methionine content.</div>
+          <ion-item>
+            <ion-label floating for="phenylalanine" id="phenylalanineLabel">Phenylalanine (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="phenylalanineLabel" aria-required="true" formControlName="phenylalanine"
+              id="phenylalanine" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && phenylalanine?.touched && phenylalanine.errors?.required">Please enter the phenylalanine content.</div>
+          <ion-item>
+            <ion-label floating for="tryptophan" id="tryptophanLabel">Tryptophan (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="tryptophanLabel" aria-required="true" formControlName="tryptophan"
+              id="tryptophan" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && tryptophan?.touched && tryptophan.errors?.required">Please enter the tryptophan content.</div>
+          <ion-item>
+            <ion-label floating for="threonine" id="threonineLabel">Threonine (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="threonineLabel" aria-required="true" formControlName="threonine"
+              id="threonine" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && threonine?.touched && threonine.errors?.required">Please enter the threonine content.</div>
+          <ion-item>
+            <ion-label floating for="valine" id="valineLabel">Valine (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="valineLabel" aria-required="true" formControlName="valine"
+              id="valine" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && valine?.touched && valine.errors?.required">Please enter the valine content.</div>
+        </ion-item-group>
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Essential fatty acids</ion-item-divider>
+          <ion-item>
+            <ion-label floating for="la" id="laLabel">Linoleic acid (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="laLabel" aria-required="true" formControlName="la"
+              id="la" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && la?.touched && la.errors?.required">Please enter the linoleic acid content.</div>
+          <ion-item>
+            <ion-label floating for="ala" id="alaLabel">alpha-Linolenic acid (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="alaLabel" aria-required="true" formControlName="ala"
+              id="ala" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && ala?.touched && ala.errors?.required">Please enter the alpha-linolenic acid content.</div>
+          <ion-item>
+            <ion-label floating for="dha" id="dhaLabel">Docosahexaenoic acid (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="dhaLabel" aria-required="true" formControlName="dha"
+              id="dha" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && dha?.touched && dha.errors?.required">Please enter the docosahexaenoic acid content.</div>
+          <ion-item>
+            <ion-label floating for="epa" id="epaLabel">Eicosapentaenoic acid (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="epaLabel" aria-required="true" formControlName="epa"
+              id="epa" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && epa?.touched && epa.errors?.required">Please enter the eicosapentaenoic acid content.</div>
+        </ion-item-group>
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Minerals</ion-item-divider>
+          <ion-item>
+            <ion-label floating for="calcium" id="calciumLabel">Calcium (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="calciumLabel" aria-required="true" formControlName="calcium"
+              id="calcium" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && calcium?.touched && calcium.errors?.required">Please enter the calcium content.</div>
+          <ion-item>
+            <ion-label floating for="copper" id="copperLabel">Copper (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="copperLabel" aria-required="true" formControlName="copper"
+              id="copper" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && copper?.touched && copper.errors?.required">Please enter the copper content.</div>
+          <ion-item>
+            <ion-label floating for="iron" id="ironLabel">Iron (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="ironLabel" aria-required="true" formControlName="iron"
+              id="iron" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && iron?.touched && iron.errors?.required">Please enter the iron content.</div>
+          <ion-item>
+            <ion-label floating for="magnesium" id="magnesiumLabel">Magnesium (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="magnesiumLabel" aria-required="true" formControlName="magnesium"
+              id="magnesium" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && magnesium?.touched && magnesium.errors?.required">Please enter the magnesium content.</div>
+          <ion-item>
+            <ion-label floating for="manganese" id="manganeseLabel">Manganese (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="manganeseLabel" aria-required="true" formControlName="manganese"
+              id="manganese" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && manganese?.touched && manganese.errors?.required">Please enter the manganese content.</div>
+          <ion-item>
+            <ion-label floating for="phosphorus" id="phosphorusLabel">Phosphorus (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="phosphorusLabel" aria-required="true" formControlName="phosphorus"
+              id="phosphorus" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && phosphorus?.touched && phosphorus.errors?.required">Please enter the phosphorus content.</div>
+          <ion-item>
+            <ion-label floating for="potassium" id="potassiumLabel">Potassium (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="potassiumLabel" aria-required="true" formControlName="potassium"
+              id="potassium" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && potassium?.touched && potassium.errors?.required">Please enter the potassium content.</div>
+          <ion-item>
+            <ion-label floating for="selenium" id="seleniumLabel">Selenium (ug)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="seleniumLabel" aria-required="true" formControlName="selenium"
+              id="selenium" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && selenium?.touched && selenium.errors?.required">Please enter the selenium content.</div>
+          <ion-item>
+            <ion-label floating for="sodium" id="sodiumLabel">Sodium (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="sodiumLabel" aria-required="true" formControlName="sodium"
+              id="sodium" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && sodium?.touched && sodium.errors?.required">Please enter the sodium content.</div>
+          <ion-item>
+            <ion-label floating for="zinc" id="zincLabel">Zinc (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="zincLabel" aria-required="true" formControlName="zinc"
+              id="zinc" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && zinc?.touched && zinc.errors?.required">Please enter the zinc content.</div>
+        </ion-item-group>
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Vitamins</ion-item-divider>
+          <ion-item>
+            <ion-label floating for="vitaminA" id="vitaminALabel">Vitamin A (ug)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminALabel" aria-required="true" formControlName="vitaminA"
+              id="vitaminA" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && vitaminA?.touched && vitaminA.errors?.required">Please enter the vitamin A content.</div>
+          <ion-item>
+            <ion-label floating for="vitaminB1" id="vitaminB1Label">Vitamin B1 (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminB1Label" aria-required="true" formControlName="vitaminB1"
+              id="vitaminB1" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && vitaminB1?.touched && vitaminB1.errors?.required">Please enter the vitamin B1 content.</div>
+          <ion-item>
+            <ion-label floating for="vitaminB2" id="vitaminB2Label">Vitamin B2 (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminB2Label" aria-required="true" formControlName="vitaminB2"
+              id="vitaminB2" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && vitaminB2?.touched && vitaminB2.errors?.required">Please enter the vitamin B2 content.</div>
+          <ion-item>
+            <ion-label floating for="vitaminB3" id="vitaminB3Label">Vitamin B3 (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminB3Label" aria-required="true" formControlName="vitaminB3"
+              id="vitaminB3" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && vitaminB3?.touched && vitaminB3.errors?.required">Please enter the vitamin B3 content.</div>
+          <ion-item>
+            <ion-label floating for="vitaminB5" id="vitaminB5Label">Vitamin B5 (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminB5Label" aria-required="true" formControlName="vitaminB5"
+              id="vitaminB5" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && vitaminB5?.touched && vitaminB5.errors?.required">Please enter the vitamin B5 content.</div>
+          <ion-item>
+            <ion-label floating for="vitaminB6" id="vitaminB6Label">Vitamin B6 (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminB6Label" aria-required="true" formControlName="vitaminB6"
+              id="vitaminB6" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && vitaminB6?.touched && vitaminB6.errors?.required">Please enter the vitamin B6 content.</div>
+          <ion-item>
+            <ion-label floating for="vitaminB9" id="vitaminB9Label">Vitamin B9 (ug)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminB9Label" aria-required="true" formControlName="vitaminB9"
+              id="vitaminB9" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && vitaminB9?.touched && vitaminB9.errors?.required">Please enter the vitamin B9 content.</div>
+          <ion-item>
+            <ion-label floating for="vitaminB12" id="vitaminB12Label">Vitamin B12 (ug)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminB12Label" aria-required="true" formControlName="vitaminB12"
+              id="vitaminB12" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && vitaminB12?.touched && vitaminB12.errors?.required">Please enter the vitamin B12 content.</div>
+          <ion-item>
+            <ion-label floating for="choline" id="cholineLabel">Choline (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="cholineLabel" aria-required="true" formControlName="choline"
+              id="choline" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && choline?.touched && choline.errors?.required">Please enter the choline content.</div>
+          <ion-item>
+            <ion-label floating for="vitaminC" id="vitaminCLabel">Vitaminc C (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminCLabel" aria-required="true" formControlName="vitaminC"
+              id="vitaminC" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && vitaminC?.touched && vitaminC.errors?.required">Please enter the vitamin C content.</div>
+          <ion-item>
+            <ion-label floating for="vitaminD" id="vitaminDLabel">Vitamin D (ug)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminDLabel" aria-required="true" formControlName="vitaminD"
+              id="vitaminD" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && vitaminD?.touched && vitaminD.errors?.required">Please enter the vitamin D content.</div>
+          <ion-item>
+            <ion-label floating for="vitaminE" id="vitaminELabel">Vitamin E (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminELabel" aria-required="true" formControlName="vitaminE"
+              id="vitaminE" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && vitaminE?.touched && vitaminE.errors?.required">Please enter the vitamin E content.</div>
+          <ion-item>
+            <ion-label floating for="vitaminK" id="vitaminKLabel">Vitamin K (ug)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="vitaminKLabel" aria-required="true" formControlName="vitaminK"
+              id="vitaminK" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && vitaminK?.touched && vitaminK.errors?.required">Please enter the vitamin K content.</div>
+        </ion-item-group>
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Other</ion-item-divider>
+          <ion-item>
+            <ion-label floating for="alcohol" id="alcoholLabel">Alcohol (g)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="alcoholLabel" aria-required="true" formControlName="alcohol"
+              id="alcohol" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && alcohol?.touched && alcohol.errors?.required">Please enter the alcohol content.</div>
+          <ion-item>
+            <ion-label floating for="caffeine" id="caffeineLabel">Caffeine (mg)*</ion-label>
+            <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="caffeineLabel" aria-required="true" formControlName="caffeine"
+              id="caffeine" required type="number"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="dailyRequirementsForm.invalid && vitaminA?.touched && vitaminA.errors?.required">Please enter the caffeine content.</div>
+        </ion-item-group>
+      </form>
+      <div *ngIf="!fitness.customRequirements">
+        <ion-item-group role="group">
+          <ion-item role="listitem">
+            Energy
+            <p item-content>{{ dailyRequirements.energy?.value.toFixed(2) }}{{ dailyRequirements.energy?.unit }}</p>
+          </ion-item>
+          <ion-item-divider color="primary" role="separator">Proximates</ion-item-divider>
+          <ion-item role="listitem">
+            Water
+            <p item-content>{{ dailyRequirements.water?.value.toFixed(2) }}{{ dailyRequirements.water?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Protein
+            <p item-content>{{ dailyRequirements.protein?.value.toFixed(2) }}{{ dailyRequirements.protein?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Carbohydrates
+            <p item-content>{{ dailyRequirements.carbs?.value.toFixed(2) }}{{ dailyRequirements.carbs?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Fiber
+            <p item-content>{{ dailyRequirements.fiber?.value.toFixed(2) }}{{ dailyRequirements.fiber?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Sugars
+            <p item-content>{{ dailyRequirements.sugars?.value.toFixed(2) }}{{ dailyRequirements.sugars?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Fats
+            <p item-content>{{ dailyRequirements.fats?.value.toFixed(2) }}{{ dailyRequirements.fats?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Trans fat
+            <p item-content>{{ dailyRequirements.transFat?.value.toFixed(2) }}{{ dailyRequirements.transFat?.unit }}</p>
+          </ion-item>
+        </ion-item-group>
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Essential amino acids</ion-item-divider>
+          <ion-item role="listitem">
+            Histidine
+            <p item-content>{{ dailyRequirements.histidine?.value.toFixed(2) }}{{ dailyRequirements.histidine?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Isoleucine
+            <p item-content>{{ dailyRequirements.isoleucine?.value.toFixed(2) }}{{ dailyRequirements.isoleucine?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Leucine
+            <p item-content>{{ dailyRequirements.leucine?.value.toFixed(2) }}{{ dailyRequirements.leucine?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Lysine
+            <p item-content>{{ dailyRequirements.lysine?.value.toFixed(2) }}{{ dailyRequirements.lysine?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Methionine
+            <p item-content>{{ dailyRequirements.methionine?.value.toFixed(2) }}{{ dailyRequirements.methionine?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Phenylalanine
+            <p item-content>{{ dailyRequirements.phenylalanine?.value.toFixed(2) }}{{ dailyRequirements.phenylalanine?.unit }}
+            </p>
+          </ion-item>
+          <ion-item role="listitem">
+            Threonine
+            <p item-content>{{ dailyRequirements.threonine?.value.toFixed(2) }}{{ dailyRequirements.threonine?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Tryptophan
+            <p item-content>{{ dailyRequirements.tryptophan?.value.toFixed(2) }}{{ dailyRequirements.tryptophan?.unit }}</p>
+          </ion-item>
+        </ion-item-group>
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Essential vitamins</ion-item-divider>
+          <ion-item role="listitem">
+            Vitamin A
+            <p item-content>{{ dailyRequirements.vitaminA?.value.toFixed(2) }}{{ dailyRequirements.vitaminA?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Vitamin B1 (Thiamine)
+            <p item-content>{{ dailyRequirements.vitaminB1?.value.toFixed(2) }}{{ dailyRequirements.vitaminB1?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Vitamin B2 (Riboflavin)
+            <p item-content>{{ dailyRequirements.vitaminB2?.value.toFixed(2) }}{{ dailyRequirements.vitaminB2?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Vitamin B3 (Niacin)
+            <p item-content>{{ dailyRequirements.vitaminB3?.value.toFixed(2) }}{{ dailyRequirements.vitaminB3?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Vitamin B5 (Pantothenic acid)
+            <p item-content>{{ dailyRequirements.vitaminB5?.value.toFixed(2) }}{{ dailyRequirements.vitaminB5?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Vitamin B6 (Pyridoxine)
+            <p item-content>{{ dailyRequirements.vitaminB6?.value.toFixed(2) }}{{ dailyRequirements.vitaminB6?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Vitamin B9 (Folate)
+            <p item-content>{{ dailyRequirements.vitaminB9?.value.toFixed(2) }}{{ dailyRequirements.vitaminB9?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Vitamin B12 (Cobalamin)
+            <p item-content>{{ dailyRequirements.vitaminB12?.value.toFixed(2) }}{{ dailyRequirements.vitaminB12?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Choline
+            <p item-content>{{ dailyRequirements.choline?.value.toFixed(2) }}{{ dailyRequirements.choline?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Vitamin C (Ascorbic acid)
+            <p item-content>{{ dailyRequirements.vitaminC?.value.toFixed(2) }}{{ dailyRequirements.vitaminC?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Vitamin D (Cholecalciferol)
+            <p item-content>{{ dailyRequirements.vitaminD?.value.toFixed(2) }}{{ dailyRequirements.vitaminD?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Vitamin E (Tocopherol)
+            <p item-content>{{ dailyRequirements.vitaminE?.value.toFixed(2) }}{{ dailyRequirements.vitaminE?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Vitamin K
+            <p item-content>{{ dailyRequirements.vitaminK?.value.toFixed(2) }}{{ dailyRequirements.vitaminK?.unit }}</p>
+          </ion-item>
+        </ion-item-group>
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Essential minerals</ion-item-divider>
+          <ion-item role="listitem">
+            Calcium
+            <p item-content>{{ dailyRequirements.calcium?.value.toFixed(2) }}{{ dailyRequirements.calcium?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Copper
+            <p item-content>{{ dailyRequirements.copper?.value.toFixed(2) }}{{ dailyRequirements.copper?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Iron
+            <p item-content>{{ dailyRequirements.iron?.value.toFixed(2) }}{{ dailyRequirements.iron?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Magnesium
+            <p item-content>{{ dailyRequirements.magnesium?.value.toFixed(2) }}{{ dailyRequirements.magnesium?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Manganese
+            <p item-content>{{ dailyRequirements.manganese?.value.toFixed(2) }}{{ dailyRequirements.manganese?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Phosphorus
+            <p item-content>{{ dailyRequirements.phosphorus?.value.toFixed(2) }}{{ dailyRequirements.phosphorus?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Potassium
+            <p item-content>{{ dailyRequirements.potassium?.value.toFixed(2) }}{{ dailyRequirements.potassium?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Selenium
+            <p item-content>{{ dailyRequirements.selenium?.value.toFixed(2) }}{{ dailyRequirements.selenium?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Sodium
+            <p item-content>{{ dailyRequirements.sodium?.value.toFixed(2) }}{{ dailyRequirements.sodium?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Zinc
+            <p item-content>{{ dailyRequirements.zinc?.value.toFixed(2) }}{{ dailyRequirements.zinc?.unit }}</p>
+          </ion-item>
+        </ion-item-group>
+        <ion-item-group role="group">
+          <ion-item-divider color="primary" role="separator">Essential fatty acids</ion-item-divider>
+          <ion-item role="listitem">
+            Omega-3 (ALA)
+            <p item-content>{{ dailyRequirements.ala?.value.toFixed(2) }}{{ dailyRequirements.ala?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Omega-3 (DHA)
+            <p item-content>{{ dailyRequirements.dha?.value.toFixed(2) }}{{ dailyRequirements.dha?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Omega-3 (EPA)
+            <p item-content>{{ dailyRequirements.epa?.value.toFixed(2) }}{{ dailyRequirements.epa?.unit }}</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Omega-6 (LA)
+            <p item-content>{{ dailyRequirements.la?.value.toFixed(2) }}{{ dailyRequirements.la?.unit }}</p>
+          </ion-item>
+        </ion-item-group>
+      </div>
       <h2>Source</h2>
       <p>Jennifer J. Otten, Jennifer Pitzi Hellwig, Linda D. Meyers, Editors, <strong>"Dietary Reference Intakes: The Essential Guide to Nutrient Requirements"</strong></p>
     </div>

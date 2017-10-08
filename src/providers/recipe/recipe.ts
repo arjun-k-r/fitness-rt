@@ -25,17 +25,16 @@ export class RecipeProvider {
     private _nutritionPvd: NutritionProvider
   ) { }
 
-  public calculateRecipeDRI(authId: string, recipe: Recipe): Promise<Nutrition> {
+  public calculateRecipeDailyRequirements(authId: string, recipe: Recipe): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
       const nutrition: Nutrition = new Nutrition();
-      const subscription: Subscription = this._nutritionPvd.getDri$(authId).subscribe((dri: Nutrition) => {
-        dri = dri['$value'] === null ? new Nutrition() : dri;
+      this._nutritionPvd.getDailyRequirements(authId).then((dailyRequirements: Nutrition) => {
+        dailyRequirements = dailyRequirements['$value'] === null ? new Nutrition() : dailyRequirements;
         for (let nutrientKey in recipe.nutrition) {
-          nutrition[nutrientKey].value = Math.round((recipe.nutrition[nutrientKey].value * 100) / (dri[nutrientKey].value || 1));
+          nutrition[nutrientKey].value = Math.round((recipe.nutrition[nutrientKey].value * 100) / (dailyRequirements[nutrientKey].value || 1));
         }
-        subscription.unsubscribe();
         resolve(nutrition);
-      }, (err: firebase.FirebaseError) => reject(err.message));
+      }).catch((err: firebase.FirebaseError) => reject(err.message));
     });
   }
 

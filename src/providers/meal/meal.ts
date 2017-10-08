@@ -10,14 +10,16 @@ import * as firebase from 'firebase/app';
 
 // Third-party
 import * as moment from 'moment';
-import { sortBy, uniqBy } from 'lodash';
+import { find, sortBy, uniqBy } from 'lodash';
 
 // Models
 import {
   Food,
+  Goal,
   Meal,
   MealPlan,
   Nutrition,
+  NutritionGoals,
   NutritionLog,
   Recipe
 } from '../../models';
@@ -50,15 +52,14 @@ export class MealProvider {
   public calculateDailyNutrition(authId: string, mealPlan: MealPlan): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
       const nutrition = new Nutrition();
-      const subscription: Subscription = this._nutritionPvd.getDri$(authId).subscribe((dri: Nutrition) => {
-        dri = dri['$value'] === null ? new Nutrition() : dri;
-        this._userRequirements = dri;
+      this._nutritionPvd.getDailyRequirements(authId).then((dailyRequirements: Nutrition) => {
+        dailyRequirements = dailyRequirements['$value'] === null ? new Nutrition() : dailyRequirements;
+        this._userRequirements = dailyRequirements;
         for (let nutrientKey in mealPlan.nutrition) {
-          nutrition[nutrientKey].value = Math.round((mealPlan.nutrition[nutrientKey].value * 100) / (dri[nutrientKey].value || 1));
+          nutrition[nutrientKey].value = Math.round((mealPlan.nutrition[nutrientKey].value * 100) / (dailyRequirements[nutrientKey].value || 1));
         }
-        subscription.unsubscribe();
         resolve(nutrition);
-      }, (err: firebase.FirebaseError) => reject(err.message));
+      }).catch((err: firebase.FirebaseError) => reject(err.message));
     });
   }
 
@@ -95,6 +96,69 @@ export class MealProvider {
 
   public calculateNutrientPercentage(nutrientPartial: number, nutrientName: string): number {
     return Math.round((nutrientPartial * 100) / (this._userRequirements && this._userRequirements[nutrientName].value || 1));
+  }
+
+  public checkGoalAchievements(goals: NutritionGoals, mealPlan: MealPlan): boolean {
+    let breakfastTimeAchieved: boolean = false,
+      dinnerTimeAchieved: boolean = false,
+      foodGroupRestrictionsAchieved: boolean = true,
+      mealIntervalAchieved: boolean = true,
+      mealSizeAchieved: boolean = true;
+
+    mealPlan.meals.forEach((meal: Meal) => {
+      if (goals.mealSize.isSelected && meal.quantity > goals.mealSize.value + 50) {
+        mealSizeAchieved = false
+      }
+
+      goals.foodGroupRestrictions.value.forEach((group: string) => {
+        if (goals.foodGroupRestrictions.isSelected && !!find(meal.foods, (food: Food) => food.group === group)) {
+          foodGroupRestrictionsAchieved = false
+        }
+      });
+    });
+
+    const mealNr: number = mealPlan.meals.length;
+
+    if (!!mealNr) {
+      const breakfastTimeGoal: number = moment.duration(goals.breakfastTime.value).asMinutes();
+      const breakfastTime: number = moment.duration(mealPlan.meals[0].hour).asMinutes();
+      if (goals.breakfastTime.isSelected) {
+        if (breakfastTime => breakfastTimeGoal - 30) {
+          breakfastTimeAchieved = true;
+        }
+      } else {
+        breakfastTimeAchieved = true;
+      }
+    }
+
+    if (mealNr > 1) {
+      const dinnerTimeGoal: number = moment.duration(goals.dinnerTime.value).asMinutes();
+      const dinnerTime: number = moment.duration(mealPlan.meals[mealNr - 1].hour).asMinutes();
+      if (goals.dinnerTime.isSelected) {
+        if (dinnerTime <= dinnerTimeGoal + 30) {
+          dinnerTimeAchieved = true;
+        }
+      } else {
+        dinnerTimeAchieved = true;
+      }
+
+      let initialMealTime: number,
+      currentMealTime: number;
+
+      for (let i = 1; i < mealNr - 1; i++) {
+        initialMealTime = moment.duration(mealPlan.meals[i - 1].hour).asMinutes() / 60;
+        currentMealTime = moment.duration(mealPlan.meals[i].hour).asMinutes() / 60;
+        if (!(currentMealTime <= initialMealTime + goals.mealInterval.value + 0.5 && currentMealTime >= initialMealTime + goals.mealInterval.value - 0.5)) {
+          mealIntervalAchieved = false;
+        }
+      }
+    }
+
+    return breakfastTimeAchieved && dinnerTimeAchieved && foodGroupRestrictionsAchieved && mealIntervalAchieved && mealSizeAchieved && (goals.breakfastTime.isSelected || goals.dinnerTime.isSelected || goals.foodGroupRestrictions.isSelected || goals.mealInterval.isSelected || goals.mealSize.isSelected);
+  }
+
+  public checkGoodMeal(meal: Meal): boolean {
+    return meal.combos.calmEating && meal.combos.feeling === 'Energy' && !meal.combos.overeating && meal.combos.slowEating;
   }
 
   public checkLifePoints(mealPlan: MealPlan): number {
@@ -216,7 +280,11 @@ export class MealProvider {
     return uniqBy(newIntoleranceList, 'name');
   }
 
-  public checkOvereating(meal: Meal): boolean {
+  public checkOvereating(meal: Meal, mealSizeGoal: Goal): boolean {
+    if (mealSizeGoal.isSelected) {
+      return meal.quantity > mealSizeGoal.value + 50;
+    }
+
     return meal.quantity > 700;
   }
 
@@ -226,6 +294,10 @@ export class MealProvider {
 
   public getMealPlan$(authId: string): FirebaseObjectObservable<MealPlan> {
     return this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`);
+  }
+
+  public getNutritionGoals$(authId: string): FirebaseObjectObservable<NutritionGoals> {
+    return this._db.object(`/meal-plan/${authId}/goals`);
   }
 
   public getNutritionLog$(authId: string): FirebaseListObservable<NutritionLog[]> {
@@ -271,5 +343,9 @@ export class MealProvider {
         })
         .catch((err: Error) => console.error(`Error storing energy consumption and life points: ${err.toString()}`));
     });
+  }
+
+  public saveNutritionGoals(authId: string, goals: NutritionGoals): firebase.Promise<void> {
+    return this._db.object(`/meal-plan/${authId}/goals`).set(goals);
   }
 }

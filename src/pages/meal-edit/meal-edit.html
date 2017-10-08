@@ -125,13 +125,13 @@
         </ion-item>
       </ion-list>
     </div>
-    <div *ngSwitchCase="'nutrition'" padding>
+    <div *ngSwitchCase="'nutrition'">
       <ion-item-group role="group">
         <ion-item role="listitem">
           Energy
           <p item-content>{{ meal.nutrition.energy?.value.toFixed(2) }}{{ meal.nutrition.energy?.unit }}</p>
         </ion-item>
-        <ion-item-divider>Proximates</ion-item-divider>
+        <ion-item-divider color="primary" role="separator">Proximates</ion-item-divider>
         <ion-item role="listitem">
           Water
           <p item-content>{{ meal.nutrition.water?.value.toFixed(2) }}{{ meal.nutrition.water?.unit }}</p>
@@ -162,7 +162,7 @@
         </ion-item>
       </ion-item-group>
       <ion-item-group role="group">
-        <ion-item-divider>Essential amino acids</ion-item-divider>
+        <ion-item-divider color="primary" role="separator">Essential amino acids</ion-item-divider>
         <ion-item role="listitem">
           Histidine
           <p item-content>{{ meal.nutrition.histidine?.value.toFixed(2) }}{{ meal.nutrition.histidine?.unit }}</p>
@@ -198,7 +198,7 @@
         </ion-item>
       </ion-item-group>
       <ion-item-group role="group">
-        <ion-item-divider>Essential vitamins</ion-item-divider>
+        <ion-item-divider color="primary" role="separator">Essential vitamins</ion-item-divider>
         <ion-item role="listitem">
           Vitamin A
           <p item-content>{{ meal.nutrition.vitaminA?.value.toFixed(2) }}{{ meal.nutrition.vitaminA?.unit }}</p>
@@ -253,7 +253,7 @@
         </ion-item>
       </ion-item-group>
       <ion-item-group role="group">
-        <ion-item-divider>Essential minerals</ion-item-divider>
+        <ion-item-divider color="primary" role="separator">Essential minerals</ion-item-divider>
         <ion-item role="listitem">
           Calcium
           <p item-content>{{ meal.nutrition.calcium?.value.toFixed(2) }}{{ meal.nutrition.calcium?.unit }}</p>
@@ -296,7 +296,7 @@
         </ion-item>
       </ion-item-group>
       <ion-item-group role="group">
-        <ion-item-divider>Essential fatty acids</ion-item-divider>
+        <ion-item-divider color="primary" role="separator">Essential fatty acids</ion-item-divider>
         <ion-item role="listitem">
           Omega-3 (ALA)
           <p item-content>{{ meal.nutrition.ala?.value.toFixed(2) }}{{ meal.nutrition.ala?.unit }}</p>

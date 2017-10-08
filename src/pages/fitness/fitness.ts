@@ -36,11 +36,14 @@ export class FitnessPage {
   private _authId: string;
   private _authSubscription: Subscription;
   private _loader: Loading;
+  private _dailyRequirementsFormSubscription: Subscription;
   private _fitnessSubscription: Subscription;
   private _fitnessFormSubscription: Subscription;
   public age: AbstractControl;
   public currentLifePoints: number = 0;
+  public customRequirements: Nutrition = new Nutrition();
   public dailyRequirements: Nutrition = new Nutrition();
+  public dailyRequirementsForm: FormGroup;
   public fitness: Fitness = new Fitness();
   public fitnessForm: FormGroup;
   public fitnessSegment: string = 'fitnessInfo';
@@ -51,6 +54,54 @@ export class FitnessPage {
   public lactating: AbstractControl;
   public pregnant: AbstractControl;
   public weight: AbstractControl;
+  // Custom requirements
+  public energy: AbstractControl;
+  public water: AbstractControl;
+  public protein: AbstractControl;
+  public histidine: AbstractControl;
+  public isoleucine: AbstractControl;
+  public leucine: AbstractControl;
+  public lysine: AbstractControl;
+  public methionine: AbstractControl;
+  public phenylalanine: AbstractControl;
+  public tryptophan: AbstractControl;
+  public threonine: AbstractControl;
+  public valine: AbstractControl;
+  public fats: AbstractControl;
+  public satFat: AbstractControl;
+  public transFat: AbstractControl;
+  public la: AbstractControl;
+  public ala: AbstractControl;
+  public dha: AbstractControl;
+  public epa: AbstractControl;
+  public carbs: AbstractControl;
+  public fiber: AbstractControl;
+  public sugars: AbstractControl;
+  public calcium: AbstractControl;
+  public copper: AbstractControl;
+  public iron: AbstractControl;
+  public magnesium: AbstractControl;
+  public manganese: AbstractControl;
+  public phosphorus: AbstractControl;
+  public potassium: AbstractControl;
+  public selenium: AbstractControl;
+  public sodium: AbstractControl;
+  public zinc: AbstractControl;
+  public vitaminA: AbstractControl;
+  public vitaminB1: AbstractControl;
+  public vitaminB2: AbstractControl;
+  public vitaminB3: AbstractControl;
+  public vitaminB5: AbstractControl;
+  public vitaminB6: AbstractControl;
+  public vitaminB9: AbstractControl;
+  public vitaminB12: AbstractControl;
+  public choline: AbstractControl;
+  public vitaminC: AbstractControl;
+  public vitaminD: AbstractControl;
+  public vitaminE: AbstractControl;
+  public vitaminK: AbstractControl;
+  public alcohol: AbstractControl;
+  public caffeine: AbstractControl;
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
@@ -88,7 +139,14 @@ export class FitnessPage {
       spinner: 'crescent'
     });
     this._loader.present();
-    this._fitnessPvd.saveFitness(this._authId, this.fitness)
+    Promise.all([
+      this._nutritionPvd.saveDailyRequirements(
+        this._authId,
+        this.fitness.customRequirements ? this.customRequirements : this.dailyRequirements,
+        this.fitness.customRequirements
+      ),
+      this._fitnessPvd.saveFitness(this._authId, this.fitness),
+    ])
       .then(() => {
         if (this._loader) {
           this._loader.dismiss();
@@ -154,9 +212,63 @@ export class FitnessPage {
               this._loader = null;
             }
             this.fitness = Object.assign({}, fitness['$value'] === null ? this.fitness : fitness);
-            this._nutritionPvd.calculateDRI(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
-              .then((dri: Nutrition) => {
-                this.dailyRequirements = Object.assign({}, dri);
+            this._fitnessFormSubscription = this.fitnessForm.valueChanges.subscribe(
+              (changes: {
+                age: number;
+                gender: string;
+                height: number;
+                hips: number;
+                lactating: boolean;
+                neck: number;
+                pregnant: boolean;
+                restingHeartRate: number;
+                waist: number;
+                weight: number
+              }) => {
+                if (this.fitnessForm.valid) {
+                  const hrMax: number = this._fitnessPvd.calculateHRMax(this.fitness.age);
+                  const thr: { min: number, max: number } = this._fitnessPvd.calculateTHR(hrMax, changes.restingHeartRate);
+                  this.fitness = Object.assign(this.fitness, {
+                    age: changes.age,
+                    bmr: this._fitnessPvd.calculateBmr(changes.age, changes.gender, changes.height, changes.weight),
+                    bodyFat: this._fitnessPvd.calculateBodyFat(changes.age, changes.gender, changes.height, changes.hips, changes.neck, changes.waist),
+                    gender: changes.gender,
+                    heartRate: {
+                      max: hrMax,
+                      resting: changes.restingHeartRate || 0,
+                      trainingMin: thr.min,
+                      trainingMax: thr.max
+                    },
+                    height: changes.height,
+                    hips: changes.hips || 0,
+                    lactating: changes.lactating,
+                    neck: changes.neck || 0,
+                    pregnant: changes.pregnant,
+                    waist: changes.waist || 0,
+                    weight: changes.weight
+                  });
+                  this.isFit = this._fitnessPvd.checkFatPercentage(this.fitness.bodyFat, this.fitness.gender);
+                  if (!this.fitness.customRequirements) {
+                    this._nutritionPvd.calculateDailyRequirements(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
+                      .then((dailyRequirements: Nutrition) => {
+                        this.dailyRequirements = Object.assign({}, dailyRequirements);
+                      })
+                      .catch((err: Error) => {
+                        this._alertCtrl.create({
+                          title: 'Uhh ohh...',
+                          subTitle: 'Something went wrong',
+                          message: err.toString(),
+                          buttons: ['OK']
+                        }).present();
+                      });
+                  }
+                }
+              },
+              (err: Error) => console.error(`Error fetching form changes: ${err}`)
+            );
+            this._nutritionPvd.calculateDailyRequirements(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
+              .then((dailyRequirements: Nutrition) => {
+                this.dailyRequirements = Object.assign({}, dailyRequirements);
               })
               .catch((err: firebase.FirebaseError) => {
                 this._alertCtrl.create({
@@ -166,6 +278,131 @@ export class FitnessPage {
                   buttons: ['OK']
                 }).present();
               });
+
+            this._nutritionPvd.getDailyRequirements(this._authId, this.fitness.customRequirements)
+              .then((dailyRequirements: Nutrition) => {
+                this.customRequirements = Object.assign({}, dailyRequirements['$value'] === null ? new Nutrition() : dailyRequirements);
+                this.dailyRequirementsForm = this._formBuilder.group({
+                  energy: [this.customRequirements.energy.value, Validators.required],
+                  water: [this.customRequirements.water.value, Validators.required],
+                  protein: [this.customRequirements.protein.value, Validators.required],
+                  histidine: [this.customRequirements.histidine.value, Validators.required],
+                  isoleucine: [this.customRequirements.isoleucine.value, Validators.required],
+                  leucine: [this.customRequirements.leucine.value, Validators.required],
+                  lysine: [this.customRequirements.lysine.value, Validators.required],
+                  methionine: [this.customRequirements.methionine.value, Validators.required],
+                  phenylalanine: [this.customRequirements.phenylalanine.value, Validators.required],
+                  tryptophan: [this.customRequirements.tryptophan.value, Validators.required],
+                  threonine: [this.customRequirements.threonine.value, Validators.required],
+                  valine: [this.customRequirements.valine.value, Validators.required],
+                  fats: [this.customRequirements.fats.value, Validators.required],
+                  satFat: [this.customRequirements.satFat.value, Validators.required],
+                  transFat: [this.customRequirements.transFat.value, Validators.required],
+                  la: [this.customRequirements.la.value, Validators.required],
+                  ala: [this.customRequirements.ala.value, Validators.required],
+                  dha: [this.customRequirements.dha.value, Validators.required],
+                  epa: [this.customRequirements.epa.value, Validators.required],
+                  carbs: [this.customRequirements.carbs.value, Validators.required],
+                  fiber: [this.customRequirements.fiber.value, Validators.required],
+                  sugars: [this.customRequirements.sugars.value, Validators.required],
+                  calcium: [this.customRequirements.calcium.value, Validators.required],
+                  copper: [this.customRequirements.copper.value, Validators.required],
+                  iron: [this.customRequirements.iron.value, Validators.required],
+                  magnesium: [this.customRequirements.magnesium.value, Validators.required],
+                  manganese: [this.customRequirements.manganese.value, Validators.required],
+                  phosphorus: [this.customRequirements.phosphorus.value, Validators.required],
+                  potassium: [this.customRequirements.potassium.value, Validators.required],
+                  selenium: [this.customRequirements.selenium.value, Validators.required],
+                  sodium: [this.customRequirements.sodium.value, Validators.required],
+                  zinc: [this.customRequirements.zinc.value, Validators.required],
+                  vitaminA: [this.customRequirements.vitaminA.value, Validators.required],
+                  vitaminB1: [this.customRequirements.vitaminB1.value, Validators.required],
+                  vitaminB2: [this.customRequirements.vitaminB2.value, Validators.required],
+                  vitaminB3: [this.customRequirements.vitaminB3.value, Validators.required],
+                  vitaminB5: [this.customRequirements.vitaminB5.value, Validators.required],
+                  vitaminB6: [this.customRequirements.vitaminB6.value, Validators.required],
+                  vitaminB9: [this.customRequirements.vitaminB9.value, Validators.required],
+                  vitaminB12: [this.customRequirements.vitaminB12.value, Validators.required],
+                  choline: [this.customRequirements.choline.value, Validators.required],
+                  vitaminC: [this.customRequirements.vitaminC.value, Validators.required],
+                  vitaminD: [this.customRequirements.vitaminD.value, Validators.required],
+                  vitaminE: [this.customRequirements.vitaminE.value, Validators.required],
+                  vitaminK: [this.customRequirements.vitaminK.value, Validators.required],
+                  alcohol: [this.customRequirements.alcohol.value, Validators.required],
+                  caffeine: [this.customRequirements.caffeine.value, Validators.required],
+                });
+
+                this._dailyRequirementsFormSubscription = this.dailyRequirementsForm.valueChanges.subscribe(
+                  (changes: {
+                    energy: number;
+                    water: number;
+                    protein: number;
+                    histidine: number;
+                    isoleucine: number;
+                    leucine: number;
+                    lysine: number;
+                    methionine: number;
+                    phenylalanine: number;
+                    tryptophan: number;
+                    threonine: number;
+                    valine: number;
+                    fats: number;
+                    satFat: number;
+                    transFat: number;
+                    la: number;
+                    ala: number;
+                    dha: number;
+                    epa: number;
+                    carbs: number;
+                    fiber: number;
+                    sugars: number;
+                    calcium: number;
+                    copper: number;
+                    iron: number;
+                    magnesium: number;
+                    manganese: number;
+                    phosphorus: number;
+                    potassium: number;
+                    selenium: number;
+                    sodium: number;
+                    zinc: number;
+                    vitaminA: number;
+                    vitaminB1: number;
+                    vitaminB2: number;
+                    vitaminB3: number;
+                    vitaminB5: number;
+                    vitaminB6: number;
+                    vitaminB9: number;
+                    vitaminB12: number;
+                    choline: number;
+                    vitaminC: number;
+                    vitaminD: number;
+                    vitaminE: number;
+                    vitaminK: number;
+                    alcohol: number;
+                    caffeine: number;
+                  }
+                  ) => {
+                    if (this.dailyRequirementsForm.valid) {
+                      for (let key in changes) {
+                        if (this.customRequirements.hasOwnProperty(key)) {
+                          this.customRequirements = Object.assign(this.customRequirements, { [key]: changes[key] });
+                        }
+                      }
+                    }
+                  },
+                  (err: Error) => console.error(`Error fetching form changes: ${err}`)
+                );
+              })
+              .catch((err: firebase.FirebaseError) => {
+                this._alertCtrl.create({
+                  title: 'Uhh ohh...',
+                  subTitle: 'Something went wrong',
+                  message: err.message,
+                  buttons: ['OK']
+                }).present();
+              });
+
             this._fitnessPvd.getLifePoints(this._authId)
               .then((lifePoints: LifePoints) => {
                 this.currentLifePoints = lifePoints.totalPoints + lifePoints.exercise + lifePoints.nutrition + lifePoints.sleep
@@ -218,63 +455,11 @@ export class FitnessPage {
         );
       }
     });
-    this._fitnessFormSubscription = this.fitnessForm.valueChanges.subscribe(
-      (changes: {
-        age: number;
-        gender: string;
-        height: number;
-        hips: number;
-        lactating: boolean;
-        neck: number;
-        pregnant: boolean;
-        restingHeartRate: number;
-        waist: number;
-        weight: number
-      }
-      ) => {
-        if (this.fitnessForm.valid) {
-          const hrMax: number = this._fitnessPvd.calculateHRMax(this.fitness.age);
-          const thr: { min: number, max: number } = this._fitnessPvd.calculateTHR(hrMax, changes.restingHeartRate);
-          this.fitness = Object.assign(this.fitness, {
-            age: changes.age,
-            bmr: this._fitnessPvd.calculateBmr(changes.age, changes.gender, changes.height, changes.weight),
-            bodyFat: this._fitnessPvd.calculateBodyFat(changes.age, changes.gender, changes.height, changes.hips, changes.neck, changes.waist),
-            gender: changes.gender,
-            heartRate: {
-              max: hrMax,
-              resting: changes.restingHeartRate || 0,
-              trainingMin: thr.min,
-              trainingMax: thr.max
-            },
-            height: changes.height,
-            hips: changes.hips || 0,
-            lactating: changes.lactating,
-            neck: changes.neck || 0,
-            pregnant: changes.pregnant,
-            waist: changes.waist || 0,
-            weight: changes.weight
-          });
-          this.isFit = this._fitnessPvd.checkFatPercentage(this.fitness.bodyFat, this.fitness.gender);
-          this._nutritionPvd.calculateDRI(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
-            .then((dri: Nutrition) => {
-              this.dailyRequirements = Object.assign({}, dri);
-            })
-            .catch((err: Error) => {
-              this._alertCtrl.create({
-                title: 'Uhh ohh...',
-                subTitle: 'Something went wrong',
-                message: err.toString(),
-                buttons: ['OK']
-              }).present();
-            });
-        }
-      },
-      (err: Error) => console.error(`Error fetching form changes: ${err}`)
-    );
   }
 
   ionViewWillLeave(): void {
     this._authSubscription && this._authSubscription.unsubscribe();
+    this._dailyRequirementsFormSubscription && this._dailyRequirementsFormSubscription.unsubscribe();
     this._fitnessSubscription && this._fitnessSubscription.unsubscribe();
     this._fitnessFormSubscription && this._fitnessFormSubscription.unsubscribe();
     if (this._loader) {

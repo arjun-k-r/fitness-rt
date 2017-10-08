@@ -23,7 +23,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { Food, Meal, MealPlan, NutritionLog, Recipe } from '../../models';
+import { Food, Meal, MealPlan, NutritionGoals, NutritionLog, Recipe } from '../../models';
 
 // Providers
 import { MealProvider } from '../../providers';
@@ -44,9 +44,11 @@ export class MealEditPage {
   private _mealIdx: number;
   private _mealPlan: MealPlan;
   private _mealPlanFoodIntolerance: Food[] = [];
-  private _nutritionLog: NutritionLog[];
+  private _nutritionGoalSubscription: Subscription;
+  private _weekLog: NutritionLog[];
   public meal: Meal = new Meal();
   public mealSegment: string = 'info';
+  public nutritionGoals: NutritionGoals = new NutritionGoals();
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _afAuth: AngularFireAuth,
@@ -90,51 +92,15 @@ export class MealEditPage {
     this._updateMeal();
   }
 
-  private _saveToDb(): void {
-    this._loader = this._loadCtrl.create({
-      content: 'Please wait...',
-      duration: 30000,
-      spinner: 'crescent'
-    });
-    this._loader.present();
-    this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog, this._mealPlanFoodIntolerance)
-      .then(() => {
-        if (this._loader) {
-          this._loader.dismiss();
-          this._loader = null;
-        }
-        this._alertCtrl.create({
-          title: 'Success!',
-          message: 'Meal plan saved successfully!',
-          buttons: [{
-            text: 'Great',
-            handler: () => {
-              this._navCtrl.pop();
-            }
-          }]
-        }).present();
-      })
-      .catch((err: firebase.FirebaseError) => {
-        if (this._loader) {
-          this._loader.dismiss();
-          this._loader = null;
-        }
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.message,
-          buttons: ['OK']
-        }).present();
-      });
-  }
-
   private _updateMeal(): void {
     this.meal.nutrition = this._mealPvd.calculateMealNutrition(this.meal.foods);
     this.meal.quantity = this._mealPvd.calculateMealQuantity(this.meal.foods);
     this._mealPlan.meals = [...this._mealPlan.meals.slice(0, this._mealIdx), this.meal, ...this._mealPlan.meals.slice(this._mealIdx + 1)];
     this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals);
-    this.meal.combos.overeating = this._mealPvd.checkOvereating(this.meal);
+    this.meal.combos.overeating = this._mealPvd.checkOvereating(this.meal, this.nutritionGoals.mealSize);
     this._mealPlanFoodIntolerance = this._mealPvd.checkMealPlanFoodIntolerance(this._intoleratedFoods, this._mealPlan.meals);
+    this.meal.combos.goalsAchieved = this._mealPvd.checkGoalAchievements(this.nutritionGoals, this._mealPlan);
+    this._mealPlan.lifePoints = this._mealPvd.checkLifePoints(this._mealPlan);
   }
 
   public addFood(): void {
@@ -187,7 +153,7 @@ export class MealEditPage {
     this._loader.present();
     this._mealPlan.meals = [...this._mealPlan.meals.slice(0, this._mealIdx), ...this._mealPlan.meals.slice(this._mealIdx + 1)];
     this._mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this._mealPlan.meals);
-    this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._nutritionLog, this._mealPlanFoodIntolerance)
+    this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._weekLog, this._mealPlanFoodIntolerance)
       .then(() => {
         if (this._loader) {
           this._loader.dismiss();
@@ -220,27 +186,63 @@ export class MealEditPage {
 
   public saveMeal(): void {
     this._updateMeal();
-    let alert: Alert;
-    const lifePoints = this._mealPvd.checkLifePoints(this._mealPlan);
-    if (this._mealPlan.lifePoints > lifePoints) {
-      alert = this._alertCtrl.create({
-        title: 'Watch your nutrition and eating habits!',
-        message: 'You are losing life points!',
-        buttons: ['I will']
-      });
-    } else {
-      alert = this._alertCtrl.create({
-        title: 'You have improved your nutrition and eating habits!',
-        message: 'You are gaining life points!',
-        buttons: ['Great!']
-      });
-    }
-
-    alert.present();
-    alert.onDidDismiss(() => {
-      this._mealPlan.lifePoints = lifePoints;
-      this._saveToDb();
+    this._loader = this._loadCtrl.create({
+      content: 'Please wait...',
+      duration: 30000,
+      spinner: 'crescent'
     });
+    this._loader.present();
+    Promise.all([
+      this._mealPvd.saveNutritionGoals(this._authId, this.nutritionGoals),
+      this._mealPvd.saveMealPlan(this._authId, this._mealPlan, this._weekLog)
+    ]).then(() => {
+      if (this._loader) {
+        this._loader.dismiss();
+        this._loader = null;
+      }
+      this._alertCtrl.create({
+        title: 'Success!',
+        message: 'Meal plan saved successfully!',
+        buttons: [{
+          text: 'Great!',
+          handler: () => {
+            const goodMeal: boolean = this._mealPvd.checkGoodMeal(this.meal);
+            if (this.meal.combos.goalsAchieved && goodMeal) {
+              this._modalCtrl.create('rewards', {
+                context: 'nutrition',
+                goalsAchieved: true,
+                goodQuality: true,
+                lifepoints: this._mealPlan.lifePoints
+              }).present();
+            } else if (this.meal.combos.goalsAchieved && this._mealPlan.lifePoints > 0) {
+              this._modalCtrl.create('rewards', {
+                context: 'nutrition',
+                goalsAchieved: true,
+                lifepoints: this._mealPlan.lifePoints
+              }).present();
+            } else if (goodMeal) {
+              this._modalCtrl.create('rewards', {
+                context: 'nutrition',
+                goodQuality: true,
+                lifepoints: this._mealPlan.lifePoints
+              }).present();
+            }
+          }
+        }]
+      }).present();
+    })
+      .catch((err: Error) => {
+        if (this._loader) {
+          this._loader.dismiss();
+          this._loader = null;
+        }
+        this._alertCtrl.create({
+          title: 'Uhh ohh...',
+          subTitle: 'Something went wrong',
+          message: err.toString(),
+          buttons: ['OK']
+        }).present();
+      });
   }
 
   public viewIntoleratedFoods(): void {
@@ -252,6 +254,23 @@ export class MealEditPage {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this._authId = auth.uid;
+        this._nutritionGoalSubscription = this._mealPvd.getNutritionGoals$(this._authId).subscribe(
+          (goals: NutritionGoals) => {
+            this.nutritionGoals = Object.assign({}, goals['$value'] === null ? this.nutritionGoals : goals);
+          },
+          (err: firebase.FirebaseError) => {
+            if (this._loader) {
+              this._loader.dismiss();
+              this._loader = null;
+            }
+            this._alertCtrl.create({
+              title: 'Uhh ohh...',
+              subTitle: 'Something went wrong',
+              message: err.message,
+              buttons: ['OK']
+            }).present();
+          }
+        );
         this._foodIntoleranceSubscription = this._mealPvd.getIntoleratedFoods$(this._authId).subscribe(
           (foods: Food[]) => this._intoleratedFoods = [...foods],
           (err: firebase.FirebaseError) => {
@@ -270,7 +289,7 @@ export class MealEditPage {
     this._mealPlan.meals = this._mealPlan.meals || [];
     this._mealIdx = <number>this._params.get('mealIdx');
     this._mealIdx = this._mealIdx === undefined ? this._mealPlan.meals.length : this._mealIdx;
-    this._nutritionLog = <NutritionLog[]>this._params.get('nutritionLog');
+    this._weekLog = <NutritionLog[]>this._params.get('nutritionLog');
     this.meal = Object.assign({}, this._mealPlan.meals[this._mealIdx] || this.meal);
     this.meal.foods = this.meal.foods || [];
   }
@@ -278,6 +297,7 @@ export class MealEditPage {
   ionViewWillLeave(): void {
     this._authSubscription && this._authSubscription.unsubscribe();
     this._foodIntoleranceSubscription && this._foodIntoleranceSubscription.unsubscribe();
+    this._nutritionGoalSubscription && this._nutritionGoalSubscription.unsubscribe();
     if (this._loader) {
       this._loader.dismiss();
       this._loader = null;

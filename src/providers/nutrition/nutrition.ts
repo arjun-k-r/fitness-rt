@@ -1609,7 +1609,7 @@ export class NutritionProvider {
       } else if (age <= 18) {
         return 1500;
       } else if (age <= 30) {
-        return 1.5;
+        return 1500;
       } else if (age <= 50) {
         return 1500;
       } else if (age <= 70) {

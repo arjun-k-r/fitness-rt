@@ -160,14 +160,49 @@ export class FoodDetailsPage {
     this.energy = this.foodForm.get('energy');
     this.water = this.foodForm.get('water');
     this.protein = this.foodForm.get('protein');
+    this.tryptophan = this.foodForm.get('tryptophan');
+    this.threonine = this.foodForm.get('threonine');
+    this.isoleucine = this.foodForm.get('isoleucine');
+    this.leucine = this.foodForm.get('leucine');
+    this.lysine = this.foodForm.get('lysine');
+    this.methionine = this.foodForm.get('methionine');
+    this.phenylalanine = this.foodForm.get('phenylalanine');
+    this.valine = this.foodForm.get('valine');
+    this.histidine = this.foodForm.get('histidine');
     this.fats = this.foodForm.get('fats');
     this.satFat = this.foodForm.get('satFat');
     this.transFat = this.foodForm.get('transFat');
+    this.dha = this.foodForm.get('dha');
+    this.la = this.foodForm.get('la');
+    this.ala = this.foodForm.get('ala');
+    this.epa = this.foodForm.get('epa');
     this.carbs = this.foodForm.get('carbs');
     this.fiber = this.foodForm.get('fiber');
     this.sugars = this.foodForm.get('sugars');
-    
-
+    this.calcium = this.foodForm.get('calcium');
+    this.iron = this.foodForm.get('iron');
+    this.magnesium = this.foodForm.get('magnesium');
+    this.manganese = this.foodForm.get('manganese');
+    this.phosphorus = this.foodForm.get('phosphorus');
+    this.potassium = this.foodForm.get('potassium');
+    this.selenium = this.foodForm.get('selenium');
+    this.sodium = this.foodForm.get('sodium');
+    this.zinc = this.foodForm.get('zinc');
+    this.vitaminA = this.foodForm.get('vitaminA');
+    this.vitaminB1 = this.foodForm.get('vitaminB1');
+    this.vitaminB2 = this.foodForm.get('vitaminB2');
+    this.vitaminB3 = this.foodForm.get('vitaminB3');
+    this.vitaminB5 = this.foodForm.get('vitaminB5');
+    this.vitaminB6 = this.foodForm.get('vitaminB6');
+    this.vitaminB9 = this.foodForm.get('vitaminB9');
+    this.vitaminB12 = this.foodForm.get('vitaminB12');
+    this.choline = this.foodForm.get('choline');
+    this.vitaminC = this.foodForm.get('vitaminC');
+    this.vitaminD = this.foodForm.get('vitaminD');
+    this.vitaminE = this.foodForm.get('vitaminE');
+    this.vitaminK = this.foodForm.get('vitaminK');
+    this.alcohol = this.foodForm.get('alcohol');
+    this.caffeine = this.foodForm.get('caffeine');
   }
 
   public changeDataView(): void {

@@ -14,12 +14,19 @@
 
 
 <ion-content>
-  <ion-searchbar debounce="2000" (ionCancel)="clearSearchActivities($event)" [(ngModel)]="activitySearchQuery" placeholder="Search activities"  role="search">
+  <ion-searchbar debounce="2000" (ionCancel)="clearSearchActivities($event)" [(ngModel)]="activitySearchQuery" placeholder="Search activities"
+    role="search">
   </ion-searchbar>
   <ion-list role="list">
-    <ion-item *ngFor="let activity of activities | search: activitySearchQuery | limit: activityLimit | sort : activitySorting" role="checkbox">
-      <ion-label text-wrap>{{ activity.name }}</ion-label>
-      <ion-checkbox #checkBox (click)="selectActivity(activity, checkBox)"></ion-checkbox>
+    <ion-item *ngFor="let activityCategory of activityCategories | search: activitySearchQuery | limit: activityLimit | sort : activitySorting"
+      role="listitem">
+      <ion-thumbnail item-start>
+        <img src="assets/icon/{{ activityCategory.icon }}">
+      </ion-thumbnail>
+      <ion-label>{{ activityCategory.name }}</ion-label>
+      <ion-select multiple="true" (ionChange)="selectActivity($event)">
+        <ion-option *ngFor="let activityType of activityCategory.types" [value]="activityType">{{ activityType.name }}</ion-option>
+      </ion-select>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="loadMoreActivities($event)">

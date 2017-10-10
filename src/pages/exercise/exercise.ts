@@ -23,7 +23,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { Activity, ActivityPlan, ExerciseGoals, ExerciseLog, ILineChartEntry } from '../../models';
+import { ActivityType, ActivityPlan, ExerciseGoals, ExerciseLog, ILineChartEntry } from '../../models';
 
 // Providers
 import { ActivityProvider } from '../../providers';
@@ -60,7 +60,7 @@ export class ExercisePage {
     private _popoverCtrl: PopoverController
   ) { }
 
-  private _changeDuration(activity: Activity): void {
+  private _changeDuration(activity: ActivityType): void {
     this._alertCtrl.create({
       title: 'Duration',
       subTitle: 'How long did you perform this activity?',
@@ -120,7 +120,7 @@ export class ExercisePage {
       authId: this._authId
     });
     activityListModal.present();
-    activityListModal.onDidDismiss((activities: Activity[]) => {
+    activityListModal.onDidDismiss((activities: ActivityType[]) => {
       if (!!activities) {
         this.activityPlan.activities = this.activityPlan.activities ? [...this.activityPlan.activities, ...activities] : [...activities];
         this._updateActivityPlan();

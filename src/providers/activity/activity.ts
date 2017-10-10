@@ -12,7 +12,7 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Activity, ActivityPlan, ExerciseGoals, ExerciseLog } from '../../models';
+import { ActivityCategory, ActivityType, ActivityPlan, ExerciseGoals, ExerciseLog } from '../../models';
 
 // Providers
 import { FitnessProvider } from '../fitness/fitness';
@@ -21,20 +21,20 @@ const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class ActivityProvider {
-  private _activities$: FirebaseListObservable<Activity[]>;
+  private _activities$: FirebaseListObservable<ActivityCategory[]>;
   private _userWeight: number;
   constructor(
     private _db: AngularFireDatabase,
     private _fitPvd: FitnessProvider
   ) {
-    this._activities$ = this._db.list('/activities', {
+    this._activities$ = this._db.list('/activity-categories', {
       query: {
         orderByChild: 'name'
       }
     });
   }
 
-  public calculateActivityEnergyConsumption(activity: Activity, authId: string): Promise<number> {
+  public calculateActivityEnergyConsumption(activity: ActivityType, authId: string): Promise<number> {
     return new Promise((resolve, reject) => {
       if (!this._userWeight) {
         const subscription: Subscription = this._fitPvd.getUserWeight$(authId).subscribe((weight: number) => {
@@ -49,12 +49,12 @@ export class ActivityProvider {
     });
   }
 
-  public calculateActivityPlanDuration(activities: Activity[]): number {
-    return activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.duration, 0);
+  public calculateActivityPlanDuration(activities: ActivityType[]): number {
+    return activities.reduce((acc: number, currActivity: ActivityType) => acc += currActivity.duration, 0);
   }
 
-  public calculateActivityPlanEnergyConsumption(activities: Activity[]): number {
-    return activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.energyConsumption, 0);
+  public calculateActivityPlanEnergyConsumption(activities: ActivityType[]): number {
+    return activities.reduce((acc: number, currActivity: ActivityType) => acc += currActivity.energyConsumption, 0);
   }
 
   public checkGoalAchievements(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
@@ -84,8 +84,8 @@ export class ActivityProvider {
     return activityPlan.totalDuration > 120 && activityPlan.totalEnergyConsumption > 600 && activityPlan.combos.energy && !activityPlan.combos.lowActivity && !activityPlan.combos.overtraining && !activityPlan.combos.sedentarism;
   }
 
-  public checkHiit(activities: Activity[]): boolean {
-    return activities.map((activity: Activity) => activity.met > 8)[0];
+  public checkHiit(activities: ActivityType[]): boolean {
+    return activities.map((activity: ActivityType) => activity.met > 8)[0];
   }
 
   public checkLifePoints(activityPlan: ActivityPlan): number {
@@ -129,19 +129,19 @@ export class ActivityProvider {
     return lifePoints;
   }
 
-  public checkLowActivity(activities: Activity[]): boolean {
-    return activities.reduce((lowIntensity: boolean, activity: Activity) => lowIntensity = lowIntensity && activity.met < 4, true);
+  public checkLowActivity(activities: ActivityType[]): boolean {
+    return activities.reduce((lowIntensity: boolean, activity: ActivityType) => lowIntensity = lowIntensity && activity.met < 4, true);
   }
 
-  public checkOvertraining(activities: Activity[]): boolean {
-    return activities.reduce((acc: number, activity: Activity) => acc += activity.met >= 6 ? activity.duration : 0, 0) > 45 || activities.reduce((acc: number, activity: Activity) => acc += activity.met > 8 ? activity.duration : 0, 0) > 20;
+  public checkOvertraining(activities: ActivityType[]): boolean {
+    return activities.reduce((acc: number, activity: ActivityType) => acc += activity.met >= 6 ? activity.duration : 0, 0) > 45 || activities.reduce((acc: number, activity: ActivityType) => acc += activity.met > 8 ? activity.duration : 0, 0) > 20;
   }
 
   public checkSedentarism(activityPlan: ActivityPlan): boolean {
     return activityPlan.totalDuration < 120;
   }
 
-  public getActivities$(): FirebaseListObservable<Activity[]> {
+  public getActivityCategories$(): FirebaseListObservable<ActivityCategory[]> {
     return this._activities$;
   }
 

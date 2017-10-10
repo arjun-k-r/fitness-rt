@@ -332,6 +332,53 @@ export class FitnessPage {
                   caffeine: [this.customRequirements.caffeine.value, Validators.required],
                 });
 
+                this.energy = this.dailyRequirementsForm.get('energy');
+                this.water = this.dailyRequirementsForm.get('water');
+                this.protein = this.dailyRequirementsForm.get('protein');
+                this.tryptophan = this.dailyRequirementsForm.get('tryptophan');
+                this.threonine = this.dailyRequirementsForm.get('threonine');
+                this.isoleucine = this.dailyRequirementsForm.get('isoleucine');
+                this.leucine = this.dailyRequirementsForm.get('leucine');
+                this.lysine = this.dailyRequirementsForm.get('lysine');
+                this.methionine = this.dailyRequirementsForm.get('methionine');
+                this.phenylalanine = this.dailyRequirementsForm.get('phenylalanine');
+                this.valine = this.dailyRequirementsForm.get('valine');
+                this.histidine = this.dailyRequirementsForm.get('histidine');
+                this.fats = this.dailyRequirementsForm.get('fats');
+                this.satFat = this.dailyRequirementsForm.get('satFat');
+                this.transFat = this.dailyRequirementsForm.get('transFat');
+                this.dha = this.dailyRequirementsForm.get('dha');
+                this.la = this.dailyRequirementsForm.get('la');
+                this.ala = this.dailyRequirementsForm.get('ala');
+                this.epa = this.dailyRequirementsForm.get('epa');
+                this.carbs = this.dailyRequirementsForm.get('carbs');
+                this.fiber = this.dailyRequirementsForm.get('fiber');
+                this.sugars = this.dailyRequirementsForm.get('sugars');
+                this.calcium = this.dailyRequirementsForm.get('calcium');
+                this.iron = this.dailyRequirementsForm.get('iron');
+                this.magnesium = this.dailyRequirementsForm.get('magnesium');
+                this.manganese = this.dailyRequirementsForm.get('manganese');
+                this.phosphorus = this.dailyRequirementsForm.get('phosphorus');
+                this.potassium = this.dailyRequirementsForm.get('potassium');
+                this.selenium = this.dailyRequirementsForm.get('selenium');
+                this.sodium = this.dailyRequirementsForm.get('sodium');
+                this.zinc = this.dailyRequirementsForm.get('zinc');
+                this.vitaminA = this.dailyRequirementsForm.get('vitaminA');
+                this.vitaminB1 = this.dailyRequirementsForm.get('vitaminB1');
+                this.vitaminB2 = this.dailyRequirementsForm.get('vitaminB2');
+                this.vitaminB3 = this.dailyRequirementsForm.get('vitaminB3');
+                this.vitaminB5 = this.dailyRequirementsForm.get('vitaminB5');
+                this.vitaminB6 = this.dailyRequirementsForm.get('vitaminB6');
+                this.vitaminB9 = this.dailyRequirementsForm.get('vitaminB9');
+                this.vitaminB12 = this.dailyRequirementsForm.get('vitaminB12');
+                this.choline = this.dailyRequirementsForm.get('choline');
+                this.vitaminC = this.dailyRequirementsForm.get('vitaminC');
+                this.vitaminD = this.dailyRequirementsForm.get('vitaminD');
+                this.vitaminE = this.dailyRequirementsForm.get('vitaminE');
+                this.vitaminK = this.dailyRequirementsForm.get('vitaminK');
+                this.alcohol = this.dailyRequirementsForm.get('alcohol');
+                this.caffeine = this.dailyRequirementsForm.get('caffeine');
+
                 this._dailyRequirementsFormSubscription = this.dailyRequirementsForm.valueChanges.subscribe(
                   (changes: {
                     energy: number;

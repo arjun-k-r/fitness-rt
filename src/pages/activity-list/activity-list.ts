@@ -18,8 +18,11 @@ import {
 // Firebase
 import * as firebase from 'firebase/app';
 
+// Thir-party
+import { find } from 'lodash';
+
 // Models
-import { Activity } from '../../models';
+import { ActivityCategory, ActivityType } from '../../models';
 
 // Providers
 import { ActivityProvider } from '../../providers';
@@ -36,9 +39,9 @@ export class ActivityListPage {
   private _loader: Loading;
   public activityLimit: number = 50;
   public activitySorting: string = 'name';
-  public activities: Activity[];
+  public activityCategories: ActivityCategory[];
   public activitySearchQuery: string = '';
-  public selectedActivities: Activity[] = [];
+  public selectedActivities: ActivityType[] = [];
   constructor(
     private _alertCtrl: AlertController,
     private _activityPvd: ActivityProvider,
@@ -66,51 +69,12 @@ export class ActivityListPage {
     setTimeout(() => ev.complete(), 1000);
   }
 
-  public selectActivity(activity: Activity, checkBox: HTMLInputElement): void {
-    const idx: number = this.selectedActivities.indexOf(activity);
-    if (idx === -1) {
-      this._alertCtrl.create({
-        title: 'Duration',
-        subTitle: 'How long did you perform this activity?',
-        inputs: [
-          {
-            name: 'duration',
-            placeholder: 'Minutes',
-            type: 'number'
-          }
-        ],
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              checkBox.checked = false;
-            }
-          },
-          {
-            text: 'Done',
-            handler: (data: { duration: number }) => {
-              activity.duration = +data.duration;
-              this._activityPvd.calculateActivityEnergyConsumption(activity, this._authId)
-                .then((energyConsumption: number) => {
-                  activity.energyConsumption = energyConsumption;
-                  this.selectedActivities = [...this.selectedActivities, activity];
-                })
-                .catch((err: Error) => {
-                  this._alertCtrl.create({
-                    title: 'Uhh ohh...',
-                    subTitle: 'Something went wrong',
-                    message: err.toString(),
-                    buttons: ['OK']
-                  }).present();
-                });
-            }
-          }
-        ]
-      }).present();
-    } else {
-      this.selectedActivities = [...this.selectedActivities.slice(0, idx), ...this.selectedActivities.slice(idx + 1)];
-    }
+  public selectActivity(selectedActivities: ActivityType[]): void {
+    selectedActivities.forEach((selectedActivity: ActivityType) => {
+      if (!find(this.selectedActivities, (activity: ActivityType) => activity.name === selectedActivity.name)) {
+        this.selectedActivities = [...this.selectedActivities, Object.assign({}, selectedActivity, { duration: 0, energyConsumption: 0 })]
+      }
+    })
   }
 
   ionViewWillEnter(): void {
@@ -120,8 +84,8 @@ export class ActivityListPage {
       spinner: 'crescent'
     });
     this._loader.present();
-    this._activitySubscription = this._activityPvd.getActivities$().subscribe((activities: Activity[]) => {
-      this.activities = [...activities];
+    this._activitySubscription = this._activityPvd.getActivityCategories$().subscribe((activities: ActivityCategory[]) => {
+      this.activityCategories = [...activities];
       if (this._loader) {
         this._loader.dismiss();
         this._loader = null;

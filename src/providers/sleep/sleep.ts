@@ -30,7 +30,7 @@ export class SleepProvider {
     } else {
       return true;
     }
-    
+
     return false;
   }
 
@@ -44,7 +44,7 @@ export class SleepProvider {
     } else {
       return true;
     }
-    
+
     return false;
   }
 
@@ -124,27 +124,24 @@ export class SleepProvider {
 
   public saveSleep(authId: string, sleep: Sleep, weekLog: SleepLog[]): Promise<{}> {
     return new Promise((resolve, reject) => {
-      this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/sleep`).set(sleep.lifePoints)
-        .then(() => {
-          const newSleepLog: SleepLog = new SleepLog(sleep.bedTime, moment().format('dddd'), sleep.duration, sleep.combos.quality);
-          const weekLength: number = weekLog.length;
-          if (!!weekLength) {
-            if (newSleepLog.date !== weekLog[weekLength - 1].date) {
-              weekLog.push(newSleepLog);
-            } else {
-              weekLog[weekLength - 1] = Object.assign({}, newSleepLog);
-            }
-          } else {
-            weekLog.push(newSleepLog);
-          }
-          Promise.all([
-            this._db.object(`/sleep-log/${authId}/`).set(weekLog),
-            this._db.object(`/sleep/${authId}/${CURRENT_DAY}`).set(sleep)
-          ]).then(() => {
-            resolve();
-          }).catch((err: firebase.FirebaseError) => reject(err));
-        })
-        .catch((err: Error) => console.error(`Error storing life points: ${err.toString()}`));
+      const newSleepLog: SleepLog = new SleepLog(sleep.bedTime, moment().format('dddd'), sleep.duration, sleep.combos.quality);
+      const weekLength: number = weekLog.length;
+      if (!!weekLength) {
+        if (newSleepLog.date !== weekLog[weekLength - 1].date) {
+          weekLog.push(newSleepLog);
+        } else {
+          weekLog[weekLength - 1] = Object.assign({}, newSleepLog);
+        }
+      } else {
+        weekLog.push(newSleepLog);
+      }
+      Promise.all([
+        this._db.object(`/sleep-log/${authId}/`).set(weekLog),
+        this._db.object(`/sleep/${authId}/${CURRENT_DAY}`).set(sleep),
+        this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/sleep`).set(sleep.lifePoints)
+      ]).then(() => {
+        resolve();
+      }).catch((err: firebase.FirebaseError) => reject(err));
     });
   }
 

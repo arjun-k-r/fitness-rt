@@ -113,14 +113,16 @@ export class MealProvider {
   }
 
   public checkDinnerTimeAchievement(goals: NutritionGoals, mealPlan: MealPlan): boolean {
-    const dinnerTimeGoal: number = moment.duration(goals.dinnerTime.value).asMinutes();
-    const dinnerTime: number = moment.duration(mealPlan.meals[mealNr - 1].hour).asMinutes();
-    if (goals.dinnerTime.isSelected) {
-      if (dinnerTime <= dinnerTimeGoal + 30) {
+    if (mealPlan.meals.length > 1) {
+      const dinnerTimeGoal: number = moment.duration(goals.dinnerTime.value).asMinutes();
+      const dinnerTime: number = moment.duration(mealPlan.meals[mealPlan.meals.length - 1].hour).asMinutes();
+      if (goals.dinnerTime.isSelected) {
+        if (dinnerTime <= dinnerTimeGoal + 30) {
+          return true;
+        }
+      } else {
         return true;
       }
-    } else {
-      return true;
     }
 
     return false;
@@ -167,6 +169,8 @@ export class MealProvider {
         return false;
       }
     }
+
+    return true;
   }
 
   public checkLifePoints(mealPlan: MealPlan): number {
@@ -330,38 +334,36 @@ export class MealProvider {
 
   public saveMealPlan(authId: string, mealPlan: MealPlan, weekLog: NutritionLog[], intoleratedFoods?: Food[]): Promise<{}> {
     return new Promise((resolve, reject) => {
-      this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/nutrition`).set(mealPlan.lifePoints)
-        .then(() => {
-          const newNutritionLog: NutritionLog = new NutritionLog(moment().format('dddd'), mealPlan.nutrition);
-          const weekLength: number = weekLog.length;
-          if (!!weekLength) {
-            if (newNutritionLog.date !== weekLog[weekLength - 1].date) {
-              weekLog.push(newNutritionLog);
-            } else {
-              weekLog[weekLength - 1] = Object.assign({}, newNutritionLog);
-            }
-          } else {
-            weekLog.push(newNutritionLog);
-          }
-          mealPlan.meals = sortBy(mealPlan.meals, (meal: Meal) => meal.hour);
-          if (!intoleratedFoods) {
-            Promise.all([
-              this._db.object(`/nutrition-log/${authId}`).set(weekLog),
-              this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan)
-            ]).then(() => {
-              resolve();
-            }).catch((err: firebase.FirebaseError) => reject(err));
-          } else {
-            Promise.all([
-              this._db.object(`/nutrition-log/${authId}`).set(weekLog),
-              this._db.object(`/food-intolerance/${authId}`).set(intoleratedFoods),
-              this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan)
-            ]).then(() => {
-              resolve();
-            }).catch((err: firebase.FirebaseError) => reject(err));
-          }
-        })
-        .catch((err: Error) => console.error(`Error storing energy consumption and life points: ${err.toString()}`));
+      const newNutritionLog: NutritionLog = new NutritionLog(moment().format('dddd'), mealPlan.nutrition);
+      const weekLength: number = weekLog.length;
+      if (!!weekLength) {
+        if (newNutritionLog.date !== weekLog[weekLength - 1].date) {
+          weekLog.push(newNutritionLog);
+        } else {
+          weekLog[weekLength - 1] = Object.assign({}, newNutritionLog);
+        }
+      } else {
+        weekLog.push(newNutritionLog);
+      }
+      mealPlan.meals = sortBy(mealPlan.meals, (meal: Meal) => meal.hour);
+      if (!intoleratedFoods) {
+        Promise.all([
+          this._db.object(`/nutrition-log/${authId}`).set(weekLog),
+          this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan),
+          this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/nutrition`).set(mealPlan.lifePoints)
+        ]).then(() => {
+          resolve();
+        }).catch((err: firebase.FirebaseError) => reject(err));
+      } else {
+        Promise.all([
+          this._db.object(`/nutrition-log/${authId}`).set(weekLog),
+          this._db.object(`/food-intolerance/${authId}`).set(intoleratedFoods),
+          this._db.object(`/meal-plan/${authId}/${CURRENT_DAY}`).set(mealPlan),
+          this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/nutrition`).set(mealPlan.lifePoints)
+        ]).then(() => {
+          resolve();
+        }).catch((err: firebase.FirebaseError) => reject(err));
+      }
     });
   }
 

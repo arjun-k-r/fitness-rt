@@ -236,12 +236,15 @@ export class ExercisePage {
           text: 'Great!',
           handler: () => {
             const goodExercise: boolean = this._activityPvd.checkGoodExercise(this.activityPlan);
-            this._modalCtrl.create('rewards', {
-              context: 'exercise',
-              goalsAchieved: this.activityPlan.combos.goalsAchieved,
-              goodQuality: goodExercise,
-              lifepoints: this.activityPlan.lifePoints
-            }).present();
+
+            if (goodExercise || this.activityPlan.combos.goalsAchieved) {
+              this._modalCtrl.create('rewards', {
+                context: 'exercise',
+                goalsAchieved: this.activityPlan.combos.goalsAchieved,
+                goodQuality: goodExercise,
+                lifepoints: this.activityPlan.lifePoints
+              }).present();
+            }
           }
         }]
       }).present();

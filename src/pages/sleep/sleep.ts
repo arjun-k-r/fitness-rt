@@ -202,9 +202,6 @@ export class SleepPage {
   }
 
   public saveSleep(): void {
-    this.sleep.combos.goalsAchieved = this._sleepPvd.checkGoalAchievements(this.sleepGoals, this.sleep);
-    this.sleep.lifePoints = this._sleepPvd.checkLifePoints(this.sleep);
-
     this._loader = this._loadCtrl.create({
       content: 'Please wait...',
       duration: 30000,
@@ -212,6 +209,8 @@ export class SleepPage {
     });
     this._loader.present();
 
+    this.sleep.combos.goalsAchieved = this._sleepPvd.checkGoalAchievements(this.sleepGoals, this.sleep);
+    this.sleep.lifePoints = this._sleepPvd.checkLifePoints(this.sleep);
     Promise.all([
       this._sleepPvd.saveSleepGoals(this._authId, this.sleepGoals),
       this._sleepPvd.saveSleep(this._authId, this.sleep, this._weekLog)
@@ -227,26 +226,12 @@ export class SleepPage {
             text: 'Great!',
             handler: () => {
               const goodSleep: boolean = this._sleepPvd.checkGoodSleep(this.sleep);
-              if (this.sleep.combos.goalsAchieved && goodSleep) {
-                this._modalCtrl.create('rewards', {
-                  context: 'sleep',
-                  goalsAchieved: true,
-                  goodQuality: true,
-                  lifepoints: this.sleep.lifePoints
-                }).present();
-              } else if (this.sleep.combos.goalsAchieved && this.sleep.lifePoints > 0) {
-                this._modalCtrl.create('rewards', {
-                  context: 'sleep',
-                  goalsAchieved: true,
-                  lifepoints: this.sleep.lifePoints
-                }).present();
-              } else if (goodSleep) {
-                this._modalCtrl.create('rewards', {
-                  context: 'sleep',
-                  goodQuality: true,
-                  lifepoints: this.sleep.lifePoints
-                }).present();
-              }
+              this._modalCtrl.create('rewards', {
+                context: 'sleep',
+                goalsAchieved: this.sleep.combos.goalsAchieved,
+                goodQuality: goodSleep,
+                lifepoints: this.sleep.lifePoints
+              }).present();
             }
           }]
         }).present();

@@ -12,10 +12,11 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { ActivityCategory, ActivityType, ActivityPlan, ExerciseGoals, ExerciseLog } from '../../models';
+import { ActivityCategory, ActivityType, ActivityPlan, ExerciseGoals, ExerciseLog, Fitness, Nutrition } from '../../models';
 
 // Providers
 import { FitnessProvider } from '../fitness/fitness';
+import { NutritionProvider } from '../nutrition/nutrition';
 
 const CURRENT_DAY: number = moment().dayOfYear();
 
@@ -25,7 +26,8 @@ export class ActivityProvider {
   private _userWeight: number;
   constructor(
     private _db: AngularFireDatabase,
-    private _fitPvd: FitnessProvider
+    private _fitPvd: FitnessProvider,
+    private _nutritionPvd: NutritionProvider
   ) {
     this._activities$ = this._db.list('/activity-categories', {
       query: {
@@ -57,27 +59,32 @@ export class ActivityProvider {
     return activities.reduce((acc: number, currActivity: ActivityType) => acc += currActivity.energyConsumption, 0);
   }
 
-  public checkGoalAchievements(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
-    let energyConsumptionAchieved: boolean = false,
-      exerciseDurationAchieved: boolean = false;
-
+  public checkDurationAchievement(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
     if (goals.duration.isSelected) {
       if (activityPlan.totalDuration >= +goals.duration.value) {
-        exerciseDurationAchieved = true;
+        return true;
       }
     } else {
-      exerciseDurationAchieved = true;
+      return true;
     }
+    
+    return false;
+  }
 
+  public checkEnergyAchievement(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
     if (goals.energy.isSelected) {
       if (activityPlan.totalEnergyConsumption >= +goals.energy.value) {
-        energyConsumptionAchieved = true;
+        return true;
       }
     } else {
-      energyConsumptionAchieved = true;
+      return true;
     }
+    
+    return false;
+  }
 
-    return energyConsumptionAchieved && exerciseDurationAchieved && (goals.duration.isSelected || goals.energy.isSelected);
+  public checkGoalAchievements(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
+    return this.checkDurationAchievement(goals, activityPlan) && this.checkEnergyAchievement(goals, activityPlan) && (goals.duration.isSelected || goals.energy.isSelected);
   }
 
   public checkGoodExercise(activityPlan: ActivityPlan): boolean {
@@ -171,30 +178,34 @@ export class ActivityProvider {
 
   public saveActivityPlan(authId: string, activityPlan: ActivityPlan, weekLog: ExerciseLog[]): Promise<{}> {
     return new Promise((resolve, reject) => {
-      Promise.all([
-        this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}/totalEnergyConsumption`).set(activityPlan.totalEnergyConsumption),
-        this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/exercise`).set(activityPlan.lifePoints)
-      ])
-        .then(() => {
-          const newExerciseLog: ExerciseLog = new ExerciseLog(moment().format('dddd'), activityPlan.totalDuration, activityPlan.totalEnergyConsumption);
-          const weekLength: number = weekLog.length;
-          if (!!weekLength) {
-            if (newExerciseLog.date !== weekLog[weekLength - 1].date) {
-              weekLog.push(newExerciseLog);
-            } else {
-              weekLog[weekLength - 1] = Object.assign({}, newExerciseLog);
-            }
-          } else {
-            weekLog.push(newExerciseLog);
-          }
-          Promise.all([
-            this._db.object(`/exercise-log/${authId}/`).set(weekLog),
-            this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`).set(activityPlan)
-          ]).then(() => {
-            resolve();
-          }).catch((err: firebase.FirebaseError) => reject(err));
-        })
-        .catch((err: Error) => console.error(`Error storing energy consumption and life points: ${err.toString()}`));
+
+      const fitnessSubscription: Subscription = this._db.object(`/fitness/${authId}`).subscribe((fitness: Fitness) => {
+        fitnessSubscription.unsubscribe();
+        if (fitness['$value'] !== null) {
+          this._nutritionPvd.calculateDailyRequirements(authId, fitness.age, fitness.bmr, fitness.gender, fitness.lactating, fitness.pregnant, fitness.weight)
+            .then((dailyRequirements: Nutrition) => {
+              const newExerciseLog: ExerciseLog = new ExerciseLog(moment().format('dddd'), activityPlan.totalDuration, activityPlan.totalEnergyConsumption);
+              const weekLength: number = weekLog.length;
+              if (!!weekLength) {
+                if (newExerciseLog.date !== weekLog[weekLength - 1].date) {
+                  weekLog.push(newExerciseLog);
+                } else {
+                  weekLog[weekLength - 1] = Object.assign({}, newExerciseLog);
+                }
+              } else {
+                weekLog.push(newExerciseLog);
+              }
+              Promise.all([
+                this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/exercise`).set(activityPlan.lifePoints),
+                this._db.object(`/exercise-log/${authId}/`).set(weekLog),
+                this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`).set(activityPlan)
+              ]).then(() => {
+                resolve();
+              }).catch((err: firebase.FirebaseError) => reject(err));
+            })
+            .catch((err: firebase.FirebaseError) => reject(err));
+        }
+      }, (err: firebase.FirebaseError) => reject(err));
     });
   }
 

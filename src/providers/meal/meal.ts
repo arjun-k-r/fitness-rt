@@ -98,69 +98,75 @@ export class MealProvider {
     return Math.round((nutrientPartial * 100) / (this._userRequirements && this._userRequirements[nutrientName].value || 1));
   }
 
+  public checkBreakfastTimeAchievement(goals: NutritionGoals, mealPlan: MealPlan): boolean {
+    const breakfastTimeGoal: number = moment.duration(goals.breakfastTime.value).asMinutes();
+    const breakfastTime: number = moment.duration(mealPlan.meals[0].hour).asMinutes();
+    if (goals.breakfastTime.isSelected) {
+      if (breakfastTime => breakfastTimeGoal - 30) {
+        return true;
+      }
+    } else {
+      return true;
+    }
+
+    return false;
+  }
+
+  public checkDinnerTimeAchievement(goals: NutritionGoals, mealPlan: MealPlan): boolean {
+    const dinnerTimeGoal: number = moment.duration(goals.dinnerTime.value).asMinutes();
+    const dinnerTime: number = moment.duration(mealPlan.meals[mealNr - 1].hour).asMinutes();
+    if (goals.dinnerTime.isSelected) {
+      if (dinnerTime <= dinnerTimeGoal + 30) {
+        return true;
+      }
+    } else {
+      return true;
+    }
+
+    return false;
+  }
+
+  public checkFoodGroupsAchievement(goals: NutritionGoals, meal: Meal): boolean {
+    let foodGroupRestrictionsAchieved: boolean = true;
+
+    if (goals.foodGroupRestrictions.isSelected) {
+      goals.foodGroupRestrictions.value.forEach((group: string) => {
+        if (!!find(meal.foods, (food: Food) => food.group === group)) {
+          foodGroupRestrictionsAchieved = false
+        }
+      });
+    }
+
+    return foodGroupRestrictionsAchieved;
+  }
+
   public checkGoalAchievements(goals: NutritionGoals, mealPlan: MealPlan): boolean {
-    let breakfastTimeAchieved: boolean = false,
-      dinnerTimeAchieved: boolean = false,
-      foodGroupRestrictionsAchieved: boolean = true,
-      mealIntervalAchieved: boolean = true,
+    let foodGroupRestrictionsAchieved: boolean = true,
       mealSizeAchieved: boolean = true;
 
     mealPlan.meals.forEach((meal: Meal) => {
-      if (goals.mealSize.isSelected && meal.quantity > goals.mealSize.value + 50) {
-        mealSizeAchieved = false
-      }
-
-      if (goals.foodGroupRestrictions.isSelected) {
-        goals.foodGroupRestrictions.value.forEach((group: string) => {
-          if (!!find(meal.foods, (food: Food) => food.group === group)) {
-            foodGroupRestrictionsAchieved = false
-          }
-        });
-      }
+      mealSizeAchieved = this.checkMealSizeAchievement(goals, meal);
+      foodGroupRestrictionsAchieved = this.checkFoodGroupsAchievement(goals, meal);
     });
 
-    const mealNr: number = mealPlan.meals.length;
-
-    if (!!mealNr) {
-      const breakfastTimeGoal: number = moment.duration(goals.breakfastTime.value).asMinutes();
-      const breakfastTime: number = moment.duration(mealPlan.meals[0].hour).asMinutes();
-      if (goals.breakfastTime.isSelected) {
-        if (breakfastTime => breakfastTimeGoal - 30) {
-          breakfastTimeAchieved = true;
-        }
-      } else {
-        breakfastTimeAchieved = true;
-      }
-    }
-
-    if (mealNr > 1) {
-      const dinnerTimeGoal: number = moment.duration(goals.dinnerTime.value).asMinutes();
-      const dinnerTime: number = moment.duration(mealPlan.meals[mealNr - 1].hour).asMinutes();
-      if (goals.dinnerTime.isSelected) {
-        if (dinnerTime <= dinnerTimeGoal + 30) {
-          dinnerTimeAchieved = true;
-        }
-      } else {
-        dinnerTimeAchieved = true;
-      }
-
-      let initialMealTime: number,
-        currentMealTime: number;
-
-      for (let i = 1; i < mealNr - 1; i++) {
-        initialMealTime = moment.duration(mealPlan.meals[i - 1].hour).asMinutes() / 60;
-        currentMealTime = moment.duration(mealPlan.meals[i].hour).asMinutes() / 60;
-        if (!(currentMealTime <= initialMealTime + +goals.mealInterval.value + 0.5 && currentMealTime >= initialMealTime + +goals.mealInterval.value - 0.5)) {
-          mealIntervalAchieved = false;
-        }
-      }
-    }
-
-    return breakfastTimeAchieved && dinnerTimeAchieved && foodGroupRestrictionsAchieved && mealIntervalAchieved && mealSizeAchieved && (goals.breakfastTime.isSelected || goals.dinnerTime.isSelected || goals.foodGroupRestrictions.isSelected || goals.mealInterval.isSelected || goals.mealSize.isSelected);
+    return this.checkBreakfastTimeAchievement(goals, mealPlan) && this.checkDinnerTimeAchievement(goals, mealPlan) && foodGroupRestrictionsAchieved && this.checkIntervalAchievement(goals, mealPlan) && mealSizeAchieved && (goals.breakfastTime.isSelected || goals.dinnerTime.isSelected || goals.foodGroupRestrictions.isSelected || goals.mealInterval.isSelected || goals.mealSize.isSelected);
   }
 
   public checkGoodMeal(meal: Meal): boolean {
     return meal.combos.calmEating && meal.combos.feeling === 'Energy' && !meal.combos.overeating && meal.combos.slowEating;
+  }
+
+  public checkIntervalAchievement(goals: NutritionGoals, mealPlan: MealPlan): boolean {
+    let initialMealTime: number,
+      currentMealTime: number;
+
+    for (let i = 1; i < mealPlan.meals.length - 1; i++) {
+      initialMealTime = moment.duration(mealPlan.meals[i - 1].hour).asMinutes() / 60;
+      currentMealTime = moment.duration(mealPlan.meals[i].hour).asMinutes() / 60;
+      if (!(currentMealTime <= initialMealTime + +goals.mealInterval.value + 0.5 && currentMealTime >= initialMealTime + +goals.mealInterval.value - 0.5)) {
+        return false;
+      }
+    }
   }
 
   public checkLifePoints(mealPlan: MealPlan): number {
@@ -280,6 +286,14 @@ export class MealProvider {
     });
 
     return uniqBy(newIntoleranceList, 'name');
+  }
+
+  public checkMealSizeAchievement(goals: NutritionGoals, meal: Meal): boolean {
+    if (goals.mealSize.isSelected) {
+      return meal.quantity <= +goals.mealSize.value + 50;
+    } else {
+      return true;
+    }
   }
 
   public checkOvereating(meal: Meal, mealSizeGoal: Goal): boolean {

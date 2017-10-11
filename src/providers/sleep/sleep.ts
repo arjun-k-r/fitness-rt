@@ -19,30 +19,37 @@ export class SleepProvider {
     private _db: AngularFireDatabase
   ) { }
 
-  public checkGoalAchievements(goals: SleepGoals, sleep: Sleep): boolean {
-    let bedTimeAchieved: boolean = false,
-      sleepDurationAchieved: boolean = false;
-    const bedTimeGoal: number = moment.duration(goals.bedTime.value).asMinutes();
+  public checkBedtimeAchievement(goals: SleepGoals, sleep: Sleep): boolean {
     const bedTime: number = moment.duration(sleep.bedTime).asMinutes();
-    sleep.duration = +sleep.duration;
+    const bedTimeGoal: number = moment.duration(goals.bedTime.value).asMinutes();
 
     if (goals.bedTime.isSelected) {
       if (bedTime => bedTimeGoal - 30 && bedTime <= bedTimeGoal + 30) {
-        bedTimeAchieved = true;
+        return true;
       }
     } else {
-      bedTimeAchieved = true;
+      return true;
     }
+    
+    return false;
+  }
+
+  public checkDurationAchievement(goals: SleepGoals, sleep: Sleep): boolean {
+    sleep.duration = +sleep.duration;
 
     if (goals.duration.isSelected) {
       if (sleep.duration >= +goals.duration.value - 0.5 && sleep.duration <= +goals.duration.value + 0.5) {
-        sleepDurationAchieved = true;
+        return true;
       }
     } else {
-      sleepDurationAchieved = true;
+      return true;
     }
+    
+    return false;
+  }
 
-    return bedTimeAchieved && sleepDurationAchieved && (goals.duration.isSelected || goals.bedTime.isSelected);
+  public checkGoalAchievements(goals: SleepGoals, sleep: Sleep): boolean {
+    return this.checkBedtimeAchievement(goals, sleep) && this.checkDurationAchievement(goals, sleep) && (goals.duration.isSelected || goals.bedTime.isSelected);
   }
 
   public checkGoodSleep(sleep: Sleep): boolean {

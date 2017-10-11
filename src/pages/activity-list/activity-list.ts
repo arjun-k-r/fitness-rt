@@ -38,7 +38,6 @@ export class ActivityListPage {
   private _authId: string;
   private _loader: Loading;
   public activityLimit: number = 50;
-  public activitySorting: string = 'name';
   public activityCategories: ActivityCategory[];
   public activitySearchQuery: string = '';
   public selectedActivities: ActivityType[] = [];
@@ -50,10 +49,6 @@ export class ActivityListPage {
     private _viewCtrl: ViewController
   ) {
     this._authId = this._params.get('authId');
-  }
-
-  public changeActivityOrder(): void {
-    this.activitySorting = this.activitySorting === 'name' ? 'met' : 'name';
   }
 
   public clearSearchActivities(evenet: string): void {

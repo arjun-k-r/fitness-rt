@@ -207,26 +207,12 @@ export class MealEditPage {
           text: 'Great!',
           handler: () => {
             const goodMeal: boolean = this._mealPvd.checkGoodMeal(this.meal);
-            if (this._mealPlan.goalsAchieved && goodMeal) {
-              this._modalCtrl.create('rewards', {
-                context: 'nutrition',
-                goalsAchieved: true,
-                goodQuality: true,
-                lifepoints: this._mealPlan.lifePoints
-              }).present();
-            } else if (this._mealPlan.goalsAchieved && this._mealPlan.lifePoints > 0) {
-              this._modalCtrl.create('rewards', {
-                context: 'nutrition',
-                goalsAchieved: true,
-                lifepoints: this._mealPlan.lifePoints
-              }).present();
-            } else if (goodMeal) {
-              this._modalCtrl.create('rewards', {
-                context: 'nutrition',
-                goodQuality: true,
-                lifepoints: this._mealPlan.lifePoints
-              }).present();
-            }
+            this._modalCtrl.create('rewards', {
+              context: 'nutrition',
+              goalsAchieved: this._mealPlan.goalsAchieved,
+              goodQuality: goodMeal,
+              lifepoints: this._mealPlan.lifePoints
+            }).present();
           }
         }]
       }).present();

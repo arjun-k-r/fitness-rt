@@ -14,16 +14,12 @@ import * as moment from 'moment';
 // Models
 import { Fitness, Nutrition } from '../../models';
 
-// Providers
-import { ActivityProvider } from '../activity/activity';
-
 const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class NutritionProvider {
 
   constructor(
-    private _activityPvd: ActivityProvider,
     private _db: AngularFireDatabase
   ) { }
 
@@ -2251,7 +2247,7 @@ export class NutritionProvider {
 
   public calculateDailyRequirements(authId: string, age: number, bmr: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
-      const subscription: Subscription = this._activityPvd.getEnergyConsumption$(authId).subscribe((energyConsumption: number) => {
+      const subscription: Subscription = this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}/totalEnergyConsumption`).subscribe((energyConsumption: number) => {
         energyConsumption = energyConsumption['$value'] === null ? 0 : energyConsumption['$value'];
         const requirements: Nutrition = new Nutrition();
         requirements.ala.value = this._calculateALADailyRequirements(energyConsumption + bmr);

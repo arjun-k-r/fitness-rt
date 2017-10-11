@@ -2,9 +2,6 @@
   <ion-navbar role="toolbar">
     <ion-title>Activities</ion-title>
     <ion-buttons end>
-      <button (click)="changeActivityOrder()" ion-button padding role="button">
-        Sort by {{ activitySorting === 'name' ? 'intensity' : 'name' }}
-      </button>
       <button (click)="doneSelecting()" icon-only ion-button padding role="button">
         <ion-icon aria-hidden="true" name="done-all"></ion-icon>
       </button>
@@ -18,7 +15,7 @@
     role="search">
   </ion-searchbar>
   <ion-list role="list">
-    <ion-item *ngFor="let activityCategory of activityCategories | search: activitySearchQuery | limit: activityLimit | sort : activitySorting"
+    <ion-item *ngFor="let activityCategory of activityCategories | search: activitySearchQuery | limit: activityLimit"
       role="listitem">
       <ion-thumbnail item-start>
         <img src="assets/icon/{{ activityCategory.icon }}">

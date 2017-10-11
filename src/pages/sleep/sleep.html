@@ -42,7 +42,7 @@
       </ion-item>
       <ion-item *ngIf="sleepGoals.bedTime.isSelected">
         <ion-label floating for="bedTimeGoal" id="bedTimeGoalLabel">Bed time</ion-label>
-        <ion-datetime aria-live="assertive" aria-labelledby="bedTimeLabel" aria-required="false" displayFormat="HH:mm" id="bedTimeLabel"
+        <ion-datetime aria-live="assertive" aria-labelledby="bedTimeGoalLabel" aria-required="false" displayFormat="HH:mm" id="bedTimeLabel"
           [(ngModel)]="sleepGoals.bedTime.value" pickerFormat="HH mm"></ion-datetime>
       </ion-item>
       <ion-item>

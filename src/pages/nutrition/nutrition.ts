@@ -133,7 +133,7 @@ export class NutritionPage {
     return this._mealPvd.calculateNutrientPercentage(nutrientValue, nutrientName);
   }
 
-  public selectFoodGroup(): void {
+  public selectFoodGroups(): void {
     this._alertCtrl.create({
       title: 'Select food groups',
       inputs: [...FOOD_GROUPS.map((group: string) => {

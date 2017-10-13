@@ -72,9 +72,16 @@
             <ion-option role="option" value="Sleepiness">Sleepiness</ion-option>
           </ion-select>
         </ion-item>
+        <button (click)="viewIntoleratedFoods()" ion-item role="button">
+          <ion-icon aria-hidden="true" color="danger" item-start name="warning"></ion-icon>
+          <h2 text-wrap>Watch out for intolerated foods</h2>
+          <ion-note item-right>
+            <ion-icon aria-hidden="true" name="open"></ion-icon>
+          </ion-note>
+        </button>
       </ion-list>
       <ion-list role="list">
-        <ion-item-divider color="light" role="separator">
+        <ion-item-divider color="primary" role="separator">
           Suggestions
         </ion-item-divider>
         <ion-item *ngIf="!meal.combos.calmEating" role="listitem">
@@ -105,20 +112,18 @@
     </div>
     <div *ngSwitchCase="'foods'" padding>
       <ion-list role="list">
-        <button (click)="viewIntoleratedFoods()" ion-item role="button">
-          <ion-icon aria-hidden="true" color="danger" item-start name="warning"></ion-icon>
-          <h2 text-wrap>Watch out for intolerated foods</h2>
-          <ion-note item-right>
-            <ion-icon aria-hidden="true" name="open"></ion-icon>
-          </ion-note>
-        </button>
         <button (click)="changeFood(i)" ion-item *ngFor="let food of meal.foods; let i = index" role="button">
           <ion-icon aria-hidden="true" color="primary" item-start name="create"></ion-icon>
           <h2 text-wrap>{{ food.name }}</h2>
           <p text-wrap>{{ food.quantity * food.servings }} g</p>
           <p item-content>{{ food.servings }} servings</p>
         </button>
-        <ion-item role="listitem">
+        <div *ngIf="meal.foods?.length === 0" class="no-elements">
+          <ion-icon aria-hidden="true" class="no-elements__icon" name="nutrition"></ion-icon>
+          <h2 class="no-elements__message">You have no foods</h2>
+          <p>Start adding new foods by pressing the green button in the bottom right corner</p>
+        </div>
+        <ion-item *ngIf="meal.foods?.length > 0" role="listitem">
           <h2 text-wrap>Total quantity</h2>
           <p color="{{ !meal.combos.overeating ? 'secondary' : 'danger' }}" ion-text item-content>
             <ion-icon aria-hidden="true" color="{{ !meal.combos.overeating ? 'secondary' : 'danger' }}" item-right name="{{ !meal.combos.overeating ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon> {{ meal.quantity }} g</p>

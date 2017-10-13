@@ -21,7 +21,7 @@
   </ion-navbar>
   <ion-toolbar role="tablist">
     <ion-segment [(ngModel)]="nutritionSegment">
-    <ion-segment-button value="goals">
+      <ion-segment-button value="goals">
         Goals
       </ion-segment-button>
       <ion-segment-button value="dayLog">
@@ -45,8 +45,8 @@
     <ion-list *ngSwitchCase="'goals'" padding>
       <ion-item>
         <ion-label for="breakfastTimeGoalSwitch" id="breakfastTimeGoalSwitchLabel">Breakfast time goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="breakfastTimeGoalSwitchLabel" aria-required="false" id="breakfastTimeGoalSwitch" [(ngModel)]="nutritionGoals.breakfastTime.isSelected"
-          role="switch">
+        <ion-toggle aria-live="assertive" aria-labelledby="breakfastTimeGoalSwitchLabel" aria-required="false" id="breakfastTimeGoalSwitch"
+          [(ngModel)]="nutritionGoals.breakfastTime.isSelected" role="switch">
         </ion-toggle>
       </ion-item>
       <ion-item *ngIf="nutritionGoals.breakfastTime.isSelected">
@@ -56,8 +56,8 @@
       </ion-item>
       <ion-item>
         <ion-label for="dinnerTimeGoalSwitch" id="dinnerTimeGoalSwitchLabel">Dinner time goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="dinnerTimeGoalSwitchLabel" aria-required="false" id="dinnerTimeGoalSwitch" [(ngModel)]="nutritionGoals.dinnerTime.isSelected"
-          role="switch">
+        <ion-toggle aria-live="assertive" aria-labelledby="dinnerTimeGoalSwitchLabel" aria-required="false" id="dinnerTimeGoalSwitch"
+          [(ngModel)]="nutritionGoals.dinnerTime.isSelected" role="switch">
         </ion-toggle>
       </ion-item>
       <ion-item *ngIf="nutritionGoals.dinnerTime.isSelected">
@@ -67,8 +67,8 @@
       </ion-item>
       <ion-item>
         <ion-label for="foodGroupRestrictionsGoalSwitch" id="foodGroupRestrictionsGoalSwitchLabel">Food group restrictions goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="foodGroupRestrictionsGoalSwitchLabel" aria-required="false" id="foodGroupRestrictionsGoalSwitch" [(ngModel)]="nutritionGoals.foodGroupRestrictions.isSelected"
-          role="switch">
+        <ion-toggle aria-live="assertive" aria-labelledby="foodGroupRestrictionsGoalSwitchLabel" aria-required="false" id="foodGroupRestrictionsGoalSwitch"
+          [(ngModel)]="nutritionGoals.foodGroupRestrictions.isSelected" role="switch">
         </ion-toggle>
       </ion-item>
       <button (click)="selectFoodGroups()" ion-item *ngIf="nutritionGoals.foodGroupRestrictions.isSelected" role="button">
@@ -87,8 +87,8 @@
       </ion-item>
       <ion-item>
         <ion-label for="mealSizeSwitch" id="mealSizeSwitchLabel">Meal size goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="mealSizeSwitchLabel" aria-required="false" id="mealSizeSwitch"
-          [(ngModel)]="nutritionGoals.mealSize.isSelected" role="switch">
+        <ion-toggle aria-live="assertive" aria-labelledby="mealSizeSwitchLabel" aria-required="false" id="mealSizeSwitch" [(ngModel)]="nutritionGoals.mealSize.isSelected"
+          role="switch">
         </ion-toggle>
       </ion-item>
       <ion-item *ngIf="nutritionGoals.mealSize.isSelected">
@@ -121,6 +121,11 @@
             <p item-content>{{ nutrientPercent(meal.nutrition.protein.value, 'protein') }}%</p>
           </ion-item>
         </ion-item-group>
+        <div *ngIf="mealPlan?.meals?.length === 0" class="no-elements">
+          <ion-icon aria-hidden="true" class="no-elements__icon" name="time"></ion-icon>
+          <h2 class="no-elements__message">You have no meals</h2>
+          <p>Start adding new meals by pressing the green button in the bottom right corner</p>
+        </div>
       </div>
       <div *ngIf="nutritionView === 'nutrition'">
         <ion-item-group role="group">
@@ -132,7 +137,8 @@
             <h2 text-wrap>Daily reccomended intakes</h2>
             <p text-wrap>Try stay between 75% and 125% of you nutrient requiremnts for best nourishment.</p>
           </ion-item>
-          <ion-item *ngIf="dailyNutrition.ala?.value + dailyNutrition.epa?.value + dailyNutrition.dha?.value / dailyNutrition.la?.value < 1" role="listitem">
+          <ion-item *ngIf="dailyNutrition.ala?.value + dailyNutrition.epa?.value + dailyNutrition.dha?.value / dailyNutrition.la?.value < 1"
+            role="listitem">
             <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
             <h2 text-wrap>Omega-3:Omega-6 ratio</h2>
             <p text-wrap>It is important to have 1:1 ALA:LA ratio. Try to reduce your LA intake or increase your ALA intake. Visit food

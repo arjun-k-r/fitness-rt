@@ -45,7 +45,11 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
+  <div *ngIf="recipes?.length === 0" class="no-elements">
+    <ion-icon aria-hidden="true" class="no-elements__icon" name="restaurant"></ion-icon>
+    <h2 class="no-elements__message">You have no recipes</h2>
+    <p>Start adding new recipes by pressing the green button in the bottom right corner</p>
+  </div>
   <ion-fab bottom right>
     <button (click)="addRecipe()" color="secondary" ion-fab role="button">
       <ion-icon aria-hidden="true" name="add"></ion-icon>

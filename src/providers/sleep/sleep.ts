@@ -53,7 +53,7 @@ export class SleepProvider {
   }
 
   public checkGoodSleep(sleep: Sleep): boolean {
-    return sleep.combos.noElectronics && sleep.combos.noElectronics && sleep.combos.noStimulants && sleep.combos.quality > 5 && sleep.combos.relaxation && sleep.duration > 7 && moment(sleep.bedTime, 'HH:mm').hours() < 22;
+    return sleep.combos.noElectronics && sleep.combos.noElectronics && sleep.combos.noStimulants && sleep.combos.quality > 5 && sleep.combos.relaxation && sleep.duration >= 7 && moment(sleep.bedTime, 'HH:mm').hours() < 22;
   }
 
   public checkLifePoints(sleep: Sleep): number {
@@ -87,7 +87,7 @@ export class SleepProvider {
       lifePoints -= 10;
     }
 
-    if (+sleep.duration > 7) {
+    if (+sleep.duration >= 7) {
       lifePoints += 20;
     } else {
       lifePoints -= 20;

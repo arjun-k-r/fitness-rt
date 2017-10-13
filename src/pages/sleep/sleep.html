@@ -115,7 +115,7 @@
             <ion-icon color="secondary" range-right name="happy"></ion-icon>
           </ion-range>
         </ion-item>
-        <ion-item-divider color="light" role="separator">
+        <ion-item-divider color="primary" role="separator">
           Suggestions
         </ion-item-divider>
         <ion-item *ngIf="sleep.duration < 7" role="listitem">
@@ -144,6 +144,12 @@
           <h2 text-wrap>Focus on good quality sleep, not on quantity.</h2>
           <p text-wrap>Make a sleep routine by going to bed and waking up at the same hours every day, and avoid stimulants, electronics
             or stressfull activities before bed time.</p>
+        </ion-item>
+        <ion-item *ngIf="sleep.duration >= 7 && sleep?.combos.noElectronics && sleep?.combos.noStimulants && sleep?.combos.relaxation && sleep.combos.quality > 5"
+          role="listitem">
+          <ion-note text-center text-wrap>No suggestions. Looking good!&nbsp;
+            <ion-icon aria-hidden="true" name="thumbs-up"></ion-icon>
+          </ion-note>
         </ion-item>
       </ion-list>
     </form>

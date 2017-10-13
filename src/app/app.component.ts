@@ -35,10 +35,10 @@ export class MyApp {
       this._splashScreen.hide();
       this.pages = [
         { component: 'fitness', icon: 'body', title: 'Fitness' },
+        { component: 'sleep', icon: 'moon', title: 'Sleep' },
         { component: 'exercise', icon: 'walk', title: 'Exercise' },
         { component: 'nutrition', icon: 'nutrition', title: 'Nutrition' },
         { component: 'recipes', icon: 'restaurant', title: 'Recipes' },
-        { component: 'sleep', icon: 'moon', title: 'Sleep' },
         { component: 'blood-cholesterol', icon: 'water', title: 'Blood cholesterol' },
         { component: 'blood-pressure', icon: 'pulse', title: 'Blood pressure' },
         { component: 'blood-sugar', icon: 'heart', title: 'Blood sugar' }

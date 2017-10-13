@@ -20,8 +20,11 @@ import {
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
+// Third-party
+import { sortBy } from 'lodash';
+
 // Models
-import { ILineChartEntry, MealPlan, Nutrition, NutritionGoals, NutritionLog } from '../../models';
+import { ILineChartEntry, Meal, MealPlan, Nutrition, NutritionGoals, NutritionLog } from '../../models';
 
 // Providers
 import { FOOD_GROUPS, MealProvider } from '../../providers';
@@ -238,7 +241,7 @@ export class NutritionPage {
         this._mealSubscription = this._mealPvd.getMealPlan$(this._authId).subscribe(
           (mealPlan: MealPlan) => {
             this.mealPlan = Object.assign({}, mealPlan['$value'] === null ? this.mealPlan : mealPlan);
-            this.mealPlan.meals = this.mealPlan.meals || [];
+            this.mealPlan.meals = this.mealPlan.meals ? sortBy(this.mealPlan.meals, (meal: Meal) => meal.hour) : [];
             this.nutrientKeys = Object.keys(this.mealPlan.nutrition);
             this._mealPvd.calculateDailyNutrition(this._authId, this.mealPlan).then((dailyNutrition: Nutrition) => {
               this.dailyNutrition = Object.assign({}, dailyNutrition);

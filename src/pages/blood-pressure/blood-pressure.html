@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-navbar role="toolbar">
+    <button ion-button menuToggle role="button">
+      <ion-icon aria-hidden="true" name="menu"></ion-icon>
+    </button>
+    <ion-title>Blood pressure</ion-title>
+    <ion-buttons end>
+      <button (click)="saveBloodPressure()" icon-only ion-button padding role="button">
+        <ion-icon aria-hidden="true" name="cloud-done"></ion-icon>
+      </button>
+      <button (click)="showSettings($event)" icon-only ion-button role="button">
+        <ion-icon aria-hidden="true" name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar role="tablist">
+    <ion-segment [(ngModel)]="bloodPressureSegment">
+      <ion-segment-button value="dayLog">
+        Today
+      </ion-segment-button>
+      <ion-segment-button value="weekLog">
+        Week log
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="bloodPressureSegment">
+    <ion-list *ngSwitchCase="'dayLog'" no-lines>
+      <ion-item>
+        <ion-label color="{{ bloodPressure.diastolic <= idealBloodPressure.diastolic ? 'secondary' : 'danger' }}" floating for="diastolic"
+          id="diastolicLabel">Diastolic blood pressure (mmHg)
+          <ion-icon aria-hidden="true" color="{{ bloodPressure.diastolic <= idealBloodPressure.diastolic ? 'secondary' : 'danger' }}"
+            item-right name="{{ bloodPressure.diastolic <= idealBloodPressure.diastolic ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+        </ion-label>
+        <ion-input [(ngModel)]="bloodPressure.diastolic" aria-live="assertive" aria-autocomplete="false" aria-labelledby="diastolicLabel"
+          aria-required="true" id="diastolic" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="{{ bloodPressure.systolic <= idealBloodPressure.systolic ? 'secondary' : 'danger' }}" floating for="systolic"
+          id="systolicLabel">Systolic blood pressure (mmHg)
+          <ion-icon aria-hidden="true" color="{{ bloodPressure.systolic <= idealBloodPressure.systolic ? 'secondary' : 'danger' }}"
+            item-right name="{{ bloodPressure.systolic <= idealBloodPressure.systolic ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+        </ion-label>
+        <ion-input [(ngModel)]="bloodPressure.systolic" aria-live="assertive" aria-autocomplete="false" aria-labelledby="systolicLabel"
+          aria-required="true" id="systolic" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating for="notes" id="notesLabel">Notes</ion-label>
+        <ion-textarea [(ngModel)]="bloodPressure.notes" aria-live="assertive" aria-autocomplete="false" aria-labelledby="notesLabel"
+          aria-required="false" id="notes" type="text" wrap="hard"></ion-textarea>
+      </ion-item>
+      <br />
+      <ion-item-divider color="primary" role="separator">
+        Suggestions
+      </ion-item-divider>
+      <ion-item *ngIf="bloodPressure.diastolic > idealBloodPressure.diastolic" role="listitem">
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+        <h2 text-wrap>Your diastolic blood pressure levels are too high</h2>
+        <p text-wrap>The best values for diastolic blood pressure are above 59 mg/dL.</p>
+      </ion-item>
+      <ion-item *ngIf="bloodPressure.systolic > idealBloodPressure.systolic" role="listitem">
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+        <h2 text-wrap>Your systolic blood pressure levels are too high</h2>
+        <p text-wrap>The best values for for systolic blood pressure are </p>
+      </ion-item>
+      <ion-item *ngIf="bloodPressure.diastolic > idealBloodPressure.diastolic && bloodPressure.systolic > idealBloodPressure.systolic"
+      role="listitem">
+      <ion-note text-center text-wrap>No suggestions. Looking good!&nbsp;<ion-icon aria-hidden="true" name="thumbs-up"></ion-icon></ion-note>
+    </ion-item>
+    </ion-list>
+    <div *ngSwitchCase="'weekLog'">
+      <ion-item padding>
+        <ion-label for="chartDataSelection" id="chartDataSelectionLabel">Pressure data</ion-label>
+        <ion-select [(ngModel)]="chartDataSelection" (ionChange)="changeChartData()" aria-live="assertive" aria-labelledby="chartDataSelectionLabel"
+          aria-required="true" id="chartDataSelection">
+          <ion-option role="option" value="diastolic">Diastolic</ion-option>
+          <ion-option role="option" value="systolic">Systolic</ion-option>
+        </ion-select>
+      </ion-item>
+      <canvas baseChart class="chart" [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [legend]="true" [options]="chartOpts">
+      </canvas>
+    </div>
+  </div>
+</ion-content>

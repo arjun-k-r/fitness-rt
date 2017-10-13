@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-navbar role="toolbar">
+    <button ion-button menuToggle role="button">
+      <ion-icon aria-hidden="true" name="menu"></ion-icon>
+    </button>
+    <ion-title>Blood sugar</ion-title>
+    <ion-buttons end>
+      <button (click)="saveBloodSugar()" icon-only ion-button padding role="button">
+        <ion-icon aria-hidden="true" name="cloud-done"></ion-icon>
+      </button>
+      <button (click)="showSettings($event)" icon-only ion-button role="button">
+        <ion-icon aria-hidden="true" name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar role="tablist">
+    <ion-segment [(ngModel)]="bloodSugarSegment">
+      <ion-segment-button value="dayLog">
+        Today
+      </ion-segment-button>
+      <ion-segment-button value="weekLog">
+        Week log
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="bloodSugarSegment">
+    <ion-list *ngSwitchCase="'dayLog'" no-lines>
+      <ion-item>
+        <ion-label for="unit" id="unitLabel">Unit</ion-label>
+        <ion-select [(ngModel)]="unit" (ionChange)="changeUnit()" aria-live="assertive" aria-labelledby="unitLabel" aria-required="true"
+          id="unit">
+          <ion-option role="option" value="mg/dL">mg/dL</ion-option>
+          <ion-option role="option" value="mmol/L">mmol/L</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label color="{{ bloodSugar.bedTime <= idealBloodSugar.bedTime ? 'secondary' : 'danger' }}" floating for="bedTime" id="bedTimeLabel">Bed time ({{ unit }})
+          <ion-icon aria-hidden="true" color="{{ bloodSugar.bedTime >= idealBloodSugar.bedTime ? 'secondary' : 'danger' }}" item-right
+            name="{{ bloodSugar.bedTime <= idealBloodSugar.bedTime ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+        </ion-label>
+        <ion-input [(ngModel)]="bloodSugar.bedTime" aria-live="assertive" aria-autocomplete="false" aria-labelledby="bedTimeLabel"
+          aria-required="true" id="bedTime" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="{{ bloodSugar.fasting <= idealBloodSugar.fasting ? 'secondary' : 'danger' }}" floating for="fasting" id="fastingLabel">Fasting ({{ unit }})
+          <ion-icon aria-hidden="true" color="{{ bloodSugar.fasting <= idealBloodSugar.fasting ? 'secondary' : 'danger' }}" item-right
+            name="{{ bloodSugar.fasting <= idealBloodSugar.fasting ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+        </ion-label>
+        <ion-input [(ngModel)]="bloodSugar.fasting" aria-live="assertive" aria-autocomplete="false" aria-labelledby="fastingLabel"
+          aria-required="true" id="fasting" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="{{ bloodSugar.preMeal <= idealBloodSugar.preMeal ? 'secondary' : 'danger' }}" floating for="preMeal" id="preMealLabel">Pre-meal ({{ unit }})
+          <ion-icon aria-hidden="true" color="{{ bloodSugar.preMeal <= idealBloodSugar.preMeal ? 'secondary' : 'danger' }}" item-right
+            name="{{ bloodSugar.preMeal <= idealBloodSugar.preMeal ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+        </ion-label>
+        <ion-input [(ngModel)]="bloodSugar.preMeal" aria-live="assertive" aria-autocomplete="false" aria-labelledby="preMealLabel"
+          aria-required="true" id="preMeal" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="{{ bloodSugar.postMeal <= idealBloodSugar.postMeal ? 'secondary' : 'danger' }}" floating for="postMeal"
+          id="postMealLabel">Post-meal ({{ unit }})
+          <ion-icon aria-hidden="true" color="{{ bloodSugar.postMeal <= idealBloodSugar.postMeal ? 'secondary' : 'danger' }}" item-right
+            name="{{ bloodSugar.postMeal <= idealBloodSugar.postMeal ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+        </ion-label>
+        <ion-input [(ngModel)]="bloodSugar.postMeal" aria-live="assertive" aria-autocomplete="false" aria-labelledby="postMealLabel"
+          aria-required="true" id="postMeal" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating for="notes" id="notesLabel">Notes</ion-label>
+        <ion-textarea [(ngModel)]="bloodSugar.notes" aria-live="assertive" aria-autocomplete="false" aria-labelledby="notesLabel"
+          aria-required="false" id="notes" type="text" wrap="hard"></ion-textarea>
+      </ion-item>
+      <br />
+      <ion-item-divider color="primary" role="separator">
+        Suggestions
+      </ion-item-divider>
+      <ion-item *ngIf="bloodSugar.bedTime > idealBloodSugar.bedTime" role="listitem">
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+        <h2 text-wrap>Your bed time blood sugar levels are too high</h2>
+        <p text-wrap>The best values for bed time blood sugar levels are above {{ idealBloodSugar.bedTime }}{{ unit }}.</p>
+      </ion-item>
+      <ion-item *ngIf="bloodSugar.fasting > idealBloodSugar.fasting" role="listitem">
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+        <h2 text-wrap>Your fasting blood sugar levels are too high</h2>
+        <p text-wrap>The best values for fasting blood sugar levels are below {{ idealBloodSugar.fasting }}{{ unit }}.</p>
+      </ion-item>
+      <ion-item *ngIf="bloodSugar.preMeal > idealBloodSugar.preMeal" role="listitem">
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+        <h2 text-wrap>Your pre-meal blood sugar levels are too low</h2>
+        <p text-wrap>The best values for pre-meal blood sugar levels are below {{ idealBloodSugar.preMeal }}{{ unit }}.</p>
+      </ion-item>
+      <ion-item *ngIf="bloodSugar.postMeal > idealBloodSugar.postMeal" role="listitem">
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+        <h2 text-wrap>Your post-meal blood sugar levels are too high</h2>
+        <p text-wrap>The best values for post-meal blood sugar levels are below {{ idealBloodSugar.postMeal }}{{ unit }}.</p>
+      </ion-item>
+      <ion-item *ngIf="bloodSugar.bedTime <= idealBloodSugar.bedTime && bloodSugar.fasting <= idealBloodSugar.fasting && bloodSugar.preMeal <= idealBloodSugar.preMeal && bloodSugar.postMeal <= idealBloodSugar.postMeal"
+        role="listitem">
+        <ion-note text-center text-wrap>No suggestions. Looking good!&nbsp;<ion-icon aria-hidden="true" name="thumbs-up"></ion-icon></ion-note>
+      </ion-item>
+    </ion-list>
+    <div *ngSwitchCase="'weekLog'">
+      <ion-item padding>
+        <ion-label for="chartDataSelection" id="chartDataSelectionLabel">Sugar data</ion-label>
+        <ion-select [(ngModel)]="chartDataSelection" (ionChange)="changeChartData()" aria-live="assertive" aria-labelledby="chartDataSelectionLabel"
+          aria-required="true" id="chartDataSelection">
+          <ion-option role="option" value="bedTime">Bed time</ion-option>
+          <ion-option role="option" value="fasting">Fasting</ion-option>
+          <ion-option role="option" value="postMeal">Post-meal</ion-option>
+          <ion-option role="option" value="preMeal">Pre-meal</ion-option>
+        </ion-select>
+      </ion-item>
+      <canvas baseChart class="chart" [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [legend]="true" [options]="chartOpts">
+      </canvas>
+    </div>
+  </div>
+</ion-content>

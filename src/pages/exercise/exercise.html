@@ -65,11 +65,11 @@
     </ion-list>
     <ion-list *ngSwitchCase="'dayLog'" padding role="list">
       <button (click)="changeActivity(i)" ion-item *ngFor="let activity of activityPlan?.activities; let i = index" role="button">
-      <ion-icon aria-hidden="true" color="primary" item-start name="create"></ion-icon>
-      <h2 text-wrap>{{ activity.name }}</h2>
-      <p text-wrap>{{ activity.duration }} minutes</p>
-      <p item-content>{{ activity.energyConsumption }} kcal</p>
-    </button>
+        <ion-icon aria-hidden="true" color="primary" item-start name="create"></ion-icon>
+        <h2 text-wrap>{{ activity.name }}</h2>
+        <p text-wrap>{{ activity.duration }} minutes</p>
+        <p item-content>{{ activity.energyConsumption }} kcal</p>
+      </button>
       <ion-item role="listitem">
         <h2 text-wrap>Total duration</h2>
         <p item-content>{{ activityPlan?.totalDuration }} minutes</p>
@@ -115,6 +115,11 @@
           fresh. Not having this feeling means you are not breathing correctly during exercise, you are not reaching your
           target heart rate, your are not resting/exerciseing properly, overtraining, not having the right nutrition, or
           doing the wrong exercise for your body.</p>
+      </ion-item>
+      <ion-item *ngIf="!activityPlan?.combos.lowActivity && !activityPlan?.combos.overtraining && !activityPlan?.combos.sedentarism && activityPlan?.combos.energy" role="listitem">
+        <ion-note text-center text-wrap>No suggestions. Looking good!&nbsp;
+          <ion-icon aria-hidden="true" name="thumbs-up"></ion-icon>
+        </ion-note>
       </ion-item>
     </ion-list>
 

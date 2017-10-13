@@ -10,7 +10,7 @@ import * as firebase from 'firebase/app';
 
 // Third-party
 import * as moment from 'moment';
-import { find, sortBy, uniqBy } from 'lodash';
+import { find, uniqBy } from 'lodash';
 
 // Models
 import {
@@ -345,7 +345,6 @@ export class MealProvider {
       } else {
         weekLog.push(newNutritionLog);
       }
-      mealPlan.meals = sortBy(mealPlan.meals, (meal: Meal) => meal.hour);
       if (!intoleratedFoods) {
         Promise.all([
           this._db.object(`/nutrition-log/${authId}`).set(weekLog),

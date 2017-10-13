@@ -25,6 +25,9 @@ import 'firebase/storage';
 
 // Charts
 import { ChartsModule } from 'ng2-charts';
+import { BloodPressureProvider } from '../providers/blood-pressure/blood-pressure';
+import { BloodSugarProvider } from '../providers/blood-sugar/blood-sugar';
+import { BloodCholesterolProvider } from '../providers/blood-cholesterol/blood-cholesterol';
 
 const CLOUD_SETTINGS: CloudSettings = {
   'core': {
@@ -65,7 +68,10 @@ const FIREBASE_CONFIG = {
     ImagePicker,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    BloodPressureProvider,
+    BloodSugarProvider,
+    BloodCholesterolProvider
   ]
 })
 export class AppModule {}

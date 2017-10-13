@@ -1,5 +1,11 @@
 export { ActivityProvider } from './activity/activity';
 export { ActivityProviderModule } from './activity/activity.module';
+export { BloodCholesterolProvider } from './blood-cholesterol/blood-cholesterol';
+export { BloodCholesterolProviderModule } from './blood-cholesterol/blood-cholesterol.module';
+export { BloodPressureProvider } from './blood-pressure/blood-pressure';
+export { BloodPressureProviderModule } from './blood-pressure/blood-pressure.module';
+export { BloodSugarProvider } from './blood-sugar/blood-sugar';
+export { BloodSugarProviderModule } from './blood-sugar/blood-sugar.module';
 export { FitnessProvider } from './fitness/fitness';
 export { FitnessProviderModule } from './fitness/fitness.module';
 export { FoodProvider, FOOD_GROUPS } from './food/food';

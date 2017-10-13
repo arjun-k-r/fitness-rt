@@ -1,4 +1,7 @@
 export * from './activity';
+export * from './bloodCholesterol';
+export * from './bloodPressure';
+export * from './bloodSugar';
 export * from './chart';
 export { Fitness } from './fitness';
 export { Food } from './food';

@@ -1,0 +1,130 @@
+<ion-header>
+  <ion-navbar role="toolbar">
+    <button ion-button menuToggle role="button">
+      <ion-icon aria-hidden="true" name="menu"></ion-icon>
+    </button>
+    <ion-title>Blood choleserol</ion-title>
+    <ion-buttons end>
+      <button (click)="saveBloodCholesterol()" icon-only ion-button padding role="button">
+        <ion-icon aria-hidden="true" name="cloud-done"></ion-icon>
+      </button>
+      <button (click)="showSettings($event)" icon-only ion-button role="button">
+        <ion-icon aria-hidden="true" name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar role="tablist">
+    <ion-segment [(ngModel)]="bloodCholesterolSegment">
+      <ion-segment-button value="dayLog">
+        Today
+      </ion-segment-button>
+      <ion-segment-button value="weekLog">
+        Week log
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="bloodCholesterolSegment">
+    <ion-list *ngSwitchCase="'dayLog'" no-lines>
+      <ion-item>
+        <ion-label for="unit" id="unitLabel">Unit</ion-label>
+        <ion-select [(ngModel)]="unit" (ionChange)="changeUnit()" aria-live="assertive" aria-labelledby="unitLabel" aria-required="true"
+          id="unit">
+          <ion-option role="option" value="mg/dL">mg/dL</ion-option>
+          <ion-option role="option" value="mmol/L">mmol/L</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label color="{{ bloodCholesterol.hdl >= idealBloodCholesterol.hdl ? 'secondary' : 'danger' }}" floating for="hdl" id="hdlLabel">HDL ({{ unit }})
+          <ion-icon aria-hidden="true" color="{{ bloodCholesterol.hdl >= idealBloodCholesterol.hdl ? 'secondary' : 'danger' }}" item-right
+            name="{{ bloodCholesterol.hdl >= idealBloodCholesterol.hdl ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+        </ion-label>
+        <ion-input [(ngModel)]="bloodCholesterol.hdl" aria-live="assertive" aria-autocomplete="false" aria-labelledby="hdlLabel"
+          aria-required="true" id="hdl" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="{{ bloodCholesterol.ldl <= idealBloodCholesterol.ldl ? 'secondary' : 'danger' }}" floating for="ldl" id="ldlLabel">LDL ({{ unit }})
+          <ion-icon aria-hidden="true" color="{{ bloodCholesterol.ldl <= idealBloodCholesterol.ldl ? 'secondary' : 'danger' }}" item-right
+            name="{{ bloodCholesterol.ldl <= idealBloodCholesterol.ldl ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+        </ion-label>
+        <ion-input [(ngModel)]="bloodCholesterol.ldl" aria-live="assertive" aria-autocomplete="false" aria-labelledby="ldlLabel"
+          aria-required="true" id="ldl" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="{{ bloodCholesterol.triglycerides <= idealBloodCholesterol.triglycerides ? 'secondary' : 'danger' }}" floating
+          for="triglycerides" id="triglyceridesLabel">Triglycerides ({{ unit }})
+          <ion-icon aria-hidden="true" color="{{ bloodCholesterol.triglycerides <= idealBloodCholesterol.triglycerides ? 'secondary' : 'danger' }}"
+            item-right name="{{ bloodCholesterol.triglycerides <= idealBloodCholesterol.triglycerides ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+        </ion-label>
+        <ion-input [(ngModel)]="bloodCholesterol.triglycerides" aria-live="assertive" aria-autocomplete="false" aria-labelledby="triglyceridesLabel"
+          aria-required="true" id="triglycerides" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="{{ bloodCholesterol.total <= idealBloodCholesterol.total ? 'secondary' : 'danger' }}" floating for="total"
+          id="totalLabel">Total ({{ unit }})
+          <ion-icon aria-hidden="true" color="{{ bloodCholesterol.total <= idealBloodCholesterol.total ? 'secondary' : 'danger' }}"
+            item-right name="{{ bloodCholesterol.total <= idealBloodCholesterol.total ? 'thumbs-up' : 'thumbs-down' }}"></ion-icon>
+        </ion-label>
+        <ion-input [(ngModel)]="bloodCholesterol.total" aria-live="assertive" aria-autocomplete="false" aria-labelledby="totalLabel"
+          aria-required="true" id="total" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating for="notes" id="notesLabel">Notes</ion-label>
+        <ion-textarea [(ngModel)]="bloodCholesterol.notes" aria-live="assertive" aria-autocomplete="false" aria-labelledby="notesLabel"
+          aria-required="false" id="notes" type="text" wrap="hard"></ion-textarea>
+      </ion-item>
+      <br />
+      <ion-item-divider color="primary" role="separator">
+        Suggestions
+      </ion-item-divider>
+      <ion-item *ngIf="bloodCholesterol.hdl < idealBloodCholesterol.hdl" role="listitem">
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+        <h2 text-wrap>Your HDL levels are too low</h2>
+        <p text-wrap>The best values for HDL are above {{ idealBloodCholesterol.hdl }}{{ unit }}. Try to increase your intake of omega-3
+          and monounsaturated fats from fish, nuts, seeds, avocados, and olives and reduce your intake of omega-6, trans
+          fats, and refined carbohydrates (refined oils, margarine, and processed foods).</p>
+      </ion-item>
+      <ion-item *ngIf="bloodCholesterol.ldl > idealBloodCholesterol.ldl" role="listitem">
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+        <h2 text-wrap>Your LDL levels are too high</h2>
+        <p text-wrap>The best values for LDL are below {{ idealBloodCholesterol.ldl }}{{ unit }}. Try to increase your intake of omega-3
+          and monounsaturated fats from fish, nuts, seeds, avocados, and olives and reduce your intake of omega-6, trans
+          fats, and refined carbohydrates (refined oils, margarine, and processed foods).</p>
+      </ion-item>
+      <ion-item *ngIf="bloodCholesterol.triglycerides > idealBloodCholesterol.triglycerides" role="listitem">
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+        <h2 text-wrap>Your triglycerides levels are too low</h2>
+        <p text-wrap>The best values for triglycerides are below {{ idealBloodCholesterol.triglycerides }}{{ unit }}. Try to reduce your
+          intake of refined carbohydrates, get more exercise, and stay as active as you can throughout the day.</p>
+      </ion-item>
+      <ion-item *ngIf="bloodCholesterol.total > idealBloodCholesterol.total" role="listitem">
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+        <h2 text-wrap>Your total blood cholesterol levels are too high</h2>
+        <p text-wrap>The best values for total blood cholesterol are below {{ idealBloodCholesterol.total }}{{ unit }}. Total blood cholesterol
+          is not so significant if your HDL levels are high and LDL and triglyceride levels are low</p>
+      </ion-item>
+      <ion-item *ngIf="bloodCholesterol.hdl >= idealBloodCholesterol.hdl && bloodCholesterol.ldl <= idealBloodCholesterol.ldl && bloodCholesterol.triglycerides <= idealBloodCholesterol.triglycerides && bloodCholesterol.total <= idealBloodCholesterol.total"
+        role="listitem">
+        <ion-note text-center text-wrap>No suggestions. Looking good!&nbsp;
+          <ion-icon aria-hidden="true" name="thumbs-up"></ion-icon>
+        </ion-note>
+      </ion-item>
+    </ion-list>
+    <div *ngSwitchCase="'weekLog'">
+      <ion-item padding>
+        <ion-label for="chartDataSelection" id="chartDataSelectionLabel">Cholesterol data</ion-label>
+        <ion-select [(ngModel)]="chartDataSelection" (ionChange)="changeChartData()" aria-live="assertive" aria-labelledby="chartDataSelectionLabel"
+          aria-required="true" id="chartDataSelection">
+          <ion-option role="option" value="hdl">HDL</ion-option>
+          <ion-option role="option" value="ldl">LDL</ion-option>
+          <ion-option role="option" value="total">Total</ion-option>
+          <ion-option role="option" value="triglycerides">Triglycerides</ion-option>
+        </ion-select>
+      </ion-item>
+      <canvas baseChart class="chart" [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [legend]="true" [options]="chartOpts">
+      </canvas>
+    </div>
+  </div>
+</ion-content>

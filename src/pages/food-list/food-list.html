@@ -28,7 +28,9 @@
 
 <ion-content>
   <ion-fab bottom *ngIf="selectionSegment === 'foods'" right>
-    <button (click)="addFood()" color="secondary" ion-fab><ion-icon name="add"></ion-icon></button>
+    <button (click)="addFood()" color="secondary" ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-fab>
   <div [ngSwitch]="selectionSegment">
     <div *ngSwitchCase="'foods'">
@@ -41,6 +43,10 @@
           <ion-checkbox #checkBox (click)="showOptions(food, checkBox)"></ion-checkbox>
         </ion-item>
       </ion-list>
+      <div *ngIf="foods?.length === 0" class="no-elements">
+        <ion-icon aria-hidden="true" class="no-elements__icon" name="nutrition"></ion-icon>
+        <h2 class="no-elements__message">You have no foods</h2>
+      </div>
       <ion-infinite-scroll (ionInfinite)="loadMoreFoods($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
       </ion-infinite-scroll>
@@ -71,6 +77,10 @@
           <ion-checkbox #checkBox (click)="showOptions(recipe, checkBox)"></ion-checkbox>
         </ion-item>
       </ion-list>
+      <div *ngIf="recipes?.length === 0" class="no-elements">
+        <ion-icon aria-hidden="true" class="no-elements__icon" name="restaurant"></ion-icon>
+        <h2 class="no-elements__message">You have no recipes</h2>
+      </div>
 
       <ion-infinite-scroll (ionInfinite)="loadMoreRecipes($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>

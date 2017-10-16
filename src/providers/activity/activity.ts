@@ -67,7 +67,7 @@ export class ActivityProvider {
     } else {
       return true;
     }
-    
+
     return false;
   }
 
@@ -79,7 +79,7 @@ export class ActivityProvider {
     } else {
       return true;
     }
-    
+
     return false;
   }
 
@@ -178,33 +178,32 @@ export class ActivityProvider {
 
   public saveActivityPlan(authId: string, activityPlan: ActivityPlan, weekLog: ExerciseLog[]): Promise<{}> {
     return new Promise((resolve, reject) => {
-
       const fitnessSubscription: Subscription = this._db.object(`/fitness/${authId}`).subscribe((fitness: Fitness) => {
-        fitnessSubscription.unsubscribe();
-        if (fitness['$value'] !== null) {
-          this._nutritionPvd.calculateDailyRequirements(authId, fitness.age, fitness.bmr, fitness.gender, fitness.lactating, fitness.pregnant, fitness.weight)
-            .then((dailyRequirements: Nutrition) => {
-              const newExerciseLog: ExerciseLog = new ExerciseLog(moment().format('dddd'), activityPlan.totalDuration, activityPlan.totalEnergyConsumption);
-              const weekLength: number = weekLog.length;
-              if (!!weekLength) {
-                if (newExerciseLog.date !== weekLog[weekLength - 1].date) {
-                  weekLog.push(newExerciseLog);
-                } else {
-                  weekLog[weekLength - 1] = Object.assign({}, newExerciseLog);
-                }
-              } else {
-                weekLog.push(newExerciseLog);
-              }
-              Promise.all([
-                this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/exercise`).set(activityPlan.lifePoints),
-                this._db.object(`/exercise-log/${authId}/`).set(weekLog),
-                this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`).set(activityPlan)
-              ]).then(() => {
-                resolve();
-              }).catch((err: firebase.FirebaseError) => reject(err));
-            })
-            .catch((err: firebase.FirebaseError) => reject(err));
+        const newExerciseLog: ExerciseLog = new ExerciseLog(moment().format('dddd'), activityPlan.totalDuration, activityPlan.totalEnergyConsumption);
+        const weekLength: number = weekLog.length;
+        if (!!weekLength) {
+          if (newExerciseLog.date !== weekLog[weekLength - 1].date) {
+            weekLog.push(newExerciseLog);
+          } else {
+            weekLog[weekLength - 1] = Object.assign({}, newExerciseLog);
+          }
+        } else {
+          weekLog.push(newExerciseLog);
         }
+        Promise.all([
+          this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/exercise`).set(activityPlan.lifePoints),
+          this._db.object(`/exercise-log/${authId}/`).set(weekLog),
+          this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`).set(activityPlan)
+        ]).then(() => {
+          if (fitness['$value'] !== null) {
+            fitnessSubscription.unsubscribe();
+            this._nutritionPvd.calculateDailyRequirements(authId, fitness.age, fitness.bmr, fitness.gender, fitness.lactating, fitness.pregnant, fitness.weight)
+              .then((dailyRequirements: Nutrition) => {
+                resolve();
+              })
+              .catch((err: firebase.FirebaseError) => reject(err));
+          }
+        }).catch((err: firebase.FirebaseError) => reject(err));
       }, (err: firebase.FirebaseError) => reject(err));
     });
   }

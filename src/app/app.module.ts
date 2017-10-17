@@ -23,12 +23,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import 'firebase/storage';
 
-// Charts
-import { ChartsModule } from 'ng2-charts';
-import { BloodPressureProvider } from '../providers/blood-pressure/blood-pressure';
-import { BloodSugarProvider } from '../providers/blood-sugar/blood-sugar';
-import { BloodCholesterolProvider } from '../providers/blood-cholesterol/blood-cholesterol';
-
 const CLOUD_SETTINGS: CloudSettings = {
   'core': {
     'app_id': '6f751f99'
@@ -54,7 +48,6 @@ const FIREBASE_CONFIG = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     BrowserModule,
-    ChartsModule,
     CloudModule.forRoot(CLOUD_SETTINGS),
     CommonModule,
     ReactiveFormsModule
@@ -68,10 +61,7 @@ const FIREBASE_CONFIG = {
     ImagePicker,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    BloodPressureProvider,
-    BloodSugarProvider,
-    BloodCholesterolProvider
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

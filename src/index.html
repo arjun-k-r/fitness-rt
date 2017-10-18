@@ -18,48 +18,7 @@
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
-        .then(reg => {
-          reg.onupdatefound = () => {
-            // The updatefound event implies that reg.installing is set; see
-            // https://w3c.github.io/ServiceWorker/#service-worker-registration-updatefound-event
-            const installingWorker = reg.installing;
-
-            installingWorker.onstatechange = () => {
-              switch (installingWorker.state) {
-                case 'installed':
-                  if (navigator.serviceWorker.controller) {
-                    // At this point, the old content will have been purged and the fresh content will
-                    // have been added to the cache.
-                    // It's the perfect time to display a "New content is available; please refresh."
-                    // message in the page's interface.
-                    console.log('New or updated content is available.');
-                    event.waitUntil(
-                      caches.open('ionic-cache').then(cache => {
-                        return cache.addAll([
-                          './build/main.js',
-                          './build/vendor.js',
-                          './build/main.css',
-                          './build/polyfills.js',
-                          'index.html',
-                          'manifest.json'
-                        ]);
-                      })
-                    );
-                  } else {
-                    // At this point, everything has been precached.
-                    // It's the perfect time to display a "Content is cached for offline use." message.
-                    console.log('Content is now available offline!');
-                  }
-                  break;
-
-                case 'redundant':
-                  console.error('The installing service worker became redundant.');
-                  break;
-              }
-            };
-          };
-          console.log('service worker installed');
-        })
+        .then(() => console.log('service worker installed'))
         .catch(err => console.error('Error', err));
     }
   </script>

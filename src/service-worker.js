@@ -20,20 +20,6 @@ const cacheList = [
   'manifest.json'
 ];
 
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheList.indexOf('ionic-cache') !== -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
-});
-
 // pre-cache our key assets
 self.toolbox.precache(cacheList);
 

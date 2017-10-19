@@ -21,6 +21,7 @@ import { MyApp } from './app.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import 'firebase/storage';
 
 const CLOUD_SETTINGS: CloudSettings = {
@@ -47,6 +48,7 @@ const FIREBASE_CONFIG = {
     AngularFireModule.initializeApp(FIREBASE_CONFIG, 'iFit'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    //AngularFirestoreModule,
     BrowserModule,
     CloudModule.forRoot(CLOUD_SETTINGS),
     CommonModule,

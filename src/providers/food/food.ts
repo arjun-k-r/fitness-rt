@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 
 // Rxjs
 import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
 
 // Firebase
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -59,10 +58,10 @@ export class FoodProvider {
     });
   }
 
-  public calculateFoodDailyRequirements(authId: string, food: Food): Promise<Nutrition> {
+  public calculateFoodRequirements(authId: string, food: Food): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
       const nutrition: Nutrition = new Nutrition();
-      this._nutritionPvd.getDailyRequirements(authId).then((dailyRequirements: Nutrition) => {
+      this._nutritionPvd.getRequirements(authId).then((dailyRequirements: Nutrition) => {
         dailyRequirements = dailyRequirements['$value'] === null ? new Nutrition() : dailyRequirements;
         for (let nutrientKey in food.nutrition) {
           nutrition[nutrientKey].value = Math.round((food.nutrition[nutrientKey].value * 100) / (dailyRequirements[nutrientKey].value || 1));

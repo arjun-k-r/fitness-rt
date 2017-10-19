@@ -3,7 +3,7 @@ export * from './bloodCholesterol';
 export * from './bloodPressure';
 export * from './bloodSugar';
 export * from './chart';
-export { Fitness } from './fitness';
+export * from './fitness';
 export { Food } from './food';
 export { Goal } from './goal';
 export { LifePoints } from './lifepoints';

@@ -1,9 +1,6 @@
 // Angular
 import { Injectable } from '@angular/core';
 
-// Rxjs
-import { Subscription } from 'rxjs/Subscription';
-
 // Firebase
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
@@ -52,7 +49,7 @@ export class MealProvider {
   public calculateDailyNutrition(authId: string, mealPlan: MealPlan): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
       const nutrition = new Nutrition();
-      this._nutritionPvd.getDailyRequirements(authId).then((dailyRequirements: Nutrition) => {
+      this._nutritionPvd.getRequirements(authId).then((dailyRequirements: Nutrition) => {
         dailyRequirements = dailyRequirements['$value'] === null ? new Nutrition() : dailyRequirements;
         this._userRequirements = dailyRequirements;
         for (let nutrientKey in mealPlan.nutrition) {
@@ -100,7 +97,6 @@ export class MealProvider {
 
   public checkBreakfastTimeAchievement(goals: NutritionGoals, mealPlan: MealPlan): boolean {
     const breakfastTimeGoal: number = moment.duration(goals.breakfastTime.value).asMinutes();
-    const breakfastTime: number = moment.duration(mealPlan.meals[0].hour).asMinutes();
     if (goals.breakfastTime.isSelected) {
       if (breakfastTime => breakfastTimeGoal - 30) {
         return true;
@@ -305,7 +301,7 @@ export class MealProvider {
       return meal.quantity > +mealSizeGoal.value + 50;
     }
 
-    return meal.quantity > 700;
+    return meal.quantity >= 1000;
   }
 
   public getIntoleratedFoods$(authId: string): FirebaseListObservable<Food[]> {

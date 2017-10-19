@@ -197,7 +197,7 @@ export class ActivityProvider {
         ]).then(() => {
           if (fitness['$value'] !== null) {
             fitnessSubscription.unsubscribe();
-            this._nutritionPvd.calculateDailyRequirements(authId, fitness.age, fitness.bmr, fitness.gender, fitness.lactating, fitness.pregnant, fitness.weight)
+            this._nutritionPvd.calculateRequirements(authId, fitness.age, fitness.bmr, fitness.gender, fitness.lactating, fitness.macronutrientRatios, fitness.pregnant, fitness.weight)
               .then((dailyRequirements: Nutrition) => {
                 resolve();
               })

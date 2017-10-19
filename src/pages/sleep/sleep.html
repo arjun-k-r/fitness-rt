@@ -111,8 +111,8 @@
         <ion-item>
           <ion-range color="{{ sleep.combos.quality > 5 ? 'secondary' : 'danger' }}" formControlName="quality" max="10" min="1" snaps="true"
             step="1">
-            <ion-icon color="danger" range-left name="sad"></ion-icon>
-            <ion-icon color="secondary" range-right name="happy"></ion-icon>
+            <ion-icon aria-hidden="true" color="danger" range-left name="sad"></ion-icon>
+            <ion-icon aria-hidden="true" color="secondary" range-right name="happy"></ion-icon>
           </ion-range>
         </ion-item>
         <ion-item-divider color="primary" role="separator">

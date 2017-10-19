@@ -20,7 +20,6 @@ export class SleepProvider {
   ) { }
 
   public checkBedtimeAchievement(goals: SleepGoals, sleep: Sleep): boolean {
-    const bedTime: number = moment.duration(sleep.bedTime).asMinutes();
     const bedTimeGoal: number = moment.duration(goals.bedTime.value).asMinutes();
 
     if (goals.bedTime.isSelected) {

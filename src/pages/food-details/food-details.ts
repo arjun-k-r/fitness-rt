@@ -367,7 +367,7 @@ export class FoodDetailsPage {
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)
     );
-    this._foodPvd.calculateFoodDailyRequirements(this.authId, this.food)
+    this._foodPvd.calculateFoodRequirements(this.authId, this.food)
       .then((nutrition: Nutrition) => {
         this.foodDailyRequirements = Object.assign({}, nutrition);
         if (this._loader) {

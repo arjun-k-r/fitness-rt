@@ -14,9 +14,18 @@ export class Fitness {
         public height: number = 0,
         public hips: number = 0,
         public lactating: boolean = false,
+        public macronutrientRatios: MacronutrientRatios = new MacronutrientRatios(),
         public neck: number = 0,
         public pregnant: boolean = false,
         public waist: number = 0,
         public weight: number = 0
+    ) { }
+}
+
+export class MacronutrientRatios {
+    constructor(
+        public carbohydrates: number = 33,
+        public fats: number = 33,
+        public protein: number = 33
     ) { }
 }

@@ -19,7 +19,7 @@
         Info
       </ion-segment-button>
       <ion-segment-button value="dailyRequirements">
-        Daily requirements
+        Requirements
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -131,9 +131,43 @@
       </ion-item-group>
     </form>
     <div *ngSwitchCase="'dailyRequirements'">
+      <ion-item-divider role="separator">
+        Carbohydrates ratio
+        <ion-badge item-end>{{ fitness.macronutrientRatios.carbohydrates }}</ion-badge>
+      </ion-item-divider>
+      <ion-item>
+        <ion-range (ionChange)="macronutrientRatioChange()" [(ngModel)]="fitness.macronutrientRatios.carbohydrates" max="100" min="0" snaps="true"
+          step="1">
+          <ion-label range-left>0%</ion-label>
+          <ion-label range-right>100%</ion-label>
+        </ion-range>
+      </ion-item>
+      <ion-item-divider role="separator">
+        Fat ratio
+        <ion-badge item-end>{{ fitness.macronutrientRatios.fats }}</ion-badge>
+      </ion-item-divider>
+      <ion-item>
+        <ion-range (ionChange)="macronutrientRatioChange()" [(ngModel)]="fitness.macronutrientRatios.fats" max="100" min="0" snaps="true"
+          step="1">
+          <ion-label range-left>0%</ion-label>
+          <ion-label range-right>100%</ion-label>
+        </ion-range>
+      </ion-item>
+      <ion-item-divider role="separator">
+        Protein ratio
+        <ion-badge item-end>{{ fitness.macronutrientRatios.protein }}</ion-badge>
+      </ion-item-divider>
+      <ion-item>
+        <ion-range (ionChange)="macronutrientRatioChange()" [(ngModel)]="fitness.macronutrientRatios.protein" max="100" min="0" snaps="true"
+          step="1">
+          <ion-label range-left>0%</ion-label>
+          <ion-label range-right>100%</ion-label>
+        </ion-range>
+      </ion-item>
       <ion-item>
         <ion-label for="customRequirementsSwitch" id="customRequirementsSwitchLabel">Custom requirements</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="customRequirementsSwitchLabel" aria-required="false" id="customRequirementsSwitch" [(ngModel)]="fitness.customRequirements" role="switch">
+        <ion-toggle aria-live="assertive" aria-labelledby="customRequirementsSwitchLabel" aria-required="false" id="customRequirementsSwitch"
+          [(ngModel)]="fitness.customRequirements" role="switch">
         </ion-toggle>
       </ion-item>
       <form [formGroup]="dailyRequirementsForm" *ngIf="fitness.customRequirements" novalidate role="form">

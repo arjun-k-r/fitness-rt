@@ -1,9 +1,6 @@
 // Angular
 import { Injectable } from '@angular/core';
 
-// Rxjs
-import { Subscription } from 'rxjs/Subscription';
-
 // Firebase
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
@@ -25,10 +22,10 @@ export class RecipeProvider {
     private _nutritionPvd: NutritionProvider
   ) { }
 
-  public calculateRecipeDailyRequirements(authId: string, recipe: Recipe): Promise<Nutrition> {
+  public calculateRecipeRequirements(authId: string, recipe: Recipe): Promise<Nutrition> {
     return new Promise((resolve, reject) => {
       const nutrition: Nutrition = new Nutrition();
-      this._nutritionPvd.getDailyRequirements(authId).then((dailyRequirements: Nutrition) => {
+      this._nutritionPvd.getRequirements(authId).then((dailyRequirements: Nutrition) => {
         dailyRequirements = dailyRequirements['$value'] === null ? new Nutrition() : dailyRequirements;
         for (let nutrientKey in recipe.nutrition) {
           nutrition[nutrientKey].value = Math.round((recipe.nutrition[nutrientKey].value * 100) / (dailyRequirements[nutrientKey].value || 1));

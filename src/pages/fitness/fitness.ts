@@ -132,6 +132,29 @@ export class FitnessPage {
     this.weight = this.fitnessForm.get('weight');
   }
 
+  public macronutrientRatioChange(changedMacronutrient: string): void {
+    this.fitness.macronutrientRatios = Object.assign({}, this._nutritionPvd.calibrateMacronutrientRatios(this.fitness.macronutrientRatios, changedMacronutrient));
+
+    if (!this.fitness.customRequirements) {
+      this._nutritionPvd.calculateRequirements(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.macronutrientRatios, this.fitness.pregnant, this.fitness.weight)
+        .then((dailyRequirements: Nutrition) => {
+          this.dailyRequirements = Object.assign({}, dailyRequirements);
+        })
+        .catch((err: Error) => {
+          this._alertCtrl.create({
+            title: 'Uhh ohh...',
+            subTitle: 'Something went wrong',
+            message: err.toString(),
+            buttons: ['OK']
+          }).present();
+        });
+    } else {
+      this.dailyRequirementsForm.controls['carbs'].patchValue(this._nutritionPvd.calculateCarbRequirements(this.customRequirements.energy.value, this.fitness.macronutrientRatios));
+      this.dailyRequirementsForm.controls['fats'].patchValue(this._nutritionPvd.calculateFatRequirements(this.customRequirements.energy.value, this.fitness.macronutrientRatios));
+      this.dailyRequirementsForm.controls['protein'].patchValue(this._nutritionPvd.calculateProteinRequirements(this.customRequirements.energy.value, this.fitness.macronutrientRatios));
+    }
+  }
+
   public saveFitness(): void {
     this._loader = this._loadCtrl.create({
       content: 'Please wait...',
@@ -140,7 +163,7 @@ export class FitnessPage {
     });
     this._loader.present();
     Promise.all([
-      this._nutritionPvd.saveDailyRequirements(
+      this._nutritionPvd.saveRequirements(
         this._authId,
         this.fitness.customRequirements ? this.customRequirements : this.dailyRequirements,
         this.fitness.customRequirements
@@ -249,7 +272,7 @@ export class FitnessPage {
                   });
                   this.isFit = this._fitnessPvd.checkFatPercentage(this.fitness.bodyFat, this.fitness.gender);
                   if (!this.fitness.customRequirements) {
-                    this._nutritionPvd.calculateDailyRequirements(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
+                    this._nutritionPvd.calculateRequirements(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.macronutrientRatios, this.fitness.pregnant, this.fitness.weight)
                       .then((dailyRequirements: Nutrition) => {
                         this.dailyRequirements = Object.assign({}, dailyRequirements);
                       })
@@ -266,7 +289,7 @@ export class FitnessPage {
               },
               (err: Error) => console.error(`Error fetching form changes: ${err}`)
             );
-            this._nutritionPvd.calculateDailyRequirements(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.pregnant, this.fitness.weight)
+            this._nutritionPvd.calculateRequirements(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.macronutrientRatios, this.fitness.pregnant, this.fitness.weight)
               .then((dailyRequirements: Nutrition) => {
                 this.dailyRequirements = Object.assign({}, dailyRequirements);
               })
@@ -279,7 +302,7 @@ export class FitnessPage {
                 }).present();
               });
 
-            this._nutritionPvd.getDailyRequirements(this._authId, this.fitness.customRequirements)
+            this._nutritionPvd.getRequirements(this._authId, this.fitness.customRequirements)
               .then((dailyRequirements: Nutrition) => {
                 this.customRequirements = Object.assign({}, dailyRequirements['$value'] === null ? new Nutrition() : dailyRequirements);
                 this.dailyRequirementsForm = this._formBuilder.group({

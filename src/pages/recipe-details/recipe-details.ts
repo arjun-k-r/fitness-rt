@@ -347,7 +347,7 @@ export class RecipeDetailsPage {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this.authId = auth.uid;
-        this._recipePvd.calculateRecipeDailyRequirements(this.authId, this.recipe)
+        this._recipePvd.calculateRecipeRequirements(this.authId, this.recipe)
           .then((nutrition: Nutrition) => {
             if (this._loader) {
               this._loader.dismiss();

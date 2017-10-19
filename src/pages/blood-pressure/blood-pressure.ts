@@ -19,9 +19,6 @@ import {
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
-// Third-party
-import * as moment from 'moment';
-
 // Models
 import { BloodPressure, BloodPressureLog, ILineChartEntry } from '../../models';
 

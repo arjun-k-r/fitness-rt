@@ -3,8 +3,8 @@
     <ion-title>Warning</ion-title>
     <ion-buttons end>
       <button (click)="dismiss()" ion-button padding role="button">
-          <ion-icon aria-hidden="true" name="done-all"></ion-icon>
-        </button>
+        <ion-icon aria-hidden="true" name="done-all"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -21,9 +21,9 @@
     </ion-item>
   </ion-list>
   <p *ngIf="intoleratedFoods?.length">
-    These foods seem to have caused you digestive problems in the past. If you have an intolerance to these foods, reduce or avoid
-    them. Intolerance means you cannot digest these foods properly and they putrefy in gut eliminating toxins. They also
-    cause inflammation. On the long-term, this leads to disease.
+    These foods seem to have caused you digestive problems in the past. If you have an intolerance to these foods, reduce or
+    avoid them. Intolerance means you cannot digest these foods properly and they putrefy in gut eliminating toxins. They
+    also cause inflammation. On the long-term, this leads to disease.
   </p>
   <ion-list role="list">
     <ion-item *ngFor="let food of intoleratedFoods" role="listitem">
@@ -31,5 +31,9 @@
       <h2 text-wrap>{{ food.name }}</h2>
     </ion-item>
   </ion-list>
+  <div *ngIf="intoleratedFoods?.length === 0" class="no-elements">
+    <ion-icon aria-hidden="true" class="no-elements__icon" name="nutrition"></ion-icon>
+    <h2 class="no-elements__message">You have no intolerated foods</h2>
+  </div>
 
 </ion-content>

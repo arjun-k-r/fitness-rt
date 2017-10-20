@@ -105,12 +105,12 @@
             <ion-icon aria-hidden="true" item-right name="open"></ion-icon>
           </button>
           <ion-item role="listitem">
-            Energy
-            <p item-content>{{ nutrientPercent(meal.nutrition.energy.value, 'energy') }}%</p>
-          </ion-item>
-          <ion-item role="listitem">
             Carbohydrates
             <p item-content>{{ nutrientPercent(meal.nutrition.carbs.value, 'carbs') }}%</p>
+          </ion-item>
+          <ion-item role="listitem">
+            Fiber
+            <p item-content>{{ nutrientPercent(meal.nutrition.fiber.value, 'fiber') }}%</p>
           </ion-item>
           <ion-item role="listitem">
             Fats
@@ -151,10 +151,6 @@
           </ion-item>
         </ion-item-group>
         <ion-item-group role="group">
-          <ion-item role="listitem">
-            Energy
-            <p item-content>{{ dailyNutrition.energy?.value }}%</p>
-          </ion-item>
           <ion-item-divider color="primary" role="separator">Proximates</ion-item-divider>
           <ion-item role="listitem">
             Water

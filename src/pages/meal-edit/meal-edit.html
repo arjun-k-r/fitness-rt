@@ -131,10 +131,6 @@
     </div>
     <div *ngSwitchCase="'nutrition'">
       <ion-item-group role="group">
-        <ion-item role="listitem">
-          Energy
-          <p item-content>{{ meal.nutrition.energy?.value.toFixed(2) }}{{ meal.nutrition.energy?.unit }}</p>
-        </ion-item>
         <ion-item-divider color="primary" role="separator">Proximates</ion-item-divider>
         <ion-item role="listitem">
           Water

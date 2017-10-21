@@ -20,7 +20,7 @@ import { MyApp } from './app.component';
 // Firebase
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
 import 'firebase/storage';
 
 const CLOUD_SETTINGS: CloudSettings = {

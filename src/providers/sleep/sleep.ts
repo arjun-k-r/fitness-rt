@@ -144,7 +144,7 @@ export class SleepProvider {
     });
   }
 
-  public saveSleepGoals(authId: string, goals: SleepGoals): firebase.Promise<void> {
+  public saveSleepGoals(authId: string, goals: SleepGoals): Promise<void> {
     return this._db.object(`/sleep/${authId}/goals`).set(goals);
   }
 }

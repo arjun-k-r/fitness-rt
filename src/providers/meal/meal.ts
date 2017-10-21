@@ -362,7 +362,7 @@ export class MealProvider {
     });
   }
 
-  public saveNutritionGoals(authId: string, goals: NutritionGoals): firebase.Promise<void> {
+  public saveNutritionGoals(authId: string, goals: NutritionGoals): Promise<void> {
     return this._db.object(`/meal-plan/${authId}/goals`).set(goals);
   }
 }

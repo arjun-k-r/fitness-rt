@@ -110,11 +110,11 @@ export class FitnessProvider {
     return this._db.object(`/fitness/${authId}/weight`);
   }
 
-  public saveFitness(authId: string, fitness: Fitness): firebase.Promise<void> {
+  public saveFitness(authId: string, fitness: Fitness): Promise<void> {
     return this._db.object(`/fitness/${authId}`).set(fitness);
   }
 
-  public saveLifePoints(authId: string, lifepoints: LifePoints): firebase.Promise<void> {
+  public saveLifePoints(authId: string, lifepoints: LifePoints): Promise<void> {
     return this._db.object(`/lifepoints/${authId}/total`).set(lifepoints);
   }
 }

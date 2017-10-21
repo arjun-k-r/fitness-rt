@@ -58,11 +58,11 @@ export class RecipeProvider {
     return this._db.list(`/recipes/${authId}`);
   }
 
-  public removeRecipe(authId: string, recipe: Recipe): firebase.Promise<void> {
+  public removeRecipe(authId: string, recipe: Recipe): Promise<void> {
     return this._db.list(`/recipes/${authId}`).remove(recipe['$key']);
   }
 
-  public saveRecipe(authId: string, recipe: Recipe): firebase.Promise<void> {
+  public saveRecipe(authId: string, recipe: Recipe): any {
     if (recipe.ingredients && recipe.ingredients.length) {
       if (recipe.hasOwnProperty('$key')) {
         return this._db.list(`/recipes/${authId}`).update(recipe['$key'], recipe);

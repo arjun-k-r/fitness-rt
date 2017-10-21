@@ -208,7 +208,7 @@ export class ActivityProvider {
     });
   }
 
-  public saveExerciseGoals(authId: string, goals: ExerciseGoals): firebase.Promise<void> {
+  public saveExerciseGoals(authId: string, goals: ExerciseGoals): Promise<void> {
     return this._db.object(`/activity-plan/${authId}/goals`).set(goals);
   }
 }

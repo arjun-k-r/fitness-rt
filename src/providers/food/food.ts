@@ -84,11 +84,11 @@ export class FoodProvider {
     return this._foods$;
   }
 
-  public removeFood(authId: string, food: Food): firebase.Promise<void> {
+  public removeFood(authId: string, food: Food): Promise<void> {
     return this._db.list(`/foods/${authId}`).remove(food['$key']);
   }
 
-  public saveFood(authId: string, food: Food): firebase.Promise<void> {
+  public saveFood(authId: string, food: Food): any{
     if (food.hasOwnProperty('$key')) {
       return this._db.list(`/foods/${authId}`).update(food['$key'], food);
     } else {

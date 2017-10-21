@@ -2373,7 +2373,7 @@ export class NutritionProvider {
     });
   }
 
-  public saveRequirements(authId: string, dailyRequirements: Nutrition, custom?: boolean): firebase.Promise<void> {
+  public saveRequirements(authId: string, dailyRequirements: Nutrition, custom?: boolean): Promise<void> {
     if (custom) {
       return this._db.object(`/daily-requirements/${authId}/custom`).set(dailyRequirements);
     } else {

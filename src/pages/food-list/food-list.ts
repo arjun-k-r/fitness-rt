@@ -108,9 +108,8 @@ export class FoodListPage {
     }).present();
   }
 
-  public _selectItem(item: Food | Recipe, checkBox: HTMLInputElement): void {
-    const idx: number = this.selectedItems.indexOf(item);
-    if (idx === -1) {
+  public _selectItem(item: Food | Recipe, checkBox: HTMLInputElement, idx: number): void {
+    if (idx === -1 || checkBox.checked === true) {
       this._alertCtrl.create({
         title: 'Servings',
         subTitle: `${item.name.toString()}`,
@@ -127,6 +126,9 @@ export class FoodListPage {
             role: 'cancel',
             handler: () => {
               checkBox.checked = false;
+              if (idx !== -1) {
+                this.selectedItems = [...this.selectedItems.slice(0, idx), ...this.selectedItems.slice(idx + 1)];
+              }
             }
           },
           {
@@ -138,7 +140,7 @@ export class FoodListPage {
           }
         ]
       }).present();
-    } else {
+    } else if (checkBox.checked === false) {
       this.selectedItems = [...this.selectedItems.slice(0, idx), ...this.selectedItems.slice(idx + 1)];
     }
   }
@@ -283,13 +285,19 @@ export class FoodListPage {
   }
 
   public showOptions(item: Food | Recipe, checkBox: HTMLInputElement): void {
+    const idx: number = this.selectedItems.indexOf(item);
+    if (idx !== -1) {
+      checkBox.checked = true;
+    }
     this._actionSheetCtrl.create({
       title: 'What to do with this item?',
       buttons: [
         {
           text: 'View details',
           handler: () => {
-            checkBox.checked = false;
+            if (idx === -1) {
+              checkBox.checked = false;
+            }
             if (item.hasOwnProperty('chef')) {
               this._navCtrl.push('recipe-details', { recipe: item });
             } else {
@@ -298,15 +306,17 @@ export class FoodListPage {
             }
           }
         }, {
-          text: 'Select it',
+          text: idx === -1 ? 'Select it' : 'Change servings',
           handler: () => {
-            this._selectItem(item, checkBox);
+            this._selectItem(item, checkBox, idx);
           }
         }, {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            checkBox.checked = false
+            if (idx === -1) {
+              checkBox.checked = false;
+            }
           }
         }
       ]

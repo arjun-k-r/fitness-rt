@@ -105,12 +105,12 @@
             <ion-icon aria-hidden="true" item-right name="open"></ion-icon>
           </button>
           <ion-item role="listitem">
-            Carbohydrates
-            <p item-content>{{ nutrientPercent(meal.nutrition.carbs.value, 'carbs') }}%</p>
+            Energy
+            <p item-content>{{ nutrientPercent(meal.nutrition.energy.value, 'energy') }}%</p>
           </ion-item>
           <ion-item role="listitem">
-            Fiber
-            <p item-content>{{ nutrientPercent(meal.nutrition.fiber.value, 'fiber') }}%</p>
+            Carbohydrates
+            <p item-content>{{ nutrientPercent(meal.nutrition.carbs.value, 'carbs') }}%</p>
           </ion-item>
           <ion-item role="listitem">
             Fats
@@ -143,14 +143,12 @@
             <p text-wrap>It is important to have 1:1 ALA:LA ratio. Try to reduce your LA intake or increase your ALA intake. Visit food
               list and sort them by nutrient content to find the proper foods.</p>
           </ion-item>
-          <ion-item *ngIf="dailyNutrition.potassium?.value / dailyNutrition.sodium?.value < 3" role="listitem">
-            <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
-            <h2 text-wrap>Potassium:Sodium ratio</h2>
-            <p text-wrap>It is important to have 3:1 potassium:sodium ratio. Try to reduce your sodium intake or increase your potassium
-              intake. Visit food list and sort them by nutrient content to find the proper foods.</p>
-          </ion-item>
         </ion-item-group>
         <ion-item-group role="group">
+          <ion-item role="listitem">
+            Energy
+            <p item-content>{{ dailyNutrition.energy?.value }}%</p>
+          </ion-item>
           <ion-item-divider color="primary" role="separator">Proximates</ion-item-divider>
           <ion-item role="listitem">
             Water

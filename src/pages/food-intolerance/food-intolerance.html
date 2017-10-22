@@ -17,4 +17,8 @@
       <h2 text-wrap>{{ food.name }}</h2>
     </ion-item>
   </ion-list>
+  <div *ngIf="foods?.length === 0" class="no-elements">
+    <ion-icon aria-hidden="true" class="no-elements__icon" name="nutrition"></ion-icon>
+    <h2 class="no-elements__message">You have no intolerated foods</h2>
+  </div>
 </ion-content>

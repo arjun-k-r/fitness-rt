@@ -22,7 +22,7 @@
       </ion-thumbnail>
       <ion-label>{{ activityCategory.name }}</ion-label>
       <ion-select multiple="true" (ionChange)="selectActivity($event)">
-        <ion-option *ngFor="let activityType of activityCategory.types" [value]="activityType">{{ activityType.name }}</ion-option>
+        <ion-option *ngFor="let activityType of activityCategory.types | sort: 'name': 'asc'" [value]="activityType">{{ activityType.name }}</ion-option>
       </ion-select>
     </ion-item>
   </ion-list>

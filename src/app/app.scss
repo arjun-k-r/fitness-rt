@@ -15,8 +15,8 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-textarea {
-    resize: none;
+.alert-checkbox-label {
+    white-space: normal!important;
 }
 
 .auth-page {
@@ -134,7 +134,11 @@ textarea {
     text-align: center;
     top: 0;
     z-index: 2;
-  }
+}
+
+textarea {
+    resize: none;
+}
 
 .upload-placeholder {
     align-items: center;

@@ -1,5 +1,1522 @@
 [
   {
+    "icon": "if_regular_biking_310309.png",
+    "name": " Bicycling",
+    "types": [
+      {
+        "met": 14,
+        "name": "mountain, uphill, vigorous",
+        "type": "Physical"
+      },
+      {
+        "met": 16,
+        "name": "mountain, competitive, racing",
+        "type": "Physical"
+      },
+      {
+        "met": 8.5,
+        "name": "BMX",
+        "type": "Physical"
+      },
+      {
+        "met": 8.5,
+        "name": "mountain, general",
+        "type": "Physical"
+      },
+      {
+        "met": 4,
+        "name": "<10 mph, leisure, to work or for pleasure (Taylor Code 115)",
+        "type": "Physical"
+      },
+      {
+        "met": 6.8,
+        "name": "to/from work, self selected pace",
+        "type": "Physical"
+      },
+      {
+        "met": 5.8,
+        "name": "on dirt or farm road, moderate pace",
+        "type": "Physical"
+      },
+      {
+        "met": 7.5,
+        "name": "general",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "leisure, 5.5 mph",
+        "type": "Physical"
+      },
+      {
+        "met": 5.8,
+        "name": "leisure, 9.4 mph",
+        "type": "Physical"
+      },
+      {
+        "met": 6.8,
+        "name": "10-11.9 mph, leisure, slow, light effort",
+        "type": "Physical"
+      },
+      {
+        "met": 8,
+        "name": "12-13.9 mph, leisure, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 10,
+        "name": "14-15.9 mph, racing or leisure, fast, vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 12,
+        "name": "16-19 mph, racing/not drafting or > 19 mph drafting, very fast, racing general",
+        "type": "Physical"
+      },
+      {
+        "met": 15.8,
+        "name": "> 20 mph, racing, not drafting",
+        "type": "Physical"
+      },
+      {
+        "met": 8.5,
+        "name": "12 mph, seated, hands on brake hoods or bar drops, 80 rpm",
+        "type": "Physical"
+      },
+      {
+        "met": 9,
+        "name": "12 mph, standing, hands on brake hoods, 60 rpm",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "unicycling",
+        "type": "Physical"
+      }
+    ]
+  },
+  {
+    "icon": "if_weightlift_309002.png",
+    "name": "Conditioning exercise",
+    "types": [
+      {
+        "met": 2.3,
+        "name": "activity promoting video game (e.g., Wii Fit), light effort (e.g., balance, yoga)",
+        "type": "Physical"
+      },
+      {
+        "met": 3.8,
+        "name": "activity promoting video game (e.g., Wii Fit), moderate effort (e.g., aerobic, resistance)",
+        "type": "Physical"
+      },
+      {
+        "met": 7.2,
+        "name": "activity promoting video/arcade game (e.g., Exergaming, Dance Dance Revolution), vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "army type obstacle course exercise, boot camp training program ",
+        "type": "Physical"
+      },
+      {
+        "met": 7,
+        "name": "bicycling, stationary, general",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "bicycling, stationary, 30-50 watts, very light to light effort",
+        "type": "Physical"
+      },
+      {
+        "met": 6.8,
+        "name": "bicycling, stationary, 90-100 watts, moderate to vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 8.8,
+        "name": "bicycling, stationary, 101-160 watts, vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 11,
+        "name": "bicycling, stationary, 161-200 watts, vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 14,
+        "name": "bicycling, stationary, 201-270 watts, very vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 4.8,
+        "name": "bicycling, stationary, 51-89 watts, light-to-moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 8.5,
+        "name": "bicycling, stationary, RPM/Spin bike class",
+        "type": "Physical"
+      },
+      {
+        "met": 8,
+        "name": "calisthenics (e.g., push ups, sit ups, pull-ups, jumping jacks), vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 3.8,
+        "name": "calisthenics (e.g., push ups, sit ups, pull-ups, lunges), moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 2.8,
+        "name": "calisthenics (e.g., situps, abdominal crunches), light effort",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "calisthenics, light or moderate effort, general (example: back exercises), going up & down from floor (Taylor Code 150)",
+        "type": "Physical"
+      },
+      {
+        "met": 4.3,
+        "name": "circuit training, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 8,
+        "name": "circuit training, including kettlebells, some aerobic movement with minimal rest, general, vigorous intensity",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "CurvesTM exercise routines in women",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "Elliptical trainer, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 6,
+        "name": "resistance training (weight lifting - free weight, nautilus or universal-type), power lifting or body building, vigorous effort (Taylor Code 210)",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "resistance (weight) training, squats , slow or explosive effort",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "resistance (weight) training, multiple exercises, 8-15 repetitions at varied resistance",
+        "type": "Physical"
+      },
+      {
+        "met": 5.5,
+        "name": "health club exercise, general (Taylor Code 160)",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "health club exercise classes, general, gym/weight training combined in one visit",
+        "type": "Physical"
+      },
+      {
+        "met": 7.8,
+        "name": "health club exercise, conditioning classes",
+        "type": "Physical"
+      },
+      {
+        "met": 3.8,
+        "name": "home exercise, general",
+        "type": "Physical"
+      },
+      {
+        "met": 9,
+        "name": "stair-treadmill ergometer, general",
+        "type": "Physical"
+      },
+      {
+        "met": 11,
+        "name": "rope skipping, general",
+        "type": "Physical"
+      },
+      {
+        "met": 6,
+        "name": "rowing, stationary ergometer, general, vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 4.8,
+        "name": "rowing, stationary, general, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 7,
+        "name": "rowing, stationary, 100 watts, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 8.5,
+        "name": "rowing, stationary, 150 watts, vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 12,
+        "name": "rowing, stationary, 200 watts, very vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 6.8,
+        "name": "ski machine, general",
+        "type": "Physical"
+      },
+      {
+        "met": 11,
+        "name": "slide board exercise, general",
+        "type": "Physical"
+      },
+      {
+        "met": 6,
+        "name": "slimnastics, jazzercise",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "stretching, mild",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "pilates, general",
+        "type": "Physical"
+      },
+      {
+        "met": 6.8,
+        "name": "teaching exercise class (e.g., aerobic, water)",
+        "type": "Physical"
+      },
+      {
+        "met": 2.8,
+        "name": "therapeutic exercise ball, Fitball exercise ",
+        "type": "Physical"
+      },
+      {
+        "met": 2.8,
+        "name": "upper body exercise, arm ergometer ",
+        "type": "Physical"
+      },
+      {
+        "met": 4.3,
+        "name": "upper body exercise, stationary bicycle - Airdyne (arms only) 40 rpm, moderate",
+        "type": "Physical"
+      },
+      {
+        "met": 5.3,
+        "name": "water aerobics, water calisthenics, water exercise",
+        "type": "Physical"
+      },
+      {
+        "met": 1.3,
+        "name": "whirlpool, sitting",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "video exercise workouts, TV conditioning programs (e.g., yoga, stretching), light effort",
+        "type": "Physical"
+      },
+      {
+        "met": 4,
+        "name": "video exercise workouts, TV conditioning programs (e.g., cardio-resistance), moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 6,
+        "name": "video exercise workouts, TV conditioning programs (e.g., cardio-resistance), vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "yoga, Hatha",
+        "type": "Physical"
+      },
+      {
+        "met": 4,
+        "name": "yoga, Power",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "yoga, Nadisodhana",
+        "type": "Physical"
+      },
+      {
+        "met": 3.3,
+        "name": "yoga, Surya Namaskar",
+        "type": "Physical"
+      },
+      {
+        "met": 5.3,
+        "name": "native New Zealander physical activities (e.g., Haka Powhiri, Moteatea, Waita Tira, Whakawatea, etc.) , general, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 6.8,
+        "name": "native New Zealander physical activities (e.g., Haka, Taiahab), general, vigorous effort",
+        "type": "Physical"
+      }
+    ]
+  },
+  {
+    "icon": "if_Dance_Instructor1_2315961.png",
+    "name": "Dancing",
+    "types": [
+      {
+        "met": 5,
+        "name": "ballet, modern, or jazz, general, rehearsal or class",
+        "type": "Physical"
+      },
+      {
+        "met": 6.8,
+        "name": "ballet, modern, or jazz, performance, vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 4.8,
+        "name": "tap",
+        "type": "Physical"
+      },
+      {
+        "met": 7.3,
+        "name": "aerobic, general",
+        "type": "Physical"
+      },
+      {
+        "met": 7.5,
+        "name": "aerobic, step, with 6 - 8 inch step",
+        "type": "Physical"
+      },
+      {
+        "met": 9.5,
+        "name": "aerobic, step, with 10 - 12 inch step",
+        "type": "Physical"
+      },
+      {
+        "met": 5.5,
+        "name": "aerobic, step, with 4-inch step",
+        "type": "Physical"
+      },
+      {
+        "met": 8.5,
+        "name": "bench step class, general ",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "aerobic, low impact",
+        "type": "Physical"
+      },
+      {
+        "met": 7.3,
+        "name": "aerobic, high impact",
+        "type": "Physical"
+      },
+      {
+        "met": 10,
+        "name": "aerobic dance wearing 10-15 lb weights",
+        "type": "Physical"
+      },
+      {
+        "met": 4.5,
+        "name": "ethnic or cultural dancing (e.g., Greek, Middle Eastern, hula, salsa, merengue, bamba y plena, flamenco, belly, and swing)",
+        "type": "Physical"
+      },
+      {
+        "met": 5.5,
+        "name": "ballroom, fast (Taylor Code 125)",
+        "type": "Physical"
+      },
+      {
+        "met": 7.8,
+        "name": "general dancing (e.g., disco, folk, Irish step dancing, line dancing, polka, contra, country)",
+        "type": "Physical"
+      },
+      {
+        "met": 11.3,
+        "name": "ballroom dancing, competitive, general",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "ballroom, slow (e.g., waltz, foxtrot, slow dancing, samba, tango, 19th century dance, mambo, cha cha)",
+        "type": "Physical"
+      },
+      {
+        "met": 5.5,
+        "name": "Anishinaabe Jingle Dancing",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "Caribbean dance (Abakua, Beguine, Bellair, Bongo, Brukin's, Caribbean Quadrills, Dinki Mini, Gere, Gumbay, Ibo, Jonkonnu, Kumina, Oreisha, Jambu)",
+        "type": "Physical"
+      }
+    ]
+  },
+  {
+    "icon": "if_Hunting_1_753892.png",
+    "name": "Fishing & Hunting",
+    "types": [
+      {
+        "met": 3.5,
+        "name": "fishing, general",
+        "type": "Physical"
+      },
+      {
+        "met": 4.5,
+        "name": "fishing, crab fishing",
+        "type": "Physical"
+      },
+      {
+        "met": 4,
+        "name": "fishing, catching fish with hands",
+        "type": "Physical"
+      },
+      {
+        "met": 4.3,
+        "name": "fishing related, digging worms, with shovel",
+        "type": "Physical"
+      },
+      {
+        "met": 4,
+        "name": "fishing from river bank and walking",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "fishing from boat or canoe, sitting",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "fishing from river bank, standing (Taylor Code 660)",
+        "type": "Physical"
+      },
+      {
+        "met": 6,
+        "name": "fishing in stream, in waders (Taylor Code 670)",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "fishing, ice, sitting",
+        "type": "Physical"
+      },
+      {
+        "met": 1.8,
+        "name": "fishing, jog or line, standing, general",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "fishing, dip net, setting net and retrieving fish, general",
+        "type": "Physical"
+      },
+      {
+        "met": 3.8,
+        "name": "fishing, set net, setting net and retrieving fish, general",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "fishing, fishing wheel, setting net and retrieving fish, general",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "fishing with a spear, standing",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "hunting, bow and arrow, or crossbow",
+        "type": "Physical"
+      },
+      {
+        "met": 6,
+        "name": "hunting, deer, elk, large game (Taylor Code 170)",
+        "type": "Physical"
+      },
+      {
+        "met": 11.3,
+        "name": "hunting large game, dragging carcass",
+        "type": "Physical"
+      },
+      {
+        "met": 4,
+        "name": "hunting large marine animals",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "hunting large game, from a hunting stand, limited walking",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "hunting large game from a car, plane, or boat",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "hunting, duck, wading",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "hunting, flying fox, squirrel",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "hunting, general",
+        "type": "Physical"
+      },
+      {
+        "met": 6,
+        "name": "hunting, pheasants or grouse (Taylor Code 680)",
+        "type": "Physical"
+      },
+      {
+        "met": 3.3,
+        "name": "hunting, birds",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "hunting, rabbit, squirrel, prairie chick, raccoon, small game (Taylor Code 690)",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "hunting, pigs, wild",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "trapping game, general",
+        "type": "Physical"
+      },
+      {
+        "met": 9.5,
+        "name": "hunting, hiking with hunting gear",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "pistol shooting or trap shooting, standing",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "rifle exercises, shooting, lying down",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "rifle exercises, shooting, kneeling or standing",
+        "type": "Physical"
+      }
+    ]
+  },
+  {
+    "icon": "if_001_Home_183566.png",
+    "name": "Home activities",
+    "types": [
+      {
+        "met": 3.3,
+        "name": "cleaning, sweeping carpet or floors, general",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "cleaning, sweeping, slow, light effort",
+        "type": "Physical"
+      },
+      {
+        "met": 3.8,
+        "name": "cleaning, sweeping, slow, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "cleaning, heavy or major (e.g. wash car, wash windows, clean garage), moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "cleaning, mopping, standing, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 3.2,
+        "name": "cleaning windows, washing windows, general",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "mopping, standing, light effort",
+        "type": "Physical"
+      },
+      {
+        "met": 4.5,
+        "name": "polishing floors, standing, walking slowly, using electric polishing machine",
+        "type": "Physical"
+      },
+      {
+        "met": 2.8,
+        "name": "multiple household tasks all at once, light effort",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "multiple household tasks all at once, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 4.3,
+        "name": "multiple household tasks all at once, vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 3.3,
+        "name": "cleaning, house or cabin, general, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "dusting or polishing furniture, general",
+        "type": "Physical"
+      },
+      {
+        "met": 3.3,
+        "name": "kitchen activity, general, (e.g., cooking, washing dishes, cleaning up), moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "cleaning, general (straightening up, changing linen, carrying out trash, light effort",
+        "type": "Physical"
+      },
+      {
+        "met": 1.8,
+        "name": "wash dishes, standing or in general (not broken into stand/walk components)",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "wash dishes, clearing dishes from table, walking, light effort",
+        "type": "Physical"
+      },
+      {
+        "met": 3.3,
+        "name": "vacuuming, general, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "butchering animals, small",
+        "type": "Physical"
+      },
+      {
+        "met": 6,
+        "name": "butchering animal, large, vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "cutting and smoking fish, drying fish or meat",
+        "type": "Physical"
+      },
+      {
+        "met": 4,
+        "name": "tanning hides, general",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "cooking or food preparation, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "cooking or food preparation - standing or sitting or in general (not broken into stand/walk components), manual appliances, light effort",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "serving food, setting table, implied walking or standing",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "cooking or food preparation, walking",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "feeding household animals",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "putting away groceries (e.g. carrying groceries, shopping without a grocery cart), carrying packages",
+        "type": "Physical"
+      },
+      {
+        "met": 7.5,
+        "name": "carrying groceries upstairs",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "cooking Indian bread on an outside stove",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "food shopping with or without a grocery cart, standing or walking",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "non-food shopping, with or without a cart, standing or walking",
+        "type": "Physical"
+      },
+      {
+        "met": 1.8,
+        "name": "ironing",
+        "type": "Physical"
+      },
+      {
+        "met": 1.3,
+        "name": "knitting, sewing, light effort, wrapping presents, sitting",
+        "type": "Physical"
+      },
+      {
+        "met": 2.8,
+        "name": "sewing with a machine",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "laundry, fold or hang clothes, put clothes in washer or dryer, packing suitcase, washing clothes by hand, implied standing, light effort",
+        "type": "Physical"
+      },
+      {
+        "met": 4,
+        "name": "laundry, hanging wash, washing clothes by hand, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "laundry, putting away clothes, gathering clothes to pack, putting away laundry, implied walking",
+        "type": "Physical"
+      },
+      {
+        "met": 3.3,
+        "name": "making bed, changing linens",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "maple syruping/sugar bushing (including carrying buckets, carrying wood)",
+        "type": "Physical"
+      },
+      {
+        "met": 5.8,
+        "name": "moving furniture, household items, carrying boxes",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "moving, lifting light loads",
+        "type": "Physical"
+      },
+      {
+        "met": 4.8,
+        "name": "organizing room",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "scrubbing floors, on hands and knees, scrubbing bathroom, bathtub, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "scrubbing floors, on hands and knees, scrubbing bathroom, bathtub, light effort",
+        "type": "Physical"
+      },
+      {
+        "met": 6.5,
+        "name": "scrubbing floors, on hands and knees, scrubbing bathroom, bathtub, vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 4,
+        "name": "sweeping garage, sidewalk or outside of house",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "standing, packing/unpacking boxes, occasional lifting of lightweight household items, loading or unloading items in car, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "implied walking, putting away household items, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "watering plants",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "building a fire inside",
+        "type": "Physical"
+      },
+      {
+        "met": 9,
+        "name": "moving household items upstairs, carrying boxes or furniture",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "standing, light effort tasks (pump gas, change light bulb, etc.)",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "walking, moderate effort tasks, non-cleaning (readying to leave, shut/lock doors, close windows, etc.)",
+        "type": "Physical"
+      },
+      {
+        "met": 2.2,
+        "name": "sitting, playing with child(ren), light effort, only active periods",
+        "type": "Physical"
+      },
+      {
+        "met": 2.8,
+        "name": "standing, playing with child(ren) light effort, only active periods",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "walking/running, playing with child(ren), moderate effort, only active periods",
+        "type": "Physical"
+      },
+      {
+        "met": 5.8,
+        "name": "walking/running, playing with child(ren), vigorous effort, only active periods",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "walking and carrying small child, child weighing 15 lbs or more",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "walking and carrying small child, child weighing less than 15 lbs",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "standing, holding child",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "child care, infant, general",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "child care, sitting/kneeling (e.g., dressing, bathing, grooming, feeding, occasional lifting of child), light effort, general",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "child care, standing (e.g., dressing, bathing, grooming, feeding, occasional lifting of child), moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 1.5,
+        "name": "reclining with baby",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "breastfeeding, sitting or reclining",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "sit, playing with animals, light effort, only active periods",
+        "type": "Physical"
+      },
+      {
+        "met": 2.8,
+        "name": "stand, playing with animals, light effort, only active periods",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "walk/run, playing with animals, general, light effort, only active periods",
+        "type": "Physical"
+      },
+      {
+        "met": 4,
+        "name": "walk/run, playing with animals, moderate effort, only active periods",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "walk/run, playing with animals, vigorous effort, only active periods",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "standing, bathing dog",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "animal care, household animals, general",
+        "type": "Physical"
+      },
+      {
+        "met": 4,
+        "name": "elder care, disabled adult, bathing, dressing, moving into and out of bed, only active periods",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "elder care, disabled adult, feeding, combing hair, light effort, only active periods",
+        "type": "Physical"
+      }
+    ]
+  },
+  {
+    "icon": "if_Setting01_928428.png",
+    "name": "Walking",
+    "types": [
+      {
+        "met": 3,
+        "name": "airplane repair",
+        "type": "Physical"
+      },
+      {
+        "met": 4,
+        "name": "automobile body work",
+        "type": "Physical"
+      },
+      {
+        "met": 3.3,
+        "name": "automobile repair, light or moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "carpentry, general, workshop (Taylor Code 620)",
+        "type": "Physical"
+      },
+      {
+        "met": 6,
+        "name": "carpentry, outside house, installing rain gutters (Taylor Code 640),carpentry, outside house, building a fence",
+        "type": "Physical"
+      },
+      {
+        "met": 3.3,
+        "name": "carpentry, outside house, building a fence",
+        "type": "Physical"
+      },
+      {
+        "met": 6,
+        "name": "carpentry, sawing hardwood",
+        "type": "Physical"
+      },
+      {
+        "met": 4,
+        "name": "carpentry, home remodeling tasks, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "carpentry, home remodeling tasks, light effort ",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "caulking, chinking log cabin",
+        "type": "Physical"
+      },
+      {
+        "met": 4.5,
+        "name": "caulking, except log cabin",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "cleaning gutters",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "excavating garage",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "hanging storm windows",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "hanging sheet rock inside house",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "hammering nails",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "home repair, general, light effort",
+        "type": "Physical"
+      },
+      {
+        "met": 4.5,
+        "name": "home repair, general, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 6,
+        "name": "home repair, general, vigorous effort",
+        "type": "Physical"
+      },
+      {
+        "met": 4.5,
+        "name": "laying or removing carpet",
+        "type": "Physical"
+      },
+      {
+        "met": 3.8,
+        "name": "laying tile or linoleum, repairing appliances",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "repairing appliances",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "painting, outside home (Taylor Code 650)",
+        "type": "Physical"
+      },
+      {
+        "met": 3.3,
+        "name": "painting inside house, wallpapering, scraping paint",
+        "type": "Physical"
+      },
+      {
+        "met": 4.5,
+        "name": "painting, (Taylor Code 630)",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "plumbing, general",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "put on and removal of tarp - sailboat",
+        "type": "Physical"
+      },
+      {
+        "met": 6,
+        "name": "roofing",
+        "type": "Physical"
+      },
+      {
+        "met": 4.5,
+        "name": "sanding floors with a power sander",
+        "type": "Physical"
+      },
+      {
+        "met": 4.5,
+        "name": "scraping and painting sailboat or powerboat",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "sharpening tools",
+        "type": "Physical"
+      },
+      {
+        "met": 5,
+        "name": "spreading dirt with a shovel",
+        "type": "Physical"
+      },
+      {
+        "met": 4.5,
+        "name": "washing and waxing hull of sailboat or airplane",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "washing and waxing car",
+        "type": "Physical"
+      },
+      {
+        "met": 4.5,
+        "name": "washing fence, painting fence, moderate effort",
+        "type": "Physical"
+      },
+      {
+        "met": 3.3,
+        "name": "wiring, tapping-splicing",
+        "type": "Physical"
+      }
+    ]
+  },
+  {
+    "icon": "if_bed_415896.png",
+    "name": "Inactivity",
+    "types": [
+      {
+        "met": 1,
+        "name": "lying quietly and watching television",
+        "type": "Physical"
+      },
+      {
+        "met": 1.3,
+        "name": "lying quietly, doing nothing, lying in bed awake, listening to music (not talking or reading)",
+        "type": "Physical"
+      },
+      {
+        "met": 1.3,
+        "name": "sitting quietly and watching television",
+        "type": "Physical"
+      },
+      {
+        "met": 1.3,
+        "name": "sitting quietly, general",
+        "type": "Physical"
+      },
+      {
+        "met": 1.5,
+        "name": "sitting quietly, fidgeting, general, fidgeting hands",
+        "type": "Physical"
+      },
+      {
+        "met": 1.8,
+        "name": "sitting, fidgeting feet",
+        "type": "Physical"
+      },
+      {
+        "met": 1.3,
+        "name": "sitting, smoking",
+        "type": "Physical"
+      },
+      {
+        "met": 1.5,
+        "name": "sitting, listening to music (not talking or reading) or watching a movie in a theater",
+        "type": "Physical"
+      },
+      {
+        "met": 1.3,
+        "name": "sitting at a desk, resting head in hands",
+        "type": "Physical"
+      },
+      {
+        "met": 0.95,
+        "name": "sleeping",
+        "type": "Physical"
+      },
+      {
+        "met": 1.3,
+        "name": "standing quietly, standing in a line",
+        "type": "Physical"
+      },
+      {
+        "met": 1.8,
+        "name": "standing, fidgeting",
+        "type": "Physical"
+      },
+      {
+        "met": 1.3,
+        "name": "reclining, writing",
+        "type": "Physical"
+      },
+      {
+        "met": 1.3,
+        "name": "reclining, talking or talking on phone",
+        "type": "Physical"
+      },
+      {
+        "met": 1.3,
+        "name": "reclining, reading",
+        "type": "Physical"
+      },
+      {
+        "met": 1,
+        "name": "meditating",
+        "type": "Physical"
+      }
+    ]
+  },
+  {
+    "icon": "if_lawn_mower_1880380.png",
+    "name": "Walking",
+    "types": [
+      {
+        "met": 3.3,
+        "name": "carrying, loading or stacking wood, loading/unloading or carrying lumber, light-to-moderate effort",
+        "type": "Physical"
+      },{
+        "met": 5.5,
+        "name": "carrying, loading or stacking wood, loading/unloading or carrying lumber",
+        "type": "Physical"
+      },{
+        "met": 4.5,
+        "name": "chopping wood, splitting logs, moderate effort",
+        "type": "Physical"
+      },{
+        "met": 6.3,
+        "name": "chopping wood, splitting logs, vigorous effort",
+        "type": "Physical"
+      },{
+        "met": 3.5,
+        "name": "clearing light brush, thinning garden, moderate effort",
+        "type": "Physical"
+      },{
+        "met": 6.3,
+        "name": "clearing brush/land, undergrowth, or ground, hauling branches, wheelbarrow chores, vigorous effort",
+        "type": "Physical"
+      },{
+        "met": 5,
+        "name": "digging sandbox, shoveling sand",
+        "type": "Physical"
+      },{
+        "met": 3.5,
+        "name": "digging, spading, filling garden, composting, light-to-moderate effort",
+        "type": "Physical"
+      },{
+        "met": 5,
+        "name": "digging, spading, filling garden, compositing, (Taylor Code 590)",
+        "type": "Physical"
+      },{
+        "met": 7.8,
+        "name": "digging, spading, filling garden, composting, vigorous effort",
+        "type": "Physical"
+      },{
+        "met": 2.8,
+        "name": "driving tractor",
+        "type": "Physical"
+      },{
+        "met": 8.3,
+        "name": "felling trees, large size",
+        "type": "Physical"
+      },{
+        "met": 5.3,
+        "name": "felling trees, small-medium size",
+        "type": "Physical"
+      },{
+        "met": 5.8,
+        "name": "gardening with heavy power tools, tilling a garden, chain saw",
+        "type": "Physical"
+      },{
+        "met": 2.3,
+        "name": "gardening, using containers, older adults > 60 years",
+        "type": "Physical"
+      },{
+        "met": 4,
+        "name": "irrigation channels, opening and closing ports",
+        "type": "Physical"
+      },{
+        "met": 6.3,
+        "name": "laying crushed rock",
+        "type": "Physical"
+      },{
+        "met": 5,
+        "name": "laying sod",
+        "type": "Physical"
+      },{
+        "met": 5.5,
+        "name": "mowing lawn, general",
+        "type": "Physical"
+      },{
+        "met": 2.5,
+        "name": "mowing lawn, riding mower (Taylor Code 550)",
+        "type": "Physical"
+      },{
+        "met": 6,
+        "name": "mowing lawn, walk, hand mower (Taylor Code 570)",
+        "type": "Physical"
+      },{
+        "met": 5,
+        "name": "mowing lawn, walk, power mower, moderate or vigorous effort",
+        "type": "Physical"
+      },{
+        "met": 4.5,
+        "name": "mowing lawn, power mower, light or moderate effort (Taylor Code 590)",
+        "type": "Physical"
+      },{
+        "met": 2.5,
+        "name": "operating snow blower, walking",
+        "type": "Physical"
+      },{
+        "met": 2,
+        "name": "planting, potting, transplanting seedlings or plants, light effort",
+        "type": "Physical"
+      },{
+        "met": 4.3,
+        "name": "planting seedlings, shrub, stooping, moderate effort",
+        "type": "Physical"
+      },{
+        "met": 4.3,
+        "name": "planting crops or garden, stooping, moderate effort",
+        "type": "Physical"
+      },{
+        "met": 4.5,
+        "name": "planting trees",
+        "type": "Physical"
+      },{
+        "met": 3.8,
+        "name": "raking lawn or leaves, moderate effort",
+        "type": "Physical"
+      },{
+        "met": 4,
+        "name": "raking lawn (Taylor Code 600)",
+        "type": "Physical"
+      },{
+        "met": 4,
+        "name": "raking roof with snow rake",
+        "type": "Physical"
+      },{
+        "met": 3,
+        "name": "riding snow blower",
+        "type": "Physical"
+      },{
+        "met": 4,
+        "name": "sacking grass, leaves",
+        "type": "Physical"
+      },{
+        "met": 5.5,
+        "name": "shoveling dirt or mud",
+        "type": "Physical"
+      },{
+        "met": 5.3,
+        "name": "shoveling snow, by hand, moderate effort",
+        "type": "Physical"
+      },{
+        "met": 6,
+        "name": "shovelling snow, by hand (Taylor Code 610)",
+        "type": "Physical"
+      },{
+        "met": 7.5,
+        "name": "shoveling snow, by hand, vigorous effort",
+        "type": "Physical"
+      },{
+        "met": 4,
+        "name": "trimming shrubs or trees, manual cutter",
+        "type": "Physical"
+      },{
+        "met": 3.5,
+        "name": "trimming shrubs or trees, power cutter, using leaf blower, edge, moderate effort",
+        "type": "Physical"
+      },{
+        "met": 3,
+        "name": "walking, applying fertilizer or seeding a lawn, push applicator",
+        "type": "Physical"
+      },{
+        "met": 1.5,
+        "name": "watering lawn or garden, standing or walking",
+        "type": "Physical"
+      },{
+        "met": 3.5,
+        "name": "weeding, cultivating garden, light-to-moderate effort",
+        "type": "Physical"
+      },{
+        "met": 4.5,
+        "name": "weeding, cultivating garden (Taylor Code 580)",
+        "type": "Physical"
+      },{
+        "met": 5,
+        "name": "weeding, cultivating garden, using a hoe, moderate-to-vigorous effort",
+        "type": "Physical"
+      },{
+        "met": 3.8,
+        "name": "gardening, general, moderate effort",
+        "type": "Physical"
+      },{
+        "met": 3.5,
+        "name": "picking fruit off trees, picking fruits/vegetables, moderate effort",
+        "type": "Physical"
+      },{
+        "met": 4.5,
+        "name": "picking fruit off trees, gleaning fruits, picking fruits/vegetables, climbing ladder to pick fruit, vigorous effort",
+        "type": "Physical"
+      },{
+        "met": 3.3,
+        "name": "implied walking/standing - picking up yard, light, picking flowers or vegetables",
+        "type": "Physical"
+      },{
+        "met": 3,
+        "name": "walking, gathering gardening tools",
+        "type": "Physical"
+      },{
+        "met": 5.5,
+        "name": "wheelbarrow, pushing garden cart or wheelbarrow ",
+        "type": "Physical"
+      },{
+        "met": 3,
+        "name": "yard work, general, light effort",
+        "type": "Physical"
+      },{
+        "met": 4,
+        "name": "yard work, general, moderate effort",
+        "type": "Physical"
+      },{
+        "met": 6,
+        "name": "yard work, general, vigorous effort",
+        "type": "Physical"
+      }
+    ]
+  },
+  {
+    "icon": "if_miscellaneous-75_809431.png",
+    "name": "Miscellaneous",
+    "types": [
+      {
+        "met": ,
+        "name": "",
+        "type": "Intellectual"
+      }
+    ]
+  },
+  {
     "icon": "if_walking_309003.png",
     "name": "Walking",
     "types": [
@@ -81,225 +1598,6 @@
       {
         "met": 3.5,
         "name": "For pleasure, work break",
-        "type": "Physical"
-      }
-    ]
-  },
-  {
-    "icon": "if_weightlift_309002.png",
-    "name": "Conditioning exercise",
-    "types": [
-      {
-        "met": 8,
-        "name": "Calisthenics (e.g. push ups, sit ups, pull-ups, jumping jacks), vigorous effort",
-        "type": "Physical"
-      },
-      {
-        "met": 3.8,
-        "name": "Calisthenics (e.g. push ups, sit ups, pull-ups, lunges), moderate effort",
-        "type": "Physical"
-      },
-      {
-        "met": 2.8,
-        "name": "Calisthenics (e.g. situps, abdominal crunches), light effort",
-        "type": "Physical"
-      },
-      {
-        "met": 3.5,
-        "name": "Calisthenics, light or moderate effort, general (example: back exercises), going up & down from floor",
-        "type": "Physical"
-      },
-      {
-        "met": 4.3,
-        "name": "Circuit training, moderate effort",
-        "type": "Physical"
-      },
-      {
-        "met": 8,
-        "name": "Circuit training, including kettlebells, some aerobic movement with minimal rest, general, vigorous intensity",
-        "type": "Physical"
-      },
-      {
-        "met": 6,
-        "name": "Resistance training (weight lifting - free weight, nautilus or universal-type), power lifting or body building, vigorous effort",
-        "type": "Physical"
-      },
-      {
-        "met": 5,
-        "name": "Resistance (weight) training, squats, slow or explosive effort",
-        "type": "Physical"
-      },
-      {
-        "met": 3.5,
-        "name": "Resistance (weight) training, multiple exercises, 8-15 repetitions at varied resistance",
-        "type": "Physical"
-      }
-    ]
-  },
-  {
-    "icon": "if_regular_biking_310309.png",
-    "name": " Bicycling",
-    "types": [
-      {
-        "met": 4,
-        "name": "Bicycling, <10 mph, leisure, to work or for pleasure",
-        "type": "Physical"
-      },
-      {
-        "met": 3.5,
-        "name": "Bicycling, to/from work, self selected pace",
-        "type": "Physical"
-      },
-      {
-        "met": 7.5,
-        "name": "Bicycling, general",
-        "type": "Physical"
-      },
-      {
-        "met": 3.5,
-        "name": "Bicycling, leisure, 5.5 mph",
-        "type": "Physical"
-      },
-      {
-        "met": 5.8,
-        "name": "Bicycling, leisure, 9.4 mph",
-        "type": "Physical"
-      },
-      {
-        "met": 6.8,
-        "name": "Bicycling, 10-11.9 mph, leisure, slow, light effort",
-        "type": "Physical"
-      },
-      {
-        "met": 8,
-        "name": "Bicycling, 12-13.9 mph, leisure, moderate effort",
-        "type": "Physical"
-      },
-      {
-        "met": 10,
-        "name": "Bicycling, 14-15.9 mph, racing or leisure, fast, vigorous effort",
-        "type": "Physical"
-      }
-    ]
-  },
-  {
-    "icon": "if_miscellaneous-75_809431.png",
-    "name": "Miscellaneous",
-    "types": [
-      {
-        "met": 1.3,
-        "name": "Sitting, studying, general, including reading and/or writing, light effort",
-        "type": "Intellectual"
-      },
-      {
-        "met": 1.8,
-        "name": "Sitting, in class, general, including note-taking or class discussion",
-        "type": "Intellectual"
-      },
-      {
-        "met": 1.8,
-        "name": "Standing, reading",
-        "type": "Intellectual"
-      },
-      {
-        "met": 2.5,
-        "name": "Standing, miscellaneous",
-        "type": "Physical"
-      }
-    ]
-  },
-  {
-    "icon": "if_washing_machine_2023116.png",
-    "name": "Home activities",
-    "types": [
-      {
-        "met": 3.3,
-        "name": "Cleaning, sweeping carpet or floors, general",
-        "type": "Physical"
-      },
-      {
-        "met": 2.3,
-        "name": "Cleaning, sweeping, slow, light effort",
-        "type": "Physical"
-      },
-      {
-        "met": 3.8,
-        "name": "Cleaning, sweeping, slow, moderate effort",
-        "type": "Physical"
-      },
-      {
-        "met": 3.5,
-        "name": "Cleaning, heavy or major (e.g. wash car, wash windows, clean garage), moderate effort",
-        "type": "Physical"
-      },
-      {
-        "met": 3.5,
-        "name": "Cleaning, mopping, standing, moderate effort",
-        "type": "Physical"
-      },
-      {
-        "met": 3.2,
-        "name": "Cleaning windows, washing windows, general",
-        "type": "Physical"
-      },
-      {
-        "met": 2.5,
-        "name": "Mopping, standing, light effort",
-        "type": "Physical"
-      },
-      {
-        "met": 4.5,
-        "name": "Polishing floors, standing, walking slowly, using electric polishing machine",
-        "type": "Physical"
-      },
-      {
-        "met": 2.8,
-        "name": "Multiple household tasks all at once, light effort",
-        "type": "Physical"
-      },
-      {
-        "met": 3.5,
-        "name": "Multiple household tasks all at once, moderate effort",
-        "type": "Physical"
-      },
-      {
-        "met": 4.3,
-        "name": "Multiple household tasks all at once, vigorous effort",
-        "type": "Physical"
-      },
-      {
-        "met": 3.3,
-        "name": "Kitchen activity, general, (e.g., cooking, washing dishes, cleaning up), moderate effort",
-        "type": "Physical"
-      },
-      {
-        "met": 2.5,
-        "name": "Cleaning, general (straightening up, changing linen, carrying out trash, light effort",
-        "type": "Physical"
-      },
-      {
-        "met": 1.8,
-        "name": "Wash dishes, standing or in general (not broken into stand/walk components)",
-        "type": "Physical"
-      },
-      {
-        "met": 2.5,
-        "name": "Wash dishes, clearing dishes from table, walking, light effort",
-        "type": "Physical"
-      },
-      {
-        "met": 3.5,
-        "name": "Cooking or food preparation, moderate effort",
-        "type": "Physical"
-      },
-      {
-        "met": 2,
-        "name": "Cooking or food preparation - standing or sitting or in general (not broken into stand/walk components), manual appliances, light effort",
-        "type": "Physical"
-      },
-      {
-        "met": 2.5,
-        "name": "Cooking or food preparation, walking",
         "type": "Physical"
       }
     ]

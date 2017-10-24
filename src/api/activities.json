@@ -1510,9 +1510,245 @@
     "name": "Miscellaneous",
     "types": [
       {
-        "met": 0,
-        "name": "",
+        "met": 1.5,
+        "name": "board game playing, sitting",
         "type": "Intellectual"
+      },
+      {
+        "met": 2.5,
+        "name": "casino gambling, standing",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1.5,
+        "name": "card playing, sitting",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1.5,
+        "name": "chess game, sitting",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1.5,
+        "name": "copying documents, standing",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1.8,
+        "name": "drawing, writing, painting, standing",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1,
+        "name": "laughing, sitting",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1.3,
+        "name": "sitting, reading, book, newspaper, etc.",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1.3,
+        "name": "sitting, writing, desk work, typing",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1,
+        "name": "sitting, playing traditional video game, computer game",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1.8,
+        "name": "standing, talking in person, on the phone, computer, or text messaging, light effort",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1.5,
+        "name": "sitting, talking in person, on the phone, computer, or text messaging, light effort",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1.3,
+        "name": "sitting, studying, general, including reading and/or writing, light effort",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1.8,
+        "name": "sitting, in class, general, including note-taking or class discussion",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1.8,
+        "name": "standing, reading",
+        "type": "Intellectual"
+      },
+      {
+        "met": 2.5,
+        "name": "standing, miscellaneous",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1.8,
+        "name": "sitting, arts and crafts,  carving wood, weaving, spinning wool, light effort",
+        "type": "Intellectual"
+      },
+      {
+        "met": 3,
+        "name": "sitting, arts and crafts,  carving wood, weaving, spinning wool, moderate effort",
+        "type": "Intellectual"
+      },
+      {
+        "met": 2.5,
+        "name": "standing, arts and crafts, sand painting, carving, weaving, light effort",
+        "type": "Intellectual"
+      },
+      {
+        "met": 3.3,
+        "name": "standing, arts and crafts, sand painting, carving, weaving, moderate effort",
+        "type": "Intellectual"
+      },
+      {
+        "met": 3.5,
+        "name": "standing, arts and crafts, sand painting, carving, weaving, vigorous effort",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1.8,
+        "name": "retreat/family reunion activities involving sitting, relaxing, talking, eating",
+        "type": "Intellectual"
+      },
+      {
+        "met": 3,
+        "name": "retreat/family reunion activities involving playing games with children",
+        "type": "Intellectual"
+      },
+      {
+        "met": 2,
+        "name": "touring/traveling/vacation involving riding in a vehicle",
+        "type": "Intellectual"
+      },
+      {
+        "met": 3.5,
+        "name": "touring/traveling/vacation involving walking",
+        "type": "Intellectual"
+      },
+      {
+        "met": 2.5,
+        "name": "camping involving standing, walking, sitting, light-to-moderate effort",
+        "type": "Intellectual"
+      },
+      {
+        "met": 1.5,
+        "name": "sitting at a sporting event, spectator",
+        "type": "Intellectual"
+      }
+    ]
+  },
+  {
+    "icon": "if_Music_Band_1_753887.png",
+    "name": "Walking",
+    "types": [
+      {
+        "met": 1.8,
+        "name": "accordion, sitting",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "cello, sitting",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "conducting orchestra, standing",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "double bass, standing",
+        "type": "Physical"
+      },
+      {
+        "met": 3.8,
+        "name": "drums, sitting",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "drumming (e.g., bongo, conga, benbe), moderate, sitting",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "flute, sitting",
+        "type": "Physical"
+      },
+      {
+        "met": 1.8,
+        "name": "horn, standing",
+        "type": "Physical"
+      },
+      {
+        "met": 2.3,
+        "name": "piano, sitting",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "playing musical instruments, general",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "organ, sitting",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "trombone, standing",
+        "type": "Physical"
+      },
+      {
+        "met": 1.8,
+        "name": "trumpet, standing",
+        "type": "Physical"
+      },
+      {
+        "met": 2.5,
+        "name": "violin, sitting",
+        "type": "Physical"
+      },
+      {
+        "met": 1.8,
+        "name": "woodwind, sitting",
+        "type": "Physical"
+      },
+      {
+        "met": 2,
+        "name": "guitar, classical, folk, sitting",
+        "type": "Physical"
+      },
+      {
+        "met": 3,
+        "name": "guitar, rock and roll band, standing",
+        "type": "Physical"
+      },
+      {
+        "met": 4,
+        "name": "marching band, baton twirling, walking, moderate pace, general",
+        "type": "Physical"
+      },
+      {
+        "met": 5.5,
+        "name": "marching band, playing an instrument, walking, brisk pace, general",
+        "type": "Physical"
+      },
+      {
+        "met": 3.5,
+        "name": "marching band, drum major, walking",
+        "type": "Physical"
       }
     ]
   },

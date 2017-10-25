@@ -97,6 +97,7 @@ export class MealProvider {
 
   public checkBreakfastTimeAchievement(goals: NutritionGoals, mealPlan: MealPlan): boolean {
     const breakfastTimeGoal: number = moment.duration(goals.breakfastTime.value).asMinutes();
+    const breakfastTime: number = moment.duration(mealPlan.meals[0].hour).asMinutes();
     if (goals.breakfastTime.isSelected) {
       if (breakfastTime => breakfastTimeGoal - 30) {
         return true;

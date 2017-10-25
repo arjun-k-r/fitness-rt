@@ -3100,8 +3100,124 @@
     "name": "Winter activities",
     "types": [
       {
-        "met": 0,
-        "name": ""
+        "met": 7.5,
+        "name": "dog sledding, mushing "
+      },
+      {
+        "met": 2.5,
+        "name": "dog sledding, passenger "
+      },
+      {
+        "met": 6,
+        "name": "moving ice house, set up/drill holes"
+      },
+      {
+        "met": 2,
+        "name": "ice fishing, sitting"
+      },
+      {
+        "met": 14,
+        "name": "skating, ice dancing"
+      },
+      {
+        "met": 5.5,
+        "name": "skating, ice, 9 mph or less"
+      },
+      {
+        "met": 7,
+        "name": "skating, ice, general (Taylor Code 360)"
+      },
+      {
+        "met": 9,
+        "name": "skating, ice, rapidly, more than 9 mph, not competitive"
+      },
+      {
+        "met": 13.3,
+        "name": "skating, speed, competitive"
+      },
+      {
+        "met": 7,
+        "name": "ski jumping, climb up carrying skis"
+      },
+      {
+        "met": 7,
+        "name": "skiing, general"
+      },
+      {
+        "met": 6.8,
+        "name": "skiing, cross country, 2.5 mph, slow or light effort, ski walking"
+      },
+      {
+        "met": 9,
+        "name": "skiing, cross country, 4.0-4.9 mph, moderate speed and effort, general"
+      },
+      {
+        "met": 12.5,
+        "name": "skiing, cross country, 5.0-7.9 mph, brisk speed, vigorous effort"
+      },
+      {
+        "met": 15,
+        "name": "skiing, cross country, >8.0 mph, elite skier, racing"
+      },
+      {
+        "met": 15.5,
+        "name": "skiing, cross country, hard snow, uphill, maximum, snow mountaineering"
+      },
+      {
+        "met": 13.3,
+        "name": "skiing, cross-country, skating "
+      },
+      {
+        "met": 13.5,
+        "name": "skiing, cross-country, biathlon, skating technique"
+      },
+      {
+        "met": 4.3,
+        "name": "skiing, downhill, alpine or snowboarding, light effort, active time only"
+      },
+      {
+        "met": 5.3,
+        "name": "skiing, downhill, alpine or snowboarding, moderate effort, general, active time only"
+      },
+      {
+        "met": 8,
+        "name": "skiing, downhill, vigorous effort, racing"
+      },
+      {
+        "met": 12.5,
+        "name": "skiing, roller, elite racers"
+      },
+      {
+        "met": 7,
+        "name": "sledding, tobogganing, bobsledding, luge (Taylor Code 370)"
+      },
+      {
+        "met": 5.3,
+        "name": "snow shoeing, moderate effort"
+      },
+      {
+        "met": 10,
+        "name": "snow shoeing, vigorous effort"
+      },
+      {
+        "met": 3.5,
+        "name": "snowmobiling, driving, moderate"
+      },
+      {
+        "met": 2,
+        "name": "snowmobiling, passenger"
+      },
+      {
+        "met": 5.3,
+        "name": "snow shoveling, by hand, moderate effort"
+      },
+      {
+        "met": 7.5,
+        "name": "snow shoveling, by hand, vigorous effort"
+      },
+      {
+        "met": 2.5,
+        "name": "snow blower, walking and pushing"
       }
     ]
   },
@@ -3110,8 +3226,100 @@
     "name": "Religious activities",
     "types": [
       {
-        "met": 0,
-        "name": ""
+        "met": 1.3,
+        "name": "sitting in church, in service, attending a ceremony, sitting quietly"
+      },
+      {
+        "met": 2,
+        "name": "sitting, playing an instrument at church"
+      },
+      {
+        "met": 1.8,
+        "name": "sitting in church, talking or singing, attending a ceremony, sitting, active participation"
+      },
+      {
+        "met": 1.3,
+        "name": "sitting, reading religious materials at home"
+      },
+      {
+        "met": 1.3,
+        "name": "standing quietly in church, attending a ceremony"
+      },
+      {
+        "met": 2,
+        "name": "standing, singing in church, attending a ceremony, standing, active participation"
+      },
+      {
+        "met": 1.3,
+        "name": "kneeling in church or at home, praying"
+      },
+      {
+        "met": 1.8,
+        "name": "standing, talking in church"
+      },
+      {
+        "met": 2,
+        "name": "walking in church"
+      },
+      {
+        "met": 2,
+        "name": "walking, less than 2.0 mph, very slow"
+      },
+      {
+        "met": 3.5,
+        "name": "walking, 3.0 mph, moderate speed, not carrying anything"
+      },
+      {
+        "met": 4.3,
+        "name": "walking, 3.5 mph, brisk speed, not carrying anything"
+      },
+      {
+        "met": 2,
+        "name": "walk/stand combination for religious purposes, usher"
+      },
+      {
+        "met": 5,
+        "name": "praise with dance or run, spiritual dancing in church"
+      },
+      {
+        "met": 2.5,
+        "name": "serving food at church"
+      },
+      {
+        "met": 2,
+        "name": "preparing food at church"
+      },
+      {
+        "met": 3.3,
+        "name": "washing dishes, cleaning kitchen at church"
+      },
+      {
+        "met": 1.5,
+        "name": "eating at church"
+      },
+      {
+        "met": 2,
+        "name": "eating/talking at church or standing eating, American Indian Feast days"
+      },
+      {
+        "met": 3.3,
+        "name": "cleaning church"
+      },
+      {
+        "met": 4,
+        "name": "general yard work at church"
+      },
+      {
+        "met": 3.5,
+        "name": "standing, moderate effort (e.g., lifting heavy objects, assembling at fast rate)"
+      },
+      {
+        "met": 4.5,
+        "name": "standing, moderate-to-heavy effort, manual labor, lifting ≥ 50 lbs, heavy maintenance"
+      },
+      {
+        "met": 1.3,
+        "name": "typing, electric, manual, or computer"
       }
     ]
   },
@@ -3120,8 +3328,80 @@
     "name": "Volunteer activities",
     "types": [
       {
-        "met": 0,
-        "name": ""
+        "met": 1.5,
+        "name": "sitting, meeting, general, and/or with talking involved"
+      },
+      {
+        "met": 1.5,
+        "name": "sitting, light office work, in general"
+      },
+      {
+        "met": 2.5,
+        "name": "sitting, moderate work"
+      },
+      {
+        "met": 2.3,
+        "name": "standing, light work (filing, talking, assembling)"
+      },
+      {
+        "met": 2,
+        "name": "sitting, child care, only active periods"
+      },
+      {
+        "met": 3,
+        "name": "standing, child care, only active periods"
+      },
+      {
+        "met": 3.5,
+        "name": "walk/run play with children, moderate, only active periods"
+      },
+      {
+        "met": 5.8,
+        "name": "walk/run play with children, vigorous, only active periods"
+      },
+      {
+        "met": 3,
+        "name": "standing, light/moderate work (e.g., pack boxes, assemble/repair, set up chairs/furniture)"
+      },
+      {
+        "met": 3.5,
+        "name": "standing, moderate (lifting 50 lbs., assembling at fast rate)"
+      },
+      {
+        "met": 4.5,
+        "name": "standing, moderate/heavy work"
+      },
+      {
+        "met": 1.3,
+        "name": "typing, electric, manual, or computer"
+      },
+      {
+        "met": 2,
+        "name": "walking, less than 2.0 mph, very slow"
+      },
+      {
+        "met": 3.5,
+        "name": "walking, 3.0 mph, moderate speed, not carrying anything"
+      },
+      {
+        "met": 4.3,
+        "name": "walking, 3.5 mph, brisk speed, not carrying anything"
+      },
+      {
+        "met": 3.5,
+        "name": "walking, 2.5 mph slowly and carrying objects less than 25 pounds"
+      },
+      {
+        "met": 4.5,
+        "name": "walking, 3.0 mph moderately and carrying objects less than 25 pounds, pushing something"
+      },
+      {
+        "met": 4.8,
+        "name": "walking, 3.5 mph, briskly and carrying objects less than 25 pounds"
+      },
+      {
+        "met": 3,
+        "name": "walk/stand combination, for volunteer purposes"
       }
     ]
   }

@@ -819,7 +819,7 @@
   },
   {
     "icon": "if_Setting01_928428.png",
-    "name": "Walking",
+    "name": "Home repair",
     "types": [
       {
         "met": 3,
@@ -1039,7 +1039,7 @@
   },
   {
     "icon": "if_lawn_mower_1880380.png",
-    "name": "Walking",
+    "name": "Lawn & Garden",
     "types": [
       {
         "met": 3.3,

@@ -144,8 +144,15 @@ export class MealProvider {
       mealSizeAchieved: boolean = true;
 
     mealPlan.meals.forEach((meal: Meal) => {
-      mealSizeAchieved = this.checkMealSizeAchievement(goals, meal);
-      foodGroupRestrictionsAchieved = this.checkFoodGroupsAchievement(goals, meal);
+      let achievement: boolean = this.checkMealSizeAchievement(goals, meal);
+      if (!achievement) {
+        mealSizeAchieved = false;
+      }
+      
+      achievement = this.checkFoodGroupsAchievement(goals, meal);
+      if (!achievement) {
+        foodGroupRestrictionsAchieved = false;
+      }
     });
 
     return this.checkBreakfastTimeAchievement(goals, mealPlan) && this.checkDinnerTimeAchievement(goals, mealPlan) && foodGroupRestrictionsAchieved && this.checkIntervalAchievement(goals, mealPlan) && mealSizeAchieved && (goals.breakfastTime.isSelected || goals.dinnerTime.isSelected || goals.foodGroupRestrictions.isSelected || goals.mealInterval.isSelected || goals.mealSize.isSelected);

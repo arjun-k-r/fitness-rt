@@ -15,13 +15,13 @@
     role="search">
   </ion-searchbar>
   <ion-list role="list">
-    <ion-item *ngFor="let activityCategory of activityCategories | search: activitySearchQuery | limit: activityLimit"
+    <ion-item *ngFor="let activityCategory of activityCategories | search: activitySearchQuery | limit: activityLimit ; let i = index"
       role="listitem">
       <ion-thumbnail item-start>
         <img src="assets/icon/{{ activityCategory.icon }}">
       </ion-thumbnail>
       <ion-label>{{ activityCategory.name }}</ion-label>
-      <ion-select multiple="true" (ionChange)="selectActivity($event)">
+      <ion-select multiple="true" [(ngModel)]="selectedActivities[activityCategory.name]">
         <ion-option *ngFor="let activityType of activityCategory.types | sort: 'name': 'asc'" [value]="activityType">{{ activityType.name }}</ion-option>
       </ion-select>
     </ion-item>

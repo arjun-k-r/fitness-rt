@@ -18,9 +18,6 @@ import {
 // Firebase
 import * as firebase from 'firebase/app';
 
-// Thir-party
-import { find } from 'lodash';
-
 // Models
 import { ActivityCategory, ActivityType } from '../../models';
 
@@ -40,7 +37,7 @@ export class ActivityListPage {
   public activityLimit: number = 50;
   public activityCategories: ActivityCategory[];
   public activitySearchQuery: string = '';
-  public selectedActivities: ActivityType[] = [];
+  public selectedActivities: any = {};
   constructor(
     private _alertCtrl: AlertController,
     private _activityPvd: ActivityProvider,
@@ -56,20 +53,17 @@ export class ActivityListPage {
   }
 
   public doneSelecting(): void {
-    this._viewCtrl.dismiss(this.selectedActivities);
+    let selectedActivities: ActivityType[] = [];
+    Object.keys(this.selectedActivities).forEach((key: string) => {
+      let selections: ActivityType[] = this.selectedActivities[key];
+      selections.forEach((selection: ActivityType) => selectedActivities.push(new ActivityType(0, 0, selection.met, `${key}, ${selection.name}`, selection.time)))
+    })
+    this._viewCtrl.dismiss(selectedActivities);
   }
 
   public loadMoreActivities(ev: InfiniteScroll) {
     this.activityLimit += 50;
     setTimeout(() => ev.complete(), 1000);
-  }
-
-  public selectActivity(selectedActivities: ActivityType[]): void {
-    selectedActivities.forEach((selectedActivity: ActivityType) => {
-      if (!find(this.selectedActivities, (activity: ActivityType) => activity.name === selectedActivity.name)) {
-        this.selectedActivities = [...this.selectedActivities, Object.assign({}, selectedActivity, { duration: 0, energyConsumption: 0 })]
-      }
-    })
   }
 
   ionViewWillEnter(): void {

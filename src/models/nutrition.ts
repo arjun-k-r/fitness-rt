@@ -34,7 +34,6 @@ export class Nutrition {
         public valine: Nutrient = new Nutrient(510, 'Amino Acids', 'Valine', 'g'),
         public histidine: Nutrient = new Nutrient(512, 'Amino Acids', 'Histidine', 'g'),
         public fats: Nutrient = new Nutrient(204, 'Proximates', 'Fats', 'g'),
-        public satFat: Nutrient = new Nutrient(606, 'Lipids', 'Saturated fat', 'g'),
         public transFat: Nutrient = new Nutrient(605, 'Lipids', 'Trans fat', 'g'),
         public la: Nutrient = new Nutrient(618, 'Lipids', 'Omega-6 (LA)', 'g'),
         public ala: Nutrient = new Nutrient(619, 'Lipids', 'Omega-3 (ALA)', 'g'),

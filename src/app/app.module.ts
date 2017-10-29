@@ -9,8 +9,11 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
 // Ionic Native
+import { Autostart } from '@ionic-native/autostart';
+import { BackgroundMode } from '@ionic-native/background-mode';
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { Pedometer } from '@ionic-native/pedometer';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -57,8 +60,11 @@ const FIREBASE_CONFIG = {
     MyApp
   ],
   providers: [
+    Autostart,
+    BackgroundMode,
     Camera,
     ImagePicker,
+    Pedometer,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

@@ -17,6 +17,8 @@ import {
   Popover,
   PopoverController
 } from 'ionic-angular';
+import { IPedometerData } from '@ionic-native/pedometer';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -60,6 +62,19 @@ export class ExercisePage {
     private _popoverCtrl: PopoverController
   ) { }
 
+  private _addActivity(): void {
+    const activityListModal: Modal = this._modalCtrl.create('activity-list', {
+      authId: this._authId
+    });
+    activityListModal.present();
+    activityListModal.onDidDismiss((activities: ActivityType[]) => {
+      if (!!activities) {
+        this.activityPlan.activities = this.activityPlan.activities ? [...this.activityPlan.activities, ...activities] : [...activities];
+        this._updateActivityPlan();
+      }
+    });
+  }
+
   private _changeDuration(activity: ActivityType): void {
     this._alertCtrl.create({
       title: 'Duration',
@@ -99,6 +114,17 @@ export class ExercisePage {
     }).present();
   }
 
+  private _recordWalking(): void {
+    const pedometerModal: Modal = this._modalCtrl.create('pedometer');
+    pedometerModal.present();
+    pedometerModal.onDidDismiss((pedometerData: IPedometerData) => {
+      if (!!pedometerData) {
+        this.activityPlan.stepsWalked = pedometerData.numberOfSteps;
+        this.activityPlan.distanceWalked = pedometerData.distance;
+      }
+    });
+  }
+
   private _removeActivity(idx: number): void {
     this.activityPlan.activities = [...this.activityPlan.activities.slice(0, idx), ...this.activityPlan.activities.slice(idx + 1)];
     this._updateActivityPlan();
@@ -113,19 +139,6 @@ export class ExercisePage {
     this.activityPlan.combos.overtraining = this._activityPvd.checkOvertraining(this.activityPlan.activities);
     this.activityPlan.combos.sedentarism = this._activityPvd.checkSedentarism(this.activityPlan);
     this.activityPlan.lifePoints = this._activityPvd.checkLifePoints(this.activityPlan);
-  }
-
-  public addActivity(): void {
-    const activityListModal: Modal = this._modalCtrl.create('activity-list', {
-      authId: this._authId
-    });
-    activityListModal.present();
-    activityListModal.onDidDismiss((activities: ActivityType[]) => {
-      if (!!activities) {
-        this.activityPlan.activities = this.activityPlan.activities ? [...this.activityPlan.activities, ...activities] : [...activities];
-        this._updateActivityPlan();
-      }
-    });
   }
 
   public changeActivity(idx: number): void {
@@ -210,6 +223,28 @@ export class ExercisePage {
       }, {
         text: 'No'
       }]
+    }).present();
+  }
+
+  public logActivity(): void {
+    this._actionSheetCtrl.create({
+      title: 'Log activity',
+      buttons: [
+        {
+          text: 'Add existing activity',
+          handler: () => {
+            this._addActivity();
+          }
+        }, {
+          text: 'Start walking',
+          handler: () => {
+            this._recordWalking();
+          }
+        }, {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
     }).present();
   }
 

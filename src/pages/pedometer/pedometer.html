@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Pedometer</ion-title>
+    <ion-buttons end>
+      <button (click)="saveRecording()" icon-only ion-button padding role="button">
+        <ion-icon aria-hidden="true" name="done-all"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list role="list">
+    <ion-item role="listitem">
+      <h2 text-wrap>Steps</h2>
+      <p item-content>{{ recordingData.numberOfSteps }}</p>
+    </ion-item>
+    <ion-item role="listitem">
+      <h2 text-wrap>Distance</h2>
+      <p item-content>{{ recordingData.distance }}km</p>
+    </ion-item>
+    <ion-item role="listitem">
+      <h2 text-wrap>Floors ascended</h2>
+      <p item-content>{{ recordingData.floorsAscended }}</p>
+    </ion-item>
+    <ion-item role="listitem">
+      <h2 text-wrap>Floors descended</h2>
+      <p item-content>{{ recordingData.floorsDescended }}</p>
+    </ion-item>
+  </ion-list>
+  <button (click)="startRecording()" [disabled]="isRecording" ion-button full role="button">Start recording</button>
+  <button (click)="stopRecording()" [disabled]="!isRecording" ion-button full role="button">Stop recording</button>
+</ion-content>

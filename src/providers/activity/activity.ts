@@ -59,6 +59,18 @@ export class ActivityProvider {
     return activities.reduce((acc: number, currActivity: ActivityType) => acc += currActivity.energyConsumption, 0);
   }
 
+  public checkDistanceAchievement(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
+    if (goals.distance.isSelected) {
+      if (activityPlan.distanceWalked >= +goals.distance.value) {
+        return true;
+      }
+    } else {
+      return true;
+    }
+
+    return false;
+  }
+
   public checkDurationAchievement(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
     if (goals.duration.isSelected) {
       if (activityPlan.totalDuration >= +goals.duration.value) {
@@ -83,8 +95,20 @@ export class ActivityProvider {
     return false;
   }
 
+  public checkStepsAchievement(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
+    if (goals.steps.isSelected) {
+      if (activityPlan.stepsWalked >= +goals.steps.value) {
+        return true;
+      }
+    } else {
+      return true;
+    }
+
+    return false;
+  }
+
   public checkGoalAchievements(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
-    return this.checkDurationAchievement(goals, activityPlan) && this.checkEnergyAchievement(goals, activityPlan) && (goals.duration.isSelected || goals.energy.isSelected);
+    return this.checkDistanceAchievement(goals, activityPlan) && this.checkDurationAchievement(goals, activityPlan) && this.checkEnergyAchievement(goals, activityPlan) && this.checkStepsAchievement(goals, activityPlan) && (goals.distance.isSelected || goals.duration.isSelected || goals.energy.isSelected || goals.steps.isSelected);
   }
 
   public checkGoodExercise(activityPlan: ActivityPlan): boolean {
@@ -179,7 +203,7 @@ export class ActivityProvider {
   public saveActivityPlan(authId: string, activityPlan: ActivityPlan, weekLog: ExerciseLog[]): Promise<{}> {
     return new Promise((resolve, reject) => {
       const fitnessSubscription: Subscription = this._db.object(`/fitness/${authId}`).subscribe((fitness: Fitness) => {
-        const newExerciseLog: ExerciseLog = new ExerciseLog(moment().format('dddd'), activityPlan.totalDuration, activityPlan.totalEnergyConsumption);
+        const newExerciseLog: ExerciseLog = new ExerciseLog(moment().format('dddd'), activityPlan.distanceWalked, activityPlan.totalDuration, activityPlan.totalEnergyConsumption, activityPlan.stepsWalked);
         const weekLength: number = weekLog.length;
         if (!!weekLength) {
           if (newExerciseLog.date !== weekLog[weekLength - 1].date) {

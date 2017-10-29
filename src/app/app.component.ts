@@ -5,6 +5,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 
 // Ionic Native
+import { Autostart } from '@ionic-native/autostart';
+import { BackgroundMode } from '@ionic-native/background-mode';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -22,6 +24,8 @@ export class MyApp {
   public pages: Array<IPageLink>;
   public rootPage: string = 'registration';
   constructor(
+    private _autostart: Autostart,
+    private _backgroundMode: BackgroundMode,
     private _platform: Platform,
     private _statusBar: StatusBar,
     private _splashScreen: SplashScreen
@@ -33,6 +37,8 @@ export class MyApp {
     this._platform.ready().then(() => {
       this._statusBar.styleDefault();
       this._splashScreen.hide();
+      this._backgroundMode.enable();
+      this._autostart.enable();
       this.pages = [
         { component: 'fitness', icon: 'body', title: 'Fitness' },
         { component: 'sleep', icon: 'moon', title: 'Sleep' },

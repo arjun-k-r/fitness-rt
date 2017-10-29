@@ -34,7 +34,9 @@ export class ActivityPlan {
             sedentarism: boolean
         } = { energy: false, goalsAchieved: false, hiit: false, lowActivity: false, overtraining: false, sedentarism: true},
         public date: number = moment().dayOfYear(),
+        public distanceWalked: number = 0,
         public lifePoints: number = 0,
+        public stepsWalked: number = 0,
         public totalDuration: number = 0,
         public totalEnergyConsumption: number = 0,
         public weekLog: ExerciseLog[] = []
@@ -43,15 +45,19 @@ export class ActivityPlan {
 
 export class ExerciseGoals {
     constructor(
+        public distance: Goal = new Goal(false, 0),
         public duration: Goal = new Goal(false, 0),
-        public energy: Goal = new Goal(false, 0)
+        public energy: Goal = new Goal(false, 0),
+        public steps: Goal = new Goal(false, 0)
     ) { }
 }
 
 export class ExerciseLog {
     constructor(
         public date: string,
+        public totalDistance: number = 0,
         public totalDuration: number = 0,
-        public totalEnergyConsumption: number = 0
+        public totalEnergyConsumption: number = 0,
+        public totalSteps: number = 0
     ) { }
 }

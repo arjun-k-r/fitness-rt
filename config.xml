@@ -3,7 +3,7 @@
     <name>iFit</name>
     <description>Cross platform fit app</description>
     <author email="razvan.tomegea@gmail.com" href="https://www.razvantomegea.com/">Razvan Tomegea</author>
-    <content original-src="index.html" src="http://192.168.0.105:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
@@ -77,13 +77,10 @@
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
     </platform>
-    <allow-navigation href="http://192.168.56.1:8100" />
-    <allow-navigation href="http://192.168.0.105:8100" />
-    <engine name="android" spec="^6.2.3" />
-    <plugin name="cordova-plugin-camera" spec="^2.4.1" />
     <plugin name="com.synconset.imagepicker" spec="^2.1.10">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Photos" />
     </plugin>
+    <plugin name="cordova-plugin-camera" spec="^2.4.1" />
     <plugin name="cordova-plugin-console" spec="^1.0.5" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
@@ -100,5 +97,7 @@
     <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
     <plugin name="cordova-plugin-autostart" spec="^2.0.1" />
     <plugin name="cordova-plugin-pedometer" spec="^0.4.1" />
-    <plugin name="de.appplant.cordova.plugin.local-notification" spec="^0.8.5" />
+    <engine name="android" spec="~6.2.3" />
+    <allow-navigation href="http://192.168.56.1:8100" />
+    <allow-navigation href="http://192.168.0.105:8100" />
 </widget>

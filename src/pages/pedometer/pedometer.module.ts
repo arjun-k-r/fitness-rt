@@ -12,5 +12,8 @@ import { PedometerPage } from './pedometer';
   imports: [
     IonicPageModule.forChild(PedometerPage),
   ],
+  providers: [
+    Pedometer
+  ]
 })
 export class PedometerPageModule {}

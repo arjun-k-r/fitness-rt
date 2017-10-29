@@ -200,6 +200,10 @@ export class ActivityProvider {
     return this._db.object(`/activity-plan/${authId}/${CURRENT_DAY - 1}`);
   }
 
+  public getTimeout(authId: string): FirebaseObjectObservable<number> {
+    return this._db.object(`/activity-plan/${authId}/timeout`)
+  }
+
   public saveActivityPlan(authId: string, activityPlan: ActivityPlan, weekLog: ExerciseLog[]): Promise<{}> {
     return new Promise((resolve, reject) => {
       const fitnessSubscription: Subscription = this._db.object(`/fitness/${authId}`).subscribe((fitness: Fitness) => {
@@ -234,5 +238,9 @@ export class ActivityProvider {
 
   public saveExerciseGoals(authId: string, goals: ExerciseGoals): Promise<void> {
     return this._db.object(`/activity-plan/${authId}/goals`).set(goals);
+  }
+
+  public saveTimeout(authId: string, timeout: number): Promise<void> {
+    return this._db.object(`/activity-plan/${authId}/timeout`).set(timeout);
   }
 }

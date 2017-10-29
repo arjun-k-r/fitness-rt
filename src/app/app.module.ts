@@ -13,7 +13,8 @@ import { Autostart } from '@ionic-native/autostart';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { Pedometer } from '@ionic-native/pedometer';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -64,7 +65,7 @@ const FIREBASE_CONFIG = {
     BackgroundMode,
     Camera,
     ImagePicker,
-    Pedometer,
+    LocalNotifications,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

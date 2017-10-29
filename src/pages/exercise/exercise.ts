@@ -24,6 +24,9 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
+// Third-party
+import * as moment from 'moment';
+
 // Models
 import { ActivityType, ActivityPlan, ExerciseGoals, ExerciseLog, ILineChartEntry } from '../../models';
 
@@ -41,7 +44,10 @@ export class ExercisePage {
   private _authSubscription: Subscription;
   private _activitySubscription: Subscription;
   private _exerciseGoalSubscription: Subscription;
+  private _getMovingInterval: number;
+  private _getMovingSubscription: Subscription;
   private _loader: Loading;
+  private _notificationId: number;
   private _weekLogSubscription: Subscription;
   private _weekLog: ExerciseLog[] = [];
   public activityPlan: ActivityPlan = new ActivityPlan();
@@ -51,12 +57,15 @@ export class ExercisePage {
   public chartOpts: any = { responsive: true };
   public exerciseGoals: ExerciseGoals = new ExerciseGoals();
   public exerciseSegment: string = 'goals';
+  public timeRanOut: string = '00:00:00';
+  public triggeredNotification: boolean = true;
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
     private _activityPvd: ActivityProvider,
     private _loadCtrl: LoadingController,
+    private _localNotifications: LocalNotifications,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
     private _popoverCtrl: PopoverController
@@ -139,6 +148,16 @@ export class ExercisePage {
     this.activityPlan.combos.overtraining = this._activityPvd.checkOvertraining(this.activityPlan.activities);
     this.activityPlan.combos.sedentarism = this._activityPvd.checkSedentarism(this.activityPlan);
     this.activityPlan.lifePoints = this._activityPvd.checkLifePoints(this.activityPlan);
+  }
+
+  public cancelMovingSchedule(): void {
+    this._localNotifications.cancel(this._notificationId);
+    this._activityPvd.saveTimeout(this._authId, moment.duration(0).asMilliseconds());
+    clearInterval(this._getMovingInterval);
+    this._notificationId = null;
+    this._getMovingInterval = null;
+    this._getMovingSubscription.unsubscribe();
+    this.triggeredNotification = true;
   }
 
   public changeActivity(idx: number): void {
@@ -303,6 +322,44 @@ export class ExercisePage {
     popover.present({
       ev: event
     });
+  }
+
+  public startMovingSchedule(): void {
+    this.triggeredNotification = false;
+    let timeout: number = moment.duration(+this.exerciseGoals.getMoving.value, 'minutes').asMilliseconds(),
+      timeRanout: moment.Duration;
+    this._notificationId = moment.duration().asMinutes();
+    this._localNotifications.schedule({
+      at: moment().add(timeout, 'milliseconds').toDate(),
+      id: this._notificationId,
+      text: 'Get moving'
+    });
+
+    this._localNotifications.on('trigger', () => {
+      this._activityPvd.saveTimeout(this._authId, moment.duration(0).asMilliseconds());
+      clearInterval(this._getMovingInterval);
+      this._notificationId = null;
+      this._getMovingInterval = null;
+      this._getMovingSubscription.unsubscribe();
+      this.triggeredNotification = true;
+    });
+
+    this._getMovingSubscription = this._activityPvd.getTimeout(this._authId).subscribe((timeout: number) => {
+      timeRanout = moment.duration(timeout['$value'], 'milliseconds');
+      this.timeRanOut = timeRanout.asMilliseconds() === 0 ? '00:00:00' : `${timeRanout.hours()}:${timeRanout.minutes()}:${timeRanout.seconds()}`;
+    }, (err: firebase.FirebaseError) => {
+      this._alertCtrl.create({
+        title: 'Uhh ohh...',
+        subTitle: 'Something went wrong',
+        message: err.message,
+        buttons: ['OK']
+      }).present();
+    });
+
+    this._getMovingInterval = setInterval(() => {
+      timeout -= 1000;
+      this._activityPvd.saveTimeout(this._authId, moment.duration(timeout).asMilliseconds());
+    }, 1000)
   }
 
   ionViewCanEnter(): void {

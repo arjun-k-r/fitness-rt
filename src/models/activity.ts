@@ -48,6 +48,7 @@ export class ExerciseGoals {
         public distance: Goal = new Goal(false, 0),
         public duration: Goal = new Goal(false, 0),
         public energy: Goal = new Goal(false, 0),
+        public getMoving: Goal = new Goal(false, 0),
         public steps: Goal = new Goal(false, 0)
     ) { }
 }

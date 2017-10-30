@@ -128,8 +128,8 @@ export class ExercisePage {
     pedometerModal.present();
     pedometerModal.onDidDismiss((pedometerData: IPedometerData) => {
       if (!!pedometerData) {
-        this.activityPlan.stepsWalked = pedometerData.numberOfSteps;
-        this.activityPlan.distanceWalked = pedometerData.distance;
+        this.activityPlan.distanceWalked = pedometerData.distance || 0;
+        this.activityPlan.stepsWalked = pedometerData.numberOfSteps || 0;
       }
     });
   }

@@ -123,6 +123,15 @@ export class ExercisePage {
     }).present();
   }
 
+  private _clearMovingSchedule(): void {
+    this._activityPvd.saveTimeout(this._authId, moment.duration(0).asMilliseconds());
+    clearInterval(this._getMovingInterval);
+    this._notificationId = null;
+    this._getMovingInterval = null;
+    this._getMovingSubscription.unsubscribe();
+    this.triggeredNotification = true;
+  }
+
   private _recordWalking(): void {
     const pedometerModal: Modal = this._modalCtrl.create('pedometer');
     pedometerModal.present();
@@ -152,12 +161,7 @@ export class ExercisePage {
 
   public cancelMovingSchedule(): void {
     this._localNotifications.cancel(this._notificationId);
-    this._activityPvd.saveTimeout(this._authId, moment.duration(0).asMilliseconds());
-    clearInterval(this._getMovingInterval);
-    this._notificationId = null;
-    this._getMovingInterval = null;
-    this._getMovingSubscription.unsubscribe();
-    this.triggeredNotification = true;
+    this._clearMovingSchedule();
   }
 
   public changeActivity(idx: number): void {
@@ -335,17 +339,10 @@ export class ExercisePage {
       text: 'Get moving'
     });
 
-    this._localNotifications.on('trigger', () => {
-      this._activityPvd.saveTimeout(this._authId, moment.duration(0).asMilliseconds());
-      clearInterval(this._getMovingInterval);
-      this._notificationId = null;
-      this._getMovingInterval = null;
-      this._getMovingSubscription.unsubscribe();
-      this.triggeredNotification = true;
-    });
+    this._localNotifications.on('trigger', () => this._clearMovingSchedule());
 
-    this._getMovingSubscription = this._activityPvd.getTimeout(this._authId).subscribe((timeout: number) => {
-      timeRanout = moment.duration(timeout['$value'], 'milliseconds');
+    this._getMovingSubscription = this._activityPvd.getTimeout(this._authId).subscribe((savedTimeout: number) => {
+      timeRanout = moment.duration(savedTimeout['$value'], 'milliseconds');
       this.timeRanOut = timeRanout.asMilliseconds() === 0 ? '00:00:00' : `${timeRanout.hours()}:${timeRanout.minutes()}:${timeRanout.seconds()}`;
     }, (err: firebase.FirebaseError) => {
       this._alertCtrl.create({
@@ -389,6 +386,27 @@ export class ExercisePage {
         this._exerciseGoalSubscription = this._activityPvd.getExerciseGoals$(this._authId).subscribe(
           (goals: ExerciseGoals) => {
             this.exerciseGoals = Object.assign({}, goals['$value'] === null ? this.exerciseGoals : goals);
+            if (this.exerciseGoals.getMoving.isSelected) {
+              let timeout: number = moment.duration(+this.exerciseGoals.getMoving.value, 'minutes').asMilliseconds(),
+                timeRanout: moment.Duration;
+              this._getMovingSubscription = this._activityPvd.getTimeout(this._authId).subscribe((savedTimeout: number) => {
+                timeRanout = moment.duration(savedTimeout['$value'], 'milliseconds');
+                this.triggeredNotification = timeRanout.asMilliseconds() === 0;
+                this.timeRanOut = timeRanout.asMilliseconds() === 0 ? '00:00:00' : `${timeRanout.hours()}:${timeRanout.minutes()}:${timeRanout.seconds()}`;
+              }, (err: firebase.FirebaseError) => {
+                this._alertCtrl.create({
+                  title: 'Uhh ohh...',
+                  subTitle: 'Something went wrong',
+                  message: err.message,
+                  buttons: ['OK']
+                }).present();
+              });
+          
+              this._getMovingInterval = setInterval(() => {
+                timeout -= 1000;
+                this._activityPvd.saveTimeout(this._authId, moment.duration(timeout).asMilliseconds());
+              }, 1000)
+            }
           },
           (err: firebase.FirebaseError) => {
             if (this._loader) {
@@ -452,6 +470,7 @@ export class ExercisePage {
     this._activitySubscription && this._activitySubscription.unsubscribe();
     this._exerciseGoalSubscription && this._exerciseGoalSubscription.unsubscribe();
     this._weekLogSubscription && this._weekLogSubscription.unsubscribe();
+    this._clearMovingSchedule();
     if (this._loader) {
       this._loader.dismiss();
       this._loader = null;

@@ -1,7 +1,12 @@
 // Angular
 import { Injectable } from '@angular/core';
 
+// Ionic
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 // Rxjs
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 import { Subscription } from 'rxjs/Subscription';
 
 // Firebase
@@ -23,10 +28,13 @@ const CURRENT_DAY: number = moment().dayOfYear();
 @Injectable()
 export class ActivityProvider {
   private _activities$: FirebaseListObservable<ActivityCategory[]>;
+  private _notificationId: any;
+  private _notificationTimer: Observable<number>;
   private _userWeight: number;
   constructor(
     private _db: AngularFireDatabase,
     private _fitPvd: FitnessProvider,
+    private _localNotifications: LocalNotifications,
     private _nutritionPvd: NutritionProvider
   ) {
     this._activities$ = this._db.list('/activity-categories', {
@@ -57,6 +65,12 @@ export class ActivityProvider {
 
   public calculateActivityPlanEnergyConsumption(activities: ActivityType[]): number {
     return activities.reduce((acc: number, currActivity: ActivityType) => acc += currActivity.energyConsumption, 0);
+  }
+
+  public cancelSchedule(): void {
+    this._localNotifications.cancel(this._notificationId);
+    this._notificationId = null;
+    this._notificationTimer = null;
   }
 
   public checkDistanceAchievement(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
@@ -204,6 +218,10 @@ export class ActivityProvider {
     return this._db.object(`/activity-plan/${authId}/timeout`)
   }
 
+  public notificationScheduled(): boolean {
+    return !!this._notificationId;
+  }
+
   public saveActivityPlan(authId: string, activityPlan: ActivityPlan, weekLog: ExerciseLog[]): Promise<{}> {
     return new Promise((resolve, reject) => {
       const fitnessSubscription: Subscription = this._db.object(`/fitness/${authId}`).subscribe((fitness: Fitness) => {
@@ -240,7 +258,21 @@ export class ActivityProvider {
     return this._db.object(`/activity-plan/${authId}/goals`).set(goals);
   }
 
-  public saveTimeout(authId: string, timeout: number): Promise<void> {
-    return this._db.object(`/activity-plan/${authId}/timeout`).set(timeout);
+  public setSchedule(countdown: number): Observable<number> {
+    if (!this._notificationId) {
+      this._notificationId = moment.duration().asMinutes();
+      this._localNotifications.schedule({
+        at: moment().add(countdown, 'milliseconds').toDate(),
+        id: this._notificationId,
+        text: 'Get moving'
+      });
+
+      this._notificationTimer = Observable
+        .timer(1, 1000)
+        .map(i => countdown - i * 1000)
+        .take(countdown / 1000 + 1);
+    }
+
+    return this._notificationTimer;
   }
 }

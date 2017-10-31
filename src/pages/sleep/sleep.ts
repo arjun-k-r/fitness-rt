@@ -69,6 +69,10 @@ export class SleepPage {
     private _popoverCtrl: PopoverController,
     private _sleepPvd: SleepProvider
   ) {
+    this._initSleepForm();
+  }
+
+  private _initSleepForm(): void {
     this.sleepForm = this._formBuilder.group({
       bedTime: ['', Validators.required],
       duration: ['', Validators.required],
@@ -83,6 +87,34 @@ export class SleepPage {
     this.noStimulants = this.sleepForm.get('noStimulants');
     this.quality = this.sleepForm.get('quality');
     this.relaxation = this.sleepForm.get('relaxation');
+  }
+
+  private _watchSleepChanges(): void {
+    this._sleepFormSubscription = this.sleepForm.valueChanges.subscribe(
+      (changes: {
+        bedTime: string;
+        duration: number;
+        noElectronics: boolean;
+        noStimulants: boolean;
+        quality: number;
+        relaxation: boolean;
+      }
+      ) => {
+        if (this.sleepForm.valid) {
+          this.sleep = Object.assign(this.sleep, {
+            bedTime: changes.bedTime,
+            combos: {
+              noElectronics: changes.noElectronics,
+              noStimulants: changes.noStimulants,
+              quality: changes.quality,
+              relaxation: changes.relaxation
+            },
+            duration: changes.duration
+          });
+        }
+      },
+      (err: Error) => console.error(`Error fetching form changes: ${err}`)
+    );
   }
 
   public changeChartData(): void {
@@ -127,45 +159,11 @@ export class SleepPage {
           });
           this._loader.present();
           this._sleepFormSubscription.unsubscribe();
-          this.sleepForm = this._formBuilder.group({
-            bedTime: ['', Validators.required],
-            duration: ['', Validators.required],
-            noElectronics: ['', Validators.required],
-            noStimulants: ['', Validators.required],
-            quality: ['', Validators.required],
-            relaxation: ['', Validators.required]
-          });
-          this.bedTime = this.sleepForm.get('bedTime');
-          this.duration = this.sleepForm.get('duration');
-          this.noElectronics = this.sleepForm.get('noElectronics');
-          this.noStimulants = this.sleepForm.get('noStimulants');
-          this.quality = this.sleepForm.get('quality');
-          this.relaxation = this.sleepForm.get('relaxation');
-          this._sleepFormSubscription = this.sleepForm.valueChanges.subscribe(
-            (changes: {
-              bedTime: string;
-              duration: number;
-              noElectronics: boolean;
-              noStimulants: boolean;
-              quality: number;
-              relaxation: boolean;
-            }
-            ) => {
-              if (this.sleepForm.valid) {
-                this.sleep = Object.assign(this.sleep, {
-                  bedTime: changes.bedTime,
-                  combos: {
-                    noElectronics: changes.noElectronics,
-                    noStimulants: changes.noStimulants,
-                    quality: changes.quality,
-                    relaxation: changes.relaxation
-                  },
-                  duration: changes.duration
-                });
-              }
-            },
-            (err: Error) => console.error(`Error fetching form changes: ${err}`)
-          );
+          
+          this._initSleepForm();
+
+          this._watchSleepChanges();
+
           const subscription: Subscription = this._sleepPvd.getPrevSleep$(this._authId).subscribe(
             (sleep: Sleep) => {
               this.sleep = Object.assign({}, sleep['$value'] === null ? this.sleep : sleep);
@@ -215,29 +213,29 @@ export class SleepPage {
       this._sleepPvd.saveSleepGoals(this._authId, this.sleepGoals),
       this._sleepPvd.saveSleep(this._authId, this.sleep, this._weekLog)
     ]).then(() => {
-        if (this._loader) {
-          this._loader.dismiss();
-          this._loader = null;
-        }
-        this._alertCtrl.create({
-          title: 'Success!',
-          message: 'Sleep plan saved successfully!',
-          buttons: [{
-            text: 'Great!',
-            handler: () => {
-              const goodSleep: boolean = this._sleepPvd.checkGoodSleep(this.sleep);
-              if (goodSleep || this.sleep.combos.goalsAchieved) {
-                this._modalCtrl.create('rewards', {
-                  context: 'sleep',
-                  goalsAchieved: this.sleep.combos.goalsAchieved,
-                  goodQuality: goodSleep,
-                  lifepoints: this.sleep.lifePoints
-                }).present();
-              }
+      if (this._loader) {
+        this._loader.dismiss();
+        this._loader = null;
+      }
+      this._alertCtrl.create({
+        title: 'Success!',
+        message: 'Sleep plan saved successfully!',
+        buttons: [{
+          text: 'Great!',
+          handler: () => {
+            const goodSleep: boolean = this._sleepPvd.checkGoodSleep(this.sleep);
+            if (goodSleep || this.sleep.combos.goalsAchieved) {
+              this._modalCtrl.create('rewards', {
+                context: 'sleep',
+                goalsAchieved: this.sleep.combos.goalsAchieved,
+                goodQuality: goodSleep,
+                lifepoints: this.sleep.lifePoints
+              }).present();
             }
-          }]
-        }).present();
-      })
+          }
+        }]
+      }).present();
+    })
       .catch((err: firebase.FirebaseError) => {
         if (this._loader) {
           this._loader.dismiss();
@@ -283,6 +281,8 @@ export class SleepPage {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this._authId = auth.uid;
+
+        // Subscribe to sleep goals
         this._sleepGoalSubscription = this._sleepPvd.getSleepGoals$(this._authId).subscribe(
           (goals: SleepGoals) => {
             this.sleepGoals = Object.assign({}, goals['$value'] === null ? this.sleepGoals : goals);
@@ -301,6 +301,7 @@ export class SleepPage {
           }
         );
 
+        // Subscribe to sleep plan
         this._sleepSubscription = this._sleepPvd.getSleep$(this._authId).subscribe(
           (sleep: Sleep) => {
             this.sleep = Object.assign({}, sleep['$value'] === null ? this.sleep : sleep);
@@ -329,6 +330,7 @@ export class SleepPage {
           }
         );
 
+        // Subscribe to last 7 days sleep plans
         this._weekLogSubscription = this._sleepPvd.getSleepLog$(this._authId).subscribe(
           (weekLog: SleepLog[] = []) => {
             this.chartLabels = [...weekLog.map((log: SleepLog) => log.date)];
@@ -349,31 +351,9 @@ export class SleepPage {
         );
       }
     });
-    this._sleepFormSubscription = this.sleepForm.valueChanges.subscribe(
-      (changes: {
-        bedTime: string;
-        duration: number;
-        noElectronics: boolean;
-        noStimulants: boolean;
-        quality: number;
-        relaxation: boolean;
-      }
-      ) => {
-        if (this.sleepForm.valid) {
-          this.sleep = Object.assign(this.sleep, {
-            bedTime: changes.bedTime,
-            combos: {
-              noElectronics: changes.noElectronics,
-              noStimulants: changes.noStimulants,
-              quality: changes.quality,
-              relaxation: changes.relaxation
-            },
-            duration: changes.duration
-          });
-        }
-      },
-      (err: Error) => console.error(`Error fetching form changes: ${err}`)
-    );
+
+    // Subscribe to sleep changes
+    this._watchSleepChanges();
   }
 
   ionViewWillLeave(): void {

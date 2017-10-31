@@ -238,6 +238,8 @@ export class NutritionPage {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this._authId = auth.uid;
+
+        // Subscribe to meal plan
         this._mealSubscription = this._mealPvd.getMealPlan$(this._authId).subscribe(
           (mealPlan: MealPlan) => {
             this.mealPlan = Object.assign({}, mealPlan['$value'] === null ? this.mealPlan : mealPlan);
@@ -277,6 +279,7 @@ export class NutritionPage {
           }
         );
 
+        // Subscribe to nutrition goals
         this._nutritionGoalSubscription = this._mealPvd.getNutritionGoals$(this._authId).subscribe(
           (goals: NutritionGoals) => {
             this.nutritionGoals = Object.assign({}, goals['$value'] === null ? this.nutritionGoals : goals);
@@ -295,6 +298,7 @@ export class NutritionPage {
           }
         );
 
+        // Subscribe to last 7 days meal plans
         this._weekLogSubscription = this._mealPvd.getNutritionLog$(this._authId).subscribe(
           (weekLog: NutritionLog[] = []) => {
             this.chartLabels = [...weekLog.map((log: NutritionLog) => log.date)];

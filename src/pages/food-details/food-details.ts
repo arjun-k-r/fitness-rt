@@ -101,6 +101,10 @@ export class FoodDetailsPage {
     this.authId = <string>this._params.get('authId');
     this.food = <Food>this._params.get('food');
     this.editMode = !this.food['$key'];
+    this._initFoodForm();
+  }
+
+  private _initFoodForm(): void {
     this.foodForm = this._formBuilder.group({
       group: [this.food.group, Validators.required],
       name: [this.food.name, Validators.required],
@@ -205,6 +209,76 @@ export class FoodDetailsPage {
     this.caffeine = this.foodForm.get('caffeine');
   }
 
+  private _watchFoodChanges(): void {
+    this._foodFormSubscription = this.foodForm.valueChanges.subscribe(
+      (changes: {
+        group: string;
+        name: string;
+        quantity: number;
+        energy: number;
+        water: number;
+        protein: number;
+        histidine: number;
+        isoleucine: number;
+        leucine: number;
+        lysine: number;
+        methionine: number;
+        phenylalanine: number;
+        tryptophan: number;
+        threonine: number;
+        valine: number;
+        fats: number;
+        satFat: number;
+        transFat: number;
+        la: number;
+        ala: number;
+        dha: number;
+        epa: number;
+        carbs: number;
+        fiber: number;
+        sugars: number;
+        calcium: number;
+        copper: number;
+        iron: number;
+        magnesium: number;
+        manganese: number;
+        phosphorus: number;
+        potassium: number;
+        selenium: number;
+        sodium: number;
+        zinc: number;
+        vitaminA: number;
+        vitaminB1: number;
+        vitaminB2: number;
+        vitaminB3: number;
+        vitaminB5: number;
+        vitaminB6: number;
+        vitaminB9: number;
+        vitaminB12: number;
+        choline: number;
+        vitaminC: number;
+        vitaminD: number;
+        vitaminE: number;
+        vitaminK: number;
+        alcohol: number;
+        caffeine: number;
+      }
+      ) => {
+        if (this.foodForm.valid) {
+          for (let key in changes) {
+            if (this.food.hasOwnProperty(key)) {
+              this.food = Object.assign(this.food, { [key]: changes[key] });
+            } else if (this.food.nutrition.hasOwnProperty(key)) {
+              this.food.nutrition[key] = Object.assign(this.food.nutrition[key], { value: +changes[key] });
+            }
+          }
+          this.food = Object.assign(this.food, { uploader: this.authId });
+        }
+      },
+      (err: Error) => console.error(`Error fetching form changes: ${err}`)
+    );
+  }
+
   public changeDataView(): void {
     this.dataView = this.dataView === 'Percentages' ? 'Quantities' : 'Percentages';
   }
@@ -300,73 +374,11 @@ export class FoodDetailsPage {
       spinner: 'crescent'
     });
     this._loader.present();
-    this._foodFormSubscription = this.foodForm.valueChanges.subscribe(
-      (changes: {
-        group: string;
-        name: string;
-        quantity: number;
-        energy: number;
-        water: number;
-        protein: number;
-        histidine: number;
-        isoleucine: number;
-        leucine: number;
-        lysine: number;
-        methionine: number;
-        phenylalanine: number;
-        tryptophan: number;
-        threonine: number;
-        valine: number;
-        fats: number;
-        satFat: number;
-        transFat: number;
-        la: number;
-        ala: number;
-        dha: number;
-        epa: number;
-        carbs: number;
-        fiber: number;
-        sugars: number;
-        calcium: number;
-        copper: number;
-        iron: number;
-        magnesium: number;
-        manganese: number;
-        phosphorus: number;
-        potassium: number;
-        selenium: number;
-        sodium: number;
-        zinc: number;
-        vitaminA: number;
-        vitaminB1: number;
-        vitaminB2: number;
-        vitaminB3: number;
-        vitaminB5: number;
-        vitaminB6: number;
-        vitaminB9: number;
-        vitaminB12: number;
-        choline: number;
-        vitaminC: number;
-        vitaminD: number;
-        vitaminE: number;
-        vitaminK: number;
-        alcohol: number;
-        caffeine: number;
-      }
-      ) => {
-        if (this.foodForm.valid) {
-          for (let key in changes) {
-            if (this.food.hasOwnProperty(key)) {
-              this.food = Object.assign(this.food, { [key]: changes[key] });
-            } else if (this.food.nutrition.hasOwnProperty(key)) {
-              this.food.nutrition[key] = Object.assign(this.food.nutrition[key], { value: +changes[key] });
-            }
-          }
-          this.food = Object.assign(this.food, { uploader: this.authId });
-        }
-      },
-      (err: Error) => console.error(`Error fetching form changes: ${err}`)
-    );
+
+    // Watch for food changes
+    this._watchFoodChanges();
+
+    // Calculate the food nutrition relative to the daily requirements
     this._foodPvd.calculateFoodRequirements(this.authId, this.food)
       .then((nutrition: Nutrition) => {
         this.foodDailyRequirements = Object.assign({}, nutrition);

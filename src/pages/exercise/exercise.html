@@ -84,13 +84,13 @@
         <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="exerciseGetMovingLabel" aria-required="true"
           id="exerciseGetMoving" [(ngModel)]="exerciseGoals.getMoving.value" type="number"></ion-input>
       </ion-item>
-      <button (click)="startMovingSchedule()" ion-item *ngIf="exerciseGoals.getMoving.isSelected && triggeredNotification">
+      <button (click)="startMovingSchedule()" ion-item *ngIf="exerciseGoals.getMoving.isSelected && scheduledGetMoving">
         <h2>Set schedule</h2>
-        <p item-content>{{ timeRanOut }}</p>
+        <p item-content>{{ countdown }}</p>
       </button>
-      <button (click)="cancelMovingSchedule()" ion-item *ngIf="exerciseGoals.getMoving.isSelected && !triggeredNotification">
+      <button (click)="cancelMovingSchedule()" ion-item *ngIf="exerciseGoals.getMoving.isSelected && !scheduledGetMoving">
         <h2>Cancel schedule</h2>
-        <p item-content>{{ timeRanOut }}</p>
+        <p item-content>{{ countdown }}</p>
       </button>
       <ion-item>
         <ion-label for="exerciseStepsSwitch" id="exerciseStepsSwitchLabel">Steps goal</ion-label>

@@ -267,10 +267,12 @@ export class ActivityProvider {
         text: 'Get moving'
       });
 
+      const schedule: number = moment.duration(countdown, 'minutes').asMilliseconds();
+
       this._notificationTimer = Observable
         .timer(1, 1000)
-        .map(i => countdown - i * 1000)
-        .take(countdown / 1000 + 1);
+        .map(i => schedule - i * 1000)
+        .take(schedule / 1000 + 1);
     }
 
     return this._notificationTimer;

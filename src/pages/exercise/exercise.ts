@@ -150,6 +150,7 @@ export class ExercisePage {
   public cancelMovingSchedule(): void {
     this._getMovingSubscription.unsubscribe();
     this._activityPvd.cancelSchedule();
+    this.countdown = '00:00:00';
   }
 
   public changeActivity(idx: number): void {

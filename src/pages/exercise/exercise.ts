@@ -14,6 +14,7 @@ import {
   Modal,
   ModalController,
   NavController,
+  Platform,
   Popover,
   PopoverController
 } from 'ionic-angular';
@@ -65,6 +66,7 @@ export class ExercisePage {
     private _loadCtrl: LoadingController,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
+    private _platform: Platform,
     private _popoverCtrl: PopoverController
   ) { }
 
@@ -365,7 +367,7 @@ export class ExercisePage {
         this._exerciseGoalSubscription = this._activityPvd.getExerciseGoals$(this._authId).subscribe(
           (goals: ExerciseGoals) => {
             this.exerciseGoals = Object.assign({}, goals['$value'] === null ? this.exerciseGoals : goals);
-            if (this.exerciseGoals.getMoving.isSelected && this._activityPvd.notificationScheduled()) {
+            if (!this._platform.is('cordova') && this.exerciseGoals.getMoving.isSelected && this._activityPvd.notificationScheduled()) {
               this.startMovingSchedule();
             }
           },

@@ -79,7 +79,7 @@
           [(ngModel)]="exerciseGoals.getMoving.isSelected" role="switch">
         </ion-toggle>
       </ion-item>
-      <ion-item *ngIf="exerciseGoals.getMoving.isSelected">
+      <ion-item showWhen="cordova" *ngIf="exerciseGoals.getMoving.isSelected">
         <ion-label floating for="exerciseGetMoving" id="exerciseGetMovingLabel">Get moving (minutes)</ion-label>
         <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="exerciseGetMovingLabel" aria-required="true"
           id="exerciseGetMoving" [(ngModel)]="exerciseGoals.getMoving.value" type="number"></ion-input>

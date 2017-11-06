@@ -6,7 +6,7 @@
     <ion-title>Nutrition</ion-title>
     <ion-buttons end>
       <button (click)="changeView()" ion-button padding role="button">
-        <ion-icon aria-hidden="true" name="{{ nutritionView === 'meals' ? 'list-box' : 'stats' }}"></ion-icon>
+        <ion-icon aria-hidden="true" name="{{ nutritionView === 'meals' ? 'stats' : 'list-box' }}"></ion-icon>
       </button>
       <button (click)="saveMealPlan()" icon-only ion-button padding role="button">
         <ion-icon aria-hidden="true" name="cloud-done"></ion-icon>

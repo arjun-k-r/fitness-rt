@@ -135,7 +135,11 @@ export class FoodListPage {
             text: 'Done',
             handler: (data: { servings: number }) => {
               item.servings = data.servings;
-              this.selectedItems = [...this.selectedItems, item];
+              if (idx === -1) {
+                this.selectedItems = [...this.selectedItems, item];
+              } else {
+                this.selectedItems = [...this.selectedItems.slice(0, idx), item, ...this.selectedItems.slice(idx + 1)];
+              }
             }
           }
         ]

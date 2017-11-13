@@ -18,9 +18,6 @@
   </ion-navbar>
   <ion-toolbar role="tablist">
     <ion-segment [(ngModel)]="exerciseSegment">
-      <ion-segment-button value="goals">
-        Goals
-      </ion-segment-button>
       <ion-segment-button value="dayLog">
         Today
       </ion-segment-button>
@@ -34,76 +31,11 @@
 
 <ion-content>
   <ion-fab *ngIf="exerciseSegment === 'dayLog'" bottom right>
-    <button (click)="logActivity()" color="secondary" ion-fab role="button">
+    <button (click)="addActivity()" color="secondary" ion-fab role="button">
       <ion-icon aria-hidden="true" name="add"></ion-icon>
     </button>
   </ion-fab>
   <div [ngSwitch]="exerciseSegment">
-    <ion-list *ngSwitchCase="'goals'" padding>
-      <ion-item>
-        <ion-label for="exerciseDistanceSwitch" id="exerciseDistanceSwitchLabel">Distance goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="exerciseDistanceSwitchLabel" aria-required="false" id="exerciseDistanceSwitch"
-          [(ngModel)]="exerciseGoals.distance.isSelected" role="switch">
-        </ion-toggle>
-      </ion-item>
-      <ion-item *ngIf="exerciseGoals.distance.isSelected">
-        <ion-label floating for="exerciseDistance" id="exerciseDistanceLabel">Distance (km)</ion-label>
-        <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="exerciseDistanceLabel" aria-required="true" id="exerciseDistance"
-          [(ngModel)]="exerciseGoals.distance.value" type="number"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label for="exerciseDistanceSwitch" id="exerciseDistanceSwitchLabel">Exercise duration</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="exerciseDistanceSwitchLabel" aria-required="false" id="exerciseDistanceSwitch"
-          [(ngModel)]="exerciseGoals.duration.isSelected" role="switch">
-        </ion-toggle>
-      </ion-item>
-      <ion-item *ngIf="exerciseGoals.duration.isSelected">
-        <ion-label floating for="exerciseDuration" id="exerciseDurationLabel">Exercise duration (minutes)</ion-label>
-        <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="exerciseDurationLabel" aria-required="true" id="exerciseDuration"
-          [(ngModel)]="exerciseGoals.duration.value" type="number"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label for="exerciseEnergySwitch" id="exerciseEnergySwitchLabel">Energy consumption goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="exerciseEnergySwitchLabel" aria-required="false" id="exerciseEnergySwitch"
-          [(ngModel)]="exerciseGoals.energy.isSelected" role="switch">
-        </ion-toggle>
-      </ion-item>
-      <ion-item *ngIf="exerciseGoals.energy.isSelected">
-        <ion-label floating for="exerciseEnergy" id="exerciseEnergyLabel">Energy consumption (kcal)</ion-label>
-        <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="exerciseEnergyLabel" aria-required="true" id="exerciseEnergy"
-          [(ngModel)]="exerciseGoals.energy.value" type="number"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label for="exerciseGetMovingSwitch" id="exerciseGetMovingSwitchLabel">Get moving goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="exerciseGetMovingSwitchLabel" aria-required="false" id="exerciseGetMovingSwitch"
-          [(ngModel)]="exerciseGoals.getMoving.isSelected" role="switch">
-        </ion-toggle>
-      </ion-item>
-      <ion-item showWhen="cordova" *ngIf="exerciseGoals.getMoving.isSelected">
-        <ion-label floating for="exerciseGetMoving" id="exerciseGetMovingLabel">Get moving (minutes)</ion-label>
-        <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="exerciseGetMovingLabel" aria-required="true"
-          id="exerciseGetMoving" [(ngModel)]="exerciseGoals.getMoving.value" type="number"></ion-input>
-      </ion-item>
-      <button showWhen="cordova" (click)="startMovingSchedule()" ion-item *ngIf="exerciseGoals.getMoving.isSelected && !scheduledGetMoving">
-        <h2>Set schedule</h2>
-        <p item-content>{{ countdown }}</p>
-      </button>
-      <button showWhen="cordova" (click)="cancelMovingSchedule()" ion-item *ngIf="exerciseGoals.getMoving.isSelected && scheduledGetMoving">
-        <h2>Cancel schedule</h2>
-        <p item-content>{{ countdown }}</p>
-      </button>
-      <ion-item>
-        <ion-label for="exerciseStepsSwitch" id="exerciseStepsSwitchLabel">Steps goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="exerciseStepsSwitchLabel" aria-required="false" id="exerciseStepsSwitch"
-          [(ngModel)]="exerciseGoals.steps.isSelected" role="switch">
-        </ion-toggle>
-      </ion-item>
-      <ion-item *ngIf="exerciseGoals.steps.isSelected">
-        <ion-label floating for="exerciseSteps" id="exerciseStepsLabel">Steps</ion-label>
-        <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="exerciseStepsLabel" aria-required="true" id="exerciseSteps"
-          [(ngModel)]="exerciseGoals.steps.value" type="number"></ion-input>
-      </ion-item>
-    </ion-list>
     <ion-list *ngSwitchCase="'dayLog'" padding role="list">
       <button (click)="changeActivity(i)" ion-item *ngFor="let activity of activityPlan?.activities; let i = index" role="button">
         <ion-icon aria-hidden="true" color="primary" item-start name="create"></ion-icon>
@@ -119,54 +51,18 @@
         <h2 text-wrap>Total energy consumption</h2>
         <p item-content>{{ activityPlan?.totalEnergyConsumption }} kcal</p>
       </ion-item>
-      <ion-item role="listitem">
-        <h2 text-wrap>Total steps</h2>
-        <p item-content>{{ activityPlan?.stepsWalked }} steps</p>
-      </ion-item>
-      <ion-item role="listitem">
-        <h2 text-wrap>Total distance</h2>
-        <p item-content>{{ activityPlan?.distanceWalked }} km</p>
-      </ion-item>
-      <ion-item>
-        <ion-label color="{{ activityPlan?.combos.energy && 'secondary'}}" for="energy" id="energyLabel" text-wrap>
-          I am feeling energized and fresh!
-          <ion-icon *ngIf="activityPlan?.combos.energy" aria-hidden="true" color="secondary" item-right name="thumbs-up"></ion-icon>
-        </ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="energyLabel" aria-required="true" id="energy" [(ngModel)]="activityPlan?.combos.energy"
-          role="switch"></ion-toggle>
-      </ion-item>
     </ion-list>
     <ion-list *ngSwitchCase="'dayLog'" role="list">
       <ion-item-divider color="primary" role="separator">
         Suggestions
       </ion-item-divider>
-      <ion-item *ngIf="activityPlan?.combos.lowActivity" role="listitem">
-        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
-        <h2 text-wrap>Your activities are to light</h2>
-        <p text-wrap>You need to reach your target heart rate zone every day the get the best of your exercise routine.</p>
-      </ion-item>
-      <ion-item *ngIf="activityPlan?.combos.overtraining" role="listitem">
-        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
-        <h2 text-wrap>Overtraining</h2>
-        <p text-wrap>You are doing too much intense exercise in a single day and may damage your cardiovascular system, nervous ystem,
-          and skeletal muscles. Split your intense exercise routine throughout the week in short, but intense sessions.</p>
-      </ion-item>
-      <ion-item *ngIf="activityPlan?.combos.sedentarism" role="listitem">
+      <ion-item *ngIf="activityPlan?.totalDuration < 120" role="listitem">
         <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
         <h2 text-wrap>Stay active</h2>
         <p text-wrap>Sedentarism puts you on a risk of all major organ diseases. Walk instead of taking a ride, take the stairs instead
           of the elevator, stretch every 45 minutes, do anything you can to avoid standing in one place. Everything counts!</p>
       </ion-item>
-      <ion-item *ngIf="!activityPlan?.combos.energy" role="listitem">
-        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
-        <h2 text-wrap>Train smart</h2>
-        <p text-wrap>Exercise must help your body get rid of toxins and increase oxygen intake. As a result, you'll feel energized and
-          fresh. Not having this feeling means you are not breathing correctly during exercise, you are not reaching your
-          target heart rate, your are not resting/exerciseing properly, overtraining, not having the right nutrition, or
-          doing the wrong exercise for your body.</p>
-      </ion-item>
-      <ion-item *ngIf="!activityPlan?.combos.lowActivity && !activityPlan?.combos.overtraining && !activityPlan?.combos.sedentarism && activityPlan?.combos.energy"
-        role="listitem">
+      <ion-item *ngIf="activityPlan?.totalDuration >= 120" role="listitem">
         <ion-note text-center text-wrap>No suggestions. Looking good!&nbsp;
           <ion-icon aria-hidden="true" name="thumbs-up"></ion-icon>
         </ion-note>

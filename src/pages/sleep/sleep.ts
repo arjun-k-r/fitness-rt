@@ -25,7 +25,7 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { ILineChartEntry, Sleep, SleepGoals, SleepLog } from '../../models';
+import { ILineChartEntry, Sleep } from '../../models';
 
 // Providers
 import { SleepProvider } from '../../providers';
@@ -42,9 +42,8 @@ export class SleepPage {
   private _loader: Loading;
   private _sleepSubscription: Subscription;
   private _sleepFormSubscription: Subscription;
-  private _sleepGoalSubscription: Subscription;
   private _weekLogSubscription: Subscription;
-  private _weekLog: SleepLog[] = [];
+  private _weekLog: Sleep[] = [];
   public bedTime: AbstractControl;
   public chartData: ILineChartEntry[] = [];
   public chartDataSelection: string = 'duration';
@@ -57,8 +56,7 @@ export class SleepPage {
   public relaxation: AbstractControl;
   public sleep: Sleep = new Sleep();
   public sleepForm: FormGroup;
-  public sleepGoals: SleepGoals = new SleepGoals();
-  public sleepSegment: string = 'goals';
+  public sleepSegment: string = 'dayLog';
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
@@ -75,18 +73,10 @@ export class SleepPage {
   private _initSleepForm(): void {
     this.sleepForm = this._formBuilder.group({
       bedTime: ['', Validators.required],
-      duration: ['', Validators.required],
-      noElectronics: ['', Validators.required],
-      noStimulants: ['', Validators.required],
-      quality: ['', Validators.required],
-      relaxation: ['', Validators.required]
+      duration: ['', Validators.required]
     });
     this.bedTime = this.sleepForm.get('bedTime');
     this.duration = this.sleepForm.get('duration');
-    this.noElectronics = this.sleepForm.get('noElectronics');
-    this.noStimulants = this.sleepForm.get('noStimulants');
-    this.quality = this.sleepForm.get('quality');
-    this.relaxation = this.sleepForm.get('relaxation');
   }
 
   private _watchSleepChanges(): void {
@@ -94,21 +84,11 @@ export class SleepPage {
       (changes: {
         bedTime: string;
         duration: number;
-        noElectronics: boolean;
-        noStimulants: boolean;
-        quality: number;
-        relaxation: boolean;
       }
       ) => {
         if (this.sleepForm.valid) {
           this.sleep = Object.assign(this.sleep, {
             bedTime: changes.bedTime,
-            combos: {
-              noElectronics: changes.noElectronics,
-              noStimulants: changes.noStimulants,
-              quality: changes.quality,
-              relaxation: changes.relaxation
-            },
             duration: changes.duration
           });
         }
@@ -121,21 +101,21 @@ export class SleepPage {
     switch (this.chartDataSelection) {
       case 'duration':
         this.chartData = [{
-          data: [...this._weekLog.map((log: SleepLog) => log.duration)],
+          data: [...this._weekLog.map((log: Sleep) => log.duration)],
           label: 'Sleep duration'
         }];
         break;
 
       case 'bedTime':
         this.chartData = [{
-          data: [...this._weekLog.map((log: SleepLog) => moment.duration(log.bedTime).asMinutes() / 60)],
+          data: [...this._weekLog.map((log: Sleep) => moment.duration(log.bedTime).asMinutes() / 60)],
           label: 'Bed time'
         }];
         break;
 
       case 'quality':
         this.chartData = [{
-          data: [...this._weekLog.map((log: SleepLog) => log.quality)],
+          data: [...this._weekLog.map((log: Sleep) => log.quality)],
           label: 'Sleep quality'
         }];
         break;
@@ -169,10 +149,7 @@ export class SleepPage {
               this.sleep = Object.assign({}, sleep['$value'] === null ? this.sleep : sleep);
               this.sleepForm.controls['bedTime'].patchValue(this.sleep.bedTime);
               this.sleepForm.controls['duration'].patchValue(this.sleep.duration);
-              this.sleepForm.controls['noElectronics'].patchValue(this.sleep.combos.noElectronics);
-              this.sleepForm.controls['noStimulants'].patchValue(this.sleep.combos.noStimulants);
-              this.sleepForm.controls['quality'].patchValue(this.sleep.combos.quality);
-              this.sleepForm.controls['relaxation'].patchValue(this.sleep.combos.relaxation);
+              this.sleepForm.controls['quality'].patchValue(this.sleep.quality);
               subscription.unsubscribe();
               if (this._loader) {
                 this._loader.dismiss();
@@ -206,13 +183,7 @@ export class SleepPage {
       spinner: 'crescent'
     });
     this._loader.present();
-
-    this.sleep.combos.goalsAchieved = this._sleepPvd.checkGoalAchievements(this.sleepGoals, this.sleep);
-    this.sleep.lifePoints = this._sleepPvd.checkLifePoints(this.sleep);
-    Promise.all([
-      this._sleepPvd.saveSleepGoals(this._authId, this.sleepGoals),
-      this._sleepPvd.saveSleep(this._authId, this.sleep, this._weekLog)
-    ]).then(() => {
+    this._sleepPvd.saveSleep(this._authId, this.sleep, this._weekLog).then(() => {
       if (this._loader) {
         this._loader.dismiss();
         this._loader = null;
@@ -220,20 +191,7 @@ export class SleepPage {
       this._alertCtrl.create({
         title: 'Success!',
         message: 'Sleep plan saved successfully!',
-        buttons: [{
-          text: 'Great!',
-          handler: () => {
-            const goodSleep: boolean = this._sleepPvd.checkGoodSleep(this.sleep);
-            if (goodSleep || this.sleep.combos.goalsAchieved) {
-              this._modalCtrl.create('rewards', {
-                context: 'sleep',
-                goalsAchieved: this.sleep.combos.goalsAchieved,
-                goodQuality: goodSleep,
-                lifepoints: this.sleep.lifePoints
-              }).present();
-            }
-          }
-        }]
+        buttons: ['Great']
       }).present();
     })
       .catch((err: firebase.FirebaseError) => {
@@ -282,35 +240,12 @@ export class SleepPage {
       if (!!auth) {
         this._authId = auth.uid;
 
-        // Subscribe to sleep goals
-        this._sleepGoalSubscription = this._sleepPvd.getSleepGoals$(this._authId).subscribe(
-          (goals: SleepGoals) => {
-            this.sleepGoals = Object.assign({}, goals['$value'] === null ? this.sleepGoals : goals);
-          },
-          (err: firebase.FirebaseError) => {
-            if (this._loader) {
-              this._loader.dismiss();
-              this._loader = null;
-            }
-            this._alertCtrl.create({
-              title: 'Uhh ohh...',
-              subTitle: 'Something went wrong',
-              message: err.message,
-              buttons: ['OK']
-            }).present();
-          }
-        );
-
         // Subscribe to sleep plan
         this._sleepSubscription = this._sleepPvd.getSleep$(this._authId).subscribe(
           (sleep: Sleep) => {
             this.sleep = Object.assign({}, sleep['$value'] === null ? this.sleep : sleep);
             this.sleepForm.controls['bedTime'].patchValue(this.sleep.bedTime);
             this.sleepForm.controls['duration'].patchValue(this.sleep.duration);
-            this.sleepForm.controls['noElectronics'].patchValue(this.sleep.combos.noElectronics);
-            this.sleepForm.controls['noStimulants'].patchValue(this.sleep.combos.noStimulants);
-            this.sleepForm.controls['quality'].patchValue(this.sleep.combos.quality);
-            this.sleepForm.controls['relaxation'].patchValue(this.sleep.combos.relaxation);
             if (this._loader) {
               this._loader.dismiss();
               this._loader = null;
@@ -332,11 +267,11 @@ export class SleepPage {
 
         // Subscribe to last 7 days sleep plans
         this._weekLogSubscription = this._sleepPvd.getSleepLog$(this._authId).subscribe(
-          (weekLog: SleepLog[] = []) => {
-            this.chartLabels = [...weekLog.map((log: SleepLog) => log.date)];
+          (weekLog: Sleep[] = []) => {
+            this.chartLabels = [...weekLog.map((log: Sleep) => `${log.date}`)];
             this._weekLog = [...weekLog];
             this.chartData = [{
-              data: [...this._weekLog.map((log: SleepLog) => log.duration)],
+              data: [...this._weekLog.map((log: Sleep) => log.duration)],
               label: 'Sleep duration'
             }];
           },
@@ -359,7 +294,6 @@ export class SleepPage {
   ionViewWillLeave(): void {
     this._authSubscription && this._authSubscription.unsubscribe();
     this._sleepSubscription && this._sleepSubscription.unsubscribe();
-    this._sleepGoalSubscription && this._sleepGoalSubscription.unsubscribe();
     this._sleepFormSubscription && this._sleepFormSubscription.unsubscribe();
     this._weekLogSubscription && this._weekLogSubscription.unsubscribe();
     if (this._loader) {

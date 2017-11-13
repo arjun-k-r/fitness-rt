@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
 import { FoodIntolerancePage } from './food-intolerance';
-import { FoodProviderModule } from '../../providers';
+import { FoodProviderModule, MealProviderModule } from '../../providers';
 
 @NgModule({
   declarations: [
@@ -11,7 +11,8 @@ import { FoodProviderModule } from '../../providers';
   ],
   imports: [
     IonicPageModule.forChild(FoodIntolerancePage),
-    FoodProviderModule
+    FoodProviderModule,
+    MealProviderModule
   ],
 })
 export class FoodIntolerancePageModule {}

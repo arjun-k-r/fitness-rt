@@ -21,7 +21,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { Fitness, LifePoints, Nutrition } from '../../models';
+import { Fitness, Nutrition } from '../../models';
 
 // Providers
 import { FitnessProvider, NutritionProvider } from '../../providers';
@@ -40,7 +40,6 @@ export class FitnessPage {
   private _fitnessSubscription: Subscription;
   private _fitnessFormSubscription: Subscription;
   public age: AbstractControl;
-  public currentLifePoints: number = 0;
   public customRequirements: Nutrition = new Nutrition();
   public dailyRequirements: Nutrition = new Nutrition();
   public dailyRequirementsForm: FormGroup;
@@ -48,9 +47,7 @@ export class FitnessPage {
   public fitnessForm: FormGroup;
   public fitnessSegment: string = 'fitnessInfo';
   public gender: AbstractControl;
-  public heartRate: number;
   public height: AbstractControl;
-  public isFit: boolean;
   public lactating: AbstractControl;
   public pregnant: AbstractControl;
   public weight: AbstractControl;
@@ -119,39 +116,6 @@ export class FitnessPage {
     this._nutritionPvd.calculateRequirements(this._authId, this.fitness.age, this.fitness.bmr, this.fitness.gender, this.fitness.lactating, this.fitness.macronutrientRatios, this.fitness.pregnant, this.fitness.weight)
       .then((dailyRequirements: Nutrition) => {
         this.dailyRequirements = Object.assign({}, dailyRequirements);
-      })
-      .catch((err: firebase.FirebaseError) => {
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.message,
-          buttons: ['OK']
-        }).present();
-      });
-  }
-
-  private _fetchLifepoints(): void {
-    this._fitnessPvd.getLifePoints(this._authId)
-      .then((lifePoints: LifePoints) => {
-        this.currentLifePoints = lifePoints.totalPoints + lifePoints.exercise + lifePoints.nutrition + lifePoints.sleep
-        this._fitnessPvd.saveLifePoints(this._authId, lifePoints)
-          .then(() => {
-            this._alertCtrl.create({
-              title: 'Success!',
-              message: 'Life points updated successfully!',
-              buttons: [{
-                text: 'Great'
-              }]
-            }).present();
-          })
-          .catch((err: firebase.FirebaseError) => {
-            this._alertCtrl.create({
-              title: 'Uhh ohh...',
-              subTitle: 'Something went wrong',
-              message: err.message,
-              buttons: ['OK']
-            }).present();
-          });
       })
       .catch((err: firebase.FirebaseError) => {
         this._alertCtrl.create({
@@ -342,12 +306,8 @@ export class FitnessPage {
       age: [null, Validators.required],
       gender: ['', Validators.required],
       height: [null, Validators.required],
-      hips: [null],
       lactating: [false, Validators.required],
-      neck: [null],
       pregnant: [false, Validators.required],
-      restingHeartRate: [null],
-      waist: [null],
       weight: [null, Validators.required]
     });
     this.age = this.fitnessForm.get('age');
@@ -362,12 +322,8 @@ export class FitnessPage {
     this.fitnessForm.controls['age'].patchValue(this.fitness.age);
     this.fitnessForm.controls['gender'].patchValue(this.fitness.gender);
     this.fitnessForm.controls['height'].patchValue(this.fitness.height);
-    this.fitnessForm.controls['hips'].patchValue(this.fitness.hips);
     this.fitnessForm.controls['lactating'].patchValue(this.fitness.lactating);
-    this.fitnessForm.controls['neck'].patchValue(this.fitness.neck);
     this.fitnessForm.controls['pregnant'].patchValue(this.fitness.pregnant);
-    this.fitnessForm.controls['restingHeartRate'].patchValue(this.fitness.heartRate && this.fitness.heartRate.resting);
-    this.fitnessForm.controls['waist'].patchValue(this.fitness.waist);
     this.fitnessForm.controls['weight'].patchValue(this.fitness.weight);
 
     this._fitnessFormSubscription = this.fitnessForm.valueChanges.subscribe(
@@ -375,39 +331,21 @@ export class FitnessPage {
         age: number;
         gender: string;
         height: number;
-        hips: number;
         lactating: boolean;
-        neck: number;
         pregnant: boolean;
-        restingHeartRate: number;
-        waist: number;
         weight: number
       }) => {
-        if (this.fitnessForm.valid) {
-
-          // Make fitness calculations if the fitness form is valid
-          const hrMax: number = this._fitnessPvd.calculateHRMax(this.fitness.age);
-          const thr: { min: number, max: number } = this._fitnessPvd.calculateTHR(hrMax, changes.restingHeartRate);
+        if (!!this.fitnessForm.valid) {
           this.fitness = Object.assign(this.fitness, {
             age: +changes.age,
             bmr: this._fitnessPvd.calculateBmr(changes.age, changes.gender, changes.height, changes.weight),
-            bodyFat: this._fitnessPvd.calculateBodyFat(changes.age, changes.gender, changes.height, changes.hips, changes.neck, changes.waist),
             gender: changes.gender,
-            heartRate: {
-              max: hrMax,
-              resting: +changes.restingHeartRate || 0,
-              trainingMin: thr.min,
-              trainingMax: thr.max
-            },
             height: +changes.height,
-            hips: +changes.hips || 0,
             lactating: changes.lactating,
-            neck: +changes.neck || 0,
             pregnant: changes.pregnant,
-            waist: +changes.waist || 0,
             weight: +changes.weight
           });
-          this.isFit = this._fitnessPvd.checkFatPercentage(this.fitness.bodyFat, this.fitness.gender);
+
           if (!this.fitness.customRequirements) {
 
             // Calculate the daily standard requirements on every change, unless disabled
@@ -545,9 +483,6 @@ export class FitnessPage {
 
             // Initialise the daily custom requirements form
             this._initCustomRequirements();
-
-            // Get the lifepoints
-            this._fetchLifepoints();
           },
           (err: firebase.FirebaseError) => {
             this._alertCtrl.create({

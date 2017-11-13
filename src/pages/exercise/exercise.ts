@@ -28,7 +28,7 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { ActivityType, ActivityPlan, ExerciseGoals, ExerciseLog, ILineChartEntry } from '../../models';
+import { ActivityType, ActivityPlan, ExerciseLog, ILineChartEntry } from '../../models';
 
 // Providers
 import { ActivityProvider } from '../../providers';
@@ -43,8 +43,6 @@ export class ExercisePage {
   private _authId: string;
   private _authSubscription: Subscription;
   private _activitySubscription: Subscription;
-  private _exerciseGoalSubscription: Subscription;
-  private _getMovingSubscription: Subscription;
   private _loader: Loading;
   private _notificationId: number;
   private _weekLogSubscription: Subscription;
@@ -54,10 +52,7 @@ export class ExercisePage {
   public chartDataSelection: string = 'duration';
   public chartLabels: string[] = [];
   public chartOpts: any = { responsive: true };
-  public countdown: string = '00:00:00';
-  public exerciseGoals: ExerciseGoals = new ExerciseGoals();
-  public exerciseSegment: string = 'goals';
-  public scheduledGetMoving: boolean = false;
+  public exerciseSegment: string = 'dayLog';
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _afAuth: AngularFireAuth,
@@ -69,19 +64,6 @@ export class ExercisePage {
     private _platform: Platform,
     private _popoverCtrl: PopoverController
   ) { }
-
-  private _addActivity(): void {
-    const activityListModal: Modal = this._modalCtrl.create('activity-list', {
-      authId: this._authId
-    });
-    activityListModal.present();
-    activityListModal.onDidDismiss((activities: ActivityType[]) => {
-      if (!!activities) {
-        this.activityPlan.activities = this.activityPlan.activities ? [...this.activityPlan.activities, ...activities] : [...activities];
-        this._updateActivityPlan();
-      }
-    });
-  }
 
   private _changeDuration(activity: ActivityType): void {
     this._alertCtrl.create({
@@ -122,17 +104,6 @@ export class ExercisePage {
     }).present();
   }
 
-  private _recordWalking(): void {
-    const pedometerModal: Modal = this._modalCtrl.create('pedometer');
-    pedometerModal.present();
-    pedometerModal.onDidDismiss((pedometerData: IPedometerData) => {
-      if (!!pedometerData) {
-        this.activityPlan.distanceWalked = pedometerData.distance || 0;
-        this.activityPlan.stepsWalked = pedometerData.numberOfSteps || 0;
-      }
-    });
-  }
-
   private _removeActivity(idx: number): void {
     this.activityPlan.activities = [...this.activityPlan.activities.slice(0, idx), ...this.activityPlan.activities.slice(idx + 1)];
     this._updateActivityPlan();
@@ -141,18 +112,19 @@ export class ExercisePage {
   private _updateActivityPlan(): void {
     this.activityPlan.totalDuration = this._activityPvd.calculateActivityPlanDuration(this.activityPlan.activities);
     this.activityPlan.totalEnergyConsumption = this._activityPvd.calculateActivityPlanEnergyConsumption(this.activityPlan.activities);
-    this.activityPlan.combos.goalsAchieved = this._activityPvd.checkGoalAchievements(this.exerciseGoals, this.activityPlan);
-    this.activityPlan.combos.hiit = this._activityPvd.checkHiit(this.activityPlan.activities);
-    this.activityPlan.combos.lowActivity = this._activityPvd.checkLowActivity(this.activityPlan.activities);
-    this.activityPlan.combos.overtraining = this._activityPvd.checkOvertraining(this.activityPlan.activities);
-    this.activityPlan.combos.sedentarism = this._activityPvd.checkSedentarism(this.activityPlan);
-    this.activityPlan.lifePoints = this._activityPvd.checkLifePoints(this.activityPlan);
   }
 
-  public cancelMovingSchedule(): void {
-    this._getMovingSubscription.unsubscribe();
-    this._activityPvd.cancelSchedule();
-    this.countdown = '00:00:00';
+  public addActivity(): void {
+    const activityListModal: Modal = this._modalCtrl.create('activity-list', {
+      authId: this._authId
+    });
+    activityListModal.present();
+    activityListModal.onDidDismiss((activities: ActivityType[]) => {
+      if (!!activities) {
+        this.activityPlan.activities = this.activityPlan.activities ? [...this.activityPlan.activities, ...activities] : [...activities];
+        this._updateActivityPlan();
+      }
+    });
   }
 
   public changeActivity(idx: number): void {
@@ -240,28 +212,6 @@ export class ExercisePage {
     }).present();
   }
 
-  public logActivity(): void {
-    this._actionSheetCtrl.create({
-      title: 'Log activity',
-      buttons: [
-        {
-          text: 'Add existing activity',
-          handler: () => {
-            this._addActivity();
-          }
-        }, {
-          text: 'Start walking',
-          handler: () => {
-            this._recordWalking();
-          }
-        }, {
-          text: 'Cancel',
-          role: 'cancel'
-        }
-      ]
-    }).present();
-  }
-
   public saveActivityPlan(): void {
     this._updateActivityPlan();
     this._loader = this._loadCtrl.create({
@@ -270,10 +220,7 @@ export class ExercisePage {
       spinner: 'crescent'
     });
     this._loader.present();
-    Promise.all([
-      this._activityPvd.saveExerciseGoals(this._authId, this.exerciseGoals),
-      this._activityPvd.saveActivityPlan(this._authId, this.activityPlan, this._weekLog)
-    ]).then(() => {
+    this._activityPvd.saveActivityPlan(this._authId, this.activityPlan, this._weekLog).then(() => {
       if (this._loader) {
         this._loader.dismiss();
         this._loader = null;
@@ -281,21 +228,7 @@ export class ExercisePage {
       this._alertCtrl.create({
         title: 'Success!',
         message: 'Activity plan saved successfully!',
-        buttons: [{
-          text: 'Great!',
-          handler: () => {
-            const goodExercise: boolean = this._activityPvd.checkGoodExercise(this.activityPlan);
-
-            if (goodExercise || this.activityPlan.combos.goalsAchieved) {
-              this._modalCtrl.create('rewards', {
-                context: 'exercise',
-                goalsAchieved: this.activityPlan.combos.goalsAchieved,
-                goodQuality: goodExercise,
-                lifepoints: this.activityPlan.lifePoints
-              }).present();
-            }
-          }
-        }]
+        buttons: ['Great']
       }).present();
     })
       .catch((err: Error) => {
@@ -316,25 +249,6 @@ export class ExercisePage {
     const popover: Popover = this._popoverCtrl.create('settings');
     popover.present({
       ev: event
-    });
-  }
-
-  public startMovingSchedule(): void {
-    this.scheduledGetMoving = true;
-    this._getMovingSubscription = this._activityPvd.setSchedule(+this.exerciseGoals.getMoving.value).subscribe(timeRemained => {
-      if (timeRemained === 0) {
-        this._alertCtrl.create({
-          title: 'Time is up',
-          message: 'Time to get moving',
-          buttons: ['OK']
-        }).present();
-        this._getMovingSubscription.unsubscribe();
-        this._getMovingSubscription = null;
-        this.scheduledGetMoving = false;
-      } else {
-        let timeSpent = moment.duration(timeRemained, 'milliseconds');
-        this.countdown = `${timeSpent.hours()}:${timeSpent.minutes()}:${timeSpent.seconds()}`;
-      }
     });
   }
 
@@ -362,28 +276,6 @@ export class ExercisePage {
     this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
       if (!!auth) {
         this._authId = auth.uid;
-
-        // Subscribe to exercise goals
-        this._exerciseGoalSubscription = this._activityPvd.getExerciseGoals$(this._authId).subscribe(
-          (goals: ExerciseGoals) => {
-            this.exerciseGoals = Object.assign({}, goals['$value'] === null ? this.exerciseGoals : goals);
-            if (!this._platform.is('cordova') && this.exerciseGoals.getMoving.isSelected && this._activityPvd.notificationScheduled()) {
-              this.startMovingSchedule();
-            }
-          },
-          (err: firebase.FirebaseError) => {
-            if (this._loader) {
-              this._loader.dismiss();
-              this._loader = null;
-            }
-            this._alertCtrl.create({
-              title: 'Uhh ohh...',
-              subTitle: 'Something went wrong',
-              message: err.message,
-              buttons: ['OK']
-            }).present();
-          }
-        );
 
         // Subscribe to activity plan
         this._activitySubscription = this._activityPvd.getActivityPlan$(this._authId).subscribe(
@@ -434,8 +326,6 @@ export class ExercisePage {
   ionViewWillLeave(): void {
     this._authSubscription && this._authSubscription.unsubscribe();
     this._activitySubscription && this._activitySubscription.unsubscribe();
-    this._exerciseGoalSubscription && this._exerciseGoalSubscription.unsubscribe();
-    this._getMovingSubscription && this._getMovingSubscription.unsubscribe();
     this._weekLogSubscription && this._weekLogSubscription.unsubscribe();
     if (this._loader) {
       this._loader.dismiss();

@@ -5,8 +5,6 @@ export * from './bloodSugar';
 export * from './chart';
 export * from './fitness';
 export { Food } from './food';
-export { Goal } from './goal';
-export { LifePoints } from './lifepoints';
 export * from './meal';
 export * from './nutrition';
 export { Recipe } from './recipe';

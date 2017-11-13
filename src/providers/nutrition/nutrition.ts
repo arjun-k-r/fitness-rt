@@ -28,7 +28,7 @@ export class NutritionProvider {
   }
 
   private _calculateAlcoholRequirements(age: number): number {
-    return age > 18 ? 10 : 0;
+    return 1;
   }
 
   /**
@@ -61,7 +61,7 @@ export class NutritionProvider {
   */
 
   private _calculateCaffeine(age: number): number {
-    return age > 14 ? 300 : 0;
+    return 1;
   }
 
   private _calculateCalciumRequirements(age: number, gender: string, lactating: boolean, pregnant: boolean): number {

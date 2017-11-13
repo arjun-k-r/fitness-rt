@@ -24,7 +24,7 @@ import * as firebase from 'firebase/app';
 import { sortBy } from 'lodash';
 
 // Models
-import { ILineChartEntry, Meal, MealPlan, Nutrition, NutritionGoals, NutritionLog } from '../../models';
+import { ILineChartEntry, Meal, MealPlan, Nutrition, NutritionLog } from '../../models';
 
 // Providers
 import { FOOD_GROUPS, MealProvider } from '../../providers';
@@ -49,9 +49,8 @@ export class NutritionPage {
   public chartOpts: any = { responsive: true };
   public dailyNutrition: Nutrition = new Nutrition();
   public mealPlan: MealPlan = new MealPlan();
-  public nutritionGoals: NutritionGoals = new NutritionGoals();
   public nutrientKeys: string[] = [];
-  public nutritionSegment: string = 'goals';
+  public nutritionSegment: string = 'dayLog';
   public nutritionView: string = 'meals';
   constructor(
     private _afAuth: AngularFireAuth,
@@ -136,28 +135,6 @@ export class NutritionPage {
     return this._mealPvd.calculateNutrientPercentage(nutrientValue, nutrientName);
   }
 
-  public selectFoodGroups(): void {
-    this._alertCtrl.create({
-      title: 'Select food groups',
-      inputs: [...FOOD_GROUPS.map((group: string) => {
-        return {
-          type: 'checkbox',
-          label: group,
-          value: group,
-          checked: this.nutritionGoals.foodGroupRestrictions.value.indexOf(group) !== -1
-        }
-      })],
-      buttons: [
-        {
-          text: 'Done',
-          handler: (foodGroups: string[]) => {
-            this.nutritionGoals.foodGroupRestrictions.value = [...foodGroups];
-          }
-        }
-      ]
-    }).present();
-  }
-
   public saveMealPlan(): void {
     this._loader = this._loadCtrl.create({
       content: 'Please wait...',
@@ -165,13 +142,8 @@ export class NutritionPage {
       spinner: 'crescent'
     });
     this._loader.present();
-    this.mealPlan.lifePoints = this._mealPvd.checkLifePoints(this.mealPlan);
     this.mealPlan.nutrition = this._mealPvd.calculateMealPlanNutrition(this.mealPlan.meals);
-    this.mealPlan.goalsAchieved = this._mealPvd.checkGoalAchievements(this.nutritionGoals, this.mealPlan);
-    Promise.all([
-      this._mealPvd.saveNutritionGoals(this._authId, this.nutritionGoals),
-      this._mealPvd.saveMealPlan(this._authId, this.mealPlan, this._weekLog)
-    ]).then(() => {
+    this._mealPvd.saveMealPlan(this._authId, this.mealPlan, this._weekLog).then(() => {
       if (this._loader) {
         this._loader.dismiss();
         this._loader = null;
@@ -179,18 +151,7 @@ export class NutritionPage {
       this._alertCtrl.create({
         title: 'Success!',
         message: 'Meal plan saved successfully!',
-        buttons: [{
-          text: 'Great!',
-          handler: () => {
-            if (this.mealPlan.goalsAchieved && this.mealPlan.lifePoints > 0) {
-              this._modalCtrl.create('rewards', {
-                context: 'nutrition',
-                goalsAchieved: true,
-                lifepoints: this.mealPlan.lifePoints
-              }).present();
-            }
-          }
-        }]
+        buttons: ['Great']
       }).present();
     })
       .catch((err: Error) => {
@@ -264,25 +225,6 @@ export class NutritionPage {
                   buttons: ['OK']
                 }).present();
               });
-          },
-          (err: firebase.FirebaseError) => {
-            if (this._loader) {
-              this._loader.dismiss();
-              this._loader = null;
-            }
-            this._alertCtrl.create({
-              title: 'Uhh ohh...',
-              subTitle: 'Something went wrong',
-              message: err.message,
-              buttons: ['OK']
-            }).present();
-          }
-        );
-
-        // Subscribe to nutrition goals
-        this._nutritionGoalSubscription = this._mealPvd.getNutritionGoals$(this._authId).subscribe(
-          (goals: NutritionGoals) => {
-            this.nutritionGoals = Object.assign({}, goals['$value'] === null ? this.nutritionGoals : goals);
           },
           (err: firebase.FirebaseError) => {
             if (this._loader) {

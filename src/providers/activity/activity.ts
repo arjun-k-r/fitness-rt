@@ -1,9 +1,6 @@
 // Angular
 import { Injectable } from '@angular/core';
 
-// Ionic
-import { LocalNotifications } from '@ionic-native/local-notifications';
-
 // Rxjs
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
@@ -17,7 +14,7 @@ import * as firebase from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { ActivityCategory, ActivityType, ActivityPlan, ExerciseGoals, ExerciseLog, Fitness, Nutrition } from '../../models';
+import { ActivityCategory, ActivityType, ActivityPlan, ExerciseLog, Fitness, Nutrition } from '../../models';
 
 // Providers
 import { FitnessProvider } from '../fitness/fitness';
@@ -28,13 +25,10 @@ const CURRENT_DAY: number = moment().dayOfYear();
 @Injectable()
 export class ActivityProvider {
   private _activities$: FirebaseListObservable<ActivityCategory[]>;
-  private _notificationId: any;
-  private _notificationTimer: Observable<number>;
   private _userWeight: number;
   constructor(
     private _db: AngularFireDatabase,
     private _fitPvd: FitnessProvider,
-    private _localNotifications: LocalNotifications,
     private _nutritionPvd: NutritionProvider
   ) {
     this._activities$ = this._db.list('/activity-categories', {
@@ -67,125 +61,6 @@ export class ActivityProvider {
     return activities.reduce((acc: number, currActivity: ActivityType) => acc += currActivity.energyConsumption, 0);
   }
 
-  public cancelSchedule(): void {
-    this._localNotifications.cancel(this._notificationId);
-    this._notificationId = null;
-    this._notificationTimer = null;
-  }
-
-  public checkDistanceAchievement(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
-    if (goals.distance.isSelected) {
-      if (activityPlan.distanceWalked >= +goals.distance.value) {
-        return true;
-      }
-    } else {
-      return true;
-    }
-
-    return false;
-  }
-
-  public checkDurationAchievement(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
-    if (goals.duration.isSelected) {
-      if (activityPlan.totalDuration >= +goals.duration.value) {
-        return true;
-      }
-    } else {
-      return true;
-    }
-
-    return false;
-  }
-
-  public checkEnergyAchievement(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
-    if (goals.energy.isSelected) {
-      if (activityPlan.totalEnergyConsumption >= +goals.energy.value) {
-        return true;
-      }
-    } else {
-      return true;
-    }
-
-    return false;
-  }
-
-  public checkStepsAchievement(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
-    if (goals.steps.isSelected) {
-      if (activityPlan.stepsWalked >= +goals.steps.value) {
-        return true;
-      }
-    } else {
-      return true;
-    }
-
-    return false;
-  }
-
-  public checkGoalAchievements(goals: ExerciseGoals, activityPlan: ActivityPlan): boolean {
-    return this.checkDistanceAchievement(goals, activityPlan) && this.checkDurationAchievement(goals, activityPlan) && this.checkEnergyAchievement(goals, activityPlan) && this.checkStepsAchievement(goals, activityPlan) && (goals.distance.isSelected || goals.duration.isSelected || goals.energy.isSelected || goals.steps.isSelected);
-  }
-
-  public checkGoodExercise(activityPlan: ActivityPlan): boolean {
-    return activityPlan.totalDuration > 120 && activityPlan.totalEnergyConsumption > 600 && activityPlan.combos.energy && !activityPlan.combos.lowActivity && !activityPlan.combos.overtraining && !activityPlan.combos.sedentarism;
-  }
-
-  public checkHiit(activities: ActivityType[]): boolean {
-    return activities.map((activity: ActivityType) => activity.met > 8)[0];
-  }
-
-  public checkLifePoints(activityPlan: ActivityPlan): number {
-    let lifePoints: number = 0;
-    if (activityPlan.totalDuration > 120 && activityPlan.totalEnergyConsumption > 600) {
-      lifePoints += 10;
-    } else {
-      lifePoints -= 10;
-    }
-
-    if (activityPlan.combos.energy) {
-      lifePoints += 10;
-    } else {
-      lifePoints -= 10;
-    }
-
-    if (activityPlan.combos.hiit) {
-      lifePoints += 10;
-    } else {
-      lifePoints -= 10;
-    }
-
-    if (!activityPlan.combos.lowActivity) {
-      lifePoints += 10;
-    } else {
-      lifePoints -= 10;
-    }
-
-    if (!activityPlan.combos.overtraining) {
-      lifePoints += 10;
-    } else {
-      lifePoints -= 10;
-    }
-
-    if (!activityPlan.combos.sedentarism) {
-      lifePoints += 15;
-    } else {
-      lifePoints -= 15;
-    }
-
-    return lifePoints;
-  }
-
-  public checkLowActivity(activities: ActivityType[]): boolean {
-    return activities.reduce((lowIntensity: boolean, activity: ActivityType) => lowIntensity = lowIntensity && activity.met < 4, true);
-  }
-
-  public checkOvertraining(activities: ActivityType[]): boolean {
-    return activities.reduce((acc: number, activity: ActivityType) => acc += activity.met >= 6 ? activity.duration : 0, 0) > 45 || activities.reduce((acc: number, activity: ActivityType) => acc += activity.met > 8 ? activity.duration : 0, 0) > 20;
-  }
-
-  public checkSedentarism(activityPlan: ActivityPlan): boolean {
-    return activityPlan.totalDuration < 120;
-  }
-
   public getActivityCategories$(): FirebaseListObservable<ActivityCategory[]> {
     return this._activities$;
   }
@@ -196,10 +71,6 @@ export class ActivityProvider {
 
   public getEnergyConsumption$(authId: string): FirebaseObjectObservable<number> {
     return this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}/totalEnergyConsumption`);
-  }
-
-  public getExerciseGoals$(authId: string): FirebaseObjectObservable<ExerciseGoals> {
-    return this._db.object(`/activity-plan/${authId}/goals`);
   }
 
   public getExerciseLog$(authId: string): FirebaseListObservable<ExerciseLog[]> {
@@ -214,18 +85,10 @@ export class ActivityProvider {
     return this._db.object(`/activity-plan/${authId}/${CURRENT_DAY - 1}`);
   }
 
-  public getTimeout(authId: string): FirebaseObjectObservable<number> {
-    return this._db.object(`/activity-plan/${authId}/timeout`)
-  }
-
-  public notificationScheduled(): boolean {
-    return !!this._notificationId;
-  }
-
   public saveActivityPlan(authId: string, activityPlan: ActivityPlan, weekLog: ExerciseLog[]): Promise<{}> {
     return new Promise((resolve, reject) => {
       const fitnessSubscription: Subscription = this._db.object(`/fitness/${authId}`).subscribe((fitness: Fitness) => {
-        const newExerciseLog: ExerciseLog = new ExerciseLog(moment().format('dddd'), activityPlan.distanceWalked, activityPlan.totalDuration, activityPlan.totalEnergyConsumption, activityPlan.stepsWalked);
+        const newExerciseLog: ExerciseLog = new ExerciseLog(moment().format('dddd'), activityPlan.totalDuration, activityPlan.totalEnergyConsumption);
         const weekLength: number = weekLog.length;
         if (!!weekLength) {
           if (newExerciseLog.date !== weekLog[weekLength - 1].date) {
@@ -237,7 +100,6 @@ export class ActivityProvider {
           weekLog.push(newExerciseLog);
         }
         Promise.all([
-          this._db.object(`/lifepoints/${authId}/${CURRENT_DAY}/exercise`).set(activityPlan.lifePoints),
           this._db.object(`/exercise-log/${authId}/`).set(weekLog),
           this._db.object(`/activity-plan/${authId}/${CURRENT_DAY}`).set(activityPlan)
         ]).then(() => {
@@ -252,29 +114,5 @@ export class ActivityProvider {
         }).catch((err: firebase.FirebaseError) => reject(err));
       }, (err: firebase.FirebaseError) => reject(err));
     });
-  }
-
-  public saveExerciseGoals(authId: string, goals: ExerciseGoals): Promise<void> {
-    return this._db.object(`/activity-plan/${authId}/goals`).set(goals);
-  }
-
-  public setSchedule(countdown: number): Observable<number> {
-    if (!this._notificationId) {
-      this._notificationId = moment.duration().asMinutes();
-      this._localNotifications.schedule({
-        at: moment().add(countdown, 'milliseconds').toDate(),
-        id: this._notificationId,
-        text: 'Get moving'
-      });
-
-      const schedule: number = moment.duration(countdown, 'minutes').asMilliseconds();
-
-      this._notificationTimer = Observable
-        .timer(1, 1000)
-        .map(i => schedule - i * 1000)
-        .take(schedule / 1000 + 1);
-    }
-
-    return this._notificationTimer;
   }
 }

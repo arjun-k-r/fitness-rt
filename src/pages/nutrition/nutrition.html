@@ -21,9 +21,6 @@
   </ion-navbar>
   <ion-toolbar role="tablist">
     <ion-segment [(ngModel)]="nutritionSegment">
-      <ion-segment-button value="goals">
-        Goals
-      </ion-segment-button>
       <ion-segment-button value="dayLog">
         Today
       </ion-segment-button>
@@ -42,61 +39,6 @@
     </button>
   </ion-fab>
   <div [ngSwitch]="nutritionSegment">
-    <ion-list *ngSwitchCase="'goals'" padding>
-      <ion-item>
-        <ion-label for="breakfastTimeGoalSwitch" id="breakfastTimeGoalSwitchLabel">Breakfast time goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="breakfastTimeGoalSwitchLabel" aria-required="false" id="breakfastTimeGoalSwitch"
-          [(ngModel)]="nutritionGoals.breakfastTime.isSelected" role="switch">
-        </ion-toggle>
-      </ion-item>
-      <ion-item *ngIf="nutritionGoals.breakfastTime.isSelected">
-        <ion-label floating for="breakfastTimeGoalSwitch" id="breakfastTimeGoalSwitchLabel">Breakfast time</ion-label>
-        <ion-datetime aria-live="assertive" aria-labelledby="breakfastTimeLabel" aria-required="false" displayFormat="HH:mm" id="breakfastTimeLabel"
-          [(ngModel)]="nutritionGoals.breakfastTime.value" pickerFormat="HH mm"></ion-datetime>
-      </ion-item>
-      <ion-item>
-        <ion-label for="dinnerTimeGoalSwitch" id="dinnerTimeGoalSwitchLabel">Dinner time goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="dinnerTimeGoalSwitchLabel" aria-required="false" id="dinnerTimeGoalSwitch"
-          [(ngModel)]="nutritionGoals.dinnerTime.isSelected" role="switch">
-        </ion-toggle>
-      </ion-item>
-      <ion-item *ngIf="nutritionGoals.dinnerTime.isSelected">
-        <ion-label floating for="dinnerTimeGoal" id="dinnerTimeGoalLabel">Dinner time</ion-label>
-        <ion-datetime aria-live="assertive" aria-labelledby="dinnerTimeLabel" aria-required="false" displayFormat="HH:mm" id="dinnerTimeLabel"
-          [(ngModel)]="nutritionGoals.dinnerTime.value" pickerFormat="HH mm"></ion-datetime>
-      </ion-item>
-      <ion-item>
-        <ion-label for="foodGroupRestrictionsGoalSwitch" id="foodGroupRestrictionsGoalSwitchLabel">Food group restrictions goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="foodGroupRestrictionsGoalSwitchLabel" aria-required="false" id="foodGroupRestrictionsGoalSwitch"
-          [(ngModel)]="nutritionGoals.foodGroupRestrictions.isSelected" role="switch">
-        </ion-toggle>
-      </ion-item>
-      <button (click)="selectFoodGroups()" ion-item *ngIf="nutritionGoals.foodGroupRestrictions.isSelected" role="button">
-        Select food group restrictions
-      </button>
-      <ion-item>
-        <ion-label for="mealIntervalSwitch" id="mealIntervalSwitchLabel">Meal interval goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="mealIntervalSwitchLabel" aria-required="false" id="mealIntervalSwitch"
-          [(ngModel)]="nutritionGoals.mealInterval.isSelected" role="switch">
-        </ion-toggle>
-      </ion-item>
-      <ion-item *ngIf="nutritionGoals.mealInterval.isSelected">
-        <ion-label floating for="mealInterval" id="mealIntervalLabel">Meal interval (hours)</ion-label>
-        <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="mealIntervalLabel" aria-required="true" id="mealInterval"
-          [(ngModel)]="nutritionGoals.mealInterval.value" type="number"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label for="mealSizeSwitch" id="mealSizeSwitchLabel">Meal size goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="mealSizeSwitchLabel" aria-required="false" id="mealSizeSwitch" [(ngModel)]="nutritionGoals.mealSize.isSelected"
-          role="switch">
-        </ion-toggle>
-      </ion-item>
-      <ion-item *ngIf="nutritionGoals.mealSize.isSelected">
-        <ion-label floating for="mealSize" id="mealSizeLabel">Meal size (g)</ion-label>
-        <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="mealSizeLabel" aria-required="true" id="mealSize"
-          [(ngModel)]="nutritionGoals.mealSize.value" type="number"></ion-input>
-      </ion-item>
-    </ion-list>
     <div *ngSwitchCase="'dayLog'">
       <div *ngIf="nutritionView === 'meals'">
         <ion-item-group *ngFor="let meal of mealPlan?.meals; let i = index" role="group">
@@ -330,17 +272,6 @@
           <ion-item role="listitem">
             Omega-6 (LA)
             <p item-content>{{ dailyNutrition.la?.value }}%</p>
-          </ion-item>
-        </ion-item-group>
-        <ion-item-group role="group">
-          <ion-item-divider color="primary" role="separator">Other</ion-item-divider>
-          <ion-item role="listitem">
-            Alcohol
-            <p item-content>{{ dailyNutrition.alcohol?.value }}%</p>
-          </ion-item>
-          <ion-item role="listitem">
-            Caffeine
-            <p item-content>{{ dailyNutrition.caffeine?.value }}%</p>
           </ion-item>
         </ion-item-group>
       </div>

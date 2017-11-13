@@ -18,9 +18,6 @@
   </ion-navbar>
   <ion-toolbar role="tablist">
     <ion-segment [(ngModel)]="sleepSegment">
-      <ion-segment-button value="goals">
-        Goals
-      </ion-segment-button>
       <ion-segment-button value="dayLog">
         Today
       </ion-segment-button>
@@ -33,30 +30,6 @@
 
 <ion-content>
   <div [ngSwitch]="sleepSegment">
-    <ion-list *ngSwitchCase="'goals'" padding>
-      <ion-item>
-        <ion-label for="bedTimeGoalSwitch" id="bedTimeGoalSwitchLabel">Bed time goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="bedTimeGoalSwitchLabel" aria-required="false" id="bedTimeGoalSwitch" [(ngModel)]="sleepGoals.bedTime.isSelected"
-          role="switch">
-        </ion-toggle>
-      </ion-item>
-      <ion-item *ngIf="sleepGoals.bedTime.isSelected">
-        <ion-label floating for="bedTimeGoal" id="bedTimeGoalLabel">Bed time</ion-label>
-        <ion-datetime aria-live="assertive" aria-labelledby="bedTimeGoalLabel" aria-required="false" displayFormat="HH:mm" id="bedTimeLabel"
-          [(ngModel)]="sleepGoals.bedTime.value" pickerFormat="HH mm"></ion-datetime>
-      </ion-item>
-      <ion-item>
-        <ion-label for="sleepDurationSwitch" id="sleepDurationSwitchLabel">Sleep duration goal</ion-label>
-        <ion-toggle aria-live="assertive" aria-labelledby="sleepDurationSwitchLabel" aria-required="false" id="sleepDurationSwitch"
-          [(ngModel)]="sleepGoals.duration.isSelected" role="switch">
-        </ion-toggle>
-      </ion-item>
-      <ion-item *ngIf="sleepGoals.duration.isSelected">
-        <ion-label floating for="sleepDuration" id="sleepDurationLabel">Sleep duration (hours)</ion-label>
-        <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="sleepDurationLabel" aria-required="true" id="sleepDuration"
-          [(ngModel)]="sleepGoals.duration.value" type="number"></ion-input>
-      </ion-item>
-    </ion-list>
     <form *ngSwitchCase="'dayLog'" [formGroup]="sleepForm" novalidate role="form">
       <ion-list no-lines>
         <ion-item-divider color="primary" role="separator">
@@ -76,83 +49,41 @@
             id="duration" required type="number"></ion-input>
         </ion-item>
         <div class="form__message" *ngIf="sleepForm.invalid && duration?.touched && duration.errors?.required">Please enter your sleep duration.</div>
-        <br />
-        <ion-item-divider color="primary" role="separator">
-          Preparation
-        </ion-item-divider>
-        <ion-item>
-          <ion-label color="{{ sleep.combos.noElectronics && 'secondary' }}" for="noElectronics" id="noElectronicsLabel">No electronics
-            <ion-icon *ngIf="sleep.combos.noElectronics" aria-hidden="true" color="secondary" item-right name="thumbs-up"></ion-icon>
-          </ion-label>
-          <ion-toggle aria-live="assertive" aria-labelledby="noElectronicsLabel" aria-required="true" formControlName="noElectronics"
-            id="noElectronics" required role="switch">
-          </ion-toggle>
-        </ion-item>
-        <ion-item>
-          <ion-label color="{{ sleep.combos.noStimulants && 'secondary' }}" for="noStimulants" id="noStimulantsLabel">No stimulants
-            <ion-icon *ngIf="sleep.combos.noStimulants" aria-hidden="true" color="secondary" item-right name="thumbs-up"></ion-icon>
-          </ion-label>
-          <ion-toggle aria-live="assertive" aria-labelledby="noStimulantsLabel" aria-required="true" formControlName="noStimulants"
-            id="noStimulants" required role="switch">
-          </ion-toggle>
-        </ion-item>
-        <ion-item>
-          <ion-label color="{{ sleep.combos.relaxation && 'secondary' }}" for="relaxation" id="relaxationLabel">Relaxation
-            <ion-icon *ngIf="sleep.combos.relaxation" aria-hidden="true" color="secondary" item-right name="thumbs-up"></ion-icon>
-          </ion-label>
-          <ion-toggle aria-live="assertive" aria-labelledby="relaxationLabel" aria-required="true" formControlName="relaxation" id="relaxation"
-            required role="switch">
-          </ion-toggle>
-        </ion-item>
-        <ion-item-divider color="primary" role="separator">
-          Quality
-          <ion-badge color="{{ sleep.combos.quality > 5 ? 'secondary' : 'danger' }}" item-end>{{ sleep.combos.quality > 5 ? 'I feeling energized and refreshed' : 'I am feeling exhausted and depressed' }}</ion-badge>
-        </ion-item-divider>
-        <ion-item>
-          <ion-range color="{{ sleep.combos.quality > 5 ? 'secondary' : 'danger' }}" formControlName="quality" max="10" min="1" snaps="true"
-            step="1">
-            <ion-icon aria-hidden="true" color="danger" range-left name="sad"></ion-icon>
-            <ion-icon aria-hidden="true" color="secondary" range-right name="happy"></ion-icon>
-          </ion-range>
-        </ion-item>
-        <ion-item-divider color="primary" role="separator">
-          Suggestions
-        </ion-item-divider>
-        <ion-item *ngIf="sleep.duration < 7" role="listitem">
-          <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
-          <h2 text-wrap>You need 7-9 hours of good quality sleep per night</h2>
-          <p text-wrap>Although our sleep need is relative to hour daily effort intelectual and physical effort, we generaly need 5 complete
-            sleep cycles per night (90-110 minutes/cycle).</p>
-        </ion-item>
-        <ion-item *ngIf="!sleep.combos.noElectronics" role="listitem">
-          <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
-          <h2 text-wrap>Avoid electronics 1 hour before bed time.</h2>
-          <p text-wrap>Electronics emit blue light and inhibit melatonin secretion. Thus, you will be alert and unable to fall asleep.</p>
-        </ion-item>
-        <ion-item *ngIf="!sleep.combos.noStimulants" role="listitem">
-          <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
-          <h2 text-wrap>Avoid stimulants 6 hours before bed time.</h2>
-          <p text-wrap>Stimulants increase your heart rate and stimulate hormones that keep you alert and prevent you from falling asleep.</p>
-        </ion-item>
-        <ion-item *ngIf="!sleep.combos.relaxation" role="listitem">
-          <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
-          <h2 text-wrap>Relax before bed.</h2>
-          <p text-wrap>Stressfull activities put your body in a fight or flight response and you will be alert and unable to fall asleep.</p>
-        </ion-item>
-        <ion-item *ngIf="sleep.combos.quality <= 5" role="listitem">
-          <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
-          <h2 text-wrap>Focus on good quality sleep, not on quantity.</h2>
-          <p text-wrap>Make a sleep routine by going to bed and waking up at the same hours every day, and avoid stimulants, electronics
-            or stressfull activities before bed time.</p>
-        </ion-item>
-        <ion-item *ngIf="sleep.duration >= 7 && sleep?.combos.noElectronics && sleep?.combos.noStimulants && sleep?.combos.relaxation && sleep.combos.quality > 5"
-          role="listitem">
-          <ion-note text-center text-wrap>No suggestions. Looking good!&nbsp;
-            <ion-icon aria-hidden="true" name="thumbs-up"></ion-icon>
-          </ion-note>
-        </ion-item>
       </ion-list>
     </form>
+    <ion-list *ngSwitchCase="'dayLog'" no-lines>
+      <ion-item-divider color="primary" role="separator">
+        Quality
+        <ion-badge color="{{ sleep.quality > 5 ? 'secondary' : 'danger' }}" item-end>{{ sleep.quality > 5 ? 'I feeling energized and refreshed' : 'I am feeling exhausted and depressed' }}</ion-badge>
+      </ion-item-divider>
+      <ion-item>
+        <ion-range color="{{ sleep.quality > 5 ? 'secondary' : 'danger' }}" [(ngModel)]="sleep.quality" max="10" min="1" snaps="true"
+          step="1">
+          <ion-icon aria-hidden="true" color="danger" range-left name="sad"></ion-icon>
+          <ion-icon aria-hidden="true" color="secondary" range-right name="happy"></ion-icon>
+        </ion-range>
+      </ion-item>
+      <ion-item-divider color="primary" role="separator">
+        Suggestions
+      </ion-item-divider>
+      <ion-item *ngIf="sleep.duration < 7" role="listitem">
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+        <h2 text-wrap>You need 7-9 hours of good quality sleep per night</h2>
+        <p text-wrap>Although our sleep need is relative to hour daily effort intelectual and physical effort, we generaly need 5 complete
+          sleep cycles per night (90-110 minutes/cycle).</p>
+      </ion-item>
+      <ion-item *ngIf="sleep.quality <= 5" role="listitem">
+        <ion-icon aria-hidden="true" color="primary" item-start name="bulb"></ion-icon>
+        <h2 text-wrap>Focus on good quality sleep, not on quantity.</h2>
+        <p text-wrap>Make a sleep routine by going to bed and waking up at the same hours every day, and avoid stimulants, electronics
+          or stressfull activities before bed time.</p>
+      </ion-item>
+      <ion-item *ngIf="sleep.duration >= 7 && sleep.quality > 5" role="listitem">
+        <ion-note text-center text-wrap>No suggestions. Looking good!&nbsp;
+          <ion-icon aria-hidden="true" name="thumbs-up"></ion-icon>
+        </ion-note>
+      </ion-item>
+    </ion-list>
     <div *ngSwitchCase="'weekLog'">
       <ion-item padding>
         <ion-label for="chartDataSelection" id="chartDataSelectionLabel">Sleep data</ion-label>

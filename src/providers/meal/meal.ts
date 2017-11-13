@@ -7,7 +7,6 @@ import * as firebase from 'firebase/app';
 
 // Third-party
 import * as moment from 'moment';
-import { find, uniqBy } from 'lodash';
 
 // Models
 import {

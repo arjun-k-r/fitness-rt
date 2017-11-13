@@ -10,7 +10,6 @@ import {
   IonicPage,
   Loading,
   LoadingController,
-  ModalController,
   NavController,
   Popover,
   PopoverController
@@ -27,7 +26,7 @@ import { sortBy } from 'lodash';
 import { ILineChartEntry, Meal, MealPlan, Nutrition, NutritionLog } from '../../models';
 
 // Providers
-import { FOOD_GROUPS, MealProvider } from '../../providers';
+import { MealProvider } from '../../providers';
 
 @IonicPage({
   name: 'nutrition'
@@ -57,7 +56,6 @@ export class NutritionPage {
     private _alertCtrl: AlertController,
     private _loadCtrl: LoadingController,
     private _mealPvd: MealProvider,
-    private _modalCtrl: ModalController,
     private _navCtrl: NavController,
     private _popoverCtrl: PopoverController
   ) { }

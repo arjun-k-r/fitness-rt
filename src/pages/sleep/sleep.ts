@@ -11,7 +11,6 @@ import {
   IonicPage,
   Loading,
   LoadingController,
-  ModalController,
   NavController,
   Popover,
   PopoverController
@@ -62,7 +61,6 @@ export class SleepPage {
     private _alertCtrl: AlertController,
     private _formBuilder: FormBuilder,
     private _loadCtrl: LoadingController,
-    private _modalCtrl: ModalController,
     private _navCtrl: NavController,
     private _popoverCtrl: PopoverController,
     private _sleepPvd: SleepProvider

@@ -14,7 +14,6 @@ import {
   Modal,
   ModalController,
   NavController,
-  Platform,
   Popover,
   PopoverController
 } from 'ionic-angular';
@@ -23,9 +22,6 @@ import { IPedometerData } from '@ionic-native/pedometer';
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-
-// Third-party
-import * as moment from 'moment';
 
 // Models
 import { ActivityType, ActivityPlan, ExerciseLog, ILineChartEntry } from '../../models';
@@ -44,7 +40,6 @@ export class ExercisePage {
   private _authSubscription: Subscription;
   private _activitySubscription: Subscription;
   private _loader: Loading;
-  private _notificationId: number;
   private _weekLogSubscription: Subscription;
   private _weekLog: ExerciseLog[] = [];
   public activityPlan: ActivityPlan = new ActivityPlan();
@@ -61,7 +56,6 @@ export class ExercisePage {
     private _loadCtrl: LoadingController,
     private _modalCtrl: ModalController,
     private _navCtrl: NavController,
-    private _platform: Platform,
     private _popoverCtrl: PopoverController
   ) { }
 

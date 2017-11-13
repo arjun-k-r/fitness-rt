@@ -4,13 +4,8 @@ import { Injectable } from '@angular/core';
 // Firebase
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 
-// Third-party
-import * as moment from 'moment';
-
 // Models
 import { Fitness } from '../../models';
-
-const CURRENT_DAY: number = moment().dayOfYear();
 
 @Injectable()
 export class FitnessProvider {

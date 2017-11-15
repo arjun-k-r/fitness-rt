@@ -17,7 +17,6 @@ import {
   Popover,
   PopoverController
 } from 'ionic-angular';
-import { IPedometerData } from '@ionic-native/pedometer';
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';

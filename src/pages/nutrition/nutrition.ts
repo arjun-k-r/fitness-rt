@@ -101,12 +101,14 @@ export class NutritionPage {
           this._loader.present();
           const subscription: Subscription = this._mealPvd.getPrevMealPlan$(this._authId).subscribe(
             (mealPlan: MealPlan) => {
+              this.mealPlan = Object.assign({}, mealPlan['$value'] === null ? this.mealPlan : mealPlan);
+              this._mealPvd.saveMealPlan(this._authId, this.mealPlan, this._weekLog);
+
               if (this._loader) {
                 this._loader.dismiss();
                 this._loader = null;
               }
-              this.mealPlan = Object.assign({}, mealPlan['$value'] === null ? this.mealPlan : mealPlan);
-              this._mealPvd.saveMealPlan(this._authId, this.mealPlan, this._weekLog);
+              
               subscription.unsubscribe();
             },
             (err: firebase.FirebaseError) => {

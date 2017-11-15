@@ -148,11 +148,12 @@ export class SleepPage {
               this.sleepForm.controls['bedTime'].patchValue(this.sleep.bedTime);
               this.sleepForm.controls['duration'].patchValue(this.sleep.duration);
               this.sleepForm.controls['quality'].patchValue(this.sleep.quality);
-              subscription.unsubscribe();
+
               if (this._loader) {
                 this._loader.dismiss();
                 this._loader = null;
               }
+              subscription.unsubscribe();
             },
             (err: firebase.FirebaseError) => {
               if (this._loader) {

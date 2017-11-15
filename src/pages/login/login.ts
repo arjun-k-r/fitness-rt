@@ -51,7 +51,7 @@ export class LoginPage {
   public login(): void {
     this._loader = this._loadCtrl.create({
       content: 'Please wait...',
-      duration: 30000,
+      duration: 10000,
       spinner: 'crescent'
     });
     this._loader.present();

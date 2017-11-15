@@ -149,7 +149,7 @@ export class MealEditPage {
   public removeMeal(): void {
     this._loader = this._loadCtrl.create({
       content: 'Please wait...',
-      duration: 30000,
+      duration: 10000,
       spinner: 'crescent'
     });
     this._loader.present();
@@ -190,7 +190,7 @@ export class MealEditPage {
     this._updateMeal();
     this._loader = this._loadCtrl.create({
       content: 'Please wait...',
-      duration: 30000,
+      duration: 10000,
       spinner: 'crescent'
     });
     this._loader.present();

@@ -132,7 +132,7 @@ export class SleepPage {
         handler: () => {
           this._loader = this._loadCtrl.create({
             content: 'Please wait...',
-            duration: 30000,
+            duration: 10000,
             spinner: 'crescent'
           });
           this._loader.present();
@@ -144,15 +144,16 @@ export class SleepPage {
 
           const subscription: Subscription = this._sleepPvd.getPrevSleep$(this._authId).subscribe(
             (sleep: Sleep) => {
+              if (this._loader) {
+                this._loader.dismiss();
+                this._loader = null;
+              }
+              
               this.sleep = Object.assign({}, sleep['$value'] === null ? this.sleep : sleep);
               this.sleepForm.controls['bedTime'].patchValue(this.sleep.bedTime);
               this.sleepForm.controls['duration'].patchValue(this.sleep.duration);
               this.sleepForm.controls['quality'].patchValue(this.sleep.quality);
 
-              if (this._loader) {
-                this._loader.dismiss();
-                this._loader = null;
-              }
               subscription.unsubscribe();
             },
             (err: firebase.FirebaseError) => {
@@ -178,7 +179,7 @@ export class SleepPage {
   public saveSleep(): void {
     this._loader = this._loadCtrl.create({
       content: 'Please wait...',
-      duration: 30000,
+      duration: 10000,
       spinner: 'crescent'
     });
     this._loader.present();
@@ -231,7 +232,7 @@ export class SleepPage {
   ionViewWillEnter(): void {
     this._loader = this._loadCtrl.create({
       content: 'Loading...',
-      duration: 30000,
+      duration: 10000,
       spinner: 'crescent'
     });
     this._loader.present();

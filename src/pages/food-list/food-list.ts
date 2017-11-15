@@ -212,7 +212,7 @@ export class FoodListPage {
     if (!this._recipeSubscription) {
       this._recipeLoader = this._loadCtrl.create({
         content: 'Loading...',
-        duration: 30000,
+        duration: 10000,
         spinner: 'crescent'
       });
       this._recipeLoader.present();
@@ -241,7 +241,7 @@ export class FoodListPage {
     if (!this._usdaFoodSubscription) {
       this._usdaFoodLoader = this._loadCtrl.create({
         content: 'Loading...',
-        duration: 30000,
+        duration: 10000,
         spinner: 'crescent'
       });
       this._usdaFoodLoader.present();
@@ -330,7 +330,7 @@ export class FoodListPage {
   ionViewWillEnter(): void {
     this._foodLoader = this._loadCtrl.create({
       content: 'Loading...',
-      duration: 30000,
+      duration: 10000,
       spinner: 'crescent'
     });
     this._foodLoader.present();

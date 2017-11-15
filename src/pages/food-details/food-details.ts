@@ -294,7 +294,7 @@ export class FoodDetailsPage {
   public removeFood(): void {
     this._loader = this._loadCtrl.create({
       content: 'Please wait...',
-      duration: 30000,
+      duration: 10000,
       spinner: 'crescent'
     });
     this._loader.present();
@@ -332,7 +332,7 @@ export class FoodDetailsPage {
   public saveFood(): void {
     this._loader = this._loadCtrl.create({
       content: 'Please wait...',
-      duration: 30000,
+      duration: 10000,
       spinner: 'crescent'
     });
     this._loader.present();
@@ -370,7 +370,7 @@ export class FoodDetailsPage {
   ionViewWillEnter(): void {
     this._loader = this._loadCtrl.create({
       content: 'Loading...',
-      duration: 30000,
+      duration: 10000,
       spinner: 'crescent'
     });
     this._loader.present();

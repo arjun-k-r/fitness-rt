@@ -35,22 +35,31 @@
 
 .auth-form {
     background: none;
-    max-width: 50rem;
+    max-width: 30rem;
     ion-list {
         background: none;
         ion-item {
             background: none;
         }
     }
+    width: 100%;
 }
 
-.auth-form__group {
+.auth-form__item {
     padding: 0;
     width: 100%;
     input {
         color: rgb(255, 255, 255);
         text-align: center!important;
         ::placeholder {
+            color: rgb(255, 255, 255)!important;
+            text-align: center!important;
+        }
+        ::-moz-placeholder {
+            color: rgb(255, 255, 255)!important;
+            text-align: center!important;
+        }
+        ::-webkit-input-placeholder {
             color: rgb(255, 255, 255)!important;
             text-align: center!important;
         }
@@ -78,14 +87,59 @@
     text-align: center;
 }
 
-.fa-spinner {
-    -webkit-animation: spin 1s linear infinite;
-    -moz-animation: spin 1s linear infinite;
-    animation: spin 1s linear infinite;
-}
+.circular-spinner {
+    animation: rotate 2s linear infinite;
+    height: 100%;
+    transform-origin: center center;
+    width: 100px;
+    .path {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+        stroke-linecap: round;
+      }
+  }
+  
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -35px;
+    }
+    100% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -124px;
+    }
+  }
+  
+  @keyframes color {
+    100%,
+    0% {
+      stroke: color($colors, danger);
+    }
+    40% {
+      stroke: color($colors, primary);
+    }
+    66% {
+      stroke: color($colors, secondary);
+    }
+    80%,
+    90% {
+      stroke: #ffa700;
+    }
+  }
 
 .form__message {
-    color: rgb(255, 255, 255);
+    color: color($colors, warn);
     padding-top: 1rem;
 }
 
@@ -100,6 +154,17 @@
     height: 100%;
     justify-content: center;
     width: 100%;
+}
+
+.menu__user-info {
+    align-items: center;
+    display: flex;
+    height: 200px;
+    justify-content: space-around;
+    width: 100%;
+    ion-icon {
+        font-size: 72px;
+    }
 }
 
 .no-elements {

@@ -21,6 +21,7 @@ interface IPageLink {
 })
 export class MyApp {
   @ViewChild(Nav) _nav: Nav;
+  public currentPage: IPageLink;
   public pages: Array<IPageLink>;
   public rootPage: string = 'registration';
   constructor(
@@ -53,6 +54,8 @@ export class MyApp {
   }
 
   public openPage(page: IPageLink): void {
+    this.currentPage = page;
     this._nav.setRoot(page.component);
   }
+  
 }

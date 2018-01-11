@@ -102,32 +102,4 @@ export class RegistrationPage {
         }).present();
       });
   }
-
-  ionViewWillEnter(): void {
-    this._loader = this._loadCtrl.create({
-      content: 'Please wait...',
-      duration: 15000,
-      spinner: 'crescent'
-    });
-    this._loader.present();
-    if (this._tabBarElement) {
-      this._tabBarElement.style.display = 'none';
-    }
-    this._afAuth.authState.subscribe((auth: firebase.User) => {
-      if (!!auth) {
-        if (this._loader) {
-          this._loader.dismiss();
-          this._loader = null;
-        }
-        this._navCtrl.setRoot('fitness');
-      }
-    });
-  }
-
-  ionViewWillLeave(): void {
-    if (this._loader) {
-      this._loader.dismiss();
-      this._loader = null;
-    }
-  }
 }

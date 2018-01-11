@@ -1,18 +1,21 @@
-<ion-menu [content]="content" swipeEnabled="false" role="navigation">
-    <ion-header>
-        <ion-toolbar role="menubar">
-            <ion-title>Menu</ion-title>
-        </ion-toolbar>
-    </ion-header>
-
+<ion-menu [content]="content" persistent="true" swipeEnabled="false" type="reveal">
     <ion-content>
-        <ion-list role="menu">
-            <button (click)="openPage(p)" ion-item menuClose *ngFor="let p of pages" role="menuitem">
-              <ion-icon aria-hidden="true" color="secondary" item-left [name]="p.icon"></ion-icon>
-              {{p.title}}
-          </button>
+        <div class="menu__user-info">
+            <div class="user-info__image">
+                <ion-icon name="person"></ion-icon>
+            </div>
+            <div class="user-info__text">
+                <h1>Username</h1>
+                <p>Email</p>
+            </div>
+        </div>
+        <ion-list no-lines role="menu">
+            <button (click)="openPage(p)" ion-item menuClose *ngFor="let p of pages">
+                <ion-icon [color]="currentPage === p ? 'secondary' : 'caption'" item-left [name]="p.icon"></ion-icon>
+                <p ion-text [color]="currentPage === p ? 'secondary' : 'dark'">{{ p.title }}</p>
+            </button>
         </ion-list>
     </ion-content>
 </ion-menu>
 
-<ion-nav #content role="presentation" [root]="rootPage" swipeBackEnabled="false"></ion-nav>
+<ion-nav #content [root]="rootPage" swipeBackEnabled="false"></ion-nav>

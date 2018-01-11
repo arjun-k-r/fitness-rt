@@ -37,8 +37,10 @@ $colors: (
   primary:    #3782fe,
   secondary:  #4dd87b,
   danger:     #f53d3d,
+  warn:       #ffff00,
   light:      #fff,
-  dark:       #222
+  dark:       #222,
+  caption:    #708090
 );
 
 
@@ -55,7 +57,7 @@ $segment-button-ios-background-color-activated: #fff;
 // Material Design only Sass variables can go here
 
 $text-input-md-highlight-color: #fff;
-$toolbar-background: color($colors, primary) !default;
+$toolbar-background: color($colors, secondary) !default;
 $segment-button-md-text-color-activated: #fff;
 $toolbar-text-color: #fff;
 $segment-button-md-border-color-activated: #fff;
@@ -76,7 +78,9 @@ $segment-button-wp-text-color-activated: #fff;
 // default are overridden.
 
 $headings-font-weight: 300;
+$text-input-highlight-color-invalid: color($colors, warn);
 $text-input-placeholder-color: #fff;
+$toolbar-background: color($colors, secondary);
 @import "ionic.theme.default";
 
 // Ionicons

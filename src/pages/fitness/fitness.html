@@ -1,15 +1,15 @@
 <ion-header>
   <ion-navbar role="toolbar">
-    <button ion-button menuToggle role="button">
-      <ion-icon aria-hidden="true" name="menu"></ion-icon>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Fitness</ion-title>
     <ion-buttons end>
-      <button (click)="saveFitness()" [disabled]="fitnessForm.invalid" ion-button padding role="button">
-        <ion-icon aria-hidden="true" name="cloud-done"></ion-icon>
+      <button (click)="saveFitness()" [disabled]="fitnessForm.invalid" ion-button padding>
+        <ion-icon name="cloud-done"></ion-icon>
       </button>
-      <button (click)="showSettings($event)" icon-only ion-button role="button">
-        <ion-icon aria-hidden="true" name="more"></ion-icon>
+      <button (click)="showSettings($event)" icon-only ion-button>
+        <ion-icon name="more"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -29,16 +29,16 @@
   <div [ngSwitch]="fitnessSegment">
     <form [formGroup]="fitnessForm" *ngSwitchCase="'fitnessInfo'" novalidate role="form">
       <ion-item-group role="group">
-        <ion-item-divider color="primary" role="separator">Primary info</ion-item-divider>
+        <ion-item-divider color="light" role="separator">Primary info</ion-item-divider>
         <ion-item>
-          <ion-icon aria-hidden="true" color="secondary" item-start name="{{ age < 14 ? 'egg' : 'man' }}"></ion-icon>
+          <ion-icon color="secondary" item-start name="{{ age < 14 ? 'egg' : 'man' }}"></ion-icon>
           <ion-label floating for="age" id="ageLabel">Age (years) *</ion-label>
           <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="ageLabel" aria-required="true" formControlName="age"
             id="age" required type="number"></ion-input>
         </ion-item>
         <div class="form__message" *ngIf="fitnessForm.invalid && age?.touched && age.errors?.required">Please enter your age.</div>
         <ion-item>
-          <ion-icon aria-hidden="true" color="secondary" item-start name="{{ gender === 'male' ? 'male' : 'female' }}"></ion-icon>
+          <ion-icon color="secondary" item-start name="{{ gender === 'male' ? 'male' : 'female' }}"></ion-icon>
           <ion-label for="gender" id="genderLabel">Gender *</ion-label>
           <ion-select aria-live="assertive" aria-labelledby="genderLabel" aria-required="true" formControlName="gender" id="gender"
             required>
@@ -48,28 +48,28 @@
         </ion-item>
         <div class="form__message" *ngIf="fitnessForm.invalid && gender?.touched && gender.errors?.required">Please select your gender.</div>
         <ion-item>
-          <ion-icon aria-hidden="true" color="secondary" item-start name="trending-up"></ion-icon>
+          <ion-icon color="secondary" item-start name="trending-up"></ion-icon>
           <ion-label floating for="height" id="heightLabel">Height (centimeters)*</ion-label>
           <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="heightLabel" aria-required="true" formControlName="height"
             id="height" required type="number"></ion-input>
         </ion-item>
         <div class="form__message" *ngIf="fitnessForm.invalid && height?.touched && height.errors?.required">Please enter your height.</div>
         <ion-item *ngIf="gender.value === 'female' && pregnant.value === false">
-          <ion-icon aria-hidden="true" color="secondary" item-start name="cart"></ion-icon>
+          <ion-icon color="secondary" item-start name="cart"></ion-icon>
           <ion-label for="lactating" id="lactatingLabel">Lactating</ion-label>
           <ion-toggle aria-live="assertive" aria-labelledby="lactatingLabel" aria-required="true" formControlName="lactating" id="lactating"
             required role="switch">
           </ion-toggle>
         </ion-item>
         <ion-item *ngIf="gender.value === 'female' && lactating.value === false">
-          <ion-icon aria-hidden="true" color="secondary" item-start name="cart"></ion-icon>
+          <ion-icon color="secondary" item-start name="cart"></ion-icon>
           <ion-label for="pregnant" id="pregnantLabel">Pregnant</ion-label>
           <ion-toggle aria-live="assertive" aria-labelledby="pregnantLabel" aria-required="true" formControlName="pregnant" id="pregnant"
             required role="switch">
           </ion-toggle>
         </ion-item>
         <ion-item>
-          <ion-icon aria-hidden="true" color="secondary" item-start name="trending-down"></ion-icon>
+          <ion-icon color="secondary" item-start name="trending-down"></ion-icon>
           <ion-label floating for="weight" id="weightLabel">Weight (kilograms)*</ion-label>
           <ion-input aria-live="assertive" aria-autocomplete="false" aria-labelledby="weightLabel" aria-required="true" formControlName="weight"
             id="weight" required type="number"></ion-input>

@@ -34,10 +34,10 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
+  primary:    #3782fe,
+  secondary:  #4dd87b,
   danger:     #f53d3d,
-  light:      #f4f4f4,
+  light:      #fff,
   dark:       #222
 );
 
@@ -46,6 +46,7 @@ $colors: (
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
+$text-input-ios-highlight-color: #fff;
 $segment-button-ios-background-color-activated: #fff;
 
 
@@ -53,6 +54,7 @@ $segment-button-ios-background-color-activated: #fff;
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
+$text-input-md-highlight-color: #fff;
 $toolbar-background: color($colors, primary) !default;
 $segment-button-md-text-color-activated: #fff;
 $toolbar-text-color: #fff;
@@ -73,8 +75,9 @@ $segment-button-wp-text-color-activated: #fff;
 // so that the above variables are used and Ionic's
 // default are overridden.
 
+$headings-font-weight: 300;
+$text-input-placeholder-color: #fff;
 @import "ionic.theme.default";
-
 
 // Ionicons
 // --------------------------------------------------

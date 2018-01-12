@@ -13,4 +13,12 @@ export class UserProfileProvider {
     private _db: AngularFireDatabase
   ) { }
 
+  public getUser$(authId: string): FirebaseObjectObservable<User> {
+    return this._db.object(`/users/${authId}`);
+  }
+
+  public saveUser(authId: string, user: User): Promise<void> {
+    return this._db.object(`/users/${authId}`).set(user);
+  }
+
 }

@@ -20,3 +20,5 @@ export { RecipeProvider } from './recipe/recipe';
 export { RecipeProviderModule } from './recipe/recipe.module';
 export { SleepProvider } from './sleep/sleep';
 export { SleepProviderModule } from './sleep/sleep.module';
+export { UserProfileProvider } from './user-profile/user-profile';
+export { UserProfileProviderModule } from './user-profile/user-profile.module';

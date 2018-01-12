@@ -11,6 +11,9 @@ import * as firebase from 'firebase/app';
 // Models
 import { User } from '../../models';
 
+// Providers
+import { UserProfileProvider } from '../../providers';
+
 @IonicPage({
   name: 'profile'
 })
@@ -20,7 +23,12 @@ import { User } from '../../models';
 export class ProfilePage {
   public user: User;
   constructor(
-    private _navCtrl: NavController
+    private _navCtrl: NavController,
+    private _userPvd: UserProfileProvider
   ) {}
+
+  ionViewWillEnter(): void {
+    this._userPvd.get
+  }
 
 }

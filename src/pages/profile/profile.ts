@@ -27,8 +27,4 @@ export class ProfilePage {
     private _userPvd: UserProfileProvider
   ) {}
 
-  ionViewWillEnter(): void {
-    this._userPvd.get
-  }
-
 }

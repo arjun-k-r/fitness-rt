@@ -9,3 +9,4 @@ export * from './meal';
 export * from './nutrition';
 export { Recipe } from './recipe';
 export * from './sleep';
+export { User } from './user';

@@ -26,6 +26,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
 import 'firebase/storage';
+import { UserProfileProvider } from '../providers/user-profile/user-profile';
 
 const CLOUD_SETTINGS: CloudSettings = {
   'core': {
@@ -68,7 +69,8 @@ const FIREBASE_CONFIG = {
     LocalNotifications,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UserProfileProvider
   ]
 })
 export class AppModule {}

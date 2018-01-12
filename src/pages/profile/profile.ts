@@ -1,25 +1,26 @@
+// Angular
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+// Ionic
+import { IonicPage, NavController } from 'ionic-angular';
 
-@IonicPage()
+// Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+
+// Models
+import { User } from '../../models';
+
+@IonicPage({
+  name: 'profile'
+})
 @Component({
-  selector: 'page-profile',
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
-  }
+  public user: User;
+  constructor(
+    private _navCtrl: NavController
+  ) {}
 
 }

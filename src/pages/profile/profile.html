@@ -19,5 +19,28 @@
 
 
 <ion-content padding>
-
+  <div [ngSwitch]="profilePageSegment">
+    <div *ngSwitchCase="'userInfo'">
+      <ion-grid>
+        <ion-row justify-content-center align-items-center>
+          <ion-col (click)="changeImage()">
+            <div class="upload-placeholder" *ngIf="!user.avatar">
+              <ion-icon name="add"></ion-icon>
+              <div>
+                Choose image
+              </div>
+            </div>
+            <div class="avatar" [style.backgroundImage]="'url(' + user.avatar + ')'" *ngIf="user.avatar"></div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <input type="file" #fileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event)" />
+      <ion-list>
+        <ion-item>
+          <ion-label fixed>Birthday</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="user.birthday"></ion-datetime>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
 </ion-content>

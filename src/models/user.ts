@@ -1,5 +1,6 @@
-export default class User {
+export class User {
   constructor(
+    public avatar: string,
     public birth: number,
     public email: string,
     public height: number,

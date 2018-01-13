@@ -1,17 +1,9 @@
 // Angular
 import { Injectable } from '@angular/core';
 
-// Firebase
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
-
-// Models
-import { Fitness } from '../../models';
-
 @Injectable()
 export class FitnessProvider {
-  constructor(
-    private _db: AngularFireDatabase
-  ) { }
+  constructor() { }
 
   /**
    * The Revised Harris-Benedict Equation
@@ -24,15 +16,16 @@ export class FitnessProvider {
     }
   }
 
-  public getFitness$(authId: string): FirebaseObjectObservable<Fitness> {
-    return this._db.object(`/fitness/${authId}`);
-  }
-
-  public getUserWeight$(authId: string): FirebaseObjectObservable<number> {
-    return this._db.object(`/fitness/${authId}/weight`);
-  }
-
-  public saveFitness(authId: string, fitness: Fitness): Promise<void> {
-    return this._db.object(`/fitness/${authId}`).set(fitness);
+  /**
+   * The U.S. Navy Body fat percentage formula
+   */
+  public calculateBodyFatPercentage(gender: string, height: number, hips: number, neck: number, units: string, waist: number, weight: number): number {
+    if (units === 'us') {
+      if (gender === 'male') {
+        return Math.round(86.01 * Math.log10(+waist - +neck) - 70.041 * Math.log10(height) + 36.76);
+      } else {
+        return Math.round(0);
+      }
+    }
   }
 }

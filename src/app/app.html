@@ -11,8 +11,8 @@
         </div>
         <ion-list no-lines role="menu">
             <button (click)="openPage(p)" ion-item menuClose *ngFor="let p of pages">
-                <ion-icon [color]="currentPage === p ? 'secondary' : 'caption'" item-left [name]="p.icon"></ion-icon>
-                <p ion-text [color]="currentPage === p ? 'secondary' : 'dark'">{{ p.title }}</p>
+                <ion-icon [color]="currentPage === p ? 'primary' : 'caption'" item-left [name]="p.icon"></ion-icon>
+                <p ion-text [color]="currentPage === p ? 'primary' : 'dark'">{{ p.title }}</p>
             </button>
         </ion-list>
     </ion-content>

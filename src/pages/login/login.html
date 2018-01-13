@@ -7,19 +7,29 @@
         <ion-item class="auth-form__item">
           <ion-input formControlName="email" required type="email"></ion-input>
         </ion-item>
-        <div class="form__message" *ngIf="loginForm.invalid && email.touched && email.errors?.required">Please enter your email.</div>
-        <div class="form__message" *ngIf="email.dirty && email.errors?.email">Please enter a valid email address.</div>
+        <div class="form__message" *ngIf="loginForm.invalid && email.touched && email.errors?.required">
+          <ion-icon name="warning"></ion-icon>
+          Please enter your email.
+        </div>
+        <div class="form__message" *ngIf="email.dirty && email.errors?.email">
+          <ion-icon name="warning"></ion-icon>
+          Please enter a valid email address.
+        </div>
         <ion-item class="auth-form__item">
           <ion-input formControlName="password" required type="password"></ion-input>
         </ion-item>
-        <div class="form__message" *ngIf="loginForm.invalid && password.touched && password.errors?.required">Please enter your password.</div>
+        <div class="form__message" *ngIf="loginForm.invalid && password.touched && password.errors?.required">
+          <ion-icon name="warning"></ion-icon>
+          Please enter your password.
+        </div>
         <br />
-        <button block color="light" [disabled]="loginForm.invalid" ion-button round type="submit">Login</button>
+        <button block color="light" [disabled]="loginForm.invalid" ion-button round type="submit">
+          <span color="primary" ion-text>Login</span>
+        </button>
         <div class="auth-form__links">
           Don't have an account?
           <a (click)="register()">Sign Up</a>
-          <br />
-          Forgot your password?
+          <br /> Forgot your password?
           <a (click)="forgotPassword()">Reset password</a>
         </div>
       </ion-list>

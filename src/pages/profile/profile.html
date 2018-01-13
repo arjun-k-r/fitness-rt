@@ -4,6 +4,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Profile</ion-title>
+    <ion-buttons end>
+      <button clear ion-button>
+        Save
+      </button>
+    </ion-buttons>
   </ion-navbar>
   <ion-toolbar role="tablist">
     <ion-segment [(ngModel)]="profilePageSegment">
@@ -17,28 +22,55 @@
   </ion-toolbar>
 </ion-header>
 
-
-<ion-content padding>
+<ion-content>
   <div [ngSwitch]="profilePageSegment">
     <div *ngSwitchCase="'userInfo'">
       <ion-grid>
-        <ion-row justify-content-center align-items-center>
-          <ion-col (click)="changeImage()">
-            <div class="upload-placeholder" *ngIf="!user.avatar">
-              <ion-icon name="add"></ion-icon>
-              <div>
-                Choose image
-              </div>
+        <ion-row align-items-center justify-content-center>
+          <ion-col>
+            <div class="avatar__icon" *ngIf="!userInfo?.photoUrl" text-center>
+              <ion-icon name="person"></ion-icon>
             </div>
-            <div class="avatar" [style.backgroundImage]="'url(' + user.avatar + ')'" *ngIf="user.avatar"></div>
+            <div class="avatar__image" [style.backgroundImage]="'url(' + userInfo?.photoUrl + ')'" *ngIf="userInfo?.photoUrl"></div>
+            <button block (click)="changeImage()" ion-button>Change avatar</button>
+          </ion-col>
+          <ion-col>
+            <h1>{{ userInfo?.displayName }}</h1>
+            <p>{{ userInfo?.email }}</p>
           </ion-col>
         </ion-row>
       </ion-grid>
       <input type="file" #fileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event)" />
       <ion-list>
+        <ion-list-header>Bio</ion-list-header>
         <ion-item>
-          <ion-label fixed>Birthday</ion-label>
-          <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="user.birthday"></ion-datetime>
+          <ion-label fixed>Age</ion-label>
+          <ion-input [(ngModel)]="userProfile.age"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Gender</ion-label>
+          <ion-select [(ngModel)]="userProfile.gender">
+            <ion-option value="female">Female</ion-option>
+            <ion-option value="male">Male</ion-option>
+          </ion-select>
+        </ion-item>
+        <div *ngIf="userProfile.gender === 'female'">
+          <ion-item>
+            <ion-label>Pregnant</ion-label>
+            <ion-toggle [(ngModel)]="userProfile.isPregnant"></ion-toggle>
+          </ion-item>
+          <ion-item>
+            <ion-label>Lactating</ion-label>
+            <ion-toggle [(ngModel)]="userProfile.isLactating"></ion-toggle>
+          </ion-item>
+        </div>
+        <ion-item>
+          <ion-label fixed>Height (cm)</ion-label>
+          <ion-input [(ngModel)]="userProfile.height"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Weight (kg)</ion-label>
+          <ion-input [(ngModel)]="userProfile.weight"></ion-input>
         </ion-item>
       </ion-list>
     </div>

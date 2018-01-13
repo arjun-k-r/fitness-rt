@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 
 // Models
-import { User } from '../../models';
+import { UserProfile } from '../../models';
 
 @Injectable()
 export class UserProfileProvider {
@@ -13,12 +13,12 @@ export class UserProfileProvider {
     private _db: AngularFireDatabase
   ) { }
 
-  public getUser$(authId: string): FirebaseObjectObservable<User> {
-    return this._db.object(`/users/${authId}`);
+  public getUserProfile$(authId: string): FirebaseObjectObservable<UserProfile> {
+    return this._db.object(`/user-profiles/${authId}`);
   }
 
-  public saveUser(authId: string, user: User): Promise<void> {
-    return this._db.object(`/users/${authId}`).set(user);
+  public saveUserProfile(authId: string, user: UserProfile): Promise<void> {
+    return this._db.object(`/user-profiles/${authId}`).set(user);
   }
 
 }

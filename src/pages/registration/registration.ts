@@ -5,12 +5,12 @@ import { CustomValidators } from 'ng2-validation';
 
 // Ionic
 import {
-  AlertController,
   IonicPage,
   Loading,
   LoadingController,
   NavController,
-  NavParams
+  NavParams,
+  ToastController
 } from 'ionic-angular';
 
 // Firebase
@@ -34,10 +34,10 @@ export class RegistrationPage {
   public registrationForm: FormGroup;
   constructor(
     private _afAuth: AngularFireAuth,
-    private _alertCtrl: AlertController,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
-    private _params: NavParams
+    private _params: NavParams,
+    private _toastCtrl: ToastController
   ) {
     this._tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this._history = this._params.get('history');
@@ -58,11 +58,14 @@ export class RegistrationPage {
   public register(): void {
     this._loader = this._loadCtrl.create({
       content: 'Please wait...',
-      duration: 10000,
+      duration: 5000,
       spinner: 'crescent'
     });
     this._loader.present();
-    this._afAuth.auth.createUserWithEmailAndPassword(this.registrationForm.get('email').value.trim(), this.registrationForm.get('password').value.trim())
+    this._afAuth.auth.createUserWithEmailAndPassword(
+      this.registrationForm.get('email').value.trim(),
+      this.registrationForm.get('password').value.trim()
+    )
       .then((user: firebase.User) => {
         user.updateProfile({
           displayName: this.registrationForm.get('name').value.trim(),
@@ -75,18 +78,20 @@ export class RegistrationPage {
           if (!!this._history) {
             this._navCtrl.setRoot(this._history);
           } else {
-            this._navCtrl.setRoot('fitness');
+            this._navCtrl.setRoot('profile');
           }
         }).catch((err: firebase.FirebaseError) => {
           if (this._loader) {
             this._loader.dismiss();
             this._loader = null;
           }
-          this._alertCtrl.create({
-            title: 'Uhh ohh...',
-            subTitle: 'Something went wrong',
-            message: err.message,
-            buttons: ['OK']
+          this._toastCtrl.create({
+            closeButtonText: 'GOT IT!',
+            cssClass: 'alert-message',
+            dismissOnPageChange: true,
+            duration: 5000,
+            message: `<ion-icon color="warn" name="warning"></ion-icon>${err.message} `,
+            showCloseButton: true
           }).present();
         });
       }).catch((err: firebase.FirebaseError) => {
@@ -94,11 +99,13 @@ export class RegistrationPage {
           this._loader.dismiss();
           this._loader = null;
         }
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.message,
-          buttons: ['OK']
+        this._toastCtrl.create({
+          closeButtonText: 'GOT IT!',
+          cssClass: 'alert-message',
+          dismissOnPageChange: true,
+          duration: 5000,
+          message: `<ion-icon color="warn" name="warning"></ion-icon>${err.message} `,
+          showCloseButton: true
         }).present();
       });
   }

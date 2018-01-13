@@ -41,14 +41,14 @@ export class MyApp {
       this._backgroundMode.enable();
       this._autostart.enable();
       this.pages = [
-        { component: 'fitness', icon: 'body', title: 'Fitness' },
-        { component: 'sleep', icon: 'moon', title: 'Sleep' },
-        { component: 'exercise', icon: 'walk', title: 'Exercise' },
-        { component: 'nutrition', icon: 'nutrition', title: 'Nutrition' },
-        { component: 'recipes', icon: 'restaurant', title: 'Recipes' },
-        { component: 'blood-cholesterol', icon: 'water', title: 'Blood cholesterol' },
-        { component: 'blood-pressure', icon: 'pulse', title: 'Blood pressure' },
-        { component: 'blood-sugar', icon: 'heart', title: 'Blood sugar' }
+        { component: 'profile', icon: 'person', title: 'Profile' }
+        // { component: 'sleep', icon: 'moon', title: 'Sleep' },
+        // { component: 'exercise', icon: 'walk', title: 'Exercise' },
+        // { component: 'nutrition', icon: 'nutrition', title: 'Nutrition' },
+        // { component: 'recipes', icon: 'restaurant', title: 'Recipes' },
+        // { component: 'blood-cholesterol', icon: 'water', title: 'Blood cholesterol' },
+        // { component: 'blood-pressure', icon: 'pulse', title: 'Blood pressure' },
+        // { component: 'blood-sugar', icon: 'heart', title: 'Blood sugar' }
       ];
     });
   }

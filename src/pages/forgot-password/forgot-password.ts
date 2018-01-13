@@ -9,7 +9,8 @@ import {
   Loading,
   LoadingController,
   NavController,
-  NavParams
+  NavParams,
+  ToastController
 } from 'ionic-angular';
 
 // Firebase
@@ -32,7 +33,8 @@ export class ForgotPasswordPage {
     private _alertCtrl: AlertController,
     private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
-    private _params: NavParams
+    private _params: NavParams,
+    private _toastCtrl: ToastController
   ) {
     this._history = this._params.get('history');
     this.forgotPasswordForm = new FormGroup({
@@ -49,7 +51,7 @@ export class ForgotPasswordPage {
   public reqestReset(): void {
     this._loader = this._loadCtrl.create({
       content: 'Please wait...',
-      duration: 10000,
+      duration: 5000,
       spinner: 'crescent'
     });
     this._loader.present();
@@ -76,20 +78,14 @@ export class ForgotPasswordPage {
           this._loader.dismiss();
           this._loader = null;
         }
-        this._alertCtrl.create({
-          title: 'Uhh ohh...',
-          subTitle: 'Something went wrong',
-          message: err.message,
-          buttons: ['OK']
+        this._toastCtrl.create({
+          closeButtonText: 'GOT IT!',
+          cssClass: 'alert-message',
+          dismissOnPageChange: true,
+          duration: 5000,
+          message: `<ion-icon color="warn" name="warning"></ion-icon>${err.message} `,
+          showCloseButton: true
         }).present();
       });
   }
-
-  ionViewWillLeave(): void {
-    if (this._loader) {
-      this._loader.dismiss();
-      this._loader = null;
-    }
-  }
-
 }

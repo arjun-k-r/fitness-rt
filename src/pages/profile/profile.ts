@@ -18,7 +18,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { Fitness, UserProfile } from '../../models';
+import { BodyFat, Fitness, UserProfile } from '../../models';
 
 // Providers
 import { UserProfileProvider } from '../../providers';
@@ -42,7 +42,11 @@ export class ProfilePage {
     private _toastCtrl: ToastController,
     private _userPvd: UserProfileProvider
   ) {
-    this.userProfile = new UserProfile(0, new Fitness(0, 0, 0), '', 0, false,false, 0);
+    this.userProfile = new UserProfile(0, new Fitness(0, new BodyFat('', 0, 0, 0), 0), '', 0, false,false, 0);
+  }
+
+  public viewPageInfo(): void {
+    this._navCtrl.push('profile-info');
   }
 
   ionViewCanEnter(): void {

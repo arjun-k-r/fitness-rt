@@ -1,7 +1,9 @@
+import { BodyFat } from './bodyFat';
+
 export class Fitness {
   constructor(
       public bmr: number,
-      public bodyFatPercentage: number,
+      public bodyFatPercentage: BodyFat,
       public waistChestRatio: number
   ) { }
 }

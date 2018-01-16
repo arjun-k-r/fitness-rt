@@ -15,18 +15,19 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-.info {
-    p, li {
-        color: color($colors, caption);
-    }
-}
-
 .alert-checkbox-label {
     white-space: normal!important;
 }
 
 .alert-message {
     color: color($colors, warn);
+}
+
+.avatar {
+    align-items: center;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
 }
 
 .avatar__icon {
@@ -37,9 +38,12 @@
 }
 
 .avatar__image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 10rem;
-    height: 10rem;
-    width: 10rem;
+    height: 20rem;
+    width: 20rem;
 }
 
 .auth-page {

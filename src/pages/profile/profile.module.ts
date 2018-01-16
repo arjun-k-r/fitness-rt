@@ -3,7 +3,11 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
 import { ProfilePage } from './profile';
-import { UserProfileProviderModule } from '../../providers';
+import {
+  FitnessProviderModule,
+  PictureProviderModule,
+  UserProfileProviderModule
+} from '../../providers';
 
 @NgModule({
   declarations: [
@@ -11,7 +15,9 @@ import { UserProfileProviderModule } from '../../providers';
   ],
   imports: [
     IonicPageModule.forChild(ProfilePage),
-    UserProfileProviderModule
+    UserProfileProviderModule,
+    FitnessProviderModule,
+    PictureProviderModule
   ],
 })
-export class ProfilePageModule {}
+export class ProfilePageModule { }

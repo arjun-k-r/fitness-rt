@@ -5,7 +5,7 @@
     </button>
     <ion-title>Profile</ion-title>
     <ion-buttons end>
-      <button clear ion-button>
+      <button clear [disabled]="!unsavedChanges" (click)="saveChanges()" ion-button>
         Save
       </button>
       <button icon ion-button (click)="viewPageInfo()">
@@ -30,11 +30,11 @@
     <div *ngSwitchCase="'userInfo'">
       <ion-grid>
         <ion-row align-items-center justify-content-center>
-          <ion-col>
-            <div class="avatar__icon" *ngIf="!userInfo?.photoUrl" text-center>
+          <ion-col class="avatar">
+            <div class="avatar__icon" *ngIf="!userInfo?.photoURL" text-center>
               <ion-icon name="person"></ion-icon>
             </div>
-            <div class="avatar__image" [style.backgroundImage]="'url(' + userInfo?.photoUrl + ')'" *ngIf="userInfo?.photoUrl"></div>
+            <div class="avatar__image" [style.backgroundImage]="'url(' + userInfo?.photoURL + ')'" *ngIf="userInfo?.photoURL"></div>
             <button block (click)="changeImage()" ion-button>Change avatar</button>
           </ion-col>
           <ion-col>
@@ -48,11 +48,11 @@
         <ion-list-header>Bio</ion-list-header>
         <ion-item>
           <ion-label fixed>Age</ion-label>
-          <ion-input [(ngModel)]="userProfile.age"></ion-input>
+          <ion-input (ionChange)="changeMade()" [(ngModel)]="userProfile.age"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Gender</ion-label>
-          <ion-select [(ngModel)]="userProfile.gender">
+          <ion-select (ionChange)="changeMade()" [(ngModel)]="userProfile.gender">
             <ion-option value="female">Female</ion-option>
             <ion-option value="male">Male</ion-option>
           </ion-select>
@@ -60,20 +60,66 @@
         <div *ngIf="userProfile.gender === 'female'">
           <ion-item>
             <ion-label>Pregnant</ion-label>
-            <ion-toggle [(ngModel)]="userProfile.isPregnant"></ion-toggle>
+            <ion-toggle (ionChange)="changeMade()" [(ngModel)]="userProfile.isPregnant"></ion-toggle>
           </ion-item>
           <ion-item>
             <ion-label>Lactating</ion-label>
-            <ion-toggle [(ngModel)]="userProfile.isLactating"></ion-toggle>
+            <ion-toggle (ionChange)="changeMade()" [(ngModel)]="userProfile.isLactating"></ion-toggle>
           </ion-item>
         </div>
+        <ion-list-header>Measurements</ion-list-header>
+        <ion-item>
+          <ion-label fixed>Chest (cm)</ion-label>
+          <ion-input (ionChange)="changeMade()" [(ngModel)]="userProfile.measurements.chest"></ion-input>
+        </ion-item>
         <ion-item>
           <ion-label fixed>Height (cm)</ion-label>
-          <ion-input [(ngModel)]="userProfile.height"></ion-input>
+          <ion-input (ionChange)="changeMade()" [(ngModel)]="userProfile.measurements.height"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Hips (cm)</ion-label>
+          <ion-input (ionChange)="changeMade()" [(ngModel)]="userProfile.measurements.hips"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Neck (cm)</ion-label>
+          <ion-input (ionChange)="changeMade()" [(ngModel)]="userProfile.measurements.neck"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Waist (cm)</ion-label>
+          <ion-input (ionChange)="changeMade()" [(ngModel)]="userProfile.measurements.waist"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label fixed>Weight (kg)</ion-label>
-          <ion-input [(ngModel)]="userProfile.weight"></ion-input>
+          <ion-input (ionChange)="changeMade()" [(ngModel)]="userProfile.measurements.weight"></ion-input>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div *ngSwitchCase="'userFitness'">
+      <ion-list>
+        <ion-item>
+          <h2>Basal metabolic rate</h2>
+          <p item-content>{{ userProfile.fitness.bmr }} kcal/day</p>
+        </ion-item>
+        <ion-item>
+          <h2>Body shape</h2>
+          <p item-content>{{ userProfile.fitness.bodyShape }}</p>
+        </ion-item>
+        <ion-list-header>Body fat</ion-list-header>
+        <ion-item>
+          <h2>Fat category</h2>
+          <p item-content>{{ userProfile.fitness.bodyFatPercentage.category }}</p>
+        </ion-item>
+        <ion-item>
+          <h2>Fat mass</h2>
+          <p item-content>{{ userProfile.fitness.bodyFatPercentage.fatMass }} kg</p>
+        </ion-item>
+        <ion-item>
+          <h2>Lean muscle mass</h2>
+          <p item-content>{{ userProfile.fitness.bodyFatPercentage.muscleMass }} kg</p>
+        </ion-item>
+        <ion-item>
+          <h2>Body fat percentage</h2>
+          <p item-content>{{ userProfile.fitness.bodyFatPercentage.fatPercentage }}%</p>
         </ion-item>
       </ion-list>
     </div>

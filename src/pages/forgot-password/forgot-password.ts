@@ -25,7 +25,6 @@ import * as firebase from 'firebase/app';
 })
 export class ForgotPasswordPage {
   private _history: string;
-  private _loader: Loading;
   public forgotPasswordForm: FormGroup;
   public email: FormControl = new FormControl('', [Validators.required, Validators.email]);
   constructor(
@@ -49,18 +48,15 @@ export class ForgotPasswordPage {
   }
 
   public reqestReset(): void {
-    this._loader = this._loadCtrl.create({
+    const loader: Loading = this._loadCtrl.create({
       content: 'Please wait...',
       duration: 5000,
       spinner: 'crescent'
     });
-    this._loader.present();
+    loader.present();
     this._afAuth.auth.sendPasswordResetEmail(this.forgotPasswordForm.get('email').value.trim())
       .then(() => {
-        if (this._loader) {
-          this._loader.dismiss();
-          this._loader = null;
-        }
+        loader.dismiss();
         this._alertCtrl.create({
           title: 'Request sent',
           subTitle: 'An email with a password reset link has been sent',
@@ -74,10 +70,7 @@ export class ForgotPasswordPage {
         }).present();
       })
       .catch((err: firebase.FirebaseError) => {
-        if (this._loader) {
-          this._loader.dismiss();
-          this._loader = null;
-        }
+        loader.dismiss();
         this._toastCtrl.create({
           closeButtonText: 'GOT IT!',
           cssClass: 'alert-message',

@@ -4,7 +4,18 @@ export class Fitness {
   constructor(
       public bmr: number,
       public bodyFatPercentage: BodyFat,
-      public waistChestRatio: number
+      public bodyShape: string
+  ) { }
+}
+
+export class BodyMeasurements {
+  constructor(
+    public chest: number,
+    public height: number,
+    public hips: number,
+    public neck: number,
+    public waist: number,
+    public weight: number
   ) { }
 }
 
@@ -13,9 +24,8 @@ export class UserProfile {
     public age: number,
     public fitness: Fitness,
     public gender: string,
-    public height: number,
     public isLactating: boolean,
     public isPregnant: boolean,
-    public weight: number
+    public measurements: BodyMeasurements
   ) { }
 }

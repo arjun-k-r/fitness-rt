@@ -22,16 +22,16 @@ export class FitnessProvider {
   /**
    * The U.S. Navy Body fat percentage formula
    */
-  public calculateBodyFatPercentage(age: number, gender: string, height: number, hips: number, neck: number, waist: number, weight: number): BodyFat {
+  public calculateBodyFat(age: number, gender: string, height: number, hips: number, neck: number, waist: number, weight: number): BodyFat {
     let bodyFat: number;
     if (gender === 'male') {
-      bodyFat = Math.round((495 / 1.0324 - 0.19077 * Math.log10(waist - neck) + 0.15456 * Math.log10(height)) - 450);
+      bodyFat = Math.round((495 / (1.0324 - 0.19077 * Math.log10(+waist - +neck) + 0.15456 * Math.log10(+height))) - 450);
     } else if (gender === 'female') {
-      bodyFat = Math.round((495 / 1.29579 - 0.35004 * Math.log10(waist + hips - neck) + 0.22100 * Math.log10(height)) - 450);
+      bodyFat = Math.round((495 / (1.29579 - 0.35004 * Math.log10(+waist + +hips - +neck) + 0.22100 * Math.log10(+height))) - 450);
     }
 
-    const fatMass: number = bodyFat * weight;
-    const muscleMass: number = weight - fatMass;
+    const fatMass: number = +(bodyFat / 100 * +weight).toFixed(2);
+    const muscleMass: number = +weight - fatMass;
     let jpIdealBf: number;
     if (gender === 'male') {
       if (age <= 20) {
@@ -75,11 +75,11 @@ export class FitnessProvider {
     if (gender === 'male') {
       if (bodyFat <= 5) {
         bodyFatCategory = 'Essential fat';
-      } if (bodyFat <= 13) {
+      } else if (bodyFat <= 13) {
         bodyFatCategory = 'Athlete';
-      } if (bodyFat <= 17) {
+      } else if (bodyFat <= 17) {
         bodyFatCategory = 'Fitness';
-      } if (bodyFat <= 25) {
+      } else if (bodyFat <= 25) {
         bodyFatCategory = 'Average';
       } else {
         bodyFatCategory = 'Obese';
@@ -87,11 +87,11 @@ export class FitnessProvider {
     } else if (gender === 'female') {
       if (bodyFat <= 13) {
         bodyFatCategory = 'Essential fat';
-      } if (bodyFat <= 20) {
+      } else if (bodyFat <= 20) {
         bodyFatCategory = 'Athlete';
-      } if (bodyFat <= 24) {
+      } else if (bodyFat <= 24) {
         bodyFatCategory = 'Fitness';
-      } if (bodyFat <= 31) {
+      } else if (bodyFat <= 31) {
         bodyFatCategory = 'Average';
       } else {
         bodyFatCategory = 'Obese';
@@ -106,11 +106,11 @@ export class FitnessProvider {
    * The U.S. Navy Body fat percentage formula
    */
   public calculateBodyShape(chest: number, gender: string, hips: number, waist: number): string {
-    const wcRatio: number = waist / chest;
+    const wcRatio: number = +waist / +chest;
     if (gender === 'male') {
       return wcRatio > 0.8 ? 'Apple shape' : 'V shape';
     } else if (gender === 'female') {
-      const whRatio: number = waist / hips;
+      const whRatio: number = +waist / +hips;
       const wcwhRatio: number = wcRatio / whRatio;
       if ((wcRatio <= 0.8 && whRatio >= 0.7) || (wcwhRatio <= 1.25 && wcwhRatio >= 0.75)) {
         return 'Hourglass shape'

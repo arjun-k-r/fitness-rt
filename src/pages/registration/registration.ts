@@ -26,10 +26,6 @@ import { NotificationProvider } from '../../providers';
 export class RegistrationPage {
   private _history: string;
   private _tabBarElement: any;
-  public emailControl: FormControl = new FormControl('', [Validators.required, Validators.email]);
-  public nameControl: FormControl = new FormControl('', [Validators.required, Validators.pattern(/[A-Za-z]+(\s[A-Za-z]+)?$/)]);
-  public passwordControl: FormControl = new FormControl('', [Validators.required, Validators.minLength(8)]);
-  public passwordConfirmControl: FormControl = new FormControl('', [Validators.required, CustomValidators.equalTo(this.passwordControl)]);
   public registrationForm: FormGroup;
   constructor(
     private _afAuth: AngularFireAuth,
@@ -40,11 +36,11 @@ export class RegistrationPage {
     this._tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this._history = this._params.get('history');
     this.registrationForm = new FormGroup({
-      email: this.emailControl,
-      name: this.nameControl,
-      password: this.passwordControl,
-      passwordConfirm: this.passwordConfirmControl
+      email:  new FormControl('', [Validators.required, Validators.email]),
+      name: new FormControl('', [Validators.required, Validators.pattern(/[A-Za-z]+(\s[A-Za-z]+)?$/)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
+    this.registrationForm.addControl('passwordConfirm', new FormControl('', [Validators.required, CustomValidators.equalTo(this.registrationForm.controls['passsword'])]));
   }
 
   public login(): void {

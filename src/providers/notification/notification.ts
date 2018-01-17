@@ -11,7 +11,7 @@ import {
 @Injectable()
 export class NotificationProvider {
   private _loader: Loading;
-  constructor(private _loadCtrl: LoadingController, private _toastCtrl) { }
+  constructor(private _loadCtrl: LoadingController, private _toastCtrl: ToastController) { }
 
   public closeLoading(): void {
     this._loader.dismiss();

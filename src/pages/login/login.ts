@@ -24,9 +24,7 @@ import { NotificationProvider } from '../../providers';
 })
 export class LoginPage {
   private _history: string;
-  public emailControl: FormControl = new FormControl('', [Validators.required, Validators.email]);
   public loginForm: FormGroup;
-  public passwordControl: FormControl = new FormControl('', Validators.required);
   constructor(
     private _afAuth: AngularFireAuth,
     private _navCtrl: NavController,
@@ -35,8 +33,8 @@ export class LoginPage {
   ) {
     this._history = this._params.get('history');
     this.loginForm = new FormGroup({
-      email: this.emailControl,
-      password: this.passwordControl
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required)
     });
   }
 

@@ -26,7 +26,6 @@ import { NotificationProvider } from '../../providers';
 export class ForgotPasswordPage {
   private _history: string;
   public forgotPasswordForm: FormGroup;
-  public emailControl: FormControl = new FormControl('', [Validators.required, Validators.email]);
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
@@ -36,7 +35,7 @@ export class ForgotPasswordPage {
   ) {
     this._history = this._params.get('history');
     this.forgotPasswordForm = new FormGroup({
-      email: this.emailControl
+      email: new FormControl('', [Validators.required, Validators.email])
     });
   }
 

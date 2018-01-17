@@ -37,21 +37,11 @@ export class ProfilePage {
   private _authId: string;
   private _authSubscription: Subscription;
   private _profileFormSubscription: Subscription;
-  public ageControl: FormControl = new FormControl('', [Validators.required]);
-  public chestMeasurementControl: FormControl = new FormControl('', [Validators.required]);
-  public genderControl: FormControl = new FormControl('', [Validators.required]);
-  public heightMeasurementControl: FormControl = new FormControl('', [Validators.required]);
-  public hipsMeasurementControl: FormControl = new FormControl('', [Validators.required]);
-  public isLactatingControl: FormControl = new FormControl('', [Validators.required]);
-  public isPregnantControl: FormControl = new FormControl('', [Validators.required]);
-  public neckMeasurementControl: FormControl = new FormControl('', [Validators.required]);
   public profileForm: FormGroup;
   public profilePageSegment: string = 'userInfo';
   public unsavedChanges: boolean = false;
   public userInfo: firebase.UserInfo;
   public userProfile: UserProfile;
-  public waistMeasurementControl: FormControl = new FormControl('', [Validators.required]);
-  public weightMeasurementControl: FormControl = new FormControl('', [Validators.required]);
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _afAuth: AngularFireAuth,
@@ -64,16 +54,16 @@ export class ProfilePage {
     private _userPvd: UserProfileProvider
   ) {
     this.profileForm = new FormGroup({
-      age: this.ageControl,
-      chestMeasurement: this.chestMeasurementControl,
-      gender: this.genderControl,
-      heightMeasurement: this.heightMeasurementControl,
-      hipsMeasurementControl: this.hipsMeasurementControl,
-      isLactating: this.isLactatingControl,
-      isPregnant: this.isPregnantControl,
-      neckMeasurement: this.neckMeasurementControl,
-      waistMeasurement: this.waistMeasurementControl,
-      weightMeasurement: this.weightMeasurementControl
+      age:  new FormControl('', [Validators.required]),
+      chestMeasurement: new FormControl('', [Validators.required]),
+      gender: new FormControl('', [Validators.required]),
+      heightMeasurement: new FormControl('', [Validators.required]),
+      hipsMeasurement: new FormControl('', [Validators.required]),
+      isLactating: new FormControl('', [Validators.required]),
+      isPregnant: new FormControl('', [Validators.required]),
+      neckMeasurement: new FormControl('', [Validators.required]),
+      waistMeasurement: new FormControl('', [Validators.required]),
+      weightMeasurement: new FormControl('', [Validators.required])
     });
     this.userProfile = new UserProfile(
       0,
@@ -104,8 +94,18 @@ export class ProfilePage {
 
   private _getProfile(): void {
     this._userPvd.getUserProfile$(this._authId).subscribe((up: UserProfile) => {
-      if (!!up && !up.hasOwnProperty('$value')) {
+      if (!!up && up['$value'] !== null) {
         this.userProfile = Object.assign({}, up);
+        this.profileForm.controls['age'].patchValue(this.userProfile.age);
+        this.profileForm.controls['chestMeasurement'].patchValue(this.userProfile.measurements.chest);
+        this.profileForm.controls['gender'].patchValue(this.userProfile.age);
+        this.profileForm.controls['heightMeasurement'].patchValue(this.userProfile.measurements.height);
+        this.profileForm.controls['hipsMeasurement'].patchValue(this.userProfile.measurements.hips);
+        this.profileForm.controls['isLactating'].patchValue(this.userProfile.isLactating);
+        this.profileForm.controls['isPregnant'].patchValue(this.userProfile.isPregnant);
+        this.profileForm.controls['neckMeasurement'].patchValue(this.userProfile.measurements.neck);
+        this.profileForm.controls['waistMeasurement'].patchValue(this.userProfile.measurements.waist);
+        this.profileForm.controls['weightMeasurement'].patchValue(this.userProfile.measurements.weight);
       }
     }, (err: firebase.FirebaseError) => {
       this._notifyPvd.showError(err.message);
@@ -128,7 +128,7 @@ export class ProfilePage {
         chestMeasurement: number,
         gender: number,
         heightMeasurement: number,
-        hipsMeasurementControl: number,
+        hipsMeasurement: number,
         isLactating: number,
         isPregnant: number,
         neckMeasurement: number,
@@ -142,7 +142,7 @@ export class ProfilePage {
             gender: c.gender,
             isLactating: c.isLactating,
             isPregnant: c.isPregnant,
-            measurements: new BodyMeasurements(c.chestMeasurement, c.heightMeasurement, c.hipsMeasurementControl, c.neckMeasurement, c.waistMeasurement, c.weightMeasurement)
+            measurements: new BodyMeasurements(c.chestMeasurement, c.heightMeasurement, c.hipsMeasurement, c.neckMeasurement, c.waistMeasurement, c.weightMeasurement)
           });
         }
       }
@@ -252,7 +252,7 @@ export class ProfilePage {
     this._navCtrl.push('profile-info');
   }
 
-  ionViewCanEnter(): Promise<void> {
+  ionViewCanEnter(): Promise<{}> {
     return new Promise((resolve, reject) => {
       this._afAuth.authState.subscribe((auth: firebase.User) => {
         if (!auth) {
@@ -266,7 +266,7 @@ export class ProfilePage {
     });
   }
 
-  ionViewCanLEave(): boolean | Promise<void> {
+  ionViewCanLEave(): boolean | Promise<{}> {
     if (!this.unsavedChanges && this.profileForm.valid) {
       return true;
     }

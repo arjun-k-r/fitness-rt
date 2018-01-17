@@ -55,7 +55,6 @@ const FIREBASE_CONFIG = {
     BrowserModule,
     CloudModule.forRoot(CLOUD_SETTINGS),
     CommonModule,
-    NotificationProviderModule,
     ReactiveFormsModule
   ],
   bootstrap: [IonicApp],

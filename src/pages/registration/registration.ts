@@ -6,16 +6,16 @@ import { CustomValidators } from 'ng2-validation';
 // Ionic
 import {
   IonicPage,
-  Loading,
-  LoadingController,
   NavController,
-  NavParams,
-  ToastController
+  NavParams
 } from 'ionic-angular';
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+
+// Providers
+import { NotificationProvider } from '../../providers';
 
 @IonicPage({
   name: 'registration'
@@ -26,25 +26,24 @@ import * as firebase from 'firebase/app';
 export class RegistrationPage {
   private _history: string;
   private _tabBarElement: any;
-  public email: FormControl = new FormControl('', [Validators.required, Validators.email]);
-  public name: FormControl = new FormControl('', [Validators.required, Validators.pattern(/[A-Za-z]+(\s[A-Za-z]+)?$/)]);
-  public password: FormControl = new FormControl('', [Validators.required, Validators.minLength(8)]);
-  public passwordConfirm: FormControl = new FormControl('', [Validators.required, CustomValidators.equalTo(this.password)]);
+  public emailControl: FormControl = new FormControl('', [Validators.required, Validators.email]);
+  public nameControl: FormControl = new FormControl('', [Validators.required, Validators.pattern(/[A-Za-z]+(\s[A-Za-z]+)?$/)]);
+  public passwordControl: FormControl = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  public passwordConfirmControl: FormControl = new FormControl('', [Validators.required, CustomValidators.equalTo(this.passwordControl)]);
   public registrationForm: FormGroup;
   constructor(
     private _afAuth: AngularFireAuth,
-    private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
-    private _params: NavParams,
-    private _toastCtrl: ToastController
+    private _notifyPvd: NotificationProvider,
+    private _params: NavParams
   ) {
     this._tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this._history = this._params.get('history');
     this.registrationForm = new FormGroup({
-      email: this.email,
-      name: this.name,
-      password: this.password,
-      passwordConfirm: this.passwordConfirm
+      email: this.emailControl,
+      name: this.nameControl,
+      password: this.passwordControl,
+      passwordConfirm: this.passwordConfirmControl
     });
   }
 
@@ -55,12 +54,7 @@ export class RegistrationPage {
   }
 
   public register(): void {
-    const loader: Loading = this._loadCtrl.create({
-      content: 'Please wait...',
-      duration: 5000,
-      spinner: 'crescent'
-    });
-    loader.present();
+    this._notifyPvd.showLoading();
     this._afAuth.auth.createUserWithEmailAndPassword(
       this.registrationForm.get('email').value.trim(),
       this.registrationForm.get('password').value.trim()
@@ -70,33 +64,19 @@ export class RegistrationPage {
           displayName: this.registrationForm.get('name').value.trim(),
           photoURL: ''
         }).then(() => {
-          loader.dismiss();
+          this._notifyPvd.closeLoading();
           if (!!this._history) {
             this._navCtrl.setRoot(this._history);
           } else {
             this._navCtrl.setRoot('profile');
           }
         }).catch((err: firebase.FirebaseError) => {
-          loader.dismiss();
-          this._toastCtrl.create({
-            closeButtonText: 'GOT IT!',
-            cssClass: 'alert-message',
-            dismissOnPageChange: true,
-            duration: 5000,
-            message: `<ion-icon color="warn" name="warning"></ion-icon>${err.message} `,
-            showCloseButton: true
-          }).present();
+          this._notifyPvd.closeLoading();
+          this._notifyPvd.showError(err.message);
         });
       }).catch((err: firebase.FirebaseError) => {
-        loader.dismiss();
-        this._toastCtrl.create({
-          closeButtonText: 'GOT IT!',
-          cssClass: 'alert-message',
-          dismissOnPageChange: true,
-          duration: 5000,
-          message: `<ion-icon color="warn" name="warning"></ion-icon>${err.message} `,
-          showCloseButton: true
-        }).present();
+        this._notifyPvd.closeLoading();
+        this._notifyPvd.showError(err.message);
       });
   }
 }

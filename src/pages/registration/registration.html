@@ -5,46 +5,46 @@
       <h1 class="auth-form__title">Fitness RT</h1>
       <ion-list no-lines>
         <ion-item class="auth-form__item">
-          <ion-input formControlName="name" id="name" placeholder="Name*" required type="text"></ion-input>
+          <ion-input formControlName="nameControl" id="name" placeholder="Name*" required type="text"></ion-input>
         </ion-item>
-        <div class="form__message" *ngIf="registrationForm.invalid && name.touched && name.errors?.required">
+        <div class="form__message" *ngIf="registrationForm.invalid && nameControl.touched && nameControl.errors?.required">
           <ion-icon name="warning"></ion-icon>
           Please enter your name.
         </div>
-        <div class="form__message" *ngIf="name.dirty && name.errors?.pattern">
+        <div class="form__message" *ngIf="nameControl.dirty && nameControl.errors?.pattern">
           <ion-icon name="warning"></ion-icon>
           Please enter a valid name.
         </div>
         <ion-item class="auth-form__item">
-          <ion-input formControlName="email" placeholder="Email*" required type="email"></ion-input>
+          <ion-input formControlName="emailControl" placeholder="Email*" required type="email"></ion-input>
         </ion-item>
-        <div class="form__message" *ngIf="registrationForm.invalid && email.touched && email.errors?.required">
+        <div class="form__message" *ngIf="registrationForm.invalid && emailControl.touched && emailControl.errors?.required">
           <ion-icon name="warning"></ion-icon>
           Please enter your email.
         </div>
-        <div class="form__message" *ngIf="email.dirty && email.errors?.email">
+        <div class="form__message" *ngIf="emailControl.dirty && emailControl.errors?.email">
           <ion-icon name="warning"></ion-icon>
           Please enter a valid email address.
         </div>
         <ion-item class="auth-form__item">
-          <ion-input formControlName="password" placeholder="Password*" required type="password"></ion-input>
+          <ion-input formControlName="passwordControl" placeholder="Password*" required type="password"></ion-input>
         </ion-item>
-        <div class="form__message" *ngIf="registrationForm.invalid && password.touched && password.errors?.required">
+        <div class="form__message" *ngIf="registrationForm.invalid && passwordControl.touched && passwordControl.errors?.required">
           <ion-icon name="warning"></ion-icon>
           Please enter your password.
         </div>
-        <div class="form__message" *ngIf="password.dirty && password.errors?.minlength">
+        <div class="form__message" *ngIf="passwordControl.dirty && passwordControl.errors?.minlength">
           <ion-icon name="warning"></ion-icon>
           Password must be at least 8 characters long.
         </div>
         <ion-item class="auth-form__item">
-          <ion-input formControlName="passwordConfirm" placeholder="Confirm password*" required type="password"></ion-input>
+          <ion-input formControlName="passwordConfirmControl" placeholder="Confirm password*" required type="password"></ion-input>
         </ion-item>
-        <div class="form__message" *ngIf="registrationForm.invalid && passwordConfirm.touched && passwordConfirm.errors?.required">
+        <div class="form__message" *ngIf="registrationForm.invalid && passwordConfirmControl.touched && passwordConfirmControl.errors?.required">
           <ion-icon name="warning"></ion-icon>
           Please confirm your password.
         </div>
-        <div class="form__message" *ngIf="passwordConfirm.dirty && passwordConfirm.errors?.equalTo">
+        <div class="form__message" *ngIf="passwordConfirmControl.dirty && passwordConfirmControl.errors?.equalTo">
           <ion-icon name="warning"></ion-icon>
           Passwords don't match.
         </div>

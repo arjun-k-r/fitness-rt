@@ -5,7 +5,7 @@
     </button>
     <ion-title>Profile</ion-title>
     <ion-buttons end>
-      <button clear [disabled]="!unsavedChanges" (click)="saveChanges()" ion-button>
+      <button clear (click)="saveChanges()" [disabled]="profileForm.invalid" ion-button>
         Save
       </button>
       <button icon ion-button (click)="viewPageInfo()">
@@ -46,56 +46,56 @@
       <input type="file" #fileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event)" />
       <ion-list>
         <ion-list-header>Bio</ion-list-header>
-        <ion-item>
-          <ion-label fixed>Age</ion-label>
-          <ion-input (ionChange)="changeMade()" [(ngModel)]="userProfile.age"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Gender</ion-label>
-          <ion-select (ionChange)="changeMade()" [(ngModel)]="userProfile.gender">
-            <ion-option value="female">Female</ion-option>
-            <ion-option value="male">Male</ion-option>
-          </ion-select>
-        </ion-item>
-        <div *ngIf="userProfile.gender === 'female'">
+        <form [formGroup]="profileForm" novalidate>
           <ion-item>
-            <ion-label>Pregnant</ion-label>
-            <ion-toggle (ionChange)="changeMade()" [(ngModel)]="userProfile.isPregnant"></ion-toggle>
+            <ion-label fixed>Age</ion-label>
+            <ion-input formControlName="ageControl"></ion-input>
+          </ion-item>
+          <div class="form__message" *ngIf="profileForm.invalid && ageControl?.touched && ageControl.errors?.required">Please enter your age.</div>
+          <ion-item>
+            <ion-label>Gender</ion-label>
+            <ion-select formcontrolName="genderControl">
+              <ion-option value="female">Female</ion-option>
+              <ion-option value="male">Male</ion-option>
+            </ion-select>
+          </ion-item>
+          <div *ngIf="userProfile.gender === 'female'">
+            <ion-item>
+              <ion-label>Pregnant</ion-label>
+              <ion-toggle formcontrolName="isPregnantControl"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>Lactating</ion-label>
+              <ion-toggle formcontrolName="isLactatingControl"></ion-toggle>
+            </ion-item>
+          </div>
+          <ion-list-header>Measurements</ion-list-header>
+          <ion-item>
+            <ion-label fixed>Chest (cm)</ion-label>
+            <ion-input formcontrolName="chestMeasurementControl"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label>Lactating</ion-label>
-            <ion-toggle (ionChange)="changeMade()" [(ngModel)]="userProfile.isLactating"></ion-toggle>
+            <ion-label fixed>Height (cm)</ion-label>
+            <ion-input formcontrolName="heightMeasurementControl"></ion-input>
           </ion-item>
-        </div>
-        <ion-list-header>Measurements</ion-list-header>
-        <ion-item>
-          <ion-label fixed>Chest (cm)</ion-label>
-          <ion-input (ionChange)="changeMade()" [(ngModel)]="userProfile.measurements.chest"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label fixed>Height (cm)</ion-label>
-          <ion-input (ionChange)="changeMade()" [(ngModel)]="userProfile.measurements.height"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label fixed>Hips (cm)</ion-label>
-          <ion-input (ionChange)="changeMade()" [(ngModel)]="userProfile.measurements.hips"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label fixed>Neck (cm)</ion-label>
-          <ion-input (ionChange)="changeMade()" [(ngModel)]="userProfile.measurements.neck"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label fixed>Waist (cm)</ion-label>
-          <ion-input (ionChange)="changeMade()" [(ngModel)]="userProfile.measurements.waist"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label fixed>Weight (kg)</ion-label>
-          <ion-input (ionChange)="changeMade()" [(ngModel)]="userProfile.measurements.weight"></ion-input>
-        </ion-item>
-      </ion-list>
-    </div>
-    <div *ngSwitchCase="'userFitness'">
-      <ion-list>
+          <ion-item>
+            <ion-label fixed>Hips (cm)</ion-label>
+            <ion-input formcontrolName="hipsMeasurementControl"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label fixed>Neck (cm)</ion-label>
+            <ion-input formcontrolName="neckMeasurementControl"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label fixed>Waist (cm)</ion-label>
+            <ion-input formcontrolName="waistMeasurementControl"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label fixed>Weight (kg)</ion-label>
+            <ion-input formcontrolName="weightMeasurementControl"></ion-input>
+          </ion-item>
+        </form>
+        <ion-list-header>Fitness</ion-list-header>
         <ion-item>
           <h2>Basal metabolic rate</h2>
           <p item-content>{{ userProfile.fitness.bmr }} kcal/day</p>
@@ -121,6 +121,11 @@
           <h2>Body fat percentage</h2>
           <p item-content>{{ userProfile.fitness.bodyFatPercentage.fatPercentage }}%</p>
         </ion-item>
+      </ion-list>
+    </div>
+    <div *ngSwitchCase="'userFitness'">
+      <ion-list>
+
       </ion-list>
     </div>
   </div>

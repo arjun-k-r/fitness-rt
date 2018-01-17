@@ -5,16 +5,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 // Ionic
 import {
   IonicPage,
-  Loading,
-  LoadingController,
   NavController,
-  NavParams,
-  ToastController
+  NavParams
 } from 'ionic-angular';
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+
+// Providers
+import { NotificationProvider } from '../../providers';
 
 @IonicPage({
   name: 'login'
@@ -24,20 +24,19 @@ import * as firebase from 'firebase/app';
 })
 export class LoginPage {
   private _history: string;
-  public email: FormControl = new FormControl('', [Validators.required, Validators.email]);
+  public emailControl: FormControl = new FormControl('', [Validators.required, Validators.email]);
   public loginForm: FormGroup;
-  public password: FormControl = new FormControl('', Validators.required);
+  public passwordControl: FormControl = new FormControl('', Validators.required);
   constructor(
     private _afAuth: AngularFireAuth,
-    private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
-    private _params: NavParams,
-    private _toastCtrl: ToastController
+    private _notifyPvd: NotificationProvider,
+    private _params: NavParams
   ) {
     this._history = this._params.get('history');
     this.loginForm = new FormGroup({
-      email: this.email,
-      password: this.password
+      email: this.emailControl,
+      password: this.passwordControl
     });
   }
 
@@ -48,33 +47,21 @@ export class LoginPage {
   }
 
   public login(): void {
-    const loader: Loading = this._loadCtrl.create({
-      content: 'Please wait...',
-      duration: 5000,
-      spinner: 'crescent'
-    });
-    loader.present();
+    this._notifyPvd.showLoading();
     this._afAuth.auth.signInWithEmailAndPassword(
       this.loginForm.get('email').value.trim(),
       this.loginForm.get('password').value.trim()
     )
       .then((user: firebase.User) => {
-        loader.dismiss();
+        this._notifyPvd.closeLoading();
         if (this._history) {
           this._navCtrl.setRoot(this._history);
         } else {
           this._navCtrl.setRoot('profile');
         }
       }).catch((err: firebase.FirebaseError) => {
-        loader.dismiss();
-        this._toastCtrl.create({
-          closeButtonText: 'GOT IT!',
-          cssClass: 'alert-message',
-          dismissOnPageChange: true,
-          duration: 5000,
-          message: `<ion-icon color="warn" name="warning"></ion-icon>${err.message} `,
-          showCloseButton: true
-        }).present();
+        this._notifyPvd.closeLoading();
+        this._notifyPvd.showError(err.message);
       });
   }
 

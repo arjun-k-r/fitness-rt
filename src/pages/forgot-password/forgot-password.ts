@@ -6,16 +6,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   AlertController,
   IonicPage,
-  Loading,
-  LoadingController,
   NavController,
-  NavParams,
-  ToastController
+  NavParams
 } from 'ionic-angular';
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+
+// Providers
+import { NotificationProvider } from '../../providers';
 
 @IonicPage({
   name: 'forgot-password'
@@ -26,18 +26,17 @@ import * as firebase from 'firebase/app';
 export class ForgotPasswordPage {
   private _history: string;
   public forgotPasswordForm: FormGroup;
-  public email: FormControl = new FormControl('', [Validators.required, Validators.email]);
+  public emailControl: FormControl = new FormControl('', [Validators.required, Validators.email]);
   constructor(
     private _afAuth: AngularFireAuth,
     private _alertCtrl: AlertController,
-    private _loadCtrl: LoadingController,
     private _navCtrl: NavController,
-    private _params: NavParams,
-    private _toastCtrl: ToastController
+    private _notifyPvd: NotificationProvider,
+    private _params: NavParams
   ) {
     this._history = this._params.get('history');
     this.forgotPasswordForm = new FormGroup({
-      email: this.email
+      email: this.emailControl
     });
   }
 
@@ -48,15 +47,10 @@ export class ForgotPasswordPage {
   }
 
   public reqestReset(): void {
-    const loader: Loading = this._loadCtrl.create({
-      content: 'Please wait...',
-      duration: 5000,
-      spinner: 'crescent'
-    });
-    loader.present();
+    this._notifyPvd.showLoading();
     this._afAuth.auth.sendPasswordResetEmail(this.forgotPasswordForm.get('email').value.trim())
       .then(() => {
-        loader.dismiss();
+        this._notifyPvd.closeLoading();
         this._alertCtrl.create({
           title: 'Request sent',
           subTitle: 'An email with a password reset link has been sent',
@@ -70,15 +64,8 @@ export class ForgotPasswordPage {
         }).present();
       })
       .catch((err: firebase.FirebaseError) => {
-        loader.dismiss();
-        this._toastCtrl.create({
-          closeButtonText: 'GOT IT!',
-          cssClass: 'alert-message',
-          dismissOnPageChange: true,
-          duration: 5000,
-          message: `<ion-icon color="warn" name="warning"></ion-icon>${err.message} `,
-          showCloseButton: true
-        }).present();
+        this._notifyPvd.closeLoading();
+        this._notifyPvd.showError(err.message);
       });
   }
 }

@@ -20,13 +20,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 // App
 import { MyApp } from './app.component';
+import { NotificationProvider } from '../providers';
 
 // Firebase
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
 import 'firebase/storage';
-import { UserProfileProvider } from '../providers/user-profile/user-profile';
 
 const CLOUD_SETTINGS: CloudSettings = {
   'core': {
@@ -55,6 +55,7 @@ const FIREBASE_CONFIG = {
     BrowserModule,
     CloudModule.forRoot(CLOUD_SETTINGS),
     CommonModule,
+    NotificationProviderModule,
     ReactiveFormsModule
   ],
   bootstrap: [IonicApp],
@@ -67,10 +68,10 @@ const FIREBASE_CONFIG = {
     Camera,
     ImagePicker,
     LocalNotifications,
+    NotificationProvider,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserProfileProvider
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

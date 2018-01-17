@@ -41,8 +41,8 @@ export class MyApp {
       this._backgroundMode.enable();
       this._autostart.enable();
       this.pages = [
-        { component: 'profile', icon: 'person', title: 'Profile' }
-        // { component: 'sleep', icon: 'moon', title: 'Sleep' },
+        { component: 'profile', icon: 'person', title: 'Profile' },
+        { component: 'sleep', icon: 'moon', title: 'Sleep' }
         // { component: 'exercise', icon: 'walk', title: 'Exercise' },
         // { component: 'nutrition', icon: 'nutrition', title: 'Nutrition' },
         // { component: 'recipes', icon: 'restaurant', title: 'Recipes' },

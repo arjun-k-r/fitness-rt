@@ -5,7 +5,7 @@
     </button>
     <ion-title>Profile</ion-title>
     <ion-buttons end>
-      <button clear (click)="save()" [disabled]="profileForm.invalid && !unsavedChanges" ion-button>
+      <button clear (click)="save()" [disabled]="profileForm.invalid" ion-button>
         Save
       </button>
       <button icon ion-button (click)="viewPageInfo()">
@@ -51,7 +51,10 @@
             <ion-label fixed>Age</ion-label>
             <ion-input formControlName="age"></ion-input>
           </ion-item>
-          <div class="form__message" *ngIf="profileForm.invalid && age?.touched && age.errors?.required">Please enter your age.</div>
+          <div class="form__message--dark" *ngIf="profileForm.invalid && profileForm.controls.age.touched && profileForm.controls.age.errors?.required">
+            <ion-icon name="warning"></ion-icon>
+            Please enter your age.
+          </div>
           <ion-item>
             <ion-label>Gender</ion-label>
             <ion-select formControlName="gender">
@@ -59,6 +62,10 @@
               <ion-option value="male">Male</ion-option>
             </ion-select>
           </ion-item>
+          <div class="form__message--dark" *ngIf="profileForm.invalid && profileForm.controls.gender.touched && profileForm.controls.gender.errors?.required">
+            <ion-icon name="warning"></ion-icon>
+            Please select your gender.
+          </div>
           <div *ngIf="userProfile.gender === 'female'">
             <ion-item>
               <ion-label>Pregnant</ion-label>
@@ -74,26 +81,50 @@
             <ion-label fixed>Chest (cm)</ion-label>
             <ion-input formControlName="chestMeasurement"></ion-input>
           </ion-item>
+          <div class="form__message--dark" *ngIf="profileForm.invalid && profileForm.controls.chestMeasurement.touched && profileForm.controls.chestMeasurement.errors?.required">
+            <ion-icon name="warning"></ion-icon>
+            Please enter your chest measurement.
+          </div>
           <ion-item>
             <ion-label fixed>Height (cm)</ion-label>
             <ion-input formControlName="heightMeasurement"></ion-input>
           </ion-item>
+          <div class="form__message--dark" *ngIf="profileForm.invalid && profileForm.controls.heightMeasurement.touched && profileForm.controls.heightMeasurement.errors?.required">
+            <ion-icon name="warning"></ion-icon>
+            Please enter your height.
+          </div>
           <ion-item>
             <ion-label fixed>Hips (cm)</ion-label>
             <ion-input formControlName="hipsMeasurement"></ion-input>
           </ion-item>
+          <div class="form__message--dark" *ngIf="profileForm.invalid && profileForm.controls.hipsMeasurement.touched && profileForm.controls.hipsMeasurement.errors?.required">
+            <ion-icon name="warning"></ion-icon>
+            Please enter your hips measurement.
+          </div>
           <ion-item>
             <ion-label fixed>Neck (cm)</ion-label>
             <ion-input formControlName="neckMeasurement"></ion-input>
           </ion-item>
+          <div class="form__message--dark" *ngIf="profileForm.invalid && profileForm.controls.neckMeasurement.touched && profileForm.controls.neckMeasurement.errors?.required">
+            <ion-icon name="warning"></ion-icon>
+            Please enter your neck measurement.
+          </div>
           <ion-item>
             <ion-label fixed>Waist (cm)</ion-label>
             <ion-input formControlName="waistMeasurement"></ion-input>
           </ion-item>
+          <div class="form__message--dark" *ngIf="profileForm.invalid && profileForm.controls.waistMeasurement.touched && profileForm.controls.waistMeasurement.errors?.required">
+            <ion-icon name="warning"></ion-icon>
+            Please enter your waist measurement.
+          </div>
           <ion-item>
             <ion-label fixed>Weight (kg)</ion-label>
             <ion-input formControlName="weightMeasurement"></ion-input>
           </ion-item>
+          <div class="form__message--dark" *ngIf="profileForm.invalid && profileForm.controls.weightMeasurement.touched && profileForm.controls.weightMeasurement.errors?.required">
+            <ion-icon name="warning"></ion-icon>
+            Please enter your weight.
+          </div>
         </form>
         <ion-list-header>Fitness</ion-list-header>
         <ion-item>
@@ -124,8 +155,12 @@
       </ion-list>
     </div>
     <div *ngSwitchCase="'trends'">
-      <ion-item padding>
-        <ion-label>Sleep data</ion-label>
+      <ion-item>
+        <ion-label fixed>Trend days</ion-label>
+        <ion-input (ionChange)="getTrends($event)" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fitness data</ion-label>
         <ion-select [(ngModel)]="chartDataSelection" (ionChange)="changeChartData()">
           <ion-option role="option" value="bodyFat">Body fat percentage</ion-option>
           <ion-option role="option" value="chestMeasurement">Chest</ion-option>
@@ -136,7 +171,8 @@
           <ion-option role="option" value="weightMeasurement">Weight</ion-option>
         </ion-select>
       </ion-item>
-      <canvas baseChart class="chart" [chartType]="'line'" [colors]="chartColors" [datasets]="chartData" [labels]="chartLabels" [legend]="true" [options]="chartOpts">
+      <canvas baseChart class="chart" [chartType]="'line'" [colors]="chartColors" [datasets]="chartData" [labels]="chartLabels"
+        [legend]="true" [options]="chartOpts">
       </canvas>
     </div>
   </div>

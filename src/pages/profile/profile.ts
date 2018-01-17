@@ -75,8 +75,8 @@ export class ProfilePage {
       gender: new FormControl(null, [Validators.required]),
       heightMeasurement: new FormControl('', [Validators.required]),
       hipsMeasurement: new FormControl('', [Validators.required]),
-      isLactating: new FormControl('', [Validators.required]),
-      isPregnant: new FormControl('', [Validators.required]),
+      isLactating: new FormControl(''),
+      isPregnant: new FormControl(''),
       neckMeasurement: new FormControl('', [Validators.required]),
       waistMeasurement: new FormControl('', [Validators.required]),
       weightMeasurement: new FormControl('', [Validators.required])
@@ -128,22 +128,6 @@ export class ProfilePage {
     }, (err: firebase.FirebaseError) => {
       this._notifyPvd.showError(err.message);
     });
-  }
-
-  private _getTrends(): void {
-    this._trendSubscription = this._userPvd.getTrends$(this._authId).subscribe(
-      (trends: FitnessTrend[] = []) => {
-        this.chartLabels = [...trends.map((t: FitnessTrend) => t.date)];
-        this._trends = [...trends];
-        this.chartData = [{
-          data: [...this._trends.map((t: FitnessTrend) => t.bodyFat)],
-          label: 'Body fat percentage'
-        }];
-      },
-      (err: firebase.FirebaseError) => {
-        this._notifyPvd.showError(err.message);
-      }
-    );
   }
 
   private _takePhoto(): void {
@@ -266,8 +250,23 @@ export class ProfilePage {
     }
   }
 
-  public changeMade(): void {
-    this.unsavedChanges = true;
+  public getTrends(input?: any): void {
+    if (this._trendSubscription) {
+      this._trendSubscription.unsubscribe();
+    }
+    this._trendSubscription = this._userPvd.getTrends$(this._authId, input ? +input._value : 7).subscribe(
+      (trends: FitnessTrend[] = []) => {
+        this.chartLabels = [...trends.map((t: FitnessTrend) => t.date)];
+        this._trends = [...trends];
+        this.chartData = [{
+          data: [...this._trends.map((t: FitnessTrend) => t.bodyFat)],
+          label: 'Body fat percentage'
+        }];
+      },
+      (err: firebase.FirebaseError) => {
+        this._notifyPvd.showError(err.message);
+      }
+    );
   }
 
   public processWebImage(event): void {
@@ -402,7 +401,7 @@ export class ProfilePage {
         };
 
         this._getProfile();
-        this._getTrends();
+        this.getTrends();
         this._watchFormChanges();
       }
     })
@@ -411,5 +410,6 @@ export class ProfilePage {
   ionViewWillLeave(): void {
     this._authSubscription.unsubscribe();
     this._profileFormSubscription.unsubscribe();
+    this._trendSubscription.unsubscribe();
   }
 }

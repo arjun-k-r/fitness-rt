@@ -20,7 +20,7 @@
 }
 
 .alert-message {
-    color: color($colors, warn);
+    color: color($colors, warn)!important;
 }
 
 .avatar {
@@ -147,13 +147,13 @@
   @keyframes color {
     100%,
     0% {
-      stroke: color($colors, danger);
-    }
-    40% {
       stroke: color($colors, primary);
     }
-    66% {
+    40% {
       stroke: color($colors, secondary);
+    }
+    66% {
+      stroke: color($colors, warn);
     }
     80%,
     90% {
@@ -161,9 +161,14 @@
     }
   }
 
-.form__message {
+.form__message--dark {
     color: color($colors, warn);
-    padding-top: 1rem;
+    padding: 1rem;
+}
+
+.form__message--light {
+    color: color($colors, danger);
+    padding: 1rem;
 }
 
 hr {

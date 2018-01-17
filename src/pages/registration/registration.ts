@@ -40,7 +40,7 @@ export class RegistrationPage {
       name: new FormControl('', [Validators.required, Validators.pattern(/[A-Za-z]+(\s[A-Za-z]+)?$/)]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
-    this.registrationForm.addControl('passwordConfirm', new FormControl('', [Validators.required, CustomValidators.equalTo(this.registrationForm.controls['passsword'])]));
+    this.registrationForm.addControl('passwordConfirm', new FormControl('', [Validators.required, CustomValidators.equalTo(this.registrationForm.controls['password'])]));
   }
 
   public login(): void {

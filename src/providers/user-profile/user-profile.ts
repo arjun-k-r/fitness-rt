@@ -21,17 +21,17 @@ export class UserProfileProvider {
     return this._db.object(`/user-profiles/${authId}`);
   }
 
-  public getTrends$(authId: string): FirebaseListObservable<FitnessTrend[]> {
+  public getTrends$(authId: string, days: number): FirebaseListObservable<FitnessTrend[]> {
     return this._db.list(`/trends/fitness/${authId}/`, {
       query: {
-        limitToLast: 7
+        limitToLast: days || 7
       }
     });
   }
 
   public saveUserProfile(authId: string, trends: FitnessTrend[], user: UserProfile): Promise<void> {
     const { measurements } = user;
-    const newTrend: FitnessTrend = new FitnessTrend(user.fitness.bodyFatPercentage.fatPercentage, measurements.chest, moment().format('dd/MM/YYYY'), measurements.height, measurements.hips, measurements.neck, measurements.waist, measurements.weight);
+    const newTrend: FitnessTrend = new FitnessTrend(user.fitness.bodyFatPercentage.fatPercentage, measurements.chest, moment().format('DD-MM-YYYY'), measurements.height, measurements.hips, measurements.neck, measurements.waist, measurements.weight);
     if (!!trends.length) {
       trends.reverse();
       if (newTrend.date !== trends[0].date) {

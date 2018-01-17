@@ -24,7 +24,7 @@ export class NotificationProvider {
       cssClass: 'alert-message',
       dismissOnPageChange: true,
       duration: 5000,
-      message: `<ion-icon color="warn" name="warning"></ion-icon>${message} `,
+      message,
       showCloseButton: true
     }).present();
   }

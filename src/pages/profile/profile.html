@@ -5,7 +5,7 @@
     </button>
     <ion-title>Profile</ion-title>
     <ion-buttons end>
-      <button clear (click)="saveChanges()" [disabled]="profileForm.invalid" ion-button>
+      <button clear (click)="save()" [disabled]="profileForm.invalid && !unsavedChanges" ion-button>
         Save
       </button>
       <button icon ion-button (click)="viewPageInfo()">
@@ -18,8 +18,8 @@
       <ion-segment-button value="userInfo">
         Info
       </ion-segment-button>
-      <ion-segment-button value="userFitness">
-        Fitness
+      <ion-segment-button value="trends">
+        Trends
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -49,12 +49,12 @@
         <form [formGroup]="profileForm" novalidate>
           <ion-item>
             <ion-label fixed>Age</ion-label>
-            <ion-input formName="age"></ion-input>
+            <ion-input formControlName="age"></ion-input>
           </ion-item>
           <div class="form__message" *ngIf="profileForm.invalid && age?.touched && age.errors?.required">Please enter your age.</div>
           <ion-item>
             <ion-label>Gender</ion-label>
-            <ion-select formcontrolName="gender">
+            <ion-select formControlName="gender">
               <ion-option value="female">Female</ion-option>
               <ion-option value="male">Male</ion-option>
             </ion-select>
@@ -62,37 +62,37 @@
           <div *ngIf="userProfile.gender === 'female'">
             <ion-item>
               <ion-label>Pregnant</ion-label>
-              <ion-toggle formcontrolName="isPregnant"></ion-toggle>
+              <ion-toggle formControlName="isPregnant"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label>Lactating</ion-label>
-              <ion-toggle formcontrolName="isLactating"></ion-toggle>
+              <ion-toggle formControlName="isLactating"></ion-toggle>
             </ion-item>
           </div>
           <ion-list-header>Measurements</ion-list-header>
           <ion-item>
             <ion-label fixed>Chest (cm)</ion-label>
-            <ion-input formcontrolName="chestMeasurement"></ion-input>
+            <ion-input formControlName="chestMeasurement"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label fixed>Height (cm)</ion-label>
-            <ion-input formcontrolName="heightMeasurement"></ion-input>
+            <ion-input formControlName="heightMeasurement"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label fixed>Hips (cm)</ion-label>
-            <ion-input formcontrolName="hipsMeasurement"></ion-input>
+            <ion-input formControlName="hipsMeasurement"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label fixed>Neck (cm)</ion-label>
-            <ion-input formcontrolName="neckMeasurement"></ion-input>
+            <ion-input formControlName="neckMeasurement"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label fixed>Waist (cm)</ion-label>
-            <ion-input formcontrolName="waistMeasurement"></ion-input>
+            <ion-input formControlName="waistMeasurement"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label fixed>Weight (kg)</ion-label>
-            <ion-input formcontrolName="weightMeasurement"></ion-input>
+            <ion-input formControlName="weightMeasurement"></ion-input>
           </ion-item>
         </form>
         <ion-list-header>Fitness</ion-list-header>
@@ -123,10 +123,21 @@
         </ion-item>
       </ion-list>
     </div>
-    <div *ngSwitchCase="'userFitness'">
-      <ion-list>
-
-      </ion-list>
+    <div *ngSwitchCase="'trends'">
+      <ion-item padding>
+        <ion-label>Sleep data</ion-label>
+        <ion-select [(ngModel)]="chartDataSelection" (ionChange)="changeChartData()">
+          <ion-option role="option" value="bodyFat">Body fat percentage</ion-option>
+          <ion-option role="option" value="chestMeasurement">Chest</ion-option>
+          <ion-option role="option" value="heightMeasurement">Height</ion-option>
+          <ion-option role="option" value="hipsMeasurement">Hips</ion-option>
+          <ion-option role="option" value="neckMeasurement">Neck</ion-option>
+          <ion-option role="option" value="waistMeasurement">Waist</ion-option>
+          <ion-option role="option" value="weightMeasurement">Weight</ion-option>
+        </ion-select>
+      </ion-item>
+      <canvas baseChart class="chart" [chartType]="'line'" [colors]="chartColors" [datasets]="chartData" [labels]="chartLabels" [legend]="true" [options]="chartOpts">
+      </canvas>
     </div>
   </div>
 </ion-content>

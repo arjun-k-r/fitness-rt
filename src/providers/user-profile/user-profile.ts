@@ -2,10 +2,14 @@
 import { Injectable } from '@angular/core';
 
 // Firebase
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
+import * as firebase from 'firebase/app';
+
+// Third-party
+import * as moment from 'moment';
 
 // Models
-import { UserProfile } from '../../models';
+import { FitnessTrend, UserProfile } from '../../models';
 
 @Injectable()
 export class UserProfileProvider {
@@ -17,7 +21,27 @@ export class UserProfileProvider {
     return this._db.object(`/user-profiles/${authId}`);
   }
 
-  public saveUserProfile(authId: string, user: UserProfile): Promise<void> {
+  public getTrends$(authId: string): FirebaseListObservable<FitnessTrend[]> {
+    return this._db.list(`/trends/fitness/${authId}/`, {
+      query: {
+        limitToLast: 7
+      }
+    });
+  }
+
+  public saveUserProfile(authId: string, trends: FitnessTrend[], user: UserProfile): Promise<void> {
+    const { measurements } = user;
+    const newTrend: FitnessTrend = new FitnessTrend(user.fitness.bodyFatPercentage.fatPercentage, measurements.chest, moment().format('dd/MM/YYYY'), measurements.height, measurements.hips, measurements.neck, measurements.waist, measurements.weight);
+    if (!!trends.length) {
+      trends.reverse();
+      if (newTrend.date !== trends[0].date) {
+        this._db.list(`/trends/fitness/${authId}/`).push(newTrend);
+      } else {
+        this._db.list(`/trends/fitness/${authId}/`).update(trends[0]['$key'], newTrend).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
+      }
+    } else {
+      this._db.list(`/trends/fitness/${authId}/`).push(newTrend);
+    }
     return this._db.object(`/user-profiles/${authId}`).set(user);
   }
 

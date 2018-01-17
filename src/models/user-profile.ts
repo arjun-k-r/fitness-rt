@@ -8,6 +8,19 @@ export class Fitness {
   ) { }
 }
 
+export class FitnessTrend {
+  constructor(
+    public bodyFat: number,
+    public chestMEasurement: number,
+    public date: string,
+    public heightMeasurement: number,
+    public hipsMeasurement: number,
+    public neckMeasurement: number,
+    public waistMeasurement,
+    public weightMeasurement: number
+  ) {}
+}
+
 export class BodyMeasurements {
   constructor(
     public chest: number,

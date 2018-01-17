@@ -1,6 +1,6 @@
 // Angular
 import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 // Rxjs
 import { Subscription } from 'rxjs/Subscription';
@@ -21,7 +21,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 // Models
-import { BodyFat, BodyMeasurements, Fitness, UserProfile } from '../../models';
+import { BodyFat, BodyMeasurements, Fitness, FitnessTrend, ILineChartColors, ILineChartEntry, UserProfile } from '../../models';
 
 // Providers
 import { FitnessProvider, NotificationProvider, PictureProvider, UserProfileProvider } from '../../providers';
@@ -36,7 +36,15 @@ export class ProfilePage {
   @ViewChild('fileInput') fileInput;
   private _authId: string;
   private _authSubscription: Subscription;
+  private _formInit: boolean;
   private _profileFormSubscription: Subscription;
+  private _trends: FitnessTrend[];
+  private _trendSubscription: Subscription;
+  public chartColors: ILineChartColors[] = [];
+  public chartData: ILineChartEntry[] = [];
+  public chartDataSelection: string = 'bodyFat';
+  public chartLabels: string[] = [];
+  public chartOpts: any = { responsive: true };
   public profileForm: FormGroup;
   public profilePageSegment: string = 'userInfo';
   public unsavedChanges: boolean = false;
@@ -53,10 +61,18 @@ export class ProfilePage {
     private _toastCtrl: ToastController,
     private _userPvd: UserProfileProvider
   ) {
+    this.chartColors.push({
+      backgroundColor: 'rgb(255, 255, 255)',
+      borderColor: '#4dd87b',
+      pointBackgroundColor: '#4dd87b',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: '#4dd87b'
+    });
     this.profileForm = new FormGroup({
-      age:  new FormControl('', [Validators.required]),
+      age: new FormControl('', [Validators.required]),
       chestMeasurement: new FormControl('', [Validators.required]),
-      gender: new FormControl('', [Validators.required]),
+      gender: new FormControl(null, [Validators.required]),
       heightMeasurement: new FormControl('', [Validators.required]),
       hipsMeasurement: new FormControl('', [Validators.required]),
       isLactating: new FormControl('', [Validators.required]),
@@ -96,9 +112,10 @@ export class ProfilePage {
     this._userPvd.getUserProfile$(this._authId).subscribe((up: UserProfile) => {
       if (!!up && up['$value'] !== null) {
         this.userProfile = Object.assign({}, up);
+        this._formInit = true;
         this.profileForm.controls['age'].patchValue(this.userProfile.age);
         this.profileForm.controls['chestMeasurement'].patchValue(this.userProfile.measurements.chest);
-        this.profileForm.controls['gender'].patchValue(this.userProfile.age);
+        this.profileForm.controls['gender'].patchValue(this.userProfile.gender);
         this.profileForm.controls['heightMeasurement'].patchValue(this.userProfile.measurements.height);
         this.profileForm.controls['hipsMeasurement'].patchValue(this.userProfile.measurements.hips);
         this.profileForm.controls['isLactating'].patchValue(this.userProfile.isLactating);
@@ -106,10 +123,27 @@ export class ProfilePage {
         this.profileForm.controls['neckMeasurement'].patchValue(this.userProfile.measurements.neck);
         this.profileForm.controls['waistMeasurement'].patchValue(this.userProfile.measurements.waist);
         this.profileForm.controls['weightMeasurement'].patchValue(this.userProfile.measurements.weight);
+        this._formInit = false;
       }
     }, (err: firebase.FirebaseError) => {
       this._notifyPvd.showError(err.message);
     });
+  }
+
+  private _getTrends(): void {
+    this._trendSubscription = this._userPvd.getTrends$(this._authId).subscribe(
+      (trends: FitnessTrend[] = []) => {
+        this.chartLabels = [...trends.map((t: FitnessTrend) => t.date)];
+        this._trends = [...trends];
+        this.chartData = [{
+          data: [...this._trends.map((t: FitnessTrend) => t.bodyFat)],
+          label: 'Body fat percentage'
+        }];
+      },
+      (err: firebase.FirebaseError) => {
+        this._notifyPvd.showError(err.message);
+      }
+    );
   }
 
   private _takePhoto(): void {
@@ -135,7 +169,7 @@ export class ProfilePage {
         waistMeasurement: number,
         weightMeasurement: number
       }) => {
-        if (this.profileForm.valid) {
+        if (this.profileForm.valid && !this._formInit) {
           this.unsavedChanges = true;
           this.userProfile = Object.assign({}, this.userProfile, {
             age: c.age,
@@ -147,6 +181,63 @@ export class ProfilePage {
         }
       }
     )
+  }
+
+  public changeChartData(): void {
+    switch (this.chartDataSelection) {
+      case 'bodyFat':
+        this.chartData = [{
+          data: [...this._trends.map((t: FitnessTrend) => t.bodyFat)],
+          label: 'Body fat percentage'
+        }];
+        break;
+
+      case 'chestMEasurement':
+        this.chartData = [{
+          data: [...this._trends.map((t: FitnessTrend) => t.chestMEasurement)],
+          label: 'Chest'
+        }];
+        break;
+
+      case 'heightMeasurement':
+        this.chartData = [{
+          data: [...this._trends.map((t: FitnessTrend) => t.heightMeasurement)],
+          label: 'Height'
+        }];
+        break;
+
+      case 'heightMeasurement':
+        this.chartData = [{
+          data: [...this._trends.map((t: FitnessTrend) => t.hipsMeasurement)],
+          label: 'Hips'
+        }];
+        break;
+
+      case 'neckMeasurement':
+        this.chartData = [{
+          data: [...this._trends.map((t: FitnessTrend) => t.neckMeasurement)],
+          label: 'Neck'
+        }];
+        break;
+
+      case 'waistMeasurement':
+        this.chartData = [{
+          data: [...this._trends.map((t: FitnessTrend) => t.waistMeasurement)],
+          label: 'Waist'
+        }];
+        break;
+
+      case 'weightMeasurement':
+        this.chartData = [{
+          data: [...this._trends.map((t: FitnessTrend) => t.weightMeasurement)],
+          label: 'Weight'
+        }];
+        break;
+
+
+      default:
+        break;
+    }
   }
 
   public changeImage(): void {
@@ -191,7 +282,7 @@ export class ProfilePage {
   public save(): void {
     this._notifyPvd.showLoading();
     this._calculateFitness();
-    this._userPvd.saveUserProfile(this._authId, this.userProfile)
+    this._userPvd.saveUserProfile(this._authId, this._trends, this.userProfile)
       .then(() => {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showInfo('Profile saved successfully!');
@@ -290,7 +381,7 @@ export class ProfilePage {
             }
           ]
         });
-      } else if (!this.profileForm.valid) {
+      } else if (this.profileForm.invalid) {
         this._notifyPvd.showError('Please complete all the fields. They are required throughout the application');
       }
     });
@@ -311,6 +402,7 @@ export class ProfilePage {
         };
 
         this._getProfile();
+        this._getTrends();
         this._watchFormChanges();
       }
     })

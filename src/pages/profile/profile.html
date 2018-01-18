@@ -13,7 +13,7 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar role="tablist">
+  <ion-toolbar>
     <ion-segment [(ngModel)]="profilePageSegment">
       <ion-segment-button value="userInfo">
         Info
@@ -44,7 +44,7 @@
         </ion-row>
       </ion-grid>
       <input type="file" #fileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event)" />
-      <ion-list>
+      <ion-list no-lines>
         <ion-list-header>Bio</ion-list-header>
         <form [formGroup]="profileForm" novalidate>
           <ion-item>
@@ -155,22 +155,26 @@
       </ion-list>
     </div>
     <div *ngSwitchCase="'trends'">
-      <ion-item>
-        <ion-label fixed>Trend days</ion-label>
-        <ion-input (ionChange)="getTrends($event)" type="number"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Fitness data</ion-label>
-        <ion-select [(ngModel)]="chartDataSelection" (ionChange)="changeChartData()">
-          <ion-option role="option" value="bodyFat">Body fat percentage</ion-option>
-          <ion-option role="option" value="chestMeasurement">Chest</ion-option>
-          <ion-option role="option" value="heightMeasurement">Height</ion-option>
-          <ion-option role="option" value="hipsMeasurement">Hips</ion-option>
-          <ion-option role="option" value="neckMeasurement">Neck</ion-option>
-          <ion-option role="option" value="waistMeasurement">Waist</ion-option>
-          <ion-option role="option" value="weightMeasurement">Weight</ion-option>
-        </ion-select>
-      </ion-item>
+      <ion-list no-lines>
+        <ion-list-header>Chart settings</ion-list-header>
+        <ion-item>
+          <ion-label fixed>Trend days</ion-label>
+          <ion-input (ionChange)="getTrends()" [(ngModel)]="trendDays" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Fitness data</ion-label>
+          <ion-select [(ngModel)]="chartDataSelection" (ionChange)="changeChartData()">
+            <ion-option role="option" value="bodyFat">Body fat percentage</ion-option>
+            <ion-option role="option" value="chestMeasurement">Chest</ion-option>
+            <ion-option role="option" value="heightMeasurement">Height</ion-option>
+            <ion-option role="option" value="hipsMeasurement">Hips</ion-option>
+            <ion-option role="option" value="neckMeasurement">Neck</ion-option>
+            <ion-option role="option" value="waistMeasurement">Waist</ion-option>
+            <ion-option role="option" value="weightMeasurement">Weight</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-list-header>Chart</ion-list-header>
+      </ion-list>
       <canvas baseChart class="chart" [chartType]="'line'" [colors]="chartColors" [datasets]="chartData" [labels]="chartLabels"
         [legend]="true" [options]="chartOpts">
       </canvas>

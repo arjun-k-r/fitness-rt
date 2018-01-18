@@ -47,6 +47,7 @@ export class ProfilePage {
   public chartOpts: any = { responsive: true };
   public profileForm: FormGroup;
   public profilePageSegment: string = 'userInfo';
+  public trendDays: number = 7;
   public unsavedChanges: boolean = false;
   public userInfo: firebase.UserInfo;
   public userProfile: UserProfile;
@@ -250,11 +251,11 @@ export class ProfilePage {
     }
   }
 
-  public getTrends(input?: any): void {
+  public getTrends(): void {
     if (this._trendSubscription) {
       this._trendSubscription.unsubscribe();
     }
-    this._trendSubscription = this._userPvd.getTrends$(this._authId, input ? +input._value : 7).subscribe(
+    this._trendSubscription = this._userPvd.getTrends$(this._authId, +this.trendDays).subscribe(
       (trends: FitnessTrend[] = []) => {
         this.chartLabels = [...trends.map((t: FitnessTrend) => t.date)];
         this._trends = [...trends];

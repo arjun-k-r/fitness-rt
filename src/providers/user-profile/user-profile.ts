@@ -29,20 +29,24 @@ export class UserProfileProvider {
     });
   }
 
-  public saveUserProfile(authId: string, trends: FitnessTrend[], user: UserProfile): Promise<void> {
-    const { measurements } = user;
-    const newTrend: FitnessTrend = new FitnessTrend(user.fitness.bodyFatPercentage.fatPercentage, measurements.chest, moment().format('DD-MM-YYYY'), measurements.height, measurements.hips, measurements.neck, measurements.waist, measurements.weight);
-    if (!!trends.length) {
-      trends.reverse();
-      if (newTrend.date !== trends[0].date) {
-        this._db.list(`/trends/fitness/${authId}/`).push(newTrend);
+  public saveUserProfile(authId: string, trends: FitnessTrend[], user: UserProfile): Promise<{}> {
+    return new Promise((resolve, reject) => {
+      const { measurements } = user;
+      const newTrend: FitnessTrend = new FitnessTrend(user.fitness.bodyFatPercentage.fatPercentage, measurements.chest, moment().format('YYYY-MM-DD'), measurements.height, measurements.hips, measurements.neck, measurements.waist, measurements.weight);
+      if (!!trends.length) {
+        trends.reverse();
+        if (newTrend.date !== trends[0].date) {
+          this._db.list(`/trends/fitness/${authId}/`).push(newTrend);
+        } else {
+          this._db.list(`/trends/fitness/${authId}/`).update(trends[0]['$key'], newTrend);
+        }
       } else {
-        this._db.list(`/trends/fitness/${authId}/`).update(trends[0]['$key'], newTrend).catch((err: firebase.FirebaseError) => console.error(`Error saving sleep log: ${err.message}`));
+        this._db.list(`/trends/fitness/${authId}/`).push(newTrend)
       }
-    } else {
-      this._db.list(`/trends/fitness/${authId}/`).push(newTrend);
-    }
-    return this._db.object(`/user-profiles/${authId}`).set(user);
+      this._db.object(`/user-profiles/${authId}`).set(user).then(() => {
+        resolve();
+      }).catch((err: firebase.FirebaseError) => reject(err));
+    });
   }
 
 }

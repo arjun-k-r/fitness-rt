@@ -12,7 +12,7 @@
     grown (organic), if it was well prepared, and if you ate properly (careful chewing, eating slowly, eating in a peacefull
     environment, etc.) before concluding is bad for you.</p>
   <form [formGroup]="metabolicTestForm" (ngSubmit)="checkMetabolicType()" novalidate>
-    <ion-list [formControl]="metabolicTestForm.controls['angerIrritability']" no-lines radio-group>
+    <ion-list formControlName="angerIrritability" no-lines radio-group>
       <ion-list-header>Anger and irratibility</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -35,7 +35,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['anxiety']" no-lines radio-group>
+    <ion-list formControlName="anxiety" no-lines radio-group>
       <ion-list-header>Anxiety</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -59,7 +59,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['idealBreakfast']" no-lines radio-group>
+    <ion-list formControlName="idealBreakfast" no-lines radio-group>
       <ion-list-header>Ideal breakfast</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -84,7 +84,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['mealPref']" no-lines radio-group>
+    <ion-list formControlName="mealPref" no-lines radio-group>
       <ion-list-header>Meal preference</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -94,7 +94,7 @@
         </p>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I would choose lighter foods such as chicken, turkey, light fish, salads, vegetables, and I'd sample various desserts.
+        <ion-label text-wrap>I would choose lighter foods such as chicken, turkey, light fish, salads, vegetables, and I'd sample various desserts.
         </ion-label>
         <ion-radio value="a"></ion-radio>
       </ion-item>
@@ -109,7 +109,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['climate']" no-lines radio-group>
+    <ion-list formControlName="climate" no-lines radio-group>
       <ion-list-header>Climate</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -134,7 +134,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['chestPressure']" no-lines radio-group>
+    <ion-list formControlName="chestPressure" no-lines radio-group>
       <ion-list-header>Chest pressure</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -153,7 +153,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['coffee']" no-lines radio-group>
+    <ion-list formControlName="coffee" no-lines radio-group>
       <ion-list-header>Coffee</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -178,7 +178,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['breakfastAppetite']" no-lines radio-group>
+    <ion-list formControlName="breakfastAppetite" no-lines radio-group>
       <ion-list-header>Appetite at breakfast</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -204,7 +204,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['lunchAppetite']" no-lines radio-group>
+    <ion-list formControlName="lunchAppetite" no-lines radio-group>
       <ion-list-header>Appetite at lunch</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -228,7 +228,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['dinnerAppetite']" no-lines radio-group>
+    <ion-list formControlName="dinnerAppetite" no-lines radio-group>
       <ion-list-header>Appetite at dinner</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -253,7 +253,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['dinnerAppetite']" no-lines radio-group>
+    <ion-list formControlName="concentration" no-lines radio-group>
       <ion-list-header>Concentration</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -279,7 +279,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['chestPressure']" no-lines radio-group>
+    <ion-list formControlName="coughing" no-lines radio-group>
       <ion-list-header>Coughing</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -299,7 +299,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['crackingSkin']" no-lines radio-group>
+    <ion-list formControlName="crackingSkin" no-lines radio-group>
       <ion-list-header>Cracking skin</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -319,7 +319,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['cravings']" no-lines radio-group>
+    <ion-list formControlName="cravings" no-lines radio-group>
       <ion-list-header>Cravings</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -344,7 +344,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['dandruff']" no-lines radio-group>
+    <ion-list formControlName="dandruff" no-lines radio-group>
       <ion-list-header>Dandruff</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -363,7 +363,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['depression']" no-lines radio-group>
+    <ion-list formControlName="depression" no-lines radio-group>
       <ion-list-header>Depression</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -373,7 +373,7 @@
         </p>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I seem to feel more depressed after eating meats and fatty foods (and less depressed after eating fruits and vegetables).
+        <ion-label text-wrap>I seem to feel more depressed after eating meats and fatty foods (and less depressed after eating fruits and vegetables).
         </ion-label>
         <ion-radio value="a"></ion-radio>
       </ion-item>
@@ -389,7 +389,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['desserts']" no-lines radio-group>
+    <ion-list formControlName="desserts" no-lines radio-group>
       <ion-list-header>Desserts</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -416,7 +416,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['dessertPref']" no-lines radio-group>
+    <ion-list formControlName="dessertPref" no-lines radio-group>
       <ion-list-header>Dessert preference</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -440,7 +440,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['idealDinner']" no-lines radio-group>
+    <ion-list formControlName="idealDinner" no-lines radio-group>
       <ion-list-header>Ideal dinner</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -465,7 +465,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['earColor']" no-lines radio-group>
+    <ion-list formControlName="earColor" no-lines radio-group>
       <ion-list-header>Ear color</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -490,7 +490,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['eatingBeforeBed']" no-lines radio-group>
+    <ion-list formControlName="eatingBeforeBed" no-lines radio-group>
       <ion-list-header>Eating before bed</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -514,7 +514,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['eatingHeavyBeforeBed']" no-lines radio-group>
+    <ion-list formControlName="eatingHeavyBeforeBed" no-lines radio-group>
       <ion-list-header>Eating heavy food before bed</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -538,7 +538,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['eatingLightBeforeBed']" no-lines radio-group>
+    <ion-list formControlName="eatingLightBeforeBed" no-lines radio-group>
       <ion-list-header>Eating light food before bed</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -562,7 +562,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['eatingSweetsBeforeBed']" no-lines radio-group>
+    <ion-list formControlName="eatingSweetsBeforeBed" no-lines radio-group>
       <ion-list-header>Eating sweets before bed</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -588,7 +588,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['eatingFrequency']" no-lines radio-group>
+    <ion-list formControlName="eatingFrequency" no-lines radio-group>
       <ion-list-header>Eating frequency</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -613,7 +613,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['eatingHabits']" no-lines radio-group>
+    <ion-list formControlName="eatingHabits" no-lines radio-group>
       <ion-list-header>Eating habits</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -643,7 +643,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['eyeMoisture']" no-lines radio-group>
+    <ion-list formControlName="eyeMoisture" no-lines radio-group>
       <ion-list-header>Eating habits</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -668,7 +668,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['skipMeals']" no-lines radio-group>
+    <ion-list formControlName="skipMeals" no-lines radio-group>
       <ion-list-header>Eating habits</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -694,7 +694,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['facialColor']" no-lines radio-group>
+    <ion-list formControlName="facialColor" no-lines radio-group>
       <ion-list-header>Facial coloring</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -719,7 +719,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['complexion']" no-lines radio-group>
+    <ion-list formControlName="complexion" no-lines radio-group>
       <ion-list-header>Facial complexion</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -744,7 +744,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['fattyFood']" no-lines radio-group>
+    <ion-list formControlName="fattyFood" no-lines radio-group>
       <ion-list-header>Fatty food</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -764,12 +764,12 @@
         <ion-radio value="b"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I love them or crave them and would like them often if I knew they were good for me.
+        <ion-label text-wrap>I love them or crave them and would like them often if I knew they were good for me.
         </ion-label>
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['fingernailThickness']" no-lines radio-group>
+    <ion-list formControlName="fingernailThickness" no-lines radio-group>
       <ion-list-header>Fingernail thickness</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -794,7 +794,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['fruitSaladLunch']" no-lines radio-group>
+    <ion-list formControlName="fruitSaladLunch" no-lines radio-group>
       <ion-list-header>Fruit salad lunch</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -818,7 +818,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['gainWeight']" no-lines radio-group>
+    <ion-list formControlName="gainWeight" no-lines radio-group>
       <ion-list-header>Gaining weight</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -843,7 +843,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['gagReflex']" no-lines radio-group>
+    <ion-list formControlName="gagReflex" no-lines radio-group>
       <ion-list-header>Gag reflex</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -868,7 +868,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['gooseBumps']" no-lines radio-group>
+    <ion-list formControlName="gooseBumps" no-lines radio-group>
       <ion-list-header>Goose bumps</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -893,8 +893,8 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['energyBoost']" no-lines radio-group>
-      <ion-list-header>Goose bumps</ion-list-header>
+    <ion-list formControlName="energyBoost" no-lines radio-group>
+      <ion-list-header>Energy boost</ion-list-header>
       <ion-item>
         <p text-wrap>
           Food is our fuel for life. But different foods have different energy-boosting effects on different metabolic types. Most
@@ -918,7 +918,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['heavyFatReaction']" no-lines radio-group>
+    <ion-list formControlName="heavyFatReaction" no-lines radio-group>
       <ion-list-header>Heavy fat meal reaction</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -943,7 +943,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['hungerFeeling']" no-lines radio-group>
+    <ion-list formControlName="hungerFeeling" no-lines radio-group>
       <ion-list-header>Hunger feelings</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -968,7 +968,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['energyDrain']" no-lines radio-group>
+    <ion-list formControlName="energyDrain" no-lines radio-group>
       <ion-list-header>Energy drain</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -976,7 +976,7 @@
         </p>
       </ion-item>
       <ion-item>
-        <ion-label text-wrap>Meat or fatty food g enerally makes me more tired, lowers my energy even more.
+        <ion-label text-wrap>Meat or fatty food generally makes me more tired, lowers my energy even more.
         </ion-label>
         <ion-radio value="a"></ion-radio>
       </ion-item>
@@ -991,7 +991,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['insectBite']" no-lines radio-group>
+    <ion-list formControlName="insectBite" no-lines radio-group>
       <ion-list-header>Insect bite or sting</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1018,7 +1018,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['insomnia']" no-lines radio-group>
+    <ion-list formControlName="insomnia" no-lines radio-group>
       <ion-list-header>Insomnia</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1044,7 +1044,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['itchingEyes']" no-lines radio-group>
+    <ion-list formControlName="itchingEyes" no-lines radio-group>
       <ion-list-header>Itching eyes</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1064,7 +1064,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['itchingSkin']" no-lines radio-group>
+    <ion-list formControlName="itchingSkin" no-lines radio-group>
       <ion-list-header>Itching skin</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1084,7 +1084,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['mealPortions']" no-lines radio-group>
+    <ion-list formControlName="mealPortions" no-lines radio-group>
       <ion-list-header>Meal portions</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1100,7 +1100,7 @@
         <ion-radio value="a"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I don't seem to eat more - l or less - than other people.
+        <ion-label text-wrap>I don't seem to eat more - l or less - than other people.
         </ion-label>
         <ion-radio value="b"></ion-radio>
       </ion-item>
@@ -1110,7 +1110,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['noiseMoisture']" no-lines radio-group>
+    <ion-list formControlName="noiseMoisture" no-lines radio-group>
       <ion-list-header>Noise moisture</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1125,7 +1125,7 @@
         <ion-radio value="a"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I don't notice my nose being too dry or too moist.
+        <ion-label text-wrap>I don't notice my nose being too dry or too moist.
         </ion-label>
         <ion-radio value="b"></ion-radio>
       </ion-item>
@@ -1135,7 +1135,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['fruitJuice']" no-lines radio-group>
+    <ion-list formControlName="fruitJuice" no-lines radio-group>
       <ion-list-header>Fruit juice between meals</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1161,7 +1161,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['personality']" no-lines radio-group>
+    <ion-list formControlName="personality" no-lines radio-group>
       <ion-list-header>Personality</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1186,7 +1186,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['potatoes']" no-lines radio-group>
+    <ion-list formControlName="potatoes" no-lines radio-group>
       <ion-list-header>Potatoes</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1205,12 +1205,12 @@
         <ion-radio value="b"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I really love them, could eat them almost every day.
+        <ion-label text-wrap>I really love them, could eat them almost every day.
         </ion-label>
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['redMeat']" no-lines radio-group>
+    <ion-list formControlName="redMeat" no-lines radio-group>
       <ion-list-header>Red meat</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1235,7 +1235,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['pupilSize']" no-lines radio-group>
+    <ion-list formControlName="pupilSize" no-lines radio-group>
       <ion-list-header>Pupil size</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1261,7 +1261,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['saladLunch']" no-lines radio-group>
+    <ion-list formControlName="saladLunch" no-lines radio-group>
       <ion-list-header>Salad for lunch</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1276,7 +1276,7 @@
         <ion-radio value="a"></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label text-wrap>I can get by, but it isn’t the best n type of food for me.
+        <ion-label text-wrap>I can get by, but it isn’t the best type of food for me.
         </ion-label>
         <ion-radio value="b"></ion-radio>
       </ion-item>
@@ -1286,7 +1286,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['salivaQuantity']" no-lines radio-group>
+    <ion-list formControlName="salivation" no-lines radio-group>
       <ion-list-header>Saliva quantity</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1302,17 +1302,17 @@
         <ion-radio value="a"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I don't notice that I have too little or too much saliva.
+        <ion-label text-wrap>I don't notice that I have too little or too much saliva.
         </ion-label>
         <ion-radio value="b"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I tend to have a lot of saliva, or I have a tendency towards drooling.
+        <ion-label text-wrap>I tend to have a lot of saliva, or I have a tendency towards drooling.
         </ion-label>
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['saltyFoods']" no-lines radio-group>
+    <ion-list formControlName="saltyFoods" no-lines radio-group>
       <ion-list-header>Salty foods</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1327,19 +1327,19 @@
         <ion-radio value="a"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I don't really notice salt one way or the other. Rarely seems like too much or too little. Just use an average amount
+        <ion-label text-wrap>I don't really notice salt one way or the other. Rarely seems like too much or too little. Just use an average amount
           on foods.
         </ion-label>
         <ion-radio value="b"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I really love salt, or crave it. I like a lot of salt on foods, to the the point that others think my food is too
+        <ion-label text-wrap>I really love salt, or crave it. I like a lot of salt on foods, to the the point that others think my food is too
           salty.
         </ion-label>
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['snacking']" no-lines radio-group>
+    <ion-list formControlName="snacking" no-lines radio-group>
       <ion-list-header>Snacking</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1363,7 +1363,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['snackPref']" no-lines radio-group>
+    <ion-list formControlName="snackPref" no-lines radio-group>
       <ion-list-header>Snacking</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1383,39 +1383,13 @@
         <ion-radio value="b"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I definitely want and need snacks in order to be at my best. Do poorly on sweets, but do well on protein and fat
+        <ion-label text-wrap>I definitely want and need snacks in order to be at my best. Do poorly on sweets, but do well on protein and fat
           (meat, chicken, cheese, hardboiled egg, nuts).
         </ion-label>
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['sneezing']" no-lines radio-group>
-      <ion-list-header>Snacking</ion-list-header>
-      <ion-item>
-        <p text-wrap>
-          We usually think of sneezing in connection with colds or allergies. But some people sneeze daily as a matter of course, even
-          when they're not sick or plagued with allergies. For example, some people sneeze routinely after eating. This question
-          pertains to brief sneezing attacks composed of just one or two sneezes-not continuous, prolonged sneezing attacks.
-          With that in mind, please select the option that best describes you.
-        </p>
-      </ion-item>
-      <ion-item>
-        <ion-label text-wrap>I almost never sneeze unless I’m sick or have allergies.
-        </ion-label>
-        <ion-radio value="a"></ion-radio>
-      </ion-item>
-      <ion-item>
-       <ion-label text-wrap>I do sneeze from time to time when not sick or allergic, but not regularly.
-        </ion-label>
-        <ion-radio value="b"></ion-radio>
-      </ion-item>
-      <ion-item>
-       <ion-label text-wrap>I often regularly tend to sneeze and/or usually sneeze a little after eating.
-        </ion-label>
-        <ion-radio value="c"></ion-radio>
-      </ion-item>
-    </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['sneezing']" no-lines radio-group>
+    <ion-list formControlName="sneezing" no-lines radio-group>
       <ion-list-header>Sneezing</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1431,17 +1405,17 @@
         <ion-radio value="a"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I do sneeze from time to time when not sick or allergic, but not regularly.
+        <ion-label text-wrap>I do sneeze from time to time when not sick or allergic, but not regularly.
         </ion-label>
         <ion-radio value="b"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I often regularly tend to sneeze and/or usually sneeze a little after eating.
+        <ion-label text-wrap>I often regularly tend to sneeze and/or usually sneeze a little after eating.
         </ion-label>
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['sociability']" no-lines radio-group>
+    <ion-list formControlName="sociability" no-lines radio-group>
       <ion-list-header>Sociability</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1463,12 +1437,12 @@
         <ion-radio value="b"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I tend to be very social, a "people person," and love com- pany and to be with others, prefer not to be alone.
+        <ion-label text-wrap>I tend to be very social, a "people person," and love com- pany and to be with others, prefer not to be alone.
         </ion-label>
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['sourFoods']" no-lines radio-group>
+    <ion-list formControlName="sourFoods" no-lines radio-group>
       <ion-list-header>Sour foods</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1478,22 +1452,22 @@
         </p>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I generally don't care for sour foods.
+        <ion-label text-wrap>I generally don't care for sour foods.
         </ion-label>
         <ion-radio value="a"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I don't feel one way or the other, particularly. Don't like or dislike them much more than any other food.
+        <ion-label text-wrap>I don't feel one way or the other, particularly. Don't like or dislike them much more than any other food.
         </ion-label>
         <ion-radio value="b"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I definitely like (some) sour foods or crave them.
+        <ion-label text-wrap>I definitely like (some) sour foods or crave them.
         </ion-label>
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['stamina']" no-lines radio-group>
+    <ion-list formControlName="stamina" no-lines radio-group>
       <ion-list-header>Stamina</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1503,12 +1477,12 @@
         </p>
       </ion-item>
       <ion-item>
-        <ion-label text-wrap>Improved wehn I eat lighter foods like chicken, fish, fruit, vegetables, grains.
+        <ion-label text-wrap>Improved when I eat lighter foods like chicken, fish, fruit, vegetables, grains.
         </ion-label>
         <ion-radio value="a"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>Improved when I eat pretty much any wholesome food.
+        <ion-label text-wrap>Improved when I eat pretty much any wholesome food.
         </ion-label>
         <ion-radio value="b"></ion-radio>
       </ion-item>
@@ -1518,7 +1492,7 @@
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['sweets']" no-lines radio-group>
+    <ion-list formControlName="sweets" no-lines radio-group>
       <ion-list-header>Consuming sweets</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1527,7 +1501,7 @@
         </p>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>Sweets don't bother me even when I eat them by them- selves. Generally sweets satisfy my appetite and don't produce
+        <ion-label text-wrap>Sweets don't bother me even when I eat them by themselves. Generally sweets satisfy my appetite and don't produce
           bad reactions.
         </ion-label>
         <ion-radio value="a"></ion-radio>
@@ -1538,13 +1512,13 @@
         <ion-radio value="b"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I usually don't do well eating sweets by themselves. They usually produce some manner of bad reaction and/or create
+        <ion-label text-wrap>I usually don't do well eating sweets by themselves. They usually produce some manner of bad reaction and/or create
           a desire for more sweets.
         </ion-label>
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['meatBreakfast']" no-lines radio-group>
+    <ion-list formControlName="meatBreakfast" no-lines radio-group>
       <ion-list-header>Meat for breakfast</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1565,12 +1539,12 @@
         <ion-radio value="b"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I feel much better with it: more energetic, have good stamina, keeps me going with- out getting hungry before lunch.
+        <ion-label text-wrap>I feel much better with it: more energetic, have good stamina, keeps me going with- out getting hungry before lunch.
         </ion-label>
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['redMeatLunch']" no-lines radio-group>
+    <ion-list formControlName="redMeatLunch" no-lines radio-group>
       <ion-list-header>Red meat for lunch</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1580,8 +1554,8 @@
         </p>
       </ion-item>
       <ion-item>
-        <ion-label text-wrap>I don't feel as well as I do without it. Tends to make me feel more tired, sleepy, lethar- gic, angry, irritable,
-          thirsty, or causes me to lose my energy by midafternoon.
+        <ion-label text-wrap>I don't feel as well as I do without it. Tends to make me feel more tired, sleepy, lethargic, angry, irritable, thirsty,
+          or causes me to lose my energy by midafternoon.
         </ion-label>
         <ion-radio value="a"></ion-radio>
       </ion-item>
@@ -1591,12 +1565,12 @@
         <ion-radio value="b"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I feel much better with it: more energetic, have good stamina, keeps me going with- out getting hungry before dinner.
+        <ion-label text-wrap>I feel much better with it: more energetic, have good stamina, keeps me going without getting hungry before dinner.
         </ion-label>
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['redMeatDinner']" no-lines radio-group>
+    <ion-list formControlName="redMeatDinner" no-lines radio-group>
       <ion-list-header>Red meat for dinner</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1606,8 +1580,8 @@
         </p>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I don't feel as well as I do without it. Tends to make me feel more tired, sleepy, lethar- gic, angry, irritable,
-          thirsty, or causes me to lose my energy.
+        <ion-label text-wrap>I don't feel as well as I do without it. Tends to make me feel more tired, sleepy, lethargic, angry, irritable, thirsty,
+          or causes me to lose my energy.
         </ion-label>
         <ion-radio value="a"></ion-radio>
       </ion-item>
@@ -1617,12 +1591,12 @@
         <ion-radio value="b"></ion-radio>
       </ion-item>
       <ion-item>
-       <ion-label text-wrap>I feel much better with it: more energetic, have good stamina, keeps me going with- out getting hungry before bedtime.
+        <ion-label text-wrap>I feel much better with it: more energetic, have good stamina, keeps me going without getting hungry before bedtime.
         </ion-label>
         <ion-radio value="c"></ion-radio>
       </ion-item>
     </ion-list>
-    <ion-list [formControl]="metabolicTestForm.controls['dinnerPref']" no-lines radio-group>
+    <ion-list formControlName="dinnerPref" no-lines radio-group>
       <ion-list-header>Dinner preference</ion-list-header>
       <ion-item>
         <p text-wrap>
@@ -1639,7 +1613,7 @@
         <ion-radio value="a"></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label text-wrap>Dinner Plate 2 - A combination plate includin g a little of everything from Plates 1 and 3.
+        <ion-label text-wrap>Dinner Plate 2 - A combination plate including a little of everything from Plates 1 and 3.
         </ion-label>
         <ion-radio value="b"></ion-radio>
       </ion-item>

@@ -35,7 +35,7 @@ export class BodyMeasurements {
 export class UserProfile {
   constructor(
     public age: number,
-    public constitution: string,
+    // public constitution: string,
     public fitness: Fitness,
     public gender: string,
     public isLactating: boolean,

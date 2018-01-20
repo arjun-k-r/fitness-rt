@@ -19,11 +19,11 @@ export class SleepProvider {
   ) { }
 
   public getSleep$(authId: string, date?: string): FirebaseObjectObservable<Sleep> {
-    return this._db.object(`/sleep/${authId}/${date || CURRENT_DAY}`);
+    return this._db.object(`/${authId}/sleep/${date || CURRENT_DAY}`);
   }
 
   public getTrends$(authId: string, days?: number): FirebaseListObservable<Sleep[]> {
-    return this._db.list(`/sleep/${authId}/`, {
+    return this._db.list(`/${authId}/trends/sleep/`, {
       query: {
         limitToLast: days || 7
       }
@@ -35,14 +35,14 @@ export class SleepProvider {
       if (!!trends.length) {
         trends.reverse();
         if (CURRENT_DAY !== trends[0].date) {
-          this._db.list(`/trends/sleep/${authId}/`).push(sleep);
+          this._db.list(`/${authId}/trends/sleep/`).push(sleep);
         } else {
-          this._db.list(`/trends/sleep/${authId}/`).update(trends[0]['$key'], sleep);
+          this._db.list(`/${authId}/trends/sleep/`).update(trends[0]['$key'], sleep);
         }
       } else {
-        this._db.list(`/trends/sleep/${authId}/`).push(sleep)
+        this._db.list(`/${authId}/trends/sleep/`).push(sleep)
       }
-      this._db.object(`/sleep/${authId}/${sleep.date}`).set(sleep).then(() => {
+      this._db.object(`/${authId}/sleep/${sleep.date}`).set(sleep).then(() => {
         resolve();
       }).catch((err: firebase.FirebaseError) => reject(err));
     });

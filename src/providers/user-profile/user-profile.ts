@@ -18,11 +18,11 @@ export class UserProfileProvider {
   ) { }
 
   public getUserProfile$(authId: string): FirebaseObjectObservable<UserProfile> {
-    return this._db.object(`/user-profiles/${authId}`);
+    return this._db.object(`/${authId}/profile/`);
   }
 
   public getTrends$(authId: string, days: number): FirebaseListObservable<FitnessTrend[]> {
-    return this._db.list(`/trends/fitness/${authId}/`, {
+    return this._db.list(`/${authId}/trends/fitness/`, {
       query: {
         limitToLast: days || 7
       }
@@ -36,14 +36,14 @@ export class UserProfileProvider {
       if (!!trends.length) {
         trends.reverse();
         if (newTrend.date !== trends[0].date) {
-          this._db.list(`/trends/fitness/${authId}/`).push(newTrend);
+          this._db.list(`/${authId}/trends/fitness/`).push(newTrend);
         } else {
-          this._db.list(`/trends/fitness/${authId}/`).update(trends[0]['$key'], newTrend);
+          this._db.list(`${authId}/trends/fitness/`).update(trends[0]['$key'], newTrend);
         }
       } else {
-        this._db.list(`/trends/fitness/${authId}/`).push(newTrend)
+        this._db.list(`/${authId}/trends/fitness/`).push(newTrend)
       }
-      this._db.object(`/user-profiles/${authId}`).set(user).then(() => {
+      this._db.object(`/${authId}/profile/`).set(user).then(() => {
         resolve();
       }).catch((err: firebase.FirebaseError) => reject(err));
     });

@@ -13,8 +13,8 @@ import { SleepProviderModule } from '../../providers'
   ],
   imports: [
     IonicPageModule.forChild(SleepPage),
-    ChartsModule,
-    SleepProviderModule
+    SleepProviderModule,
+    ChartsModule
   ],
 })
 export class SleepPageModule {}

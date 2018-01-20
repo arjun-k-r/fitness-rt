@@ -1,3 +1,5 @@
+export { DietProvider } from './diet/diet';
+export { DietProviderModule } from './diet/diet.module';
 export { FitnessProvider } from './fitness/fitness';
 export { FitnessProviderModule } from './fitness/fitness.module';
 export { NotificationProvider } from './notification/notification';

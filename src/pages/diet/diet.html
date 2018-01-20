@@ -1,18 +1,260 @@
-<!--
-  Generated template for the DietPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Diet</ion-title>
+    <ion-buttons end>
+      <button icon ion-button (click)="viewPageInfo()">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="dietPageSegment">
+      <ion-segment-button value="today">
+        Info
+      </ion-segment-button>
+      <ion-segment-button value="trends">
+        Trends
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-fab bottom *ngIf="dietPageSegment === 'today'" right>
+    <button (click)="addMeal()" color="secondary" ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <div [ngSwitch]="dietPageSegment">
+    <div *ngSwitchCase="'today'">
+      <ion-list no-lines>
+        <ion-item>
+          <ion-label>Date</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DD" (ionChange)="getDiet()" [max]="maxDateSelection" min="2018" [(ngModel)]="dietDate"
+            pickerFormat="YYYY-MM-DD"></ion-datetime>
+        </ion-item>
+        <ion-list-header>Meals</ion-list-header>
+        <button (click)="editMeal(i)" detail-push ion-item *ngFor="let meal of diet?.meals; let i = index">
+          <ion-icon item-start name="restaurant"></ion-icon>
+          <h2>{{ meal.hour }}</h2>
+          <ion-icon item-end name="open"></ion-icon>
+        </button>
+        <ion-list-header>Nourishment</ion-list-header>
+      </ion-list>
+      <ion-item-group>
+        <ion-item-divider>Proximates</ion-item-divider>
+        <ion-item>
+          Energy
+          <p item-content>{{ diet.nourishmentPercentage.energy?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Water
+          <p item-content>{{ diet.nourishmentPercentage.water?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Protein
+          <p item-content>{{ diet.nourishmentPercentage.protein?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Carbohydrates
+          <p item-content>{{ diet.nourishmentPercentage.carbs?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Fiber
+          <p item-content>{{ diet.nourishmentPercentage.fiber?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Sugars
+          <p item-content>{{ diet.nourishmentPercentage.sugars?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Fats
+          <p item-content>{{ diet.nourishmentPercentage.fats?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Trans fat
+          <p item-content>{{ diet.nourishmentPercentage.transFat?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider>Essential amino acids</ion-item-divider>
+        <ion-item>
+          Histidine
+          <p item-content>{{ diet.nourishmentPercentage.histidine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Isoleucine
+          <p item-content>{{ diet.nourishmentPercentage.isoleucine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Leucine
+          <p item-content>{{ diet.nourishmentPercentage.leucine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Lysine
+          <p item-content>{{ diet.nourishmentPercentage.lysine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Methionine
+          <p item-content>{{ diet.nourishmentPercentage.methionine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Phenylalanine
+          <p item-content>{{ diet.nourishmentPercentage.phenylalanine?.value }}%
+          </p>
+        </ion-item>
+        <ion-item>
+          Threonine
+          <p item-content>{{ diet.nourishmentPercentage.threonine?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Tryptophan
+          <p item-content>{{ diet.nourishmentPercentage.tryptophan?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider>Essential vitamins</ion-item-divider>
+        <ion-item>
+          Vitamin A
+          <p item-content>{{ diet.nourishmentPercentage.vitaminA?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin B1 (Thiamine)
+          <p item-content>{{ diet.nourishmentPercentage.vitaminB1?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin B2 (Riboflavin)
+          <p item-content>{{ diet.nourishmentPercentage.vitaminB2?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin B3 (Niacin)
+          <p item-content>{{ diet.nourishmentPercentage.vitaminB3?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin B5 (Pantothenic acid)
+          <p item-content>{{ diet.nourishmentPercentage.vitaminB5?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin B6 (Pyridoxine)
+          <p item-content>{{ diet.nourishmentPercentage.vitaminB6?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin B9 (Folate)
+          <p item-content>{{ diet.nourishmentPercentage.vitaminB9?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin B12 (Cobalamin)
+          <p item-content>{{ diet.nourishmentPercentage.vitaminB12?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Choline
+          <p item-content>{{ diet.nourishmentPercentage.choline?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin C (Ascorbic acid)
+          <p item-content>{{ diet.nourishmentPercentage.vitaminC?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin D (Cholecalciferol)
+          <p item-content>{{ diet.nourishmentPercentage.vitaminD?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin E (Tocopherol)
+          <p item-content>{{ diet.nourishmentPercentage.vitaminE?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Vitamin K
+          <p item-content>{{ diet.nourishmentPercentage.vitaminK?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider>Essential minerals</ion-item-divider>
+        <ion-item>
+          Calcium
+          <p item-content>{{ diet.nourishmentPercentage.calcium?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Copper
+          <p item-content>{{ diet.nourishmentPercentage.copper?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Iron
+          <p item-content>{{ diet.nourishmentPercentage.iron?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Magnesium
+          <p item-content>{{ diet.nourishmentPercentage.magnesium?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Manganese
+          <p item-content>{{ diet.nourishmentPercentage.manganese?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Phosphorus
+          <p item-content>{{ diet.nourishmentPercentage.phosphorus?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Potassium
+          <p item-content>{{ diet.nourishmentPercentage.potassium?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Selenium
+          <p item-content>{{ diet.nourishmentPercentage.selenium?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Sodium
+          <p item-content>{{ diet.nourishmentPercentage.sodium?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Zinc
+          <p item-content>{{ diet.nourishmentPercentage.zinc?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider>Essential fatty acids</ion-item-divider>
+        <ion-item>
+          Omega-3 (ALA)
+          <p item-content>{{ diet.nourishmentPercentage.ala?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Omega-6 (LA)
+          <p item-content>{{ diet.nourishmentPercentage.la?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider>Other</ion-item-divider>
+        <ion-item>
+          Alcohol
+          <p item-content>{{ diet.nourishmentPercentage.alcohol?.value }}%</p>
+        </ion-item>
+        <ion-item>
+          Caffeine
+          <p item-content>{{ diet.nourishmentPercentage.caffeine?.value }}%</p>
+        </ion-item>
+      </ion-item-group>
+    </div>
+    <div *ngSwitchCase="'trends'">
+      <ion-list no-lines>
+        <ion-list-header>Chart settings</ion-list-header>
+        <ion-item>
+          <ion-label fixed>Trend days</ion-label>
+          <ion-input (ionChange)="getTrends()" [(ngModel)]="trendDays" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Nutrition data</ion-label>
+          <ion-select [(ngModel)]="chartDataSelection" (ionChange)="changeChartData()">
+            <ion-option *ngFor="let nutrientKey of nutrientKeys" [value]="nutrientKey">{{diet?.nourishment[nutrientKey].name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-list-header>Chart</ion-list-header>
+      </ion-list>
+      <canvas baseChart class="chart" [chartType]="'line'" [colors]="chartColors" [datasets]="chartData" [labels]="chartLabels"
+        [legend]="true" [options]="chartOpts">
+      </canvas>
+    </div>
+  </div>
 </ion-content>

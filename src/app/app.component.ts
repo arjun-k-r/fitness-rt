@@ -42,9 +42,9 @@ export class MyApp {
       this._autostart.enable();
       this.pages = [
         { component: 'profile', icon: 'person', title: 'Profile' },
-        { component: 'sleep', icon: 'moon', title: 'Sleep' }
+        { component: 'sleep', icon: 'moon', title: 'Sleep' },
+        { component: 'diet', icon: 'nutrition', title: 'Diet' },
         // { component: 'exercise', icon: 'walk', title: 'Exercise' },
-        // { component: 'nutrition', icon: 'nutrition', title: 'Nutrition' },
         // { component: 'recipes', icon: 'restaurant', title: 'Recipes' },
         // { component: 'blood-cholesterol', icon: 'water', title: 'Blood cholesterol' },
         // { component: 'blood-pressure', icon: 'pulse', title: 'Blood pressure' },

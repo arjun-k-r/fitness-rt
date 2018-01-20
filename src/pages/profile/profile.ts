@@ -73,7 +73,7 @@ export class ProfilePage {
     this.profileForm = new FormGroup({
       age: new FormControl('', [Validators.required]),
       chestMeasurement: new FormControl('', [Validators.required]),
-      constitution: new FormControl('', [Validators.required]),
+      // constitution: new FormControl('', [Validators.required]),
       gender: new FormControl(null, [Validators.required]),
       heightMeasurement: new FormControl('', [Validators.required]),
       hipsMeasurement: new FormControl('', [Validators.required]),
@@ -86,7 +86,7 @@ export class ProfilePage {
     });
     this.userProfile = new UserProfile(
       0,
-      '',
+      // '',
       new Fitness(0, new BodyFat('', 0, 0, 0), ''),
       '',
       false,
@@ -119,8 +119,8 @@ export class ProfilePage {
         this.userProfile = Object.assign({}, up);
         this._formInit = true;
         this.profileForm.controls['age'].patchValue(this.userProfile.age);
-        this.profileForm.controls['chestMeasurement'].patchValue(this.userProfile.constitution);
-        this.profileForm.controls['constitution'].patchValue(this.userProfile.measurements.chest);
+        this.profileForm.controls['chestMeasurement'].patchValue(this.userProfile.measurements.chest);
+        // this.profileForm.controls['constitution'].patchValue(this.userProfile.constitution);
         this.profileForm.controls['gender'].patchValue(this.userProfile.gender);
         this.profileForm.controls['heightMeasurement'].patchValue(this.userProfile.measurements.height);
         this.profileForm.controls['hipsMeasurement'].patchValue(this.userProfile.measurements.hips);
@@ -151,7 +151,7 @@ export class ProfilePage {
       (c: {
         age: number,
         chestMeasurement: number,
-        constitution: string,
+        // constitution: string,
         gender: number,
         heightMeasurement: number,
         hipsMeasurement: number,
@@ -166,13 +166,14 @@ export class ProfilePage {
           this.unsavedChanges = true;
           this.userProfile = Object.assign({}, this.userProfile, {
             age: c.age,
-            constitution: c.constitution,
+            // constitution: c.constitution,
             gender: c.gender,
             isLactating: c.isLactating,
             isPregnant: c.isPregnant,
             measurements: new BodyMeasurements(c.chestMeasurement, c.heightMeasurement, c.hipsMeasurement, c.neckMeasurement, c.waistMeasurement, c.weightMeasurement),
             metabolicType: c.metabolicType
           });
+          this._calculateFitness();
         }
       }
     )

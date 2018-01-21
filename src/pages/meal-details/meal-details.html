@@ -19,25 +19,28 @@
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
-  <ion-list no-lines>
+  <ion-list>
     <ion-list-header>Details</ion-list-header>
     <ion-item>
+      <ion-icon color="primary" item-start name="time"></ion-icon>
       <ion-label fixed>Meal time</ion-label>
       <ion-datetime displayFormat="HH:mm" [(ngModel)]="meal.hour" pickerFormat="HH mm"></ion-datetime>
     </ion-item>
     <ion-item>
+      <ion-icon color="primary" item-start name="create"></ion-icon>
       <ion-label fixed>Notes</ion-label>
       <ion-textarea [(ngModel)]="meal.notes" type="text" wrap="hard"></ion-textarea>
     </ion-item>
     <button (click)="addToFavorites()" ion-item>
-      <ion-note item-start>
-        <ion-icon color="primary" name="favorite"></ion-icon>
-      </ion-note>
+      <ion-icon color="primary" item-start name="heart"></ion-icon>
       <h2>Add to favorites</h2>
     </button>
     <button (click)="takeHungerTest()" ion-item>
-      <h2>Are your realy hungry?</h2>
-      <p item-content>Take test</p>
+      <ion-icon color="primary" item-start name="restaurant"></ion-icon>
+      <h2>Take hunger test here</h2>
+      <ion-note item-right>
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-note>
     </button>
     <ion-list-header>Foods</ion-list-header>
     <button (click)="changeFood(i)" ion-item *ngFor="let food of meal.foods; let i = index">
@@ -60,7 +63,7 @@
       </ion-item>
       <ion-item>
         Water
-        <p item-content>{{ meal.nourishment.energy?.value }} {{ meal.nourishment.energy?.unit }}
+        <p item-content>{{ meal.nourishment.water?.value }} {{ meal.nourishment.water?.unit }}
         </p>
       </ion-item>
       <ion-item>

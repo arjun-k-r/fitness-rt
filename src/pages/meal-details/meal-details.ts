@@ -45,11 +45,11 @@ export class MealDetailsPage {
     private _userPvd: UserProfileProvider
   ) {
     this._authId = this._params.get('authId');
-    this._diet = <Diet>this._params.get('mealPlan');
+    this._diet = <Diet>this._params.get('diet');
     this._diet.meals = this._diet.meals || [];
     this._mealIdx = <number>this._params.get('mealIdx') || this._diet.meals.length;
-    this._trends = <Diet[]>this._params.get('diet');
-    this.meal = Object.assign({}, this._diet.meals[this._mealIdx] || new Meal([], null, '', 0));
+    this._trends = <Diet[]>this._params.get('trends');
+    this.meal = Object.assign({}, this._diet.meals[this._mealIdx] || new Meal([], new NutritionalValues(), '', 0));
     this.meal.foods = this.meal.foods || [];
   }
 

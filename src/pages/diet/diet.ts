@@ -73,6 +73,7 @@ export class DietPage {
   public addMeal(): void {
     this._navCtrl.push('meal-details', {
       authId: this._authId,
+      id: this.diet.meals.length,
       diet: this.diet,
       trends: this._trends
     });

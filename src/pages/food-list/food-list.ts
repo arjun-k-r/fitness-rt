@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the MealEditPage page.
+ * Generated class for the FoodListPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
@@ -10,16 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-meal-edit',
-  templateUrl: 'meal-edit.html',
+  selector: 'page-food-list',
+  templateUrl: 'food-list.html',
 })
-export class MealEditPage {
+export class FoodListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MealEditPage');
+    console.log('ionViewDidLoad FoodListPage');
   }
 
 }

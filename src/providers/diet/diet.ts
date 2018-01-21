@@ -1,9 +1,6 @@
 // Angular
 import { Injectable } from '@angular/core';
 
-// Rxjs
-import { Subscription } from 'rxjs/Subscription';
-
 // Firebase
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import * as firebase from 'firebase/app';
@@ -61,10 +58,6 @@ export class DietProvider {
     }
   }
 
-  private _calculateAlcoholRequirement(age: number): number {
-    return age > 18 ? 10 : 0;
-  }
-
   /**
    * Redundant for now
   private _calculateBiotinRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
@@ -93,10 +86,6 @@ export class DietProvider {
     }
   }
   */
-
-  private _calculateCaffeine(age: number): number {
-    return age > 14 ? 300 : 0;
-  }
 
   private _calculateCalciumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
@@ -2221,7 +2210,7 @@ export class DietProvider {
   }
 
   private _calculateWater(intenseExercise: boolean, weight: number): number {
-    return weight * (intenseExercise ? 2.5 : 2);
+    return weight * 28.4 * (intenseExercise ? 1.5 : 1);
   }
 
   private _calculateZincRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
@@ -2293,63 +2282,71 @@ export class DietProvider {
     return nourishment;
   }
 
+  public calculateNourishmentFromRequirement(current: NutritionalValues, required: NutritionalValues): NutritionalValues {
+    const nourishment: NutritionalValues = new NutritionalValues();
+    for (let key in current) {
+      nourishment[key].value = Math.round((current[key].value * 100) / (required[key].value || 1));
+    }
+
+    return nourishment;
+  }
+
   public calculateRequirement(
-    authId: string,
     age: number,
-    energyConsumption: number,
     gender: string,
-    intenseExercise: boolean,
     lactating: boolean,
     metabolicType: string,
     pregnant: boolean,
     weight: number
-  ): NutritionalValues {
-    return new NutritionalValues(
-      energyConsumption,
-      this._calculateWater(intenseExercise, weight),
-      this._calculateProteinRequirement(energyConsumption, intenseExercise, metabolicType),
-      this._calculateCarbRequirement(energyConsumption, intenseExercise, metabolicType),
-      this._calculateFiberRequirement(age, gender, lactating, pregnant),
-      this._calculateSugarsRequirement(energyConsumption),
-      this._calculateFatRequirement(energyConsumption, intenseExercise, metabolicType),
-      this._calculateTransFatRequirement(),
-      this._calculateAlaRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateLaRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateHistidineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-      this._calculateIsoleucineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-      this._calculateLeucineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-      this._calculateLysineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-      this._calculateMethionineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-      this._calculatePhenylalanineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-      this._calculateThreonineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-      this._calculateTryptophanRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-      this._calculateValineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-      this._calculateCalciumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateCopperRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateIronRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateMagnesiumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateManganeseRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculatePhosphorusRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculatePotassiumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateSeleniumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateSodiumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateZincRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateVitaminARequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateVitaminB1Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateVitaminB2Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateVitaminB3Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateVitaminB5Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateVitaminB6Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateVitaminB9Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateVitaminB12Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateCholineRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateVitaminCRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateVitaminDRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateVitaminERequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateVitaminKRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-      this._calculateAlcoholRequirement(age),
-      this._calculateCaffeine(age)
-    );
+  ): Promise<NutritionalValues> {
+    const energyConsumption = 0;
+    const intenseExercise = false;
+    return new Promise((resolve, rejcet) => {
+      resolve(new NutritionalValues(
+        energyConsumption,
+        this._calculateWater(intenseExercise, weight),
+        this._calculateProteinRequirement(energyConsumption, intenseExercise, metabolicType),
+        this._calculateCarbRequirement(energyConsumption, intenseExercise, metabolicType),
+        this._calculateFiberRequirement(age, gender, lactating, pregnant),
+        this._calculateSugarsRequirement(energyConsumption),
+        this._calculateFatRequirement(energyConsumption, intenseExercise, metabolicType),
+        this._calculateTransFatRequirement(),
+        this._calculateAlaRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateLaRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateHistidineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+        this._calculateIsoleucineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+        this._calculateLeucineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+        this._calculateLysineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+        this._calculateMethionineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+        this._calculatePhenylalanineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+        this._calculateThreonineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+        this._calculateTryptophanRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+        this._calculateValineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+        this._calculateCalciumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateCopperRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateIronRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateMagnesiumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateManganeseRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculatePhosphorusRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculatePotassiumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateSeleniumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateSodiumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateZincRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateVitaminARequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateVitaminB1Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateVitaminB2Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateVitaminB3Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateVitaminB5Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateVitaminB6Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateVitaminB9Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateVitaminB12Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateCholineRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateVitaminCRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateVitaminDRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateVitaminERequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateVitaminKRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2)
+      ));
+    });
   }
 
   public getDiet$(authId: string, date?: string): FirebaseObjectObservable<Diet> {
@@ -2364,19 +2361,37 @@ export class DietProvider {
     });
   }
 
-  public savediet(authId: string, diet: Diet, trends: Diet[]): Promise<{}> {
+  public removeFavoriteMeal(authId: string, meal: Meal): Promise<void> {
+    return this._db.list(`/${authId}/meals/`).remove(meal['$key'])
+  }
+
+  public saveFavoriteMeal(authId: string, meal: Meal): Promise<{}> {
+    return new Promise((resolve, reject) => {
+      if ('$key' in meal) {
+        this._db.list(`/${authId}/meals/`).update(meal['$key'], meal).then(() => {
+          resolve();
+        }).catch((err: firebase.FirebaseError) => reject(err));
+      } else {
+        this._db.list(`/${authId}/meals/`).push(meal).then(() => {
+          resolve();
+        });
+      }
+    })
+  }
+
+  public saveDiet(authId: string, diet: Diet, trends: Diet[]): Promise<{}> {
     return new Promise((resolve, reject) => {
       if (!!trends.length) {
         trends.reverse();
         if (CURRENT_DAY !== trends[0].date) {
-          this._db.list(`/trends/diet/${authId}/`).push(diet);
+          this._db.list(`/${authId}/trends/diet/`).push(diet);
         } else {
-          this._db.list(`/trends/diet/${authId}/`).update(trends[0]['$key'], diet);
+          this._db.list(`/${authId}/trends/diet/`).update(trends[0]['$key'], diet);
         }
       } else {
-        this._db.list(`/trends/diet/${authId}/`).push(diet)
+        this._db.list(`/${authId}/trends/diet/`).push(diet)
       }
-      this._db.object(`/diet/${authId}/${diet.date}`).set(diet).then(() => {
+      this._db.object(`/${authId}/diet/${diet.date}`).set(diet).then(() => {
         resolve();
       }).catch((err: firebase.FirebaseError) => reject(err));
     });

@@ -1,0 +1,273 @@
+<!--
+  Generated template for the FoodDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>FoodDetails</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item-group>
+    <ion-item-divider>Proximates</ion-item-divider>
+    <ion-item>
+      Energy
+      <p item-content>
+        {{ diet.nourishmentAchieved.energy?.value }} {{ diet.nourishment.energy?.unit }} ({{ diet.nourishmentAchieved.energy?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Water
+      <p item-content>{{ diet.nourishment.energy?.value }} {{ diet.nourishment.energy?.unit }} ({{ diet.nourishmentAchieved.water?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Protein
+      <p item-content>{{ diet.nourishment.protein?.value }} {{ diet.nourishment.protein?.unit }} ({{ diet.nourishmentAchieved.protein?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Carbohydrates
+      <p item-content>{{ diet.nourishment.carbs?.value }} {{ diet.nourishment.carbs?.unit }} ({{ diet.nourishmentAchieved.carbs?.value }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Fiber
+      <p item-content>{{ diet.nourishment.fiber?.value }} {{ diet.nourishment.fiber?.unit }} ({{ diet.nourishmentAchieved.fiber?.value }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Sugars
+      <p item-content>{{ diet.nourishment.sugars?.value }} {{ diet.nourishment.sugars?.unit }} ({{ diet.nourishmentAchieved.sugars?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Fats
+      <p item-content>{{ diet.nourishment.fats?.value }} {{ diet.nourishment.fats?.unit }} ({{ diet.nourishmentAchieved.fats?.value }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Trans fat
+      <p item-content>{{ diet.nourishment.transFat?.value }} {{ diet.nourishment.transFat?.unit }} ({{ diet.nourishmentAchieved.transFat?.value
+        }}%)
+      </p>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider>Essential fatty acids</ion-item-divider>
+    <ion-item>
+      Omega-3 (ALA)
+      <p item-content>{{ diet.nourishment.ala?.value }} {{ diet.nourishment.ala?.unit }} ({{ diet.nourishmentAchieved.ala?.value }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Omega-6 (LA)
+      <p item-content>{{ diet.nourishment.la?.value }} {{ diet.nourishment.la?.unit }} ({{ diet.nourishmentAchieved.la?.value }}%)
+      </p>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider>Essential amino acids</ion-item-divider>
+    <ion-item>
+      Histidine
+      <p item-content>{{ diet.nourishment.histidine?.value }} {{ diet.nourishment.histidine?.unit }} ({{ diet.nourishmentAchieved.histidine?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Isoleucine
+      <p item-content>{{ diet.nourishment.isoleucine?.value }} {{ diet.nourishment.isoleucine?.unit }} ({{ diet.nourishmentAchieved.isoleucine?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Leucine
+      <p item-content>{{ diet.nourishment.leucine?.value }} {{ diet.nourishment.leucine?.unit }} ({{ diet.nourishmentAchieved.leucine?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Lysine
+      <p item-content>{{ diet.nourishment.lysine?.value }} {{ diet.nourishment.lysine?.unit }} ({{ diet.nourishmentAchieved.lysine?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Methionine
+      <p item-content>{{ diet.nourishment.methionine?.value }} {{ diet.nourishment.methionine?.unit }} ({{ diet.nourishmentAchieved.methionine?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Phenylalanine
+      <p item-content>{{ diet.nourishment.phenylalanine?.value }} {{ diet.nourishment.phenylalanine?.unit }} ({{ diet.nourishmentAchieved.phenylalanine?.value
+        }}%
+      </p>
+    </ion-item>
+    <ion-item>
+      Threonine
+      <p item-content>{{ diet.nourishment.threonine?.value }} {{ diet.nourishment.threonine?.unit }} ({{ diet.nourishmentAchieved.threonine?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Tryptophan
+      <p item-content>{{ diet.nourishment.tryptophan?.value }} {{ diet.nourishment.tryptophan?.unit }} ({{ diet.nourishmentAchieved.tryptophan?.value
+        }}%)
+      </p>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider>Essential vitamins</ion-item-divider>
+    <ion-item>
+      Vitamin A
+      <p item-content>{{ diet.nourishment.vitaminA?.value }} {{ diet.nourishment.vitaminA?.unit }} ({{ diet.nourishmentAchieved.vitaminA?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Vitamin B1 (Thiamine)
+      <p item-content>{{ diet.nourishment.vitaminB1?.value }} {{ diet.nourishment.vitaminB1?.unit }} ({{ diet.nourishmentAchieved.vitaminB1?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Vitamin B2 (Riboflavin)
+      <p item-content>{{ diet.nourishment.vitaminB2?.value }} {{ diet.nourishment.vitaminB2?.unit }} ({{ diet.nourishmentAchieved.vitaminB2?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Vitamin B3 (Niacin)
+      <p item-content>{{ diet.nourishment.vitaminB3?.value }} {{ diet.nourishment.vitaminB3?.unit }} ({{ diet.nourishmentAchieved.vitaminB3?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Vitamin B5 (Pantothenic acid)
+      <p item-content>{{ diet.nourishment.vitaminB5?.value }} {{ diet.nourishment.vitaminB5?.unit }} ({{ diet.nourishmentAchieved.vitaminB5?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Vitamin B6 (Pyridoxine)
+      <p item-content>{{ diet.nourishment.vitaminB6?.value }} {{ diet.nourishment.vitaminB6?.unit }} ({{ diet.nourishmentAchieved.vitaminB6?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Vitamin B9 (Folate)
+      <p item-content>{{ diet.nourishment.vitaminB9?.value }} {{ diet.nourishment.vitaminB9?.unit }} ({{ diet.nourishmentAchieved.vitaminB9?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Vitamin B12 (Cobalamin)
+      <p item-content>{{ diet.nourishment.vitaminB12?.value }} {{ diet.nourishment.vitaminB12?.unit }} ({{ diet.nourishmentAchieved.vitaminB12?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Choline
+      <p item-content>{{ diet.nourishment.choline?.value }} {{ diet.nourishment.choline?.unit }} ({{ diet.nourishmentAchieved.choline?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Vitamin C (Ascorbic acid)
+      <p item-content>{{ diet.nourishment.vitaminC?.value }} {{ diet.nourishment.vitaminC?.unit }} ({{ diet.nourishmentAchieved.vitaminC?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Vitamin D (Cholecalciferol)
+      <p item-content>{{ diet.nourishment.vitaminD?.value }} {{ diet.nourishment.vitaminD?.unit }} ({{ diet.nourishmentAchieved.vitaminD?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Vitamin E (Tocopherol)
+      <p item-content>{{ diet.nourishment.vitaminE?.value }} {{ diet.nourishment.vitaminE?.unit }} ({{ diet.nourishmentAchieved.vitaminE?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Vitamin K
+      <p item-content>{{ diet.nourishment.vitaminK?.value }} {{ diet.nourishment.vitaminK?.unit }} ({{ diet.nourishmentAchieved.vitaminK?.value
+        }}%)
+      </p>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider>Essential minerals</ion-item-divider>
+    <ion-item>
+      Calcium
+      <p item-content>{{ diet.nourishment.calcium?.value }} {{ diet.nourishment.calcium?.unit }} ({{ diet.nourishmentAchieved.calcium?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Copper
+      <p item-content>{{ diet.nourishment.copper?.value }} {{ diet.nourishment.copper?.unit }} ({{ diet.nourishmentAchieved.copper?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Iron
+      <p item-content>{{ diet.nourishment.iron?.value }} {{ diet.nourishment.iron?.unit }} ({{ diet.nourishmentAchieved.iron?.value }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Magnesium
+      <p item-content>{{ diet.nourishment.magnesium?.value }} {{ diet.nourishment.magnesium?.unit }} ({{ diet.nourishmentAchieved.magnesium?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Manganese
+      <p item-content>{{ diet.nourishment.manganese?.value }} {{ diet.nourishment.manganese?.unit }} ({{ diet.nourishmentAchieved.manganese?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Phosphorus
+      <p item-content>{{ diet.nourishment.phosphorus?.value }} {{ diet.nourishment.phosphorus?.unit }} ({{ diet.nourishmentAchieved.phosphorus?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Potassium
+      <p item-content>{{ diet.nourishment.potassium?.value }} {{ diet.nourishment.potassium?.unit }} ({{ diet.nourishmentAchieved.potassium?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Selenium
+      <p item-content>{{ diet.nourishment.selenium?.value }} {{ diet.nourishment.selenium?.unit }} ({{ diet.nourishmentAchieved.selenium?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Sodium
+      <p item-content>{{ diet.nourishment.sodium?.value }} {{ diet.nourishment.sodium?.unit }} ({{ diet.nourishmentAchieved.sodium?.value
+        }}%)
+      </p>
+    </ion-item>
+    <ion-item>
+      Zinc
+      <p item-content>{{ diet.nourishment.zinc?.value }} {{ diet.nourishment.zinc?.unit }} ({{ diet.nourishmentAchieved.zinc?.value }}%)
+      </p>
+    </ion-item>
+  </ion-item-group>
+
+</ion-content>

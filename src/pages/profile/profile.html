@@ -177,6 +177,14 @@
           <h2>Body shape</h2>
           <p item-content>{{ userProfile.fitness.bodyShape }}</p>
         </ion-item>
+        <ion-item>
+          <h2>Ideal waist</h2>
+          <p item-content>{{ userProfile.fitness.idealWaist }}</p>
+        </ion-item>
+        <ion-item>
+          <h2>Ideal weight</h2>
+          <p item-content>{{ userProfile.fitness.idealWeight }}</p>
+        </ion-item>
         <ion-list-header>Body fat</ion-list-header>
         <ion-item>
           <h2>Fat category</h2>
@@ -193,6 +201,10 @@
         <ion-item>
           <h2>Body fat percentage</h2>
           <p item-content>{{ userProfile.fitness.bodyFatPercentage.fatPercentage }}%</p>
+        </ion-item>
+        <ion-item>
+          <h2>Ideal body fat percentage</h2>
+          <p item-content>{{ userProfile.fitness.bodyFatPercentage.ideal }}%</p>
         </ion-item>
       </ion-list>
     </div>

@@ -18,6 +18,6 @@ export class Diet {
         public date: string,
         public meals: Meal[],
         public nourishment: NutritionalValues,
-        public nourishmentPercentage: NutritionalValues
+        public nourishmentAchieved: NutritionalValues
     ) { }
 }

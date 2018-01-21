@@ -4,7 +4,9 @@ export class Fitness {
   constructor(
       public bmr: number,
       public bodyFatPercentage: BodyFat,
-      public bodyShape: string
+      public bodyShape: string,
+      public idealWaist: string,
+      public idealWeight: string
   ) { }
 }
 

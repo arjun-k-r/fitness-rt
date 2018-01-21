@@ -87,7 +87,7 @@ export class ProfilePage {
     this.userProfile = new UserProfile(
       0,
       // '',
-      new Fitness(0, new BodyFat('', 0, 0, 0), ''),
+      new Fitness(0, new BodyFat('', 0, 0, 0, 0), '', '', ''),
       '',
       false,
       false,
@@ -101,7 +101,9 @@ export class ProfilePage {
     const bodyFat: BodyFat = this._fitPvd.calculateBodyFat(age, gender, measurements.height, measurements.hips, measurements.neck, measurements.waist, measurements.weight);
     const bmr: number = this._fitPvd.calculateBmr(age, gender, measurements.height, measurements.weight);
     const bodyShape: string = this._fitPvd.calculateBodyShape(measurements.chest, gender, measurements.hips, measurements.waist);
-    this.userProfile.fitness = new Fitness(bmr, bodyFat, bodyShape);
+    const idealWaist: string = this._fitPvd.calculateIdealWaist(age, gender, measurements.height);
+    const idealWeight: string = this._fitPvd.calculateIdealWeight(age, gender, measurements.height);
+    this.userProfile.fitness = new Fitness(bmr, bodyFat, bodyShape, idealWaist, idealWeight);
   }
 
   private _chooseImage(): void {
@@ -175,7 +177,8 @@ export class ProfilePage {
           });
           this._calculateFitness();
         }
-      }
+      },
+      (err: Error) => console.error(`Error fetching form changes: ${err}`)
     )
   }
 

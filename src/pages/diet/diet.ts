@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs/Subscription';
 
 // Ionic
 import {
-  AlertController,
   IonicPage,
   NavController
 } from 'ionic-angular';
@@ -51,7 +50,6 @@ export class DietPage {
   public trendDays: number = 7;
   constructor(
     private _afAuth: AngularFireAuth,
-    private _alertCtrl: AlertController,
     private _dietPvd: DietProvider,
     private _navCtrl: NavController,
     private _notifyPvd: NotificationProvider
@@ -73,7 +71,8 @@ export class DietPage {
   }
 
   public addMeal(): void {
-    this._navCtrl.push('meal-edit', {
+    this._navCtrl.push('meal-details', {
+      authId: this._authId,
       diet: this.diet,
       trends: this._trends
     });
@@ -88,6 +87,7 @@ export class DietPage {
 
   public editMeal(idx: number): void {
     this._navCtrl.push('meal-edit', {
+      authId: this._authId,
       id: idx + 1,
       mealIdx: idx,
       diet: this.diet,

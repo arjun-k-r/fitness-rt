@@ -32,42 +32,42 @@ export class FitnessProvider {
 
     const fatMass: number = +(bodyFat / 100 * +weight).toFixed(2);
     const muscleMass: number = +weight - fatMass;
-    let jpIdealBf: number;
+    let idealBodyFat: number;
     if (gender === 'male') {
       if (age <= 20) {
-        jpIdealBf = 8.5;
+        idealBodyFat = 8.5;
       } else if (age <= 25) {
-        jpIdealBf = 10.5;
+        idealBodyFat = 10.5;
       } else if (age <= 30) {
-        jpIdealBf = 12.7;
+        idealBodyFat = 12.7;
       } else if (age <= 35) {
-        jpIdealBf = 13.7;
+        idealBodyFat = 13.7;
       } else if (age <= 40) {
-        jpIdealBf = 15.3;
+        idealBodyFat = 15.3;
       } else if (age <= 45) {
-        jpIdealBf = 16.4;
+        idealBodyFat = 16.4;
       } else if (age <= 50) {
-        jpIdealBf = 18.9;
+        idealBodyFat = 18.9;
       } else if (age <= 55) {
-        jpIdealBf = 20.9;
+        idealBodyFat = 20.9;
       }
     } else if (gender === 'female') {
       if (age <= 20) {
-        jpIdealBf = 17.7;
+        idealBodyFat = 17.7;
       } else if (age <= 25) {
-        jpIdealBf = 18.4;
+        idealBodyFat = 18.4;
       } else if (age <= 30) {
-        jpIdealBf = 19.3;
+        idealBodyFat = 19.3;
       } else if (age <= 35) {
-        jpIdealBf = 21.5;
+        idealBodyFat = 21.5;
       } else if (age <= 40) {
-        jpIdealBf = 22.2;
+        idealBodyFat = 22.2;
       } else if (age <= 45) {
-        jpIdealBf = 22.9;
+        idealBodyFat = 22.9;
       } else if (age <= 50) {
-        jpIdealBf = 25.2;
+        idealBodyFat = 25.2;
       } else if (age <= 55) {
-        jpIdealBf = 26.3;
+        idealBodyFat = 26.3;
       }
     }
 
@@ -98,13 +98,10 @@ export class FitnessProvider {
       }
     }
 
-    return new BodyFat(bodyFatCategory, fatMass, bodyFat, muscleMass);
+    return new BodyFat(bodyFatCategory, fatMass, bodyFat, idealBodyFat, muscleMass);
 
   }
 
-  /**
-   * The U.S. Navy Body fat percentage formula
-   */
   public calculateBodyShape(chest: number, gender: string, hips: number, waist: number): string {
     const wcRatio: number = +waist / +chest;
     if (gender === 'male') {
@@ -119,6 +116,30 @@ export class FitnessProvider {
       } else if (whRatio < 0.7) {
         return 'Pear shape';
       }
+    }
+  }
+
+  /**
+   * Based on the waist to height ratio
+   */
+  public calculateIdealWaist(age: number, gender: string, height: number): string {
+    if (age <= 14) {
+      return `${Math.floor(+height * 0.46)}-${Math.floor(+height * 0.51)} cm`;
+    } else if (gender === 'male') {
+      return `${Math.floor(+height * 0.43)}-${Math.floor(+height * 0.52)} cm`;
+    } else if (gender === 'female') {
+      return `${Math.floor(+height * 0.42)}-${Math.floor(+height * 0.48)} cm`;
+    }
+  }
+
+  /**
+   * The Dr. Devine formula
+   */
+  public calculateIdealWeight(age: number, gender: string, height: number): string {
+    if (gender === 'male') {
+      return `${Math.floor(50 + 2.3 * (+height * 0.3937008 - 60))} kg`;
+    } else if (gender === 'female') {
+      return `${Math.floor(45.5 + 2.3 * (+height * 0.3937008 - 60))} kg`;
     }
   }
 }

@@ -3,10 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 // Ionic
-import {
-  IonicPage,
-  NavController
-} from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 
 // Providers
 import { NotificationProvider } from '../../providers';
@@ -21,7 +18,6 @@ import { NotificationProvider } from '../../providers';
 export class MetabolicTypeTestPage {
   public metabolicTestForm: FormGroup;
   constructor(
-    private _navCtrl: NavController,
     private _notifyPvd: NotificationProvider,
   ) {
     this.metabolicTestForm = new FormGroup({

@@ -2,6 +2,8 @@ export { DietProvider } from './diet/diet';
 export { DietProviderModule } from './diet/diet.module';
 export { FitnessProvider } from './fitness/fitness';
 export { FitnessProviderModule } from './fitness/fitness.module';
+export { FOOD_GROUPS, FoodProvider } from './food/food';
+export { FoodProviderModule } from './food/food.module';
 export { NotificationProvider } from './notification/notification';
 export { NotificationProviderModule } from './notification/notification.module';
 export { PictureProvider } from './picture/picture';

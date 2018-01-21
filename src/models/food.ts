@@ -7,7 +7,6 @@ export class Food {
         public ndbno: string,
         public nourishment: NutritionalValues,
         public quantity: number,
-        public servings: number,
         public unit: string,
         public uploader?: string
     ) { }

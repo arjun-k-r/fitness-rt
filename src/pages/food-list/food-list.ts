@@ -70,32 +70,8 @@ export class FoodListPage {
         name: food.nourishment[nutrientKey].name
       }
     });
-  }
 
-  private _selectGroup(): void {
-    this._alertCtrl.create({
-      title: 'Filter foods by group',
-      subTitle: 'Select a food group',
-      inputs: [...FOOD_GROUPS.map((group: string) => {
-        return {
-          type: 'radio',
-          label: group,
-          value: group,
-          checked: this.selectedGroup === group
-        }
-      })],
-      buttons: [
-        {
-          text: 'Done',
-          handler: (data: string) => {
-            this.selectedGroup = data;
-            this.selectedNutrient = '';
-            this._foodPvd.changeFoodGroup(this.selectedGroup);
-            this._notifyPvd.showLoading();
-          }
-        }
-      ]
-    }).present();
+    console.log(this._nutrients, food.nourishment)
   }
 
   public _selectFood(food: Food | Meal, checkBox: HTMLInputElement, idx: number): void {
@@ -137,6 +113,32 @@ export class FoodListPage {
     } else if (checkBox.checked === false) {
       this.selectedFoods = [...this.selectedFoods.slice(0, idx), ...this.selectedFoods.slice(idx + 1)];
     }
+  }
+
+  private _selectGroup(): void {
+    this._alertCtrl.create({
+      title: 'Filter foods by group',
+      subTitle: 'Select a food group',
+      inputs: [...FOOD_GROUPS.map((group: string) => {
+        return {
+          type: 'radio',
+          label: group,
+          value: group,
+          checked: this.selectedGroup === group
+        }
+      })],
+      buttons: [
+        {
+          text: 'Done',
+          handler: (data: string) => {
+            this.selectedGroup = data;
+            this.selectedNutrient = '';
+            this._foodPvd.changeFoodGroup(this.selectedGroup);
+            this._notifyPvd.showLoading();
+          }
+        }
+      ]
+    }).present();
   }
 
   private _selectNutrient(): void {

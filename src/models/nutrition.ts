@@ -153,5 +153,48 @@ export class NutritionalValues {
     this.vitaminD = new Nutrient(328, 'Vitamins', 'Vitamin D', 'ug', this.vitaminDValue),
     this.vitaminE = new Nutrient(323, 'Vitamins', 'Vitamin E', 'mg', this.vitaminAValue),
     this.vitaminK = new Nutrient(329, 'Vitamins', 'Vitamin K', 'ug', this.vitaminKValue)
+
+    delete this.energyValue;
+    delete this.waterValue;
+    delete this.proteinValue;
+    delete this.carbsValue;
+    delete this.fiberValue;
+    delete this.sugarsValue;
+    delete this.fatsValue;
+    delete this.transFatValue;
+    delete this.alaValue;
+    delete this.laValue;
+    delete this.histidineValue;
+    delete this.isoleucineValue;
+    delete this.leucineValue;
+    delete this.lysineValue;
+    delete this.methionineValue;
+    delete this.phenylalanineValue;
+    delete this.tryptophanValue;
+    delete this.threonineValue;
+    delete this.valineValue;
+    delete this.calciumValue;
+    delete this.copperValue;
+    delete this.ironValue;
+    delete this.magnesiumValue;
+    delete this.manganeseValue;
+    delete this.phosphorusValue;
+    delete this.potassiumValue;
+    delete this.seleniumValue;
+    delete this.sodiumValue;
+    delete this.zincValue;
+    delete this.vitaminAValue;
+    delete this.vitaminB1Value;
+    delete this.vitaminB2Value;
+    delete this.vitaminB3Value;
+    delete this.vitaminB5Value;
+    delete this.vitaminB6Value;
+    delete this.vitaminB9Value;
+    delete this.vitaminB12Value;
+    delete this.cholineValue;
+    delete this.vitaminCValue;
+    delete this.vitaminDValue;
+    delete this.vitaminEValue;
+    delete this.vitaminKValue;
   }
 }

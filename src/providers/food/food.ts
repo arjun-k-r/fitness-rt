@@ -49,7 +49,7 @@ export class FoodProvider {
   ) {
     this._foods$ = this._db.list('/foods/usda', {
       query: {
-        limitToFirst: this._foodLimitSubject,
+        limitToFirst: this._usdaFoodLimitSubject,
         orderByChild: 'group',
         equalTo: this._foodGroupSubject
       }
@@ -74,7 +74,9 @@ export class FoodProvider {
     });
     return this._db.list(`/${authId}/foods`, {
       query: {
-        limitToFirst: this._foodLimitSubject
+        limitToFirst: this._foodLimitSubject,
+        orderByChild: 'group',
+        equalTo: this._foodGroupSubject
       }
     });
   }

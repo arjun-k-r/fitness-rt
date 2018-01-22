@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-navbar role="toolbar">
+  <ion-navbar>
     <ion-title>Meal details</ion-title>
     <ion-buttons end>
       <button (click)="saveMeal()" [disabled]="!meal.foods.length" ion-button padding>
         <ion-icon name="cloud-done"></ion-icon>
       </button>
-      <button (click)="removeMeal()" icon-only ion-button padding>
+      <button (click)="removeMeal()" [disabled]="!meal.$key" icon-only ion-button padding>
         <ion-icon name="trash"></ion-icon>
       </button>
     </ion-buttons>

@@ -119,6 +119,34 @@ export class FoodDetailsPage {
     );
   }
 
+  public addToAvoidList(food: Food): void {
+    food.toAvoid = true;
+    food.isFavorite = false;
+    this._foodPvd.saveFood(this.authId, this.food)
+      .then(() => {
+        this._notifyPvd.closeLoading();
+        this._notifyPvd.showInfo('Food saved successfully!');
+      })
+      .catch((err: firebase.FirebaseError) => {
+        this._notifyPvd.closeLoading();
+        this._notifyPvd.showError(err.message);
+      });
+  }
+
+  public addToFavorites(food: Food): void {
+    food.toAvoid = false;
+    food.isFavorite = true;
+    this._foodPvd.saveFood(this.authId, this.food)
+      .then(() => {
+        this._notifyPvd.closeLoading();
+        this._notifyPvd.showInfo('Food saved successfully!');
+      })
+      .catch((err: firebase.FirebaseError) => {
+        this._notifyPvd.closeLoading();
+        this._notifyPvd.showError(err.message);
+      });
+  }
+
   public dismiss(): void {
     this._viewCtrl.dismiss();
   }

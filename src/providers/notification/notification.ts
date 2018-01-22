@@ -14,8 +14,10 @@ export class NotificationProvider {
   constructor(private _loadCtrl: LoadingController, private _toastCtrl: ToastController) { }
 
   public closeLoading(): void {
-    this._loader.dismiss();
-    delete this._loader;
+    if (this._loader) {
+      this._loader.dismiss();
+      delete this._loader;
+    }
   }
 
   public showError(message: string): void {

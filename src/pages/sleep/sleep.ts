@@ -66,6 +66,22 @@ export class SleepPage {
     this.sleep = new Sleep('21:00', CURRENT_DAY, 8, '', 10);
   }
 
+  private _getTrends(): void {
+    this._trendSubscription = this._sleepPvd.getTrends$(this._authId, +this.trendDays).subscribe(
+      (trends: Sleep[] = []) => {
+        this.chartLabels = [...trends.map((t: Sleep) => t.date)];
+        this._trends = [...trends];
+        this.chartData = [{
+          data: [...this._trends.map((s: Sleep) => s.duration)],
+          label: 'Sleep duration'
+        }];
+      },
+      (err: firebase.FirebaseError) => {
+        this._notifyPvd.showError(err.message);
+      }
+    );
+  }
+
   public changeChartData(): void {
     switch (this.chartDataSelection) {
       case 'duration':
@@ -99,6 +115,10 @@ export class SleepPage {
     this.unsavedChanges = true;
   }
 
+  public changeTrendDays(): void {
+    this._sleepPvd.changeTrendDays(+this.trendDays || 1);
+  }
+
   public getSleep(): void {
     if (this._sleepSubscription) {
       this._sleepSubscription.unsubscribe();
@@ -110,25 +130,6 @@ export class SleepPage {
     }, (err: firebase.FirebaseError) => {
       this._notifyPvd.showError(err.message);
     });
-  }
-
-  public getTrends(): void {
-    if (this._trendSubscription) {
-      this._trendSubscription.unsubscribe();
-    }
-    this._trendSubscription = this._sleepPvd.getTrends$(this._authId, +this.trendDays).subscribe(
-      (trends: Sleep[] = []) => {
-        this.chartLabels = [...trends.map((t: Sleep) => t.date)];
-        this._trends = [...trends];
-        this.chartData = [{
-          data: [...this._trends.map((s: Sleep) => s.duration)],
-          label: 'Sleep duration'
-        }];
-      },
-      (err: firebase.FirebaseError) => {
-        this._notifyPvd.showError(err.message);
-      }
-    );
   }
 
   public save(): void {
@@ -194,7 +195,7 @@ export class SleepPage {
       if (!!auth) {
         this._authId = auth.uid;
         this.getSleep();
-        this.getTrends();
+        this._getTrends();
       }
     })
   }

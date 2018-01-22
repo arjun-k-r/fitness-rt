@@ -1,6 +1,9 @@
 // Angular
 import { Injectable } from '@angular/core';
 
+// Rxjs
+import { Subject } from 'rxjs/Subject';
+
 // Firebase
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import * as firebase from 'firebase/app';
@@ -15,7 +18,8 @@ const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 
 @Injectable()
 export class DietProvider {
-
+  private _mealLimitSubject: Subject<any> = new Subject();
+  private _trendDaysSubject: Subject<any> = new Subject();
   constructor(
     private _db: AngularFireDatabase
   ) { }
@@ -2274,7 +2278,7 @@ export class DietProvider {
     foods.forEach((f: Food | Meal) => {
       for (let key in nourishment) {
         if (key in f.nourishment) {
-          nourishment[key].value += f.nourishment[key].value * +f.quantity;
+          nourishment[key].value += +f.nourishment[key].value * +f.quantity;
         }
       }
     });
@@ -2349,14 +2353,36 @@ export class DietProvider {
     });
   }
 
+  public changeMealLimit(limit: number): void {
+    this._mealLimitSubject.next(limit);
+  }
+
+  public changeTrendDays(days: number): void {
+    this._trendDaysSubject.next(days);
+  }
+
   public getDiet$(authId: string, date?: string): FirebaseObjectObservable<Diet> {
     return this._db.object(`/${authId}/diet/${date || CURRENT_DAY}`);
   }
 
+  public getFavoriteMeals$(authId: string, limit: number): FirebaseListObservable<Meal[]> {
+    setTimeout(() => {
+      this.changeMealLimit(limit);
+    });
+    return this._db.list(`/${authId}/meals/`, {
+      query: {
+        limitToFirst: this._mealLimitSubject
+      }
+    });
+  }
+
   public getTrends$(authId: string, days?: number): FirebaseListObservable<Diet[]> {
+    setTimeout(() => {
+      this.changeTrendDays(days);
+    });
     return this._db.list(`/${authId}/trends/diet/`, {
       query: {
-        limitToLast: days || 7
+        limitToLast: this._trendDaysSubject
       }
     });
   }

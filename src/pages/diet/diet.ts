@@ -70,6 +70,22 @@ export class DietPage {
     );
   }
 
+  private _getTrends(): void {
+    this._trendSubscription = this._dietPvd.getTrends$(this._authId, +this.trendDays).subscribe(
+      (trends: Diet[] = []) => {
+        this.chartLabels = [...trends.map((t: Diet) => t.date)];
+        this._trends = [...trends];
+        this.chartData = [{
+          data: [...this._trends.map((d: Diet) => d.nourishment.energy.value)],
+          label: 'Energy intake'
+        }];
+      },
+      (err: firebase.FirebaseError) => {
+        this._notifyPvd.showError(err.message);
+      }
+    );
+  }
+
   public addMeal(): void {
     this._navCtrl.push('meal-details', {
       authId: this._authId,
@@ -84,6 +100,10 @@ export class DietPage {
       data: [...this._trends.map((d: Diet) => d.nourishment[this.chartDataSelection].value)],
       label: `${this.diet.nourishment[this.chartDataSelection].name} intake`
     }];
+  }
+
+  public changeTrendDays(): void {
+    this._dietPvd.changeTrendDays(+this.trendDays || 1);
   }
 
   public editMeal(idx: number): void {
@@ -109,25 +129,6 @@ export class DietPage {
     });
   }
 
-  public getTrends(): void {
-    if (this._trendSubscription) {
-      this._trendSubscription.unsubscribe();
-    }
-    this._trendSubscription = this._dietPvd.getTrends$(this._authId, +this.trendDays).subscribe(
-      (trends: Diet[] = []) => {
-        this.chartLabels = [...trends.map((t: Diet) => t.date)];
-        this._trends = [...trends];
-        this.chartData = [{
-          data: [...this._trends.map((d: Diet) => d.nourishment.energy.value)],
-          label: 'Energy intake'
-        }];
-      },
-      (err: firebase.FirebaseError) => {
-        this._notifyPvd.showError(err.message);
-      }
-    );
-  }
-
   public viewPageInfo(): void {
     this._navCtrl.push('diet-info');
   }
@@ -151,7 +152,7 @@ export class DietPage {
       if (!!auth) {
         this._authId = auth.uid;
         this.getDiet();
-        this.getTrends();
+        this._getTrends();
       }
     })
   }

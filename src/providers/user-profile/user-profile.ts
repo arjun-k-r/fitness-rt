@@ -1,6 +1,9 @@
 // Angular
 import { Injectable } from '@angular/core';
 
+// Rxjs
+import { Subject } from 'rxjs/Subject';
+
 // Firebase
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import * as firebase from 'firebase/app';
@@ -13,18 +16,26 @@ import { FitnessTrend, UserProfile } from '../../models';
 
 @Injectable()
 export class UserProfileProvider {
+  private _trendDaysSubject: Subject<any> = new Subject();
   constructor(
     private _db: AngularFireDatabase
   ) { }
+
+  public changeTrendDays(days: number): void {
+    this._trendDaysSubject.next(days);
+  }
 
   public getUserProfile$(authId: string): FirebaseObjectObservable<UserProfile> {
     return this._db.object(`/${authId}/profile/`);
   }
 
   public getTrends$(authId: string, days: number): FirebaseListObservable<FitnessTrend[]> {
+    setTimeout(() => {
+      this.changeTrendDays(days);
+    });
     return this._db.list(`/${authId}/trends/fitness/`, {
       query: {
-        limitToLast: days || 7
+        limitToLast: this._trendDaysSubject
       }
     });
   }

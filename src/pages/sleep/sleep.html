@@ -67,14 +67,14 @@
         <ion-list-header>Chart settings</ion-list-header>
         <ion-item>
           <ion-label fixed>Trend days</ion-label>
-          <ion-input (ionChange)="getTrends()" [(ngModel)]="trendDays" type="number"></ion-input>
+          <ion-input (ionChange)="changeTrendDays()" [(ngModel)]="trendDays" type="number"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Sleep data</ion-label>
           <ion-select (ionChange)="changeChartData()" [(ngModel)]="chartDataSelection">
-            <ion-option role="option" value="duration">Sleep duration</ion-option>
-            <ion-option role="option" value="bedTime">Bed time</ion-option>
-            <ion-option role="option" value="quality">Sleep quality</ion-option>
+            <ion-option value="duration">Sleep duration</ion-option>
+            <ion-option value="bedTime">Bed time</ion-option>
+            <ion-option value="quality">Sleep quality</ion-option>
           </ion-select>
         </ion-item>
         <ion-list-header>Chart</ion-list-header>

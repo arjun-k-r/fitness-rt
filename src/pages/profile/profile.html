@@ -213,18 +213,18 @@
         <ion-list-header>Chart settings</ion-list-header>
         <ion-item>
           <ion-label fixed>Trend days</ion-label>
-          <ion-input (ionChange)="getTrends()" [(ngModel)]="trendDays" type="number"></ion-input>
+          <ion-input (ionChange)="changeTrendDays()" [(ngModel)]="trendDays" type="number"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Fitness data</ion-label>
           <ion-select [(ngModel)]="chartDataSelection" (ionChange)="changeChartData()">
-            <ion-option role="option" value="bodyFat">Body fat percentage</ion-option>
-            <ion-option role="option" value="chestMeasurement">Chest</ion-option>
-            <ion-option role="option" value="heightMeasurement">Height</ion-option>
-            <ion-option role="option" value="hipsMeasurement">Hips</ion-option>
-            <ion-option role="option" value="neckMeasurement">Neck</ion-option>
-            <ion-option role="option" value="waistMeasurement">Waist</ion-option>
-            <ion-option role="option" value="weightMeasurement">Weight</ion-option>
+            <ion-option value="bodyFat">Body fat percentage</ion-option>
+            <ion-option value="chestMeasurement">Chest</ion-option>
+            <ion-option value="heightMeasurement">Height</ion-option>
+            <ion-option value="hipsMeasurement">Hips</ion-option>
+            <ion-option value="neckMeasurement">Neck</ion-option>
+            <ion-option value="waistMeasurement">Waist</ion-option>
+            <ion-option value="weightMeasurement">Weight</ion-option>
           </ion-select>
         </ion-item>
         <ion-list-header>Chart</ion-list-header>

@@ -1,6 +1,9 @@
 // Angular
 import { Injectable } from '@angular/core';
 
+// Rxjs
+import { Subject } from 'rxjs/Subject';
+
 // Firebase
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import * as firebase from 'firebase/app';
@@ -14,18 +17,26 @@ import { Sleep } from '../../models';
 const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 @Injectable()
 export class SleepProvider {
+  private _trendDaysSubject: Subject<any> = new Subject();
   constructor(
     private _db: AngularFireDatabase
   ) { }
+
+  public changeTrendDays(days: number): void {
+    this._trendDaysSubject.next(days);
+  }
 
   public getSleep$(authId: string, date?: string): FirebaseObjectObservable<Sleep> {
     return this._db.object(`/${authId}/sleep/${date || CURRENT_DAY}`);
   }
 
   public getTrends$(authId: string, days?: number): FirebaseListObservable<Sleep[]> {
+    setTimeout(() => {
+      this.changeTrendDays(days);
+    });
     return this._db.list(`/${authId}/trends/sleep/`, {
       query: {
-        limitToLast: days || 7
+        limitToLast: this._trendDaysSubject
       }
     });
   }

@@ -103,14 +103,15 @@ export class MealDetailsPage {
   public addFood(): void {
     const foodListModal: Modal = this._modalCtrl.create('food-list', { authId: this._authId });
     foodListModal.present();
-    foodListModal.onDidDismiss((foods: Food[]) => {
-      if (!!foods) {
-        this.meal.foods = [...this.meal.foods, ...foods];
+    foodListModal.onDidDismiss((foods: (Food | Meal)[]) => {
+      if (!!foods && !!foods.length) {
+        let selectedFoods: any = foods.map((f: Food | Meal) => ('ndbno' in f) ? f : (<Meal>f).foods);
+        this.meal.foods = [...this.meal.foods, ...[].concat(...selectedFoods)];
         this._updateMeal();
       }
     });
   }
-  
+
   public addToFavorites(): void {
     this._alertCtrl.create({
       title: 'Favorite meal',
@@ -133,14 +134,14 @@ export class MealDetailsPage {
             this.meal.name = data.name;
             this._notifyPvd.showLoading();
             this._dietPvd.saveFavoriteMeal(this._authId, this.meal)
-            .then(() => {
-              this._notifyPvd.closeLoading();
-              this._notifyPvd.showInfo('Meal added to favorites successfully!');
-              this._navCtrl.pop();
-            })
-            .catch((err: firebase.FirebaseError) => {
-              this._notifyPvd.showError(err.message);
-            });
+              .then(() => {
+                this._notifyPvd.closeLoading();
+                this._notifyPvd.showInfo('Meal added to favorites successfully!');
+                this._navCtrl.pop();
+              })
+              .catch((err: firebase.FirebaseError) => {
+                this._notifyPvd.showError(err.message);
+              });
           }
         }
       ]

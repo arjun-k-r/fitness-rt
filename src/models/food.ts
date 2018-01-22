@@ -8,6 +8,8 @@ export class Food {
         public nourishment: NutritionalValues,
         public quantity: number,
         public unit: string,
-        public uploader?: string
+        public uploader?: string,
+        public isFavorite?: boolean,
+        public toAvoid?: boolean
     ) { }
 }

@@ -1,18 +1,85 @@
-<!--
-  Generated template for the FoodListPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>FoodList</ion-title>
+    <ion-title>Foods</ion-title>
+    <ion-buttons end>
+      <button (click)="showFilter()" icon-only ion-button padding>
+        <ion-icon name="funnel"></ion-icon>
+      </button>
+      <button (click)="doneSelecting()" icon-only ion-button padding>
+        <ion-icon name="done-all"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="foodPageSegmet">
+      <ion-segment-button value="foods">
+        My foods
+      </ion-segment-button>
+      <ion-segment-button (click)="getMeals()" value="meals">
+        My meals
+      </ion-segment-button>
+      <ion-segment-button (click)="getUSDAFoods()" value="usdaFoods">
+        USDA Database
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
+<ion-content>
+  <ion-fab bottom *ngIf="foodPageSegmet === 'foods'" right>
+    <button (click)="addFood()" color="primary" ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <div [ngSwitch]="foodPageSegmet">
+    <div *ngSwitchCase="'foods'">
+      <ion-searchbar debounce="2000" (ionCancel)="clearSearchFoods($event)" [(ngModel)]="foodSearchQuery" placeholder="Search foods">
+      </ion-searchbar>
+      <ion-list>
+        <ion-item *ngFor="let food of foods | search: foodSearchQuery | sort: selectedNutrient">
+          <ion-label text-wrap>{{ food.name }}</ion-label>
+          <ion-checkbox #checkBox (click)="showOptions(food, checkBox)"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+      <div *ngIf="foods?.length === 0" class="no-elements">
+        <ion-icon class="no-elements__icon" name="nutrition"></ion-icon>
+        <h2 class="no-elements__message">You have no foods</h2>
+      </div>
+      <ion-infinite-scroll (ionInfinite)="loadMoreFoods($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
 
-<ion-content padding>
+    <div *ngSwitchCase="'meals'">
+      <ion-searchbar debounce="2000" (ionCancel)="clearSearchMeals($event)" [(ngModel)]="mealSearchQuery" placeholder="Search meals">
+      </ion-searchbar>
+      <ion-list>
+        <ion-item *ngFor="let meal of meals | search: mealSearchQuery | sort: selectedNutrient">
+          <ion-label text-wrap>{{ meal.name }}</ion-label>
+          <ion-checkbox #checkBox (click)="showOptions(meal, checkBox)"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+      <div *ngIf="meals?.length === 0" class="no-elements">
+        <ion-icon class="no-elements__icon" name="restaurant"></ion-icon>
+        <h2 class="no-elements__message">You have no meals</h2>
+      </div>
+      <ion-infinite-scroll (ionInfinite)="loadMoreMeals($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
 
+    <div *ngSwitchCase="'usdaFoods'">
+      <ion-searchbar debounce="2000" (ionCancel)="clearSearchUsdaFoods($event)" [(ngModel)]="usdaFoodSearchQuery" placeholder="Search USDA foods">
+      </ion-searchbar>
+      <ion-list>
+        <ion-item *ngFor="let food of usdaFoods | search: usdaFoodSearchQuery | sort: selectedNutrient">
+          <ion-label text-wrap>{{ food.name }}</ion-label>
+          <ion-checkbox #checkBox (click)="showOptions(food, checkBox)"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="loadMoreUsdaFoods($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
 </ion-content>

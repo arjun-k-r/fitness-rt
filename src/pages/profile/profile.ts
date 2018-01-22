@@ -139,6 +139,22 @@ export class ProfilePage {
     });
   }
 
+  private _getTrends(): void {
+    this._trendSubscription = this._userPvd.getTrends$(this._authId, +this.trendDays).subscribe(
+      (trends: FitnessTrend[] = []) => {
+        this.chartLabels = [...trends.map((t: FitnessTrend) => t.date)];
+        this._trends = [...trends];
+        this.chartData = [{
+          data: [...this._trends.map((t: FitnessTrend) => t.bodyFat)],
+          label: 'Body fat percentage'
+        }];
+      },
+      (err: firebase.FirebaseError) => {
+        this._notifyPvd.showError(err.message);
+      }
+    );
+  }
+
   private _takePhoto(): void {
     this._picPvd.takePhoto().then((photoUri: string) => {
       this.userInfo.photoURL = photoUri;
@@ -265,23 +281,8 @@ export class ProfilePage {
     }
   }
 
-  public getTrends(): void {
-    if (this._trendSubscription) {
-      this._trendSubscription.unsubscribe();
-    }
-    this._trendSubscription = this._userPvd.getTrends$(this._authId, +this.trendDays).subscribe(
-      (trends: FitnessTrend[] = []) => {
-        this.chartLabels = [...trends.map((t: FitnessTrend) => t.date)];
-        this._trends = [...trends];
-        this.chartData = [{
-          data: [...this._trends.map((t: FitnessTrend) => t.bodyFat)],
-          label: 'Body fat percentage'
-        }];
-      },
-      (err: firebase.FirebaseError) => {
-        this._notifyPvd.showError(err.message);
-      }
-    );
+  public changeTrendDays(): void {
+    this._userPvd.changeTrendDays(+this.trendDays || 1);
   }
 
   public processWebImage(event): void {
@@ -423,7 +424,7 @@ export class ProfilePage {
         };
 
         this._getProfile();
-        this.getTrends();
+        this._getTrends();
         this._watchFormChanges();
       }
     })

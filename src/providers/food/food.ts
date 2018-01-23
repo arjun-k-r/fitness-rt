@@ -41,15 +41,12 @@ export const FOOD_GROUPS: string[] = [
 @Injectable()
 export class FoodProvider {
   private _foodGroupSubject: Subject<string> = new Subject();
-  private _foodLimitSubject: Subject<any> = new Subject();
-  private _usdaFoodLimitSubject: Subject<any> = new Subject();
   private _foods$: FirebaseListObservable<Food[]>;
   constructor(
     private _db: AngularFireDatabase
   ) {
     this._foods$ = this._db.list('/foods/usda', {
       query: {
-        limitToFirst: this._usdaFoodLimitSubject,
         orderByChild: 'group',
         equalTo: this._foodGroupSubject
       }
@@ -60,31 +57,18 @@ export class FoodProvider {
     this._foodGroupSubject.next(group);
   }
 
-  public changeFoodLimit(limit: number): void {
-    this._foodLimitSubject.next(limit);
-  }
-
-  public changeUSDAFoodLimit(limit: number): void {
-    this._usdaFoodLimitSubject.next(limit);
-  }
-
-  public getMyFoods$(authId: string, limit: number): FirebaseListObservable<Food[]> {
-    setTimeout(() => {
-      this.changeFoodLimit(limit);
-    });
+  public getMyFoods$(authId: string): FirebaseListObservable<Food[]> {
     return this._db.list(`/${authId}/foods`, {
       query: {
-        limitToFirst: this._foodLimitSubject,
         orderByChild: 'group',
         equalTo: this._foodGroupSubject
       }
     });
   }
 
-  public getUSDAFoods$(group: string, limit: number): FirebaseListObservable<Food[]> {
+  public getUSDAFoods$(group: string): FirebaseListObservable<Food[]> {
     setTimeout(() => {
       this.changeFoodGroup(group);
-      this.changeUSDAFoodLimit(limit);
     });
     return this._foods$;
   }

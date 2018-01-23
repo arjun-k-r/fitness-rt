@@ -66,17 +66,12 @@
             <ion-icon name="warning"></ion-icon>
             Please select your gender.
           </div>
-          <!--
           <ion-item>
             <ion-label>Constitution</ion-label>
             <ion-select formControlName="constitution">
-              <ion-option value="v">Vata</ion-option>
-              <ion-option value="vp">Vata-Pitta</ion-option>
-              <ion-option value="p">Pitta</ion-option>
-              <ion-option value="pk">Pitta-Kapha</ion-option>
-              <ion-option value="k">Kapha</ion-option>
-              <ion-option value="kv">Kapha-Vata</ion-option>
-              <ion-option value="vkp">Vata-Pitta-Kapha</ion-option>
+              <ion-option value="vata">Vata</ion-option>
+              <ion-option value="pitta">Pitta</ion-option>
+              <ion-option value="kapha">Kapha</ion-option>
             </ion-select>
           </ion-item>
           <button (click)="takeConstitutionTest()" ion-item>
@@ -88,25 +83,6 @@
           <div class="form__message--dark" *ngIf="profileForm.invalid && profileForm.controls.constitution.touched && profileForm.controls.constitution.errors?.required">
             <ion-icon name="warning"></ion-icon>
             Please select your constitution.
-          </div>
-          -->
-          <ion-item>
-            <ion-label>Metabolic type</ion-label>
-            <ion-select formControlName="metabolicType">
-              <ion-option value="protein">Protein</ion-option>
-              <ion-option value="mixed">Mixed</ion-option>
-              <ion-option value="carbo">Carbo</ion-option>
-            </ion-select>
-          </ion-item>
-          <button (click)="takeMetabolicTypeTest()" ion-item>
-            <h2 color="primary" ion-text>Take self-test</h2>
-            <ion-note item-right>
-              <ion-icon name="arrow-forward"></ion-icon>
-            </ion-note>
-          </button>
-          <div class="form__message--dark" *ngIf="profileForm.invalid && profileForm.controls.metabolicType.touched && profileForm.controls.metabolicType.errors?.required">
-            <ion-icon name="warning"></ion-icon>
-            Please select your metabolic type.
           </div>
           <div *ngIf="userProfile.gender === 'female'">
             <ion-item>

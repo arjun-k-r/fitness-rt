@@ -31,11 +31,11 @@ export class NotificationProvider {
     }).present();
   }
 
-  public showInfo(message: string): void {
+  public showInfo(message: string, duration?: number): void {
     this._toastCtrl.create({
       closeButtonText: 'GREAT!',
       dismissOnPageChange: true,
-      duration: 5000,
+      duration: duration || 5000,
       message,
       showCloseButton: true
     }).present();

@@ -18,7 +18,6 @@ const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 
 @Injectable()
 export class DietProvider {
-  private _mealLimitSubject: Subject<any> = new Subject();
   private _trendDaysSubject: Subject<any> = new Subject();
   constructor(
     private _db: AngularFireDatabase
@@ -147,15 +146,15 @@ export class DietProvider {
     }
   }
 
-  private _calculateCarbRequirement(energyConsumption: number, intenseExercise: boolean, metabolicType: string): number {
-    switch (metabolicType) {
-      case 'protein':
+  private _calculateCarbRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
+    switch (constitution) {
+      case 'kapha':
         return (intenseExercise ? 0.3 : 0.2) * energyConsumption / 4;
 
-      case 'carbo':
+      case 'vata':
         return (intenseExercise ? 0.7 : 0.6) * energyConsumption / 4;
 
-      case 'mixed':
+      case 'pitta':
         return (intenseExercise ? 0.5 : 0.4) * energyConsumption / 4;
     }
   }
@@ -446,15 +445,15 @@ export class DietProvider {
     }
   }
 
-  private _calculateFatRequirement(energyConsumption: number, intenseExercise: boolean, metabolicType: string): number {
-    switch (metabolicType) {
-      case 'protein':
+  private _calculateFatRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
+    switch (constitution) {
+      case 'kapha':
         return (intenseExercise ? 0.25 : 0.4) * energyConsumption / 4;
 
-      case 'carbo':
+      case 'vata':
         return (intenseExercise ? 0.1 : 0.25) * energyConsumption / 4;
 
-      case 'mixed':
+      case 'pitta':
         return (intenseExercise ? 0.2 : 0.35) * energyConsumption / 4;
     }
   }
@@ -1459,15 +1458,15 @@ export class DietProvider {
     }
   }
 
-  private _calculateProteinRequirement(energyConsumption: number, intenseExercise: boolean, metabolicType: string): number {
-    switch (metabolicType) {
-      case 'protein':
+  private _calculateProteinRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
+    switch (constitution) {
+      case 'kapha':
         return (intenseExercise ? 0.45 : 0.4) * energyConsumption / 4;
 
-      case 'carbo':
+      case 'vata':
         return (intenseExercise ? 0.2 : 0.15) * energyConsumption / 4;
 
-      case 'mixed':
+      case 'pitta':
         return (intenseExercise ? 0.3 : 0.25) * energyConsumption / 4;
     }
   }
@@ -2297,9 +2296,9 @@ export class DietProvider {
 
   public calculateRequirement(
     age: number,
+    constitution: string,
     gender: string,
     lactating: boolean,
-    metabolicType: string,
     pregnant: boolean,
     weight: number
   ): Promise<NutritionalValues> {
@@ -2309,11 +2308,11 @@ export class DietProvider {
       resolve(new NutritionalValues(
         energyConsumption,
         this._calculateWater(intenseExercise, weight),
-        this._calculateProteinRequirement(energyConsumption, intenseExercise, metabolicType),
-        this._calculateCarbRequirement(energyConsumption, intenseExercise, metabolicType),
+        this._calculateProteinRequirement(energyConsumption, intenseExercise, constitution),
+        this._calculateCarbRequirement(energyConsumption, intenseExercise, constitution),
         this._calculateFiberRequirement(age, gender, lactating, pregnant),
         this._calculateSugarsRequirement(energyConsumption),
-        this._calculateFatRequirement(energyConsumption, intenseExercise, metabolicType),
+        this._calculateFatRequirement(energyConsumption, intenseExercise, constitution),
         this._calculateTransFatRequirement(),
         this._calculateAlaRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
         this._calculateLaRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
@@ -2353,10 +2352,6 @@ export class DietProvider {
     });
   }
 
-  public changeMealLimit(limit: number): void {
-    this._mealLimitSubject.next(limit);
-  }
-
   public changeTrendDays(days: number): void {
     this._trendDaysSubject.next(days);
   }
@@ -2365,15 +2360,8 @@ export class DietProvider {
     return this._db.object(`/${authId}/diet/${date || CURRENT_DAY}`);
   }
 
-  public getFavoriteMeals$(authId: string, limit: number): FirebaseListObservable<Meal[]> {
-    setTimeout(() => {
-      this.changeMealLimit(limit);
-    });
-    return this._db.list(`/${authId}/meals/`, {
-      query: {
-        limitToFirst: this._mealLimitSubject
-      }
-    });
+  public getFavoriteMeals$(authId: string): FirebaseListObservable<Meal[]> {
+    return this._db.list(`/${authId}/meals/`);
   }
 
   public getTrends$(authId: string, days?: number): FirebaseListObservable<Diet[]> {

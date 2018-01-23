@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
 import { FoodListPage } from './food-list';
-import { SearchPipeModule, SortByPipeModule } from '../../pipes';
+import { LimitPipeModule, SearchPipeModule, SortByPipeModule } from '../../pipes';
 import { DietProviderModule, FoodProviderModule } from '../../providers';
 
 @NgModule({
@@ -14,6 +14,7 @@ import { DietProviderModule, FoodProviderModule } from '../../providers';
     IonicPageModule.forChild(FoodListPage),
     DietProviderModule,
     FoodProviderModule,
+    LimitPipeModule,
     SearchPipeModule,
     SortByPipeModule
   ],

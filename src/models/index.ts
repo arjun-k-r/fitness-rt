@@ -1,5 +1,6 @@
 export { BodyFat } from './bodyFat';
 export * from './chart';
+export * from './constitution';
 export * from './diet';
 export { Food } from './food';
 export * from './nutrition';

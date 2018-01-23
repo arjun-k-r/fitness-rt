@@ -10,9 +10,7 @@ import {
   AlertController,
   IonicPage,
   InfiniteScroll,
-  Modal,
   ModalController,
-  NavController,
   NavParams,
   ViewController
 } from 'ionic-angular';
@@ -57,7 +55,6 @@ export class FoodListPage {
     private _dietPvd: DietProvider,
     private _foodPvd: FoodProvider,
     private _modalCtrl: ModalController,
-    private _navCtrl: NavController,
     private _notifyPvd: NotificationProvider,
     private _params: NavParams,
     private _viewCtrl: ViewController
@@ -70,8 +67,6 @@ export class FoodListPage {
         name: food.nourishment[nutrientKey].name
       }
     });
-
-    console.log(this._nutrients, food.nourishment)
   }
 
   public _selectFood(food: Food | Meal, checkBox: HTMLInputElement, idx: number): void {
@@ -190,7 +185,7 @@ export class FoodListPage {
       this._foodSubscription.unsubscribe();
     }
     this._notifyPvd.showLoading();
-    this._foodSubscription = this._foodPvd.getMyFoods$(this._authId, this.foodLimit).subscribe((foods: Food[]) => {
+    this._foodSubscription = this._foodPvd.getMyFoods$(this._authId).subscribe((foods: Food[]) => {
       this.foods = [...foods];
       this._notifyPvd.closeLoading()
     }, (err: firebase.FirebaseError) => {
@@ -201,7 +196,7 @@ export class FoodListPage {
 
   public getMeals(): void {
     this._notifyPvd.showLoading();
-    this._mealSubscription = this._dietPvd.getFavoriteMeals$(this._authId, this.mealLimit).subscribe((meals: Meal[]) => {
+    this._mealSubscription = this._dietPvd.getFavoriteMeals$(this._authId).subscribe((meals: Meal[]) => {
       this.meals = [...meals];
       this._notifyPvd.closeLoading()
     }, (err: firebase.FirebaseError) => {
@@ -212,7 +207,7 @@ export class FoodListPage {
 
   public getUSDAFoods(): void {
     this._notifyPvd.showLoading();
-    this._usdaFoodSubscription = this._foodPvd.getUSDAFoods$(this.selectedGroup, this.usdaFoodLimit).subscribe((foods: Food[]) => {
+    this._usdaFoodSubscription = this._foodPvd.getUSDAFoods$(this.selectedGroup).subscribe((foods: Food[]) => {
       this.usdaFoods = [...foods];
       this._notifyPvd.closeLoading()
     }, (err: firebase.FirebaseError) => {
@@ -223,19 +218,16 @@ export class FoodListPage {
 
   public loadMoreFoods(ev: InfiniteScroll) {
     this.foodLimit += 50;
-    this._foodPvd.changeFoodLimit(this.usdaFoodLimit);
     setTimeout(() => ev.complete(), 1000);
   }
 
   public loadMoreMeals(ev: InfiniteScroll) {
     this.mealLimit += 50;
-    this._dietPvd.changeMealLimit(this.mealLimit);
     setTimeout(() => ev.complete(), 1000);
   }
 
   public loadMoreUsdaFoods(ev: InfiniteScroll) {
     this.usdaFoodLimit += 50;
-    this._foodPvd.changeUSDAFoodLimit(this.usdaFoodLimit);
     setTimeout(() => ev.complete(), 1000);
   }
 
@@ -275,7 +267,7 @@ export class FoodListPage {
             if (idx === -1) {
               checkBox.checked = false;
             }
-            this._modalCtrl.create('food-details', { authId: this._authId, food: food, id: food.name })
+            this._modalCtrl.create('food-details', { authId: this._authId, food: food, id: food.name }).present();
           }
         }, {
           text: idx === -1 ? 'Select it' : 'Change servings',

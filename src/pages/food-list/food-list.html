@@ -36,7 +36,7 @@
       <ion-searchbar debounce="2000" (ionCancel)="clearSearchFoods($event)" [(ngModel)]="foodSearchQuery" placeholder="Search foods">
       </ion-searchbar>
       <ion-list>
-        <ion-item *ngFor="let food of foods | search: foodSearchQuery | sort: selectedNutrient">
+        <ion-item *ngFor="let food of foods | search: foodSearchQuery | limit: foodLimit | sort: selectedNutrient">
           <ion-label text-wrap>{{ food.name }}</ion-label>
           <ion-checkbox #checkBox (click)="showOptions(food, checkBox)"></ion-checkbox>
         </ion-item>
@@ -54,7 +54,7 @@
       <ion-searchbar debounce="2000" (ionCancel)="clearSearchMeals($event)" [(ngModel)]="mealSearchQuery" placeholder="Search meals">
       </ion-searchbar>
       <ion-list>
-        <ion-item *ngFor="let meal of meals | search: mealSearchQuery | sort: selectedNutrient">
+        <ion-item *ngFor="let meal of meals | search: mealSearchQuery | limit: mealLimit | sort: selectedNutrient">
           <ion-label text-wrap>{{ meal.name }}</ion-label>
           <ion-checkbox #checkBox (click)="showOptions(meal, checkBox)"></ion-checkbox>
         </ion-item>
@@ -72,7 +72,7 @@
       <ion-searchbar debounce="2000" (ionCancel)="clearSearchUsdaFoods($event)" [(ngModel)]="usdaFoodSearchQuery" placeholder="Search USDA foods">
       </ion-searchbar>
       <ion-list>
-        <ion-item *ngFor="let food of usdaFoods | search: usdaFoodSearchQuery | sort: selectedNutrient">
+        <ion-item *ngFor="let food of usdaFoods | search: usdaFoodSearchQuery | limit: usdaFoodLimit | sort: selectedNutrient">
           <ion-label text-wrap>{{ food.name }}</ion-label>
           <ion-checkbox #checkBox (click)="showOptions(food, checkBox)"></ion-checkbox>
         </ion-item>

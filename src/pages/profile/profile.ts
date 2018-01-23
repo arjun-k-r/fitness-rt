@@ -73,26 +73,24 @@ export class ProfilePage {
     this.profileForm = new FormGroup({
       age: new FormControl('', [Validators.required]),
       chestMeasurement: new FormControl('', [Validators.required]),
-      // constitution: new FormControl('', [Validators.required]),
+      constitution: new FormControl('', [Validators.required]),
       gender: new FormControl(null, [Validators.required]),
       heightMeasurement: new FormControl('', [Validators.required]),
       hipsMeasurement: new FormControl('', [Validators.required]),
       isLactating: new FormControl(''),
       isPregnant: new FormControl(''),
-      metabolicType: new FormControl(''),
       neckMeasurement: new FormControl('', [Validators.required]),
       waistMeasurement: new FormControl('', [Validators.required]),
       weightMeasurement: new FormControl('', [Validators.required])
     });
     this.userProfile = new UserProfile(
       0,
-      // '',
+      '',
       new Fitness(0, new BodyFat('', 0, 0, 0, 0), '', '', ''),
       '',
       false,
       false,
-      new BodyMeasurements(0, 0, 0, 0, 0, 0),
-      ''
+      new BodyMeasurements(0, 0, 0, 0, 0, 0)
     );
   }
 
@@ -122,13 +120,12 @@ export class ProfilePage {
         this._formInit = true;
         this.profileForm.controls['age'].patchValue(this.userProfile.age);
         this.profileForm.controls['chestMeasurement'].patchValue(this.userProfile.measurements.chest);
-        // this.profileForm.controls['constitution'].patchValue(this.userProfile.constitution);
+        this.profileForm.controls['constitution'].patchValue(this.userProfile.constitution);
         this.profileForm.controls['gender'].patchValue(this.userProfile.gender);
         this.profileForm.controls['heightMeasurement'].patchValue(this.userProfile.measurements.height);
         this.profileForm.controls['hipsMeasurement'].patchValue(this.userProfile.measurements.hips);
         this.profileForm.controls['isLactating'].patchValue(this.userProfile.isLactating);
         this.profileForm.controls['isPregnant'].patchValue(this.userProfile.isPregnant);
-        this.profileForm.controls['metabolicType'].patchValue(this.userProfile.metabolicType);
         this.profileForm.controls['neckMeasurement'].patchValue(this.userProfile.measurements.neck);
         this.profileForm.controls['waistMeasurement'].patchValue(this.userProfile.measurements.waist);
         this.profileForm.controls['weightMeasurement'].patchValue(this.userProfile.measurements.weight);
@@ -169,13 +166,12 @@ export class ProfilePage {
       (c: {
         age: number,
         chestMeasurement: number,
-        // constitution: string,
+        constitution: string,
         gender: number,
         heightMeasurement: number,
         hipsMeasurement: number,
         isLactating: number,
         isPregnant: number,
-        metabolicType: string,
         neckMeasurement: number,
         waistMeasurement: number,
         weightMeasurement: number
@@ -184,12 +180,11 @@ export class ProfilePage {
           this.unsavedChanges = true;
           this.userProfile = Object.assign({}, this.userProfile, {
             age: c.age,
-            // constitution: c.constitution,
+            constitution: c.constitution,
             gender: c.gender,
             isLactating: c.isLactating,
             isPregnant: c.isPregnant,
-            measurements: new BodyMeasurements(c.chestMeasurement, c.heightMeasurement, c.hipsMeasurement, c.neckMeasurement, c.waistMeasurement, c.weightMeasurement),
-            metabolicType: c.metabolicType
+            measurements: new BodyMeasurements(c.chestMeasurement, c.heightMeasurement, c.hipsMeasurement, c.neckMeasurement, c.waistMeasurement, c.weightMeasurement)
           });
           this._calculateFitness();
         }
@@ -308,10 +303,7 @@ export class ProfilePage {
   }
 
   public takeConstitutionTest(): void {
-    this._navCtrl.push('constitution-test')
-  }
-  public takeMetabolicTypeTest(): void {
-    this._navCtrl.push('metabolic-type-test')
+    this._navCtrl.push('constitution-questionaire')
   }
 
   public uploadImage(file?: File): void {

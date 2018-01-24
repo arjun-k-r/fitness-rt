@@ -20,6 +20,15 @@
             "port": 9222,
             "sourceMaps": true,
             "webRoot": "${workspaceRoot}/src"
+        },
+        {
+            "type": "firefox",
+            "request": "launch",
+            "name": "Launch Firefox against localhost",
+            "url": "http://localhost:8100",
+            "sourceMaps": "client",
+            "reAttach": true,
+            "webRoot": "${workspaceRoot}/src"
         }
     ]
 }

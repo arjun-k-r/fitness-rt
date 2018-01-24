@@ -181,39 +181,42 @@ export class FoodListPage {
   }
 
   public getFoods(): void {
-    if (this._foodSubscription) {
-      this._foodSubscription.unsubscribe();
+    if (!this._foodSubscription || (this._foodSubscription && this._foodSubscription.closed)) {
+      this._notifyPvd.showLoading();
+      this._foodSubscription = this._foodPvd.getMyFoods$(this._authId, this.selectedGroup).subscribe((foods: Food[]) => {
+        this.foods = [...foods];
+        this._notifyPvd.closeLoading()
+      }, (err: FirebaseError) => {
+        this._notifyPvd.closeLoading()
+        this._notifyPvd.showError(err.message);
+      });
     }
-    this._notifyPvd.showLoading();
-    this._foodSubscription = this._foodPvd.getMyFoods$(this._authId).subscribe((foods: Food[]) => {
-      this.foods = [...foods];
-      this._notifyPvd.closeLoading()
-    }, (err: FirebaseError) => {
-      this._notifyPvd.closeLoading()
-      this._notifyPvd.showError(err.message);
-    });
   }
 
   public getMeals(): void {
-    this._notifyPvd.showLoading();
-    this._mealSubscription = this._dietPvd.getFavoriteMeals$(this._authId).subscribe((meals: Meal[]) => {
-      this.meals = [...meals];
-      this._notifyPvd.closeLoading()
-    }, (err: FirebaseError) => {
-      this._notifyPvd.closeLoading()
-      this._notifyPvd.showError(err.message);
-    });
+    if (!this._mealSubscription || (this._mealSubscription && this._mealSubscription.closed)) {
+      this._notifyPvd.showLoading();
+      this._mealSubscription = this._dietPvd.getFavoriteMeals$(this._authId).subscribe((meals: Meal[]) => {
+        this.meals = [...meals];
+        this._notifyPvd.closeLoading()
+      }, (err: FirebaseError) => {
+        this._notifyPvd.closeLoading()
+        this._notifyPvd.showError(err.message);
+      });
+    }
   }
 
   public getUSDAFoods(): void {
-    this._notifyPvd.showLoading();
-    this._usdaFoodSubscription = this._foodPvd.getUSDAFoods$(this.selectedGroup).subscribe((foods: Food[]) => {
-      this.usdaFoods = [...foods];
-      this._notifyPvd.closeLoading()
-    }, (err: FirebaseError) => {
-      this._notifyPvd.closeLoading()
-      this._notifyPvd.showError(err.message);
-    });
+    if (!this._usdaFoodSubscription || (this._usdaFoodSubscription && this._usdaFoodSubscription.closed)) {
+      this._notifyPvd.showLoading();
+      this._usdaFoodSubscription = this._foodPvd.getUSDAFoods$(this.selectedGroup).subscribe((foods: Food[]) => {
+        this.usdaFoods = [...foods];
+        this._notifyPvd.closeLoading()
+      }, (err: FirebaseError) => {
+        this._notifyPvd.closeLoading()
+        this._notifyPvd.showError(err.message);
+      });
+    }
   }
 
   public loadMoreFoods(ev: InfiniteScroll) {

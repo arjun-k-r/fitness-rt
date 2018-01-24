@@ -1,6 +1,6 @@
 {
-  "name": "ifit",
-  "app_id": "6f751f99",
+  "name": "fitness-rt",
+  "app_id": "54226b67",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

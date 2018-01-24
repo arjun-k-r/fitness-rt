@@ -57,7 +57,10 @@ export class FoodProvider {
     this._foodGroupSubject.next(group);
   }
 
-  public getMyFoods$(authId: string): FirebaseListObservable<Food[]> {
+  public getMyFoods$(authId: string, group: string): FirebaseListObservable<Food[]> {
+    setTimeout(() => {
+      this.changeFoodGroup(group);
+    });
     return this._db.list(`/${authId}/foods`, {
       query: {
         orderByChild: 'group',
@@ -78,7 +81,7 @@ export class FoodProvider {
   }
 
   public saveFood(authId: string, food: Food): any {
-    if (food.hasOwnProperty('$key')) {
+    if ('$key' in food) {
       return this._db.list(`/${authId}/foods`).update(food['$key'], food);
     } else {
       return this._db.list(`/${authId}/foods`).push(food);

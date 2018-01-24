@@ -1,9 +1,9 @@
 {
-  "name": "ifit",
+  "name": "fitness-rt",
   "description": "Cross platform fitness app",
   "version": "1.0.0",
   "author": "Razvan Tomegea",
-  "homepage": "https://iFit-d29c7.firebaseapp.comm",
+  "homepage": "https://fitness-rt.firebaseapp.comm",
   "private": true,
   "config": {
     "ionic_copy": "./config/copy.config.js",
@@ -13,9 +13,9 @@
   "scripts": {
     "build": "ionic-app-scripts build",
     "clean": "ionic-app-scripts clean",
-    "clear:osx": "rimraf platforms/iFit-darwin-x64 && rimraf platforms/iFit-mas-x64",
-    "clear:win": "rimraf platforms/iFit-win32-x64 && rimraf platforms/iFit-win32-ia32",
-    "clear:nix": "rimraf platforms/iFit-linux-x64 && rimraf platforms/iFit-linux-ia32",
+    "clear:osx": "rimraf platforms/fitness-rt-darwin-x64 && rimraf platforms/fitness-rt-mas-x64",
+    "clear:win": "rimraf platforms/fitness-rt-win32-x64 && rimraf platforms/fitness-rt-win32-ia32",
+    "clear:nix": "rimraf platforms/fitness-rt-linux-x64 && rimraf platforms/fitness-rt-linux-ia32",
     "electron": "electron .",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
@@ -96,7 +96,7 @@
       "cordova-plugin-whitelist": {},
       "ionic-plugin-keyboard": {},
       "cordova-plugin-ionic": {
-        "APP_ID": "6f751f99",
+        "APP_ID": "54226b67",
         "CHANNEL_NAME": "Master",
         "UPDATE_METHOD": "background",
         "UPDATE_API": "https://api.ionicjs.com",

@@ -2287,7 +2287,7 @@ export class DietProvider {
 
   public calculateNourishmentFromRequirement(current: NutritionalValues, required: NutritionalValues): NutritionalValues {
     const nourishment: NutritionalValues = new NutritionalValues();
-    for (let key in current) {
+    for (let key in required) {
       nourishment[key].value = Math.round((current[key].value * 100) / (required[key].value || 1));
     }
 
@@ -2296,6 +2296,7 @@ export class DietProvider {
 
   public calculateRequirement(
     age: number,
+    bmr: number,
     constitution: Constitution,
     gender: string,
     lactating: boolean,
@@ -2306,7 +2307,7 @@ export class DietProvider {
     const intenseExercise = false;
     return new Promise((resolve, rejcet) => {
       resolve(new NutritionalValues(
-        energyConsumption,
+        energyConsumption + bmr,
         this._calculateWater(intenseExercise, weight),
         this._calculateProteinRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
         this._calculateCarbRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),

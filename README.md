@@ -1,2 +1,2 @@
-# iFit
+# Fitness-rt
 Cross-platform fitness application.

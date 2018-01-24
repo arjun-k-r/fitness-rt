@@ -92,7 +92,7 @@ export class FoodDetailsPage {
 
   private _calculateAchievedNourishment(): void {
     this._userPvd.getUserProfile$(this.authId).subscribe((u: UserProfile) => {
-      this._dietPvd.calculateRequirement(u.age, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
+      this._dietPvd.calculateRequirement(u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
         .then((r: NutritionalValues) => {
           this.foodNourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this.food.nourishment, r);
         })
@@ -119,13 +119,13 @@ export class FoodDetailsPage {
     );
   }
 
-  public addToAvoidList(food: Food): void {
-    food.toAvoid = true;
-    food.isFavorite = false;
+  public addToAvoidList(): void {
+    this.food.toAvoid = true;
+    this.food.isFavorite = false;
     this._foodPvd.saveFood(this.authId, this.food)
       .then(() => {
         this._notifyPvd.closeLoading();
-        this._notifyPvd.showInfo('Food saved successfully!');
+        this._notifyPvd.showInfo('Food added to avoid list!');
       })
       .catch((err: FirebaseError) => {
         this._notifyPvd.closeLoading();
@@ -133,13 +133,13 @@ export class FoodDetailsPage {
       });
   }
 
-  public addToFavorites(food: Food): void {
-    food.toAvoid = false;
-    food.isFavorite = true;
+  public addToFavorites(): void {
+    this.food.toAvoid = false;
+    this.food.isFavorite = true;
     this._foodPvd.saveFood(this.authId, this.food)
       .then(() => {
         this._notifyPvd.closeLoading();
-        this._notifyPvd.showInfo('Food saved successfully!');
+        this._notifyPvd.showInfo('Food added to favorites!');
       })
       .catch((err: FirebaseError) => {
         this._notifyPvd.closeLoading();

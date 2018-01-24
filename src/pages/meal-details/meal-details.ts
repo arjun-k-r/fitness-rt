@@ -91,7 +91,7 @@ export class MealDetailsPage {
     this._diet.meals = [...this._diet.meals.slice(0, this._mealIdx), this.meal, ...this._diet.meals.slice(this._mealIdx + 1)];
     this._diet.nourishment = this._dietPvd.calculateNourishment(this._diet.meals);
     this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
-      this._dietPvd.calculateRequirement(u.age, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
+      this._dietPvd.calculateRequirement(u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
         .then((r: NutritionalValues) => {
           this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
         })
@@ -175,7 +175,7 @@ export class MealDetailsPage {
     this._diet.meals = [...this._diet.meals.slice(0, this._mealIdx), ...this._diet.meals.slice(this._mealIdx + 1)];
     this._diet.nourishment = this._dietPvd.calculateNourishment(this._diet.meals);
     this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
-      this._dietPvd.calculateRequirement(u.age, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
+      this._dietPvd.calculateRequirement(u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
         .then((r: NutritionalValues) => {
           this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
           this._dietPvd.saveDiet(this._authId, this._diet, this._trends)
@@ -200,7 +200,7 @@ export class MealDetailsPage {
     this._diet.meals = [...this._diet.meals.slice(0, this._mealIdx), this.meal, ...this._diet.meals.slice(this._mealIdx + 1)];
     this._diet.nourishment = this._dietPvd.calculateNourishment(this._diet.meals);
     this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
-      this._dietPvd.calculateRequirement(u.age, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
+      this._dietPvd.calculateRequirement(u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
         .then((r: NutritionalValues) => {
           this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
           this._dietPvd.saveDiet(this._authId, this._diet, this._trends)

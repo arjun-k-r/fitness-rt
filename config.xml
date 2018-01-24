@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>iFit</name>
+    <name>fitness-rt</name>
     <description>Cross platform fit app</description>
     <author email="razvan.tomegea@gmail.com" href="https://www.razvantomegea.com/">Razvan Tomegea</author>
     <content src="index.html" />
@@ -88,7 +88,7 @@
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-ionic" spec="^2.0.0">
-        <variable name="APP_ID" value="6f751f99" />
+        <variable name="APP_ID" value="54226b67" />
         <variable name="CHANNEL_NAME" value="Master" />
         <variable name="UPDATE_METHOD" value="background" />
         <variable name="UPDATE_API" value="https://api.ionicjs.com" />

@@ -31,17 +31,17 @@ import { FoodProvider } from '../providers/food/food';
 
 const CLOUD_SETTINGS: CloudSettings = {
   'core': {
-    'app_id': '6f751f99'
+    'app_id': '54226b67'
   }
 };
 
 const FIREBASE_CONFIG = {
-  apiKey: 'AIzaSyCFuo3aDzAyF6LFgS9cyKQGvXBL7CE41zM',
-  authDomain: 'ifit-6f60e.firebaseapp.com',
-  databaseURL: 'https://ifit-6f60e.firebaseio.com',
-  projectId: 'ifit-6f60e',
-  storageBucket: 'ifit-6f60e.appspot.com',
-  messagingSenderId: '597263959509'
+  apiKey: 'AIzaSyBbUXYb4bGV0BXfe8XE5B0e5A2G7oE2aDc',
+  authDomain: 'fitness-rt.firebaseapp.com',
+  databaseURL: 'https://fitness-rt.firebaseio.com',
+  projectId: 'fitness-rt',
+  storageBucket: 'fitness-rt.appspot.com',
+  messagingSenderId: '745981839715'
 };
 
 @NgModule({
@@ -50,7 +50,7 @@ const FIREBASE_CONFIG = {
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(FIREBASE_CONFIG, 'iFit'),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG, 'fitness-rt'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     BrowserModule,

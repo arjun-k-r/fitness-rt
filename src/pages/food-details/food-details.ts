@@ -13,7 +13,7 @@ import {
 } from 'ionic-angular';
 
 // Firebase
-import * as firebase from 'firebase/app';
+import { FirebaseError } from 'firebase/app';
 
 // Models
 import { Food, NutritionalValues, UserProfile } from '../../models';
@@ -127,7 +127,7 @@ export class FoodDetailsPage {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showInfo('Food saved successfully!');
       })
-      .catch((err: firebase.FirebaseError) => {
+      .catch((err: FirebaseError) => {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showError(err.message);
       });
@@ -141,7 +141,7 @@ export class FoodDetailsPage {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showInfo('Food saved successfully!');
       })
-      .catch((err: firebase.FirebaseError) => {
+      .catch((err: FirebaseError) => {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showError(err.message);
       });
@@ -163,7 +163,7 @@ export class FoodDetailsPage {
         this._notifyPvd.showInfo('Food removed successfully!');
         this._viewCtrl.dismiss();
       })
-      .catch((err: firebase.FirebaseError) => {
+      .catch((err: FirebaseError) => {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showError(err.message);
       });
@@ -176,7 +176,7 @@ export class FoodDetailsPage {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showInfo('Food saved successfully!');
       })
-      .catch((err: firebase.FirebaseError) => {
+      .catch((err: FirebaseError) => {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showError(err.message);
       });

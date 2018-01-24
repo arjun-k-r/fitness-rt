@@ -12,7 +12,7 @@ import {
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import { FirebaseError, User } from 'firebase/app';
 
 // Third-party
 import * as moment from 'moment';
@@ -29,7 +29,6 @@ const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
   name: 'diet'
 })
 @Component({
-  selector: 'page-diet',
   templateUrl: 'diet.html',
 })
 export class DietPage {
@@ -80,7 +79,7 @@ export class DietPage {
           label: 'Energy intake'
         }];
       },
-      (err: firebase.FirebaseError) => {
+      (err: FirebaseError) => {
         this._notifyPvd.showError(err.message);
       }
     );
@@ -124,7 +123,7 @@ export class DietPage {
       if (!!s && s['$value'] !== null) {
         this.diet = Object.assign({}, s);
       }
-    }, (err: firebase.FirebaseError) => {
+    }, (err: FirebaseError) => {
       this._notifyPvd.showError(err.message);
     });
   }
@@ -135,7 +134,7 @@ export class DietPage {
 
   ionViewCanEnter(): Promise<{}> {
     return new Promise((resolve, reject) => {
-      this._afAuth.authState.subscribe((auth: firebase.User) => {
+      this._afAuth.authState.subscribe((auth: User) => {
         if (!auth) {
           reject();
           this._navCtrl.setRoot('registration', {
@@ -148,7 +147,7 @@ export class DietPage {
   }
 
   ionViewWillEnter(): void {
-    this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
+    this._authSubscription = this._afAuth.authState.subscribe((auth: User) => {
       if (!!auth) {
         this._authId = auth.uid;
         this.getDiet();

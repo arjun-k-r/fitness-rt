@@ -6,13 +6,13 @@ import { Subject } from 'rxjs/Subject';
 
 // Firebase
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
-import * as firebase from 'firebase/app';
+import { FirebaseError } from 'firebase/app';
 
 // Third-party
 import * as moment from 'moment';
 
 // Models
-import { Diet, Food, Meal, NutritionalValues } from '../../models';
+import { Constitution, Diet, Food, Meal, NutritionalValues } from '../../models';
 
 const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 
@@ -148,13 +148,13 @@ export class DietProvider {
 
   private _calculateCarbRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
     switch (constitution) {
-      case 'kapha':
+      case 'Kapha':
         return (intenseExercise ? 0.3 : 0.2) * energyConsumption / 4;
 
-      case 'vata':
+      case 'Vata':
         return (intenseExercise ? 0.7 : 0.6) * energyConsumption / 4;
 
-      case 'pitta':
+      case 'Pitta':
         return (intenseExercise ? 0.5 : 0.4) * energyConsumption / 4;
     }
   }
@@ -447,13 +447,13 @@ export class DietProvider {
 
   private _calculateFatRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
     switch (constitution) {
-      case 'kapha':
+      case 'Kapha':
         return (intenseExercise ? 0.25 : 0.4) * energyConsumption / 4;
 
-      case 'vata':
+      case 'Vata':
         return (intenseExercise ? 0.1 : 0.25) * energyConsumption / 4;
 
-      case 'pitta':
+      case 'Pitta':
         return (intenseExercise ? 0.2 : 0.35) * energyConsumption / 4;
     }
   }
@@ -1460,13 +1460,13 @@ export class DietProvider {
 
   private _calculateProteinRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
     switch (constitution) {
-      case 'kapha':
+      case 'Kapha':
         return (intenseExercise ? 0.45 : 0.4) * energyConsumption / 4;
 
-      case 'vata':
+      case 'Vata':
         return (intenseExercise ? 0.2 : 0.15) * energyConsumption / 4;
 
-      case 'pitta':
+      case 'Pitta':
         return (intenseExercise ? 0.3 : 0.25) * energyConsumption / 4;
     }
   }
@@ -2296,7 +2296,7 @@ export class DietProvider {
 
   public calculateRequirement(
     age: number,
-    constitution: string,
+    constitution: Constitution,
     gender: string,
     lactating: boolean,
     pregnant: boolean,
@@ -2308,11 +2308,11 @@ export class DietProvider {
       resolve(new NutritionalValues(
         energyConsumption,
         this._calculateWater(intenseExercise, weight),
-        this._calculateProteinRequirement(energyConsumption, intenseExercise, constitution),
-        this._calculateCarbRequirement(energyConsumption, intenseExercise, constitution),
+        this._calculateProteinRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
+        this._calculateCarbRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
         this._calculateFiberRequirement(age, gender, lactating, pregnant),
         this._calculateSugarsRequirement(energyConsumption),
-        this._calculateFatRequirement(energyConsumption, intenseExercise, constitution),
+        this._calculateFatRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
         this._calculateTransFatRequirement(),
         this._calculateAlaRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
         this._calculateLaRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
@@ -2384,7 +2384,7 @@ export class DietProvider {
       if ('$key' in meal) {
         this._db.list(`/${authId}/meals/`).update(meal['$key'], meal).then(() => {
           resolve();
-        }).catch((err: firebase.FirebaseError) => reject(err));
+        }).catch((err: FirebaseError) => reject(err));
       } else {
         this._db.list(`/${authId}/meals/`).push(meal).then(() => {
           resolve();
@@ -2407,7 +2407,7 @@ export class DietProvider {
       }
       this._db.object(`/${authId}/diet/${diet.date}`).set(diet).then(() => {
         resolve();
-      }).catch((err: firebase.FirebaseError) => reject(err));
+      }).catch((err: FirebaseError) => reject(err));
     });
   }
 

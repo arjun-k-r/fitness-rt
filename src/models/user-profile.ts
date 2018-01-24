@@ -1,4 +1,5 @@
 import { BodyFat } from './bodyFat';
+import { Constitution } from './constitution';
 
 export class Fitness {
   constructor(
@@ -37,7 +38,7 @@ export class BodyMeasurements {
 export class UserProfile {
   constructor(
     public age: number,
-    public constitution: string,
+    public constitution: Constitution,
     public fitness: Fitness,
     public gender: string,
     public isLactating: boolean,

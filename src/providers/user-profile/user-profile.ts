@@ -6,13 +6,13 @@ import { Subject } from 'rxjs/Subject';
 
 // Firebase
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
-import * as firebase from 'firebase/app';
+import { FirebaseError } from 'firebase/app';
 
 // Third-party
 import * as moment from 'moment';
 
 // Models
-import { FitnessTrend, UserProfile } from '../../models';
+import { Constitution, FitnessTrend, UserProfile } from '../../models';
 
 @Injectable()
 export class UserProfileProvider {
@@ -40,6 +40,10 @@ export class UserProfileProvider {
     });
   }
 
+  public saveConstitution(authId: string, constitution: Constitution): Promise<void> {
+    return this._db.object(`/${authId}/profile/constitution`).set(constitution);
+  }
+
   public saveUserProfile(authId: string, trends: FitnessTrend[], user: UserProfile): Promise<{}> {
     return new Promise((resolve, reject) => {
       const { measurements } = user;
@@ -56,7 +60,7 @@ export class UserProfileProvider {
       }
       this._db.object(`/${authId}/profile/`).set(user).then(() => {
         resolve();
-      }).catch((err: firebase.FirebaseError) => reject(err));
+      }).catch((err: FirebaseError) => reject(err));
     });
   }
 

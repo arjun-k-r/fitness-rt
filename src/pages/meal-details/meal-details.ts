@@ -13,7 +13,7 @@ import {
 } from 'ionic-angular';
 
 // Firebase
-import * as firebase from 'firebase/app';
+import { FirebaseError } from 'firebase/app';
 
 // Models
 import { Diet, Food, Meal, NutritionalValues, UserProfile } from '../../models';
@@ -139,7 +139,7 @@ export class MealDetailsPage {
                 this._notifyPvd.showInfo('Meal added to favorites successfully!');
                 this._navCtrl.pop();
               })
-              .catch((err: firebase.FirebaseError) => {
+              .catch((err: FirebaseError) => {
                 this._notifyPvd.showError(err.message);
               });
           }
@@ -184,7 +184,7 @@ export class MealDetailsPage {
               this._notifyPvd.showInfo('Meal removed successfully!');
               this._navCtrl.pop();
             })
-            .catch((err: firebase.FirebaseError) => {
+            .catch((err: FirebaseError) => {
               this._notifyPvd.showError(err.message);
             });
         })
@@ -209,7 +209,7 @@ export class MealDetailsPage {
               this._notifyPvd.showInfo('Diet saved successfully!');
               this._navCtrl.pop();
             })
-            .catch((err: firebase.FirebaseError) => {
+            .catch((err: FirebaseError) => {
               this._notifyPvd.showError(err.message);
             })
         })

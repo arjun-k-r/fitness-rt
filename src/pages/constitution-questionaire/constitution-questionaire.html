@@ -1,6 +1,11 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Constitution Questionaire</ion-title>
+    <ion-buttons end>
+      <button clear (click)="calculateResults()" ion-button>
+        Done
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -15,19 +20,19 @@
         <ion-label text-wrap>
           thin, lanky, boney and taller or shorter than average
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.frame"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.frame"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           average build and size, weight centered in middle
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.frame"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.frame"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           heavy, stocky, broad and either very tall or very short
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.frame"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.frame"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -36,19 +41,19 @@
         <ion-label text-wrap>
           low, difficulties in gaining weight
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.weight"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.weight"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           moderate, no difficulties in gaining or loosing weight
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.weight"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.weight"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           heavy, difficulties in loosing weight
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.weight"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.weight"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -57,19 +62,19 @@
         <ion-label text-wrap>
           unpredictable, irregular, variable
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.appetite"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.appetite"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           strong, cannot skip meals and will have to eat again after 3 or 4 hours
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.appetite"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.appetite"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           constant but can skip meals easily and tolerate hunger and thirst
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.appetite"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.appetite"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -78,19 +83,19 @@
         <ion-label text-wrap>
           very variable, sometimes a lot, sometimes a little
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.foodAmount"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.foodAmount"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           usually a lot, can eat large quantities at once
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.foodAmount"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.foodAmount"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           usually not much, can feel full with a little
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.foodAmount"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.foodAmount"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -99,19 +104,19 @@
         <ion-label text-wrap>
           thin and dry, cool to touch, rough
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.skinTexture"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.skinTexture"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           smooth and warm, oily T-zone
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.skinTexture"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.skinTexture"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           thick and moist/greasy, cold
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.skinTexture"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.skinTexture"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -120,19 +125,19 @@
         <ion-label text-wrap>
           dark, tans easily
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.complexion"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.complexion"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           fair with freckles, moles, prone to sunburn
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.complexion"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.complexion"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           pale and hardly tans
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.complexion"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.complexion"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -141,19 +146,19 @@
         <ion-label text-wrap>
           dry, brittle and curly/frizzy
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.hair"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.hair"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           soft, straight and fine
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.hair"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.hair"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           thick and weavy, tends to get greasy
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.hair"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.hair"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -162,19 +167,19 @@
         <ion-label text-wrap>
           small and dry, blink a lot
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.eyes"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.eyes"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           penetrating gaze, reddish sclerae
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.eyes"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.eyes"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           large and moist, white sclerae
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.eyes"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.eyes"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -183,19 +188,19 @@
         <ion-label text-wrap>
           thin and dry, often chapped
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.lips"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.lips"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           pink and soft
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.lips"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.lips"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           full and smooth
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.lips"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.lips"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -204,19 +209,19 @@
         <ion-label text-wrap>
           crooked, irregular with receding gums
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.teeth"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.teeth"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           yellowish, gums easily bleed
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.teeth"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.teeth"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           large, white and straight
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.teeth"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.teeth"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -225,19 +230,19 @@
         <ion-label text-wrap>
           delicate, small and long fingers with chipped nails
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.fingersNails"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.fingersNails"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           regular fingers with pink and soft nails
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.fingersNails"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.fingersNails"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           wide, angular fingers with large and hard nails
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.fingersNails"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.fingersNails"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -246,19 +251,19 @@
         <ion-label text-wrap>
           low volume, hoarse and cracking
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.voice"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.voice"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           loud and sharp
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.voice"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.voice"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           pleasant, harmonious, low pitch
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.voice"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.voice"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -267,19 +272,19 @@
         <ion-label text-wrap>
           feels colder than others; cold feet and hands
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.bodyTemperature"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.bodyTemperature"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           feels hotter that others; palms, feet and face warm or hot
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.bodyTemperature"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.bodyTemperature"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           normal, palms and feet cool
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.bodyTemperature"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.bodyTemperature"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -288,19 +293,19 @@
         <ion-label text-wrap>
           scanty with little odour
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.perspiration"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.perspiration"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           intense during physical activities or when it gets hot, sharp smell
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.perspiration"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.perspiration"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           constant and moderate, sweet smell
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.perspiration"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.perspiration"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -309,19 +314,19 @@
         <ion-label text-wrap>
           light sleeper, awakes easily and may have difficulties falling asleep
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.sleep"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.sleep"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           sleeps deep and even, hardly needs more than 8 hours sleep
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.sleep"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.sleep"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           long and sound sleeper, has difficulties awakening even after long hours of sleep
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.sleep"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.sleep"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -330,19 +335,19 @@
         <ion-label text-wrap>
           fast with a light step
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.walk"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.walk"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           average speed, determined step
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.walk"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.walk"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           slow pace, steady step
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.walk"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.walk"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -351,19 +356,19 @@
         <ion-label text-wrap>
           prefers warm climates, dislikes windy dry and cold days
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.body.weather"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.weather"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           prefers cooler climates, dislikes heat
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.body.weather"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.weather"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           adaptable to most climates but can't stand cold and rainy days
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.body.weather"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.weather"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-list-header>Mental constitution</ion-list-header>
@@ -375,19 +380,19 @@
           lively and enthusiastic, likes to change
 
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.temperament"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.temperament"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           purposeful and intense, likes to convince
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.temperament"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.temperament"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           easy going and accepting, likes to support
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.temperament"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.temperament"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -396,19 +401,19 @@
         <ion-label text-wrap>
           independent but insecure, nervous in new situations
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.social"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.social"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           outgoing, assertive, accessible, leader nature
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.social"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.social"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           follower, good listener, accommodating, lots of friends
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.social"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.social"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -417,19 +422,19 @@
         <ion-label text-wrap>
           uncertain and jumpy
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.negativeTraits"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.negativeTraits"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           furious and bossy
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.negativeTraits"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.negativeTraits"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           greedy and possessive
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.negativeTraits"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.negativeTraits"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -438,19 +443,19 @@
         <ion-label text-wrap>
           becomes anxious and worried
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.underStress"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.underStress"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           becomes irritable and aggressive
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.underStress"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.underStress"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           becomes withdrawn and passive
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.underStress"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.underStress"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -459,19 +464,19 @@
         <ion-label text-wrap>
           very talkative; fast, diffused speaking
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.talk"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.talk"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           talkative, good speaker, good at arguments
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.talk"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.talk"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           slow, steady speaker, limited speech, cautious
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.talk"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.talk"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -480,19 +485,19 @@
         <ion-label text-wrap>
           short attention span, forgets things easily
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.memory"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.memory"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           moderate, remembers details clearly and forgets rather slowly
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.memory"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.memory"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           excellent long-term memory, hardly forgets anything
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.memory"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.memory"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -501,19 +506,19 @@
         <ion-label text-wrap>
           mainly verbal, might have difficulties in truly understanding
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.learningType"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.learningType"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           lots of visual imagery, learns efficiently
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.learningType"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.learningType"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           feelings and emotions involved, usually grasping late but ultimately understandig well
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.learningType"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.learningType"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -522,40 +527,40 @@
         <ion-label text-wrap>
           flying, searching, restless, prone to nightmares
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.dreams"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.dreams"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           fighting, violent, passionate and colorful
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.dreams"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.dreams"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           few, sentimental, romantic, watery, sad
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.dreams"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.dreams"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
-      <ion-item-divider>Lova</ion-item-divider>
+      <ion-item-divider>Love</ion-item-divider>
       <ion-item>
         <ion-label text-wrap>
           falls in and out of love easily
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.love"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.love"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           intense, passionate love affairs
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.love"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.love"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           long term relationships full of affection and love
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.love"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.love"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -564,19 +569,19 @@
         <ion-label text-wrap>
           distinct and detailed ideas in many areas
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.creativity"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.creativity"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           inventive in technical or scientific areas
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.creativity"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.creativity"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           creative when dealing with business things
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.creativity"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.creativity"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -585,19 +590,19 @@
         <ion-label text-wrap>
           making decisions often feels like a problematic and difficult process
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.decisions"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.decisions"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           makes decisions quickly and determined
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.decisions"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.decisions"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           take their time to think things through
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.decisions"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.decisions"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -606,19 +611,19 @@
         <ion-label text-wrap>
           travelling, dancing, arts
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.interests"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.interests"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           sports, politics, luxury
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.interests"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.interests"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           business, food, literature
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.interests"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.interests"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -627,19 +632,19 @@
         <ion-label text-wrap>
           spends easily, doesn't save much and often feels poor
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.finances"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.finances"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           spends money on certain chosen things, luxury
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.finances"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.finances"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           saves money, spends freely on food and entertainment
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.finances"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.finances"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -648,19 +653,19 @@
         <ion-label text-wrap>
           hyperactive, restless
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.activity"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.activity"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           active, enjoys exercise and competition
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.activity"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.activity"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           somewhat lethargic
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.activity"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.activity"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -669,19 +674,19 @@
         <ion-label text-wrap>
           extreme or none at all
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.sexDrive"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.sexDrive"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           passionate and dominating
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.sexDrive"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.sexDrive"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           constant and loyal
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.sexDrive"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.sexDrive"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -690,19 +695,19 @@
         <ion-label text-wrap>
           erratic, rebel, changing
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.beliefs"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.beliefs"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           determined, strong principles
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.beliefs"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.beliefs"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           permanent, doesn't change easily
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.beliefs"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.beliefs"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -711,23 +716,22 @@
         <ion-label text-wrap>
           erratic, free and unattached
         </ion-label>
-        <ion-checkbox [(ngModel)]="vataConstitution.mind.lifestyle"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.vata.mind.lifestyle"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           bustling, well planned
         </ion-label>
-        <ion-checkbox [(ngModel)]="pittaConstitution.mind.lifestyle"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.mind.lifestyle"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
           regular, gets into a rut easily
         </ion-label>
-        <ion-checkbox [(ngModel)]="kaphaConstitution.mind.lifestyle"></ion-checkbox>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.mind.lifestyle"></ion-checkbox>
       </ion-item>
     </ion-item-group>
   </ion-list>
-  <button block (click)="checkConstitution()" color="primary" ion-button>Submit</button>
   <p padding>Thisquestionaire is based on Dr. Robert E. Svoboda's book
     <a href="https://www.amazon.com/dp/0965620832/?tag=raspber0c-20" target="_blank">Prakriti: Your Ayurvedic Constitution (Your Ayurvedic Constitution Revised Enlarged Second Edition)</a>
   </p>

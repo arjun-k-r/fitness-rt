@@ -12,7 +12,7 @@ import {
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import { FirebaseError } from 'firebase/app';
 
 // Providers
 import { NotificationProvider } from '../../providers';
@@ -62,7 +62,7 @@ export class ForgotPasswordPage {
           }]
         }).present();
       })
-      .catch((err: firebase.FirebaseError) => {
+      .catch((err: FirebaseError) => {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showError(err.message);
       });

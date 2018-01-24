@@ -66,24 +66,6 @@
             <ion-icon name="warning"></ion-icon>
             Please select your gender.
           </div>
-          <ion-item>
-            <ion-label>Constitution</ion-label>
-            <ion-select formControlName="constitution">
-              <ion-option value="vata">Vata</ion-option>
-              <ion-option value="pitta">Pitta</ion-option>
-              <ion-option value="kapha">Kapha</ion-option>
-            </ion-select>
-          </ion-item>
-          <button (click)="takeConstitutionTest()" ion-item>
-            <h2 color="primary" ion-text>Take self-test</h2>
-            <ion-note item-right>
-              <ion-icon name="arrow-forward"></ion-icon>
-            </ion-note>
-          </button>
-          <div class="form__message--dark" *ngIf="profileForm.invalid && profileForm.controls.constitution.touched && profileForm.controls.constitution.errors?.required">
-            <ion-icon name="warning"></ion-icon>
-            Please select your constitution.
-          </div>
           <div *ngIf="userProfile.gender === 'female'">
             <ion-item>
               <ion-label>Pregnant</ion-label>
@@ -94,6 +76,42 @@
               <ion-toggle formControlName="isLactating"></ion-toggle>
             </ion-item>
           </div>
+          <ion-list-header>Constitution</ion-list-header>
+          <ion-item>
+            <h2 ion-text color="primary">{{ userProfile.constitution.dominantDosha }}</h2>
+          </ion-item>
+          <ion-list-header>Physical constitution</ion-list-header>
+          <ion-item>
+            <h2>Vata</h2>
+            <p item-content>{{ userProfile.constitution.vata.bodyInfluence }}%</p>
+          </ion-item>
+          <ion-item>
+            <h2>Pitta</h2>
+            <p item-content>{{ userProfile.constitution.pitta.bodyInfluence }}%</p>
+          </ion-item>
+          <ion-item>
+            <h2>Kapha</h2>
+            <p item-content>{{ userProfile.constitution.kapha.bodyInfluence }}%</p>
+          </ion-item>
+          <ion-list-header>Mental constitution</ion-list-header>
+          <ion-item>
+            <h2>Vata</h2>
+            <p item-content>{{ userProfile.constitution.vata.mindInfluence }}%</p>
+          </ion-item>
+          <ion-item>
+            <h2>Pitta</h2>
+            <p item-content>{{ userProfile.constitution.pitta.mindInfluence }}%</p>
+          </ion-item>
+          <ion-item>
+            <h2>Kapha</h2>
+            <p item-content>{{ userProfile.constitution.kapha.mindInfluence }}%</p>
+          </ion-item>
+          <button (click)="takeConstitutionTest()" ion-item>
+            <h2 color="primary" ion-text>Take self-test</h2>
+            <ion-note item-right>
+              <ion-icon name="arrow-forward"></ion-icon>
+            </ion-note>
+          </button>
           <ion-list-header>Measurements</ion-list-header>
           <ion-item>
             <ion-label fixed>Chest (cm)</ion-label>

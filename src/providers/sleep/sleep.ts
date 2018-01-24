@@ -6,7 +6,7 @@ import { Subject } from 'rxjs/Subject';
 
 // Firebase
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
-import * as firebase from 'firebase/app';
+import { FirebaseError } from 'firebase/app';
 
 // Third-party
 import * as moment from 'moment';
@@ -55,7 +55,7 @@ export class SleepProvider {
       }
       this._db.object(`/${authId}/sleep/${sleep.date}`).set(sleep).then(() => {
         resolve();
-      }).catch((err: firebase.FirebaseError) => reject(err));
+      }).catch((err: FirebaseError) => reject(err));
     });
   }
 

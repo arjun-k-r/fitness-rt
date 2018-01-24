@@ -11,6 +11,7 @@ import {
   AlertController,
   IonicPage,
   NavController,
+  NavParams,
   Toast,
   ToastController
 } from 'ionic-angular';
@@ -18,10 +19,19 @@ import { Camera } from '@ionic-native/camera';
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import { FirebaseError, User, UserInfo } from 'firebase/app';
 
 // Models
-import { BodyFat, BodyMeasurements, Fitness, FitnessTrend, ILineChartColors, ILineChartEntry, UserProfile } from '../../models';
+import {
+  BodyFat,
+  BodyMeasurements,
+  Constitution,
+  Fitness,
+  FitnessTrend,
+  ILineChartColors,
+  ILineChartEntry,
+  UserProfile
+} from '../../models';
 
 // Providers
 import { FitnessProvider, NotificationProvider, PictureProvider, UserProfileProvider } from '../../providers';
@@ -49,7 +59,7 @@ export class ProfilePage {
   public profilePageSegment: string = 'userInfo';
   public trendDays: number = 7;
   public unsavedChanges: boolean = false;
-  public userInfo: firebase.UserInfo;
+  public userInfo: UserInfo;
   public userProfile: UserProfile;
   constructor(
     private _actionSheetCtrl: ActionSheetController,
@@ -59,6 +69,7 @@ export class ProfilePage {
     private _navCtrl: NavController,
     private _notifyPvd: NotificationProvider,
     private _picPvd: PictureProvider,
+    private _params: NavParams,
     private _toastCtrl: ToastController,
     private _userPvd: UserProfileProvider
   ) {
@@ -73,7 +84,6 @@ export class ProfilePage {
     this.profileForm = new FormGroup({
       age: new FormControl('', [Validators.required]),
       chestMeasurement: new FormControl('', [Validators.required]),
-      constitution: new FormControl('', [Validators.required]),
       gender: new FormControl(null, [Validators.required]),
       heightMeasurement: new FormControl('', [Validators.required]),
       hipsMeasurement: new FormControl('', [Validators.required]),
@@ -85,7 +95,7 @@ export class ProfilePage {
     });
     this.userProfile = new UserProfile(
       0,
-      '',
+      new Constitution(),
       new Fitness(0, new BodyFat('', 0, 0, 0, 0), '', '', ''),
       '',
       false,
@@ -120,7 +130,6 @@ export class ProfilePage {
         this._formInit = true;
         this.profileForm.controls['age'].patchValue(this.userProfile.age);
         this.profileForm.controls['chestMeasurement'].patchValue(this.userProfile.measurements.chest);
-        this.profileForm.controls['constitution'].patchValue(this.userProfile.constitution);
         this.profileForm.controls['gender'].patchValue(this.userProfile.gender);
         this.profileForm.controls['heightMeasurement'].patchValue(this.userProfile.measurements.height);
         this.profileForm.controls['hipsMeasurement'].patchValue(this.userProfile.measurements.hips);
@@ -131,7 +140,7 @@ export class ProfilePage {
         this.profileForm.controls['weightMeasurement'].patchValue(this.userProfile.measurements.weight);
         this._formInit = false;
       }
-    }, (err: firebase.FirebaseError) => {
+    }, (err: FirebaseError) => {
       this._notifyPvd.showError(err.message);
     });
   }
@@ -146,7 +155,7 @@ export class ProfilePage {
           label: 'Body fat percentage'
         }];
       },
-      (err: firebase.FirebaseError) => {
+      (err: FirebaseError) => {
         this._notifyPvd.showError(err.message);
       }
     );
@@ -166,7 +175,6 @@ export class ProfilePage {
       (c: {
         age: number,
         chestMeasurement: number,
-        constitution: string,
         gender: number,
         heightMeasurement: number,
         hipsMeasurement: number,
@@ -180,7 +188,6 @@ export class ProfilePage {
           this.unsavedChanges = true;
           this.userProfile = Object.assign({}, this.userProfile, {
             age: c.age,
-            constitution: c.constitution,
             gender: c.gender,
             isLactating: c.isLactating,
             isPregnant: c.isPregnant,
@@ -296,14 +303,14 @@ export class ProfilePage {
       .then(() => {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showInfo('Profile saved successfully!');
-      }).catch((err: firebase.FirebaseError) => {
+      }).catch((err: FirebaseError) => {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showError(err.message);
       })
   }
 
   public takeConstitutionTest(): void {
-    this._navCtrl.push('constitution-questionaire')
+    this._navCtrl.push('constitution-questionaire', { authId: this._authId, constitution: this.userProfile.constitution })
   }
 
   public uploadImage(file?: File): void {
@@ -332,11 +339,11 @@ export class ProfilePage {
         this._afAuth.auth.currentUser.updateProfile({
           displayName: this.userInfo.displayName,
           photoURL: this.userInfo.photoURL
-        }).catch((err: firebase.FirebaseError) => {
+        }).catch((err: FirebaseError) => {
           this._notifyPvd.showError(err.message);
         });
       }
-    }, (err: firebase.FirebaseError) => {
+    }, (err: FirebaseError) => {
       toast.setMessage(err.message);
     },
       () => {
@@ -359,7 +366,7 @@ export class ProfilePage {
 
   ionViewCanEnter(): Promise<{}> {
     return new Promise((resolve, reject) => {
-      this._afAuth.authState.subscribe((auth: firebase.User) => {
+      this._afAuth.authState.subscribe((auth: User) => {
         if (!auth) {
           reject();
           this._navCtrl.setRoot('registration', {
@@ -402,7 +409,7 @@ export class ProfilePage {
   }
 
   ionViewWillEnter(): void {
-    this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
+    this._authSubscription = this._afAuth.authState.subscribe((auth: User) => {
       if (!!auth) {
         this._authId = auth.uid;
         const { displayName, email, phoneNumber, photoURL, providerId, uid } = this._afAuth.auth.currentUser;

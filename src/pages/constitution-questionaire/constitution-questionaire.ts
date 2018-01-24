@@ -2,89 +2,100 @@
 import { Component } from '@angular/core';
 
 // Ionic
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 // Models
 import { Constitution } from '../../models';
 
 // Providers
-import { NotificationProvider } from '../../providers';
+import { NotificationProvider, UserProfileProvider } from '../../providers';
+import { FirebaseError } from 'firebase/app';
 
 @IonicPage({
   name: 'constitution-questionaire'
 })
 @Component({
-  templateUrl: 'constitution-questionaire.html',
+  templateUrl: 'constitution-questionaire.html'
 })
 export class ConstitutionQuestionairePage {
-  public vataConstitution: Constitution = new Constitution();
-  public pittaConstitution: Constitution = new Constitution();
-  public kaphaConstitution: Constitution = new Constitution();
+  public constitution: Constitution;
   constructor(
+    private _navCtrl: NavController,
     private _notifyPvd: NotificationProvider,
+    private _params: NavParams,
+    private _userPvd: UserProfileProvider
   ) { }
 
-  public checkConstitution(): void {
-    const bodyConstitution: any = {
-      vata: 0,
-      pitta: 0,
-      kapha: 0
-    };
+  public calculateResults(): void {
+    this._notifyPvd.showLoading();
+    this.constitution.vata.body.total = 0;
+    this.constitution.pitta.body.total = 0;
+    this.constitution.kapha.body.total = 0;
+    this.constitution.vata.mind.total = 0;
+    this.constitution.pitta.mind.total = 0;
+    this.constitution.kapha.mind.total = 0;
 
-    const mentalConstitution: any = {
-      vata: 0,
-      pitta: 0,
-      kapha: 0
-    };
-
-    for (let key in this.vataConstitution.body) {
-      if (this.vataConstitution.body[key]) {
-        bodyConstitution.vata++;
+    for (let key in this.constitution.vata.body) {
+      if (this.constitution.vata.body[key] === true) {
+        this.constitution.vata.body.total++;
       }
 
-      if (this.pittaConstitution.body[key]) {
-        bodyConstitution.pitta++;
+      if (this.constitution.pitta.body[key] === true) {
+        this.constitution.pitta.body.total++;
       }
 
-      if (this.kaphaConstitution.body[key]) {
-        bodyConstitution.kapha++;
+      if (this.constitution.kapha.body[key] === true) {
+        this.constitution.kapha.body.total++;
       }
     }
 
-    for (let key in this.vataConstitution.mind) {
-      if (this.vataConstitution.mind[key]) {
-        mentalConstitution.vata++;
+    for (let key in this.constitution.vata.mind) {
+      if (this.constitution.vata.mind[key] === true) {
+        this.constitution.vata.mind.total++;
       }
 
-      if (this.pittaConstitution.mind[key]) {
-        mentalConstitution.pitta++;
+      if (this.constitution.pitta.mind[key] === true) {
+        this.constitution.pitta.mind.total++;
       }
 
-      if (this.kaphaConstitution.mind[key]) {
-        mentalConstitution.kapha++;
+      if (this.constitution.kapha.mind[key] === true) {
+        this.constitution.kapha.mind.total++;
       }
     }
 
-    const bodyPoints: number = bodyConstitution.vata + bodyConstitution.pitta + bodyConstitution.kapha;
-    const mentalPoints: number = mentalConstitution.vata + mentalConstitution.pitta + mentalConstitution.kapha;
+    const bodyPoints: number = this.constitution.vata.body.total + this.constitution.pitta.body.total + this.constitution.kapha.body.total;
+    const mentalPoints: number = this.constitution.vata.mind.total + this.constitution.pitta.mind.total + this.constitution.kapha.mind.total;
 
-    const maxBodyPoints: number = Math.max(bodyConstitution.vata, bodyConstitution.pitta, bodyConstitution.kapha);
-    const maxMentalPoints: number = Math.max(mentalConstitution.vata, mentalConstitution.pitta, mentalConstitution.kapha);
+    this.constitution.vata.total = this.constitution.vata.body.total + this.constitution.vata.mind.total;
+    this.constitution.pitta.total = this.constitution.pitta.body.total + this.constitution.pitta.mind.total;
+    this.constitution.kapha.total = this.constitution.kapha.body.total + this.constitution.kapha.mind.total;
 
-    const bodyDosha: string = maxBodyPoints === bodyConstitution.vata ? 'Vata' : maxBodyPoints === bodyConstitution.pitta ? 'Pitta' : 'Kapha';
-    const mentalDosha: string = maxMentalPoints === mentalConstitution.vata ? 'Vata' : maxMentalPoints === mentalConstitution.pitta ? 'Pitta' : 'Kapha';
+    this.constitution.vata.bodyInfluence = Math.round(this.constitution.vata.body.total * 100 / bodyPoints);
+    this.constitution.pitta.bodyInfluence = Math.round(this.constitution.pitta.body.total * 100 / bodyPoints);
+    this.constitution.kapha.bodyInfluence = Math.round(this.constitution.kapha.body.total * 100 / bodyPoints);
 
-    const totalVataPoints: number = bodyConstitution.vata + mentalConstitution.vata;
-    const totalPittaPoints: number = bodyConstitution.pitta + mentalConstitution.pitta;
-    const totalKaphaPoints: number = bodyConstitution.kapha + mentalConstitution.kapha;
+    this.constitution.vata.mindInfluence = Math.round(this.constitution.vata.mind.total * 100 / mentalPoints);
+    this.constitution.pitta.mindInfluence = Math.round(this.constitution.pitta.mind.total * 100 / mentalPoints);
+    this.constitution.kapha.mindInfluence = Math.round(this.constitution.kapha.mind.total * 100 / mentalPoints);
+
+    const totalVataPoints: number = this.constitution.vata.body.total + this.constitution.vata.mind.total;
+    const totalPittaPoints: number = this.constitution.pitta.body.total + this.constitution.pitta.mind.total;
+    const totalKaphaPoints: number = this.constitution.kapha.body.total + this.constitution.kapha.mind.total;
 
     const maxPoints: number = Math.max(totalVataPoints, totalPittaPoints, totalKaphaPoints);
-    const dominantDosha: string = maxPoints === totalVataPoints ? 'Vata' : maxPoints === totalPittaPoints ? 'Pitta' : 'Kapha';
+    this.constitution.dominantDosha = maxPoints === totalVataPoints ? 'Vata' : maxPoints === totalPittaPoints ? 'Pitta' : 'Kapha';
 
-    this._notifyPvd.showInfo(`
-      Physical constitution: ${(bodyConstitution.vata * 100 / bodyPoints).toFixed(2)}% Vata, ${(bodyConstitution.pitta * 100 / bodyPoints).toFixed(2)}% Pitta, ${(bodyConstitution.kapha * 100 / bodyPoints).toFixed(2)}% Kapha\n
-      Mental constitution: ${(mentalConstitution.vata * 100 / mentalPoints).toFixed(2)}% Vata, ${(mentalConstitution.pitta * 100 / mentalPoints).toFixed(2)}% Pitta, ${(mentalConstitution.kapha * 100 / mentalPoints).toFixed(2)}% Kapha\n
-      Your dominant dosha is: ${dominantDosha}
-    `, 60000);
+    this._userPvd.saveConstitution(this._params.get('authId'), this.constitution)
+      .then(() => {
+        this._notifyPvd.closeLoading();
+        this._navCtrl.pop();
+      }).catch((err: FirebaseError) => {
+        this._notifyPvd.closeLoading();
+        this._notifyPvd.showError(err.message);
+      })
+  }
+
+  ionViewWillEnter(): void {
+    this.constitution = <Constitution>this._params.get('constitution') || new Constitution();
   }
 }

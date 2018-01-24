@@ -13,7 +13,7 @@ import {
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import { FirebaseError, User } from 'firebase/app';
 
 // Third-party
 import * as moment from 'moment';
@@ -76,7 +76,7 @@ export class SleepPage {
           label: 'Sleep duration'
         }];
       },
-      (err: firebase.FirebaseError) => {
+      (err: FirebaseError) => {
         this._notifyPvd.showError(err.message);
       }
     );
@@ -127,7 +127,7 @@ export class SleepPage {
       if (!!s && s['$value'] !== null) {
         this.sleep = Object.assign({}, s);
       }
-    }, (err: firebase.FirebaseError) => {
+    }, (err: FirebaseError) => {
       this._notifyPvd.showError(err.message);
     });
   }
@@ -138,7 +138,7 @@ export class SleepPage {
       .then(() => {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showInfo('Sleep saved successfully!');
-      }).catch((err: firebase.FirebaseError) => {
+      }).catch((err: FirebaseError) => {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showError(err.message);
       })
@@ -150,7 +150,7 @@ export class SleepPage {
 
   ionViewCanEnter(): Promise<{}> {
     return new Promise((resolve, reject) => {
-      this._afAuth.authState.subscribe((auth: firebase.User) => {
+      this._afAuth.authState.subscribe((auth: User) => {
         if (!auth) {
           reject();
           this._navCtrl.setRoot('registration', {
@@ -191,7 +191,7 @@ export class SleepPage {
   }
 
   ionViewWillEnter(): void {
-    this._authSubscription = this._afAuth.authState.subscribe((auth: firebase.User) => {
+    this._authSubscription = this._afAuth.authState.subscribe((auth: User) => {
       if (!!auth) {
         this._authId = auth.uid;
         this.getSleep();

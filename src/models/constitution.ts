@@ -16,7 +16,8 @@ export class MentalConstitution {
     public activity: boolean = false,
     public sexDrive: boolean = false,
     public beliefs: boolean = false,
-    public lifetyl: boolean = false
+    public lifetyle: boolean = false,
+    public total: number = 0
   ) {}
 }
 
@@ -38,13 +39,26 @@ export class PhysicalConstitution {
     public perspiration: boolean = false,
     public sleep: boolean = false,
     public walk: boolean = false,
-    public weather: boolean = false
+    public weather: boolean = false,
+    public total: number = 0
+  ) {}
+}
+
+export class Dosha {
+  constructor(
+    public body: PhysicalConstitution = new PhysicalConstitution(),
+    public mind: MentalConstitution = new MentalConstitution(),
+    public total: number = 0,
+    public bodyInfluence: number = 0,
+    public mindInfluence: number = 0
   ) {}
 }
 
 export class Constitution {
   constructor(
-    public body: PhysicalConstitution = new PhysicalConstitution(),
-    public mind: MentalConstitution = new MentalConstitution()
+    public vata: Dosha = new Dosha(),
+    public pitta: Dosha = new Dosha(),
+    public kapha: Dosha = new Dosha(),
+    public dominantDosha: string = ''
   ) {}
 }

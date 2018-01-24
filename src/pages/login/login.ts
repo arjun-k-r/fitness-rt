@@ -11,7 +11,7 @@ import {
 
 // Firebase
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import { FirebaseError, User } from 'firebase/app';
 
 // Providers
 import { NotificationProvider } from '../../providers';
@@ -50,14 +50,14 @@ export class LoginPage {
       this.loginForm.get('email').value.trim(),
       this.loginForm.get('password').value.trim()
     )
-      .then((user: firebase.User) => {
+      .then((user: User) => {
         this._notifyPvd.closeLoading();
         if (this._history) {
           this._navCtrl.setRoot(this._history);
         } else {
           this._navCtrl.setRoot('profile');
         }
-      }).catch((err: firebase.FirebaseError) => {
+      }).catch((err: FirebaseError) => {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showError(err.message);
       });

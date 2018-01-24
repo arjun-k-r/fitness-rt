@@ -16,7 +16,7 @@ import {
 } from 'ionic-angular';
 
 // Firebase
-import * as firebase from 'firebase/app';
+import { FirebaseError } from 'firebase/app';
 
 // Models
 import { Food, Meal, NutritionalValues } from '../../models';
@@ -188,7 +188,7 @@ export class FoodListPage {
     this._foodSubscription = this._foodPvd.getMyFoods$(this._authId).subscribe((foods: Food[]) => {
       this.foods = [...foods];
       this._notifyPvd.closeLoading()
-    }, (err: firebase.FirebaseError) => {
+    }, (err: FirebaseError) => {
       this._notifyPvd.closeLoading()
       this._notifyPvd.showError(err.message);
     });
@@ -199,7 +199,7 @@ export class FoodListPage {
     this._mealSubscription = this._dietPvd.getFavoriteMeals$(this._authId).subscribe((meals: Meal[]) => {
       this.meals = [...meals];
       this._notifyPvd.closeLoading()
-    }, (err: firebase.FirebaseError) => {
+    }, (err: FirebaseError) => {
       this._notifyPvd.closeLoading()
       this._notifyPvd.showError(err.message);
     });
@@ -210,7 +210,7 @@ export class FoodListPage {
     this._usdaFoodSubscription = this._foodPvd.getUSDAFoods$(this.selectedGroup).subscribe((foods: Food[]) => {
       this.usdaFoods = [...foods];
       this._notifyPvd.closeLoading()
-    }, (err: firebase.FirebaseError) => {
+    }, (err: FirebaseError) => {
       this._notifyPvd.closeLoading()
       this._notifyPvd.showError(err.message);
     });

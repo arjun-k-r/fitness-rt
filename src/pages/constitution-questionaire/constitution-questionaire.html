@@ -78,6 +78,48 @@
       </ion-item>
     </ion-item-group>
     <ion-item-group>
+      <ion-item-divider>Breakfast</ion-item-divider>
+      <ion-item>
+        <ion-label text-wrap>
+          anxious, sleepy, and exhauseed when skipping breakfast; best with a light breakfast and early lunch
+        </ion-label>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.breakfast"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>
+          skips breakfast easily if wants to, but needs big lunch
+        </ion-label>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.breakfast"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>
+          light breakfast, but can go without breakfast and lunch
+        </ion-label>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.breakfast"></ion-checkbox>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider>Stimulants</ion-item-divider>
+      <ion-item>
+        <ion-label text-wrap>
+          needs coffee or tea in the morning to wake up, but crashing in the noon
+        </ion-label>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.stimulants"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>
+          enjoys stimulants and tends to misues coffee and tea throughout the day
+        </ion-label>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.stimulants"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>
+          doesn't need stimulants, but may enjoy a cup of coffee or tea to give them a boost
+        </ion-label>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.stimulants"></ion-checkbox>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
       <ion-item-divider>Food amount</ion-item-divider>
       <ion-item>
         <ion-label text-wrap>
@@ -96,6 +138,27 @@
           usually not much, can feel full with a little
         </ion-label>
         <ion-checkbox [(ngModel)]="constitution?.kapha.body.foodAmount"></ion-checkbox>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider>Digestion and evacuation</ion-item-divider>
+      <ion-item>
+        <ion-label text-wrap>
+          irregular bowel movements, gets bloated, suffers from constipation or diarrhea
+        </ion-label>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.digestionEvacuation"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>
+          frequent bowel movements, sometimes loose stools
+        </ion-label>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.digestionEvacuation"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>
+          constant elimination
+        </ion-label>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.digestionEvacuation"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -327,6 +390,27 @@
           long and sound sleeper, has difficulties awakening even after long hours of sleep
         </ion-label>
         <ion-checkbox [(ngModel)]="constitution?.kapha.body.sleep"></ion-checkbox>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider>Pulse</ion-item-divider>
+      <ion-item>
+        <ion-label text-wrap>
+          thin, shallow, and fast with variable rhythm
+        </ion-label>
+        <ion-checkbox [(ngModel)]="constitution?.vata.body.pulse"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>
+          full, regular, and strong with medium speen and rhythm
+        </ion-label>
+        <ion-checkbox [(ngModel)]="constitution?.pitta.body.pulse"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label text-wrap>
+          strong, full, slow, and rhythmic
+        </ion-label>
+        <ion-checkbox [(ngModel)]="constitution?.kapha.body.pulse"></ion-checkbox>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -651,19 +735,19 @@
       <ion-item-divider>Activity</ion-item-divider>
       <ion-item>
         <ion-label text-wrap>
-          hyperactive, restless
+          hyperactive, restless, low endurance, addicted to vigurous exercise
         </ion-label>
         <ion-checkbox [(ngModel)]="constitution?.vata.mind.activity"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
-          active, enjoys exercise and competition
+          active, enjoys exercise and competition, high endurance
         </ion-label>
         <ion-checkbox [(ngModel)]="constitution?.pitta.mind.activity"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label text-wrap>
-          somewhat lethargic
+          somewhat lethargic, can last prolong exercise, but never motivated to do it
         </ion-label>
         <ion-checkbox [(ngModel)]="constitution?.kapha.mind.activity"></ion-checkbox>
       </ion-item>

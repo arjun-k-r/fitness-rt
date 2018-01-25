@@ -26,6 +26,9 @@ export class PhysicalConstitution {
     public frame: boolean = false,
     public weight: boolean = false,
     public appetite: boolean = false,
+    public breakfast: boolean = false,
+    public stimulants: boolean = false,
+    public digestion: boolean = false,
     public foodamount: boolean = false,
     public skinTexture: boolean = false,
     public complexion: boolean = false,
@@ -38,6 +41,7 @@ export class PhysicalConstitution {
     public bodyTemperature: boolean = false,
     public perspiration: boolean = false,
     public sleep: boolean = false,
+    public pulse: boolean = false,
     public walk: boolean = false,
     public weather: boolean = false,
     public total: number = 0

@@ -9,8 +9,8 @@
       <button (click)="dismiss()" *ngIf="!editMode" icon-only ion-button padding>
         <ion-icon name="done-all"></ion-icon>
       </button>
-      <button (click)="save()" [disabled]="foodForm.invalid" *ngIf="editMode" ion-button padding>
-        <ion-icon name="cloud-done"></ion-icon>
+      <button (click)="save()" [disabled]="foodForm.invalid" *ngIf="editMode" icon-only ion-button padding>
+        <ion-icon name="done-all"></ion-icon>
       </button>
       <button (click)="remove()" [disabled]="!food.$key" *ngIf="editMode" icon-only ion-button padding>
         <ion-icon name="trash"></ion-icon>
@@ -27,49 +27,49 @@
       <ion-item>
         Energy
         <p item-content>
-          {{ food.nourishment.energy?.value.toFixed(2) }} {{ food.nourishment.energy?.unit }} ({{ foodNourishmentAchieved?.energy.value
+          {{ food.nourishment.energy?.value }} {{ food.nourishment.energy?.unit }} ({{ foodNourishmentAchieved?.energy.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Water
-        <p item-content>{{ food.nourishment.water?.value.toFixed(2) }} {{ food.nourishment.water?.unit }} ({{ foodNourishmentAchieved?.water.value
+        <p item-content>{{ food.nourishment.water?.value }} {{ food.nourishment.water?.unit }} ({{ foodNourishmentAchieved?.water.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Protein
-        <p item-content>{{ food.nourishment.protein?.value.toFixed(2) }} {{ food.nourishment.protein?.unit }} ({{ foodNourishmentAchieved?.protein?.value
+        <p item-content>{{ food.nourishment.protein?.value }} {{ food.nourishment.protein?.unit }} ({{ foodNourishmentAchieved?.protein?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Carbohydrates
-        <p item-content>{{ food.nourishment.carbs?.value.toFixed(2) }} {{ food.nourishment.carbs?.unit }} ({{ foodNourishmentAchieved?.carbs.value
+        <p item-content>{{ food.nourishment.carbs?.value }} {{ food.nourishment.carbs?.unit }} ({{ foodNourishmentAchieved?.carbs.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Fiber
-        <p item-content>{{ food.nourishment.fiber?.value.toFixed(2) }} {{ food.nourishment.fiber?.unit }} ({{ foodNourishmentAchieved?.fiber.value
+        <p item-content>{{ food.nourishment.fiber?.value }} {{ food.nourishment.fiber?.unit }} ({{ foodNourishmentAchieved?.fiber.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Sugars
-        <p item-content>{{ food.nourishment.sugars?.value.toFixed(2) }} {{ food.nourishment.sugars?.unit }} ({{ foodNourishmentAchieved?.sugars.value
+        <p item-content>{{ food.nourishment.sugars?.value }} {{ food.nourishment.sugars?.unit }} ({{ foodNourishmentAchieved?.sugars.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Fats
-        <p item-content>{{ food.nourishment.fats?.value.toFixed(2) }} {{ food.nourishment.fats?.unit }} ({{ foodNourishmentAchieved?.fats.value
+        <p item-content>{{ food.nourishment.fats?.value }} {{ food.nourishment.fats?.unit }} ({{ foodNourishmentAchieved?.fats.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Trans fat
-        <p item-content>{{ food.nourishment.transFat?.value.toFixed(2) }} {{ food.nourishment.transFat?.unit }} ({{ foodNourishmentAchieved?.transFat?.value
+        <p item-content>{{ food.nourishment.transFat?.value }} {{ food.nourishment.transFat?.unit }} ({{ foodNourishmentAchieved?.transFat?.value
           }}%)
         </p>
       </ion-item>
@@ -78,12 +78,12 @@
       <ion-item-divider>Essential fatty acids</ion-item-divider>
       <ion-item>
         Omega-3 (ALA)
-        <p item-content>{{ food.nourishment.ala?.value.toFixed(2) }} {{ food.nourishment.ala?.unit }} ({{ foodNourishmentAchieved?.ala.value }}%)
+        <p item-content>{{ food.nourishment.ala?.value }} {{ food.nourishment.ala?.unit }} ({{ foodNourishmentAchieved?.ala.value }}%)
         </p>
       </ion-item>
       <ion-item>
         Omega-6 (LA)
-        <p item-content>{{ food.nourishment.la?.value.toFixed(2) }} {{ food.nourishment.la?.unit }} ({{ foodNourishmentAchieved?.la.value }}%)
+        <p item-content>{{ food.nourishment.la?.value }} {{ food.nourishment.la?.unit }} ({{ foodNourishmentAchieved?.la.value }}%)
         </p>
       </ion-item>
     </ion-item-group>
@@ -91,49 +91,49 @@
       <ion-item-divider>Essential amino acids</ion-item-divider>
       <ion-item>
         Histidine
-        <p item-content>{{ food.nourishment.histidine?.value.toFixed(2) }} {{ food.nourishment.histidine?.unit }} ({{ foodNourishmentAchieved?.histidine?.value
+        <p item-content>{{ food.nourishment.histidine?.value }} {{ food.nourishment.histidine?.unit }} ({{ foodNourishmentAchieved?.histidine?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Isoleucine
-        <p item-content>{{ food.nourishment.isoleucine?.value.toFixed(2) }} {{ food.nourishment.isoleucine?.unit }} ({{ foodNourishmentAchieved?.isoleucine?.value
+        <p item-content>{{ food.nourishment.isoleucine?.value }} {{ food.nourishment.isoleucine?.unit }} ({{ foodNourishmentAchieved?.isoleucine?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Leucine
-        <p item-content>{{ food.nourishment.leucine?.value.toFixed(2) }} {{ food.nourishment.leucine?.unit }} ({{ foodNourishmentAchieved?.leucine?.value
+        <p item-content>{{ food.nourishment.leucine?.value }} {{ food.nourishment.leucine?.unit }} ({{ foodNourishmentAchieved?.leucine?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Lysine
-        <p item-content>{{ food.nourishment.lysine?.value.toFixed(2) }} {{ food.nourishment.lysine?.unit }} ({{ foodNourishmentAchieved?.lysine.value
+        <p item-content>{{ food.nourishment.lysine?.value }} {{ food.nourishment.lysine?.unit }} ({{ foodNourishmentAchieved?.lysine.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Methionine
-        <p item-content>{{ food.nourishment.methionine?.value.toFixed(2) }} {{ food.nourishment.methionine?.unit }} ({{ foodNourishmentAchieved?.methionine?.value
+        <p item-content>{{ food.nourishment.methionine?.value }} {{ food.nourishment.methionine?.unit }} ({{ foodNourishmentAchieved?.methionine?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Phenylalanine
-        <p item-content>{{ food.nourishment.phenylalanine?.value.toFixed(2) }} {{ food.nourishment.phenylalanine?.unit }} ({{ foodNourishmentAchieved?.phenylalanine?.value
+        <p item-content>{{ food.nourishment.phenylalanine?.value }} {{ food.nourishment.phenylalanine?.unit }} ({{ foodNourishmentAchieved?.phenylalanine?.value
           }}%
         </p>
       </ion-item>
       <ion-item>
         Threonine
-        <p item-content>{{ food.nourishment.threonine?.value.toFixed(2) }} {{ food.nourishment.threonine?.unit }} ({{ foodNourishmentAchieved?.threonine?.value
+        <p item-content>{{ food.nourishment.threonine?.value }} {{ food.nourishment.threonine?.unit }} ({{ foodNourishmentAchieved?.threonine?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Tryptophan
-        <p item-content>{{ food.nourishment.tryptophan?.value.toFixed(2) }} {{ food.nourishment.tryptophan?.unit }} ({{ foodNourishmentAchieved?.tryptophan?.value
+        <p item-content>{{ food.nourishment.tryptophan?.value }} {{ food.nourishment.tryptophan?.unit }} ({{ foodNourishmentAchieved?.tryptophan?.value
           }}%)
         </p>
       </ion-item>
@@ -142,79 +142,79 @@
       <ion-item-divider>Essential vitamins</ion-item-divider>
       <ion-item>
         Vitamin A
-        <p item-content>{{ food.nourishment.vitaminA?.value.toFixed(2) }} {{ food.nourishment.vitaminA?.unit }} ({{ foodNourishmentAchieved?.vitaminA?.value
+        <p item-content>{{ food.nourishment.vitaminA?.value }} {{ food.nourishment.vitaminA?.unit }} ({{ foodNourishmentAchieved?.vitaminA?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Vitamin B1 (Thiamine)
-        <p item-content>{{ food.nourishment.vitaminB1?.value.toFixed(2) }} {{ food.nourishment.vitaminB1?.unit }} ({{ foodNourishmentAchieved?.vitaminB1?.value
+        <p item-content>{{ food.nourishment.vitaminB1?.value }} {{ food.nourishment.vitaminB1?.unit }} ({{ foodNourishmentAchieved?.vitaminB1?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Vitamin B2 (Riboflavin)
-        <p item-content>{{ food.nourishment.vitaminB2?.value.toFixed(2) }} {{ food.nourishment.vitaminB2?.unit }} ({{ foodNourishmentAchieved?.vitaminB2?.value
+        <p item-content>{{ food.nourishment.vitaminB2?.value }} {{ food.nourishment.vitaminB2?.unit }} ({{ foodNourishmentAchieved?.vitaminB2?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Vitamin B3 (Niacin)
-        <p item-content>{{ food.nourishment.vitaminB3?.value.toFixed(2) }} {{ food.nourishment.vitaminB3?.unit }} ({{ foodNourishmentAchieved?.vitaminB3?.value
+        <p item-content>{{ food.nourishment.vitaminB3?.value }} {{ food.nourishment.vitaminB3?.unit }} ({{ foodNourishmentAchieved?.vitaminB3?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Vitamin B5 (Pantothenic acid)
-        <p item-content>{{ food.nourishment.vitaminB5?.value.toFixed(2) }} {{ food.nourishment.vitaminB5?.unit }} ({{ foodNourishmentAchieved?.vitaminB5?.value
+        <p item-content>{{ food.nourishment.vitaminB5?.value }} {{ food.nourishment.vitaminB5?.unit }} ({{ foodNourishmentAchieved?.vitaminB5?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Vitamin B6 (Pyridoxine)
-        <p item-content>{{ food.nourishment.vitaminB6?.value.toFixed(2) }} {{ food.nourishment.vitaminB6?.unit }} ({{ foodNourishmentAchieved?.vitaminB6?.value
+        <p item-content>{{ food.nourishment.vitaminB6?.value }} {{ food.nourishment.vitaminB6?.unit }} ({{ foodNourishmentAchieved?.vitaminB6?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Vitamin B9 (Folate)
-        <p item-content>{{ food.nourishment.vitaminB9?.value.toFixed(2) }} {{ food.nourishment.vitaminB9?.unit }} ({{ foodNourishmentAchieved?.vitaminB9?.value
+        <p item-content>{{ food.nourishment.vitaminB9?.value }} {{ food.nourishment.vitaminB9?.unit }} ({{ foodNourishmentAchieved?.vitaminB9?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Vitamin B12 (Cobalamin)
-        <p item-content>{{ food.nourishment.vitaminB12?.value.toFixed(2) }} {{ food.nourishment.vitaminB12?.unit }} ({{ foodNourishmentAchieved?.vitaminB12?.value
+        <p item-content>{{ food.nourishment.vitaminB12?.value }} {{ food.nourishment.vitaminB12?.unit }} ({{ foodNourishmentAchieved?.vitaminB12?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Choline
-        <p item-content>{{ food.nourishment.choline?.value.toFixed(2) }} {{ food.nourishment.choline?.unit }} ({{ foodNourishmentAchieved?.choline?.value
+        <p item-content>{{ food.nourishment.choline?.value }} {{ food.nourishment.choline?.unit }} ({{ foodNourishmentAchieved?.choline?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Vitamin C (Ascorbic acid)
-        <p item-content>{{ food.nourishment.vitaminC?.value.toFixed(2) }} {{ food.nourishment.vitaminC?.unit }} ({{ foodNourishmentAchieved?.vitaminC?.value
+        <p item-content>{{ food.nourishment.vitaminC?.value }} {{ food.nourishment.vitaminC?.unit }} ({{ foodNourishmentAchieved?.vitaminC?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Vitamin D (Cholecalciferol)
-        <p item-content>{{ food.nourishment.vitaminD?.value.toFixed(2) }} {{ food.nourishment.vitaminD?.unit }} ({{ foodNourishmentAchieved?.vitaminD?.value
+        <p item-content>{{ food.nourishment.vitaminD?.value }} {{ food.nourishment.vitaminD?.unit }} ({{ foodNourishmentAchieved?.vitaminD?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Vitamin E (Tocopherol)
-        <p item-content>{{ food.nourishment.vitaminE?.value.toFixed(2) }} {{ food.nourishment.vitaminE?.unit }} ({{ foodNourishmentAchieved?.vitaminE?.value
+        <p item-content>{{ food.nourishment.vitaminE?.value }} {{ food.nourishment.vitaminE?.unit }} ({{ foodNourishmentAchieved?.vitaminE?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Vitamin K
-        <p item-content>{{ food.nourishment.vitaminK?.value.toFixed(2) }} {{ food.nourishment.vitaminK?.unit }} ({{ foodNourishmentAchieved?.vitaminK?.value
+        <p item-content>{{ food.nourishment.vitaminK?.value }} {{ food.nourishment.vitaminK?.unit }} ({{ foodNourishmentAchieved?.vitaminK?.value
           }}%)
         </p>
       </ion-item>
@@ -223,61 +223,61 @@
       <ion-item-divider>Essential minerals</ion-item-divider>
       <ion-item>
         Calcium
-        <p item-content>{{ food.nourishment.calcium?.value.toFixed(2) }} {{ food.nourishment.calcium?.unit }} ({{ foodNourishmentAchieved?.calcium?.value
+        <p item-content>{{ food.nourishment.calcium?.value }} {{ food.nourishment.calcium?.unit }} ({{ foodNourishmentAchieved?.calcium?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Copper
-        <p item-content>{{ food.nourishment.copper?.value.toFixed(2) }} {{ food.nourishment.copper?.unit }} ({{ foodNourishmentAchieved?.copper.value
+        <p item-content>{{ food.nourishment.copper?.value }} {{ food.nourishment.copper?.unit }} ({{ foodNourishmentAchieved?.copper.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Iron
-        <p item-content>{{ food.nourishment.iron?.value.toFixed(2) }} {{ food.nourishment.iron?.unit }} ({{ foodNourishmentAchieved?.iron.value
+        <p item-content>{{ food.nourishment.iron?.value }} {{ food.nourishment.iron?.unit }} ({{ foodNourishmentAchieved?.iron.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Magnesium
-        <p item-content>{{ food.nourishment.magnesium?.value.toFixed(2) }} {{ food.nourishment.magnesium?.unit }} ({{ foodNourishmentAchieved?.magnesium?.value
+        <p item-content>{{ food.nourishment.magnesium?.value }} {{ food.nourishment.magnesium?.unit }} ({{ foodNourishmentAchieved?.magnesium?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Manganese
-        <p item-content>{{ food.nourishment.manganese?.value.toFixed(2) }} {{ food.nourishment.manganese?.unit }} ({{ foodNourishmentAchieved?.manganese?.value
+        <p item-content>{{ food.nourishment.manganese?.value }} {{ food.nourishment.manganese?.unit }} ({{ foodNourishmentAchieved?.manganese?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Phosphorus
-        <p item-content>{{ food.nourishment.phosphorus?.value.toFixed(2) }} {{ food.nourishment.phosphorus?.unit }} ({{ foodNourishmentAchieved?.phosphorus?.value
+        <p item-content>{{ food.nourishment.phosphorus?.value }} {{ food.nourishment.phosphorus?.unit }} ({{ foodNourishmentAchieved?.phosphorus?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Potassium
-        <p item-content>{{ food.nourishment.potassium?.value.toFixed(2) }} {{ food.nourishment.potassium?.unit }} ({{ foodNourishmentAchieved?.potassium?.value
+        <p item-content>{{ food.nourishment.potassium?.value }} {{ food.nourishment.potassium?.unit }} ({{ foodNourishmentAchieved?.potassium?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Selenium
-        <p item-content>{{ food.nourishment.selenium?.value.toFixed(2) }} {{ food.nourishment.selenium?.unit }} ({{ foodNourishmentAchieved?.selenium?.value
+        <p item-content>{{ food.nourishment.selenium?.value }} {{ food.nourishment.selenium?.unit }} ({{ foodNourishmentAchieved?.selenium?.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Sodium
-        <p item-content>{{ food.nourishment.sodium?.value.toFixed(2) }} {{ food.nourishment.sodium?.unit }} ({{ foodNourishmentAchieved?.sodium.value
+        <p item-content>{{ food.nourishment.sodium?.value }} {{ food.nourishment.sodium?.unit }} ({{ foodNourishmentAchieved?.sodium.value
           }}%)
         </p>
       </ion-item>
       <ion-item>
         Zinc
-        <p item-content>{{ food.nourishment.zinc?.value.toFixed(2) }} {{ food.nourishment.zinc?.unit }} ({{ foodNourishmentAchieved?.zinc.value
+        <p item-content>{{ food.nourishment.zinc?.value }} {{ food.nourishment.zinc?.unit }} ({{ foodNourishmentAchieved?.zinc.value
           }}%)
         </p>
       </ion-item>

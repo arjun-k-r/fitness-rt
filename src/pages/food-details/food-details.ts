@@ -180,6 +180,8 @@ export class FoodDetailsPage {
 
   public save(): void {
     this._notifyPvd.showLoading();
+    this.food.isFavorite = false;
+    this.food.toAvoid = false;
     this._foodPvd.saveFood(this.authId, this.food)
       .then(() => {
         this._notifyPvd.closeLoading();

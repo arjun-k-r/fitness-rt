@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>{{ food.name || 'New food' }}</ion-title>
     <ion-buttons end>
-      <button (click)="editFood()" *ngIf="(food.uploader && foodForm.controls.food.uploader === authId) && !editMode" icon-only
+      <button (click)="editFood()" *ngIf="(food.uploader && food.uploader === authId) && !editMode" icon-only
         ion-button padding>
         <ion-icon name="create"></ion-icon>
       </button>
@@ -12,7 +12,7 @@
       <button (click)="save()" [disabled]="foodForm.invalid" *ngIf="editMode" ion-button padding>
         <ion-icon name="cloud-done"></ion-icon>
       </button>
-      <button (click)="remove()" *ngIf="editMode" icon-only ion-button padding>
+      <button (click)="remove()" [disabled]="!food.$key" *ngIf="editMode" icon-only ion-button padding>
         <ion-icon name="trash"></ion-icon>
       </button>
     </ion-buttons>

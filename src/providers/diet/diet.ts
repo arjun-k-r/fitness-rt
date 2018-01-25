@@ -1684,7 +1684,7 @@ export class DietProvider {
       } else if (age <= 18) {
         return 1500;
       } else if (age <= 30) {
-        return 1.5;
+        return 1500;
       } else if (age <= 50) {
         return 1500;
       } else if (age <= 70) {
@@ -1695,8 +1695,16 @@ export class DietProvider {
     }
   }
 
-  private _calculateSugarsRequirement(energyConsumption: number): number {
-    return 0.1 * energyConsumption / 4;
+  private _calculateSugarsRequirement(age: number, gender: string): number {
+    if (age < 2) {
+      return 0.001;
+    } else if (age < 18) {
+      return 25;
+    } else if (gender === 'male') {
+      return 38;
+    } else {
+      return 25;
+    }
   }
 
   private _calculateVitaminB1Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
@@ -1812,7 +1820,7 @@ export class DietProvider {
   }
 
   private _calculateTransFatRequirement(): number {
-    return 0.00000000000000000000000001;
+    return 0.001;
   }
 
   private _calculateTryptophanRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
@@ -2312,11 +2320,11 @@ export class DietProvider {
         this._calculateProteinRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
         this._calculateCarbRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
         this._calculateFiberRequirement(age, gender, lactating, pregnant),
-        this._calculateSugarsRequirement(energyConsumption),
+        this._calculateSugarsRequirement(age, gender),
         this._calculateFatRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
         this._calculateTransFatRequirement(),
-        this._calculateAlaRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-        this._calculateLaRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+        this._calculateAlaRequirement(age, gender, lactating, pregnant),
+        this._calculateLaRequirement(age, gender, lactating, pregnant),
         this._calculateHistidineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
         this._calculateIsoleucineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
         this._calculateLeucineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),

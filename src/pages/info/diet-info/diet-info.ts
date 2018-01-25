@@ -1,25 +1,17 @@
+// Angular
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the DietInfoPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+// Ionic
+import { IonicPage } from 'ionic-angular';
 
-@IonicPage()
+@IonicPage({
+  name: 'diet-info',
+  segment: 'diet/info'
+})
 @Component({
-  selector: 'page-diet-info',
   templateUrl: 'diet-info.html',
 })
 export class DietInfoPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor() {
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DietInfoPage');
-  }
-
 }

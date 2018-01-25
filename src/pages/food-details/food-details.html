@@ -9,10 +9,10 @@
       <button (click)="dismiss()" *ngIf="!editMode" icon-only ion-button padding>
         <ion-icon name="done-all"></ion-icon>
       </button>
-      <button (click)="saveFood()" [disabled]="foodForm.invalid" *ngIf="editMode" ion-button padding>
+      <button (click)="save()" [disabled]="foodForm.invalid" *ngIf="editMode" ion-button padding>
         <ion-icon name="cloud-done"></ion-icon>
       </button>
-      <button (click)="removeFood()" *ngIf="editMode" icon-only ion-button padding>
+      <button (click)="remove()" *ngIf="editMode" icon-only ion-button padding>
         <ion-icon name="trash"></ion-icon>
       </button>
     </ion-buttons>
@@ -20,7 +20,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <div *ngIf="!editMode">
     <ion-item-group>
       <ion-item-divider>Proximates</ion-item-divider>
@@ -305,12 +305,12 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label fixed>Name *</ion-label>
+        <ion-label fixed text-wrap>Name *</ion-label>
         <ion-input formControlName="name" required type="text"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.name?.touched && foodForm.controls.name.errors?.required">Please enter the food name.</div>
       <ion-item>
-        <ion-label fixed>Quantity (g)*</ion-label>
+        <ion-label fixed text-wrap>Quantity (g)*</ion-label>
         <ion-input formControlName="quantity" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.quantity?.touched && foodForm.controls.quantity.errors?.required">Please enter the food quantity.</div>
@@ -318,42 +318,42 @@
     <ion-item-group>
       <ion-item-divider color="primary" role="separator">Proximates</ion-item-divider>
       <ion-item>
-        <ion-label fixed>Energy (kcal)*</ion-label>
+        <ion-label fixed text-wrap>Energy (kcal)*</ion-label>
         <ion-input formControlName="energy" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.energy?.touched && foodForm.controls.energy.errors?.required">Please enter the energy content.</div>
       <ion-item>
-        <ion-label fixed>Water (ml)*</ion-label>
+        <ion-label fixed text-wrap>Water (ml)*</ion-label>
         <ion-input formControlName="water" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.water?.touched && foodForm.controls.water.errors?.required">Please enter the water content.</div>
       <ion-item>
-        <ion-label fixed>Protein (g)*</ion-label>
+        <ion-label fixed text-wrap>Protein (g)*</ion-label>
         <ion-input formControlName="protein" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.protein?.touched && foodForm.controls.protein.errors?.required">Please enter the protein content.</div>
       <ion-item>
-        <ion-label fixed>Carbohydrates (g)*</ion-label>
+        <ion-label fixed text-wrap>Carbohydrates (g)*</ion-label>
         <ion-input formControlName="carbs" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.carbs?.touched && foodForm.controls.carbs.errors?.required">Please enter the carbohydrate content.</div>
       <ion-item>
-        <ion-label fixed>Fiber (g)*</ion-label>
+        <ion-label fixed text-wrap>Fiber (g)*</ion-label>
         <ion-input formControlName="fiber" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.fiber?.touched && foodForm.controls.fiber.errors?.required">Please enter the fiber content.</div>
       <ion-item>
-        <ion-label fixed>Sugars (g)*</ion-label>
+        <ion-label fixed text-wrap>Sugars (g)*</ion-label>
         <ion-input formControlName="sugars" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.sugars?.touched && foodForm.controls.sugars.errors?.required">Please enter the sugar content.</div>
       <ion-item>
-        <ion-label fixed>Total fat (g)*</ion-label>
+        <ion-label fixed text-wrap>Total fat (g)*</ion-label>
         <ion-input formControlName="fats" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.fats?.touched && foodForm.controls.fats.errors?.required">Please enter the fat content.</div>
       <ion-item>
-        <ion-label fixed>Trans fat (g)*</ion-label>
+        <ion-label fixed text-wrap>Trans fat (g)*</ion-label>
         <ion-input formControlName="transFat" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.transFat?.touched && foodForm.controls.transFat.errors?.required">Please enter the trans fat content.</div>
@@ -361,12 +361,12 @@
     <ion-item-group>
       <ion-item-divider color="primary" role="separator">Essential fatty acids</ion-item-divider>
       <ion-item>
-        <ion-label fixed>Linoleic acid (g)*</ion-label>
+        <ion-label fixed text-wrap>Linoleic acid (g)*</ion-label>
         <ion-input formControlName="la" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.la?.touched && foodForm.controls.la.errors?.required">Please enter the linoleic acid content.</div>
       <ion-item>
-        <ion-label fixed>alpha-Linolenic acid (g)*</ion-label>
+        <ion-label fixed text-wrap>alpha-Linolenic acid (g)*</ion-label>
         <ion-input formControlName="ala" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.ala?.touched && foodForm.controls.ala.errors?.required">Please enter the alpha-linolenic acid content.</div>
@@ -374,47 +374,47 @@
     <ion-item-group>
       <ion-item-divider color="primary" role="separator">Essential amino acids</ion-item-divider>
       <ion-item>
-        <ion-label fixed>Histidine (g)*</ion-label>
+        <ion-label fixed text-wrap>Histidine (g)*</ion-label>
         <ion-input formControlName="histidine" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.histidine?.touched && foodForm.controls.histidine.errors?.required">Please enter the histidine content.</div>
       <ion-item>
-        <ion-label fixed>Isoleucine (g)*</ion-label>
+        <ion-label fixed text-wrap>Isoleucine (g)*</ion-label>
         <ion-input formControlName="isoleucine" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.isoleucine?.touched && foodForm.controls.isoleucine.errors?.required">Please enter the isoleucine content.</div>
       <ion-item>
-        <ion-label fixed>Leucine (g)*</ion-label>
+        <ion-label fixed text-wrap>Leucine (g)*</ion-label>
         <ion-input formControlName="leucine" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.leucine?.touched && foodForm.controls.leucine.errors?.required">Please enter the leucine content.</div>
       <ion-item>
-        <ion-label fixed>Lysine (g)*</ion-label>
+        <ion-label fixed text-wrap>Lysine (g)*</ion-label>
         <ion-input formControlName="lysine" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.lysine?.touched && foodForm.controls.lysine.errors?.required">Please enter the lysine content.</div>
       <ion-item>
-        <ion-label fixed>Methionine (g)*</ion-label>
+        <ion-label fixed text-wrap>Methionine (g)*</ion-label>
         <ion-input formControlName="methionine" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.methionine?.touched && foodForm.controls.methionine.errors?.required">Please enter the methionine content.</div>
       <ion-item>
-        <ion-label fixed>Phenylalanine (g)*</ion-label>
+        <ion-label fixed text-wrap>Phenylalanine (g)*</ion-label>
         <ion-input formControlName="phenylalanine" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.phenylalanine?.touched && foodForm.controls.phenylalanine.errors?.required">Please enter the phenylalanine content.</div>
       <ion-item>
-        <ion-label fixed>Tryptophan (g)*</ion-label>
+        <ion-label fixed text-wrap>Tryptophan (g)*</ion-label>
         <ion-input formControlName="tryptophan" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.tryptophan?.touched && foodForm.controls.tryptophan.errors?.required">Please enter the tryptophan content.</div>
       <ion-item>
-        <ion-label fixed>Threonine (g)*</ion-label>
+        <ion-label fixed text-wrap>Threonine (g)*</ion-label>
         <ion-input formControlName="threonine" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.threonine?.touched && foodForm.controls.threonine.errors?.required">Please enter the threonine content.</div>
       <ion-item>
-        <ion-label fixed>Valine (g)*</ion-label>
+        <ion-label fixed text-wrap>Valine (g)*</ion-label>
         <ion-input formControlName="valine" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.valine?.touched && foodForm.controls.valine.errors?.required">Please enter the valine content.</div>
@@ -422,52 +422,52 @@
     <ion-item-group>
       <ion-item-divider color="primary" role="separator">Minerals</ion-item-divider>
       <ion-item>
-        <ion-label fixed>Calcium (mg)*</ion-label>
+        <ion-label fixed text-wrap>Calcium (mg)*</ion-label>
         <ion-input formControlName="calcium" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.calcium?.touched && foodForm.controls.calcium.errors?.required">Please enter the calcium content.</div>
       <ion-item>
-        <ion-label fixed>Copper (mg)*</ion-label>
+        <ion-label fixed text-wrap>Copper (mg)*</ion-label>
         <ion-input formControlName="copper" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.copper?.touched && foodForm.controls.copper.errors?.required">Please enter the copper content.</div>
       <ion-item>
-        <ion-label fixed>Iron (mg)*</ion-label>
+        <ion-label fixed text-wrap>Iron (mg)*</ion-label>
         <ion-input formControlName="iron" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.iron?.touched && foodForm.controls.iron.errors?.required">Please enter the iron content.</div>
       <ion-item>
-        <ion-label fixed>Magnesium (mg)*</ion-label>
+        <ion-label fixed text-wrap>Magnesium (mg)*</ion-label>
         <ion-input formControlName="magnesium" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.magnesium?.touched && foodForm.controls.magnesium.errors?.required">Please enter the magnesium content.</div>
       <ion-item>
-        <ion-label fixed>Manganese (mg)*</ion-label>
+        <ion-label fixed text-wrap>Manganese (mg)*</ion-label>
         <ion-input formControlName="manganese" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.manganese?.touched && foodForm.controls.manganese.errors?.required">Please enter the manganese content.</div>
       <ion-item>
-        <ion-label fixed>Phosphorus (mg)*</ion-label>
+        <ion-label fixed text-wrap>Phosphorus (mg)*</ion-label>
         <ion-input formControlName="phosphorus" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.phosphorus?.touched && foodForm.controls.phosphorus.errors?.required">Please enter the phosphorus content.</div>
       <ion-item>
-        <ion-label fixed>Potassium (mg)*</ion-label>
+        <ion-label fixed text-wrap>Potassium (mg)*</ion-label>
         <ion-input formControlName="potassium" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.potassium?.touched && foodForm.controls.potassium.errors?.required">Please enter the potassium content.</div>
       <ion-item>
-        <ion-label fixed>Selenium (ug)*</ion-label>
+        <ion-label fixed text-wrap>Selenium (ug)*</ion-label>
         <ion-input formControlName="selenium" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.selenium?.touched && foodForm.controls.selenium.errors?.required">Please enter the selenium content.</div>
       <ion-item>
-        <ion-label fixed>Sodium (mg)*</ion-label>
+        <ion-label fixed text-wrap>Sodium (mg)*</ion-label>
         <ion-input formControlName="sodium" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.sodium?.touched && foodForm.controls.sodium.errors?.required">Please enter the sodium content.</div>
       <ion-item>
-        <ion-label fixed>Zinc (mg)*</ion-label>
+        <ion-label fixed text-wrap>Zinc (mg)*</ion-label>
         <ion-input formControlName="zinc" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.zinc?.touched && foodForm.controls.zinc.errors?.required">Please enter the zinc content.</div>
@@ -475,67 +475,67 @@
     <ion-item-group>
       <ion-item-divider color="primary" role="separator">Vitamins</ion-item-divider>
       <ion-item>
-        <ion-label fixed>Vitamin A (ug)*</ion-label>
+        <ion-label fixed text-wrap>Vitamin A (ug)*</ion-label>
         <ion-input formControlName="vitaminA" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.vitaminA?.touched && foodForm.controls.vitaminA.errors?.required">Please enter the vitamin A content.</div>
       <ion-item>
-        <ion-label fixed>Vitamin B1 (mg)*</ion-label>
+        <ion-label fixed text-wrap>Vitamin B1 (mg)*</ion-label>
         <ion-input formControlName="vitaminB1" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.vitaminB1?.touched && foodForm.controls.vitaminB1.errors?.required">Please enter the vitamin B1 content.</div>
       <ion-item>
-        <ion-label fixed>Vitamin B2 (mg)*</ion-label>
+        <ion-label fixed text-wrap>Vitamin B2 (mg)*</ion-label>
         <ion-input formControlName="vitaminB2" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.vitaminB2?.touched && foodForm.controls.vitaminB2.errors?.required">Please enter the vitamin B2 content.</div>
       <ion-item>
-        <ion-label fixed>Vitamin B3 (mg)*</ion-label>
+        <ion-label fixed text-wrap>Vitamin B3 (mg)*</ion-label>
         <ion-input formControlName="vitaminB3" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.vitaminB3?.touched && foodForm.controls.vitaminB3.errors?.required">Please enter the vitamin B3 content.</div>
       <ion-item>
-        <ion-label fixed>Vitamin B5 (mg)*</ion-label>
+        <ion-label fixed text-wrap>Vitamin B5 (mg)*</ion-label>
         <ion-input formControlName="vitaminB5" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.vitaminB5?.touched && foodForm.controls.vitaminB5.errors?.required">Please enter the vitamin B5 content.</div>
       <ion-item>
-        <ion-label fixed>Vitamin B6 (mg)*</ion-label>
+        <ion-label fixed text-wrap>Vitamin B6 (mg)*</ion-label>
         <ion-input formControlName="vitaminB6" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.vitaminB6?.touched && foodForm.controls.vitaminB6.errors?.required">Please enter the vitamin B6 content.</div>
       <ion-item>
-        <ion-label fixed>Vitamin B9 (ug)*</ion-label>
+        <ion-label fixed text-wrap>Vitamin B9 (ug)*</ion-label>
         <ion-input formControlName="vitaminB9" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.vitaminB9?.touched && foodForm.controls.vitaminB9.errors?.required">Please enter the vitamin B9 content.</div>
       <ion-item>
-        <ion-label fixed>Vitamin B12 (ug)*</ion-label>
+        <ion-label fixed text-wrap>Vitamin B12 (ug)*</ion-label>
         <ion-input formControlName="vitaminB12" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.vitaminB12?.touched && foodForm.controls.vitaminB12.errors?.required">Please enter the vitamin B12 content.</div>
       <ion-item>
-        <ion-label fixed>Choline (mg)*</ion-label>
+        <ion-label fixed text-wrap>Choline (mg)*</ion-label>
         <ion-input formControlName="choline" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.choline?.touched && foodForm.controls.choline.errors?.required">Please enter the choline content.</div>
       <ion-item>
-        <ion-label fixed>Vitaminc C (mg)*</ion-label>
+        <ion-label fixed text-wrap>Vitaminc C (mg)*</ion-label>
         <ion-input formControlName="vitaminC" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.vitaminC?.touched && foodForm.controls.vitaminC.errors?.required">Please enter the vitamin C content.</div>
       <ion-item>
-        <ion-label fixed>Vitamin D (ug)*</ion-label>
+        <ion-label fixed text-wrap>Vitamin D (ug)*</ion-label>
         <ion-input formControlName="vitaminD" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.vitaminD?.touched && foodForm.controls.vitaminD.errors?.required">Please enter the vitamin D content.</div>
       <ion-item>
-        <ion-label fixed>Vitamin E (mg)*</ion-label>
+        <ion-label fixed text-wrap>Vitamin E (mg)*</ion-label>
         <ion-input formControlName="vitaminE" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.vitaminE?.touched && foodForm.controls.vitaminE.errors?.required">Please enter the vitamin E content.</div>
       <ion-item>
-        <ion-label fixed>Vitamin K (ug)*</ion-label>
+        <ion-label fixed text-wrap>Vitamin K (ug)*</ion-label>
         <ion-input formControlName="vitaminK" required type="number"></ion-input>
       </ion-item>
       <div class="form__message--dark" *ngIf="foodForm.invalid && foodForm.controls.vitaminK?.touched && foodForm.controls.vitaminK.errors?.required">Please enter the vitamin K content.</div>

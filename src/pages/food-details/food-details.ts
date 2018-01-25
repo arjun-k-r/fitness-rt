@@ -115,7 +115,7 @@ export class FoodDetailsPage {
       changes => {
         if (this.foodForm.valid) {
           for (let key in changes) {
-            if (key in this.food.nourishment) {
+            if (key in this.food) {
               this.food = Object.assign(this.food, { [key]: changes[key] });
             } else if (key in this.food.nourishment) {
               this.food.nourishment[key] = Object.assign(this.food.nourishment[key], { value: +changes[key] });
@@ -186,6 +186,7 @@ export class FoodDetailsPage {
       .then(() => {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showInfo('Food saved successfully!');
+        this._viewCtrl.dismiss();
       })
       .catch((err: FirebaseError) => {
         this._notifyPvd.closeLoading();

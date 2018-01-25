@@ -1,6 +1,9 @@
 // Angular
 import { Component, ViewChild } from '@angular/core';
 
+// Rxjs
+import { Subscription } from 'rxjs/Subscription';
+
 // Ionic
 import { Nav, Platform } from 'ionic-angular';
 
@@ -9,6 +12,10 @@ import { Autostart } from '@ionic-native/autostart';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
+// Firebase
+import { AngularFireAuth } from 'angularfire2/auth';
+import { User } from 'firebase/app';
 
 interface IPageLink {
   component: string,
@@ -21,10 +28,13 @@ interface IPageLink {
 })
 export class MyApp {
   @ViewChild(Nav) _nav: Nav;
+  private _authSubscription: Subscription;
+  public auth: User;
   public currentPage: IPageLink;
   public pages: Array<IPageLink>;
   public rootPage: string = 'registration';
   constructor(
+    private _afAuth: AngularFireAuth,
     private _autostart: Autostart,
     private _backgroundMode: BackgroundMode,
     private _platform: Platform,
@@ -50,6 +60,11 @@ export class MyApp {
         // { component: 'blood-pressure', icon: 'pulse', title: 'Blood pressure' },
         // { component: 'blood-sugar', icon: 'heart', title: 'Blood sugar' }
       ];
+      this._authSubscription = this._afAuth.authState.subscribe((auth: User) => {
+        if (!!auth) {
+          this.auth = auth;
+        }
+      });
     });
   }
 

@@ -6,14 +6,14 @@
         ion-button padding>
         <ion-icon name="create"></ion-icon>
       </button>
-      <button (click)="dismiss()" *ngIf="!editMode" icon-only ion-button padding>
-        <ion-icon name="done-all"></ion-icon>
-      </button>
       <button (click)="save()" [disabled]="foodForm.invalid" *ngIf="editMode" icon-only ion-button padding>
         <ion-icon name="done-all"></ion-icon>
       </button>
       <button (click)="remove()" [disabled]="!food.$key" *ngIf="editMode" icon-only ion-button padding>
         <ion-icon name="trash"></ion-icon>
+      </button>
+      <button (click)="dismiss()" icon-only ion-button padding>
+        <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>

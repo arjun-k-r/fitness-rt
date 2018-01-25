@@ -34,7 +34,7 @@
             <div class="avatar__icon" *ngIf="!userInfo?.photoURL" text-center>
               <ion-icon name="person"></ion-icon>
             </div>
-            <div class="avatar__image" [style.backgroundImage]="'url(' + userInfo?.photoURL + ')'" *ngIf="userInfo?.photoURL"></div>
+            <div class="avatar__image avatar__image--large" [style.backgroundImage]="'url(' + userInfo?.photoURL + ')'" *ngIf="userInfo?.photoURL"></div>
             <button block (click)="changeImage()" ion-button>Change avatar</button>
           </ion-col>
           <ion-col>

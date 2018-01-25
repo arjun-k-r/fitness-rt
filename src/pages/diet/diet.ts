@@ -46,6 +46,7 @@ export class DietPage {
   public dietDate: string = CURRENT_DAY;
   public dietPageSegment: string = 'today';
   public maxDateSelection: string = CURRENT_DAY;
+  public nutrients: string[];
   public trendDays: number = 7;
   constructor(
     private _afAuth: AngularFireAuth,
@@ -122,6 +123,7 @@ export class DietPage {
     this._dietSubscription = this._dietPvd.getDiet$(this._authId, this.dietDate).subscribe((s: Diet) => {
       if (!!s && s['$value'] !== null) {
         this.diet = Object.assign({}, s);
+        this.nutrients = Object.keys(this.diet.nourishment);
       }
     }, (err: FirebaseError) => {
       this._notifyPvd.showError(err.message);

@@ -1,12 +1,13 @@
 <ion-menu [content]="content" persistent="true" swipeEnabled="false" type="reveal">
     <ion-content>
         <div class="menu__user-info">
-            <div class="user-info__image">
+            <div class="user-info__image" *ngIf="!auth?.photoURL">
                 <ion-icon name="person"></ion-icon>
             </div>
+            <div class="avatar__image avatar__image--small" [style.backgroundImage]="'url(' + auth?.photoURL + ')'" *ngIf="auth?.photoURL"></div>
             <div class="user-info__text">
-                <h1>Username</h1>
-                <p>Email</p>
+                <h2>{{ auth?.displayName || 'Username' }}</h2>
+                <p>{{ auth?.email }}</p>
             </div>
         </div>
         <ion-list no-lines>

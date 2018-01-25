@@ -1820,7 +1820,7 @@ export class DietProvider {
   }
 
   private _calculateTransFatRequirement(): number {
-    return 0.001;
+    return 1;
   }
 
   private _calculateTryptophanRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {

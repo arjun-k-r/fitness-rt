@@ -41,10 +41,13 @@
         <button (click)="editMeal(i)" detail-push ion-item *ngFor="let meal of diet.meals; let i = index">
           <ion-icon color="primary" item-start name="restaurant"></ion-icon>
           <h2>{{ meal.hour }}</h2>
-          <ion-icon item-end name="open"></ion-icon>
+          <ion-note item-right>
+            <ion-icon name="arrow-forward"></ion-icon>
+          </ion-note>
         </button>
         <ion-item>
-          <ion-note text-wrap>{{ diet.meals.length }} meals today</ion-note>
+          <h2>Total</h2>
+          <ion-note item-right>{{ diet.meals.length }} meals</ion-note>
         </ion-item>
         <ion-list-header>Nourishment</ion-list-header>
       </ion-list>
@@ -352,7 +355,7 @@
         <ion-item>
           <ion-label>Nutrition data</ion-label>
           <ion-select [(ngModel)]="chartDataSelection" (ionChange)="changeChartData()">
-            <ion-option *ngFor="let nutrientKey of nutrientKeys" [value]="nutrientKey">{{diet?.nourishment[nutrientKey].name}}</ion-option>
+            <ion-option *ngFor="let nutrient of nutrients" [value]="nutrient">{{diet?.nourishment[nutrient].name}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-list-header>Chart</ion-list-header>

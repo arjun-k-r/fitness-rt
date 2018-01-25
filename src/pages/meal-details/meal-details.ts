@@ -222,6 +222,17 @@ export class MealDetailsPage {
     this._dietPvd.calculateRequirement(this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight)
       .then((r: NutritionalValues) => {
         this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
+        this._diet.meals.sort((m1: Meal, m2: Meal) => {
+          if (m1.hour > m2.hour) {
+            return 1;
+          }
+
+          if (m1.hour < m2.hour) {
+            return -1;
+          }
+          
+          return 0;
+        });
         this._dietPvd.saveDiet(this._authId, this._diet, this._trends)
           .then(() => {
             this._notifyPvd.closeLoading();

@@ -42,6 +42,14 @@
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 10rem;
+}
+
+.avatar__image--small {
+    height: 13rem;
+    width: 13rem;
+}
+
+.avatar__image--large {
     height: 20rem;
     width: 20rem;
 }
@@ -191,8 +199,10 @@ hr {
 .menu__user-info {
     align-items: center;
     display: flex;
-    height: 200px;
-    justify-content: space-around;
+    flex-flow: row wrap;
+    height: 250px;
+    justify-content: center;
+    padding: 2rem;
     width: 100%;
     ion-icon {
         font-size: 72px;

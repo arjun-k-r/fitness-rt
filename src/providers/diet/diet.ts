@@ -2272,12 +2272,12 @@ export class DietProvider {
     }
   }
 
-  public calculateNourishment(foods: (Food | Meal)[]): NutritionalValues {
+  public calculateNourishment(foods: (Food | Meal)[], withQuantities?: boolean): NutritionalValues {
     const nourishment: NutritionalValues = new NutritionalValues();
     foods.forEach((f: Food | Meal) => {
       for (let key in nourishment) {
         if (key in f.nourishment) {
-          nourishment[key].value += +f.nourishment[key].value * +f.quantity;
+          nourishment[key].value += +f.nourishment[key].value * (withQuantities ? +f.quantity / 100 : 1);
         }
       }
     });
@@ -2288,7 +2288,7 @@ export class DietProvider {
   public calculateNourishmentFromRequirement(current: NutritionalValues, required: NutritionalValues): NutritionalValues {
     const nourishment: NutritionalValues = new NutritionalValues();
     for (let key in required) {
-      nourishment[key].value = Math.round((current[key].value * 100) / (required[key].value || 1));
+      nourishment[key].value = Math.round((current[key].value * 100) / required[key].value);
     }
 
     return nourishment;
@@ -2303,11 +2303,11 @@ export class DietProvider {
     pregnant: boolean,
     weight: number
   ): Promise<NutritionalValues> {
-    const energyConsumption = 0;
+    const energyConsumption = bmr;
     const intenseExercise = false;
     return new Promise((resolve, rejcet) => {
       resolve(new NutritionalValues(
-        energyConsumption + bmr,
+        energyConsumption,
         this._calculateWater(intenseExercise, weight),
         this._calculateProteinRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
         this._calculateCarbRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),

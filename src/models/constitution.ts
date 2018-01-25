@@ -63,6 +63,7 @@ export class Constitution {
     public vata: Dosha = new Dosha(),
     public pitta: Dosha = new Dosha(),
     public kapha: Dosha = new Dosha(),
-    public dominantDosha: string = ''
+    public dominantDosha: string = '',
+    public bodyType: string = ''
   ) {}
 }

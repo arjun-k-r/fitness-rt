@@ -1,6 +1,9 @@
 // Angular
 import { Component } from '@angular/core';
 
+// Rxjs
+import { Subscription } from 'rxjs/Subscription';
+
 // Ionic
 import {
   ActionSheetController,
@@ -14,6 +17,9 @@ import {
 
 // Firebase
 import { FirebaseError } from 'firebase/app';
+
+// Third-party
+import * as moment from 'moment';
 
 // Models
 import { Diet, Food, Meal, NutritionalValues, UserProfile } from '../../models';
@@ -33,6 +39,8 @@ export class MealDetailsPage {
   private _diet: Diet;
   private _mealIdx: number;
   private _trends: Diet[];
+  private _userProfile: UserProfile;
+  private _userSubscription: Subscription;
   public meal: Meal;
   constructor(
     private _actionSheetCtrl: ActionSheetController,
@@ -47,9 +55,9 @@ export class MealDetailsPage {
     this._authId = this._params.get('authId');
     this._diet = <Diet>this._params.get('diet');
     this._diet.meals = this._diet.meals || [];
-    this._mealIdx = <number>this._params.get('mealIdx') || this._diet.meals.length;
+    this._mealIdx = this._params.get('mealIdx') === undefined ? this._diet.meals.length : <number>this._params.get('mealIdx');
     this._trends = <Diet[]>this._params.get('trends');
-    this.meal = Object.assign({}, this._diet.meals[this._mealIdx] || new Meal([], new NutritionalValues(), '', 0));
+    this.meal = Object.assign({}, this._diet.meals[this._mealIdx] || new Meal([], new NutritionalValues(), '', 0, moment().format('HH:mm')));
     this.meal.foods = this.meal.foods || [];
   }
 
@@ -86,18 +94,17 @@ export class MealDetailsPage {
   }
 
   private _updateMeal(): void {
-    this.meal.nourishment = this._dietPvd.calculateNourishment(this.meal.foods);
+    this.meal.nourishment = this._dietPvd.calculateNourishment(this.meal.foods, true);
     this.meal.quantity = this.meal.foods.reduce((quantity: number, food: Food) => quantity + food.quantity, 0);
     this._diet.meals = [...this._diet.meals.slice(0, this._mealIdx), this.meal, ...this._diet.meals.slice(this._mealIdx + 1)];
     this._diet.nourishment = this._dietPvd.calculateNourishment(this._diet.meals);
-    this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
-      this._dietPvd.calculateRequirement(u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
-        .then((r: NutritionalValues) => {
-          this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
-        })
-    }, (err: Error) => {
-      this._notifyPvd.showError(err.message);
-    });
+    this._dietPvd.calculateRequirement(this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight)
+      .then((r: NutritionalValues) => {
+        this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
+      })
+      .catch((err: FirebaseError) => {
+        this._notifyPvd.showError(err.message);
+      });
   }
 
   public addFood(): void {
@@ -105,8 +112,12 @@ export class MealDetailsPage {
     foodListModal.present();
     foodListModal.onDidDismiss((foods: (Food | Meal)[]) => {
       if (!!foods && !!foods.length) {
-        let selectedFoods: any = foods.map((f: Food | Meal) => ('ndbno' in f) ? f : (<Meal>f).foods);
-        this.meal.foods = [...this.meal.foods, ...[].concat(...selectedFoods)];
+        if (foods.length === 1 && !('ndbno' in foods[0])) {
+          this.meal = <Meal>Object.assign({}, foods[0]);
+        } else {
+          let selectedFoods: any = foods.map((f: Food | Meal) => ('ndbno' in f) ? f : (<Meal>f).foods);
+          this.meal.foods = [...this.meal.foods, ...[].concat(...selectedFoods)];
+        }
         this._updateMeal();
       }
     });
@@ -137,7 +148,6 @@ export class MealDetailsPage {
               .then(() => {
                 this._notifyPvd.closeLoading();
                 this._notifyPvd.showInfo('Meal added to favorites successfully!');
-                this._navCtrl.pop();
               })
               .catch((err: FirebaseError) => {
                 this._notifyPvd.showError(err.message);
@@ -170,51 +180,74 @@ export class MealDetailsPage {
     }).present();
   }
 
+  public removeFavoriteMeal(): void {
+    this._dietPvd.removeFavoriteMeal(this._authId, this.meal)
+      .then(() => {
+        this._notifyPvd.closeLoading();
+        this._notifyPvd.showInfo('Meal removed from favorites successfully!');
+        delete this.meal.name;
+      })
+      .catch((err: FirebaseError) => {
+        this._notifyPvd.showError(err.message);
+      });
+  }
+
   public removeMeal(): void {
     this._notifyPvd.showLoading();
     this._diet.meals = [...this._diet.meals.slice(0, this._mealIdx), ...this._diet.meals.slice(this._mealIdx + 1)];
     this._diet.nourishment = this._dietPvd.calculateNourishment(this._diet.meals);
-    this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
-      this._dietPvd.calculateRequirement(u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
-        .then((r: NutritionalValues) => {
-          this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
-          this._dietPvd.saveDiet(this._authId, this._diet, this._trends)
-            .then(() => {
-              this._notifyPvd.closeLoading();
-              this._notifyPvd.showInfo('Meal removed successfully!');
-              this._navCtrl.pop();
-            })
-            .catch((err: FirebaseError) => {
-              this._notifyPvd.showError(err.message);
-            });
-        })
-    }, (err: Error) => {
-      this._notifyPvd.showError(err.message);
-    });
+    this._dietPvd.calculateRequirement(this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight)
+      .then((r: NutritionalValues) => {
+        this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
+        this._dietPvd.saveDiet(this._authId, this._diet, this._trends)
+          .then(() => {
+            this._notifyPvd.closeLoading();
+            this._notifyPvd.showInfo('Meal removed successfully!');
+            this._navCtrl.pop();
+          })
+          .catch((err: FirebaseError) => {
+            this._notifyPvd.showError(err.message);
+          });
+      })
+      .catch((err: FirebaseError) => {
+        this._notifyPvd.showError(err.message);
+      });
   }
 
   public saveMeal(): void {
     this._notifyPvd.showLoading();
-    this.meal.nourishment = this._dietPvd.calculateNourishment(this.meal.foods);
-    this.meal.quantity = this.meal.foods.reduce((quantity: number, food: Food) => quantity + food.quantity, 0);
-    this._diet.meals = [...this._diet.meals.slice(0, this._mealIdx), this.meal, ...this._diet.meals.slice(this._mealIdx + 1)];
-    this._diet.nourishment = this._dietPvd.calculateNourishment(this._diet.meals);
-    this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
-      this._dietPvd.calculateRequirement(u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
-        .then((r: NutritionalValues) => {
-          this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
-          this._dietPvd.saveDiet(this._authId, this._diet, this._trends)
-            .then(() => {
-              this._notifyPvd.closeLoading();
-              this._notifyPvd.showInfo('Diet saved successfully!');
-              this._navCtrl.pop();
-            })
-            .catch((err: FirebaseError) => {
-              this._notifyPvd.showError(err.message);
-            })
-        })
-    }, (err: Error) => {
-      this._notifyPvd.showError(err.message);
+    if (!this.meal.name) {
+      delete this.meal.name;
+    }
+    this._dietPvd.calculateRequirement(this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight)
+      .then((r: NutritionalValues) => {
+        this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
+        this._dietPvd.saveDiet(this._authId, this._diet, this._trends)
+          .then(() => {
+            this._notifyPvd.closeLoading();
+            this._notifyPvd.showInfo('Diet saved successfully!');
+            this._navCtrl.pop();
+          })
+          .catch((err: FirebaseError) => {
+            this._notifyPvd.showError(err.message);
+          })
+      })
+      .catch((err: FirebaseError) => {
+        this._notifyPvd.showError(err.message);
+      });
+  }
+
+  public viewFoodGuidelines(): void {
+    this._navCtrl.push('food-guidelines', { constitution: this._userProfile.constitution })
+  }
+
+  ionViewWillEnter(): void {
+    this._userSubscription = this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
+      this._userProfile = u;
     });
+  }
+
+  ionViewWillLeave(): void {
+
   }
 }

@@ -106,7 +106,7 @@ export class DietPage {
   }
 
   public editMeal(idx: number): void {
-    this._navCtrl.push('meal-edit', {
+    this._navCtrl.push('meal-details', {
       authId: this._authId,
       id: idx + 1,
       mealIdx: idx,

@@ -69,7 +69,7 @@ export class FoodListPage {
     });
   }
 
-  public _selectFood(food: Food | Meal, checkBox: HTMLInputElement, idx: number): void {
+  private _selectFood(food: Food | Meal, checkBox: HTMLInputElement, idx: number): void {
     if (idx === -1 || checkBox.checked === true) {
       this._alertCtrl.create({
         title: 'Quantity',
@@ -234,6 +234,15 @@ export class FoodListPage {
     setTimeout(() => ev.complete(), 1000);
   }
 
+  public selectMeal(meal: Meal): void {
+    const idx: number = this.selectedFoods.indexOf(meal);
+    if (idx === -1) {
+      this.selectedFoods = [...this.selectedFoods, meal];
+    } else {
+      this.selectedFoods = [...this.selectedFoods.slice(0, idx), ...this.selectedFoods.slice(idx + 1)];
+    }
+  }
+
   public showFilter(): void {
     this._actionSheetCtrl.create({
       title: 'Food list options',
@@ -256,7 +265,7 @@ export class FoodListPage {
     }).present();
   }
 
-  public showOptions(food: Food | Meal, checkBox: HTMLInputElement): void {
+  public showOptions(food: Food, checkBox: HTMLInputElement): void {
     const idx: number = this.selectedFoods.indexOf(food);
     if (idx !== -1) {
       checkBox.checked = true;
@@ -264,7 +273,7 @@ export class FoodListPage {
     this._actionSheetCtrl.create({
       title: 'What to do with this food?',
       buttons: [
-        ('ndbno' in food) && {
+        {
           text: 'View details',
           handler: () => {
             if (idx === -1) {

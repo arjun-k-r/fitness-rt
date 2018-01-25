@@ -84,6 +84,7 @@ export class ConstitutionQuestionairePage {
 
     const maxPoints: number = Math.max(totalVataPoints, totalPittaPoints, totalKaphaPoints);
     this.constitution.dominantDosha = maxPoints === totalVataPoints ? 'Vata' : maxPoints === totalPittaPoints ? 'Pitta' : 'Kapha';
+    this.constitution.bodyType = this.constitution.dominantDosha === 'Vata' ? 'Ectomorph' : this.constitution.dominantDosha === 'Pitta' ? 'Mezomorph' : 'Endomorph';
 
     this._userPvd.saveConstitution(this._params.get('authId'), this.constitution)
       .then(() => {

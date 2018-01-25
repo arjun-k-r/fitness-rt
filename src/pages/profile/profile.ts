@@ -11,7 +11,6 @@ import {
   AlertController,
   IonicPage,
   NavController,
-  NavParams,
   Toast,
   ToastController
 } from 'ionic-angular';
@@ -69,7 +68,6 @@ export class ProfilePage {
     private _navCtrl: NavController,
     private _notifyPvd: NotificationProvider,
     private _picPvd: PictureProvider,
-    private _params: NavParams,
     private _toastCtrl: ToastController,
     private _userPvd: UserProfileProvider
   ) {

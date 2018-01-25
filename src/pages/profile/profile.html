@@ -78,7 +78,12 @@
           </div>
           <ion-list-header>Constitution</ion-list-header>
           <ion-item>
-            <h2 ion-text color="primary">{{ userProfile.constitution.dominantDosha }}</h2>
+            <h2>Dominant dosha</h2>
+            <p item-content>{{ userProfile.constitution.dominantDosha }}</p>
+          </ion-item>
+          <ion-item>
+            <h2>Body type</h2>
+            <p item-content>{{ userProfile.constitution.bodyType }}</p>
           </ion-item>
           <ion-list-header>Physical constitution</ion-list-header>
           <ion-item>

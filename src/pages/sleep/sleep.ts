@@ -120,14 +120,17 @@ export class SleepPage {
   }
 
   public getSleep(): void {
+    this._notifyPvd.showLoading();
     if (this._sleepSubscription) {
       this._sleepSubscription.unsubscribe();
     }
     this._sleepSubscription = this._sleepPvd.getSleep$(this._authId, this.sleepDate).subscribe((s: Sleep) => {
       if (!!s && s['$value'] !== null) {
         this.sleep = Object.assign({}, s);
+        this._notifyPvd.closeLoading();
       }
     }, (err: FirebaseError) => {
+      this._notifyPvd.closeLoading();
       this._notifyPvd.showError(err.message);
     });
   }

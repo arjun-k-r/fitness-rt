@@ -117,6 +117,7 @@ export class DietPage {
   }
 
   public getDiet(): void {
+    this._notifyPvd.showLoading();
     if (this._dietSubscription) {
       this._dietSubscription.unsubscribe();
     }
@@ -124,8 +125,10 @@ export class DietPage {
       if (!!s && s['$value'] !== null) {
         this.diet = Object.assign({}, s);
         this.nutrients = Object.keys(this.diet.nourishment);
+        this._notifyPvd.closeLoading();
       }
     }, (err: FirebaseError) => {
+      this._notifyPvd.closeLoading();
       this._notifyPvd.showError(err.message);
     });
   }

@@ -122,6 +122,7 @@ export class ProfilePage {
   }
 
   private _getProfile(): void {
+    this._notifyPvd.showLoading();
     this._userPvd.getUserProfile$(this._authId).subscribe((up: UserProfile) => {
       if (!!up && up['$value'] !== null) {
         this.userProfile = Object.assign({}, up);
@@ -137,9 +138,11 @@ export class ProfilePage {
         this.profileForm.controls['waistMeasurement'].patchValue(this.userProfile.measurements.waist);
         this.profileForm.controls['weightMeasurement'].patchValue(this.userProfile.measurements.weight);
         this._formInit = false;
+        this._notifyPvd.closeLoading();
       }
     }, (err: FirebaseError) => {
       this._notifyPvd.showError(err.message);
+      this._notifyPvd.closeLoading();
     });
   }
 

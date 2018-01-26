@@ -54,7 +54,8 @@ export class Dosha {
     public mind: MentalConstitution = new MentalConstitution(),
     public total: number = 0,
     public bodyInfluence: number = 0,
-    public mindInfluence: number = 0
+    public mindInfluence: number = 0,
+    public totalInfluence: number = 0
   ) {}
 }
 

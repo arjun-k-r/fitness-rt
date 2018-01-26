@@ -81,6 +81,11 @@ export class ConstitutionQuestionairePage {
     const totalVataPoints: number = this.constitution.vata.body.total + this.constitution.vata.mind.total;
     const totalPittaPoints: number = this.constitution.pitta.body.total + this.constitution.pitta.mind.total;
     const totalKaphaPoints: number = this.constitution.kapha.body.total + this.constitution.kapha.mind.total;
+    const totalPoints: number = totalVataPoints + totalPittaPoints + totalKaphaPoints;
+
+    this.constitution.vata.totalInfluence = Math.round(totalVataPoints * 100 / totalPoints);
+    this.constitution.pitta.totalInfluence = Math.round(totalPittaPoints * 100 / totalPoints);
+    this.constitution.kapha.totalInfluence = Math.round(totalKaphaPoints * 100 / totalPoints);
 
     const maxPoints: number = Math.max(totalVataPoints, totalPittaPoints, totalKaphaPoints);
     this.constitution.dominantDosha = maxPoints === totalVataPoints ? 'Vata' : maxPoints === totalPittaPoints ? 'Pitta' : 'Kapha';

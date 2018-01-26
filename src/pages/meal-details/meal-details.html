@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>Meal details</ion-title>
     <ion-buttons end>
-      <button (click)="saveMeal()" [disabled]="!meal.foods.length" ion-button padding>
+      <button (click)="saveMeal()" [disabled]="!meal.foods.length" icon-only ion-button padding>
         <ion-icon name="done-all"></ion-icon>
       </button>
       <button (click)="removeMeal()" icon-only ion-button padding>
@@ -27,7 +27,7 @@
       <ion-datetime displayFormat="HH:mm" [(ngModel)]="meal.hour" pickerFormat="HH mm"></ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-icon color="primary" item-start name="create"></ion-icon>
+      <ion-icon color="primary" item-start name="clipboard"></ion-icon>
       <ion-label fixed>Notes</ion-label>
       <ion-textarea [(ngModel)]="meal.notes" type="text" wrap="hard"></ion-textarea>
     </ion-item>

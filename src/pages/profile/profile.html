@@ -85,31 +85,17 @@
             <h2>Body type</h2>
             <p item-content>{{ userProfile.constitution.bodyType }}</p>
           </ion-item>
-          <ion-list-header>Physical constitution</ion-list-header>
           <ion-item>
             <h2>Vata</h2>
-            <p item-content>{{ userProfile.constitution.vata.bodyInfluence }}%</p>
+            <p item-content>{{ userProfile.constitution.vata.totalInfluence }}%</p>
           </ion-item>
           <ion-item>
             <h2>Pitta</h2>
-            <p item-content>{{ userProfile.constitution.pitta.bodyInfluence }}%</p>
+            <p item-content>{{ userProfile.constitution.pitta.totalInfluence }}%</p>
           </ion-item>
           <ion-item>
             <h2>Kapha</h2>
-            <p item-content>{{ userProfile.constitution.kapha.bodyInfluence }}%</p>
-          </ion-item>
-          <ion-list-header>Mental constitution</ion-list-header>
-          <ion-item>
-            <h2>Vata</h2>
-            <p item-content>{{ userProfile.constitution.vata.mindInfluence }}%</p>
-          </ion-item>
-          <ion-item>
-            <h2>Pitta</h2>
-            <p item-content>{{ userProfile.constitution.pitta.mindInfluence }}%</p>
-          </ion-item>
-          <ion-item>
-            <h2>Kapha</h2>
-            <p item-content>{{ userProfile.constitution.kapha.mindInfluence }}%</p>
+            <p item-content>{{ userProfile.constitution.kapha.totalInfluence }}%</p>
           </ion-item>
           <button (click)="takeConstitutionTest()" ion-item>
             <h2 color="primary" ion-text>Take self-test</h2>

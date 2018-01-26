@@ -54,8 +54,8 @@ export class ProfilePage {
   public chartDataSelection: string = 'bodyFat';
   public chartLabels: string[] = [];
   public chartOpts: any = { responsive: true };
+  public pageSegment: string = 'userInfo';
   public profileForm: FormGroup;
-  public profilePageSegment: string = 'userInfo';
   public trendDays: number = 7;
   public unsavedChanges: boolean = false;
   public userInfo: UserInfo;

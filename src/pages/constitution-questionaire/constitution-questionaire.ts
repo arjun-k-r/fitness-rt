@@ -87,9 +87,33 @@ export class ConstitutionQuestionairePage {
     this.constitution.pitta.totalInfluence = Math.round(totalPittaPoints * 100 / totalPoints);
     this.constitution.kapha.totalInfluence = Math.round(totalKaphaPoints * 100 / totalPoints);
 
-    const maxPoints: number = Math.max(totalVataPoints, totalPittaPoints, totalKaphaPoints);
-    this.constitution.dominantDosha = maxPoints === totalVataPoints ? 'Vata' : maxPoints === totalPittaPoints ? 'Pitta' : 'Kapha';
-    this.constitution.bodyType = this.constitution.dominantDosha === 'Vata' ? 'Ectomorph' : this.constitution.dominantDosha === 'Pitta' ? 'Mezomorph' : 'Endomorph';
+    const maxPoints: number = Math.max(this.constitution.vata.totalInfluence, this.constitution.pitta.totalInfluence, this.constitution.kapha.totalInfluence);
+    if (maxPoints === this.constitution.vata.totalInfluence) {
+      if (this.constitution.vata.totalInfluence - this.constitution.pitta.totalInfluence <= 5 && this.constitution.vata.totalInfluence - this.constitution.kapha.totalInfluence <= 5) {
+        this.constitution.dominantDosha = 'Vata-Pitta-Kapha';
+        this.constitution.bodyType = 'Ectomorph'
+      } else if (this.constitution.vata.totalInfluence - this.constitution.pitta.totalInfluence <= 5) {
+        this.constitution.dominantDosha = 'Vata-Pitta';
+      } else if (this.constitution.vata.totalInfluence - this.constitution.kapha.totalInfluence <= 5) {
+        this.constitution.dominantDosha = 'Vata-Kapha';
+      }
+    } else if (maxPoints === this.constitution.pitta.totalInfluence) {
+      if (this.constitution.pitta.totalInfluence - this.constitution.vata.totalInfluence <= 5 && this.constitution.pitta.totalInfluence - this.constitution.kapha.totalInfluence <= 5) {
+        this.constitution.dominantDosha = 'Vata-Pitta-Kapha';
+      } else if (this.constitution.pitta.totalInfluence - this.constitution.vata.totalInfluence <= 5) {
+        this.constitution.dominantDosha = 'Vata-Pitta';
+      } else if (this.constitution.pitta.totalInfluence - this.constitution.kapha.totalInfluence <= 5) {
+        this.constitution.dominantDosha = 'Pitta-Kapha';
+      }
+    } else if (maxPoints === this.constitution.kapha.totalInfluence) {
+      if (this.constitution.kapha.totalInfluence - this.constitution.vata.totalInfluence <= 5 && this.constitution.kapha.totalInfluence - this.constitution.pitta.totalInfluence <= 5) {
+        this.constitution.dominantDosha = 'Vata-Pitta-Kapha';
+      } else if (this.constitution.kapha.totalInfluence - this.constitution.vata.totalInfluence <= 5) {
+        this.constitution.dominantDosha = 'Vata-Kapha';
+      } else if (this.constitution.kapha.totalInfluence - this.constitution.pitta.totalInfluence <= 5) {
+        this.constitution.dominantDosha = 'Pitta-Kapha';
+      }
+    }
 
     this._userPvd.saveConstitution(this._params.get('authId'), this.constitution)
       .then(() => {

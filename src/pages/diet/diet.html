@@ -11,7 +11,7 @@
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar>
-    <ion-segment [(ngModel)]="dietPageSegment">
+    <ion-segment [(ngModel)]="pageSegment">
       <ion-segment-button value="today">
         Info
       </ion-segment-button>
@@ -24,12 +24,12 @@
 
 
 <ion-content>
-  <ion-fab bottom *ngIf="dietPageSegment === 'today'" right>
+  <ion-fab bottom *ngIf="pageSegment === 'today'" right>
     <button (click)="addMeal()" color="primary" ion-fab>
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
-  <div [ngSwitch]="dietPageSegment">
+  <div [ngSwitch]="pageSegment">
     <div *ngSwitchCase="'today'">
       <ion-list no-lines>
         <ion-item>

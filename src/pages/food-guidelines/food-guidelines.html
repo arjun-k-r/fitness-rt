@@ -2,6 +2,16 @@
   <ion-navbar>
     <ion-title>Food guidelines</ion-title>
   </ion-navbar>
+  <ion-toolbar *ngIf="!singleDosha">
+    <ion-segment [(ngModel)]="pageSegment">
+      <ion-segment-button value="today">
+        Info
+      </ion-segment-button>
+      <ion-segment-button value="trends">
+        Trends
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 

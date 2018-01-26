@@ -14,7 +14,7 @@
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar>
-    <ion-segment [(ngModel)]="profilePageSegment">
+    <ion-segment [(ngModel)]="pageSegment">
       <ion-segment-button value="userInfo">
         Info
       </ion-segment-button>
@@ -26,7 +26,7 @@
 </ion-header>
 
 <ion-content>
-  <div [ngSwitch]="profilePageSegment">
+  <div [ngSwitch]="pageSegment">
     <div *ngSwitchCase="'userInfo'">
       <ion-grid>
         <ion-row align-items-center justify-content-center>
@@ -78,7 +78,7 @@
           </div>
           <ion-list-header>Constitution</ion-list-header>
           <ion-item>
-            <h2>Dominant dosha</h2>
+            <h2>Dominant dosha(s)</h2>
             <p item-content>{{ userProfile.constitution.dominantDosha }}</p>
           </ion-item>
           <ion-item>

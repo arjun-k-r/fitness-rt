@@ -29,7 +29,7 @@
     <ion-item>
       <ion-icon color="primary" item-start name="clipboard"></ion-icon>
       <ion-label fixed>Notes</ion-label>
-      <ion-textarea [(ngModel)]="meal.notes" type="text" wrap="hard"></ion-textarea>
+      <ion-textarea [(ngModel)]="meal.notes" placeholder="i.e. I felt full of energy after this meal" type="text" wrap="hard"></ion-textarea>
     </ion-item>
     <button *ngIf="!meal.name" (click)="addToFavorites()" ion-item>
       <ion-icon color="primary" item-start name="heart"></ion-icon>
@@ -55,7 +55,7 @@
     </button>
     <ion-list-header>Foods</ion-list-header>
     <button (click)="changeFood(i)" ion-item *ngFor="let food of meal.foods; let i = index">
-      <ion-icon color="primary" item-start name="create"></ion-icon>
+      <ion-icon color="primary" item-start name="nutrition"></ion-icon>
       <h2 text-wrap>{{ food.name }}</h2>
       <p item-content>{{ food.quantity }} g</p>
     </button>

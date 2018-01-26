@@ -77,7 +77,7 @@ export class FoodListPage {
         inputs: [
           {
             name: 'quantity',
-            placeholder: `${food.quantity.toString()} g`,
+            placeholder: `${food.quantity.toString()}`,
             type: 'number'
           }
         ],
@@ -238,10 +238,41 @@ export class FoodListPage {
     setTimeout(() => ev.complete(), 1000);
   }
 
-  public selectMeal(meal: Meal): void {
+  public selectMeal(meal: Meal, checkBox: HTMLInputElement): void {
     const idx: number = this.selectedFoods.indexOf(meal);
-    if (idx === -1) {
-      this.selectedFoods = [...this.selectedFoods, meal];
+    if (idx === -1 || !!checkBox.checked) {
+      this._alertCtrl.create({
+        title: 'Servings',
+        subTitle: `How much ${meal.name} do you want to eat?`,
+        inputs: [
+          {
+            name: 'servings',
+            type: 'number'
+          }
+        ],
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              if (idx === -1) {
+                checkBox.checked = false;
+              }
+            }
+          },
+          {
+            text: 'Done',
+            handler: (data: { servings: number }) => {
+              meal.servings = +data.servings;
+              if (idx === -1) {
+                this.selectedFoods = [...this.selectedFoods, meal];
+              } else {
+                this.selectedFoods = [...this.selectedFoods.slice(0, idx), meal, ...this.selectedFoods.slice(idx + 1)];
+              }
+            }
+          }
+        ]
+      }).present();
     } else {
       this.selectedFoods = [...this.selectedFoods.slice(0, idx), ...this.selectedFoods.slice(idx + 1)];
     }

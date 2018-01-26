@@ -57,7 +57,7 @@ export class MealDetailsPage {
     this._diet.meals = this._diet.meals || [];
     this._mealIdx = this._params.get('mealIdx') === undefined ? this._diet.meals.length : <number>this._params.get('mealIdx');
     this._trends = <Diet[]>this._params.get('trends');
-    this.meal = Object.assign({}, this._diet.meals[this._mealIdx] || new Meal([], new NutritionalValues(), '', 0, moment().format('HH:mm')));
+    this.meal = Object.assign({}, this._diet.meals[this._mealIdx] || new Meal([], new NutritionalValues(), '', 0, 0, moment().format('HH:mm')));
     this.meal.foods = this.meal.foods || [];
   }
 
@@ -114,8 +114,14 @@ export class MealDetailsPage {
       if (!!foods && !!foods.length) {
         if (foods.length === 1 && !('ndbno' in foods[0])) {
           this.meal = <Meal>Object.assign({}, foods[0]);
+          this.meal['$key'] = foods[0]['$key'];
+          this.meal.foods.forEach((f: Food) => {
+            f.quantity = f.quantity * this.meal.servings;
+          });
         } else {
-          let selectedFoods: any = foods.map((f: Food | Meal) => ('ndbno' in f) ? f : (<Meal>f).foods);
+          let selectedFoods: any = foods.map((f: Food | Meal) => ('ndbno' in f) ? f : (<Meal>f).foods.forEach((f: Food) => {
+            f.quantity = f.quantity * this.meal.servings;
+          }));
           this.meal.foods = [...this.meal.foods, ...[].concat(...selectedFoods)];
         }
         this._updateMeal();
@@ -230,7 +236,7 @@ export class MealDetailsPage {
           if (m1.hour < m2.hour) {
             return -1;
           }
-          
+
           return 0;
         });
         this._dietPvd.saveDiet(this._authId, this._diet, this._trends)
@@ -246,6 +252,10 @@ export class MealDetailsPage {
       .catch((err: FirebaseError) => {
         this._notifyPvd.showError(err.message);
       });
+  }
+
+  public takeHungerTest(): void {
+    this._navCtrl.push('hunger-questionaire', { constitution: this._userProfile.constitution })
   }
 
   public viewFoodGuidelines(): void {

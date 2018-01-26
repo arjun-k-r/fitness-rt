@@ -7,7 +7,8 @@ export class Meal {
         public foods: Food[],
         public nourishment: NutritionalValues,
         public notes: string,
-        public quantity: number = 0,
+        public quantity: number,
+        public servings: number,
         public hour?: string,
         public name?: string,
     ) { }

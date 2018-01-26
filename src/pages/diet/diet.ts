@@ -44,9 +44,9 @@ export class DietPage {
   public chartOpts: any = { responsive: true };
   public diet: Diet;
   public dietDate: string = CURRENT_DAY;
-  public dietPageSegment: string = 'today';
   public maxDateSelection: string = CURRENT_DAY;
   public nutrients: string[];
+  public pageSegment: string = 'today';
   public trendDays: number = 7;
   constructor(
     private _afAuth: AngularFireAuth,

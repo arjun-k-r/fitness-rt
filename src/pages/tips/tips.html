@@ -3,7 +3,7 @@
     <ion-title>Tips</ion-title>
   </ion-navbar>
   <ion-toolbar>
-    <ion-segment [(ngModel)]="tipsPageSegment">
+    <ion-segment [(ngModel)]="pageSegment">
       <ion-segment-button value="vata">
         Vata
       </ion-segment-button>
@@ -18,7 +18,7 @@
 </ion-header>
 
 
-<ion-content  class="info" [ngSwitch]="tipsPageSegment" padding>
+<ion-content  class="info" [ngSwitch]="pageSegment" padding>
   <div *ngSwitchCase="'vata'">
     <h2>General tips</h2>
     <p>The Vatas find it very difficult to maintain regular habits, that is, to eat and sleep at regular times. But this is the most

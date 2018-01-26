@@ -148,6 +148,18 @@ export class DietProvider {
 
   private _calculateCarbRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
     switch (constitution) {
+      case 'Vata-Pitta-Kapha':
+        return (intenseExercise ? 0.5 : 0.4) * energyConsumption / 4;
+
+      case 'Vata-Pitta':
+        return (intenseExercise ? 0.6 : 0.5) * energyConsumption / 4;
+
+      case 'Pitta-Kapha':
+        return (intenseExercise ? 0.4 : 0.3) * energyConsumption / 4;
+
+      case 'Vata-Kapha':
+        return (intenseExercise ? 0.5 : 0.4) * energyConsumption / 4;
+
       case 'Kapha':
         return (intenseExercise ? 0.3 : 0.2) * energyConsumption / 4;
 
@@ -447,6 +459,18 @@ export class DietProvider {
 
   private _calculateFatRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
     switch (constitution) {
+      case 'Vata-Pitta-Kapha':
+        return (intenseExercise ? 0.18 : 0.33) * energyConsumption / 4;
+
+      case 'Vata-Pitta':
+        return (intenseExercise ? 0.15 : 0.3) * energyConsumption / 4;
+
+      case 'Pitta-Kapha':
+        return (intenseExercise ? 0.22 : 0.37) * energyConsumption / 4;
+
+      case 'Vata-Kapha':
+        return (intenseExercise ? 0.17 : 0.32) * energyConsumption / 4;
+
       case 'Kapha':
         return (intenseExercise ? 0.25 : 0.4) * energyConsumption / 4;
 
@@ -1460,6 +1484,18 @@ export class DietProvider {
 
   private _calculateProteinRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
     switch (constitution) {
+      case 'Vata-Pitta-Kapha':
+        return (intenseExercise ? 0.32 : 0.27) * energyConsumption / 4;
+
+      case 'Vata-Pitta':
+        return (intenseExercise ? 0.25 : 0.2) * energyConsumption / 4;
+
+      case 'Pitta-Kapha':
+        return (intenseExercise ? 0.38 : 0.33) * energyConsumption / 4;
+
+      case 'Vata-Kapha':
+        return (intenseExercise ? 0.33 : 0.28) * energyConsumption / 4;
+
       case 'Kapha':
         return (intenseExercise ? 0.45 : 0.4) * energyConsumption / 4;
 
@@ -2385,6 +2421,7 @@ export class DietProvider {
   }
 
   public removeFavoriteMeal(authId: string, meal: Meal): Promise<void> {
+    console.log(meal);
     return this._db.list(`/${authId}/meals/`).remove(meal['$key'])
   }
 

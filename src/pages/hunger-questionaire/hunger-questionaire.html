@@ -1,0 +1,173 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Hunger vs. appetite questionaire</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div padding>
+    <p>
+      <strong>Hunger</strong> is a
+      <strong>physiologic nonspecific drive for ANY food</strong> that occurs when the body senses that we need to eat.
+      <strong>Appetite</strong>, on the other hande. is a
+      <strong>psychological desire to consume SPECIFIC foods</strong>. It is aroused when
+      <strong>environmental cues</strong> (i.e. time, place, smell, sight, emotions, thoughts, etc.).</p>
+    <p>Nowadays, people rarely experience true hunger and commonly experience appetite (cravings) in the absence of hunger which
+      prevents them from making healthy choices.</p>
+    <p>Try to listen to your body and answer as honest as you can:</p>
+  </div>
+  <form [formGroup]="hungerForm" (ngSubmit)="checkHunger()" no-validate>
+    <ion-list formControlName="mealTime" no-lines radio-group>
+      <ion-list-header>It's the time of the day when I usually eat</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes">Yes</ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no">No</ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="mealPlace" no-lines radio-group>
+      <ion-list-header>I am at the location I usually eat</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes">Yes</ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no">No</ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="foodSight" no-lines radio-group>
+      <ion-list-header>I recently saw food</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes">Yes</ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no">No</ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="foodSmell" no-lines radio-group>
+      <ion-list-header>I recently felt the smell of food</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes">Yes</ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no">No</ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="fatigue" no-lines radio-group>
+      <ion-list-header>I am tired</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes">Yes</ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no">No</ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="stress" no-lines radio-group>
+      <ion-list-header>I am stressed</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes">Yes</ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no">No</ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="sadness" no-lines radio-group>
+      <ion-list-header>I am sad or feeling lonely</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes">Yes</ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no">No</ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="boredom" no-lines radio-group>
+      <ion-list-header>I am bored</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes">Yes</ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no">No</ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="excitement" no-lines radio-group>
+      <ion-list-header>I am excited (angry or happy)</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes">Yes</ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no">No</ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="occasion" no-lines radio-group>
+      <ion-list-header>It is a special ocasion or people around are eating</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes">Yes</ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no">No</ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="earlyEat" no-lines radio-group>
+      <ion-list-header>I ate less than 3 hours ago</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes">Yes</ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no">No</ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="specificFood" no-lines radio-group>
+      <ion-list-header>I feel like eating something specific (craving)</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes">Yes</ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no">No</ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="mealWaiting" no-lines radio-group>
+      <ion-list-header>I can wait for more than 15 minutes without eating</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes">Yes</ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no">No</ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-item>
+      <ion-label>How would you rate your hunger from 1 to 10?</ion-label>
+      <ion-range max="10" min="1" formControlName="hungerRating" snaps="true" step="1">
+        <p range-left small>0</p>
+        <p range-right>10</p>
+      </ion-range>
+    </ion-item>
+    <button block color="primary" [disabled]="hungerForm.invalid" ion-button type="submit">Check hunger</button>
+  </form>
+</ion-content>

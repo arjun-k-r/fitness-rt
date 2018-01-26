@@ -43,9 +43,9 @@ export class SleepPage {
   public chartLabels: string[] = [];
   public chartOpts: any = { responsive: true };
   public maxDateSelection: string = CURRENT_DAY;
+  public pageSegment: string = 'today';
   public sleep: Sleep;
   public sleepDate: string = CURRENT_DAY;
-  public sleepPageSegment: string = 'today';
   public trendDays: number = 7;
   public unsavedChanges: boolean = false;
   constructor(

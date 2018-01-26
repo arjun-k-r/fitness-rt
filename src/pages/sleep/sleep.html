@@ -14,7 +14,7 @@
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar>
-    <ion-segment [(ngModel)]="sleepPageSegment">
+    <ion-segment [(ngModel)]="pageSegment">
       <ion-segment-button value="today">
         Info
       </ion-segment-button>
@@ -27,7 +27,7 @@
 
 
 <ion-content>
-  <div [ngSwitch]="sleepPageSegment">
+  <div [ngSwitch]="pageSegment">
     <div *ngSwitchCase="'today'">
       <ion-list>
         <ion-item>

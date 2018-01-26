@@ -4,11 +4,14 @@
   </ion-navbar>
   <ion-toolbar *ngIf="!singleDosha">
     <ion-segment [(ngModel)]="pageSegment">
-      <ion-segment-button value="today">
-        Info
+      <ion-segment-button *ngIf="constitution.dominantDosha.includes('Vata')" value="Vata">
+        Vata
       </ion-segment-button>
-      <ion-segment-button value="trends">
-        Trends
+      <ion-segment-button *ngIf="constitution.dominantDosha.includes('Pitta')" value="Pitta">
+        Pitta
+      </ion-segment-button>
+      <ion-segment-button *ngIf="constitution.dominantDosha.includes('Kapha')" value="Kapha">
+        Kapha
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -16,12 +19,30 @@
 
 
 <ion-content class="info" padding>
-  <div *ngIf="constitution.dominantDosha === 'Vata'">
-    <h2>General tips</h2>
-    <p>Choose to eat warm, moist, cooked, and generally well spiced foods, instead of cold, frozen, dry, and raw.</p>
-    <p>Focus on the sweet, sour, and salty tastes and limit the astrigent, bitter, and pungent tastes.</p>
-    <p>Eat regular frequent small meals.</p>
-    <h2>Foods to favor</h2>
-    <h3>Vegetables</h3>
+  <div [ngSwitch]="pageSegment">
+    <div *ngSwitchCase="'Vata'">
+      <h2>General tips</h2>
+      <p>Choose to eat warm, moist, cooked, and generally well spiced foods, instead of cold, frozen, dry, and raw.</p>
+      <p>Focus on the sweet, sour, and salty tastes and limit the astrigent, bitter, and pungent tastes.</p>
+      <p>Eat regular frequent small meals.</p>
+      <h2>Foods to favor</h2>
+      <h3>Vegetables</h3>
+    </div>
+    <div *ngSwitchCase="'Pitta'">
+      <h2>General tips</h2>
+      <p>Choose to eat warm, moist, cooked, and generally well spiced foods, instead of cold, frozen, dry, and raw.</p>
+      <p>Focus on the sweet, sour, and salty tastes and limit the astrigent, bitter, and pungent tastes.</p>
+      <p>Eat regular frequent small meals.</p>
+      <h2>Foods to favor</h2>
+      <h3>Vegetables</h3>
+    </div>
+    <div *ngSwitchCase="'Kapha'">
+      <h2>General tips</h2>
+      <p>Choose to eat warm, moist, cooked, and generally well spiced foods, instead of cold, frozen, dry, and raw.</p>
+      <p>Focus on the sweet, sour, and salty tastes and limit the astrigent, bitter, and pungent tastes.</p>
+      <p>Eat regular frequent small meals.</p>
+      <h2>Foods to favor</h2>
+      <h3>Vegetables</h3>
+    </div>
   </div>
 </ion-content>

@@ -9,7 +9,9 @@ import {
 
 import { Constitution } from '../../models';
 
-@IonicPage()
+@IonicPage({
+  name: 'food-guidelines'
+})
 @Component({
   templateUrl: 'food-guidelines.html',
 })
@@ -19,6 +21,8 @@ export class FoodGuidelinesPage {
   public singleDosha: boolean;
   constructor(private _params: NavParams) {
     this.constitution = <Constitution>this._params.get('constitution');
+    this.pageSegment = this.constitution.dominantDosha;
+    console.log(this.pageSegment)
     if (this.constitution.dominantDosha === 'Vata' || this.constitution.dominantDosha === 'Pitta'  || this.constitution.dominantDosha === 'Kapha' ) {
       this.singleDosha = true;
     }

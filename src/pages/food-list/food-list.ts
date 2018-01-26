@@ -176,6 +176,10 @@ export class FoodListPage {
     this.foodSearchQuery = '';
   }
 
+  public dismiss(): void {
+    this._viewCtrl.dismiss();
+  }
+
   public doneSelecting(): void {
     this._viewCtrl.dismiss(this.selectedFoods);
   }

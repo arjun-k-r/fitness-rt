@@ -5,7 +5,7 @@
       <button (click)="showFilter()" icon-only ion-button padding-right>
         <ion-icon name="funnel"></ion-icon>
       </button>
-      <button (click)="doneSelecting()" icon-only ion-button padding-right>
+      <button (click)="doneSelecting()" [disabled]="!selectedFoods.length" icon-only ion-button padding-right>
         <ion-icon name="done-all"></ion-icon>
       </button>
       <button (click)="dismiss()" icon-only ion-button padding-right>

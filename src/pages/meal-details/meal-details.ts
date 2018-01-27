@@ -193,6 +193,7 @@ export class MealDetailsPage {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showInfo('Meal removed from favorites successfully!');
         delete this.meal.name;
+        delete this.meal.key;
       })
       .catch((err: FirebaseError) => {
         this._notifyPvd.showError(err.message);

@@ -11,6 +11,7 @@ export class Meal {
         public servings: number,
         public hour?: string,
         public name?: string,
+        public key?: string
     ) { }
 }
 

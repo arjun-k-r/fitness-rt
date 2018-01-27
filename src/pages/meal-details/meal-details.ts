@@ -114,7 +114,7 @@ export class MealDetailsPage {
       if (!!foods && !!foods.length) {
         if (foods.length === 1 && !('ndbno' in foods[0])) {
           this.meal = <Meal>Object.assign({}, foods[0]);
-          this.meal['$key'] = foods[0]['$key'];
+          this.meal.key = foods[0]['$key'];
           this.meal.foods.forEach((f: Food) => {
             f.quantity = f.quantity * this.meal.servings;
           });
@@ -151,9 +151,10 @@ export class MealDetailsPage {
             this.meal.name = data.name;
             this._notifyPvd.showLoading();
             this._dietPvd.saveFavoriteMeal(this._authId, this.meal)
-              .then(() => {
+              .then((key: string) => {
                 this._notifyPvd.closeLoading();
                 this._notifyPvd.showInfo('Meal added to favorites successfully!');
+                this.meal.key = key;
               })
               .catch((err: FirebaseError) => {
                 this._notifyPvd.showError(err.message);

@@ -2421,20 +2421,17 @@ export class DietProvider {
   }
 
   public removeFavoriteMeal(authId: string, meal: Meal): Promise<void> {
-    console.log(meal);
-    return this._db.list(`/${authId}/meals/`).remove(meal['$key'])
+    return this._db.list(`/${authId}/meals/`).remove(meal.key)
   }
 
   public saveFavoriteMeal(authId: string, meal: Meal): Promise<{}> {
     return new Promise((resolve, reject) => {
-      if ('$key' in meal) {
-        this._db.list(`/${authId}/meals/`).update(meal['$key'], meal).then(() => {
+      if ('key' in meal) {
+        this._db.list(`/${authId}/meals/`).update(meal.key, meal).then(() => {
           resolve();
         }).catch((err: FirebaseError) => reject(err));
       } else {
-        this._db.list(`/${authId}/meals/`).push(meal).then(() => {
-          resolve();
-        });
+        resolve(this._db.list(`/${authId}/meals/`).push(meal).key);
       }
     })
   }

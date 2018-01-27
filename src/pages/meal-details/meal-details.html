@@ -31,11 +31,11 @@
       <ion-label fixed>Notes</ion-label>
       <ion-textarea [(ngModel)]="meal.notes" placeholder="i.e. I felt full of energy after this meal" type="text" wrap="hard"></ion-textarea>
     </ion-item>
-    <button *ngIf="!meal.name" (click)="addToFavorites()" ion-item>
+    <button *ngIf="!meal.name && !meal.key" (click)="addToFavorites()" ion-item>
       <ion-icon color="primary" item-start name="heart"></ion-icon>
       <h2>Add to favorites</h2>
     </button>
-    <button *ngIf="meal.name" (click)="removeFavoriteMeal()" ion-item>
+    <button *ngIf="meal.name && meal.key" (click)="removeFavoriteMeal()" ion-item>
       <ion-icon color="warn" item-start name="heart"></ion-icon>
       <h2>Remove from favorites</h2>
     </button>

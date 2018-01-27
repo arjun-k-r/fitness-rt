@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>{{ food.name || 'New food' }}</ion-title>
     <ion-buttons end>
-      <button (click)="editFood()" *ngIf="(food.uploader && food.uploader === authId) && !editMode" icon-only ion-button padding-right>
+      <button (click)="edit()" *ngIf="(food.uploader && food.uploader === authId) && !editMode" icon-only ion-button padding-right>
         <ion-icon name="create"></ion-icon>
       </button>
       <button (click)="save()" [disabled]="foodForm.invalid" *ngIf="editMode" icon-only ion-button padding-right>

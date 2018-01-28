@@ -149,6 +149,7 @@ export class MealDetailsPage {
           text: 'Done',
           handler: (data: { name: string }) => {
             this.meal.name = data.name;
+            delete this.meal.key;
             this._notifyPvd.showLoading();
             this._dietPvd.saveFavoriteMeal(this._authId, this.meal)
               .then((key: string) => {
@@ -226,6 +227,9 @@ export class MealDetailsPage {
     this._notifyPvd.showLoading();
     if (!this.meal.name) {
       delete this.meal.name;
+    }
+    if (!this.meal.key) {
+      delete this.meal.key;
     }
     this._dietPvd.calculateRequirement(this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight)
       .then((r: NutritionalValues) => {

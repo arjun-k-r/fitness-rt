@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
-import { SortByPipe } from './sortBy.pipe';
+import { SortByPipe } from './sortBy';
 
 @NgModule({
   declarations: [

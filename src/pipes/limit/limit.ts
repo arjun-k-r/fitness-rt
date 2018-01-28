@@ -4,10 +4,8 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'limit',
 })
 export class LimitPipe implements PipeTransform {
-  /**
-   * Limits the items
-   */
-  transform(items: Array<any> = [], limit: number = Number.MAX_SAFE_INTEGER) {
+
+  transform(items: any[] = [], limit: number = Number.MAX_SAFE_INTEGER): any[] {
     return (!!items && !!items.length) ? items.filter((item: any, idx: number) => idx <= limit) : [];
   }
 }

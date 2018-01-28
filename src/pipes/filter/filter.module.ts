@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
+
 import { IonicPageModule } from 'ionic-angular';
 
-import { LimitPipe } from './limit.pipe';
+import { FilterPipe } from './filter';
 
 @NgModule({
   declarations: [
-    LimitPipe,
+    FilterPipe,
   ],
   imports: [
-    IonicPageModule.forChild(LimitPipe),
+    IonicPageModule.forChild(FilterPipe),
   ],
   exports: [
-    LimitPipe
+    FilterPipe
   ]
 })
-export class LimitPipeModule {}
+export class FilterPipeModule {}

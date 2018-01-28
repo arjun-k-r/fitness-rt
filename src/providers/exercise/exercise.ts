@@ -1,18 +1,79 @@
+
+// Angular
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the ExerciseProvider provider.
+// Rxjs
+import { Subject } from 'rxjs/Subject';
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
+// Firebase
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
+import { FirebaseError } from 'firebase/app';
+
+// Third-party
+import * as moment from 'moment';
+
+// Models
+import { Activity, ActivityCategory, Exercise } from '../../models';
+
+const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
+
 @Injectable()
 export class ExerciseProvider {
+  private _activities$: FirebaseListObservable<ActivityCategory[]>;
+  private _trendDaysSubject: Subject<any> = new Subject();
+  constructor(
+    private _db: AngularFireDatabase
+  ) {
+    this._activities$ = this._db.list('/activities', {
+      query: {
+        orderByChild: 'name'
+      }
+    });
+  }
 
-  constructor(public http: Http) {
-    console.log('Hello ExerciseProvider Provider');
+  public calculateActivityEnergyBurn(activity: Activity, weight: number): number {
+    return Math.round(activity.met * weight * activity.duration / 60);
+  }
+
+  public changeTrendDays(days: number): void {
+    this._trendDaysSubject.next(days);
+  }
+
+  public getActivities$(): FirebaseListObservable<ActivityCategory[]> {
+    return this._activities$;
+  }
+
+  public getExercise$(authId: string, date?: string): FirebaseObjectObservable<Exercise> {
+    return this._db.object(`/${authId}/exercise/${date || CURRENT_DAY}`);
+  }
+
+  public getTrends$(authId: string, days?: number): FirebaseListObservable<Exercise[]> {
+    setTimeout(() => {
+      this.changeTrendDays(days);
+    });
+    return this._db.list(`/${authId}/trends/exercise/`, {
+      query: {
+        limitToLast: this._trendDaysSubject
+      }
+    });
+  }
+
+  public saveExercise(authId: string, exercise: Exercise, trends: Exercise[]): Promise<{}> {
+    return new Promise((resolve, reject) => {
+      if (!!trends.length) {
+        trends.reverse();
+        if (CURRENT_DAY !== trends[0].date) {
+          this._db.list(`/${authId}/trends/exercise/`).push(exercise);
+        } else {
+          this._db.list(`/${authId}/trends/exercise/`).update(trends[0]['$key'], exercise);
+        }
+      } else {
+        this._db.list(`/${authId}/trends/exercise/`).push(exercise)
+      }
+      this._db.object(`/${authId}/exercise/${exercise.date}`).set(exercise).then(() => {
+        resolve();
+      }).catch((err: FirebaseError) => reject(err));
+    });
   }
 
 }

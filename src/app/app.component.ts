@@ -54,7 +54,7 @@ export class MyApp {
         { component: 'profile', icon: 'person', title: 'Profile' },
         { component: 'sleep', icon: 'moon', title: 'Sleep' },
         { component: 'diet', icon: 'nutrition', title: 'Diet' },
-        // { component: 'exercise', icon: 'walk', title: 'Exercise' },
+        { component: 'exercise', icon: 'walk', title: 'Exercise' },
         // { component: 'recipes', icon: 'restaurant', title: 'Recipes' },
         // { component: 'blood-cholesterol', icon: 'water', title: 'Blood cholesterol' },
         // { component: 'blood-pressure', icon: 'pulse', title: 'Blood pressure' },

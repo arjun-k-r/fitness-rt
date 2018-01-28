@@ -9,7 +9,7 @@ export class FilterPipe implements PipeTransform {
   /**
    * Filters a set of items if they hold, within a property, a set of items (for instance, a recipe must have specific ingredients)
    */
-  transform(items: Array<any> = [], prop: string = '', queryItems: Array<string> = []) {
+  transform(items: any[] = [], prop: string = '', queryItems: string[] = []): any[] {
     if (!!items && !!items.length) {
       if (!!queryItems && !!queryItems.length && !!prop) {
         let foundIt: number;

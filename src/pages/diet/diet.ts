@@ -21,7 +21,7 @@ import * as moment from 'moment';
 import { Diet, ILineChartColors, ILineChartEntry, NutritionalValues } from '../../models';
 
 // Providers
-import { NotificationProvider, DietProvider } from '../../providers';
+import { DietProvider, NotificationProvider } from '../../providers';
 
 const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 

@@ -7,10 +7,8 @@ import { orderBy } from 'lodash';
   name: 'sort',
 })
 export class SortByPipe implements PipeTransform {
-  /**
-   * Sorts items by specific property
-   */
-  transform(items: Array<any> = [], sortBy: string = '', order: string = 'desc') {
+
+  transform(items: any[] = [], sortBy: string = '', order: string = 'desc'): any[] {
     return !!sortBy ? orderBy(items, sortBy, order) : items;
   }
 }

@@ -1,8 +1,7 @@
 [
   {
-    "icon": "if_regular_biking_310309.png",
     "name": "Bicycling",
-    "types": [
+    "activities": [
       {
         "met": 14,
         "name": "mountain, uphill, vigorous"
@@ -78,9 +77,8 @@
     ]
   },
   {
-    "icon": "if_weightlift_309002.png",
     "name": "Conditioning exercise",
-    "types": [
+    "activities": [
       {
         "met": 2.3,
         "name": "activity promoting video game (e.g., Wii Fit), light effort (e.g., balance, yoga)"
@@ -300,9 +298,8 @@
     ]
   },
   {
-    "icon": "if_Dance_Instructor1_2315961.png",
     "name": "Dancing",
-    "types": [
+    "activities": [
       {
         "met": 5,
         "name": "ballet, modern, or jazz, general, rehearsal or class"
@@ -378,9 +375,8 @@
     ]
   },
   {
-    "icon": "if_Hunting_1_753892.png",
     "name": "Fishing & Hunting",
-    "types": [
+    "activities": [
       {
         "met": 3.5,
         "name": "fishing, general"
@@ -512,9 +508,8 @@
     ]
   },
   {
-    "icon": "if_001_Home_183566.png",
     "name": "Home activities",
-    "types": [
+    "activities": [
       {
         "met": 3.3,
         "name": "cleaning, sweeping carpet or floors, general"
@@ -818,9 +813,8 @@
     ]
   },
   {
-    "icon": "if_Setting01_928428.png",
     "name": "Home repair",
-    "types": [
+    "activities": [
       {
         "met": 3,
         "name": "airplane repair"
@@ -968,9 +962,8 @@
     ]
   },
   {
-    "icon": "if_bed_415896.png",
     "name": "Inactivity",
-    "types": [
+    "activities": [
       {
         "met": 1,
         "name": "lying quietly and watching television"
@@ -1038,9 +1031,8 @@
     ]
   },
   {
-    "icon": "if_lawn_mower_1880380.png",
     "name": "Lawn & Garden",
-    "types": [
+    "activities": [
       {
         "met": 3.3,
         "name": "carrying, loading or stacking wood, loading/unloading or carrying lumber, light-to-moderate effort"
@@ -1256,9 +1248,8 @@
     ]
   },
   {
-    "icon": "if_miscellaneous-75_809431.png",
     "name": "Miscellaneous",
-    "types": [
+    "activities": [
       {
         "met": 1.5,
         "name": "board game playing, sitting"
@@ -1370,9 +1361,8 @@
     ]
   },
   {
-    "icon": "if_Music_Band_1_753887.png",
     "name": "Music playing",
-    "types": [
+    "activities": [
       {
         "met": 1.8,
         "name": "accordion, sitting"
@@ -1456,9 +1446,8 @@
     ]
   },
   {
-    "icon": "if_office_1372378.png",
     "name": "Occupation",
-    "types": [
+    "activities": [
       {
         "met": 2.3,
         "name": "active workstation, treadmill desk, walking"
@@ -1946,9 +1935,8 @@
     ]
   },
   {
-    "icon": "if_running_310307.png",
     "name": "Running",
-    "types": [
+    "activities": [
       {
         "met": 6,
         "name": "jog/walk combination (jogging component of less than 10 minutes) (Taylor Code 180)"
@@ -2052,9 +2040,8 @@
     ]
   },
   {
-    "icon": "if_Esthetician_1_753899.png",
     "name": "Self care",
-    "types": [
+    "activities": [
       {
         "met": 2.3,
         "name": "getting ready for bed, general, standing"
@@ -2102,9 +2089,8 @@
     ]
   },
   {
-    "icon": "if_7_759452.png",
     "name": "Sexual activity",
-    "types": [
+    "activities": [
       {
         "met": 2.8,
         "name": "active, vigorous effort"
@@ -2120,9 +2106,8 @@
     ]
   },
   {
-    "icon": "if_Tennis_Courts_2315970.png",
     "name": "Sports",
-    "types": [
+    "activities": [
       {
         "met": 5.5,
         "name": "Alaska Native Games, Eskimo Olympics, general"
@@ -2361,11 +2346,11 @@
       },
       {
         "met": 5.3,
-        "name": "martial arts, different types, slower pace, novice performers, practice"
+        "name": "martial arts, different activities, slower pace, novice performers, practice"
       },
       {
         "met": 10.3,
-        "name": "martial arts, different types, moderate pace (e.g., judo, jujitsu, karate, kick boxing, tae kwan do, tai-bo, Muay Thai boxing)"
+        "name": "martial arts, different activities, moderate pace (e.g., judo, jujitsu, karate, kick boxing, tae kwan do, tai-bo, Muay Thai boxing)"
       },
       {
         "met": 4,
@@ -2610,9 +2595,8 @@
     ]
   },
   {
-    "icon": "if_Aiga_bus_134138.png",
     "name": "Transportation",
-    "types": [
+    "activities": [
       {
         "met": 2.5,
         "name": "automobile or light truck (not a semi) driving"
@@ -2652,9 +2636,8 @@
     ]
   },
   {
-    "icon": "if_walking_309003.png",
     "name": "Walking",
-    "types": [
+    "activities": [
       {
         "met": 7,
         "name": "backpacking (Taylor Code 050)"
@@ -2882,9 +2865,8 @@
     ]
   },
   {
-    "icon": "if_swimming_309010.png",
     "name": "Water activities",
-    "types": [
+    "activities": [
       {
         "met": 2.5,
         "name": "boating, power, driving"
@@ -3096,9 +3078,8 @@
     ]
   },
   {
-    "icon": "if_Snow_Equipment_2315982.png",
     "name": "Winter activities",
-    "types": [
+    "activities": [
       {
         "met": 7.5,
         "name": "dog sledding, mushing "
@@ -3222,9 +3203,8 @@
     ]
   },
   {
-    "icon": "if_Untitled-2-45_536266.png",
     "name": "Religious activities",
-    "types": [
+    "activities": [
       {
         "met": 1.3,
         "name": "sitting in church, in service, attending a ceremony, sitting quietly"
@@ -3324,9 +3304,8 @@
     ]
   },
   {
-    "icon": "if_office_1372378.png",
     "name": "Volunteer activities",
-    "types": [
+    "activities": [
       {
         "met": 1.5,
         "name": "sitting, meeting, general, and/or with talking involved"

@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>Meal details</ion-title>
     <ion-buttons end>
-      <button (click)="saveMeal()" [disabled]="!meal.foods.length" icon-only ion-button padding-right>
+      <button (click)="saveMeal()" [disabled]="!unsavedChanges" icon-only ion-button padding-right>
         <ion-icon name="done-all"></ion-icon>
       </button>
       <button (click)="removeMeal()" icon-only ion-button padding-right>
@@ -24,12 +24,12 @@
     <ion-item>
       <ion-icon color="primary" item-start name="time"></ion-icon>
       <ion-label fixed>Meal time</ion-label>
-      <ion-datetime displayFormat="HH:mm" [(ngModel)]="meal.hour" pickerFormat="HH mm"></ion-datetime>
+      <ion-datetime displayFormat="HH:mm" (ionChange)="changeMade()" [(ngModel)]="meal.hour" pickerFormat="HH mm"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-icon color="primary" item-start name="clipboard"></ion-icon>
       <ion-label fixed>Notes</ion-label>
-      <ion-textarea [(ngModel)]="meal.notes" placeholder="i.e. I felt full of energy after this meal" type="text" wrap="hard"></ion-textarea>
+      <ion-textarea (ionChange)="changeMade()" [(ngModel)]="meal.notes" placeholder="i.e. I felt full of energy after this meal" type="text" wrap="hard"></ion-textarea>
     </ion-item>
     <button *ngIf="!meal.name && !meal.key" (click)="addToFavorites()" ion-item>
       <ion-icon color="primary" item-start name="heart"></ion-icon>

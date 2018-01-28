@@ -9,7 +9,7 @@ export class SearchPipe implements PipeTransform {
   /**
    * Filters items by their name
    */
-  transform(items: Array<{ name: string }> = [], searchQuery: string = '') {
+  transform(items: { name: string }[] = [], searchQuery: string = ''): any[] {
     let match: number = 0,
       tokens: Array<string> = [...searchQuery.split(' ').map((token: string) => token.trim().toLocaleLowerCase())];
 

@@ -42,6 +42,7 @@ export class MealDetailsPage {
   private _userProfile: UserProfile;
   private _userSubscription: Subscription;
   public meal: Meal;
+  public unsavedChanges: boolean = false;
   constructor(
     private _actionSheetCtrl: ActionSheetController,
     private _alertCtrl: AlertController,
@@ -94,11 +95,12 @@ export class MealDetailsPage {
   }
 
   private _updateMeal(): void {
+    this.changeMade();
     this.meal.nourishment = this._dietPvd.calculateNourishment(this.meal.foods, true);
     this.meal.quantity = this.meal.foods.reduce((quantity: number, food: Food) => quantity + food.quantity, 0);
     this._diet.meals = [...this._diet.meals.slice(0, this._mealIdx), this.meal, ...this._diet.meals.slice(this._mealIdx + 1)];
     this._diet.nourishment = this._dietPvd.calculateNourishment(this._diet.meals);
-    this._dietPvd.calculateRequirement(this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight)
+    this._dietPvd.calculateRequirement(this._authId, this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight)
       .then((r: NutritionalValues) => {
         this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
       })
@@ -188,6 +190,10 @@ export class MealDetailsPage {
     }).present();
   }
 
+  public changeMade(): void {
+    this.unsavedChanges = true;
+  }
+
   public removeFavoriteMeal(): void {
     this._dietPvd.removeFavoriteMeal(this._authId, this.meal)
       .then(() => {
@@ -205,7 +211,7 @@ export class MealDetailsPage {
     this._notifyPvd.showLoading();
     this._diet.meals = [...this._diet.meals.slice(0, this._mealIdx), ...this._diet.meals.slice(this._mealIdx + 1)];
     this._diet.nourishment = this._dietPvd.calculateNourishment(this._diet.meals);
-    this._dietPvd.calculateRequirement(this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight)
+    this._dietPvd.calculateRequirement(this._authId, this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight)
       .then((r: NutritionalValues) => {
         this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
         this._dietPvd.saveDiet(this._authId, this._diet, this._trends)
@@ -231,9 +237,10 @@ export class MealDetailsPage {
     if (!this.meal.key) {
       delete this.meal.key;
     }
-    this._dietPvd.calculateRequirement(this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight)
+    this._dietPvd.calculateRequirement(this._authId, this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight)
       .then((r: NutritionalValues) => {
         this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
+        this._diet.meals[this._mealIdx] = this.meal;
         this._diet.meals.sort((m1: Meal, m2: Meal) => {
           if (m1.hour > m2.hour) {
             return 1;
@@ -268,6 +275,34 @@ export class MealDetailsPage {
     this._navCtrl.push('food-guidelines', { constitution: this._userProfile.constitution })
   }
 
+  ionViewCanLEave(): boolean | Promise<{}> {
+    if (!this.unsavedChanges) {
+      return true;
+    }
+    return new Promise((resolve, reject) => {
+      if (this.unsavedChanges) {
+        this._alertCtrl.create({
+          title: 'Unsaved changes',
+          message: 'All your changes will be lost. Are you sure you want to leave?',
+          buttons: [
+            {
+              text: 'No',
+              handler: () => {
+                reject();
+              }
+            },
+            {
+              text: 'Yes',
+              handler: () => {
+                resolve();
+              }
+            }
+          ]
+        });
+      }
+    });
+  }
+
   ionViewWillEnter(): void {
     this._userSubscription = this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
       this._userProfile = u;
@@ -275,6 +310,6 @@ export class MealDetailsPage {
   }
 
   ionViewWillLeave(): void {
-
+    this._userSubscription.unsubscribe();
   }
 }

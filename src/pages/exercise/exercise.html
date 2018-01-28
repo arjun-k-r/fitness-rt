@@ -1,18 +1,87 @@
-<!--
-  Generated template for the ExercisePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Exercise</ion-title>
+    <ion-buttons end>
+      <button clear (click)="save()" [disabled]="!unsavedChanges" icon-only ion-button padding-right>
+        <ion-icon name="done-all"></ion-icon>
+      </button>
+      <button (click)="viewPageInfo()" icon ion-button padding-right>
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="pageSegment">
+      <ion-segment-button value="today">
+        Info
+      </ion-segment-button>
+      <ion-segment-button value="trends">
+        Trends
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-fab bottom *ngIf="pageSegment === 'today'" right>
+    <button (click)="addActivity()" color="primary" ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <div [ngSwitch]="pageSegment">
+    <div *ngSwitchCase="'today'">
+      <ion-list>
+        <ion-item>
+          <ion-label>Date</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DD" (ionChange)="getExercise()" [max]="maxDateSelection" min="2018" [(ngModel)]="exerciseDate"
+            pickerFormat="YYYY-MM-DD"></ion-datetime>
+        </ion-item>
+        <ion-list-header>Activities</ion-list-header>
+        <button (click)="changeActivity(i)" detail-push ion-item *ngFor="let activity of exercise.activities; let i = index">
+          <ion-icon color="primary" item-start name="create"></ion-icon>
+          <h2 text-wrap>{{ activity.name }}</h2>
+          <p>{{ activity.duration }} mins</p>
+          <p item-content>{{ activity.energyBurn }} kcal</p>
+        </button>
+        <ion-item>
+          <h2 text-wrap>Total activities</h2>
+          <p item-content>{{ exercise.activities.length }} activities</p>
+        </ion-item>
+        <ion-list-header>Review</ion-list-header>
+        <ion-item>
+          <h2>Duration</h2>
+          <ion-note item-right>{{ exercise.duration }} mins</ion-note>
+        </ion-item>
+        <ion-item>
+          <h2>Energy burn</h2>
+          <ion-note item-right>{{ exercise.energyBurn }} kcal</ion-note>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div *ngSwitchCase="'trends'">
+      <ion-list no-lines>
+        <ion-list-header>Chart settings</ion-list-header>
+        <ion-item>
+          <ion-label fixed>Trend days</ion-label>
+          <ion-input (ionChange)="changeTrendDays()" [(ngModel)]="trendDays" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Exercise data</ion-label>
+          <ion-select (ionChange)="changeChartData()" [(ngModel)]="chartDataSelection">
+            <ion-option value="duration">Duration</ion-option>
+            <ion-option value="energyBurn">Energy burn</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-list-header>Chart</ion-list-header>
+      </ion-list>
+      <canvas baseChart class="chart" [chartType]="'line'" [colors]="chartColors" [datasets]="chartData" [labels]="chartLabels"
+        [legend]="true" [options]="chartOpts">
+      </canvas>
+    </div>
+  </div>
 
 </ion-content>

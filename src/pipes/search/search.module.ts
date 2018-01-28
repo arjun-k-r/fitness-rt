@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
-
 import { IonicPageModule } from 'ionic-angular';
 
-import { FilterPipe } from './filter.pipe';
+import { SearchPipe } from './search';
 
 @NgModule({
   declarations: [
-    FilterPipe,
+    SearchPipe,
   ],
   imports: [
-    IonicPageModule.forChild(FilterPipe),
+    IonicPageModule.forChild(SearchPipe),
   ],
   exports: [
-    FilterPipe
+    SearchPipe
   ]
 })
-export class FilterPipeModule {}
+export class SearchPipeModule {}

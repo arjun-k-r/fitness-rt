@@ -2356,6 +2356,12 @@ export class DietProvider {
     return nourishment;
   }
 
+  /**
+   * What we eat differs from what we absorb and what our cells use
+   * Nutritional values are in a constant state of degradation
+   * after harvesting/sacrificing (storage, preparation, transportation, light, heat, oxygen, etc.)
+   * The majority of foods, in reality, are nutrient deprived because of overproduction and soil mineral depletion
+   */
   public calculateRequirement(
     authId: string,
     age: number,

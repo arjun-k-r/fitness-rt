@@ -76,7 +76,8 @@ export class ExercisePage {
       [],
       CURRENT_DAY,
       0,
-      0
+      0,
+      ''
     );
   }
 

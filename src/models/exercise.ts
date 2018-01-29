@@ -19,6 +19,7 @@ export class Exercise {
         public activities: Activity[],
         public date: string,
         public duration: number,
-        public energyBurn: number
+        public energyBurn: number,
+        public notes: string
     ) { }
 }

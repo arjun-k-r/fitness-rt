@@ -60,6 +60,11 @@
           <h2>Energy burn</h2>
           <ion-note item-right>{{ exercise.energyBurn }} kcal</ion-note>
         </ion-item>
+        <ion-item>
+          <ion-icon color="primary" item-start name="clipboard"></ion-icon>
+          <ion-label fixed>Notes</ion-label>
+          <ion-textarea (ionChange)="changeMade()" [(ngModel)]="exercise.notes" type="text" wrap="hard"></ion-textarea>
+        </ion-item>
       </ion-list>
     </div>
     <div *ngSwitchCase="'trends'">

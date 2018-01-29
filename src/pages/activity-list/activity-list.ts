@@ -62,7 +62,7 @@ export class ActivityListPage {
         inputs: [
           {
             name: 'duration',
-            placeholder: `${activity.duration.toString()} mins`,
+            placeholder: `${activity.duration ? activity.duration.toString() : '0'} mins`,
             type: 'number'
           }
         ],

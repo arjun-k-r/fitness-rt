@@ -2371,12 +2371,14 @@ export class DietProvider {
         (e: Exercise) => {
           let intenseExercise: boolean = false,
            energyConsumption: number = bmr;
-          e.activities.forEach((a: Activity) => {
-            if (a.met > 5) {
-              intenseExercise = true;
-            }
-          });
-          energyConsumption += e.energyBurn;
+          if (!!e && e['$value'] !== null) {
+            e.activities.forEach((a: Activity) => {
+              if (a.met > 5) {
+                intenseExercise = true;
+              }
+            });
+            energyConsumption += e.energyBurn;
+          }
           subscription.unsubscribe();
           resolve(new NutritionalValues(
             energyConsumption,

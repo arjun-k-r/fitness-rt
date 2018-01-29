@@ -128,6 +128,7 @@ export class FoodListPage {
           handler: (data: string) => {
             this.selectedGroup = data;
             this.selectedNutrient = '';
+            this.clearSearchUsdaFoods();
             this._foodPvd.changeFoodGroup(this.selectedGroup);
             this._notifyPvd.showLoading();
           }
@@ -164,15 +165,15 @@ export class FoodListPage {
     this._modalCtrl.create('food-details', { authId: this._authId, food: newFood, id: newFood.name }).present();
   }
 
-  public clearSearchFoods(evenet: string): void {
+  public clearSearchFoods(): void {
     this.foodSearchQuery = '';
   }
 
-  public clearSearchMeals(evenet: string): void {
+  public clearSearchMeals(): void {
     this.mealSearchQuery = '';
   }
 
-  public clearSearchUsdaFoods(evenet: string): void {
+  public clearSearchUsdaFoods(): void {
     this.foodSearchQuery = '';
   }
 

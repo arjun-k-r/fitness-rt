@@ -101,6 +101,7 @@ export class ExercisePage {
           text: 'Done',
           handler: (data: { duration: string }) => {
             activity.duration = +data.duration;
+            activity.energyBurn = this._exercisePvd.calculateActivityEnergyBurn(activity, this._userProfile.measurements.weight)
             this._updateExercise();
           }
         }

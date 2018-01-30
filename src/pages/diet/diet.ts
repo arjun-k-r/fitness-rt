@@ -18,10 +18,10 @@ import { FirebaseError, User } from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Diet, ILineChartColors, ILineChartEntry, NutritionalValues } from '../../models';
+import { Diet, ILineChartColors, ILineChartEntry, NutritionalValues, UserProfile } from '../../models';
 
 // Providers
-import { DietProvider, NotificationProvider } from '../../providers';
+import { DietProvider, NotificationProvider, UserProfileProvider } from '../../providers';
 
 const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 
@@ -52,7 +52,8 @@ export class DietPage {
     private _afAuth: AngularFireAuth,
     private _dietPvd: DietProvider,
     private _navCtrl: NavController,
-    private _notifyPvd: NotificationProvider
+    private _notifyPvd: NotificationProvider,
+    private _userPvd: UserProfileProvider
   ) {
     this.chartColors.push({
       backgroundColor: 'rgb(255, 255, 255)',
@@ -152,13 +153,35 @@ export class DietPage {
   }
 
   ionViewWillEnter(): void {
+    this._notifyPvd.showLoading();
     this._authSubscription = this._afAuth.authState.subscribe((auth: User) => {
       if (!!auth) {
         this._authId = auth.uid;
-        this.getDiet();
-        this._getTrends();
+
+        // Update requirements according to exercise changes
+        const userSubscription: Subscription = this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
+          userSubscription.unsubscribe();
+          this._dietSubscription = this._dietPvd.getDiet$(this._authId, this.dietDate).subscribe((s: Diet) => {
+            if (!!s && s['$value'] !== null) {
+              this.diet = Object.assign({}, s);
+              this._dietPvd.calculateRequirement(this._authId, u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
+                .then((r: NutritionalValues) => {
+                  this.diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
+                })
+                .catch((err: string) => {
+                  this._notifyPvd.showError(err);
+                });
+              this.nutrients = Object.keys(this.diet.nourishment);
+              this._notifyPvd.closeLoading();
+            }
+          }, (err: FirebaseError) => {
+            this._notifyPvd.closeLoading();
+            this._notifyPvd.showError(err.message);
+          });
+          this._getTrends();
+        });
       }
-    })
+    });
   }
 
   ionViewWillLeave(): void {

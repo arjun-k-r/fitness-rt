@@ -5,7 +5,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { ChartsModule } from 'ng2-charts';
 
 import { DietPage } from './diet';
-import { DietProviderModule } from '../../providers';
+import { DietProviderModule, UserProfileProviderModule } from '../../providers';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,8 @@ import { DietProviderModule } from '../../providers';
   imports: [
     IonicPageModule.forChild(DietPage),
     DietProviderModule,
-    ChartsModule
+    ChartsModule,
+    UserProfileProviderModule
   ],
 })
 export class DietPageModule {}

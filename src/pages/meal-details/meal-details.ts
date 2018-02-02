@@ -53,16 +53,16 @@ export class MealDetailsPage {
     private _params: NavParams,
     private _userPvd: UserProfileProvider
   ) {
-    this._authId = this._params.get('authId');
+    this._authId = this._params.get('authId') || '';
+    this._diet = <Diet>this._params.get('diet') || new Diet('', [], null, null);
+    this._diet.meals = this._diet.meals || [];
+    this._mealIdx = this._params.get('mealIdx') === undefined ? this._diet.meals.length : <number>this._params.get('mealIdx');
+    this._trends = <Diet[]>this._params.get('trends') || [];
+    this.meal = Object.assign({}, this._diet.meals[this._mealIdx] || new Meal([], new NutritionalValues(), '', 0, 0, moment().format('HH:mm')));
+    this.meal.foods = this.meal.foods || [];
     if (!this._authId) {
       this._navCtrl.setRoot('diet');
     }
-    this._diet = <Diet>this._params.get('diet');
-    this._diet.meals = this._diet.meals || [];
-    this._mealIdx = this._params.get('mealIdx') === undefined ? this._diet.meals.length : <number>this._params.get('mealIdx');
-    this._trends = <Diet[]>this._params.get('trends');
-    this.meal = Object.assign({}, this._diet.meals[this._mealIdx] || new Meal([], new NutritionalValues(), '', 0, 0, moment().format('HH:mm')));
-    this.meal.foods = this.meal.foods || [];
   }
 
   private _changeQuantity(food: Food): void {

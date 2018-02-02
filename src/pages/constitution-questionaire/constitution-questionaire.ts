@@ -26,7 +26,7 @@ export class ConstitutionQuestionairePage {
     private _userPvd: UserProfileProvider
   ) {
     this.constitution = <Constitution>this._params.get('constitution') || new Constitution();
-    if (!this.constitution) {
+    if (!this.constitution.dominantDosha) {
       this._navCtrl.setRoot('profile');
     }
   }

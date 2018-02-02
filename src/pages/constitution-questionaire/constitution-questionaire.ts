@@ -24,7 +24,12 @@ export class ConstitutionQuestionairePage {
     private _notifyPvd: NotificationProvider,
     private _params: NavParams,
     private _userPvd: UserProfileProvider
-  ) { }
+  ) {
+    this.constitution = <Constitution>this._params.get('constitution') || new Constitution();
+    if (!this.constitution) {
+      this._navCtrl.setRoot('profile');
+    }
+  }
 
   public calculateResults(): void {
     this._notifyPvd.showLoading();
@@ -123,9 +128,5 @@ export class ConstitutionQuestionairePage {
         this._notifyPvd.closeLoading();
         this._notifyPvd.showError(err.message);
       })
-  }
-
-  ionViewWillEnter(): void {
-    this.constitution = <Constitution>this._params.get('constitution') || new Constitution();
   }
 }

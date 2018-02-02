@@ -54,6 +54,9 @@ export class MealDetailsPage {
     private _userPvd: UserProfileProvider
   ) {
     this._authId = this._params.get('authId');
+    if (!this._authId) {
+      this._navCtrl.setRoot('diet');
+    }
     this._diet = <Diet>this._params.get('diet');
     this._diet.meals = this._diet.meals || [];
     this._mealIdx = this._params.get('mealIdx') === undefined ? this._diet.meals.length : <number>this._params.get('mealIdx');

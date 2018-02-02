@@ -121,9 +121,16 @@ export class MealDetailsPage {
             f.quantity = f.quantity * this.meal.servings;
           });
         } else {
-          let selectedFoods: any = foods.map((f: Food | Meal) => ('ndbno' in f) ? f : (<Meal>f).foods.forEach((f: Food) => {
-            f.quantity = f.quantity * this.meal.servings;
-          }));
+          let selectedFoods: any = foods.map((item: Food | Meal) => {
+            if ('ndbno' in item) {
+              return item;
+            }
+
+            return (<Meal>item).foods.map((f: Food) => {
+              f.quantity = f.quantity * (<Meal>item).servings;
+              return f;
+            })
+          });
           this.meal.foods = [...this.meal.foods, ...[].concat(...selectedFoods)];
         }
         this._updateMeal();

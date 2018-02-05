@@ -137,6 +137,14 @@
             Please enter your neck measurement.
           </div>
           <ion-item>
+            <ion-label fixed>Resting heart rate</ion-label>
+            <ion-input formControlName="restingHeartRateMeasurement" placeholder="cm"></ion-input>
+          </ion-item>
+          <div class="form__message--dark" *ngIf="profileForm.invalid && profileForm.controls.restingHeartRateMeasurement.touched && profileForm.controls.restingHeartRateMeasurement.errors?.required">
+            <ion-icon name="warning"></ion-icon>
+            Please enter your resting heart rate
+          </div>
+          <ion-item>
             <ion-label fixed>Waist</ion-label>
             <ion-input formControlName="waistMeasurement" placeholder="cm"></ion-input>
           </ion-item>
@@ -161,6 +169,18 @@
         <ion-item>
           <h2>Body shape</h2>
           <p item-content>{{ userProfile.fitness.bodyShape }}</p>
+        </ion-item>
+        <ion-item>
+          <h2>Maximum heart rate (VO2 Max)</h2>
+          <p item-content>{{ userProfile.fitness.heartRate.max }}bpm</p>
+        </ion-item>
+        <ion-item>
+          <h2>Training heart rate</h2>
+          <p item-content>{{ userProfile.fitness.heartRate.trainingMin }}-{{ userProfile.fitness.heartRate.trainingMax }}bpm</p>
+        </ion-item>
+        <ion-item>
+          <h2>Ideal resting heart rate</h2>
+          <p item-content>60bpm</p>
         </ion-item>
         <ion-item>
           <h2>Ideal waist</h2>
@@ -208,6 +228,7 @@
             <ion-option value="heightMeasurement">Height</ion-option>
             <ion-option value="hipsMeasurement">Hips</ion-option>
             <ion-option value="neckMeasurement">Neck</ion-option>
+            <ion-option value="restingHeartRateMeasurement">Neck</ion-option>
             <ion-option value="waistMeasurement">Waist</ion-option>
             <ion-option value="weightMeasurement">Weight</ion-option>
           </ion-select>

@@ -47,7 +47,7 @@ export class UserProfileProvider {
   public saveUserProfile(authId: string, trends: FitnessTrend[], user: UserProfile): Promise<{}> {
     return new Promise((resolve, reject) => {
       const { measurements } = user;
-      const newTrend: FitnessTrend = new FitnessTrend(user.fitness.bodyFatPercentage.fatPercentage, measurements.chest, moment().format('YYYY-MM-DD'), measurements.height, measurements.hips, measurements.neck, measurements.waist, measurements.weight);
+      const newTrend: FitnessTrend = new FitnessTrend(user.fitness.bodyFatPercentage.fatPercentage, measurements.chest, moment().format('YYYY-MM-DD'), measurements.height, measurements.hips, measurements.neck, measurements.restingHeartRate, measurements.waist, measurements.weight);
       if (!!trends.length) {
         trends.reverse();
         if (newTrend.date !== trends[0].date) {

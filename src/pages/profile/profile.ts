@@ -27,6 +27,7 @@ import {
   Constitution,
   Fitness,
   FitnessTrend,
+  HeartRate,
   ILineChartColors,
   ILineChartEntry,
   UserProfile
@@ -88,28 +89,30 @@ export class ProfilePage {
       isLactating: new FormControl(''),
       isPregnant: new FormControl(''),
       neckMeasurement: new FormControl('', [Validators.required]),
+      restingHeartRateMeasurement: new FormControl('', [Validators.required]),
       waistMeasurement: new FormControl('', [Validators.required]),
       weightMeasurement: new FormControl('', [Validators.required])
     });
     this.userProfile = new UserProfile(
       0,
       new Constitution(),
-      new Fitness(0, new BodyFat('', 0, 0, 0, 0), '', '', ''),
+      new Fitness(0, new BodyFat('', 0, 0, 0, 0), '', new HeartRate(0, 0, 0), '', ''),
       '',
       false,
       false,
-      new BodyMeasurements(0, 0, 0, 0, 0, 0)
+      new BodyMeasurements(0, 0, 0, 0, 0, 0, 0)
     );
   }
 
   private _calculateFitness(): void {
     const { age, gender, measurements } = this.userProfile;
-    const bodyFat: BodyFat = this._fitPvd.calculateBodyFat(age, gender, measurements.height, measurements.hips, measurements.neck, measurements.waist, measurements.weight);
-    const bmr: number = this._fitPvd.calculateBmr(age, gender, measurements.height, measurements.weight);
-    const bodyShape: string = this._fitPvd.calculateBodyShape(measurements.chest, gender, measurements.hips, measurements.waist);
-    const idealWaist: string = this._fitPvd.calculateIdealWaist(age, gender, measurements.height);
-    const idealWeight: string = this._fitPvd.calculateIdealWeight(age, gender, measurements.height);
-    this.userProfile.fitness = new Fitness(bmr, bodyFat, bodyShape, idealWaist, idealWeight);
+    const bodyFat: BodyFat = this._fitPvd.calculateBodyFat(+age, gender, +measurements.height, +measurements.hips, +measurements.neck, +measurements.waist, +measurements.weight);
+    const bmr: number = this._fitPvd.calculateBmr(+age, gender, +measurements.height, +measurements.weight);
+    const bodyShape: string = this._fitPvd.calculateBodyShape(+measurements.chest, gender, +measurements.hips, +measurements.waist);
+    const idealWaist: string = this._fitPvd.calculateIdealWaist(+age, gender, +measurements.height);
+    const idealWeight: string = this._fitPvd.calculateIdealWeight(+age, gender, +measurements.height);
+    const heartRate: HeartRate = this._fitPvd.calculateHeartRate(+age, +measurements.restingHeartRate);
+    this.userProfile.fitness = new Fitness(bmr, bodyFat, bodyShape, heartRate, idealWaist, idealWeight);
   }
 
   private _chooseImage(): void {
@@ -135,6 +138,7 @@ export class ProfilePage {
         this.profileForm.controls['isLactating'].patchValue(this.userProfile.isLactating);
         this.profileForm.controls['isPregnant'].patchValue(this.userProfile.isPregnant);
         this.profileForm.controls['neckMeasurement'].patchValue(this.userProfile.measurements.neck);
+        this.profileForm.controls['restingHeartRateMeasurement'].patchValue(this.userProfile.measurements.restingHeartRate);
         this.profileForm.controls['waistMeasurement'].patchValue(this.userProfile.measurements.waist);
         this.profileForm.controls['weightMeasurement'].patchValue(this.userProfile.measurements.weight);
         this._formInit = false;
@@ -182,6 +186,7 @@ export class ProfilePage {
         isLactating: number,
         isPregnant: number,
         neckMeasurement: number,
+        restingHeartRateMeasurement: number,
         waistMeasurement: number,
         weightMeasurement: number
       }) => {
@@ -192,7 +197,7 @@ export class ProfilePage {
             gender: c.gender,
             isLactating: c.isLactating,
             isPregnant: c.isPregnant,
-            measurements: new BodyMeasurements(c.chestMeasurement, c.heightMeasurement, c.hipsMeasurement, c.neckMeasurement, c.waistMeasurement, c.weightMeasurement)
+            measurements: new BodyMeasurements(c.chestMeasurement, c.heightMeasurement, c.hipsMeasurement, c.neckMeasurement, c.restingHeartRateMeasurement, c.waistMeasurement, c.weightMeasurement)
           });
           this._calculateFitness();
         }
@@ -235,6 +240,13 @@ export class ProfilePage {
         this.chartData = [{
           data: [...this._trends.map((t: FitnessTrend) => t.neckMeasurement)],
           label: 'Neck'
+        }];
+        break;
+
+      case 'restingHeartRateMeasurement':
+        this.chartData = [{
+          data: [...this._trends.map((t: FitnessTrend) => t.restingHeartRateMeasurement)],
+          label: 'Resting heart rate'
         }];
         break;
 

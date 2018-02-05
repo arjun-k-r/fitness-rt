@@ -2,20 +2,27 @@
 import { Injectable } from '@angular/core';
 
 // Models
-import { BodyFat } from '../../models';
+import { BodyFat, HeartRate } from '../../models';
 
 @Injectable()
 export class FitnessProvider {
   constructor() { }
 
   /**
+   * Nes, B.M, et al. HRMax formula
+   */
+  private _calculateHRMax(age: number): number {
+    return Math.round(211 - (0.64 * age));
+  }
+
+  /**
    * The Revised Harris-Benedict Equation
    */
   public calculateBmr(age: number, gender: string, height: number, weight: number): number {
     if (gender === 'male') {
-      return Math.round(13.397 * +weight + 4.799 * +height - 5.677 * +age + 88.362);
+      return Math.round(13.397 * weight + 4.799 * height - 5.677 * age + 88.362);
     } else {
-      return Math.round(9.247 * +weight + 3.098 * +height - 4.33 * +age + 447.593);
+      return Math.round(9.247 * weight + 3.098 * height - 4.33 * age + 447.593);
     }
   }
 
@@ -25,13 +32,13 @@ export class FitnessProvider {
   public calculateBodyFat(age: number, gender: string, height: number, hips: number, neck: number, waist: number, weight: number): BodyFat {
     let bodyFat: number;
     if (gender === 'male') {
-      bodyFat = Math.round((495 / (1.0324 - 0.19077 * Math.log10(+waist - +neck) + 0.15456 * Math.log10(+height))) - 450);
+      bodyFat = +(495 / (1.0324 - 0.19077 * Math.log10(Math.abs(waist - neck)) + 0.15456 * Math.log10(height)) - 450).toFixed(2);
     } else if (gender === 'female') {
-      bodyFat = Math.round((495 / (1.29579 - 0.35004 * Math.log10(+waist + +hips - +neck) + 0.22100 * Math.log10(+height))) - 450);
+      bodyFat = +(495 / (1.29579 - 0.35004 * Math.log10(Math.abs(waist + hips - neck)) + 0.221 * Math.log10(height)) - 450).toFixed(2);
     }
 
     const fatMass: number = +(bodyFat / 100 * +weight).toFixed(2);
-    const muscleMass: number = +weight - fatMass;
+    const muscleMass: number = weight - fatMass;
     let idealBodyFat: number;
     if (gender === 'male') {
       if (age <= 20) {
@@ -103,11 +110,11 @@ export class FitnessProvider {
   }
 
   public calculateBodyShape(chest: number, gender: string, hips: number, waist: number): string {
-    const wcRatio: number = +waist / +chest;
+    const wcRatio: number = waist / chest;
     if (gender === 'male') {
       return wcRatio > 0.8 ? 'Apple shape' : 'V shape';
     } else if (gender === 'female') {
-      const whRatio: number = +waist / +hips;
+      const whRatio: number = waist / hips;
       const wcwhRatio: number = wcRatio / whRatio;
       if ((wcRatio <= 0.8 && whRatio >= 0.7) || (wcwhRatio <= 1.25 && wcwhRatio >= 0.75)) {
         return 'Hourglass shape'
@@ -124,11 +131,11 @@ export class FitnessProvider {
    */
   public calculateIdealWaist(age: number, gender: string, height: number): string {
     if (age <= 14) {
-      return `${Math.floor(+height * 0.46)}-${Math.floor(+height * 0.51)} cm`;
+      return `${Math.floor(height * 0.46)}-${Math.floor(height * 0.51)} cm`;
     } else if (gender === 'male') {
-      return `${Math.floor(+height * 0.43)}-${Math.floor(+height * 0.52)} cm`;
+      return `${Math.floor(height * 0.43)}-${Math.floor(height * 0.52)} cm`;
     } else if (gender === 'female') {
-      return `${Math.floor(+height * 0.42)}-${Math.floor(+height * 0.48)} cm`;
+      return `${Math.floor(height * 0.42)}-${Math.floor(height * 0.48)} cm`;
     }
   }
 
@@ -137,9 +144,17 @@ export class FitnessProvider {
    */
   public calculateIdealWeight(age: number, gender: string, height: number): string {
     if (gender === 'male') {
-      return `${Math.floor(50 + 2.3 * (+height * 0.3937008 - 60))} kg`;
+      return `${Math.floor(50 + 2.3 * (height * 0.3937008 - 60))} kg`;
     } else if (gender === 'female') {
-      return `${Math.floor(45.5 + 2.3 * (+height * 0.3937008 - 60))} kg`;
+      return `${Math.floor(45.5 + 2.3 * (height * 0.3937008 - 60))} kg`;
     }
+  }
+
+  /**
+  * Calculates the heart The Karvonen method
+  */
+  public calculateHeartRate(age: number, hrRest: number): HeartRate {
+    const hrMax: number = this._calculateHRMax(age);
+    return new HeartRate(hrMax, Math.round(0.85 * (hrMax - hrRest) + hrRest), Math.round(0.5 * (hrMax - hrRest) + hrRest));
   }
 }

@@ -65,6 +65,13 @@
           <ion-label fixed>Notes</ion-label>
           <ion-textarea (ionChange)="changeMade()" [(ngModel)]="exercise.notes" type="text" wrap="hard"></ion-textarea>
         </ion-item>
+        <button (click)="takeOvertrainingTest()" ion-item>
+          <ion-icon color="primary" item-start name="battery-dead"></ion-icon>
+          <h2>Take overtraining test here</h2>
+          <ion-note item-right>
+            <ion-icon name="arrow-forward"></ion-icon>
+          </ion-note>
+        </button>
       </ion-list>
     </div>
     <div *ngSwitchCase="'trends'">

@@ -1,0 +1,311 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Overtraining questionaire</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div padding>
+    <p>Stress is the body's reaction to harmful situations -- whether they’re real or perceived. When you feel threatened, a
+      chemical reaction occurs in your body that allows you to act in a way to prevent injury. This reaction is known as
+      "fight-or-flight,” or the stress response. During stress response, your heart rate increases, breathing quickens, muscles
+      tighten, and blood pressure rises. You’ve gotten ready to act. It is how you protect yourself. Stress can affect all
+      aspects of your life, including your emotions, behaviors, thinking ability, and physical health. No part of the body
+      is immune. But, because people handle stress differently, symptoms of stress can vary. </p>
+  </div>
+  <form [formGroup]="stressForm" (ngSubmit)="checkOvertraining()" no-validate>
+    <ion-list formControlName="mood" no-lines radio-group>
+      <ion-list-header>Becoming easily agitated, frustrated, and moody</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="overwhelm" no-lines radio-group>
+      <ion-list-header>Feeling overwhelmed, like you are losing control or need to take control</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="relaxation" no-lines radio-group>
+      <ion-list-header>Having difficulty relaxing and quieting your mind</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="depression" no-lines radio-group>
+      <ion-list-header>Feeling bad about yourself (low self-esteem), lonely, worthless, and depressed</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="withdrawn" no-lines radio-group>
+      <ion-list-header>Avoiding others</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="energy" no-lines radio-group>
+      <ion-list-header>Low energy</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="headaches" no-lines radio-group>
+      <ion-list-header>Headaches</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="digestion" no-lines radio-group>
+      <ion-list-header>Upset stomach, including diarrhea, constipation, and nausea</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="pain" no-lines radio-group>
+      <ion-list-header>Aches, pains, and tense muscles</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="chest" no-lines radio-group>
+      <ion-list-header>Chest pain and rapid heartbeat</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="insomnia" no-lines radio-group>
+      <ion-list-header>Insomnia</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="colds" no-lines radio-group>
+      <ion-list-header>Frequent colds and infections</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="libido" no-lines radio-group>
+      <ion-list-header>Loss of sexual desire and/or ability</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="nervousness" no-lines radio-group>
+      <ion-list-header>Nervousness and shaking, ringing in the ear, cold or sweaty hands and feet</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="mouth" no-lines radio-group>
+      <ion-list-header>Dry mouth and difficulty swallowing</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="jaw" no-lines radio-group>
+      <ion-list-header>Clenched jaw and grinding teeth</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="worry" no-lines radio-group>
+      <ion-list-header>Constant worrying</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="thoughts" no-lines radio-group>
+      <ion-list-header>Racing thoughts</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="disorganization" no-lines radio-group>
+      <ion-list-header>Forgetfulness and disorganization</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="focus" no-lines radio-group>
+      <ion-list-header>Inability to focus</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="judgment" no-lines radio-group>
+      <ion-list-header>Poor judgment</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="pessimism" no-lines radio-group>
+      <ion-list-header>Being pessimistic or seeing only the negative side</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="appetite" no-lines radio-group>
+      <ion-list-header>Changes in appetite (either not eating or eating too much)</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="procrastinating" no-lines radio-group>
+      <ion-list-header>Procrastinating and avoiding responsibilities</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="twitching" no-lines radio-group>
+      <ion-list-header>Exhibiting more nervous behaviors, such as nail biting, fidgeting, and pacing</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="addiction" no-lines radio-group>
+      <ion-list-header>Increased use of alcohol, drugs, or cigarettes</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <button block color="primary" [disabled]="stressForm.invalid" ion-button type="submit">Check stress</button>
+  </form>
+  <div padding>
+    <p>Based on
+      <a href="https://www.webmd.com/balance/stress-management/stress-symptoms-effects_of-stress-on-the-body" target="_blank">WebMD, "Stress Symptoms"</a>
+    </p>
+  </div>
+</ion-content>

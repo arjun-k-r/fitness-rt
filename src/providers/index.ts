@@ -6,6 +6,8 @@ export { FitnessProvider } from './fitness/fitness';
 export { FitnessProviderModule } from './fitness/fitness.module';
 export { FOOD_GROUPS, FoodProvider } from './food/food';
 export { FoodProviderModule } from './food/food.module';
+export { MindBalanceProvider } from './mind-balance/mind-balance';
+export { MindBalanceProviderModule } from './mind-balance/mind-balance.module';
 export { NotificationProvider } from './notification/notification';
 export { NotificationProviderModule } from './notification/notification.module';
 export { PictureProvider } from './picture/picture';

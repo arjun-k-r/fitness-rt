@@ -1,0 +1,274 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Overtraining questionaire</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div padding>
+    <p>Overtraining is the result of giving your body more work or stress than it can handle. Overtraining occurs when a person
+      experiences stress and physical trauma from exercise faster than their body can repair the damage. Although, regular exercise is extremely beneficial to your
+      general health and fitness, exercise is a stress for the body and breaks it down. It’s the rest
+      and recovery that makes you stronger and healthier.</p>
+  </div>
+  <form [formGroup]="overtrainingForm" (ngSubmit)="checkOvertraining()" no-validate>
+    <ion-list formControlName="heartRate" no-lines radio-group>
+      <ion-list-header>Elevated resting heart rate</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="infections" no-lines radio-group>
+      <ion-list-header>Frequent minor infections</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="colds" no-lines radio-group>
+      <ion-list-header>Increased susceptibility to colds and flu’s</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="injuries" no-lines radio-group>
+      <ion-list-header>Increases in minor injuries</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="pain" no-lines radio-group>
+      <ion-list-header>Chronic muscle soreness or joint pain</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="exhaustion" no-lines radio-group>
+      <ion-list-header>Exhaustion</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="lethargy" no-lines radio-group>
+      <ion-list-header>Lethargy</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="weight" no-lines radio-group>
+      <ion-list-header>Muscle loss/Fat gain</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="appetite" no-lines radio-group>
+      <ion-list-header>Appetite loss</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="thirst" no-lines radio-group>
+      <ion-list-header>Insatiable thirst or dehydration</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="exerciseIntolerance" no-lines radio-group>
+      <ion-list-header>Intolerance to exercise</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="performance" no-lines radio-group>
+      <ion-list-header>Decreased performance</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="recovery" no-lines radio-group>
+      <ion-list-header>Delayed recovery from exercise</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="energy" no-lines radio-group>
+      <ion-list-header>Fatigued, tired, drained, lack of energy</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="concentration" no-lines radio-group>
+      <ion-list-header>Reduced ability to concentrate</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="apathy" no-lines radio-group>
+      <ion-list-header>Apathy or no motivation</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="irritability" no-lines radio-group>
+      <ion-list-header>Irritability</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="anxiety" no-lines radio-group>
+      <ion-list-header>Anxiety</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="depression" no-lines radio-group>
+      <ion-list-header>Depression</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="headaches" no-lines radio-group>
+      <ion-list-header>Headaches</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="insomnia" no-lines radio-group>
+      <ion-list-header>Insomnia</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="relaxation" no-lines radio-group>
+      <ion-list-header>Inability to relax</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="twitching" no-lines radio-group>
+      <ion-list-header>Twitchy, fidgety or jittery</ion-list-header>
+      <ion-item>
+        <ion-label>Yes</ion-label>
+        <ion-radio value="yes"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio value="no"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <button block color="primary" [disabled]="overtrainingForm.invalid" ion-button type="submit">Check overtraining</button>
+  </form>
+  <div padding>
+    <p>Based on <a href="http://stretchcoach.com/articles/overtraining/" target="_blank">Stretch Couch, "Overtraining – Learn how to identify Overtraining Syndrome"</a></p>
+  </div>
+</ion-content>

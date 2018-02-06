@@ -228,6 +228,10 @@ export class ExercisePage {
       })
   }
 
+  public takeOvertrainingTest(): void {
+    this._navCtrl.push('overtraining-questionaire');
+  }
+
   public viewPageInfo(): void {
     this._navCtrl.push('exercise-info');
   }

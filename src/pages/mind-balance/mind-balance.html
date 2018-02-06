@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mind Balance</ion-title>
+    <ion-buttons end>
+      <button clear (click)="save()" [disabled]="!unsavedChanges" icon-only ion-button padding-right>
+        <ion-icon name="done-all"></ion-icon>
+      </button>
+      <button (click)="viewPageInfo()" icon ion-button padding-right>
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="pageSegment">
+      <ion-segment-button value="today">
+        Info
+      </ion-segment-button>
+      <ion-segment-button value="trends">
+        Trends
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div [ngSwitch]="pageSegment">
+    <div *ngSwitchCase="'today'">
+      <ion-list>
+        <ion-item>
+          <ion-icon color="primary" item-start name="calendar"></ion-icon>
+          <ion-label>Date</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DD" (ionChange)="getMindBalance()" [max]="maxDateSelection" min="2018" [(ngModel)]="mindBalanceDate"
+            pickerFormat="YYYY-MM-DD"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>Stress levels:
+            <ion-badge [color]="mindBalance.stress < 5 ? 'primary' : 'warn'">{{ mindBalance.stress }}</ion-badge>
+          </ion-label>
+          <ion-range (ionChange)="changeMade()" max="10" min="1" [(ngModel)]="mindBalance.stress" snaps="true" step="1">
+            <ion-icon color="warn" name="sad" range-right small></ion-icon>
+            <ion-icon color="primary" name="happy" range-left></ion-icon>
+          </ion-range>
+        </ion-item>
+        <button (click)="takeStressTest()" ion-item>
+          <ion-icon color="primary" item-start name="flame"></ion-icon>
+          <h2>Take stress test here</h2>
+          <ion-note item-right>
+            <ion-icon name="arrow-forward"></ion-icon>
+          </ion-note>
+        </button>
+        <ion-item>
+          <ion-label>Vikruti (dosha imbalance)</ion-label>
+          <ion-select (ionChange)="changeMade()" [(ngModel)]="mindBalance.vikruti">
+            <ion-option value="vata">Vata</ion-option>
+            <ion-option value="pitta">Pitta</ion-option>
+            <ion-option value="kapha">Kapha</ion-option>
+          </ion-select>
+        </ion-item>
+        <button (click)="takeVikrutiTest()" ion-item>
+          <ion-icon color="primary" item-start name="contrast"></ion-icon>
+          <h2>Take vikruti test here</h2>
+          <ion-note item-right>
+            <ion-icon name="arrow-forward"></ion-icon>
+          </ion-note>
+        </button>
+        <ion-item>
+          <ion-icon color="primary" item-start name="clipboard"></ion-icon>
+          <ion-label fixed>Notes</ion-label>
+          <ion-textarea (ionChange)="changeMade()" [(ngModel)]="mindBalance.notes" type="text" wrap="hard"></ion-textarea>
+        </ion-item>
+      </ion-list>
+    </div>
+    <div *ngSwitchCase="'trends'">
+      <ion-list no-lines>
+        <ion-list-header>Chart settings</ion-list-header>
+        <ion-item>
+          <ion-label fixed>Trend days</ion-label>
+          <ion-input (ionChange)="changeTrendDays()" [(ngModel)]="trendDays" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Mind balance data</ion-label>
+          <ion-select (ionChange)="changeChartData()" [(ngModel)]="chartDataSelection">
+            <ion-option value="stress">Stress levels</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-list-header>Chart</ion-list-header>
+      </ion-list>
+      <canvas baseChart class="chart" [chartType]="'line'" [colors]="chartColors" [datasets]="chartData" [labels]="chartLabels"
+        [legend]="true" [options]="chartOpts"></canvas>
+    </div>
+  </div>
+</ion-content>

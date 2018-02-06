@@ -1,0 +1,524 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Imbalance Questionaire</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="vikrutiForm" (ngSubmit)="checkOvertraining()" no-validate>
+    <ion-list formControlName="appearance" no-lines radio-group>
+      <ion-list-header>Appearance</ion-list-header>
+      <ion-item>
+        <ion-label>Thin, bony, emaciated</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Medium, intense</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Large, sluggish</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="weight" no-lines radio-group>
+      <ion-list-header>Weight</ion-list-header>
+      <ion-item>
+        <ion-label>Underweight</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Steady</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Overweight</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="joints" no-lines radio-group>
+      <ion-list-header>Joints</ion-list-header>
+      <ion-item>
+        <ion-label>Cracking and popping</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tender</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Swollen</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="spine" no-lines radio-group>
+      <ion-list-header>Spine</ion-list-header>
+      <ion-item>
+        <ion-label>Scoliosis tendency</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Kyphosis tendency</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lordosis tendency, slipped disk</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="muscles" no-lines radio-group>
+      <ion-list-header>Muscles </ion-list-header>
+      <ion-item>
+        <ion-label>Tremors, tics, spasms</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tenderness</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Swelling</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="skin" no-lines radio-group>
+      <ion-list-header>Skin</ion-list-header>
+      <ion-item>
+        <ion-label>Dark, dry, rough, scaly, liver spots</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Yellow or red, rashes, pimples, acne</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pale, oily, smooth, swelling</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="lymphNodes" no-lines radio-group>
+      <ion-list-header>Lymph nodes</ion-list-header>
+      <ion-item>
+        <ion-label>Underweight</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Steady</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Overweight</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="veins" no-lines radio-group>
+      <ion-list-header>Veins</ion-list-header>
+      <ion-item>
+        <ion-label>Prominent, collapsed, empty</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Bruises easily, moderate visibility</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Full, wide, stagnant</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="eyes" no-lines radio-group>
+      <ion-list-header>Eyes</ion-list-header>
+      <ion-item>
+        <ion-label>Dry, restless, blinking</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Red, burning, hypersensitive to light</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pale, swollen, sticky, excessive lacrimation</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="ears" no-lines radio-group>
+      <ion-list-header>Ears</ion-list-header>
+      <ion-item>
+        <ion-label>Ringing (tinnitus)</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pain, infections</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Clogged, discharge</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="nose" no-lines radio-group>
+      <ion-list-header>Nose, Sinuses</ion-list-header>
+      <ion-item>
+        <ion-label>Dry, crusty</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Red, inflamed</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Congestion</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="lips" no-lines radio-group>
+      <ion-list-header>Lips</ion-list-header>
+      <ion-item>
+        <ion-label>Dry, cracked</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Red, inflamed</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pale, oily</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="mouth" no-lines radio-group>
+      <ion-list-header>Mouth</ion-list-header>
+      <ion-item>
+        <ion-label>Dry, receding gums</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Red, inflamed and tender gums</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Excessive salivation</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="teeth" no-lines radio-group>
+      <ion-list-header>Teeth</ion-list-header>
+      <ion-item>
+        <ion-label>Cavities, receding gums, cracked enamel</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Yellow, wasted enamel</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Sweet tooth, strong enamel</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="tongue" no-lines radio-group>
+      <ion-list-header>Tongue</ion-list-header>
+      <ion-item>
+        <ion-label>Dry, cracked, tremors, dark coating</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Red, inflamed, yellow coating</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pale, thick white coating</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="hair" no-lines radio-group>
+      <ion-list-header>Hair</ion-list-header>
+      <ion-item>
+        <ion-label>Dry, knotted, brittle</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Oily, graying, bald</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Oily, wavy</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="nails" no-lines radio-group>
+      <ion-list-header>Nails </ion-list-header>
+      <ion-item>
+        <ion-label>Dry, rough, brittle, cracked, bitten</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Soft, sharp, inflamed</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pale, thick, oily</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="appetite" no-lines radio-group>
+      <ion-list-header>Appetite</ion-list-header>
+      <ion-item>
+        <ion-label>Variable, anorexia nervosa</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Strong, unbearable, hypoglycemia </ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Low, steady</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="digestion" no-lines radio-group>
+      <ion-list-header>Digestion</ion-list-header>
+      <ion-item>
+        <ion-label>Irregular, gas and bloating</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Quick, acid indigestion</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Slow, prolonged, indigestion</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="metabolism" no-lines radio-group>
+      <ion-list-header>Metabolism</ion-list-header>
+      <ion-item>
+        <ion-label>Irregular</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Hyperactive</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Slow</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="thirst" no-lines radio-group>
+      <ion-list-header>Thirst</ion-list-header>
+      <ion-item>
+        <ion-label>Variable</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Strong</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Low</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="elimination" no-lines radio-group>
+      <ion-list-header>Elimination</ion-list-header>
+      <ion-item>
+        <ion-label>Constipation, dry, hard stools</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Loose stools, diarrhea, burning</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Heavy, oily stools with mucous</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="energy" no-lines radio-group>
+      <ion-list-header>Energy level</ion-list-header>
+      <ion-item>
+        <ion-label>Hyperactive, exhausts quickly</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Intense, exhausts from excessive thinking</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Low, exhaustion due to excess weight</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="sex" no-lines radio-group>
+      <ion-list-header>Sex drive</ion-list-header>
+      <ion-item>
+        <ion-label>Premature orgasm</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Painful sex</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Low libido</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="liverSpleen" no-lines radio-group>
+      <ion-list-header>Liver & Spleen</ion-list-header>
+      <ion-item>
+        <ion-label>Palpable (double normal size)</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tender</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Enlarged, fatty degenerative changes</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="voice" no-lines radio-group>
+      <ion-list-header>Voice</ion-list-header>
+      <ion-item>
+        <ion-label>Dry, exhausted, explosive, whispering, stuttering</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Sharp, penetrating, metallic</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Deep, hoarse, drum-like</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="speech" no-lines radio-group>
+      <ion-list-header>Speech</ion-list-header>
+      <ion-item>
+        <ion-label>Rapid, abrupt, unclear ideas</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Sharp, determined, premeditated</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Slow, monotonous</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="breathing" no-lines radio-group>
+      <ion-list-header>Breathing </ion-list-header>
+      <ion-item>
+        <ion-label>Nervous, diaphragmatic, (sympathetic nervous system)</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Aggressive, intercostals, tight in chest</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Slow, abdominal, apnea tendency</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="allergies" no-lines radio-group>
+      <ion-list-header>Allergies</ion-list-header>
+      <ion-item>
+        <ion-label>Dry wheezing, breathlessness</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Hives, rashes, urticaria</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Congestion, runny nose</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="sleep" no-lines radio-group>
+      <ion-list-header>Sleep</ion-list-header>
+      <ion-item>
+        <ion-label>Insomnia, broken</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Difficult entering, insufficient</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Excessive, drowsiness</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="dreams" no-lines radio-group>
+      <ion-list-header>Dreams</ion-list-header>
+      <ion-item>
+        <ion-label>Plenty, active, fearful</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fiery, violent</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Watery, romantic</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="emotions" no-lines radio-group>
+      <ion-list-header>Emotions</ion-list-header>
+      <ion-item>
+        <ion-label>Anxiety, fear, loneliness</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Judgment, criticism, anger, hate, jealousy</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Attachment, greed, depression</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="intellect" no-lines radio-group>
+      <ion-list-header>Intellect</ion-list-header>
+      <ion-item>
+        <ion-label>Fast but faulty response</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Abrupt but accurate response</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Slow but exact response</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-list formControlName="memory" no-lines radio-group>
+      <ion-list-header>Memory</ion-list-header>
+      <ion-item>
+        <ion-label>Recent good, remote poor</ion-label>
+        <ion-radio value="vata"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Moderate, distinct</ion-label>
+        <ion-radio value="pitta"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Slow, remote very good</ion-label>
+        <ion-radio value="kapha"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <button block color="primary" [disabled]="vikrutiForm.invalid" ion-button type="submit">Check vikruti</button>
+  </form>
+  <p padding>This questionaire is based on Usha and Dr. Vasant Lad book
+    <a href="https://www.amazon.com/Ayurvedic-Cooking-Self-Healing-Usha/dp/1883725054" target="_blank">Ayurvedic Cooking for Self-Healing</a>
+  </p>
+</ion-content>

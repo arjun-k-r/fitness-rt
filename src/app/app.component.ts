@@ -52,6 +52,7 @@ export class MyApp {
       this._autostart.enable();
       this.pages = [
         { component: 'profile', icon: 'person', title: 'Profile' },
+        { component: 'mind-balance', icon: 'compass', title: 'Mind balance' },
         { component: 'sleep', icon: 'moon', title: 'Sleep' },
         { component: 'diet', icon: 'nutrition', title: 'Diet' },
         { component: 'exercise', icon: 'walk', title: 'Exercise' },

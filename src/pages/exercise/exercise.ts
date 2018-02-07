@@ -84,7 +84,7 @@ export class ExercisePage {
   private _changeDuration(activity: Activity): void {
     this._alertCtrl.create({
       title: 'Duration',
-      subTitle: `How much ${activity.name} did you perform?`,
+      subTitle: `How much ${activity.category}, ${activity.name} did you perform?`,
       inputs: [
         {
           name: 'duration',

@@ -1,0 +1,995 @@
+[
+  {
+    "group": "Neck",
+    "muscles": [
+      {
+        "name": "Sternocleidomastoid",
+        "exercises": [
+          {
+            "name": "Cable Neck Flexion",
+            "preparation": "Sit on bench facing away from middle pulley. Place neck in harness cable attachment. Place arms on lower thighs for support",
+            "execution": "Move head away from pulley by bending neck forward until chin touches upper chest. Return head by hyperextending neck and repeat",
+            "utility": "Basic or Auxilary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "None"
+            ],
+            "stabilizers": [
+              "Rectus Abdominis",
+              "Obliques"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/CBNeckFlx.html"
+          },
+          {
+            "name": "Cable Neck Flexion (with belt)",
+            "preparation": "Place latched belt on high pulley cable by attaching carabiner on belt buckle. Grasp attached belt, face away from pulley, and place head in belt loop. With belt above ears, clamp belt snugly around head by tightly gripping ends close to back of mid-head. With neck braced and assistance of arm, lunge forward to angle torso forward with feet staggered. Place hand on lower thigh for support.",
+            "execution": "Pull head forward and down by flexing neck until chin touches upper chest. Return by hyperextending neck until head is angled upward. Repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "None"
+            ],
+            "stabilizers": [
+              "Rectus Abdominis",
+              "Obliques",
+              "Erector Spinae"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/CBNeckFlxBelt.html"
+          },
+          {
+            "name": "Cable Neck Rotation (with belt)",
+            "preparation": "Place workout chair or bench with vertical back support facing to one side near adjustable height cable pulley. Adjust pulley approximately height of head when seated. Place latched belt on adjustable height cable by attaching carabiner on belt buckle. Sit on bench, grasp attached belt from side. Face toward cable pulley and place head in belt loop. With belt above ears, clamp belt snugly around head by tightly gripping ends close forehead. Position torso upright with feet wide apart and hand nearest cable pulley on lower thigh for added support.",
+            "execution": "Turn head away from pulley cable by rotating head away from pulley. Turn head back toward cable pulley and repeat. Turn seat the opposite direction or attach belt to pulley on opposite side and continue with other side.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "Splenius",
+              "Erector Spinae",
+              "Levator Scapulae",
+              "Trapezius, Upper",
+              "Obliques",
+              "Quadratus lumborum",
+              "Psoas major",
+              "Iliocastalis lumborum",
+              "Iliocastalis thoracis"
+            ],
+            "stabilizers": [
+              "Latissimus Dorsi",
+              "Pectoralis Major, Sternal",
+              "Pectoralis Major, Clavicular",
+              "Trapezius, middle fibers",
+              "Levator scapulae",
+              "Obliques",
+              "Quadratus lumborum",
+              "Psoas major",
+              "Iliocastalis lumborum",
+              "Iliocastalis thoracis"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/CBNeckRotationBelt.html"
+          },
+          {
+            "name": "Cable Lateral Neck Flexion (with belt)",
+            "preparation": "Adjust pulley approximately height of neck or head when seated. Place latched belt on adjustable height cable by attaching carabiner on belt buckle. Sit on bench with pulley to one side and feet apart. Place head in belt loop. With belt above ears, clamp belt snugly around head by tightly gripping ends close to side of head. Pull torso upright by bracing opposite hand on far side of bench. ",
+            "execution": "Pull head away from pulley cable by laterally flexing neck. Tilt head back toward cable pulley and repeat. Sit on bench the opposite direction and continue with other side.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "Splenius",
+              "Erector Spinae",
+              "Levator Scapulae",
+              "Trapezius, Upper",
+              "Obliques",
+              "Quadratus lumborum",
+              "Psoas major",
+              "Iliocastalis lumborum",
+              "Iliocastalis thoracis"
+            ],
+            "stabilizers": [
+              "Latissimus Dorsi",
+              "Pectoralis Major, Sternal",
+              "Pectoralis Major, Clavicular",
+              "Trapezius, middle fibers",
+              "Levator scapulae",
+              "Obliques",
+              "Quadratus lumborum",
+              "Psoas major",
+              "Iliocastalis lumborum",
+              "Iliocastalis thoracis"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/CBNeckLtrFlxBelt.html"
+          }
+        ]
+      },
+      {
+        "name": "Splenius",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Shoulders",
+    "muscles": [
+      {
+        "name": "Deltoid (Anterior)",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Deltoid (Lateral)",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Deltoid (Posterior)",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Supraspinatus",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Upper arms",
+    "muscles": [
+      {
+        "name": "Triceps Brachii",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Biceps Brachii",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Brachialis",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Forearms",
+    "muscles": [
+      {
+        "name": "Brachioradialis",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Wrist (Flexors)",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Wrist (Extensors)",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Pronators",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Suspinators",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Back",
+    "muscles": [
+      {
+        "name": "General",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Latissimus Dorsi & Teres Major",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Trapezius (Upper)",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Trapezius (Middle)",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Trapezius (Lower)",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Levator Scapulae",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Rhomboids",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Infraspinatus & Teres Minor",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Subscapularis",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Chest",
+    "muscles": [
+      {
+        "name": "General",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Pectoralis Major (Sternal)",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Pectoralis Major (Clavicular)",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Pectoralis Minor",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      ,
+      {
+        "name": "Serratus Anterior",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Waist",
+    "muscles": [
+      {
+        "name": "Rectus Abdominis",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Transverse Abdominus",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Obliques",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Quadratus Lumborum",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Erector Spinae",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Hips",
+    "muscles": [
+      {
+        "name": "Gluteus Maximus",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Abductors",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Flexors",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Deep External Rotators",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Thighs",
+    "muscles": [
+      {
+        "name": "Quadriceps",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Hamstrings",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Hip Adductors",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Calves",
+    "muscles": [
+      {
+        "name": "General",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Gastrocnemius",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Soleus",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Tibialis Anterior",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      },
+      {
+        "name": "Popliteus",
+        "exercises": [
+          {
+            "name": "",
+            "preparation": "",
+            "execution": "",
+            "utility": "",
+            "mechanics": "",
+            "force": "",
+            "target": "",
+            "synergists": [
+              ""
+            ],
+            "stabilizers": [],
+            "source": ""
+          }
+        ]
+      }
+    ]
+  }
+]

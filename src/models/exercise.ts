@@ -7,6 +7,7 @@ export class ActivityCategory {
 
 export class Activity {
     constructor(
+        public category: string,
         public duration: number,
         public energyBurn: number,
         public met: number,

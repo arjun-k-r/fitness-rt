@@ -45,6 +45,9 @@ export class ActivityListPage {
   }
 
   public done(): void {
+    this.selectedActivities.forEach((a: Activity) => {
+      a.name = `${a.category}, ${a.name}`;
+    });
     this._viewCtrl.dismiss(this.selectedActivities);
   }
 
@@ -54,7 +57,7 @@ export class ActivityListPage {
   }
 
   public selectActivity(activity: Activity, activityCategory: ActivityCategory, checkBox: HTMLInputElement): void {
-    const idx: number = this.selectedActivities.findIndex((a: Activity) => a.name === `${activityCategory.name}, ${activity.name}`);
+    const idx: number = this.selectedActivities.findIndex((a: Activity) => a.name === activity.name);
     if (idx === -1 || !!checkBox.checked) {
       this._alertCtrl.create({
         title: 'Duration',
@@ -80,7 +83,7 @@ export class ActivityListPage {
             text: 'Done',
             handler: (data: { duration: number }) => {
               activity.duration = +data.duration;
-              activity.name = `${activityCategory.name}, ${activity.name}`;
+              activity.category = activityCategory.name;
               if (idx === -1) {
                 this.selectedActivities = [...this.selectedActivities, activity];
               } else {

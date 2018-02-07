@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Overtraining questionaire</ion-title>
+    <ion-title>Stress questionaire</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -14,7 +14,7 @@
       aspects of your life, including your emotions, behaviors, thinking ability, and physical health. No part of the body
       is immune. But, because people handle stress differently, symptoms of stress can vary. </p>
   </div>
-  <form [formGroup]="stressForm" (ngSubmit)="checkOvertraining()" no-validate>
+  <form [formGroup]="stressForm" (ngSubmit)="checkStress()" no-validate>
     <ion-list formControlName="mood" no-lines radio-group>
       <ion-list-header>Becoming easily agitated, frustrated, and moody</ion-list-header>
       <ion-item>

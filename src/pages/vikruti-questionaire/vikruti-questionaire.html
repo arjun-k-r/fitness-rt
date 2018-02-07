@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Imbalance Questionaire</ion-title>
+    <ion-title>Vikruti questionaire</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="vikrutiForm" (ngSubmit)="checkOvertraining()" no-validate>
+  <form [formGroup]="vikrutiForm" (ngSubmit)="checkVikruti()" no-validate>
     <ion-list formControlName="appearance" no-lines radio-group>
       <ion-list-header>Appearance</ion-list-header>
       <ion-item>

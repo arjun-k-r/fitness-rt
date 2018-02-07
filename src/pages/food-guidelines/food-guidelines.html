@@ -2,15 +2,15 @@
   <ion-navbar>
     <ion-title>Food guidelines</ion-title>
   </ion-navbar>
-  <ion-toolbar *ngIf="!singleDosha">
+  <ion-toolbar>
     <ion-segment [(ngModel)]="pageSegment">
-      <ion-segment-button *ngIf="constitution.dominantDosha.includes('Vata')" value="Vata">
+      <ion-segment-button value="Vata">
         Vata
       </ion-segment-button>
-      <ion-segment-button *ngIf="constitution.dominantDosha.includes('Pitta')" value="Pitta">
+      <ion-segment-button value="Pitta">
         Pitta
       </ion-segment-button>
-      <ion-segment-button *ngIf="constitution.dominantDosha.includes('Kapha')" value="Kapha">
+      <ion-segment-button value="Kapha">
         Kapha
       </ion-segment-button>
     </ion-segment>

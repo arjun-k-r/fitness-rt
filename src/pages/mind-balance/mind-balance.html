@@ -40,7 +40,7 @@
           <ion-label>Stress levels:
             <ion-badge [color]="mindBalance.stress < 5 ? 'primary' : 'warn'">{{ mindBalance.stress }}</ion-badge>
           </ion-label>
-          <ion-range (ionChange)="changeMade()" max="10" min="1" [(ngModel)]="mindBalance.stress" snaps="true" step="1">
+          <ion-range (ionChange)="changeMade()" max="10" min="0" [(ngModel)]="mindBalance.stress" snaps="true" step="1">
             <ion-icon color="warn" name="sad" range-right small></ion-icon>
             <ion-icon color="primary" name="happy" range-left></ion-icon>
           </ion-range>

@@ -14,6 +14,10 @@ module.exports = {
     src: '{{ROOT}}/node_modules/font-awesome/fonts/**/*',
     dest: '{{WWW}}/fonts/'
   },
+  copyMaterialIcons: {
+    src: ['{{ROOT}}/node_modules/ionic2-material-icons/fonts/**/*'],
+    dest: '{{WWW}}/assets/fonts'
+  },
   copyIndexContent: {
     src: ['{{SRC}}/index.html', '{{SRC}}/manifest.json', '{{SRC}}/service-worker.js'],
     dest: '{{WWW}}'

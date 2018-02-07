@@ -51,6 +51,13 @@
           <h2 text-wrap>Total activities</h2>
           <p item-content>{{ exercise.activities.length }} activities</p>
         </ion-item>
+        <button (click)="viewMuscleExercises()" ion-item>
+          <ion-icon color="primary" item-start md-name="fitness_center"></ion-icon>
+          <h2>Muscle group exercises</h2>
+          <ion-note item-right>
+            <ion-icon name="arrow-forward"></ion-icon>
+          </ion-note>
+        </button>
         <ion-list-header>Review</ion-list-header>
         <ion-item>
           <h2>Duration</h2>

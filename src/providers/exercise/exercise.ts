@@ -13,18 +13,24 @@ import { FirebaseError } from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Activity, ActivityCategory, Exercise } from '../../models';
+import { Activity, ActivityCategory, Exercise, IMuscleGroup } from '../../models';
 
 const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 
 @Injectable()
 export class ExerciseProvider {
   private _activities$: FirebaseListObservable<ActivityCategory[]>;
+  private _muscleGroupExercises$: FirebaseListObservable<IMuscleGroup[]>;
   private _trendDaysSubject: Subject<any> = new Subject();
   constructor(
     private _db: AngularFireDatabase
   ) {
     this._activities$ = this._db.list('/activities', {
+      query: {
+        orderByChild: 'name'
+      }
+    });
+    this._muscleGroupExercises$ = this._db.list('/muscle-exercises', {
       query: {
         orderByChild: 'name'
       }
@@ -45,6 +51,10 @@ export class ExerciseProvider {
 
   public getExercise$(authId: string, date?: string): FirebaseObjectObservable<Exercise> {
     return this._db.object(`/${authId}/exercise/${date || CURRENT_DAY}`);
+  }
+
+  public getMuscleGroupExercises$(): FirebaseListObservable<IMuscleGroup[]> {
+    return this._muscleGroupExercises$;
   }
 
   public getTrends$(authId: string, days?: number): FirebaseListObservable<Exercise[]> {

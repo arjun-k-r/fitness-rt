@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Muscle group exercises</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-item-group *ngFor="let mucleGroup of (muscleGroups | async)">
+    <ion-item-divider>{{ mucleGroup.group }}</ion-item-divider>
+    <button (click)="openDetails(muscle)" ion-item *ngFor="let muscle of muscleGroup.muscles">
+      {{ muscle.name }}
+    </button>
+  </ion-item-group>
+</ion-content>

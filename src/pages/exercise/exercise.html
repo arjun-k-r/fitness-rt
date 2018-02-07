@@ -43,7 +43,7 @@
         <ion-list-header>Activities</ion-list-header>
         <button (click)="changeActivity(i)" detail-push ion-item *ngFor="let activity of exercise.activities; let i = index">
           <ion-icon color="primary" item-start name="create"></ion-icon>
-          <h2 text-wrap>{{ activity.name }}, {{ activity.category }}</h2>
+          <h2 text-wrap>{{ activity.category }}, {{ activity.name }}</h2>
           <p>{{ activity.duration }} mins</p>
           <p item-content>{{ activity.energyBurn }} kcal</p>
         </button>

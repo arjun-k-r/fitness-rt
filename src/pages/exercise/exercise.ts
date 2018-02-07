@@ -208,6 +208,7 @@ export class ExercisePage {
     this._exerciseSubscription = this._exercisePvd.getExercise$(this._authId, this.exerciseDate).subscribe((e: Exercise) => {
       if (!!e && e['$value'] !== null) {
         this.exercise = Object.assign({}, e);
+        this.exercise.activities = this.exercise.activities || [];
         this._notifyPvd.closeLoading();
       }
     }, (err: FirebaseError) => {

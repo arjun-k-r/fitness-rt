@@ -30,7 +30,7 @@ export class ExerciseProvider {
         orderByChild: 'name'
       }
     });
-    this._muscleGroupExercises$ = this._db.list('/muscle-exercises', {
+    this._muscleGroupExercises$ = this._db.list('/muscle-group-exercises', {
       query: {
         orderByChild: 'name'
       }

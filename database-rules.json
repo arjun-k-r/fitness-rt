@@ -12,6 +12,11 @@
         ".write": "false"
       }
     },
+    "muscle-group-exercises": {
+      ".indexOn": "name",
+      ".read": "auth != null",
+      ".write": "false"
+    },
     "$user_id": {
       ".read": "$user_id === auth.uid",
       ".write": "$user_id === auth.uid",

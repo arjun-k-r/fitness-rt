@@ -45,9 +45,6 @@ export class ActivityListPage {
   }
 
   public done(): void {
-    this.selectedActivities.forEach((a: Activity) => {
-      a.name = `${a.category}, ${a.name}`;
-    });
     this._viewCtrl.dismiss(this.selectedActivities);
   }
 

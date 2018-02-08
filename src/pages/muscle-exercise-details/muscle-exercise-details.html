@@ -6,4 +6,42 @@
 
 
 <ion-content>
+  <div padding>
+    <h2>Preparation</h2>
+    <p>{{ exercise?.preparation }}</p>
+    <h2>Execution</h2>
+    <p>{{ exercise?.execution }}</p>
+  </div>
+  <ion-list>
+    <ion-list-header>Classification</ion-list-header>
+    <ion-item>
+      <h2>Utility</h2>
+      <p item-content>{{ exercise?.utility }}</p>
+    </ion-item>
+    <ion-item>
+      <h2>Mechanics</h2>
+      <p item-content>{{ exercise?.mechanics }}</p>
+    </ion-item>
+    <ion-item>
+      <h2>Force</h2>
+      <p item-content>{{ exercise?.force }}</p>
+    </ion-item>
+    <ion-list-header>Muscles</ion-list-header>
+    <ion-item>
+      <h2>Target muscle</h2>
+      <p item-content>{{ exercise?.target }}</p>
+    </ion-item>
+    <ion-item-divider>Synergists</ion-item-divider>
+    <ion-item *ngFor="let muscle of exercise?.synergists">
+      <h2>{{ muscle }}</h2>
+    </ion-item>
+    <ion-item-divider>Stabilizers</ion-item-divider>
+    <ion-item *ngFor="let muscle of exercise?.stabilizers">
+      <h2>{{ muscle }}</h2>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <h2>Reference</h2>
+    <a [href]="exercise?.source" target="_blank">ExRx.net, {{ exercise?.name }}</a>
+  </div>
 </ion-content>

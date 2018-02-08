@@ -105,6 +105,277 @@
               "Iliocastalis thoracis"
             ],
             "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/CBNeckLtrFlxBelt.html"
+          },
+          {
+            "name": "Lever Neck Flexion (plate loaded)",
+            "preparation": "Sit on seat in machine. Position padded lever on face. Position body so neck is in line with lever axis. Grasp handles for support.",
+            "execution": "Move head forward by flexing neck until chin touches upper chest. Return head by hyperextending neck and repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "None"
+            ],
+            "stabilizers": [
+              "Latissimus Dorsi",
+              "Deltoid, Posterior",
+              "Rhomboids",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Triceps Brachii",
+              "Rectus Abdominis",
+              "Obliques"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/LVNeckFlexionH.html"
+          },
+          {
+            "name": "Lever Lateral Neck Flexion (plate loaded)",
+            "preparation": "Sit on seat in machine with feet apart. Position padded lever on side of head. Center body so neck is in line with lever axis. Grasp handles for support.",
+            "execution": "Move head down to side by laterally flexing neck. Return head to opposite side and repeat. Sit in machine backwards and continue with opposite side.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "Splenius",
+              "Erector Spinae",
+              "Levator Scapulae",
+              "Trapezius, Upper",
+              "Obliques",
+              "Quadratus lumborum",
+              "Psoas major",
+              "Iliocastalis lumborum",
+              "Iliocastalis thoracis"
+            ],
+            "stabilizers": [
+              "Latissimus Dorsi",
+              "Pectoralis Major, Sternal",
+              "Pectoralis Major, Clavicular",
+              "Pectoralis Minor",
+              "Obliques",
+              "Quadratus lumborum",
+              "Psoas major",
+              "Iliocastalis lumborum",
+              "Iliocastalis thoracis"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/LVLateralNeckFlexionH.html"
+          },
+          {
+            "name": "Lever Neck Flexion",
+            "preparation": "Sit on seat in machine. Position padded lever on face. Position body so neck is in line with lever axis. Grasp handles for support.",
+            "execution": "Move head forward by flexing neck until chin touches upper chest. Return head by hyperextending neck and repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "None"
+            ],
+            "stabilizers": [
+              "Latissimus Dorsi",
+              "Deltoid, Posterior",
+              "Rhomboids",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Triceps Brachii",
+              "Rectus Abdominis",
+              "Obliques"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/LVNeckFlx.html"
+          },
+          {
+            "name": "Lever Lateral Neck Flexion",
+            "preparation": "Sit on seat in machine with feet apart. Position side of head on padded lever. Center body so neck is in line with lever axis. Grasp handles for support.",
+            "execution": "Move head down to side by laterally flexing neck. Return head to opposite side and repeat. Sit in machine backwards and continue with opposite side.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "Splenius",
+              "Erector Spinae",
+              "Levator Scapulae",
+              "Trapezius, Upper ",
+              "Obliques",
+              "Quadratus lumborum",
+              "Psoas major",
+              "Iliocastalis lumborum",
+              "Iliocastalis thoracis"
+            ],
+            "stabilizers": [
+              "Latissimus Dorsi",
+              "Pectoralis Major, Sternal",
+              "Pectoralis Major, Clavicular",
+              "Pectoralis Minor ",
+              "Obliques",
+              "Quadratus lumborum",
+              "Psoas major",
+              "Iliocastalis lumborum",
+              "Iliocastalis thoracis"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/LVNeckLtrFlx.html"
+          },
+          {
+            "name": "Weighted Lying Neck Flexion",
+            "preparation": "Place folded towel on weight plate(s). Lie supine on bench, head extending off of end of bench. Place plates on forehead with towel placed in between for comfort.",
+            "execution": "Move head up by flexing neck until chin touches upper chest. Return by hyperextending neck and repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "None"
+            ],
+            "stabilizers": [
+              "Rectus Abdominis",
+              "Obliques"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/WtLyingNeckFlexion.html"
+          },
+          {
+            "name": "Weighted Neck Flexion",
+            "preparation": "Place folded towel on weight plate. Lie supine perpendicular on bench with low back and hips extending off and feet on floor. Place weight and towel on forehead. Place plates on forehead with towel placed in between for comfort.",
+            "execution": "Move head up by flexing neck until chin touches upper chest. Return by hyperextending neck and repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "None"
+            ],
+            "stabilizers": [
+              "Rectus Abdominis",
+              "Obliques"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/WtNeckFlx.html"
+          },
+          {
+            "name": "Weighted Lateral Neck Flexion",
+            "preparation": "Place folded towel on weight plate. Lie on bench on side with knees and hips bent and arm hanging over edge. Position weight and towel on side of upper head. Hold weight on side of head with hand of upper arm. Place hand of lower arm on floor for support.",
+            "execution": "Move head up to side by laterally flexing neck. Lower head to opposite side and repeat. Lie on other side and continue.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "Splenius",
+              "Erector Spinae",
+              "Levator Scapulae",
+              "Trapezius, Upper"
+            ],
+            "stabilizers": [
+              "None"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/WtNeckLateralFlex.html"
+          },
+          {
+            "name": "Front Neck Bridge",
+            "preparation": "Kneel on all fours on well cushioned mat. Place head on mat between hands. Rise and straighten knees. Fold hands behind low back or hips.",
+            "execution": "Roll back onto forehead until nose touches mat. Roll forward onto top of head until chin touches upper chest. Repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Push & Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "Splenius",
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Erector Spinae, Cervicis & Capitis Fibers"
+            ],
+            "stabilizers": [
+              "Quadriceps",
+              "Erector Spinae",
+              "Rectus Abdominis",
+              "Obliques",
+              "Iliopsoas",
+              "Tensor Fasciae Latae",
+              "Sartorius",
+              "Gastrocnemius",
+              "Soleus"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/BWFrontNeckBridge.html"
+          },
+          {
+            "name": "Wall Front Neck Bridge",
+            "preparation": "Place small or folded cushioned mat on wall or column approximately chest height. With hands supporting mat on each side stand back so feet are away from wall or column with body leaning forward. Place top of forehead on mat. Fold hands behind low back or hips.",
+            "execution": "Roll down onto forehead until nose touches mat. Roll up onto top of head until chin touches upper chest. Repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Push & Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "Splenius",
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Erector Spinae, Cervicis & Capitis Fibers"
+            ],
+            "stabilizers": [
+              "Waist flexors",
+              "Waist extensors",
+              "Hip flexors",
+              "Knee extenors"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/BWWallFrontNeckBridge.html"
+          },
+          {
+            "name": "Wall Side Neck Bridge",
+            "preparation": "Place small or folded cushioned mat on column or at end of wall approximately shoulder height. With hands supporting mat, stand with side toward mat. Step far to side so feet are away from wall or column forward. Place side of head on mat with shoulder extending over end of adjacent side of column or wall so body leans to side. Fold hands behind low back or hips.",
+            "execution": "Push side of head into mat and roll onto top of head moving body away from mat. Return to original position by rolling back down to side of head while bringing shoulder back over end of column or wall. Repeat.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "Splenius",
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Erector Spinae, Cervicis & Capitis Fibers",
+              "Obliques",
+              "Quadratus lumborum",
+              "Psoas major",
+              "Iliocastalis lumborum",
+              "Iliocastalis thoracis"
+            ],
+            "stabilizers": [
+              "Gluteus Medius",
+              "Gluteus Minimus "
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/BWWallSideNeckBridge.html"
+          },
+          {
+            "name": "Neck Retraction Stretch",
+            "preparation": "Stand or sit.",
+            "execution": "Pull head back as far possible while looking slightly down. Hold stretch.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Longus colli",
+            "synergists": [
+              "Splenius",
+              "Trapezius, Upper",
+              "Erector Spinae, Cervicis & Capitis Fibers"
+            ],
+            "stabilizers": [
+              "None"
+            ],
+            "source": "http://www.exrx.net/Stretches/Sternocleidomastoid/NeckRetraction.html"
+          },
+          {
+            "name": "Neck Retraction Stretch",
+            "preparation": "Stand or sit.",
+            "execution": "Turn head over shoulder to one side. Hold stretch. Repeat to other side.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Sternocleidomastoid",
+            "synergists": [
+              "Splenius"
+            ],
+            "stabilizers": [
+              "None"
+            ],
+            "source": "http://www.exrx.net/Stretches/Sternocleidomastoid/NeckRotation.html"
           }
         ]
       },
@@ -112,18 +383,259 @@
         "name": "Splenius",
         "exercises": [
           {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
+            "name": "Cable Neck Extension",
+            "preparation": "Sit on bench facing pulley. Place neck in harness cable attachment. Place forearms on lower thighs for support.",
+            "execution": "Move head away from pulley by hyperextending neck. Return by bending neck forward until chin touches upper chest. Repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Splenius",
             "synergists": [
-              ""
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Erector Spinae, Cervicis & Capitis Fibers",
+              "Sternocleidomastoid, Posterior Fibers "
             ],
-            "stabilizers": [],
-            "source": ""
+            "stabilizers": [
+              "Pectoralis Major, Sternal",
+              "Pectoralis Major, Clavicular",
+              "Pectoralis Minor",
+              "Latissimus Dorsi",
+              "Rhomboids"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Splenius/CBNeckExt.html"
+          },
+          {
+            "name": "Cable Neck Extension (with belt)",
+            "preparation": "Sit on bench facing low pulley. Place latched belt on low pulley cable by attaching carabiner on belt buckle. Place head in belt loop. With belt above ears, clamp belt snugly around head by tightly gripping ends close to forehead. Place other hand or forearm on lower thighs for support.",
+            "execution": "Pull head up and back by hyperextending neck. Return by bending neck forward until chin touches upper chest. Repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Splenius",
+            "synergists": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Erector Spinae, Cervicis & Capitis Fibers",
+              "Sternocleidomastoid, Posterior Fibers "
+            ],
+            "stabilizers": [
+              "Pectoralis Major, Sternal",
+              "Pectoralis Major, Clavicular",
+              "Pectoralis Minor",
+              "Latissimus Dorsi",
+              "Rhomboids",
+              "Triceps Brachii",
+              "Erector Spinae",
+              "Gluteus Maximus ",
+              "Rectus Abdominis",
+              "Obliques"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Splenius/CBNeckExtBelt.html"
+          },
+          {
+            "name": "Lever Neck Extension (plate loaded)",
+            "preparation": "Sit on seat in machine. Place back of head under padded lever. Position body so neck is in line with lever axis. Grasp handles for support.",
+            "execution": "Move head back by hyperextending neck. Return by bending neck forward until chin touches upper chest. Repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Splenius",
+            "synergists": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Erector Spinae, Cervicis & Capitis Fibers",
+              "Sternocleidomastoid, Posterior Fibers "
+            ],
+            "stabilizers": [
+              "Pectoralis Major, Sternal",
+              "Pectoralis Major, Clavicular",
+              "Pectoralis Minor",
+              "Serratus Anterior",
+              "Deltoid, Anterior",
+              "Triceps Brachii "
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Splenius/LVNeckExtentionH.html"
+          },
+          {
+            "name": "Lever Neck Extension",
+            "preparation": "Sit on seat in machine. Place back of head under padded lever. Position body so neck is in line with lever axis. Grasp handles for support.",
+            "execution": "Move head back by hyperextending neck. Return by bending neck forward until chin touches upper chest. Repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Splenius",
+            "synergists": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Erector Spinae, Cervicis & Capitis Fibers",
+              "Sternocleidomastoid, Posterior Fibers "
+            ],
+            "stabilizers": [
+              "Pectoralis Major, Sternal",
+              "Pectoralis Major, Clavicular",
+              "Pectoralis Minor",
+              "Serratus Anterior",
+              "Deltoid, Anterior",
+              "Triceps Brachii "
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Splenius/LVNeckExt.html"
+          },
+          {
+            "name": "Weighted Lying Neck Extension",
+            "preparation": "Lie prone on bench with head extended off of end and folded towel and weight plate(s) on floor. With both hands, place plate(s) on back of head with towel placed in between for comfort.",
+            "execution": "Move head up by hyperextending neck up as high as possible. Return by bending neck down until chin touches upper chest. Repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Splenius",
+            "synergists": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Erector Spinae, Cervicis & Capitis Fibers",
+              "Sternocleidomastoid, Posterior Fibers "
+            ],
+            "stabilizers": [
+              "None"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Splenius/WtLyingNeckExtension.html"
+          },
+          {
+            "name": "Weighted Neck Extension",
+            "preparation": "Kneel on side of bench with weight plates on end of bench. With both hands, hold weight plate(s) cushioned with towel. Position upper body prone and perpendicular on bench with head and arms extending off of side. With both hands, place weight plate(s) on back of head with towel placed in between for comfort.",
+            "execution": "Move head up by hyperextending neck up as high as possible. Return by bending neck down until chin touches upper chest. Repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Splenius",
+            "synergists": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Erector Spinae, Cervicis & Capitis Fibers",
+              "Sternocleidomastoid, Posterior Fibers"
+            ],
+            "stabilizers": [
+              "None"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Splenius/WtNeckExtension.html"
+          },
+          {
+            "name": "Weighted Seated Neck Extension",
+            "preparation": "Place folded towel on weight plate. On bench or stool, sit bent over on thighs. With both hands, place plate(s) on back of head with towel placed in between for comfort.",
+            "execution": "Move head up by hyperextending neck up as high as possible. Return by bending neck down until chin touches upper chest. Repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Splenius",
+            "synergists": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Erector Spinae, Cervicis & Capitis Fibers",
+              "Sternocleidomastoid, Posterior Fibers"
+            ],
+            "stabilizers": [
+              "None"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Splenius/WtNeckExt.html"
+          },
+          {
+            "name": "Weighted Neck Harness Extension",
+            "preparation": "Sit on bench with weighted neck harness on head. Allow weight to dangle in front by bending over.",
+            "execution": "Move head up by hyperextending neck. Return by bending neck down until chin touches upper chest. Repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Splenius",
+            "synergists": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Erector Spinae, Cervicis & Capitis Fibers",
+              "Sternocleidomastoid, Posterior Fibers"
+            ],
+            "stabilizers": [
+              "None"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Splenius/WtNeckHarnessExt.html"
+          },
+          {
+            "name": "Rear Neck Bridge",
+            "preparation": "Lying supine on well cushioned mat. Position feet very close to hips. Raise buttocks and low back slightly off of floor and fold hands on abdomen.",
+            "execution": "Extend hips and knees while pushing head back into floor. Roll back on head while arching spine high off of floor. Hyperextend neck back in attempt to bring forehead toward mat. Return body to close to mat until back of head and shoulders make contact with mat. Repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Splenius",
+            "synergists": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Sternocleidomastoid, Posterior Fibers",
+              "Erector Spinae",
+              "Gluteus Maximus",
+              "Quadriceps"
+            ],
+            "stabilizers": [
+              "None"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Splenius/BWRearNeckBridge.html"
+          },
+          {
+            "name": "Wall Rear Neck Bridge",
+            "preparation": "Hold small or folded cushioned mat behind head. Facing away from wall or column position head and back of shoulders low on wall or column with mat between. Stand with feet far away from wall or column so body is angled back. Position hips and back straight and bend knees just slightly. Place arms to side or hold hands on abdomen.",
+            "execution": "Push head back into mat and roll head upward. Arch spine and straighten knees. Hyperextend neck so head is facing up. Return to origianl position by rolling head down while allowing low back to straighten and knees to bend slightly. Continue down until back of head and shoulders make contact with mat. Repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Splenius",
+            "synergists": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Sternocleidomastoid, Posterior Fibers",
+              "Erector Spinae",
+              "Gluteus Maximus",
+              "Quadriceps"
+            ],
+            "stabilizers": [
+              "Gluteus Maximus"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Splenius/BWWallRearNeckBridge.html"
+          },
+          {
+            "name": "Lying Neck Retraction Isometric",
+            "preparation": "Lie supine on mat.",
+            "execution": "Press head down into mat and hold. Relax and repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Pull",
+            "target": "Splenius",
+            "synergists": [
+              "None"
+            ],
+            "stabilizers": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Erector Spinae, Cervicis & Capitis Fibers",
+              "Longus capitis",
+              "Longus colli",
+              "Rectus capitus "
+            ],
+            "source": "http://www.exrx.net/WeightExercises/Splenius/LyingIsometricNeckRetr.html"
+          },
+          {
+            "name": "Neck Extensor Stretch",
+            "preparation": "Bow head forward with jaw shut. Depress chin into top of sternum.",
+            "execution": "Slightly turn head to one side. Hold stretch. Repeat to other side.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "None",
+            "target": "Splenius",
+            "synergists": [
+              "Trapezius, Upper",
+              "Erector Spinae, Cervicis & Capitis Fibers"
+            ],
+            "stabilizers": [
+              "None"
+            ],
+            "source": "http://www.exrx.net/Stretches/Splenius/Neck.html"
           }
         ]
       }
@@ -146,7 +658,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -165,7 +679,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -184,7 +700,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -203,7 +721,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -227,7 +747,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -246,7 +768,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -265,7 +789,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -289,7 +815,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -308,7 +836,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -327,7 +857,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -346,7 +878,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -365,7 +899,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -389,7 +925,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -408,7 +946,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -427,7 +967,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -446,7 +988,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -465,7 +1009,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -484,7 +1030,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -503,7 +1051,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -522,7 +1072,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -541,7 +1093,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -565,7 +1119,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -584,7 +1140,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -603,7 +1161,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -622,7 +1182,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -641,7 +1203,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -665,7 +1229,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -684,7 +1250,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -703,7 +1271,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -722,7 +1292,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -741,7 +1313,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -765,7 +1339,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -784,7 +1360,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -803,7 +1381,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -822,7 +1402,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -846,7 +1428,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -865,7 +1449,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -884,7 +1470,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -908,7 +1496,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -927,7 +1517,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -946,7 +1538,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -965,7 +1559,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]
@@ -984,7 +1580,9 @@
             "synergists": [
               ""
             ],
-            "stabilizers": [],
+            "stabilizers": [
+              ""
+            ],
             "source": ""
           }
         ]

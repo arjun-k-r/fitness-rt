@@ -8,7 +8,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 import { IMuscleGroup, IMuscle } from '../../models';
 
 // Providers
-import { ExerciseProvider, NotificationProvider } from '../../providers';
+import { ExerciseProvider } from '../../providers';
 import { FirebaseListObservable } from 'angularfire2/database-deprecated';
 
 @IonicPage({
@@ -21,8 +21,7 @@ export class MuscleGroupListPage {
   public muscleGroups$: FirebaseListObservable<IMuscleGroup[]>;
   constructor(
     private _exercisePvd: ExerciseProvider,
-    private _navCtrl: NavController,
-    private _notifyPvd: NotificationProvider
+    private _navCtrl: NavController
   ) {
   }
 

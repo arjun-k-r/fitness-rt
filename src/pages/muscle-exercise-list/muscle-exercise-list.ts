@@ -8,8 +8,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { IMuscle, IMuscleExercise } from '../../models';
 
 // Providers
-import { ExerciseProvider, NotificationProvider } from '../../providers';
-import { FirebaseListObservable } from 'angularfire2/database-deprecated';
+import { NotificationProvider } from '../../providers';
 
 @IonicPage({
   name: 'muscle-exercise-list'

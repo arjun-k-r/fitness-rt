@@ -41,8 +41,8 @@ export class FitnessTrend {
 export class HeartRate {
   constructor(
     public max: number,
-    public trainingMin: number,
-    public trainingMax: number
+    public trainingMax: number,
+    public trainingMin: number
   ) {}
 }
 

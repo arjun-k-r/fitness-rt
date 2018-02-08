@@ -7,9 +7,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 // Models
 import { IMuscle, IMuscleExercise } from '../../models';
 
-// Providers
-import { NotificationProvider } from '../../providers';
-
 @IonicPage({
   name: 'muscle-exercise-list'
 })

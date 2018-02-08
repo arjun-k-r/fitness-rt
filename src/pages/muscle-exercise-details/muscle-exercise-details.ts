@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavParams } from 'ionic-angular';
 
 // Models
-import { IMuscle } from '../../models';
+import { IMuscleExercise } from '../../models';
 
 @IonicPage({
   name: 'muscle-exercise-details'
@@ -14,8 +14,8 @@ import { IMuscle } from '../../models';
   templateUrl: 'muscle-exercise-details.html',
 })
 export class MuscleExerciseDetailsPage {
-  public muscle: IMuscle;
+  public exercise: IMuscleExercise;
   constructor(private _params: NavParams) {
-    this.muscle = this._params.get('muscle');
+    this.exercise = this._params.get('exercise');
   }
 }

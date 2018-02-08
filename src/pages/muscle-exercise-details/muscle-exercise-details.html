@@ -1,15 +1,9 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ muscle.name }} exercises</ion-title>
+    <ion-title>{{ exercise.name }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
-  <button (click)="openDetails(exercise)" ion-item *ngFor="let exercise of muscle.exercises">
-    {{ exercise.name }}
-    <ion-note item-right>
-      <ion-icon name="arrow-forward"></ion-icon>
-    </ion-note>
-  </button>
 </ion-content>

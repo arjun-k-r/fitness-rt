@@ -233,8 +233,8 @@ export class ExercisePage {
     this._navCtrl.push('overtraining-questionaire');
   }
 
-  public viewMuscleExercises(): void {
-    this._navCtrl.push('muscle-exercise-list');
+  public viewMuscleGroups(): void {
+    this._navCtrl.push('muscle-group-list');
   }
 
   public viewPageInfo(): void {

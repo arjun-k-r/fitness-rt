@@ -3,15 +3,13 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
 import { MuscleExerciseListPage } from './muscle-exercise-list';
-import { ExerciseProviderModule } from '../../providers';
 
 @NgModule({
   declarations: [
-    MuscleExerciseListPage,
+    MuscleExerciseListPage
   ],
   imports: [
-    IonicPageModule.forChild(MuscleExerciseListPage),
-    ExerciseProviderModule
+    IonicPageModule.forChild(MuscleExerciseListPage)
   ],
 })
 export class MuscleExerciseListPageModule {}

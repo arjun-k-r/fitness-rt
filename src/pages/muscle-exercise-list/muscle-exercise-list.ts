@@ -2,10 +2,10 @@
 import { Component } from '@angular/core';
 
 // Ionic
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 // Models
-import { IMuscleGroup, IMuscle } from '../../models';
+import { IMuscle, IMuscleExercise } from '../../models';
 
 // Providers
 import { ExerciseProvider, NotificationProvider } from '../../providers';
@@ -18,20 +18,13 @@ import { FirebaseListObservable } from 'angularfire2/database-deprecated';
   templateUrl: 'muscle-exercise-list.html',
 })
 export class MuscleExerciseListPage {
-  public muscleGroups$: FirebaseListObservable<IMuscleGroup[]>;
-  constructor(
-    private _exercisePvd: ExerciseProvider,
-    private _navCtrl: NavController,
-    private _notifyPvd: NotificationProvider
-  ) {
+  public muscle: IMuscle;
+  constructor(private _navCtrl: NavController, private _params: NavParams) {
+    this.muscle = this._params.get('muscle');
   }
 
-  public openDetails(muscle: IMuscle): void {
-    this._navCtrl.push('muscle-exercise-details', { muscle });
-  }
-
-  ionViewWillEnter(): void {
-    this.muscleGroups$ = this._exercisePvd.getMuscleGroupExercises$();
+  public openDetails(exercise: IMuscleExercise): void {
+    this._navCtrl.push('muscle-exercise-details', { exercise });
   }
 
 }

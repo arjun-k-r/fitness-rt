@@ -1,18 +1,15 @@
-<!--
-  Generated template for the MuscleExerciseDetailsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>MuscleExerciseDetails</ion-title>
+    <ion-title>{{ muscle.name }} exercises</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <button (click)="openDetails(exercise)" ion-item *ngFor="let exercise of muscle.exercises">
+    {{ exercise.name }}
+    <ion-note item-right>
+      <ion-icon name="arrow-forward"></ion-icon>
+    </ion-note>
+  </button>
 </ion-content>

@@ -1,25 +1,21 @@
+// Angular
 import { Component } from '@angular/core';
+
+// Ionic
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the MuscleExerciseDetailsPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+// Models
+import { IMuscleGroup, IMuscle } from '../../models';
 
-@IonicPage()
+@IonicPage({
+  name: 'muscle-exercise-details'
+})
 @Component({
-  selector: 'page-muscle-exercise-details',
   templateUrl: 'muscle-exercise-details.html',
 })
 export class MuscleExerciseDetailsPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public muscle: IMuscle;
+  constructor(private _navCtrl: NavController, private _params: NavParams) {
+    this.muscle = this._params.get('muscle');
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MuscleExerciseDetailsPage');
-  }
-
 }

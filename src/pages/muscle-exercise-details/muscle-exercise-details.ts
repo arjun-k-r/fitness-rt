@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 
 // Ionic
-import { IonicPage, NavParams } from 'ionic-angular';
+import { IonicPage, NavParams, NavController } from 'ionic-angular';
 
 // Models
 import { IMuscleExercise } from '../../models';
@@ -15,7 +15,10 @@ import { IMuscleExercise } from '../../models';
 })
 export class MuscleExerciseDetailsPage {
   public exercise: IMuscleExercise;
-  constructor(private _params: NavParams) {
+  constructor(private _navCtrl: NavController, private _params: NavParams) {
     this.exercise = this._params.get('exercise');
+    if (!this.exercise) {
+      this._navCtrl.setRoot('exercise');
+    }
   }
 }

@@ -17,6 +17,9 @@ export class MuscleExerciseListPage {
   public muscle: IMuscle;
   constructor(private _navCtrl: NavController, private _params: NavParams) {
     this.muscle = this._params.get('muscle');
+    if (!this.muscle) {
+      this._navCtrl.setRoot('exercise');
+    }
   }
 
   public openDetails(exercise: IMuscleExercise): void {

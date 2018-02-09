@@ -645,7 +645,555 @@
     "group": "Shoulders",
     "muscles": [
       {
-        "name": "Deltoid (Anterior)",
+        "name": "Deltoid, Anterior",
+        "exercises": [
+          {
+            "name": "Barbell Behind Neck Press",
+            "preparation": "Grasp barbell with overhand grip from rack or clean from floor. Position bar behind neck.",
+            "execution": "Press bar upward until arms are extended overhead. Return behind neck and repeat.",
+            "utility": "Basic",
+            "mechanics": "Compound",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Deltoid, Lateral",
+              "Supraspinatus",
+              "Triceps Brachii",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Triceps, Long Head",
+              "Trapezius, Upper",
+              "Levator Scapulae"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/BBBehindNeckPress.html"
+          },
+          {
+            "name": "Barbell Front Raise",
+            "preparation": "Grasp barbell with overhand grip with elbows straight or slightly bent.",
+            "execution": "Raise barbell forward and upward until upper arms are above horizontal. Lower and repeat.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Pectoralis Major, Clavicular",
+              "Deltoid, Lateral",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Wrist Extensors"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/BBFrontRaise.html"
+          },
+          {
+            "name": "Barbell Incline Front Raise",
+            "preparation": "Grasp barbell with shoulder width overhand grip. Lie supine on upper portion of 45 degree incline bench with legs straight. Position barbell on top of upper thighs. ",
+            "execution": "With elbows straight or slightly bent, raise barbell up and over shoulders until uppers arm are vertical. Lower barbell to upper thigh and repeat. ",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Pectoralis Major, Clavicular",
+              "Deltoid, Lateral",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Serratus Anterior",
+              "Wrist Extensors "
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/BBInclineFrontRaise.html"
+          },
+          {
+            "name": "Barbell Military Press",
+            "preparation": "Grasp barbell from rack or clean barbell from floor with overhand grip, slightly wider than shoulder width. Position bar in front of neck.",
+            "execution": "Press bar upward until arms are extended overhead. Lower to front of neck and repeat.",
+            "utility": "Basic",
+            "mechanics": "Compound",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Pectoralis Major, Clavicular",
+              "Triceps Brachii",
+              "Deltoid, Lateral",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations "
+            ],
+            "stabilizers": [
+              "Triceps, Long Head",
+              "Biceps Brachii, Short Head",
+              "Trapezius, Upper",
+              "Levator Scapulae "
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/BBMilitaryPress.html"
+          },
+          {
+            "name": "Barbell Seated Military Press",
+            "preparation": "Grasp barbell with slightly wider than shoulder width overhand grip from rack. Position bar near upper chest.",
+            "execution": "Press bar upward until arms are extended overhead. Return to upper chest and repeat.",
+            "utility": "Basic",
+            "mechanics": "Compound",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Deltoid, Lateral",
+              "Supraspinatus",
+              "Triceps Brachii",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Triceps, Long Head",
+              "Trapezius, Upper",
+              "Levator Scapulae"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/BBSeatedMilitaryPress.html"
+          },
+          {
+            "name": "Barbell Shoulder Press",
+            "preparation": "Grasp barbell with slightly wider than shoulder width overhand grip from rack. Position bar near upper chest.",
+            "execution": "Press bar upward until arms are extended overhead. Return to upper chest and repeat.",
+            "utility": "Basic",
+            "mechanics": "Compound",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Deltoid, Lateral",
+              "Supraspinatus",
+              "Triceps Brachii",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Triceps, Long Head",
+              "Trapezius, Upper",
+              "Levator Scapulae"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/BBShoulderPress.html"
+          },
+          {
+            "name": "Cable Bar Behind Neck Press",
+            "preparation": "Stand facing cable bar, mounted on each side to upper waist height narrow double pulley cables. Grasp cable bar with wide overhand grip upper chest height. Stand directly between both cable pulleys with one foot forward and other foot back. Push cable bar over head and position cable bar behind neck or rest on shoulders.",
+            "execution": "Press cable bar upward until arms are extended overhead. Return behind neck and repeat.",
+            "utility": "Basic",
+            "mechanics": "Compound",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Deltoid, Lateral",
+              "Supraspinatus",
+              "Triceps Brachii",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Triceps, Long Head",
+              "Trapezius, Upper",
+              "Levator Scapulae"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBBarBehindNeckPress.html"
+          },
+          {
+            "name": "Cable Bar Military Press",
+            "preparation": "Stand facing cable bar, mounted on each side to upper waist height narrow double pulley cables. Grasp cable bar with overhand grip, slightly wider than shoulder width. Position cable bar upper chest height. Stand directly between both cable pulleys with one foot forward and other foot back.",
+            "execution": "Press cable bar upward until arms are extended overhead. Return to upper chest and repeat.",
+            "utility": "Basic",
+            "mechanics": "Compound",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Deltoid, Lateral",
+              "Supraspinatus",
+              "Triceps Brachii",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Triceps, Long Head",
+              "Biceps Brachii, Short Head",
+              "Trapezius, Upper",
+              "Levator Scapulae"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBBarMilitaryPress.html"
+          },
+          {
+            "name": "Cable Bar Shoulder Press",
+            "preparation": "Stand facing cable bar mounted on each side to upper waist height narrow double pulley cables. Grasp cable bar with wide overhand grip and position upper chest height. Stand directly between both cable pulleys with one foot forward and other foot back.",
+            "execution": "Press cable bar upward until arms are extended overhead. Return to upper chest and repeat.",
+            "utility": "Basic",
+            "mechanics": "Compound",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Deltoid, Lateral",
+              "Supraspinatus",
+              "Triceps Brachii",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Triceps, Long Head",
+              "Trapezius, Upper",
+              "Levator Scapulae"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBBarShoulderPress.html"
+          },
+          {
+            "name": "Cable Seated Front Raise",
+            "preparation": "Sit on seat above twin cable pulleys. Grasp stirrups on each side. Sit upright with arms straight down to each side with palms facing back.",
+            "execution": "Raise stirrups forward and upward until upper arms are well above horizontal. Lower and repeat.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Pectoralis Major, Clavicular",
+              "Deltoid, Lateral",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Wrist Extensors"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBSeatedFrontRaise.html"
+          },
+          {
+            "name": "Cable Alternating Front Raise",
+            "preparation": "Stand with low double pulleys behind. Grasp stirrup attachments, one in each hand. Stand away from pulley slightly with arms back somewhat at side and elbows straight or slightly bent.",
+            "execution": "Raise one stirrup forward and upward until upper arm is well above horizontal. Lower and repeat with opposite arm, alternating between arms.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Pectoralis Major, Clavicular",
+              "Deltoid, Lateral",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Wrist Extensors"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBAlternatingFrontRaise.html"
+          },
+          {
+            "name": "Cable Alternating Seated Front Raise",
+            "preparation": "Sit on seat above twin cable pulleys. Grasp stirrups on each side. Sit upright with arms straight down to each side with palms facing back.",
+            "execution": "Raise one stirrup forward and upward until upper arm is well above horizontal. Lower and repeat with opposite arm. Continue by alternating raises between sides.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Pectoralis Major, Clavicular",
+              "Deltoid, Lateral",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Wrist Extensors"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBAlternatingSeatedFrontRaise.html"
+          },
+          {
+            "name": "Cable One Arm Front Raise",
+            "preparation": "Grasp stirrup attachment. Stand away from pulley slightly with arm back somewhat at side and elbow straight or slightly bent.",
+            "execution": "Raise stirrup forward and upward until upper arm is well above horizontal. Lower and repeat. Repeat with opposite arm.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Pectoralis Major, Clavicular",
+              "Deltoid, Lateral",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Wrist Extensors"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBFrontRaise.html"
+          },
+          {
+            "name": "Cable One Arm Front Raise (with rope)",
+            "preparation": "Grasp end of Triceps Rope Cable attachment with one hand so that protruding end is in contact with side of hand (thumb and index finger). Stand away from pulley with arm back at side and elbow straight.",
+            "execution": "Raise stirrup forward and upward until arm is well above horizontal or cable makes contact with underside of upper arm. Lower and repeat. Repeat with opposite arm.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Pectoralis Major, Clavicular",
+              "Deltoid, Lateral",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Wrist Extensors"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBFrontRaiseRope.html"
+          },
+          {
+            "name": "Cable Standing Shoulder Press",
+            "preparation": "Stand between two low to medium height pulleys. Grasp cable stirrups from each side. Position stirrups to each side of shoulders with elbows down to sides and stirrups above or slightly narrower than elbows.",
+            "execution": "Push stirrups upward until arms are extended overhead. Return stirrups to sides of shoulders and repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Compound",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Deltoid, Lateral",
+              "Supraspinatus",
+              "Triceps Brachii",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Triceps, Long Head",
+              "Trapezius, Upper",
+              "Levator Scapulae "
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBStandingShoulderPress.html"
+          },
+          {
+            "name": "Cable Shoulder Press",
+            "preparation": "Sit on seat and grasp stirrups from low to medium low position from each side. Position stirrups to each side of shoulders with elbows down to sides and stirrups above or slightly narrower than elbows.",
+            "execution": "Push stirrups upward until arms are extended overhead. Return stirrups to sides of shoulders and repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Compound",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Deltoid, Lateral",
+              "Supraspinatus",
+              "Triceps Brachii",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Triceps, Long Head",
+              "Trapezius, Upper",
+              "Levator Scapulae "
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBShoulderPress.html"
+          },
+          {
+            "name": "Cable Twisting Overhead Press",
+            "preparation": "Stand beside low to medium height pulley. Grasp cable stirrup. Position stirrup to front of shoulder with elbow down to side. Place opposite hand on hip. With feet wide apart, squat down slightly.",
+            "execution": "Rotate body away from pulley and straighten legs while pushing stirrup diagonally upward toward opposite side of body. Return to original position and repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Compound",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Pectoralis Major, Clavicular",
+              "Deltoid, Lateral",
+              "Supraspinatus",
+              "Triceps Brachii",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations",
+              "Gluteus Maximus",
+              "Adductor Magnus",
+              "Quadriceps",
+              "Soleus",
+              "Obliques",
+              "Psoas major",
+              "Quadratus lumborum",
+              "Iliocastalis lumborum",
+              "Iliocastalis thoracis",
+              "Tensor Fasciae Latae",
+              "Gluteus Medius "
+            ],
+            "stabilizers": [
+              "Triceps, Long Head",
+              "Hamstrings",
+              "Gastrocnemius",
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Erector Spinae",
+              "Obliques"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBTwistingOverheadPress.html"
+          },
+          {
+            "name": "Dumbbell Arnold Press",
+            "preparation": "Stand with two dumbbells position in front of shoulders, palms facing body and elbows under wrists.",
+            "execution": "Initiate movement by bringing elbows out to sides. Continue to raise elbows outward while pressing dumbbells overhead until arms are straight. Lower to front of shoulders in opposite pattern and repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Compound",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Deltoid, Lateral",
+              "Supraspinatus",
+              "Triceps Brachii",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Triceps, Long Head",
+              "Trapezius, Upper",
+              "Levator Scapulae "
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/DBArnoldPress.html"
+          },
+          {
+            "name": "Dumbbell Front Raise",
+            "preparation": "Grasp dumbbells in both hands. Position dumbbells in front of upper legs with elbows straight or slightly bent.",
+            "execution": "Raise dumbbells forward and upward until upper arms are above horizontal. Lower and repeat.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Pectoralis Major, Clavicular",
+              "Deltoid, Lateral",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Wrist Extensors"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/DBFrontRaise.html"
+          },
+          {
+            "name": "Dumbbell Alternating Front Raise",
+            "preparation": "Grasp dumbbells in both hands. Position dumbbells in front of upper legs with elbows straight or slightly bent.",
+            "execution": "Raise one dumbbell forward and upward with until upper arm is above horizontal. Lower and repeat with opposite arm, alternating between arms.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Pectoralis Major, Clavicular",
+              "Deltoid, Lateral",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Trapezius, Upper",
+              "Levator Scapulae",
+              "Wrist Extensors"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/DBAlternatingFrontRaise.html"
+          },
+          {
+            "name": "Dumbbell Alternating Incline Front Raise",
+            "preparation": "Grasp dumbbells and lie supine on upper portion of 45 degree incline bench with legs straight. Position dumbbells downward below each shoulder.",
+            "execution": "With elbows straight or slightly bent, raise one dumbbell forward, up and over shoulder until upper arm is vertical. Lower dumbbell down to starting position. Repeat raise with other arm, alternating between sides.",
+            "utility": "Auxiliary",
+            "mechanics": "Isolated",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Pectoralis Major, Clavicular",
+              "Deltoid, Lateral",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations"
+            ],
+            "stabilizers": [
+              "Serratus Anterior",
+              "Wrist Extensors"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/DBAlternInclineFrontRaise.html"
+          },
+          {
+            "name": "Dumbbell Shoulder Press",
+            "preparation": "Position dumbbells to each side of shoulders with elbows below wrists.",
+            "execution": "Press dumbbells upward until arms are extended overhead. Lower to sides of shoulders and repeat.",
+            "utility": "Basic",
+            "mechanics": "Compound",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Deltoid, Lateral",
+              "Supraspinatus",
+              "Triceps Brachii",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations",
+              "Pectoralis Major, Clavicular"
+            ],
+            "stabilizers": [
+              "Triceps, Long Head",
+              "Biceps Brachii",
+              "Trapezius, Upper",
+              "Levator Scapulae"
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/DBShoulderPress.html"
+          },
+          {
+            "name": "Dumbbell One Arm Shoulder Press",
+            "preparation": "Stand with dumbbells positioned near shoulder with elbow below wrists.",
+            "execution": "Press dumbbell upward until arm is extended overhead. Lower to side of shoulder and repeat.",
+            "utility": "Basic or Auxiliary",
+            "mechanics": "Compound",
+            "force": "Push",
+            "target": "Deltoid, Anterior",
+            "synergists": [
+              "Deltoid, Lateral",
+              "Supraspinatus",
+              "Triceps Brachii",
+              "Trapezius, Middle",
+              "Trapezius, Lower",
+              "Serratus Anterior, Inferior Digitations",
+              "Pectoralis Major, Clavicular",
+              "Obliques",
+              "Psoas major",
+              "Iliocastalis lumborum",
+              "Iliocastalis thoracis"
+            ],
+            "stabilizers": [
+              "Triceps, Long Head",
+              "Biceps Brachii ",
+              "Trapezius, Upper",
+              "Levator Scapulae "
+            ],
+            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/DBOneArmShoulderPress.html"
+          }
+        ]
+      },
+      {
+        "name": "Deltoid, Lateral",
         "exercises": [
           {
             "name": "",
@@ -666,28 +1214,7 @@
         ]
       },
       {
-        "name": "Deltoid (Lateral)",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Deltoid (Posterior)",
+        "name": "Deltoid, Posterior",
         "exercises": [
           {
             "name": "",

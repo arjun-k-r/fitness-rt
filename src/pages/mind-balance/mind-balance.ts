@@ -140,6 +140,10 @@ export class MindBalancePage {
     this._navCtrl.push('vikruti-questionaire');
   }
 
+  public viewLifestyleGuidelines(): void {
+    this._navCtrl.push('lifestyle-guidelines');
+  }
+
   public viewPageInfo(): void {
     this._navCtrl.push('mind-balance-info');
   }

@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Lifestyle guidelines</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="pageSegment">
+      <ion-segment-button value="Vata">
+        Vata
+      </ion-segment-button>
+      <ion-segment-button value="Pitta">
+        Pitta
+      </ion-segment-button>
+      <ion-segment-button value="Kapha">
+        Kapha
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="info" [ngSwitch]="pageSegment" padding>
+  <div *ngSwitchCase="'Vata'">
+    <p>The Vatas find it
+      <strong>very difficult to maintain regular habits</strong>, that is, to eat and sleep at regular times. But this is the most
+      important thing for them to do. When Vata is out of balance this may feel almost impossible, but an effort to establish
+      a regular routine is very important for all people with a Vata body type.
+    </p>
+    <p>Rest sufficiently, and choose foods, behaviors, personal relationships, and environmental circumstances which can be
+      instrumental in balancing vata characteristics. It is also important to regulate mental and physical impulses and to
+      modify mental attitudes, emotional states, and behaviors in supportive ways.</p>
+    <p> Sweet, sour, and salty tastes decrease vata influences, so include these tastes if vata influences need to be diminished.
+      Milk, wheat, rice, and some fruits and berries can provide sweet and sour tastes.
+    </p>
+    <p>Regular exercise should be relaxed and moderate. Hatha yoga practice in a meditative mood is good, as are t'ai chi, walking,
+      and swimming. Avoid strenuous, competitive, frantic activities.</p>
+    <p>When possible, associate with people who are calmly purposeful.</p>
+    <p>Meditate every day for deep relaxation.</p>
+    <h2>Refferences</h2>
+    <a href="http://holisticonline.com/ayurveda/ayv-vata-tips-on-health.htm" target="_blank">
+      Ayurveda, Holisticonline.com, "General Tips on Health and Wellness For Vata Types"
+    </a>
+  </div>
+  <div *ngSwitchCase="'Pitta'">
+    <p>Pitta constitutions will be upset by alcohol and cigarettes, as well as by overwork, overexertion, and overheating. When
+      out of balance, they are susceptible to feeling such negative emotions as hostility, hatred, intolerance, and jealousy.
+      Therefore it is very important for Pittas to keep cool (literally and figuratively) and to lead a pure and moderate
+      lifestyle. Choose foods, attitudes, behaviors, personal relationships, and environmental circumstances which can be
+      instrumental in balancing pitta characteristics.</p>
+    <p>Because sweet, bitter, and astringent tastes decrease pitta influences, include these in your food plan if pitta characteristics
+      are too pronounced. Complex carbohydrates, milk, and some fruits are sweet; some green, leafy vegetables are bitter;
+      beans and some green vegetables are astringent.
+    </p>
+    <p>Do things that cool the mind, emotions, and body. Avoid conflicts. Cultivate the virtues of honesty, morality, kindness,
+      generosity, and self-control.</p>
+    <h2>Refferences</h2>
+    <a href="http://holisticonline.com/ayurveda/ayv-Pitta-tips-on-health.htm" target="_blank">
+      Ayurveda, Holisticonline.com, "General Tips on Health and Wellness For Pitta Types"
+    </a>
+  </div>
+  <div *ngSwitchCase="'Kapha'">
+    <p>Kapha's are prone to lethargy, sluggishness, depression, and overweight, Kaphas need activity and stimulation. </p>
+    <p>Daily exercise is more important for them than for any other type. Getting out of the house and actively seeking new
+      experiences is also valuable. </p>
+    <p>Be receptive to useful change, renounce impediments to progress, be intentional in implementing life-enhancing actions,
+      and choose foods, mental attitudes, behaviors, exercise routines, and relationships and environmental circumstances
+      which can be instrumental in balancing kapha characteristics. </p>
+    <p>Pungent, bitter, and astringent tastes decrease kapha influences. Black pepper, ginger, cumin, chili, and some other
+      spices provide the pungent taste; bitter is provided by some green leafy vegetables; and some green vegetables and
+      beans provide the astringent taste. Note that the taste that decreases a dosha usually increases one or both of the
+      other two. For general purposes, mildly increase the proportion of foods which are helpful while somewhat decreasing
+      the proportions of others-having a sampling of all six tastes at your major meal.
+    </p>
+    <p>Meditation can be more intensive for kapha constitutions than for vata or pitta constitutions. Schedule time every day
+      for prayer and meditation.</p>
+    <h2>Refferences</h2>
+    <a href="http://holisticonline.com/ayurveda/ayv-kapha-tips-for-health.htm" target="_blank">
+      Ayurveda, Holisticonline.com, "General Tips on Health and Wellness For Kapha Types"
+    </a>
+  </div>
+</ion-content>

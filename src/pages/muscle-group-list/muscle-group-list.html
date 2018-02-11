@@ -8,8 +8,8 @@
 <ion-content>
   <ion-item-group *ngFor="let muscleGroup of (muscleGroups$ | async)">
     <ion-item-divider>{{ muscleGroup.group }}</ion-item-divider>
-    <button (click)="openDetails(muscle)" ion-item *ngFor="let muscle of muscleGroup.muscles">
-      {{ muscle.name }}
+    <button (click)="openDetails(exercise)" ion-item *ngFor="let exercise of muscleGroup.exercises">
+      {{ exercise.name }}
       <ion-note item-right>
         <ion-icon name="arrow-forward"></ion-icon>
       </ion-note>

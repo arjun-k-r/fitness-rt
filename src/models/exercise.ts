@@ -26,24 +26,16 @@ export class Exercise {
 }
 
 export interface IMuscleExercise {
+    comments: string[];
+    image: string;
+    instructions: string[];
+    muscles: string[];
     name: string;
-    preparation: string;
-    execution: string;
-    utility: string;
-    mechanics: string;
-    force: string;
-    target: string;
-    synergists: string[];
-    stabilizers: string[];
-    source: string;
-}
-
-export interface IMuscle {
-    name: string;
-    exercises: IMuscleExercise;
+    variations: string[];
+    warning: string;
 }
 
 export interface IMuscleGroup {
     group: string;
-    muscles: IMuscle;
+    exercises: IMuscleExercise;
 }

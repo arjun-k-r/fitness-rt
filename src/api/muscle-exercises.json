@@ -1,2118 +1,453 @@
 [
   {
-    "group": "Neck",
-    "muscles": [
+    "group": "Arms",
+    "exercises": [
       {
-        "name": "Sternocleidomastoid",
-        "exercises": [
-          {
-            "name": "Cable Neck Flexion",
-            "preparation": "Sit on bench facing away from middle pulley. Place neck in harness cable attachment. Place arms on lower thighs for support",
-            "execution": "Move head away from pulley by bending neck forward until chin touches upper chest. Return head by hyperextending neck and repeat",
-            "utility": "Basic or Auxilary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "None"
-            ],
-            "stabilizers": [
-              "Rectus Abdominis",
-              "Obliques"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/CBNeckFlx.html"
-          },
-          {
-            "name": "Cable Neck Flexion (with belt)",
-            "preparation": "Place latched belt on high pulley cable by attaching carabiner on belt buckle. Grasp attached belt, face away from pulley, and place head in belt loop. With belt above ears, clamp belt snugly around head by tightly gripping ends close to back of mid-head. With neck braced and assistance of arm, lunge forward to angle torso forward with feet staggered. Place hand on lower thigh for support.",
-            "execution": "Pull head forward and down by flexing neck until chin touches upper chest. Return by hyperextending neck until head is angled upward. Repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "None"
-            ],
-            "stabilizers": [
-              "Rectus Abdominis",
-              "Obliques",
-              "Erector Spinae"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/CBNeckFlxBelt.html"
-          },
-          {
-            "name": "Cable Neck Rotation (with belt)",
-            "preparation": "Place workout chair or bench with vertical back support facing to one side near adjustable height cable pulley. Adjust pulley approximately height of head when seated. Place latched belt on adjustable height cable by attaching carabiner on belt buckle. Sit on bench, grasp attached belt from side. Face toward cable pulley and place head in belt loop. With belt above ears, clamp belt snugly around head by tightly gripping ends close forehead. Position torso upright with feet wide apart and hand nearest cable pulley on lower thigh for added support.",
-            "execution": "Turn head away from pulley cable by rotating head away from pulley. Turn head back toward cable pulley and repeat. Turn seat the opposite direction or attach belt to pulley on opposite side and continue with other side.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "Splenius",
-              "Erector Spinae",
-              "Levator Scapulae",
-              "Trapezius, Upper",
-              "Obliques",
-              "Quadratus lumborum",
-              "Psoas major",
-              "Iliocastalis lumborum",
-              "Iliocastalis thoracis"
-            ],
-            "stabilizers": [
-              "Latissimus Dorsi",
-              "Pectoralis Major, Sternal",
-              "Pectoralis Major, Clavicular",
-              "Trapezius, middle fibers",
-              "Levator scapulae",
-              "Obliques",
-              "Quadratus lumborum",
-              "Psoas major",
-              "Iliocastalis lumborum",
-              "Iliocastalis thoracis"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/CBNeckRotationBelt.html"
-          },
-          {
-            "name": "Cable Lateral Neck Flexion (with belt)",
-            "preparation": "Adjust pulley approximately height of neck or head when seated. Place latched belt on adjustable height cable by attaching carabiner on belt buckle. Sit on bench with pulley to one side and feet apart. Place head in belt loop. With belt above ears, clamp belt snugly around head by tightly gripping ends close to side of head. Pull torso upright by bracing opposite hand on far side of bench. ",
-            "execution": "Pull head away from pulley cable by laterally flexing neck. Tilt head back toward cable pulley and repeat. Sit on bench the opposite direction and continue with other side.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "Splenius",
-              "Erector Spinae",
-              "Levator Scapulae",
-              "Trapezius, Upper",
-              "Obliques",
-              "Quadratus lumborum",
-              "Psoas major",
-              "Iliocastalis lumborum",
-              "Iliocastalis thoracis"
-            ],
-            "stabilizers": [
-              "Latissimus Dorsi",
-              "Pectoralis Major, Sternal",
-              "Pectoralis Major, Clavicular",
-              "Trapezius, middle fibers",
-              "Levator scapulae",
-              "Obliques",
-              "Quadratus lumborum",
-              "Psoas major",
-              "Iliocastalis lumborum",
-              "Iliocastalis thoracis"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/CBNeckLtrFlxBelt.html"
-          },
-          {
-            "name": "Lever Neck Flexion (plate loaded)",
-            "preparation": "Sit on seat in machine. Position padded lever on face. Position body so neck is in line with lever axis. Grasp handles for support.",
-            "execution": "Move head forward by flexing neck until chin touches upper chest. Return head by hyperextending neck and repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "None"
-            ],
-            "stabilizers": [
-              "Latissimus Dorsi",
-              "Deltoid, Posterior",
-              "Rhomboids",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Triceps Brachii",
-              "Rectus Abdominis",
-              "Obliques"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/LVNeckFlexionH.html"
-          },
-          {
-            "name": "Lever Lateral Neck Flexion (plate loaded)",
-            "preparation": "Sit on seat in machine with feet apart. Position padded lever on side of head. Center body so neck is in line with lever axis. Grasp handles for support.",
-            "execution": "Move head down to side by laterally flexing neck. Return head to opposite side and repeat. Sit in machine backwards and continue with opposite side.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "Splenius",
-              "Erector Spinae",
-              "Levator Scapulae",
-              "Trapezius, Upper",
-              "Obliques",
-              "Quadratus lumborum",
-              "Psoas major",
-              "Iliocastalis lumborum",
-              "Iliocastalis thoracis"
-            ],
-            "stabilizers": [
-              "Latissimus Dorsi",
-              "Pectoralis Major, Sternal",
-              "Pectoralis Major, Clavicular",
-              "Pectoralis Minor",
-              "Obliques",
-              "Quadratus lumborum",
-              "Psoas major",
-              "Iliocastalis lumborum",
-              "Iliocastalis thoracis"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/LVLateralNeckFlexionH.html"
-          },
-          {
-            "name": "Lever Neck Flexion",
-            "preparation": "Sit on seat in machine. Position padded lever on face. Position body so neck is in line with lever axis. Grasp handles for support.",
-            "execution": "Move head forward by flexing neck until chin touches upper chest. Return head by hyperextending neck and repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "None"
-            ],
-            "stabilizers": [
-              "Latissimus Dorsi",
-              "Deltoid, Posterior",
-              "Rhomboids",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Triceps Brachii",
-              "Rectus Abdominis",
-              "Obliques"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/LVNeckFlx.html"
-          },
-          {
-            "name": "Lever Lateral Neck Flexion",
-            "preparation": "Sit on seat in machine with feet apart. Position side of head on padded lever. Center body so neck is in line with lever axis. Grasp handles for support.",
-            "execution": "Move head down to side by laterally flexing neck. Return head to opposite side and repeat. Sit in machine backwards and continue with opposite side.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "Splenius",
-              "Erector Spinae",
-              "Levator Scapulae",
-              "Trapezius, Upper ",
-              "Obliques",
-              "Quadratus lumborum",
-              "Psoas major",
-              "Iliocastalis lumborum",
-              "Iliocastalis thoracis"
-            ],
-            "stabilizers": [
-              "Latissimus Dorsi",
-              "Pectoralis Major, Sternal",
-              "Pectoralis Major, Clavicular",
-              "Pectoralis Minor ",
-              "Obliques",
-              "Quadratus lumborum",
-              "Psoas major",
-              "Iliocastalis lumborum",
-              "Iliocastalis thoracis"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/LVNeckLtrFlx.html"
-          },
-          {
-            "name": "Weighted Lying Neck Flexion",
-            "preparation": "Place folded towel on weight plate(s). Lie supine on bench, head extending off of end of bench. Place plates on forehead with towel placed in between for comfort.",
-            "execution": "Move head up by flexing neck until chin touches upper chest. Return by hyperextending neck and repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "None"
-            ],
-            "stabilizers": [
-              "Rectus Abdominis",
-              "Obliques"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/WtLyingNeckFlexion.html"
-          },
-          {
-            "name": "Weighted Neck Flexion",
-            "preparation": "Place folded towel on weight plate. Lie supine perpendicular on bench with low back and hips extending off and feet on floor. Place weight and towel on forehead. Place plates on forehead with towel placed in between for comfort.",
-            "execution": "Move head up by flexing neck until chin touches upper chest. Return by hyperextending neck and repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "None"
-            ],
-            "stabilizers": [
-              "Rectus Abdominis",
-              "Obliques"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/WtNeckFlx.html"
-          },
-          {
-            "name": "Weighted Lateral Neck Flexion",
-            "preparation": "Place folded towel on weight plate. Lie on bench on side with knees and hips bent and arm hanging over edge. Position weight and towel on side of upper head. Hold weight on side of head with hand of upper arm. Place hand of lower arm on floor for support.",
-            "execution": "Move head up to side by laterally flexing neck. Lower head to opposite side and repeat. Lie on other side and continue.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "Splenius",
-              "Erector Spinae",
-              "Levator Scapulae",
-              "Trapezius, Upper"
-            ],
-            "stabilizers": [
-              "None"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/WtNeckLateralFlex.html"
-          },
-          {
-            "name": "Front Neck Bridge",
-            "preparation": "Kneel on all fours on well cushioned mat. Place head on mat between hands. Rise and straighten knees. Fold hands behind low back or hips.",
-            "execution": "Roll back onto forehead until nose touches mat. Roll forward onto top of head until chin touches upper chest. Repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Push & Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "Splenius",
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Erector Spinae, Cervicis & Capitis Fibers"
-            ],
-            "stabilizers": [
-              "Quadriceps",
-              "Erector Spinae",
-              "Rectus Abdominis",
-              "Obliques",
-              "Iliopsoas",
-              "Tensor Fasciae Latae",
-              "Sartorius",
-              "Gastrocnemius",
-              "Soleus"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/BWFrontNeckBridge.html"
-          },
-          {
-            "name": "Wall Front Neck Bridge",
-            "preparation": "Place small or folded cushioned mat on wall or column approximately chest height. With hands supporting mat on each side stand back so feet are away from wall or column with body leaning forward. Place top of forehead on mat. Fold hands behind low back or hips.",
-            "execution": "Roll down onto forehead until nose touches mat. Roll up onto top of head until chin touches upper chest. Repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Push & Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "Splenius",
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Erector Spinae, Cervicis & Capitis Fibers"
-            ],
-            "stabilizers": [
-              "Waist flexors",
-              "Waist extensors",
-              "Hip flexors",
-              "Knee extenors"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/BWWallFrontNeckBridge.html"
-          },
-          {
-            "name": "Wall Side Neck Bridge",
-            "preparation": "Place small or folded cushioned mat on column or at end of wall approximately shoulder height. With hands supporting mat, stand with side toward mat. Step far to side so feet are away from wall or column forward. Place side of head on mat with shoulder extending over end of adjacent side of column or wall so body leans to side. Fold hands behind low back or hips.",
-            "execution": "Push side of head into mat and roll onto top of head moving body away from mat. Return to original position by rolling back down to side of head while bringing shoulder back over end of column or wall. Repeat.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "Splenius",
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Erector Spinae, Cervicis & Capitis Fibers",
-              "Obliques",
-              "Quadratus lumborum",
-              "Psoas major",
-              "Iliocastalis lumborum",
-              "Iliocastalis thoracis"
-            ],
-            "stabilizers": [
-              "Gluteus Medius",
-              "Gluteus Minimus "
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Sternocleidomastoid/BWWallSideNeckBridge.html"
-          },
-          {
-            "name": "Neck Retraction Stretch",
-            "preparation": "Stand or sit.",
-            "execution": "Pull head back as far possible while looking slightly down. Hold stretch.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Longus colli",
-            "synergists": [
-              "Splenius",
-              "Trapezius, Upper",
-              "Erector Spinae, Cervicis & Capitis Fibers"
-            ],
-            "stabilizers": [
-              "None"
-            ],
-            "source": "http://www.exrx.net/Stretches/Sternocleidomastoid/NeckRetraction.html"
-          },
-          {
-            "name": "Neck Retraction Stretch",
-            "preparation": "Stand or sit.",
-            "execution": "Turn head over shoulder to one side. Hold stretch. Repeat to other side.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Sternocleidomastoid",
-            "synergists": [
-              "Splenius"
-            ],
-            "stabilizers": [
-              "None"
-            ],
-            "source": "http://www.exrx.net/Stretches/Sternocleidomastoid/NeckRotation.html"
-          }
-        ]
+        "image": "assets/images/curls.jpg",
+        "name": "Curls",
+        "instructions": [
+          "Sit holding a dumbbell in each hand with arms hanging down and the palms of the hands Lacing the body",
+          "Inhale and bend the the elbow, rotating the palm up before the forearm reaches horizontal",
+          "Continue by raising the elbows at the end of the movement"
+        ],
+        "variations": [
+          "Emphasize biceps",
+          "Work brachioradialis intensely",
+          "Work mainly biceps and brachialis"
+        ],
+        "comments": [
+          "This exercise primarily uses the brachioradialis (long supinator), brachial's, biceps brachii, and anterior deltoid and, to a lesser extent, the coracobrachialis and clavicular head of the pectoral's major"
+        ],
+        "muscles": [
+          "Biceps brachii",
+          "Brachialis",
+          "Brachioardialis",
+          "Anterior deltoid"
+        ],
+        "warning": ""
       },
       {
-        "name": "Splenius",
-        "exercises": [
-          {
-            "name": "Cable Neck Extension",
-            "preparation": "Sit on bench facing pulley. Place neck in harness cable attachment. Place forearms on lower thighs for support.",
-            "execution": "Move head away from pulley by hyperextending neck. Return by bending neck forward until chin touches upper chest. Repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Splenius",
-            "synergists": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Erector Spinae, Cervicis & Capitis Fibers",
-              "Sternocleidomastoid, Posterior Fibers "
-            ],
-            "stabilizers": [
-              "Pectoralis Major, Sternal",
-              "Pectoralis Major, Clavicular",
-              "Pectoralis Minor",
-              "Latissimus Dorsi",
-              "Rhomboids"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Splenius/CBNeckExt.html"
-          },
-          {
-            "name": "Cable Neck Extension (with belt)",
-            "preparation": "Sit on bench facing low pulley. Place latched belt on low pulley cable by attaching carabiner on belt buckle. Place head in belt loop. With belt above ears, clamp belt snugly around head by tightly gripping ends close to forehead. Place other hand or forearm on lower thighs for support.",
-            "execution": "Pull head up and back by hyperextending neck. Return by bending neck forward until chin touches upper chest. Repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Splenius",
-            "synergists": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Erector Spinae, Cervicis & Capitis Fibers",
-              "Sternocleidomastoid, Posterior Fibers "
-            ],
-            "stabilizers": [
-              "Pectoralis Major, Sternal",
-              "Pectoralis Major, Clavicular",
-              "Pectoralis Minor",
-              "Latissimus Dorsi",
-              "Rhomboids",
-              "Triceps Brachii",
-              "Erector Spinae",
-              "Gluteus Maximus ",
-              "Rectus Abdominis",
-              "Obliques"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Splenius/CBNeckExtBelt.html"
-          },
-          {
-            "name": "Lever Neck Extension (plate loaded)",
-            "preparation": "Sit on seat in machine. Place back of head under padded lever. Position body so neck is in line with lever axis. Grasp handles for support.",
-            "execution": "Move head back by hyperextending neck. Return by bending neck forward until chin touches upper chest. Repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Splenius",
-            "synergists": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Erector Spinae, Cervicis & Capitis Fibers",
-              "Sternocleidomastoid, Posterior Fibers "
-            ],
-            "stabilizers": [
-              "Pectoralis Major, Sternal",
-              "Pectoralis Major, Clavicular",
-              "Pectoralis Minor",
-              "Serratus Anterior",
-              "Deltoid, Anterior",
-              "Triceps Brachii "
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Splenius/LVNeckExtentionH.html"
-          },
-          {
-            "name": "Lever Neck Extension",
-            "preparation": "Sit on seat in machine. Place back of head under padded lever. Position body so neck is in line with lever axis. Grasp handles for support.",
-            "execution": "Move head back by hyperextending neck. Return by bending neck forward until chin touches upper chest. Repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Splenius",
-            "synergists": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Erector Spinae, Cervicis & Capitis Fibers",
-              "Sternocleidomastoid, Posterior Fibers "
-            ],
-            "stabilizers": [
-              "Pectoralis Major, Sternal",
-              "Pectoralis Major, Clavicular",
-              "Pectoralis Minor",
-              "Serratus Anterior",
-              "Deltoid, Anterior",
-              "Triceps Brachii "
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Splenius/LVNeckExt.html"
-          },
-          {
-            "name": "Weighted Lying Neck Extension",
-            "preparation": "Lie prone on bench with head extended off of end and folded towel and weight plate(s) on floor. With both hands, place plate(s) on back of head with towel placed in between for comfort.",
-            "execution": "Move head up by hyperextending neck up as high as possible. Return by bending neck down until chin touches upper chest. Repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Splenius",
-            "synergists": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Erector Spinae, Cervicis & Capitis Fibers",
-              "Sternocleidomastoid, Posterior Fibers "
-            ],
-            "stabilizers": [
-              "None"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Splenius/WtLyingNeckExtension.html"
-          },
-          {
-            "name": "Weighted Neck Extension",
-            "preparation": "Kneel on side of bench with weight plates on end of bench. With both hands, hold weight plate(s) cushioned with towel. Position upper body prone and perpendicular on bench with head and arms extending off of side. With both hands, place weight plate(s) on back of head with towel placed in between for comfort.",
-            "execution": "Move head up by hyperextending neck up as high as possible. Return by bending neck down until chin touches upper chest. Repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Splenius",
-            "synergists": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Erector Spinae, Cervicis & Capitis Fibers",
-              "Sternocleidomastoid, Posterior Fibers"
-            ],
-            "stabilizers": [
-              "None"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Splenius/WtNeckExtension.html"
-          },
-          {
-            "name": "Weighted Seated Neck Extension",
-            "preparation": "Place folded towel on weight plate. On bench or stool, sit bent over on thighs. With both hands, place plate(s) on back of head with towel placed in between for comfort.",
-            "execution": "Move head up by hyperextending neck up as high as possible. Return by bending neck down until chin touches upper chest. Repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Splenius",
-            "synergists": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Erector Spinae, Cervicis & Capitis Fibers",
-              "Sternocleidomastoid, Posterior Fibers"
-            ],
-            "stabilizers": [
-              "None"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Splenius/WtNeckExt.html"
-          },
-          {
-            "name": "Weighted Neck Harness Extension",
-            "preparation": "Sit on bench with weighted neck harness on head. Allow weight to dangle in front by bending over.",
-            "execution": "Move head up by hyperextending neck. Return by bending neck down until chin touches upper chest. Repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Splenius",
-            "synergists": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Erector Spinae, Cervicis & Capitis Fibers",
-              "Sternocleidomastoid, Posterior Fibers"
-            ],
-            "stabilizers": [
-              "None"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Splenius/WtNeckHarnessExt.html"
-          },
-          {
-            "name": "Rear Neck Bridge",
-            "preparation": "Lying supine on well cushioned mat. Position feet very close to hips. Raise buttocks and low back slightly off of floor and fold hands on abdomen.",
-            "execution": "Extend hips and knees while pushing head back into floor. Roll back on head while arching spine high off of floor. Hyperextend neck back in attempt to bring forehead toward mat. Return body to close to mat until back of head and shoulders make contact with mat. Repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Splenius",
-            "synergists": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Sternocleidomastoid, Posterior Fibers",
-              "Erector Spinae",
-              "Gluteus Maximus",
-              "Quadriceps"
-            ],
-            "stabilizers": [
-              "None"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Splenius/BWRearNeckBridge.html"
-          },
-          {
-            "name": "Wall Rear Neck Bridge",
-            "preparation": "Hold small or folded cushioned mat behind head. Facing away from wall or column position head and back of shoulders low on wall or column with mat between. Stand with feet far away from wall or column so body is angled back. Position hips and back straight and bend knees just slightly. Place arms to side or hold hands on abdomen.",
-            "execution": "Push head back into mat and roll head upward. Arch spine and straighten knees. Hyperextend neck so head is facing up. Return to origianl position by rolling head down while allowing low back to straighten and knees to bend slightly. Continue down until back of head and shoulders make contact with mat. Repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Splenius",
-            "synergists": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Sternocleidomastoid, Posterior Fibers",
-              "Erector Spinae",
-              "Gluteus Maximus",
-              "Quadriceps"
-            ],
-            "stabilizers": [
-              "Gluteus Maximus"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Splenius/BWWallRearNeckBridge.html"
-          },
-          {
-            "name": "Lying Neck Retraction Isometric",
-            "preparation": "Lie supine on mat.",
-            "execution": "Press head down into mat and hold. Relax and repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Pull",
-            "target": "Splenius",
-            "synergists": [
-              "None"
-            ],
-            "stabilizers": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Erector Spinae, Cervicis & Capitis Fibers",
-              "Longus capitis",
-              "Longus colli",
-              "Rectus capitus "
-            ],
-            "source": "http://www.exrx.net/WeightExercises/Splenius/LyingIsometricNeckRetr.html"
-          },
-          {
-            "name": "Neck Extensor Stretch",
-            "preparation": "Bow head forward with jaw shut. Depress chin into top of sternum.",
-            "execution": "Slightly turn head to one side. Hold stretch. Repeat to other side.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "None",
-            "target": "Splenius",
-            "synergists": [
-              "Trapezius, Upper",
-              "Erector Spinae, Cervicis & Capitis Fibers"
-            ],
-            "stabilizers": [
-              "None"
-            ],
-            "source": "http://www.exrx.net/Stretches/Splenius/Neck.html"
-          }
-        ]
+        "image": "",
+        "name": "Concentration curls",
+        "instructions": [
+          "Sit holding a dumbbell with the palm facing forward and the elbow positioned against the inner thigh",
+          "Inhale and lift the forearm by bending the elbow",
+          "Exhale at the end of the effort"
+        ],
+        "variations": [],
+        "muscles": [
+          ""
+        ],
+        "comments": [
+          "This isolation exercise allows you to control the range of motion, speed. and form of the movement",
+          "It mainly works the biceps brachii and brachialis"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
       }
     ]
   },
   {
     "group": "Shoulders",
-    "muscles": [
+    "exercises": [
       {
-        "name": "Deltoid, Anterior",
-        "exercises": [
-          {
-            "name": "Barbell Behind Neck Press",
-            "preparation": "Grasp barbell with overhand grip from rack or clean from floor. Position bar behind neck.",
-            "execution": "Press bar upward until arms are extended overhead. Return behind neck and repeat.",
-            "utility": "Basic",
-            "mechanics": "Compound",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Deltoid, Lateral",
-              "Supraspinatus",
-              "Triceps Brachii",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Triceps, Long Head",
-              "Trapezius, Upper",
-              "Levator Scapulae"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/BBBehindNeckPress.html"
-          },
-          {
-            "name": "Barbell Front Raise",
-            "preparation": "Grasp barbell with overhand grip with elbows straight or slightly bent.",
-            "execution": "Raise barbell forward and upward until upper arms are above horizontal. Lower and repeat.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Pectoralis Major, Clavicular",
-              "Deltoid, Lateral",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Wrist Extensors"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/BBFrontRaise.html"
-          },
-          {
-            "name": "Barbell Incline Front Raise",
-            "preparation": "Grasp barbell with shoulder width overhand grip. Lie supine on upper portion of 45 degree incline bench with legs straight. Position barbell on top of upper thighs. ",
-            "execution": "With elbows straight or slightly bent, raise barbell up and over shoulders until uppers arm are vertical. Lower barbell to upper thigh and repeat. ",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Pectoralis Major, Clavicular",
-              "Deltoid, Lateral",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Serratus Anterior",
-              "Wrist Extensors "
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/BBInclineFrontRaise.html"
-          },
-          {
-            "name": "Barbell Military Press",
-            "preparation": "Grasp barbell from rack or clean barbell from floor with overhand grip, slightly wider than shoulder width. Position bar in front of neck.",
-            "execution": "Press bar upward until arms are extended overhead. Lower to front of neck and repeat.",
-            "utility": "Basic",
-            "mechanics": "Compound",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Pectoralis Major, Clavicular",
-              "Triceps Brachii",
-              "Deltoid, Lateral",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations "
-            ],
-            "stabilizers": [
-              "Triceps, Long Head",
-              "Biceps Brachii, Short Head",
-              "Trapezius, Upper",
-              "Levator Scapulae "
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/BBMilitaryPress.html"
-          },
-          {
-            "name": "Barbell Seated Military Press",
-            "preparation": "Grasp barbell with slightly wider than shoulder width overhand grip from rack. Position bar near upper chest.",
-            "execution": "Press bar upward until arms are extended overhead. Return to upper chest and repeat.",
-            "utility": "Basic",
-            "mechanics": "Compound",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Deltoid, Lateral",
-              "Supraspinatus",
-              "Triceps Brachii",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Triceps, Long Head",
-              "Trapezius, Upper",
-              "Levator Scapulae"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/BBSeatedMilitaryPress.html"
-          },
-          {
-            "name": "Barbell Shoulder Press",
-            "preparation": "Grasp barbell with slightly wider than shoulder width overhand grip from rack. Position bar near upper chest.",
-            "execution": "Press bar upward until arms are extended overhead. Return to upper chest and repeat.",
-            "utility": "Basic",
-            "mechanics": "Compound",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Deltoid, Lateral",
-              "Supraspinatus",
-              "Triceps Brachii",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Triceps, Long Head",
-              "Trapezius, Upper",
-              "Levator Scapulae"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/BBShoulderPress.html"
-          },
-          {
-            "name": "Cable Bar Behind Neck Press",
-            "preparation": "Stand facing cable bar, mounted on each side to upper waist height narrow double pulley cables. Grasp cable bar with wide overhand grip upper chest height. Stand directly between both cable pulleys with one foot forward and other foot back. Push cable bar over head and position cable bar behind neck or rest on shoulders.",
-            "execution": "Press cable bar upward until arms are extended overhead. Return behind neck and repeat.",
-            "utility": "Basic",
-            "mechanics": "Compound",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Deltoid, Lateral",
-              "Supraspinatus",
-              "Triceps Brachii",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Triceps, Long Head",
-              "Trapezius, Upper",
-              "Levator Scapulae"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBBarBehindNeckPress.html"
-          },
-          {
-            "name": "Cable Bar Military Press",
-            "preparation": "Stand facing cable bar, mounted on each side to upper waist height narrow double pulley cables. Grasp cable bar with overhand grip, slightly wider than shoulder width. Position cable bar upper chest height. Stand directly between both cable pulleys with one foot forward and other foot back.",
-            "execution": "Press cable bar upward until arms are extended overhead. Return to upper chest and repeat.",
-            "utility": "Basic",
-            "mechanics": "Compound",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Deltoid, Lateral",
-              "Supraspinatus",
-              "Triceps Brachii",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Triceps, Long Head",
-              "Biceps Brachii, Short Head",
-              "Trapezius, Upper",
-              "Levator Scapulae"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBBarMilitaryPress.html"
-          },
-          {
-            "name": "Cable Bar Shoulder Press",
-            "preparation": "Stand facing cable bar mounted on each side to upper waist height narrow double pulley cables. Grasp cable bar with wide overhand grip and position upper chest height. Stand directly between both cable pulleys with one foot forward and other foot back.",
-            "execution": "Press cable bar upward until arms are extended overhead. Return to upper chest and repeat.",
-            "utility": "Basic",
-            "mechanics": "Compound",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Deltoid, Lateral",
-              "Supraspinatus",
-              "Triceps Brachii",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Triceps, Long Head",
-              "Trapezius, Upper",
-              "Levator Scapulae"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBBarShoulderPress.html"
-          },
-          {
-            "name": "Cable Seated Front Raise",
-            "preparation": "Sit on seat above twin cable pulleys. Grasp stirrups on each side. Sit upright with arms straight down to each side with palms facing back.",
-            "execution": "Raise stirrups forward and upward until upper arms are well above horizontal. Lower and repeat.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Pectoralis Major, Clavicular",
-              "Deltoid, Lateral",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Wrist Extensors"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBSeatedFrontRaise.html"
-          },
-          {
-            "name": "Cable Alternating Front Raise",
-            "preparation": "Stand with low double pulleys behind. Grasp stirrup attachments, one in each hand. Stand away from pulley slightly with arms back somewhat at side and elbows straight or slightly bent.",
-            "execution": "Raise one stirrup forward and upward until upper arm is well above horizontal. Lower and repeat with opposite arm, alternating between arms.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Pectoralis Major, Clavicular",
-              "Deltoid, Lateral",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Wrist Extensors"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBAlternatingFrontRaise.html"
-          },
-          {
-            "name": "Cable Alternating Seated Front Raise",
-            "preparation": "Sit on seat above twin cable pulleys. Grasp stirrups on each side. Sit upright with arms straight down to each side with palms facing back.",
-            "execution": "Raise one stirrup forward and upward until upper arm is well above horizontal. Lower and repeat with opposite arm. Continue by alternating raises between sides.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Pectoralis Major, Clavicular",
-              "Deltoid, Lateral",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Wrist Extensors"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBAlternatingSeatedFrontRaise.html"
-          },
-          {
-            "name": "Cable One Arm Front Raise",
-            "preparation": "Grasp stirrup attachment. Stand away from pulley slightly with arm back somewhat at side and elbow straight or slightly bent.",
-            "execution": "Raise stirrup forward and upward until upper arm is well above horizontal. Lower and repeat. Repeat with opposite arm.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Pectoralis Major, Clavicular",
-              "Deltoid, Lateral",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Wrist Extensors"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBFrontRaise.html"
-          },
-          {
-            "name": "Cable One Arm Front Raise (with rope)",
-            "preparation": "Grasp end of Triceps Rope Cable attachment with one hand so that protruding end is in contact with side of hand (thumb and index finger). Stand away from pulley with arm back at side and elbow straight.",
-            "execution": "Raise stirrup forward and upward until arm is well above horizontal or cable makes contact with underside of upper arm. Lower and repeat. Repeat with opposite arm.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Pectoralis Major, Clavicular",
-              "Deltoid, Lateral",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Wrist Extensors"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBFrontRaiseRope.html"
-          },
-          {
-            "name": "Cable Standing Shoulder Press",
-            "preparation": "Stand between two low to medium height pulleys. Grasp cable stirrups from each side. Position stirrups to each side of shoulders with elbows down to sides and stirrups above or slightly narrower than elbows.",
-            "execution": "Push stirrups upward until arms are extended overhead. Return stirrups to sides of shoulders and repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Compound",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Deltoid, Lateral",
-              "Supraspinatus",
-              "Triceps Brachii",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Triceps, Long Head",
-              "Trapezius, Upper",
-              "Levator Scapulae "
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBStandingShoulderPress.html"
-          },
-          {
-            "name": "Cable Shoulder Press",
-            "preparation": "Sit on seat and grasp stirrups from low to medium low position from each side. Position stirrups to each side of shoulders with elbows down to sides and stirrups above or slightly narrower than elbows.",
-            "execution": "Push stirrups upward until arms are extended overhead. Return stirrups to sides of shoulders and repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Compound",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Deltoid, Lateral",
-              "Supraspinatus",
-              "Triceps Brachii",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Triceps, Long Head",
-              "Trapezius, Upper",
-              "Levator Scapulae "
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBShoulderPress.html"
-          },
-          {
-            "name": "Cable Twisting Overhead Press",
-            "preparation": "Stand beside low to medium height pulley. Grasp cable stirrup. Position stirrup to front of shoulder with elbow down to side. Place opposite hand on hip. With feet wide apart, squat down slightly.",
-            "execution": "Rotate body away from pulley and straighten legs while pushing stirrup diagonally upward toward opposite side of body. Return to original position and repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Compound",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Pectoralis Major, Clavicular",
-              "Deltoid, Lateral",
-              "Supraspinatus",
-              "Triceps Brachii",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations",
-              "Gluteus Maximus",
-              "Adductor Magnus",
-              "Quadriceps",
-              "Soleus",
-              "Obliques",
-              "Psoas major",
-              "Quadratus lumborum",
-              "Iliocastalis lumborum",
-              "Iliocastalis thoracis",
-              "Tensor Fasciae Latae",
-              "Gluteus Medius "
-            ],
-            "stabilizers": [
-              "Triceps, Long Head",
-              "Hamstrings",
-              "Gastrocnemius",
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Erector Spinae",
-              "Obliques"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/CBTwistingOverheadPress.html"
-          },
-          {
-            "name": "Dumbbell Arnold Press",
-            "preparation": "Stand with two dumbbells position in front of shoulders, palms facing body and elbows under wrists.",
-            "execution": "Initiate movement by bringing elbows out to sides. Continue to raise elbows outward while pressing dumbbells overhead until arms are straight. Lower to front of shoulders in opposite pattern and repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Compound",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Deltoid, Lateral",
-              "Supraspinatus",
-              "Triceps Brachii",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Triceps, Long Head",
-              "Trapezius, Upper",
-              "Levator Scapulae "
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/DBArnoldPress.html"
-          },
-          {
-            "name": "Dumbbell Front Raise",
-            "preparation": "Grasp dumbbells in both hands. Position dumbbells in front of upper legs with elbows straight or slightly bent.",
-            "execution": "Raise dumbbells forward and upward until upper arms are above horizontal. Lower and repeat.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Pectoralis Major, Clavicular",
-              "Deltoid, Lateral",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Wrist Extensors"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/DBFrontRaise.html"
-          },
-          {
-            "name": "Dumbbell Alternating Front Raise",
-            "preparation": "Grasp dumbbells in both hands. Position dumbbells in front of upper legs with elbows straight or slightly bent.",
-            "execution": "Raise one dumbbell forward and upward with until upper arm is above horizontal. Lower and repeat with opposite arm, alternating between arms.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Pectoralis Major, Clavicular",
-              "Deltoid, Lateral",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Trapezius, Upper",
-              "Levator Scapulae",
-              "Wrist Extensors"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/DBAlternatingFrontRaise.html"
-          },
-          {
-            "name": "Dumbbell Alternating Incline Front Raise",
-            "preparation": "Grasp dumbbells and lie supine on upper portion of 45 degree incline bench with legs straight. Position dumbbells downward below each shoulder.",
-            "execution": "With elbows straight or slightly bent, raise one dumbbell forward, up and over shoulder until upper arm is vertical. Lower dumbbell down to starting position. Repeat raise with other arm, alternating between sides.",
-            "utility": "Auxiliary",
-            "mechanics": "Isolated",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Pectoralis Major, Clavicular",
-              "Deltoid, Lateral",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations"
-            ],
-            "stabilizers": [
-              "Serratus Anterior",
-              "Wrist Extensors"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/DBAlternInclineFrontRaise.html"
-          },
-          {
-            "name": "Dumbbell Shoulder Press",
-            "preparation": "Position dumbbells to each side of shoulders with elbows below wrists.",
-            "execution": "Press dumbbells upward until arms are extended overhead. Lower to sides of shoulders and repeat.",
-            "utility": "Basic",
-            "mechanics": "Compound",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Deltoid, Lateral",
-              "Supraspinatus",
-              "Triceps Brachii",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations",
-              "Pectoralis Major, Clavicular"
-            ],
-            "stabilizers": [
-              "Triceps, Long Head",
-              "Biceps Brachii",
-              "Trapezius, Upper",
-              "Levator Scapulae"
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/DBShoulderPress.html"
-          },
-          {
-            "name": "Dumbbell One Arm Shoulder Press",
-            "preparation": "Stand with dumbbells positioned near shoulder with elbow below wrists.",
-            "execution": "Press dumbbell upward until arm is extended overhead. Lower to side of shoulder and repeat.",
-            "utility": "Basic or Auxiliary",
-            "mechanics": "Compound",
-            "force": "Push",
-            "target": "Deltoid, Anterior",
-            "synergists": [
-              "Deltoid, Lateral",
-              "Supraspinatus",
-              "Triceps Brachii",
-              "Trapezius, Middle",
-              "Trapezius, Lower",
-              "Serratus Anterior, Inferior Digitations",
-              "Pectoralis Major, Clavicular",
-              "Obliques",
-              "Psoas major",
-              "Iliocastalis lumborum",
-              "Iliocastalis thoracis"
-            ],
-            "stabilizers": [
-              "Triceps, Long Head",
-              "Biceps Brachii ",
-              "Trapezius, Upper",
-              "Levator Scapulae "
-            ],
-            "source": "http://www.exrx.net/WeightExercises/DeltoidAnterior/DBOneArmShoulderPress.html"
-          }
-        ]
-      },
-      {
-        "name": "Deltoid, Lateral",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Deltoid, Posterior",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Supraspinatus",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "group": "Upper arms",
-    "muscles": [
-      {
-        "name": "Triceps Brachii",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Biceps Brachii",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Brachialis",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "group": "Forearms",
-    "muscles": [
-      {
-        "name": "Brachioradialis",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Wrist (Flexors)",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Wrist (Extensors)",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Pronators",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Suspinators",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "group": "Back",
-    "muscles": [
-      {
-        "name": "General",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Latissimus Dorsi & Teres Major",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Trapezius (Upper)",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Trapezius (Middle)",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Trapezius (Lower)",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Levator Scapulae",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Rhomboids",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Infraspinatus & Teres Minor",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Subscapularis",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
       }
     ]
   },
   {
     "group": "Chest",
-    "muscles": [
+    "exercises": [
       {
-        "name": "General",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Pectoralis Major (Sternal)",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Pectoralis Major (Clavicular)",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Pectoralis Minor",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Serratus Anterior",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
       }
     ]
   },
   {
-    "group": "Waist",
-    "muscles": [
+    "group": "Back",
+    "exercises": [
       {
-        "name": "Rectus Abdominis",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Transverse Abdominus",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Obliques",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Quadratus Lumborum",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Erector Spinae",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
       }
     ]
   },
   {
-    "group": "Hips",
-    "muscles": [
+    "group": "Legs",
+    "exercises": [
       {
-        "name": "Gluteus Maximus",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Abductors",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Flexors",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Deep External Rotators",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
       }
     ]
   },
   {
-    "group": "Thighs",
-    "muscles": [
+    "group": "Buttocks",
+    "exercises": [
       {
-        "name": "Quadriceps",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Hamstrings",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Hip Adductors",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
       }
     ]
   },
   {
-    "group": "Calves",
-    "muscles": [
+    "group": "Abdomen",
+    "exercises": [
       {
-        "name": "General",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Gastrocnemius",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Soleus",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Tibialis Anterior",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
-      },
-      {
-        "name": "Popliteus",
-        "exercises": [
-          {
-            "name": "",
-            "preparation": "",
-            "execution": "",
-            "utility": "",
-            "mechanics": "",
-            "force": "",
-            "target": "",
-            "synergists": [
-              ""
-            ],
-            "stabilizers": [
-              ""
-            ],
-            "source": ""
-          }
-        ]
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
       }
     ]
   }

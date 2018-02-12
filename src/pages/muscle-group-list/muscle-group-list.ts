@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 
 // Models
-import { IMuscleGroup, IMuscleExercise } from '../../models';
+import { IMuscleGroup, MuscleExercise } from '../../models';
 
 // Providers
 import { ExerciseProvider } from '../../providers';
@@ -25,7 +25,7 @@ export class MuscleGroupListPage {
   ) {
   }
 
-  public openDetails(exercise: IMuscleExercise): void {
+  public openDetails(exercise: MuscleExercise): void {
     this._navCtrl.push('muscle-exercise-details', { exercise });
   }
 

@@ -1,0 +1,559 @@
+[
+  {
+    "group": "Arms",
+    "exercises": [
+      {
+        "image": "assets/images/curls.png",
+        "name": "Curls",
+        "instructions": [
+          "Sit holding a dumbbell in each hand with arms hanging down and the palms of the hands Lacing the body",
+          "Inhale and bend the the elbow, rotating the palm up before the forearm reaches horizontal",
+          "Continue by raising the elbows at the end of the movement"
+        ],
+        "variations": [
+          "Emphasize biceps",
+          "Work brachioradialis intensely",
+          "Work mainly biceps and brachialis"
+        ],
+        "comments": [
+          "This exercise primarily uses the brachioradialis (long supinator), brachial's, biceps brachii, and anterior deltoid and, to a lesser extent, the coracobrachialis and clavicular head of the pectoral's major"
+        ],
+        "muscles": [
+          "Biceps brachii",
+          "Brachialis",
+          "Brachioardialis",
+          "Anterior deltoid"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/concentration-curls.png",
+        "name": "Concentration curls",
+        "instructions": [
+          "Sit holding a dumbbell with the palm facing forward and the elbow positioned against the inner thigh",
+          "Inhale and lift the forearm by bending the elbow",
+          "Exhale at the end of the effort"
+        ],
+        "variations": [],
+        "muscles": [
+          "Biceps brachii",
+          "Brachialis"
+        ],
+        "comments": [
+          "This isolation exercise allows you to control the range of motion, speed. and form of the movement",
+          "It mainly works the biceps brachii and brachialis"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/hammer-curls.png",
+        "name": "Hammer curls",
+        "instructions": [
+          "Stand or sit gripping a dumbbell in each hand with the palms facing each other",
+          "Inhale and raise the forearms together or alternately",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          "Biceps brachii",
+          "Brachialis",
+          "Brachioardialis"
+        ],
+        "comments": [
+          "This is the best exercise for developing the brachioradialis",
+          "It also develops the biceps brachii, brachialis, and, to a lesser degree, the extensor carpi radialis brevis and longus."
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/low-pulley-curls.png",
+        "name": "Low-pulley curls",
+        "instructions": [
+          "Stand facing the machine, grasping the handles with an underhand grip (thumbs facing away from each other)",
+          "Inhale and bend the elbows to raise the forearms",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          "Two-handed low-pulley curls"
+        ],
+        "muscles": [
+          "Biceps brachii",
+          "Brachialis"
+        ],
+        "comments": [
+          "This exercise focuses the effort on the biceps brachii and works the muscle intensely"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/high-pulley-curls.png",
+        "name": "High-pulley curls",
+        "instructions": [
+          "Stand between the pulleys with the arms outstretched in a 'cross' and grasp the handles of the high pulleys with an underhand grip",
+          "Inhale and bend the elbows to bring the hands toward the body",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          "One-handed execution"
+        ],
+        "muscles": [
+          "Biceps brachii",
+          "Brachialis"
+        ],
+        "comments": [
+          "This exercise, which is most often performed as a cool-down at the end of an arm session, focuses the work on the short head of the biceps brachii, which has been stretched and put under tension in the 'cross' start-up position",
+          "This exercise also contracts the monoarticular brachialis elbow flexor",
+          "Perform this exercise with light weights so that you can concentrate and feel the contraction at the inside of the biceps brachii",
+          "Sets of high reps provide the best results",
+          "In addition to its role as a forearm flexor, the biceps brachii is the most powerful supinator"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/barbell-curls.png",
+        "name": "Barbell curls",
+        "instructions": [
+          "Stand with the back straight, grasping the barbell with an underhand grip and hands slightly wider than shoulder-width apart",
+          "Inhale and raise the barbell by bending the elbows, taking care to stabilize the torso and spine by isometrically contracting the gluteal muscles, abdominal muscles, and spinal muscles",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          "Placing the hands farther apart isolates the short head of the biceps brachii",
+          "Placing the hands closer together isolates the long head of the biceps brachii",
+          "Raising both elbows after they are flexed increases the contraction of the biceps brachii and contracts the anterior deltoid",
+          "To make the exercise more difficult, perform the movement with the back against a wall so that the shoulder blades don’t move",
+          "You can lift more weight and gain strength by leaning the torso back while lifting the bar; however, to prevent injury, this requires good technique and well-developed abdominal and lumbar muscles"
+        ],
+        "muscles": [
+          "Biceps brachii",
+          "Brachialis"
+        ],
+        "comments": [
+          "This exercise mainly contracts the biceps brachii, brachialis, and, to a lesser degree, the brachioradialis, pronator teres, and the wrist flexor group"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/machine-curls.png",
+        "name": "Machine curls",
+        "instructions": [
+          "Sit at the machine and grasp the bar with an underhand grip, arms extended, and resting on the support",
+          "Inhale and raise the forearms",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [
+          "This is one of the best exercises for working the biceps brachii. Fixing the arms against the support makes it impossible to 'cheat'",
+          "At the beginning, the muscle tension is intense, so be sure to warm up properly using light weights. To avoid the risk of tendonitis, do not completely extend the arm",
+          "This movement also works the brachialis and, to a lesser extent, the brachioradialis and pronator teres"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/preacher-curls.png",
+        "name": "Preacher curls",
+        "instructions": [
+          "Sit or stand with the arms resting on the support pad and grasp the bar with an underhand grip",
+          "Inhale and raise the forearms by bending the elbows",
+          "Exhale at the end of the effort"
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          "Biceps brachii",
+          "Brachialis"
+        ],
+        "comments": [
+          "This is one of the best exercises for isolating the biceps"
+        ],
+        "warning": "The angle of the support pad places significant tension on the forearms when the arm is completely extended. Therefore, warm up the muscles properly and begin with lighter weights."
+      },
+      {
+        "image": "assets/images/reverse-curls.png",
+        "name": "Reverse curls",
+        "instructions": [
+          "Stand with the legs slightly apart and arms extended and grasp the bar with an overhand grip (with the thumbs facing each other)",
+          "Inhale and raise the forearms by bending the elbows",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          "Biceps brachii",
+          "Brachialis",
+          "Brachioardialis",
+          "Extensor carpi radialis longus",
+          "Extensor carpi radialis brevis",
+          "Extensor digitorum",
+          "Extensor digiti minimi",
+          "Extensor carpi ulnaris"
+        ],
+        "comments": [
+          "This exercise works the extensor muscles of the wrist: extensor carpi radialis longus, extensor carpi radialis brevis, extensor digitorum, extensor digiti minimi, and extensor carpi ulnaris",
+          "It also acts on the brachioradialis, brachialis, and, to a lesser degree, the biceps brachii",
+          "This is an excellent exercise for strengthening the wrist, which is often weak because of an imbalance caused by using the wrist flexors rather than the wrist extensors. For this reason, many boxers include it in their training. Many bench press champions use it to keep their wrists from trembling under extreme weights"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/reverse-wrist-curls.png",
+        "name": "Reverse wrist curls",
+        "instructions": [
+          "Sit with the forearms resting on the thighs or on a bench and grasp the bar with an overhand grip and keep the wrists relaxed",
+          "Raise the hands by extending at the wrists"
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          "Extensor carpi radialis longus",
+          "Extensor carpi radialis brevis",
+          "Extensor digitorum",
+          "Extensor digiti minimi",
+          "Extensor carpi ulnaris"
+        ],
+        "comments": [
+          "This exercise contracts the extensor carpi radialis longus and brevis, extensor digitorum, extensor digiti minimi, as well as the extensor carpi ulnaris",
+          "This exercise strengthens the wrists, which are often vulnerable because of weak wrist extensors"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/wrist-curls.png",
+        "name": "Wrist curls",
+        "instructions": [
+          "Sit with the forearms resting on the thighs or on a bench and grasp the bar with an underhand grip with wrists relaxed",
+          "Inhale and raise the hands by flexing at the wrists"
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          "Flexor carpi radialis",
+          "Palmaris longus",
+          "Flexor digitorum superficialis",
+          "Flexor digitorum profundus",
+          "Flexor digitorum profundus",
+          "Flexor pollicis longus",
+          "Flexor carpi ulnaris"
+        ],
+        "comments": [
+          "This exercise contracts the flexor carpi radialis, palmaris longus, flexor carpi ulnaris, and the flexors digitorum superficialis and profundus",
+          "The latter two muscles, although located deep in the wrist, make up most of the muscle mass of the wrist flexors"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/push-downs.png",
+        "name": "Push-downs",
+        "instructions": [
+          "Stand with the back to the machine and grasp the handle with an overhand grip, keeping the elbows tucked into the body",
+          "Inhale and extend the forearms, keeping the elbows tucked into the body",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          "Variation with back to the machine to isolate of the long head of the triceps",
+          "Variation with a rope to isolate the lateral head of the triceps"
+        ],
+        "muscles": [
+          "Triceps brachii",
+          "Anconeus"
+        ],
+        "comments": [
+          "This exercise isolates the triceps and the anconeus",
+          "The variation using a rope rather than a handle engages the lateral head of the triceps more intensely",
+          "Performing the movement with an underhand grip requires more contribution from the medial head of triceps",
+          "Hold an isometric contraction for one or two seconds at the end of the movement to feel the effort more intensely",
+          "When using heavy weights, lean forward with the torso",
+          "Beginners can use this exercise to develop enough strength to move on to more difficult exercises"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/reverse-push-downs.png",
+        "name": "Reverse push-downs",
+        "instructions": [
+          "Stand facing the machine with the arms next the body and elbows bent and grasp the handle with an underhand grip",
+          "Inhale and extend the forearms by straightening the elbows, keeping them tucked into the body",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          "Triceps brachii",
+          "Extensor carpi radialis brevis",
+          "Extensor digitorum",
+          "Extensor carpi ulnaris",
+          "Extensor carpi radialis longus",
+          "Anconeus"
+        ],
+        "comments": [
+          "The underhand grip isolates the medial head of the triceps brachii and precludes working with heavy weights",
+          "When extending the forearms, the anconeus and wrist extensors also contract",
+          "The extensor carpi ulnaris, extensor digitorum, extensor digiti minimi, and extensors carpi radialis longus and brevis keep the wrist straight with isometric contraction during the exercise"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/one-arm-reverse-push-downs.jpg",
+        "name": "One-arm reverse push-downs",
+        "instructions": [
+          "Stand facing the machine and grasp the handle with an underhand grip",
+          "Inhale and extend the forearm",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          "Triceps brachii",
+          "Anconeus"
+        ],
+        "comments": [
+          "This exercise mainly works the lateral head of the triceps"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/triceps-extensions.jpg",
+        "name": "Triceps extensions",
+        "instructions": [
+          "Lie on a horizontal bench and grasp the barbell with an overhand grip and the arms vertical",
+          "Inhale and lower the barbell to the forehead or behind the head by bending the elbows",
+          "Return to the initial position",
+          "Exhale at the end of the effort"
+        ],
+        "variations": [
+          "Performing this exercise at an Atlas triceps pulley simulates the movement with a barbell, but enables you to isolate the long head of the triceps brachii"
+        ],
+        "muscles": [
+          "Triceps brachii"
+        ],
+        "comments": [
+          "Because of individual variations in shoulder width, valgus angle at the elbows, and wrist flexibility, the hands can be closer or farther apart on the bar and the elbow angle more or less open during the exercise. Using an E-Z bar helps prevent excessive strain at the wrists"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      }
+    ]
+  },
+  {
+    "group": "Shoulders",
+    "exercises": [
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      }
+    ]
+  },
+  {
+    "group": "Chest",
+    "exercises": [
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      }
+    ]
+  },
+  {
+    "group": "Back",
+    "exercises": [
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      }
+    ]
+  },
+  {
+    "group": "Legs",
+    "exercises": [
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      }
+    ]
+  },
+  {
+    "group": "Buttocks",
+    "exercises": [
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      }
+    ]
+  },
+  {
+    "group": "Abdomen",
+    "exercises": [
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      }
+    ]
+  }
+]

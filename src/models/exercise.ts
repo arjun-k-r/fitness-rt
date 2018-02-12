@@ -25,17 +25,19 @@ export class Exercise {
     ) { }
 }
 
-export interface IMuscleExercise {
-    comments: string[];
-    image: string;
-    instructions: string[];
-    muscles: string[];
-    name: string;
-    variations: string[];
-    warning: string;
+export class MuscleExercise {
+    constructor(
+        public comments: string[] = [],
+        public image: string = '',
+        public instructions: string[] = [],
+        public muscles: string[] = [],
+        public name: string = '',
+        public variations: string[] = [],
+        public warning: string = ''
+    ) { }
 }
 
 export interface IMuscleGroup {
     group: string;
-    exercises: IMuscleExercise;
+    exercises: MuscleExercise[];
 }

@@ -345,93 +345,134 @@
         "warning": ""
       },
       {
-        "image": "",
-        "name": "",
+        "image": "assets/images/dumbell-triceps-extensions.png",
+        "name": "Dumbell triceps extensions",
         "instructions": [
-          ""
+          "Lie on a flat bench and grasp a dumbbell in each hand with the arms vertical",
+          "Inhale and lower the forearms by bending the elbow with a controlled movement",
+          "Return to the initial position",
+          "Exhale at the end of the effort"
         ],
         "variations": [
           ""
         ],
         "muscles": [
-          ""
+          "Triceps brachii",
+          "Anconeus"
         ],
-        "comments": [],
+        "comments": [
+          "This exercise works all three heads of the triceps brachii equally"
+        ],
         "warning": ""
       },
       {
-        "image": "",
-        "name": "",
+        "image": "assets/images/one-arm-dumbell-triceps-extensions.png",
+        "name": "One-arm dumbell triceps extensions",
         "instructions": [
-          ""
+          "Sit or stand and grip a dumbbell in one hand with the arm vertical",
+          "Inhale and bend the elbow to lower the dumbbell behind the head to the neck",
+          "Return to the initial position",
+          "Exhale at the end of the movement"
         ],
         "variations": [
           ""
         ],
         "muscles": [
-          ""
+          "Triceps brachii",
+          "Anconeus"
         ],
-        "comments": [],
+        "comments": [
+          "The vertical position of the arm stretches the long head of the triceps brachii, emphasizing its contraction while working",
+          "Contract the abdominal core to prevent arching the low back. If possible use a bench with support for the low back"
+        ],
         "warning": ""
       },
       {
-        "image": "",
-        "name": "",
+        "image": "assets/images/seated-dumbell-triceps-extensions.png",
+        "name": "Seated dumbell triceps extensions",
         "instructions": [
-          ""
+          "Sit and grasp a dumbbell, holding it behind the neck",
+          "Inhale, and extend the forearm",
+          "Exhale at the end of the movement"
         ],
         "variations": [
           ""
         ],
         "muscles": [
-          ""
+          "Triceps brachii",
+          "Anconeus"
         ],
-        "comments": [],
+        "comments": [
+          "The vertical position of the arm strongly stretches the long head of the triceps brachii, emphasizing its contraction while working",
+          "Contract the abdominal core to prevent arching the low back. If possible use a bench with support for the low back"
+        ],
         "warning": ""
       },
       {
-        "image": "",
-        "name": "",
+        "image": "assets/images/seated-ez-bar-triceps-extensions.png",
+        "name": "Seated E-Z bar triceps extensions",
         "instructions": [
-          ""
+          "Sit or stand and grasp an E-Z bar with an overhand grip and arms vertical",
+          "Inhale and bend the elbows to lower the bar behind the head",
+          "Return to the initial position",
+          "Exhale at the end of the extension"
         ],
         "variations": [
           ""
         ],
         "muscles": [
-          ""
+          "Triceps brachii"
         ],
-        "comments": [],
+        "comments": [
+          "The vertical position of the arms strongly stretches the long head of the triceps brachii, emphasizing its contraction while working",
+          "An overhand grip isolates the lateral head of the triceps brachii",
+          "Contract the abdominal muscles and avoid arching the low back. If possible use a bench with support for the low back"
+        ],
         "warning": ""
       },
       {
-        "image": "",
-        "name": "",
+        "image": "assets/images/triceps-kickbacks.png",
+        "name": "Triceps kickbacks",
         "instructions": [
-          ""
+          "Stand with the knees slightly bent and lean forward at the waist, maintaining a straight back",
+          "Bend the elbow and hold the upper arm horizontally alongside the body",
+          "Inhale and extend the forearm",
+          "Exhale at the end of the movement"
         ],
         "variations": [
           ""
         ],
         "muscles": [
-          ""
+          "Triceps brachii",
+          "Anconeus"
         ],
-        "comments": [],
+        "comments": [
+          "This is an excellent exercise for pumping the triceps group",
+          "Perform this exercise until you feel a burn for best results"
+        ],
         "warning": ""
       },
       {
-        "image": "",
-        "name": "",
+        "image": "assets/images/triceps-dips.png",
+        "name": "Triceps dips",
         "instructions": [
-          ""
+          "Suspend the body between two benches by placing the hands on the edge of one bench and the feet on the edge of the other bench",
+          "Inhale, then dip by bending the elbows and rise by extending the forearms",
+          "Exhale at the end of the movement"
         ],
         "variations": [
           ""
         ],
         "muscles": [
-          ""
+          "Triceps brachii",
+          "Anconeus",
+          "Anterior deltoid",
+          "Pectoralis major"
         ],
-        "comments": [],
+        "comments": [
+          "This exercise works the triceps and pectorals as well as the anterior deltoid",
+          "Resting weights on top of the thighs increases the difficulty and intensity of the dip"
+        ],
         "warning": ""
       }
     ]
@@ -439,6 +480,342 @@
   {
     "group": "Shoulders",
     "exercises": [
+      {
+        "image": "assets/images/back-presses.png",
+        "name": "Back presses",
+        "instructions": [
+          "Sit with the back straight, holding the bar across the back of the neck with an overhand grip",
+          "Inhale and extend the bar straight up, keeping the low back as straight as possible",
+          "Exhale at the end of the effort"
+        ],
+        "variations": [
+          "You can also perform this exercise while standing at a frame that guides the barbell. Various specific machines can help with the performance of this exercise"
+        ],
+        "muscles": [
+          "Deltoid",
+          "Trapezius",
+          "Triceps brachii",
+          "Serratus anterior"
+        ],
+        "comments": [
+          "This exercise uses the deltoid, mainly the middle and posterior fibers, as well as the trapezius, triceps brachii, and serratus anterior. Although not worked as intensely, the rhomboids, infraspinatus, teres minor, and, deeper in, the supraspinatus also contract"
+        ],
+        "warning": "To prevent injury to the shoulder joint, which is vulnerable, lower the bar only as far as your unique shoulder structure and flexibility allow you to do comfortably."
+      },
+      {
+        "image": "assets/images/seated-front-press.png",
+        "name": "Seated front presses",
+        "instructions": [
+          "Sit with the back straight and hold the bar with an overhand grip, resting it across the upper chest",
+          "Inhale and extend the bar vertically",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          "Narrow grip with the elbows forward isolates the anterior deltoid and the clavicular head of the pectoralis major",
+          "Wide grip with the elbows out to the side isolates the anterior and middle deltoids"
+        ],
+        "muscles": [
+          "Deltoid",
+          "Triceps brachii",
+          "Pectoralis major clavicular head",
+          "Serratus anterior",
+          "Trapezius",
+          "Supraspinatus"
+        ],
+        "comments": [
+          "This fundamental exercise mainly uses the anterior and lateral deltoids, clavicular head of the pectoralis major, triceps brachii, serratus anterior, trapezius and, deeper in, the supraspinatus",
+          "You can also perform this exercise standing, as long as you keep the back straight, avoiding excessive curvature of the lumbar spine",
+          "Extending the barbell with the elbows forward isolates the anterior deltoid"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/seated-dumbbell-presses.png",
+        "name": "Seated dumbbell presses",
+        "instructions": [
+          "Sit on a bench, Keeping the back straight, and hold dumbbells at shoulder level with an overhand grip (thumbs pointing inward)",
+          "Inhale and extend the arms vertically",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          "Palms facing each other"
+        ],
+        "muscles": [
+          "Deltoid",
+          "Triceps brachii",
+          "Trapezius",
+          "Serratus anterior"
+        ],
+        "comments": [
+          "This exercise contracts the deltoid, mainly the middle deltoid, as well as trapezius, serratus anterior, and triceps brachii",
+          "This movement may also be performed standing or alternating the arms. A backrest helps prevent an excessive arch in the back"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/imges/front-dumbbell-presses.png",
+        "name": "Front dumbbell presses",
+        "instructions": [
+          "Sit on a bench, keeping the back straight. With elbows bent and pointing forward, hold the dumbbells at shoulder level with an ointing away from each other)",
+          "Inhale and extend the arms vertically while rotating 180 degrees at the wrists, bringing them into an overhand grip (thumbs pointing toward each other)",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          "This exercise may be performed seated against a backrest to help prevent an excessive arch in the back, standing, and alternating arms"
+        ],
+        "muscles": [
+          "Deltoid",
+          "Triceps brachii",
+          "Pectoralis major clavicular head",
+          "Trapezius",
+          "Serratus anterior"
+        ],
+        "comments": [
+          "This exercise solicits the deltoid, mainly the anterior deltoid, as well as the clavicular head of the pectoralis major, triceps  brachii, trapezius, and serratus anterior",
+          "Working with the elbows pointing forward prevents excessive friction, which triggers inflammation in the shoulder that can eventually develop into a more serious injury. This movement is recommended for people with weak shoulders and is meant to replace more intense exercises, such as classic dumbbell extensions with the elbows pointing to the sides or extensions from behind the neck"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/bent-over-lateral-raises.png",
+        "name": "Bent-over lateral raises",
+        "instructions": [
+          "Stand with legs slightly apart and knees slightly bent and lean forward at the waist while keeping the back straight. With arms hanging down, grasp the dumbbells with the elbows slightly bent",
+          "Inhale and raise the arms to horizontal",
+          "Exhale at the end of the effort"
+        ],
+        "variations": [
+          "The exercise may be performed facedown on an incline bench"
+        ],
+        "muscles": [
+          "Deltoid",
+          "Trapezius",
+          "Infraspinatus",
+          "Teres minor"
+        ],
+        "comments": [
+          "This exercise works the shoulder group, accenting the work of the posterior deltoid. Squeeze the shoulder blades together at the end of the movement to contract the middle and lower portions of the trapezius, rhomboids, teres minor, and infraspinatus"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/lateral-dumbbell-raises.png",
+        "name": "Lateral dumbbell raises",
+        "instructions": [
+          "Stand with a straight back, with legs slightly apart, arms hanging next to the body, holding a dumbbell in each hand",
+          "Raise the arms to horizontal with the elbows slightly bent",
+          "Return to the initial position"
+        ],
+        "variations": [
+          "Initial position with dumbbells to the side",
+          "Initial position with dumbbells behind",
+          "Initial position with dumbbells in front",
+          "Final position with arms raised to horizontal works the deltoid",
+          "Final position with arms raised above horizontal isolates the upper and middle portions of the trapezius"
+        ],
+        "muscles": [
+          "Deltoid",
+          "Trapezius"
+        ],
+        "comments": [
+          "This exercise mainly uses the middle deltoid",
+          "The three divisions of the deltoids create a multipennate muscle whose different fiber directions converge on the humerus. Their function is to support relatively heavy weight and to move the arm through its full range of motion with precision. Therefore, it is important to adapt training to the specifics of this muscle by varying the initial position of the movement (hands behind, to the side, or in front). This thoroughly works all the fibers of the middle deltoid. Because everyone’s physical structure is different (length of the clavicle, shape of the acromion, and height of the insertion at the humerus), you must find the angle of the initial position that is best for you. Lateral raises contract the supraspinatus, although you can’t see this because it is located deep in the supraspinatus fossa of the scapula (shoulder blade), where it attaches to the lesser tubercle of the humerus",
+          "Raising the arm above horizontal contracts the upper part of the trapezius; however, many bodybuilders don’t work above horizontal so that they isolate the the lateral deltoid",
+          "This exercise should not be performed with heavy weights, but instead in sets of 1 0 to 25 reps, while varying the working angle without much recuperation time until you feel a burn. To increase the intensity, maintain an isometric contraction for a few seconds with the arm at horizontal between each repetition"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/alternate-front-arm-raises.png",
+        "name": "Alternate front arm raises",
+        "instructions": [
+          "Stand with the feet slightly apart, holding the barbells with an overhand grip as they rest against the front of the thighs or slightly to the side",
+          "Inhale and alternate raising the arms to the front to eye level",
+          "Exhale at the end of the effort"
+        ],
+        "variations": [
+          "Lying facedown on an incline bench",
+          "Raising to the front using both hands"
+        ],
+        "muscles": [
+          "Anterior deltoid",
+          "Middle deltoid",
+          "Pectoralis major clavicular head"
+        ],
+        "comments": [
+          "This exercise uses mainly the anterior deltoid, the clavicular head of the pectoralis major, and, to a lesser degree, the remaining deltoids",
+          "All movements that raise the arms contract the muscles that anchor the scapula to the rib cage, such as the serratus anterior and rhomboids, which create a stable support for the humerus to move from"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/side-lying-lateral-raises.png",
+        "name": "Side-lying lateral raises",
+        "instructions": [
+          "Lie on one side on the floor or on a bench holding a dumbbell with an overhand grip",
+          "Inhale and raise the arm to vertical",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          "Deltoid"
+        ],
+        "comments": [
+          "Unlike standing raises, which progressively work the muscle to maximum intensity at the end of the movement (when the arm reaches horizontal), this exercise works the deltoid differently by focusing the effort at the beginning of the raise. Sets of 1 0 to 1 2 repetitions work best",
+          "This movement contracts the supraspinatus, the muscle mainly responsible for initiating abduction. Varying the initial position (dumbbell in front of or behind the thigh) allows you to work all the deltoid fibers"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/low-pulley-lateral-raises.png",
+        "name": "Low-pulley lateral raises",
+        "instructions": [
+          "Grasp the handle with the arm next to the body",
+          "Inhale and raise the arm to horizontal",
+          "Exhale out at the end of the movement"
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          "Middle deltoid"
+        ],
+        "comments": [
+          "This exercise mainly develops the middle deltoid. Because the muscle is multipennate, composed of many fibers in the shape of a feather, it is best to vary the working angles in order to work all the fibers"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/low-pulley-front-raises.png",
+        "name": "Low-pulley front raises",
+        "instructions": [
+          "Stand with the feet slightly apart, arms next to the body. Grasp the handle with an overhand grip with one hand",
+          "Inhale and raise the arm up to eye level",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          "Anterior deltoid",
+          "Middle deltoid",
+          "Pectoralis major clavicular head"
+        ],
+        "comments": [
+          "This exercise contracts the deltoid (mainly the anterior deltoid) as well as the clavicular head of the pectoralis major and, to a lesser degree, the short head of the biceps brachii"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/high-pulley-lateral-extensions.png",
+        "name": "High-pulley lateral extensions",
+        "instructions": [
+          "Stand facing the pulleys with the arms extended to the front, gripping the right handle with the left hand and the left handle with the right hand",
+          "Inhale and extend arms to the side and back",
+          "Exhale at the end of the movement",
+          "Return to the initial position with a controlled movement and begin again"
+        ],
+        "variations": [],
+        "muscles": [
+          "Deltoid",
+          "Trapezius",
+          "Teres minor",
+          "Infraspinatus",
+          "Rhomboid"
+        ],
+        "comments": [
+          "This exercise mainly contracts the posterior deltoid, infraspinatus, teres minor, and, at the end of the movement as the shoulder blades come together, the trapezius and eeper in, the rhomboids",
+          "People who carry their shoulders forward because of chest muscle development can perform this exercise in addition to posterior shoulder work at a machine to help rebalance their posture",
+          "To realign shoulders where they belong, work with moderate weights, and at the end of the movement squeeze the shoulders back"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "assets/images/low-pulley-bent-over-lateral-extensions.png",
+        "name": "Low-pulley bent-over lateral raises",
+        "instructions": [
+          "Stand with the feet apart, legs slightly bent, and lean forward from the waist, keeping a flat back, Grip a handle in each hand with the cables crossed",
+          "Inhale and raise the arms to the side to horizontal",
+          "Exhale at the end of the effort"
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          "Deltoid",
+          "Triceps brachii, lateral head",
+          "Trapezius",
+          "Teres minor",
+          "Teres major",
+          "Infraspinatus"
+        ],
+        "comments": [
+          "This exercise mainly works the posterior deltoid. At the end of the movement, as the shoulder blades squeeze together, the trapezius (middle and lower portions) and the rhomboids contract"
+        ],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
       {
         "image": "",
         "name": "",

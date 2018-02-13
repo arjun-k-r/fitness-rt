@@ -43,15 +43,11 @@ export class MindBalanceProvider {
 
   public saveMindBalance(authId: string, mindBalance: MindBalance, trends: MindBalance[]): Promise<{}> {
     return new Promise((resolve, reject) => {
-      if (!!trends.length) {
-        trends.reverse();
-        if (CURRENT_DAY !== trends[0].date) {
-          this._db.list(`/${authId}/trends/mind-balance/`).push(mindBalance);
-        } else {
-          this._db.list(`/${authId}/trends/mind-balance/`).update(trends[0]['$key'], mindBalance);
-        }
+      const trend: MindBalance = trends.find((mb: MindBalance) => mb.date === mindBalance.date);
+      if (trend) {
+        this._db.list(`/${authId}/trends/mind-balance/`).update(trend['$key'], mindBalance);
       } else {
-        this._db.list(`/${authId}/trends/mind-balance/`).push(mindBalance)
+        this._db.list(`/${authId}/trends/mind-balance/`).push(mindBalance);
       }
       this._db.object(`/${authId}/mind-balance/${mindBalance.date}`).set(mindBalance).then(() => {
         resolve();

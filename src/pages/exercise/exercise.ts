@@ -211,6 +211,7 @@ export class ExercisePage {
         this.exercise.activities = this.exercise.activities || [];
         this._notifyPvd.closeLoading();
       }
+      this.exercise.date = this.exerciseDate;
     }, (err: FirebaseError) => {
       this._notifyPvd.closeLoading();
       this._notifyPvd.showError(err.message);

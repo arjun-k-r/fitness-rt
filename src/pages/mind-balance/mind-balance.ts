@@ -114,6 +114,7 @@ export class MindBalancePage {
         this.mindBalance = Object.assign({}, m);
         this._notifyPvd.closeLoading();
       }
+      this.mindBalance.date = this.mindBalanceDate;
     }, (err: FirebaseError) => {
       this._notifyPvd.closeLoading();
       this._notifyPvd.showError(err.message);

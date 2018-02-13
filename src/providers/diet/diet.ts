@@ -2370,13 +2370,15 @@ export class DietProvider {
     gender: string,
     lactating: boolean,
     pregnant: boolean,
-    weight: number
+    weight: number,
+    date?: string
   ): Promise<NutritionalValues> {
+    date = date || CURRENT_DAY;
     return new Promise((resolve, reject) => {
-      const subscription: Subscription = this._exercisePvd.getExercise$(authId).subscribe(
+      const subscription: Subscription = this._exercisePvd.getExercise$(authId, date).subscribe(
         (e: Exercise) => {
           let intenseExercise: boolean = false,
-           energyConsumption: number = bmr;
+            energyConsumption: number = bmr;
           if (!!e && e['$value'] !== null) {
             e.activities.forEach((a: Activity) => {
               if (a.met > 5) {
@@ -2479,15 +2481,11 @@ export class DietProvider {
 
   public saveDiet(authId: string, diet: Diet, trends: Diet[]): Promise<{}> {
     return new Promise((resolve, reject) => {
-      if (!!trends.length) {
-        trends.reverse();
-        if (CURRENT_DAY !== trends[0].date) {
-          this._db.list(`/${authId}/trends/diet/`).push(diet);
-        } else {
-          this._db.list(`/${authId}/trends/diet/`).update(trends[0]['$key'], diet);
-        }
+      const trend: Diet = trends.find((d: Diet) => d.date === diet.date);
+      if (trend) {
+        this._db.list(`/${authId}/trends/diet/`).update(trend['$key'], diet);
       } else {
-        this._db.list(`/${authId}/trends/diet/`).push(diet)
+        this._db.list(`/${authId}/trends/diet/`).push(diet);
       }
       this._db.object(`/${authId}/diet/${diet.date}`).set(diet).then(() => {
         resolve();

@@ -129,6 +129,7 @@ export class SleepPage {
         this.sleep = Object.assign({}, s);
         this._notifyPvd.closeLoading();
       }
+      this.sleep.date = this.sleepDate;
     }, (err: FirebaseError) => {
       this._notifyPvd.closeLoading();
       this._notifyPvd.showError(err.message);

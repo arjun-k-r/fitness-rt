@@ -128,6 +128,7 @@ export class DietPage {
         this.nutrients = Object.keys(this.diet.nourishment);
         this._notifyPvd.closeLoading();
       }
+      this.diet.date = this.dietDate;
     }, (err: FirebaseError) => {
       this._notifyPvd.closeLoading();
       this._notifyPvd.showError(err.message);
@@ -164,7 +165,7 @@ export class DietPage {
           this._dietSubscription = this._dietPvd.getDiet$(this._authId, this.dietDate).subscribe((s: Diet) => {
             if (!!s && s['$value'] !== null) {
               this.diet = Object.assign({}, s);
-              this._dietPvd.calculateRequirement(this._authId, u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
+              this._dietPvd.calculateRequirement(this._authId, u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight, this.diet.date)
                 .then((r: NutritionalValues) => {
                   this.diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
                 })

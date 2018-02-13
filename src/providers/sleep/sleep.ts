@@ -43,15 +43,11 @@ export class SleepProvider {
 
   public saveSleep(authId: string, sleep: Sleep, trends: Sleep[]): Promise<{}> {
     return new Promise((resolve, reject) => {
-      if (!!trends.length) {
-        trends.reverse();
-        if (CURRENT_DAY !== trends[0].date) {
-          this._db.list(`/${authId}/trends/sleep/`).push(sleep);
-        } else {
-          this._db.list(`/${authId}/trends/sleep/`).update(trends[0]['$key'], sleep);
-        }
+      const trend: Sleep = trends.find((s: Sleep) => s.date === sleep.date);
+      if (trend) {
+        this._db.list(`/${authId}/trends/sleep/`).update(trend['$key'], sleep);
       } else {
-        this._db.list(`/${authId}/trends/sleep/`).push(sleep)
+        this._db.list(`/${authId}/trends/sleep/`).push(sleep);
       }
       this._db.object(`/${authId}/sleep/${sleep.date}`).set(sleep).then(() => {
         resolve();

@@ -70,15 +70,11 @@ export class ExerciseProvider {
 
   public saveExercise(authId: string, exercise: Exercise, trends: Exercise[]): Promise<{}> {
     return new Promise((resolve, reject) => {
-      if (!!trends.length) {
-        trends.reverse();
-        if (CURRENT_DAY !== trends[0].date) {
-          this._db.list(`/${authId}/trends/exercise/`).push(exercise);
-        } else {
-          this._db.list(`/${authId}/trends/exercise/`).update(trends[0]['$key'], exercise);
-        }
+      const trend: Exercise = trends.find((e: Exercise) => e.date === exercise.date);
+      if (trend) {
+        this._db.list(`/${authId}/trends/exercise/`).update(trend['$key'], exercise);
       } else {
-        this._db.list(`/${authId}/trends/exercise/`).push(exercise)
+        this._db.list(`/${authId}/trends/exercise/`).push(exercise);
       }
       this._db.object(`/${authId}/exercise/${exercise.date}`).set(exercise).then(() => {
         resolve();

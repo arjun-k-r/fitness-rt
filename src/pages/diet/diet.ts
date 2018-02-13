@@ -37,6 +37,7 @@ export class DietPage {
   private _dietSubscription: Subscription;
   private _trends: Diet[] = [];
   private _trendSubscription: Subscription;
+  private _userProfile: UserProfile;
   public chartColors: ILineChartColors[] = [];
   public chartData: ILineChartEntry[] = [];
   public chartDataSelection: string = 'energy';
@@ -129,6 +130,13 @@ export class DietPage {
         this._notifyPvd.closeLoading();
       }
       this.diet.date = this.dietDate;
+      this._dietPvd.calculateRequirement(this._authId, this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight, this.diet.date)
+        .then((r: NutritionalValues) => {
+          this.diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
+        })
+        .catch((err: string) => {
+          this._notifyPvd.showError(err);
+        });
     }, (err: FirebaseError) => {
       this._notifyPvd.closeLoading();
       this._notifyPvd.showError(err.message);
@@ -165,6 +173,7 @@ export class DietPage {
           this._dietSubscription = this._dietPvd.getDiet$(this._authId, this.dietDate).subscribe((s: Diet) => {
             if (!!s && s['$value'] !== null) {
               this.diet = Object.assign({}, s);
+              this._userProfile = Object.assign({}, u);
               this._dietPvd.calculateRequirement(this._authId, u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight, this.diet.date)
                 .then((r: NutritionalValues) => {
                   this.diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);

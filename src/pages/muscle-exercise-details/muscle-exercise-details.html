@@ -8,7 +8,7 @@
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col col-6-sm>
+      <ion-col col-sm-6>
         <div *ngIf="!!exercise.warning">
           <h2 color="warn" ion-text>
             <ion-icon color="warn" name="warning"></ion-icon>Warning</h2>
@@ -23,7 +23,7 @@
           <li *ngFor="let muscle of exercise.muscles">{{ muscle }}</li>
         </ul>
       </ion-col>
-      <ion-col col-6-sm>
+      <ion-col col-sm-6>
         <img [src]="exercise.image" [alt]="exercise.name">
       </ion-col>
     </ion-row>

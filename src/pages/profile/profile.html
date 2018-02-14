@@ -137,7 +137,7 @@
             Please enter your neck measurement.
           </div>
           <ion-item>
-            <ion-label fixed>Resting heart rate</ion-label>
+            <ion-label fixed text-wrap>Resting heart rate</ion-label>
             <ion-input formControlName="restingHeartRateMeasurement" placeholder="cm"></ion-input>
           </ion-item>
           <div class="form__message--dark" *ngIf="profileForm.invalid && profileForm.controls.restingHeartRateMeasurement.touched && profileForm.controls.restingHeartRateMeasurement.errors?.required">

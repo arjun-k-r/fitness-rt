@@ -232,3 +232,7 @@ hr {
 textarea {
     resize: none;
 }
+
+.text-input::-moz-placeholder {
+    color: color($colors, caption);
+}

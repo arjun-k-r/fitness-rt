@@ -74,6 +74,7 @@
     "ng2-validation": "^4.2.0",
     "rxjs": "5.4.0",
     "sw-toolbox": "3.6.0",
+    "watson-developer-cloud": "^3.0.6",
     "zone.js": "0.8.12"
   },
   "devDependencies": {

@@ -12,7 +12,7 @@ import { FirebaseError } from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { MindBalance } from '../../models';
+import { IEmotion, MindBalance } from '../../models';
 
 const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 @Injectable()
@@ -24,6 +24,14 @@ export class MindBalanceProvider {
 
   public changeTrendDays(days: number): void {
     this._trendDaysSubject.next(days);
+  }
+
+  public getEmotions$(): FirebaseListObservable<IEmotion[]> {
+    return this._db.list('emotions', {
+      query: {
+        orderByChild: name
+      }
+    });
   }
 
   public getMindBalance$(authId: string, date?: string): FirebaseObjectObservable<MindBalance> {

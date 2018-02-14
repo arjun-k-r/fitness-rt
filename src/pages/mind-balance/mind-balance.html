@@ -67,6 +67,19 @@
             <ion-icon name="arrow-forward"></ion-icon>
           </ion-note>
         </button>
+        <ion-item>
+          <ion-icon color="primary" item-start name="heart"></ion-icon>
+          <ion-label fixed text-wrap>Emotions and causes</ion-label>
+          <ion-textarea (ionChange)="changeMade()" [(ngModel)]="mindBalance.emotions" placeholder="i.e. Today I felt glowing and smiling, because I had a perfect sleep and was sunny!"
+            type="text" wrap="hard"></ion-textarea>
+        </ion-item>
+        <button (click)="viewEmotions()" ion-item>
+          <ion-icon color="primary" item-start name="heart-outline"></ion-icon>
+          <h2>View emotions here</h2>
+          <ion-note item-right>
+            <ion-icon name="arrow-forward"></ion-icon>
+          </ion-note>
+        </button>
         <button (click)="viewLifestyleGuidelines()" ion-item>
           <ion-icon color="primary" item-start name="book"></ion-icon>
           <h2>Lifestyle guidelines</h2>

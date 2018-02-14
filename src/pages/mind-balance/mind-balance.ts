@@ -63,7 +63,7 @@ export class MindBalancePage {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: '#4dd87b'
     });
-    this.mindBalance = new MindBalance(CURRENT_DAY, '', 0, '');
+    this.mindBalance = new MindBalance(CURRENT_DAY, '', '', 0, '');
   }
 
   private _getTrends(): void {
@@ -139,6 +139,10 @@ export class MindBalancePage {
 
   public takeVikrutiTest(): void {
     this._navCtrl.push('vikruti-questionaire');
+  }
+
+  public viewEmotions(): void {
+    this._navCtrl.push('emotions-list');
   }
 
   public viewLifestyleGuidelines(): void {

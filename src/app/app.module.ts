@@ -30,6 +30,7 @@ import 'firebase/storage';
 import { FoodProvider } from '../providers/food/food';
 import { ExerciseProvider } from '../providers/exercise/exercise';
 import { MindBalanceProvider } from '../providers/mind-balance/mind-balance';
+import { WatsonProvider } from '../providers/watson/watson';
 
 const CLOUD_SETTINGS: CloudSettings = {
   'core': {
@@ -76,7 +77,8 @@ const FIREBASE_CONFIG = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FoodProvider,
     ExerciseProvider,
-    MindBalanceProvider
+    MindBalanceProvider,
+    WatsonProvider
   ]
 })
 export class AppModule {}

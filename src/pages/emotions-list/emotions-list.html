@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Emotions list</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let emotion of (emotions$ | async)">
+        <ion-list no-lines>
+          <ion-item-divider>{{ emotion.name }}</ion-item-divider>
+          <ion-item *ngFor="let derivative of emotion.derivatives">
+            {{ derivative }}
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

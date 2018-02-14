@@ -6,13 +6,19 @@
 
 
 <ion-content>
-  <ion-item-group *ngFor="let muscleGroup of (muscleGroups$ | async)">
-    <ion-item-divider>{{ muscleGroup.group }}</ion-item-divider>
-    <button (click)="openDetails(exercise)" ion-item *ngFor="let exercise of muscleGroup.exercises">
-      {{ exercise.name }}
-      <ion-note item-right>
-        <ion-icon name="arrow-forward"></ion-icon>
-      </ion-note>
-    </button>
-  </ion-item-group>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-lg-4 col-md-6 col-sm-6 *ngFor="let muscleGroup of (muscleGroups$ | async)">
+        <ion-item-group>
+          <ion-item-divider>{{ muscleGroup.group }}</ion-item-divider>
+          <button (click)="openDetails(exercise)" ion-item *ngFor="let exercise of muscleGroup.exercises">
+            {{ exercise.name }}
+            <ion-note item-right>
+              <ion-icon name="arrow-forward"></ion-icon>
+            </ion-note>
+          </button>
+        </ion-item-group>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

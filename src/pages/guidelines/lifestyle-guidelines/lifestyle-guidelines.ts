@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
 // Ionic
 import {
   IonicPage,
-  NavController,
-  NavParams
+  // NavController,
+  // NavParams
 } from 'ionic-angular';
 
 import { Constitution } from '../../../models';
@@ -20,7 +20,9 @@ export class LifestyleGuidelinesPage {
   public constitution: Constitution;
   public pageSegment: string = 'Vata';
   public singleDosha: boolean = false;
-  constructor(private _navCtrl: NavController, private _params: NavParams) {
+  constructor(
+    // private _navCtrl: NavController, private _params: NavParams
+  ) {
     /*
     this.constitution = <Constitution>this._params.get('constitution') || new Constitution();
     if (!this.constitution.dominantDosha) {

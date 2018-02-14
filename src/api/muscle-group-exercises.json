@@ -757,18 +757,25 @@
         "warning": ""
       },
       {
-        "image": "",
-        "name": "",
+        "image": "assets/images/one-dumbbell-front-raises.png",
+        "name": "One-dumbbell front raises",
         "instructions": [
-          ""
+          "Stand with the legs slightly apart, a straight back, and the abdominal muscles contracted. With arms extended, grasp a dumbbell in both hands with fingers crossed over each other as it rests against the thighs",
+          "Inhale and raise the dumbbell to eye level",
+          "Lower gently, avoiding abrupt movements",
+          "Exhale at the end of the movement"
         ],
         "variations": [
           ""
         ],
         "muscles": [
-          ""
+          "Deltoid",
+          "Pectoralis major clavicular head"
         ],
-        "comments": [],
+        "comments": [
+          "This exercise mainly contracts the anterior deltoid, the clavicular head of the pectoralis major, and the short head of the biceps",
+          "Note that all the fixators of the scapula are used during the isometric contraction, which allows the humerus to move from a stable position"
+        ],
         "warning": ""
       },
       {

@@ -5,6 +5,11 @@
       ".read": "auth != null",
       ".write": "false"
     },
+      "emotions": {
+      ".indexOn": "name",
+      ".read": "auth != null",
+      ".write": "false"
+    },
     "foods": {
       "usda": {
         ".indexOn": "group",

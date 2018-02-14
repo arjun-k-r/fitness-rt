@@ -77,7 +77,7 @@
         <ion-item>
           <ion-icon color="primary" item-start name="clipboard"></ion-icon>
           <ion-label fixed>Notes</ion-label>
-          <ion-textarea (ionChange)="changeMade()" [(ngModel)]="exercise.notes" type="text" wrap="hard"></ion-textarea>
+          <ion-textarea (ionChange)="changeMade()" [(ngModel)]="exercise.notes" placeholder="i.e. I felt very confident and energized after working out" type="text" wrap="hard"></ion-textarea>
         </ion-item>
         <button (click)="takeOvertrainingTest()" ion-item>
           <ion-icon color="primary" item-start name="battery-dead"></ion-icon>

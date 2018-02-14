@@ -779,63 +779,103 @@
         "warning": ""
       },
       {
-        "image": "",
-        "name": "",
+        "image": "assets/images/barbell-front-raises.png",
+        "name": "Barbell front raises",
         "instructions": [
-          ""
+          "Stand with the legs slightly apart and the back straight, contracting the abdominal muscles, Hold the barbell with an overhand grip as it rests against the thighs",
+          "Inhale and raise the barbell with extended arms to eye level",
+          "Exhale at the end of the movement"
         ],
         "variations": [
-          ""
+          "Front raise at a low pulley"
         ],
         "muscles": [
-          ""
+          "Deltoid",
+          "Pectoralis major clavicular head",
+          "Infraspinatus",
+          "Trapezius",
+          "Serratus anterior",
+          "Biceps brachii"
         ],
-        "comments": [],
+        "comments": [
+          "This exercise contracts the anterior deltoid, the clavicular head of the pectoralis major, the infraspinatus, and, to a lesser degree, the trapezius, serratus anterior, and short head of biceps",
+          "If you continue raising the arms, the posterior deltoid contracts, reinforcing the work of the other muscles and allowing you to raise the arms to vertical",
+          "The exercise may also be performed with your back to a low pulley and the cable passing between the legs",
+          "The biceps brachii participates to a lesser degree in all anterior arm raises"
+        ],
         "warning": ""
       },
       {
-        "image": "",
-        "name": "",
+        "image": "assets/images/upright-rows.png",
+        "name": "Upright rows",
         "instructions": [
-          ""
+          "Stand with the legs slightly apart and back straight. Grasp the barbell with an overhand grip slightly wider than shoulder width as it rests against the thighs",
+          "Inhale and pull the barbell up along the body to the chin keeping the elbows as high as possible",
+          "Lower the bar in a controlled manner without abrupt movements",
+          "Exhale at the end of the effort"
         ],
         "variations": [
           ""
         ],
         "muscles": [
-          ""
+          "Deltoid",
+          "Trapezius",
+          "Biceps brachii",
+          "Forearms",
+          "Gluteal muscles",
+          "Lumbosacralis",
+          "Abdominal muscles"
         ],
-        "comments": [],
+        "comments": [
+          "This exercise mainly uses the deltoid, trapezius, and biceps, and to a lesser degree, the muscles of the forearms, the gluteal muscles, the lumbosacralis group, and the abdominal muscles",
+          "This is a fundamental exercise that is comprehensive and helps develop a 'Hercules' physique"
+        ],
         "warning": ""
       },
       {
-        "image": "",
-        "name": "",
+        "image": "assets/images/nautilus-lateral-raises.png",
+        "name": "Nautilus lateral raises",
         "instructions": [
-          ""
+          "Sit at a machine, grasping the handles",
+          "Inhale and raise the elbows to horizontal",
+          "Exhale at the end of the movement"
         ],
         "variations": [
           ""
         ],
         "muscles": [
-          ""
+          "Deltoid",
+          "Supraspinatus",
+          "Trapezius"
         ],
-        "comments": [],
+        "comments": [
+          "This exercise uses the deltoid (focusing most of the effort on the middle deltoid) and the supraspinatus, located under the deltoid, If raising the arm above horizontal, the upper portion of the trapezius also becomes involved",
+          "This is an excellent beginning exercise because you don’t have to worry about your form or positioning, and it allows long sets of repetitions"
+        ],
         "warning": ""
       },
       {
-        "image": "",
-        "name": "",
+        "image": "assets/images/pec-deck-rear-delt-laterals.png",
+        "name": "Pec deck rear-delt laterals",
         "instructions": [
-          ""
+          "Sit facing the machine, with the torso against the back pad, arms forward, gripping the handles",
+          "Inhale and separate the arms, squeezing the shoulder blades together at the end of the movement",
+          "Exhale"
         ],
         "variations": [
           ""
         ],
         "muscles": [
-          ""
+          "Deltoid",
+          "Infraspinatus",
+          "Teres minor",
+          "Trapezius",
+          "Rhomboid"
         ],
-        "comments": [],
+        "comments": [
+          "This exercise mainly engages the posterior deltoid, infraspinatus, and teres minor and, at the end of the movement, when the shoulder blades squeeze together, the trapezius and rhomboids",
+          "In some people, the teres minor and infraspinatus are fused, forming one muscle"
+        ],
         "warning": ""
       }
     ]
@@ -843,6 +883,201 @@
   {
     "group": "Chest",
     "exercises": [
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
+      {
+        "image": "",
+        "name": "",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warning": ""
+      },
       {
         "image": "",
         "name": "",

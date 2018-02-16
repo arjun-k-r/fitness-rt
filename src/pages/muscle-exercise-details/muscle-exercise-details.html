@@ -9,10 +9,10 @@
   <ion-grid>
     <ion-row>
       <ion-col col-sm-6>
-        <div *ngIf="!!exercise.warning">
+        <div *ngIf="exercise.warnings.length">
           <h2 color="warn" ion-text>
-            <ion-icon color="warn" name="warning"></ion-icon>Warning</h2>
-          <p color="warn" ion-text>{{ exercise.warning }}</p>
+            <ion-icon color="warn" name="warning"></ion-icon>Warnings</h2>
+          <p color="warn" ion-text *ngFor="let warning of exercise.warnings">{{ warning }}</p>
         </div>
         <h2>Instructions</h2>
         <ul>

@@ -24,7 +24,7 @@
           "Brachioardialis",
           "Anterior deltoid"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/concentration-curls.png",
@@ -43,7 +43,7 @@
           "This isolation exercise allows you to control the range of motion, speed. and form of the movement",
           "It mainly works the biceps brachii and brachialis"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/hammer-curls.png",
@@ -53,9 +53,7 @@
           "Inhale and raise the forearms together or alternately",
           "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Biceps brachii",
           "Brachialis",
@@ -65,7 +63,7 @@
           "This is the best exercise for developing the brachioradialis",
           "It also develops the biceps brachii, brachialis, and, to a lesser degree, the extensor carpi radialis brevis and longus."
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/low-pulley-curls.png",
@@ -85,7 +83,7 @@
         "comments": [
           "This exercise focuses the effort on the biceps brachii and works the muscle intensely"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/high-pulley-curls.png",
@@ -109,7 +107,7 @@
           "Sets of high reps provide the best results",
           "In addition to its role as a forearm flexor, the biceps brachii is the most powerful supinator"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/barbell-curls.png",
@@ -133,7 +131,7 @@
         "comments": [
           "This exercise mainly contracts the biceps brachii, brachialis, and, to a lesser degree, the brachioradialis, pronator teres, and the wrist flexor group"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/machine-curls.png",
@@ -143,18 +141,19 @@
           "Inhale and raise the forearms",
           "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
-          ""
+          "Biceps brachii",
+          "Brachialis",
+          "Brachioardialis",
+          "Pronator teres"
         ],
         "comments": [
           "This is one of the best exercises for working the biceps brachii. Fixing the arms against the support makes it impossible to 'cheat'",
           "At the beginning, the muscle tension is intense, so be sure to warm up properly using light weights. To avoid the risk of tendonitis, do not completely extend the arm",
           "This movement also works the brachialis and, to a lesser extent, the brachioradialis and pronator teres"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/preacher-curls.png",
@@ -164,9 +163,7 @@
           "Inhale and raise the forearms by bending the elbows",
           "Exhale at the end of the effort"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Biceps brachii",
           "Brachialis"
@@ -174,7 +171,9 @@
         "comments": [
           "This is one of the best exercises for isolating the biceps"
         ],
-        "warning": "The angle of the support pad places significant tension on the forearms when the arm is completely extended. Therefore, warm up the muscles properly and begin with lighter weights."
+        "warnings": [
+          "The angle of the support pad places significant tension on the forearms when the arm is completely extended. Therefore, warm up the muscles properly and begin with lighter weights."
+        ]
       },
       {
         "image": "assets/images/reverse-curls.png",
@@ -184,9 +183,7 @@
           "Inhale and raise the forearms by bending the elbows",
           "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Biceps brachii",
           "Brachialis",
@@ -202,7 +199,7 @@
           "It also acts on the brachioradialis, brachialis, and, to a lesser degree, the biceps brachii",
           "This is an excellent exercise for strengthening the wrist, which is often weak because of an imbalance caused by using the wrist flexors rather than the wrist extensors. For this reason, many boxers include it in their training. Many bench press champions use it to keep their wrists from trembling under extreme weights"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/reverse-wrist-curls.png",
@@ -211,9 +208,7 @@
           "Sit with the forearms resting on the thighs or on a bench and grasp the bar with an overhand grip and keep the wrists relaxed",
           "Raise the hands by extending at the wrists"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Extensor carpi radialis longus",
           "Extensor carpi radialis brevis",
@@ -225,7 +220,7 @@
           "This exercise contracts the extensor carpi radialis longus and brevis, extensor digitorum, extensor digiti minimi, as well as the extensor carpi ulnaris",
           "This exercise strengthens the wrists, which are often vulnerable because of weak wrist extensors"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/wrist-curls.png",
@@ -234,9 +229,7 @@
           "Sit with the forearms resting on the thighs or on a bench and grasp the bar with an underhand grip with wrists relaxed",
           "Inhale and raise the hands by flexing at the wrists"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Flexor carpi radialis",
           "Palmaris longus",
@@ -250,7 +243,7 @@
           "This exercise contracts the flexor carpi radialis, palmaris longus, flexor carpi ulnaris, and the flexors digitorum superficialis and profundus",
           "The latter two muscles, although located deep in the wrist, make up most of the muscle mass of the wrist flexors"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/push-downs.png",
@@ -276,7 +269,7 @@
           "When using heavy weights, lean forward with the torso",
           "Beginners can use this exercise to develop enough strength to move on to more difficult exercises"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/reverse-push-downs.png",
@@ -286,9 +279,7 @@
           "Inhale and extend the forearms by straightening the elbows, keeping them tucked into the body",
           "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Triceps brachii",
           "Extensor carpi radialis brevis",
@@ -302,7 +293,7 @@
           "When extending the forearms, the anconeus and wrist extensors also contract",
           "The extensor carpi ulnaris, extensor digitorum, extensor digiti minimi, and extensors carpi radialis longus and brevis keep the wrist straight with isometric contraction during the exercise"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/one-arm-reverse-push-downs.jpg",
@@ -312,9 +303,7 @@
           "Inhale and extend the forearm",
           "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Triceps brachii",
           "Anconeus"
@@ -322,7 +311,7 @@
         "comments": [
           "This exercise mainly works the lateral head of the triceps"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/triceps-extensions.jpg",
@@ -342,7 +331,7 @@
         "comments": [
           "Because of individual variations in shoulder width, valgus angle at the elbows, and wrist flexibility, the hands can be closer or farther apart on the bar and the elbow angle more or less open during the exercise. Using an E-Z bar helps prevent excessive strain at the wrists"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/dumbell-triceps-extensions.png",
@@ -353,9 +342,7 @@
           "Return to the initial position",
           "Exhale at the end of the effort"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Triceps brachii",
           "Anconeus"
@@ -363,7 +350,7 @@
         "comments": [
           "This exercise works all three heads of the triceps brachii equally"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/one-arm-dumbell-triceps-extensions.png",
@@ -374,9 +361,7 @@
           "Return to the initial position",
           "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Triceps brachii",
           "Anconeus"
@@ -385,7 +370,7 @@
           "The vertical position of the arm stretches the long head of the triceps brachii, emphasizing its contraction while working",
           "Contract the abdominal core to prevent arching the low back. If possible use a bench with support for the low back"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/seated-dumbell-triceps-extensions.png",
@@ -395,9 +380,7 @@
           "Inhale, and extend the forearm",
           "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Triceps brachii",
           "Anconeus"
@@ -406,7 +389,7 @@
           "The vertical position of the arm strongly stretches the long head of the triceps brachii, emphasizing its contraction while working",
           "Contract the abdominal core to prevent arching the low back. If possible use a bench with support for the low back"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/seated-ez-bar-triceps-extensions.png",
@@ -417,9 +400,7 @@
           "Return to the initial position",
           "Exhale at the end of the extension"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Triceps brachii"
         ],
@@ -428,7 +409,7 @@
           "An overhand grip isolates the lateral head of the triceps brachii",
           "Contract the abdominal muscles and avoid arching the low back. If possible use a bench with support for the low back"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/triceps-kickbacks.png",
@@ -439,9 +420,7 @@
           "Inhale and extend the forearm",
           "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Triceps brachii",
           "Anconeus"
@@ -450,7 +429,7 @@
           "This is an excellent exercise for pumping the triceps group",
           "Perform this exercise until you feel a burn for best results"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/triceps-dips.png",
@@ -460,9 +439,7 @@
           "Inhale, then dip by bending the elbows and rise by extending the forearms",
           "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Triceps brachii",
           "Anconeus",
@@ -473,7 +450,7 @@
           "This exercise works the triceps and pectorals as well as the anterior deltoid",
           "Resting weights on top of the thighs increases the difficulty and intensity of the dip"
         ],
-        "warning": ""
+        "warnings": []
       }
     ]
   },
@@ -500,7 +477,9 @@
         "comments": [
           "This exercise uses the deltoid, mainly the middle and posterior fibers, as well as the trapezius, triceps brachii, and serratus anterior. Although not worked as intensely, the rhomboids, infraspinatus, teres minor, and, deeper in, the supraspinatus also contract"
         ],
-        "warning": "To prevent injury to the shoulder joint, which is vulnerable, lower the bar only as far as your unique shoulder structure and flexibility allow you to do comfortably."
+        "warnings": [
+          "To prevent injury to the shoulder joint, which is vulnerable, lower the bar only as far as your unique shoulder structure and flexibility allow you to do comfortably."
+        ]
       },
       {
         "image": "assets/images/seated-front-press.png",
@@ -527,7 +506,7 @@
           "You can also perform this exercise standing, as long as you keep the back straight, avoiding excessive curvature of the lumbar spine",
           "Extending the barbell with the elbows forward isolates the anterior deltoid"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/seated-dumbbell-presses.png",
@@ -550,7 +529,7 @@
           "This exercise contracts the deltoid, mainly the middle deltoid, as well as trapezius, serratus anterior, and triceps brachii",
           "This movement may also be performed standing or alternating the arms. A backrest helps prevent an excessive arch in the back"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/imges/front-dumbbell-presses.png",
@@ -574,7 +553,7 @@
           "This exercise solicits the deltoid, mainly the anterior deltoid, as well as the clavicular head of the pectoralis major, triceps  brachii, trapezius, and serratus anterior",
           "Working with the elbows pointing forward prevents excessive friction, which triggers inflammation in the shoulder that can eventually develop into a more serious injury. This movement is recommended for people with weak shoulders and is meant to replace more intense exercises, such as classic dumbbell extensions with the elbows pointing to the sides or extensions from behind the neck"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/bent-over-lateral-raises.png",
@@ -596,7 +575,7 @@
         "comments": [
           "This exercise works the shoulder group, accenting the work of the posterior deltoid. Squeeze the shoulder blades together at the end of the movement to contract the middle and lower portions of the trapezius, rhomboids, teres minor, and infraspinatus"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/lateral-dumbbell-raises.png",
@@ -623,7 +602,7 @@
           "Raising the arm above horizontal contracts the upper part of the trapezius; however, many bodybuilders don’t work above horizontal so that they isolate the the lateral deltoid",
           "This exercise should not be performed with heavy weights, but instead in sets of 1 0 to 25 reps, while varying the working angle without much recuperation time until you feel a burn. To increase the intensity, maintain an isometric contraction for a few seconds with the arm at horizontal between each repetition"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/alternate-front-arm-raises.png",
@@ -646,7 +625,7 @@
           "This exercise uses mainly the anterior deltoid, the clavicular head of the pectoralis major, and, to a lesser degree, the remaining deltoids",
           "All movements that raise the arms contract the muscles that anchor the scapula to the rib cage, such as the serratus anterior and rhomboids, which create a stable support for the humerus to move from"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/side-lying-lateral-raises.png",
@@ -656,9 +635,7 @@
           "Inhale and raise the arm to vertical",
           "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Deltoid"
         ],
@@ -666,7 +643,7 @@
           "Unlike standing raises, which progressively work the muscle to maximum intensity at the end of the movement (when the arm reaches horizontal), this exercise works the deltoid differently by focusing the effort at the beginning of the raise. Sets of 1 0 to 1 2 repetitions work best",
           "This movement contracts the supraspinatus, the muscle mainly responsible for initiating abduction. Varying the initial position (dumbbell in front of or behind the thigh) allows you to work all the deltoid fibers"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/low-pulley-lateral-raises.png",
@@ -676,16 +653,14 @@
           "Inhale and raise the arm to horizontal",
           "Exhale out at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Middle deltoid"
         ],
         "comments": [
           "This exercise mainly develops the middle deltoid. Because the muscle is multipennate, composed of many fibers in the shape of a feather, it is best to vary the working angles in order to work all the fibers"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/low-pulley-front-raises.png",
@@ -695,9 +670,7 @@
           "Inhale and raise the arm up to eye level",
           "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Anterior deltoid",
           "Middle deltoid",
@@ -706,7 +679,7 @@
         "comments": [
           "This exercise contracts the deltoid (mainly the anterior deltoid) as well as the clavicular head of the pectoralis major and, to a lesser degree, the short head of the biceps brachii"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/high-pulley-lateral-extensions.png",
@@ -730,7 +703,7 @@
           "People who carry their shoulders forward because of chest muscle development can perform this exercise in addition to posterior shoulder work at a machine to help rebalance their posture",
           "To realign shoulders where they belong, work with moderate weights, and at the end of the movement squeeze the shoulders back"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/low-pulley-bent-over-lateral-extensions.png",
@@ -740,9 +713,7 @@
           "Inhale and raise the arms to the side to horizontal",
           "Exhale at the end of the effort"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Deltoid",
           "Triceps brachii, lateral head",
@@ -754,7 +725,7 @@
         "comments": [
           "This exercise mainly works the posterior deltoid. At the end of the movement, as the shoulder blades squeeze together, the trapezius (middle and lower portions) and the rhomboids contract"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/one-dumbbell-front-raises.png",
@@ -765,9 +736,7 @@
           "Lower gently, avoiding abrupt movements",
           "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Deltoid",
           "Pectoralis major clavicular head"
@@ -776,7 +745,7 @@
           "This exercise mainly contracts the anterior deltoid, the clavicular head of the pectoralis major, and the short head of the biceps",
           "Note that all the fixators of the scapula are used during the isometric contraction, which allows the humerus to move from a stable position"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/barbell-front-raises.png",
@@ -803,7 +772,7 @@
           "The exercise may also be performed with your back to a low pulley and the cable passing between the legs",
           "The biceps brachii participates to a lesser degree in all anterior arm raises"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/upright-rows.png",
@@ -814,9 +783,7 @@
           "Lower the bar in a controlled manner without abrupt movements",
           "Exhale at the end of the effort"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Deltoid",
           "Trapezius",
@@ -830,7 +797,7 @@
           "This exercise mainly uses the deltoid, trapezius, and biceps, and to a lesser degree, the muscles of the forearms, the gluteal muscles, the lumbosacralis group, and the abdominal muscles",
           "This is a fundamental exercise that is comprehensive and helps develop a 'Hercules' physique"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/nautilus-lateral-raises.png",
@@ -840,9 +807,7 @@
           "Inhale and raise the elbows to horizontal",
           "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Deltoid",
           "Supraspinatus",
@@ -852,7 +817,7 @@
           "This exercise uses the deltoid (focusing most of the effort on the middle deltoid) and the supraspinatus, located under the deltoid, If raising the arm above horizontal, the upper portion of the trapezius also becomes involved",
           "This is an excellent beginning exercise because you don’t have to worry about your form or positioning, and it allows long sets of repetitions"
         ],
-        "warning": ""
+        "warnings": []
       },
       {
         "image": "assets/images/pec-deck-rear-delt-laterals.png",
@@ -862,9 +827,7 @@
           "Inhale and separate the arms, squeezing the shoulder blades together at the end of the movement",
           "Exhale"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
           "Deltoid",
           "Infraspinatus",
@@ -876,7 +839,7 @@
           "This exercise mainly engages the posterior deltoid, infraspinatus, and teres minor and, at the end of the movement, when the shoulder blades squeeze together, the trapezius and rhomboids",
           "In some people, the teres minor and infraspinatus are fused, forming one muscle"
         ],
-        "warning": ""
+        "warnings": []
       }
     ]
   },
@@ -884,19 +847,249 @@
     "group": "Chest",
     "exercises": [
       {
-        "image": "",
-        "name": "",
+        "image": "assets/images/incline-presses.png",
+        "name": "Incline presses",
         "instructions": [
-          ""
+          "Sit on an incline bench angled at 45 to 60 degrees, grasp the barbell with an overhand grip wider than shoulder width",
+          "Inhale and lower the barbell to the sternal notch",
+          "Extend the arms"
+        ],
+        "variations": [],
+        "muscles": [
+          "Pectoralis major",
+          "Anterior deltoid",
+          "Serratus anterior",
+          "Anconeus",
+          "Triceps brachii, long head",
+          "Triceps brachii, medial head"
+        ],
+        "comments": [
+          "This exercise mainly solicits the clavicular head of the pectoralis major, anterior deltoid, triceps brachii, serratus anterior, and pectoralis minor. This exercise may be done at a frame that guides the bar",
+          "Contrary to popular lore, the incline press does not tone the breasts and in no way prevents their sagging. Breasts are composed of adipose tissue containing the mammary glands, all of which is contained in a net of connective tissue that rests on top of the pectoralis major"
+        ],
+        "warnings": [
+          "Elbow pain most often develops after bench pressing. This overuse injury is generally related to excessive training with long sets. In bench pressing, locking the extended arms at the end of the movement subjects the elbow to rubbing and microtrauma, which over time may lead to inflammation. Occasionally, this condition can lead to intra-articular calcifications, which are particularly crippling. In this case, surgery is often the only solution for regaining complete arm extension. At the first sign of elbow pain, avoid for several days exercises that involve arm extension in order to prevent serious injury. When you resume exercises that include arm extension, avoid completely extending the forearms at the end of the movement until the pain has completely disappeared."
+        ]
+      },
+      {
+        "image": "assets/images/bench-presses.png",
+        "name": "Bench presses",
+        "instructions": [
+          "Lie faceup on a horizontal bench, with buttocks on the bench and feet flat on the ground",
+          "Grasp the barbell with an overhand grip wider than shoulder width",
+          "Inhale and lower the bar to the chest with a controlled movement",
+          "Extend the arms and exhale at the end of the effort"
         ],
         "variations": [
-          ""
+          "This movement may be performed while arching the back power-lifter style. This position brings the more powerful lower part of the pectoral muscle into play, allowing you to lift heavier weights",
+          "Executing the extension with the elbows next to the body concentrates the work onto the anterior deltoid",
+          "Hands closer together isolates the central part of the pectorals",
+          "Hands wider apart isolates the lateral part of the pectorals",
+          "Lowering the bar to the chondrocostal border of the rib cage isolates the lower part of the pectorals",
+          "Lowering the barbell onto the middle part of the pectorals isolates the midline fibers",
+          "Lowering the bar onto the sternal notch isolates the clavicular head of the muscle",
+          "If you have back problems or want to isolate the pectorals, perform the extension with the legs raised",
+          "Perform the extension at a frame that guides the bar"
         ],
         "muscles": [
-          ""
+          "Pectoralis major",
+          "Triceps brachii, long head",
+          "Triceps brachii, medial head",
+          "Anterior deltoid",
+          "Serratus anterior",
+          "Coracobrachialis"
         ],
-        "comments": [],
-        "warning": ""
+        "comments": [
+          "This exercise engages the complete pectoralis major muscle, pectoralis minor, anterior deltoid, serratus anterior, and coracobrachialis"
+        ],
+        "warnings": [
+          "For maximum safety, lock onto the bar with a grip in which the thumb and fingers oppose each other. If the grip on the bar is not locked on in opposition, the bar could slip out of your hands and fall on the jaw or, worse, the neck and cause a serious injury.",
+          "Elbow pain most often develops after bench pressing. This overuse injury is generally related to excessive training with long sets. In bench pressing, locking the extended arms at the end of the movement subjects the elbow to rubbing and microtrauma, which over time may lead to inflammation. Occasionally, this condition can lead to intra-articular calcifications, which are particularly crippling. In this case, surgery is often the only solution for regaining complete arm extension. At the first sign of elbow pain, avoid for several days exercises that involve arm extension in order to prevent serious injury. When you resume exercises that include arm extension, avoid completely extending the forearms at the end of the movement until the pain has completely disappeared."
+        ]
+      },
+      {
+        "image": "assets/images/bench-presses.png",
+        "name": "Close-grip bench presses",
+        "instructions": [
+          "Lie on a horizontal bench with the buttocks on the bench and the feet on the ground, gripping the barbell with an overhand grip and wrists 4 to 15 inches apart, depending on the flexibility of the wrists: Inhale and lower the bar with a controlled movement to the chest, with the elbows out to the side. Extend and exhale at the end of the effort"
+        ],
+        "variations": [
+          "Execution with elbows open to the sides to better isolate the triceps brachii"
+        ],
+        "muscles": [
+          "Pectoralis major",
+          "Triceps brachii",
+          "Anconeus"
+        ],
+        "comments": [
+          "This exercise develops the pectoral muscles at the sternal notch and the triceps brachii. (With this in mind, it may be included in a program for the arms.) By extending and keeping the elbows next to the body, a greater part of the work is performed by the anterior deltoid. This movement may be performed at a frame that guides the bar"
+        ],
+        "warnings": [
+          "Depending on your physical structure, the narrow grip may cause wrist pain. In this case, use a wider grip.",
+          "Elbow pain most often develops after bench pressing. This overuse injury is generally related to excessive training with long sets. In bench pressing, locking the extended arms at the end of the movement subjects the elbow to rubbing and microtrauma, which over time may lead to inflammation. Occasionally, this condition can lead to intra-articular calcifications, which are particularly crippling. In this case, surgery is often the only solution for regaining complete arm extension. At the first sign of elbow pain, avoid for several days exercises that involve arm extension in order to prevent serious injury. When you resume exercises that include arm extension, avoid completely extending the forearms at the end of the movement until the pain has completely disappeared."
+        ]
+      },
+      {
+        "image": "assets/images/decline-presses.png",
+        "name": "Decline presses",
+        "instructions": [
+          "Lie on a decline bench (between 20 and 40 degrees), with the head angled down and feet fixed to prevent sliding and grasp the barbell with an overhand grip shoulder width or more",
+          "Inhale and lower the barbell to the lower pectorals with a controlled movement",
+          "Extend the arms and exhale at the end of the movement"
+        ],
+        "variations": [],
+        "muscles": [
+          "Pectoralis major",
+          "Triceps brachii, long head",
+          "Triceps brachii, short head",
+          "Anterior deltoid"
+        ],
+        "comments": [
+          "This exercise contracts the pectoralis major (mainly its inferior fibers), triceps brachii, and the anterior deltoid",
+          "This exercise is useful for outlining the inferior groove of the pectorals. Using light weights and lowering the bar to the neck stretches the pectoralis major correctly. The decline press may be performed at a frame that guides the bar"
+        ],
+        "warnings": [
+          "Elbow pain most often develops after bench pressing. This overuse injury is generally related to excessive training with long sets. In bench pressing, locking the extended arms at the end of the movement subjects the elbow to rubbing and microtrauma, which over time may lead to inflammation. Occasionally, this condition can lead to intra-articular calcifications, which are particularly crippling. In this case, surgery is often the only solution for regaining complete arm extension. At the first sign of elbow pain, avoid for several days exercises that involve arm extension in order to prevent serious injury. When you resume exercises that include arm extension, avoid completely extending the forearms at the end of the movement until the pain has completely disappeared."
+        ]
+      },
+      {
+        "image": "assets/images/push-ups.png",
+        "name": "Push-ups",
+        "instructions": [
+          "Support yourself facedown on the ground, with arms extended, hands shoulder-width (or more) apart, and feet touching or slightly apart",
+          "Inhale and bend the elbows to bring the rib cage close to the ground without arching the low back excessively",
+          "Push back up to complete arm extension",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          "Feet higher isolates the the clavicular head of the pectoralis major",
+          "Chest higher isolates the inferior part of the pectoralis major",
+          "Hands wider isolates the lateral part of the pectoralis major",
+          "Hands closer together isolates the sternal head of the pectoralis major"
+        ],
+        "muscles": [
+          "Pectoralis major",
+          "Triceps brachii",
+          "Anterior deltoid",
+          "Anconeus"
+        ],
+        "comments": [
+          "This movement is excellent for the pectoralis major and the triceps brachii"
+        ],
+        "warnings": []
+      },
+      {
+        "image": "assets/images/parallel-bar-dips.png",
+        "name": "Parallel bar dips",
+        "instructions": [
+          "Hang from the parallel bars with arms extended and legs suspended",
+          "Inhale and bend the elbows to bring the chest level with the bars",
+          "Return to the extended arm position",
+          "Exhale at the end of the effort"
+        ],
+        "variations": [],
+        "muscles": [
+          "Pectoralis major",
+          "Triceps brachii",
+          "Anterior deltoid",
+          "Brachialis",
+          "Anconeus"
+        ],
+        "comments": [
+          "The more the chest is angled forward during the exercise, the more the inferior fibers of the pectorals are used. Conversely, the more vertical the chest, the more the triceps brachii will be used",
+          "This exercise is excellent for stretching the pectoralis major and for working on the flexibility of the shoulder girdle",
+          "If you are a beginner, use a dips machine to familiarize yourself with the movement. Sets of 10 to 20 repetitions provide the best results",
+          "For developing more strength and also more size, athletes used to this movement may use a weight belt, or hang a weight from their legs"
+        ],
+        "warnings": [
+          "This exercise is not recommended for beginners, because it requires a certain amount of initial strength.",
+          "Execute the dips with caution to prevent shoulder trauma."
+        ]
+      },
+      {
+        "image": "assets/images/dumbbell-presses.png",
+        "name": "Dumbbell presses",
+        "instructions": [
+          "Lie faceup on a horizontal bench, with feet flat on the ground for stability and elbows bent, holding dumbbells with an overhand grip at the chest level",
+          "Inhale and extend the arms vertically while rotating the forearms so that the palms face each other",
+          "Once the hands face each other, perform an isometric contraction to focus the effort on the sternal head of the pectoralis major",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          "Executing the exercise without rotating the forearms"
+        ],
+        "muscles": [
+          "Pectoralis major",
+          "Triceps brachii",
+          "Anterior deltoid",
+          "Anconeus"
+        ],
+        "comments": [
+          "This exercise is similar to the bench press, but with its greater range of motion, it stretches the pectoralis muscles.",
+          "Although not contracted as intensely, the triceps brachii and anterior deltoid are also used."
+        ],
+        "warnings": []
+      },
+      {
+        "image": "assets/images/dumbbell-flys.png",
+        "name": "Dumbbell flys",
+        "instructions": [
+          "Lie on a narrow bench that won’t interfere with the shoulder movement and hold a dumbbell in each hand with arms extended or slightly bent to relieve stress on the joint",
+          "Inhale and open the arms to horizontal",
+          "Raise the arms to vertical while exhaling",
+          "Perform a small isometric contraction at the end of the movement to emphasize the work on the sternal head of the pectoralis major"
+        ],
+        "variations": [],
+        "muscles": [
+          "Pectoralis major"
+        ],
+        "comments": [
+          "This exercise is never performed with heavy weights.",
+          "This exercise focuses the work on the pectoralis major. It serves as a basic exercise to increase thoracic expansion, which contributes to increased pulmonary capacity. It also develops muscle flexibility."
+        ],
+        "warnings": [
+          "To avoid the risk of tearing the pectoral muscles, perform the exercise with extreme caution when using heavier weights."
+        ]
+      },
+      {
+        "image": "assets/images/incline-dumbbell-presses.png",
+        "name": "Incline dumbbell presses",
+        "instructions": [
+          "Sit on a bench with an angle of no more than 60 degrees (to prevent too much work with the deltoid), with elbows bent and grasping the dumbbells with an overhand grip",
+          "Inhale and extend the arms vertically, bringing the dumbbells together",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          "Beginning the press with the hands in an underhand grip and rotating the wrists halfway to an overhand grip so that the dumbbells face each other focuses the effort on the sternal head of the pectoralis major."
+        ],
+        "muscles": [
+          "Pectoralis major",
+          "Triceps brachii, long head",
+          "Triceps brachii, medial head",
+          "Anterior deltoid",
+          "Serratus anterior"
+        ],
+        "comments": [
+          "This exercise, which is midway between an incline press and incline dumbbell fly, works the pectorals (mainly the clavicular head) and increases their flexibility. It also contracts the anterior deltoid, the serratus anterior, and the pectoralis minor (these last two muscles are fixators of the scapula, which stabilize the arm at the torso). It also uses the triceps brachii, but not as intensely as the barbell press does"
+        ],
+        "warnings": []
+      },
+      {
+        "image": "assets/images/incline-dumbbell-flys.png",
+        "name": "Incline dumbbell flys",
+        "instructions": [
+          "Sit on a bench angled between 45 and 60 degrees, dumbbells in hand and arms extended vertically or slightly bent to ease stress when bringing the arms together",
+          "Inhale and extend the arms to horizontal",
+          "Raise the arms to vertical while exhaling"
+        ],
+        "variations": [],
+        "muscles": [
+          "Pectoralis major"
+        ],
+        "comments": [
+          "This movement should not be performed with heavy weights. It focuses the effort mainly on the clavicular head of the pectoralis major. Along with the pullover, it is a fundamental exercise for developing thoracic expansion"
+        ],
+        "warnings": []
       },
       {
         "image": "",
@@ -911,7 +1104,9 @@
           ""
         ],
         "comments": [],
-        "warning": ""
+        "warnings": [
+          ""
+        ]
       },
       {
         "image": "",
@@ -926,7 +1121,9 @@
           ""
         ],
         "comments": [],
-        "warning": ""
+        "warnings": [
+          ""
+        ]
       },
       {
         "image": "",
@@ -941,7 +1138,9 @@
           ""
         ],
         "comments": [],
-        "warning": ""
+        "warnings": [
+          ""
+        ]
       },
       {
         "image": "",
@@ -956,142 +1155,9 @@
           ""
         ],
         "comments": [],
-        "warning": ""
-      },
-      {
-        "image": "",
-        "name": "",
-        "instructions": [
+        "warnings": [
           ""
-        ],
-        "variations": [
-          ""
-        ],
-        "muscles": [
-          ""
-        ],
-        "comments": [],
-        "warning": ""
-      },
-      {
-        "image": "",
-        "name": "",
-        "instructions": [
-          ""
-        ],
-        "variations": [
-          ""
-        ],
-        "muscles": [
-          ""
-        ],
-        "comments": [],
-        "warning": ""
-      },
-      {
-        "image": "",
-        "name": "",
-        "instructions": [
-          ""
-        ],
-        "variations": [
-          ""
-        ],
-        "muscles": [
-          ""
-        ],
-        "comments": [],
-        "warning": ""
-      },
-      {
-        "image": "",
-        "name": "",
-        "instructions": [
-          ""
-        ],
-        "variations": [
-          ""
-        ],
-        "muscles": [
-          ""
-        ],
-        "comments": [],
-        "warning": ""
-      },
-      {
-        "image": "",
-        "name": "",
-        "instructions": [
-          ""
-        ],
-        "variations": [
-          ""
-        ],
-        "muscles": [
-          ""
-        ],
-        "comments": [],
-        "warning": ""
-      },
-      {
-        "image": "",
-        "name": "",
-        "instructions": [
-          ""
-        ],
-        "variations": [
-          ""
-        ],
-        "muscles": [
-          ""
-        ],
-        "comments": [],
-        "warning": ""
-      },
-      {
-        "image": "",
-        "name": "",
-        "instructions": [
-          ""
-        ],
-        "variations": [
-          ""
-        ],
-        "muscles": [
-          ""
-        ],
-        "comments": [],
-        "warning": ""
-      },
-      {
-        "image": "",
-        "name": "",
-        "instructions": [
-          ""
-        ],
-        "variations": [
-          ""
-        ],
-        "muscles": [
-          ""
-        ],
-        "comments": [],
-        "warning": ""
-      },
-      {
-        "image": "",
-        "name": "",
-        "instructions": [
-          ""
-        ],
-        "variations": [
-          ""
-        ],
-        "muscles": [
-          ""
-        ],
-        "comments": [],
-        "warning": ""
+        ]
       }
     ]
   },
@@ -1111,7 +1177,9 @@
           ""
         ],
         "comments": [],
-        "warning": ""
+        "warnings": [
+          ""
+        ]
       }
     ]
   },
@@ -1131,7 +1199,9 @@
           ""
         ],
         "comments": [],
-        "warning": ""
+        "warnings": [
+          ""
+        ]
       }
     ]
   },
@@ -1151,7 +1221,9 @@
           ""
         ],
         "comments": [],
-        "warning": ""
+        "warnings": [
+          ""
+        ]
       }
     ]
   },
@@ -1171,7 +1243,9 @@
           ""
         ],
         "comments": [],
-        "warning": ""
+        "warnings": [
+          ""
+        ]
       }
     ]
   }

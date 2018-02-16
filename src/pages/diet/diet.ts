@@ -169,11 +169,13 @@ export class DietPage {
 
         // Update requirements according to exercise changes
         const userSubscription: Subscription = this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
-          userSubscription.unsubscribe();
+          if (!!u && u['$value'] !== null) {
+            this._userProfile = Object.assign({}, u);
+            userSubscription.unsubscribe();
+          }
           this._dietSubscription = this._dietPvd.getDiet$(this._authId, this.dietDate).subscribe((s: Diet) => {
             if (!!s && s['$value'] !== null) {
               this.diet = Object.assign({}, s);
-              this._userProfile = Object.assign({}, u);
               this._dietPvd.calculateRequirement(this._authId, u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight, this.diet.date)
                 .then((r: NutritionalValues) => {
                   this.diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);

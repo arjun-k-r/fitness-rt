@@ -233,6 +233,6 @@ textarea {
     resize: none;
 }
 
-.text-input::-moz-placeholder {
+textarea.text-input::-moz-placeholder {
     color: color($colors, caption);
 }

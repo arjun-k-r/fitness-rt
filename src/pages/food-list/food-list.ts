@@ -174,7 +174,7 @@ export class FoodListPage {
   }
 
   public clearSearchUsdaFoods(): void {
-    this.foodSearchQuery = '';
+    this.usdaFoodSearchQuery = '';
   }
 
   public dismiss(): void {

@@ -27,10 +27,6 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
 import 'firebase/storage';
-import { FoodProvider } from '../providers/food/food';
-import { ExerciseProvider } from '../providers/exercise/exercise';
-import { MindBalanceProvider } from '../providers/mind-balance/mind-balance';
-import { WatsonProvider } from '../providers/watson/watson';
 
 const CLOUD_SETTINGS: CloudSettings = {
   'core': {
@@ -74,11 +70,7 @@ const FIREBASE_CONFIG = {
     NotificationProvider,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FoodProvider,
-    ExerciseProvider,
-    MindBalanceProvider,
-    WatsonProvider
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

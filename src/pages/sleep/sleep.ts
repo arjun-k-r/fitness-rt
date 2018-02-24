@@ -19,10 +19,10 @@ import { FirebaseError, User } from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { ILineChartColors, ILineChartEntry, Sleep } from '../../models';
+import { ILineChartColors, ILineChartEntry, Sleep, UserProfile } from '../../models';
 
 // Providers
-import { NotificationProvider, SleepProvider } from '../../providers';
+import { NotificationProvider, SleepProvider, UserProfileProvider } from '../../providers';
 
 const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 @IonicPage({
@@ -42,6 +42,7 @@ export class SleepPage {
   public chartDataSelection: string = 'duration';
   public chartLabels: string[] = [];
   public chartOpts: any = { responsive: true };
+  public idealSleep: string;
   public maxDateSelection: string = CURRENT_DAY;
   public pageSegment: string = 'today';
   public sleep: Sleep;
@@ -53,7 +54,8 @@ export class SleepPage {
     private _alertCtrl: AlertController,
     private _navCtrl: NavController,
     private _notifyPvd: NotificationProvider,
-    private _sleepPvd: SleepProvider
+    private _sleepPvd: SleepProvider,
+    private _userPvd: UserProfileProvider
   ) {
     this.chartColors.push({
       backgroundColor: 'rgb(255, 255, 255)',
@@ -162,6 +164,8 @@ export class SleepPage {
           });
         }
         resolve();
+      }, (err: FirebaseError) => {
+        reject(err);
       })
     });
   }
@@ -200,7 +204,15 @@ export class SleepPage {
         this._authId = auth.uid;
         this.getSleep();
         this._getTrends();
+        const subscription: Subscription = this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
+          this.idealSleep = this._sleepPvd.calculateIdealSleep(u.age);
+          subscription.unsubscribe();
+        }, (err: FirebaseError) => {
+          this._notifyPvd.showError(err.message);
+        });
       }
+    }, (err: FirebaseError) => {
+      this._notifyPvd.showError(err.message);
     })
   }
 

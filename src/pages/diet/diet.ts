@@ -158,6 +158,8 @@ export class DietPage {
           });
         }
         resolve();
+      }, (err: FirebaseError) => {
+        reject(err);
       })
     });
   }
@@ -193,8 +195,14 @@ export class DietPage {
             this._notifyPvd.showError(err.message);
           });
           this._getTrends();
+        }, (err: FirebaseError) => {
+          this._notifyPvd.closeLoading();
+          this._notifyPvd.showError(err.message);
         });
       }
+    }, (err: FirebaseError) => {
+      this._notifyPvd.closeLoading();
+      this._notifyPvd.showError(err.message);
     });
   }
 

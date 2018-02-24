@@ -5,7 +5,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { ChartsModule } from 'ng2-charts';
 
 import { SleepPage } from './sleep';
-import { SleepProviderModule } from '../../providers'
+import { SleepProviderModule, UserProfileProviderModule } from '../../providers'
 
 @NgModule({
   declarations: [
@@ -14,7 +14,8 @@ import { SleepProviderModule } from '../../providers'
   imports: [
     IonicPageModule.forChild(SleepPage),
     SleepProviderModule,
-    ChartsModule
+    ChartsModule,
+    UserProfileProviderModule
   ],
 })
 export class SleepPageModule {}

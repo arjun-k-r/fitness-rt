@@ -170,6 +170,7 @@ export class MealDetailsPage {
                 this.meal.key = key;
               })
               .catch((err: FirebaseError) => {
+                this._notifyPvd.closeLoading();
                 this._notifyPvd.showError(err.message);
               });
           }
@@ -213,6 +214,7 @@ export class MealDetailsPage {
         delete this.meal.key;
       })
       .catch((err: FirebaseError) => {
+        this._notifyPvd.closeLoading();
         this._notifyPvd.showError(err.message);
       });
   }
@@ -231,10 +233,12 @@ export class MealDetailsPage {
             this._navCtrl.pop();
           })
           .catch((err: FirebaseError) => {
+            this._notifyPvd.closeLoading();
             this._notifyPvd.showError(err.message);
           });
       })
       .catch((err: FirebaseError) => {
+        this._notifyPvd.closeLoading();
         this._notifyPvd.showError(err.message);
       });
   }
@@ -269,10 +273,12 @@ export class MealDetailsPage {
             this._navCtrl.pop();
           })
           .catch((err: FirebaseError) => {
+            this._notifyPvd.closeLoading();
             this._notifyPvd.showError(err.message);
           })
       })
       .catch((err: FirebaseError) => {
+        this._notifyPvd.closeLoading();
         this._notifyPvd.showError(err.message);
       });
   }
@@ -316,6 +322,8 @@ export class MealDetailsPage {
   ionViewWillEnter(): void {
     this._userSubscription = this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
       this._userProfile = u;
+    }, (err: FirebaseError) => {
+      this._notifyPvd.showError(err.message);
     });
   }
 

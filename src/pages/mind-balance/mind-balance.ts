@@ -163,6 +163,8 @@ export class MindBalancePage {
           });
         }
         resolve();
+      }, (err: FirebaseError) => {
+        reject(err);
       })
     });
   }
@@ -202,6 +204,8 @@ export class MindBalancePage {
         this.getMindBalance();
         this._getTrends();
       }
+    }, (err: FirebaseError) => {
+      this._notifyPvd.showError(err.message);
     })
   }
 

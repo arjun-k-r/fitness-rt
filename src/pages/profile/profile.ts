@@ -387,6 +387,8 @@ export class ProfilePage {
           });
         }
         resolve();
+      }, (err: FirebaseError) => {
+        reject(err);
       })
     });
   }
@@ -439,6 +441,8 @@ export class ProfilePage {
         this._getTrends();
         this._watchFormChanges();
       }
+    }, (err: FirebaseError) => {
+      this._notifyPvd.showError(err.message);
     })
   }
 

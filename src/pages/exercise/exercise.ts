@@ -256,6 +256,8 @@ export class ExercisePage {
           });
         }
         resolve();
+      }, (err: FirebaseError) => {
+        reject(err);
       })
     });
   }
@@ -298,6 +300,8 @@ export class ExercisePage {
           this._userProfile = u;
         });
       }
+    }, (err: FirebaseError) => {
+      this._notifyPvd.showError(err.message);
     })
   }
 

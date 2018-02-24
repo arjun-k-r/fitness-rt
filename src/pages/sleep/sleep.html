@@ -56,9 +56,15 @@
           </ion-range>
         </ion-item>
         <ion-item>
+          <ion-icon color="primary" item-start name="heart-outline"></ion-icon>
+          <h2>Ideal sleep</h2>
+          <p item-content>{{ idealSleep }}</p>
+        </ion-item>
+        <ion-item>
           <ion-icon color="primary" item-start name="clipboard"></ion-icon>
           <ion-label fixed>Notes</ion-label>
-          <ion-textarea (ionChange)="changeMade()" [(ngModel)]="sleep.notes" placeholder="i.e. I slept amazing, because I turned off my phone before bed!" type="text" wrap="hard"></ion-textarea>
+          <ion-textarea (ionChange)="changeMade()" [(ngModel)]="sleep.notes" placeholder="i.e. I slept amazing, because I turned off my phone before bed!"
+            type="text" wrap="hard"></ion-textarea>
         </ion-item>
       </ion-list>
     </div>

@@ -129,6 +129,7 @@ export class FoodDetailsPage {
   }
 
   public addToAvoidList(): void {
+    this._notifyPvd.showLoading();
     this.food.toAvoid = true;
     this.food.isFavorite = false;
     this._foodPvd.saveFood(this.authId, this.food)
@@ -143,6 +144,7 @@ export class FoodDetailsPage {
   }
 
   public addToFavorites(): void {
+    this._notifyPvd.showLoading();
     this.food.toAvoid = false;
     this.food.isFavorite = true;
     this._foodPvd.saveFood(this.authId, this.food)

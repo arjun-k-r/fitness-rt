@@ -22,6 +22,24 @@ export class SleepProvider {
     private _db: AngularFireDatabase
   ) { }
 
+  public calculateIdealSleep(age: number): string {
+    if (age < 1) {
+      return '14-17';
+    } else if (age < 3) {
+      return '11-14';
+    } else if (age < 6) {
+      return '10-13';
+    } else if (age < 14) {
+      return '9-11';
+    } else if (age < 18) {
+      return '8-10';
+    } else if (age < 65) {
+      return '7-9';
+    }
+
+    return '7-8';
+  }
+
   public changeTrendDays(days: number): void {
     this._trendDaysSubject.next(days);
   }

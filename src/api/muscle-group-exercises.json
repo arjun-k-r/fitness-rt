@@ -1111,60 +1111,79 @@
           "This exercise also develops the coracobrachialis and the short head of the biceps brachii. Long sets allow you to pump the muscles intensely",
           "This exercise helps beginners develop enough strength to move onto more complex movements"
         ],
-        "warnings": [
-          ""
-        ]
+        "warnings": []
       },
       {
         "image": "",
-        "name": "",
+        "name": "Cable crossover flys",
         "instructions": [
-          ""
+          "Stand with the legs slightly apart and lean the torso forward a bit, with the arms spread apart and elbows slightly bent",
+          "Inhale and squeeze the arms together until the wrists touch",
+          "Exhale at the end of the contraction"
         ],
         "variations": [
-          ""
+          "Crossed arm increases the focus onto the sternal head of the pectoralis major"
         ],
         "muscles": [
-          ""
+          "Pectoralis major",
+          "Pectoralis minor"
         ],
-        "comments": [],
-        "warnings": [
-          ""
-        ]
+        "comments": [
+          "This is an excellent exercise for working the pectoralis major muscles. Sets with a lot of reps allow you to pump the muscle well. You can work all the fibers of the pectoralis major by varying the angle of the chest and the working angle of the arms (squeezing the arms at various heights)",
+          "Cable crossover flys also contract the pectoralis minor, which is located deeper than the pectoralis major. Besides stabilizing the scapula (shoulder blade), this muscle also pulls it forward"
+        ],
+        "warnings": []
       },
       {
         "image": "",
-        "name": "",
+        "name": "Dumbbell pullovers",
         "instructions": [
-          ""
+          "Lie on a bench with the feet flat on the ground and hold a dumbbell in the palms of both hands, with the thumbs surrounding the  handle and arms extended",
+          "Inhale and lower the dumbbell behind the head, bending slightly at the elbows",
+          "Exhale and return to the initial position"
         ],
         "variations": [
-          ""
+          "Performing the movement at a machine",
+          "Placing yourself transversely across a bench opens the rib cage"
         ],
         "muscles": [
-          ""
+          "Pectoralis major",
+          "Pectoralis minor",
+          "Triceps brachii, long head",
+          "Latissimus dorsi",
+          "Serratus anterior",
+          "Teres major",
+          "Rhomboids"
         ],
-        "comments": [],
-        "warnings": [
-          ""
-        ]
+        "comments": [
+          "This exercise develops the bulk of the pectoralis major, long head of triceps brachii, teres major, latissimus dorsi, serratus  anterior, rhomboids, and pectoralis minor. The last three muscles stabilize the scapula so that the humerus can move from a stable base",
+          "If you use this exercise to open the rib cage, you must work with light weights and avoid bending too much at the elbows. If possible, use a convex bench or place yourself across a horizontal bench and position the pelvis lower than the shoulder girdle. Take in a deep breath at the beginning of the movement and breathe out only at the end of the execution"
+        ],
+        "warnings": []
       },
       {
         "image": "",
-        "name": "",
+        "name": "Barbell pullovers",
         "instructions": [
-          ""
+          "With arms extended, hold the barbell with an overhand grip and hands shoulder-width apart",
+          "Inhale and expand the chest as much as possible, lowering the barbell behind the head bending slightly at the elbows",
+          "Exhale while returning to the initial position"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
-          ""
+          "Pectoralis major",
+          "Pectoralis minor",
+          "Triceps brachii, long head",
+          "Latissimus dorsi",
+          "Serratus anterior",
+          "Teres major",
+          "Rhomboids"
         ],
-        "comments": [],
-        "warnings": [
-          ""
-        ]
+        "comments": [
+          "This exercise develops the pectoralis major, long head of the triceps brachii, teres major, latissimus dorsi, serratus anterior, rhomboids, and pectoralis minor",
+          "This is an excellent movement for developing the flexibility and expansion of the rib cage. It should be performed with light weights using proper form and breathing"
+        ],
+        "warnings": []
       }
     ]
   },
@@ -1173,7 +1192,369 @@
     "exercises": [
       {
         "image": "",
-        "name": "",
+        "name": "Reverse chin-ups",
+        "instructions": [
+          "Hang from a bar with an underhand grip, hands shoulder-width apart",
+          "Inhale and push out the chest as you raise the chin to the bar",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [],
+        "muscles": [
+          "Teres major",
+          "Brachialis",
+          "Latissimus dorsi",
+          "Biceps brachii"
+        ],
+        "comments": [
+          "This movement develops the latissimus dorsi and teres major and is associated with the intense work of the biceps brachii and brachialis. Therefore, it could be included in an arm workout program",
+          "This exercise also contracts the middle and lower portions of the trapezius, the rhomboids, and the pectorals",
+          "Performing this exercise takes a certain amount of strength; use a high pulley to make it easier"
+        ],
+        "warnings": []
+      },
+      {
+        "image": "",
+        "name": "Chin-ups",
+        "instructions": [
+          "Hang from a fixed bar with a very wide overhand grip",
+          "Inhale and pull the chest up to the level of the bar",
+          "Exhale at the end of the movement",
+          "Return to the initial position with a controlled descent and begin again"
+        ],
+        "variations": [
+          "By sticking out the chest you can raise your chest to chin level. To increase the intensity, wear a weight belt. Keeping the elbows in next to the body during the movement contracts mainly the external fibers of the latissimus dorsi and develops the width of the back",
+          "Bringing the elbows back and the chest out as you raise the chin to the bar mainly solicits the upper and central fibers of the latissimus dorsi and those of the teres major"
+        ],
+        "muscles": [
+          "Brachialis",
+          "Biceps brachii",
+          "Brachioardialis",
+          "Teres major",
+          "Rhomboid",
+          "Latissimus dorsi",
+          "Trapezius, middle portion",
+          "Trapezius, lower portion"
+        ],
+        "comments": [
+          "This exercise takes a certain amount of strength and is excellent for developing the latissimus dorsi and teres major and, when the shoulder blades come together at the top of the chin-up, the rhomboids and middle and lower portions of the trapezius. It also works the biceps brachii, brachialis, and brachioradialis",
+          "This exercise develops the bulk of the back when the shoulder blades come together and the rhomboids and the upper and lower portion of the trapezius are used equally",
+          "Although not as strongly contracted, the pectoralis major works with the latissimus dorsi and teres major to create the angle between the arm and the trunk",
+          "Originally, the teres major and latissimus dorsi muscles of our far-off ancestors played a role in their getting around on all fours by helping them to push off with the front paws. As our ancestors became tree climbers, these muscles became powerful, specializing in vertical displacement. Returning to the ground, our more recent ancestors adopted bipedal displacement without losing the possibility of climbing. For this reason we possess powerful back muscles capable of pulling our bodies up, still allowing us to climb trees",
+          "The main difference between our locomotor mechanism and that of our close simian relatives is the development of lower extremities that allow us to walk on two legs. Our chest and upper extremities have not developed differently and have the same structure and proportions. Contrary to popular opinion, apes do not have relatively big arms; we just have big legs!"
+        ],
+        "warnings": [
+          "To avoid tendinitis of the distal tendon of the biceps brachii (the biceps tendon that inserts at the radius), keep the elbows slightly bent"
+        ]
+      },
+      {
+        "image": "",
+        "name": "Lat pull-downs",
+        "instructions": [
+          "Sit facing the machine with the legs positioned under the pads, gripping the bar in with a wide overhand grip",
+          "Inhale and pull the bar down to the sternal notch while puffing out the chest and pulling the elbows back",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          "Variation with a wide bar and palms facing each other"
+        ],
+        "muscles": [
+          "Brachialis",
+          "Biceps brachii",
+          "Rhomboid",
+          "Teres major",
+          "Latissimus dorsi",
+          "Trapezius, middle portion",
+          "Trapezius, lower portion"
+        ],
+        "comments": [
+          "This exercise develops the bulk of the back. It mainly works the upper and central fibers of the latissimus dorsi, the middle and lower portions of the trapezius, the rhomboids, the biceps brachii, the brachialis, and, to a lesser extent, the pectorals also contract"
+        ],
+        "warnings": []
+      },
+      {
+        "image": "",
+        "name": "Back lat pull-downs",
+        "instructions": [
+          "Sit facing the machine with the thighs positioned under the pads, grasping the bar with a wide overhand grip",
+          "Inhale and pull the bar down to the back of the neck, bringing the elbows alongside the body",
+          "Exhale at the end of the movement"
+        ],
+        "variations": [
+          "Variation at a machine with a fixed axis"
+        ],
+        "muscles": [
+          "Brachialis",
+          "Biceps brachii",
+          "Brachioardialis",
+          "Extensor carpi radialis brevis",
+          "Rhomboid",
+          "Teres major",
+          "Latissimus dorsi",
+          "Trapezius, lower portion"
+        ],
+        "comments": [
+          "This exercise develops the width of the back. It works the latissimus dorsi (mainly the lateral and lower fibers), the teres major, the forearm flexors (biceps brachii, brachialis, and brachioradialis), the rhomboids, and the lower portion of the trapezius. The latter two muscles come into play when the shoulder blades are pulled together. Back lat pull-downs help beginners develop enough strength to move on to chin-ups"
+        ],
+        "warnings": []
+      },
+      {
+        "image": "",
+        "name": "Close-grip lat pull-downs",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "Straight-arm lat pull-downs",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "Seated rows",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "One-arm dumbbell rows",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "Bent rows",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "Freestanding T-bar rows",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "T-bar rows with abdominal support",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "Stiff-legged deadlifts",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "Sumo deadlifts",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "Deadlifts",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "Back extensions",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "Torso extensions at a machine",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "Upright rows",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "Barbell shrugs",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "Dumbbell shrugs",
+        "instructions": [
+          ""
+        ],
+        "variations": [
+          ""
+        ],
+        "muscles": [
+          ""
+        ],
+        "comments": [],
+        "warnings": [
+          ""
+        ]
+      },
+      {
+        "image": "",
+        "name": "Machine shrugs",
         "instructions": [
           ""
         ],

@@ -15,10 +15,10 @@ import { MuscleExercise } from '../../models';
 })
 export class MuscleExerciseDetailsPage {
   public exercise: MuscleExercise;
-  constructor(private _navCtrl: NavController, private _params: NavParams) {
-    this.exercise = this._params.get('exercise') || new MuscleExercise();
+  constructor(private navCtrl: NavController, private params: NavParams) {
+    this.exercise = this.params.get('exercise') || new MuscleExercise();
     if (!this.exercise.name) {
-      this._navCtrl.setRoot('exercise');
+      this.navCtrl.setRoot('exercise');
     }
   }
 }

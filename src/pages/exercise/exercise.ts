@@ -36,13 +36,13 @@ const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
   templateUrl: 'exercise.html',
 })
 export class ExercisePage {
-  private _authId: string;
-  private _authSubscription: Subscription;
-  private _exerciseSubscription: Subscription;
-  private _trends: Exercise[] = [];
-  private _trendSubscription: Subscription;
-  private _userProfile: UserProfile;
-  private _userSubscription: Subscription;
+  private authId: string;
+  private authSubscription: Subscription;
+  private exerciseSubscription: Subscription;
+  private trends: Exercise[] = [];
+  private trendSubscription: Subscription;
+  private userProfile: UserProfile;
+  private userSubscription: Subscription;
   public chartColors: ILineChartColors[] = [];
   public chartData: ILineChartEntry[] = [];
   public chartDataSelection: string = 'energyBurn';
@@ -55,14 +55,14 @@ export class ExercisePage {
   public trendDays: number = 7;
   public unsavedChanges: boolean = false;
   constructor(
-    private _actionSheetCtrl: ActionSheetController,
-    private _afAuth: AngularFireAuth,
-    private _alertCtrl: AlertController,
-    private _exercisePvd: ExerciseProvider,
-    private _modalCtrl: ModalController,
-    private _navCtrl: NavController,
-    private _notifyPvd: NotificationProvider,
-    private _userPvd: UserProfileProvider
+    private actionSheetCtrl: ActionSheetController,
+    private afAuth: AngularFireAuth,
+    private alertCtrl: AlertController,
+    private exercisePvd: ExerciseProvider,
+    private modalCtrl: ModalController,
+    private navCtrl: NavController,
+    private notifyPvd: NotificationProvider,
+    private userPvd: UserProfileProvider
   ) {
     this.chartColors.push({
       backgroundColor: 'rgb(255, 255, 255)',
@@ -81,8 +81,8 @@ export class ExercisePage {
     );
   }
 
-  private _changeDuration(activity: Activity): void {
-    this._alertCtrl.create({
+  private changeDuration(activity: Activity): void {
+    this.alertCtrl.create({
       title: 'Duration',
       subTitle: `How much ${activity.category}, ${activity.name} did you perform?`,
       inputs: [
@@ -101,66 +101,66 @@ export class ExercisePage {
           text: 'Done',
           handler: (data: { duration: string }) => {
             activity.duration = +data.duration;
-            activity.energyBurn = this._exercisePvd.calculateActivityEnergyBurn(activity, this._userProfile.measurements.weight)
-            this._updateExercise();
+            activity.energyBurn = this.exercisePvd.calculateActivityEnergyBurn(activity, this.userProfile.measurements.weight)
+            this.updateExercise();
           }
         }
       ]
     }).present();
   }
 
-  private _removeActivity(idx: number): void {
+  private removeActivity(idx: number): void {
     this.exercise.activities = [...this.exercise.activities.slice(0, idx), ...this.exercise.activities.slice(idx + 1)];
-    this._updateExercise();
+    this.updateExercise();
   }
 
-  private _getTrends(): void {
-    this._trendSubscription = this._exercisePvd.getTrends$(this._authId, +this.trendDays).subscribe(
+  private getTrends(): void {
+    this.trendSubscription = this.exercisePvd.getTrends$(this.authId, +this.trendDays).subscribe(
       (trends: Exercise[] = []) => {
         this.chartLabels = [...trends.map((t: Exercise) => t.date)];
-        this._trends = [...trends];
+        this.trends = [...trends];
         this.chartData = [{
-          data: [...this._trends.map((e: Exercise) => e.energyBurn)],
+          data: [...this.trends.map((e: Exercise) => e.energyBurn)],
           label: 'Energy burn'
         }];
       },
       (err: FirebaseError) => {
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.showError(err.message);
       }
     );
   }
 
-  private _updateExercise(): void {
+  private updateExercise(): void {
     this.changeMade();
     this.exercise.duration = this.exercise.activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.duration, 0);
     this.exercise.energyBurn = this.exercise.activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.energyBurn, 0);
   }
 
   public addActivity(): void {
-    const activityListModal: Modal = this._modalCtrl.create('activity-list', { authId: this._authId });
+    const activityListModal: Modal = this.modalCtrl.create('activity-list', { authId: this.authId });
     activityListModal.present();
     activityListModal.onDidDismiss((activities: Activity[]) => {
       if (!!activities && !!activities.length) {
-        activities.forEach((a: Activity) => a.energyBurn = this._exercisePvd.calculateActivityEnergyBurn(a, this._userProfile.measurements.weight))
+        activities.forEach((a: Activity) => a.energyBurn = this.exercisePvd.calculateActivityEnergyBurn(a, this.userProfile.measurements.weight))
         this.exercise.activities = [...this.exercise.activities, ...activities];
-        this._updateExercise();
+        this.updateExercise();
       }
     });
   }
 
   public changeActivity(idx: number): void {
-    this._actionSheetCtrl.create({
+    this.actionSheetCtrl.create({
       title: 'Change activity',
       buttons: [
         {
           text: 'Change duration',
           handler: () => {
-            this._changeDuration(this.exercise.activities[idx]);
+            this.changeDuration(this.exercise.activities[idx]);
           }
         }, {
           text: 'Remove it',
           handler: () => {
-            this._removeActivity(idx);
+            this.removeActivity(idx);
           }
         }, {
           text: 'Cancel',
@@ -174,14 +174,14 @@ export class ExercisePage {
     switch (this.chartDataSelection) {
       case 'energyBurn':
         this.chartData = [{
-          data: [...this._trends.map((e: Exercise) => e.energyBurn)],
+          data: [...this.trends.map((e: Exercise) => e.energyBurn)],
           label: 'Energy Burn'
         }];
         break;
 
       case 'duration':
         this.chartData = [{
-          data: [...this._trends.map((e: Exercise) => e.duration)],
+          data: [...this.trends.map((e: Exercise) => e.duration)],
           label: 'Duration'
         }];
         break;
@@ -197,61 +197,61 @@ export class ExercisePage {
   }
 
   public changeTrendDays(): void {
-    this._exercisePvd.changeTrendDays(+this.trendDays || 1);
+    this.exercisePvd.changeTrendDays(+this.trendDays || 1);
   }
 
   public getExercise(): void {
-    this._notifyPvd.showLoading();
-    if (this._exerciseSubscription) {
-      this._exerciseSubscription.unsubscribe();
+    this.notifyPvd.showLoading();
+    if (this.exerciseSubscription) {
+      this.exerciseSubscription.unsubscribe();
     }
-    this._exerciseSubscription = this._exercisePvd.getExercise$(this._authId, this.exerciseDate).subscribe((e: Exercise) => {
+    this.exerciseSubscription = this.exercisePvd.getExercise$(this.authId, this.exerciseDate).subscribe((e: Exercise) => {
       if (!!e && e['$value'] !== null) {
         this.exercise = Object.assign({}, e);
         this.exercise.activities = this.exercise.activities || [];
-        this._notifyPvd.closeLoading();
+        this.notifyPvd.closeLoading();
       }
       this.exercise.date = this.exerciseDate;
     }, (err: FirebaseError) => {
-      this._notifyPvd.closeLoading();
-      this._notifyPvd.showError(err.message);
+      this.notifyPvd.closeLoading();
+      this.notifyPvd.showError(err.message);
     });
   }
 
   public save(): void {
-    this._notifyPvd.showLoading();
-    this._exercisePvd.saveExercise(this._authId, this.exercise, this._trends)
+    this.notifyPvd.showLoading();
+    this.exercisePvd.saveExercise(this.authId, this.exercise, this.trends)
       .then(() => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showInfo('Exercise saved successfully!');
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showInfo('Exercise saved successfully!');
       }).catch((err: FirebaseError) => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showError(err.message);
       })
   }
 
   public takeOvertrainingTest(): void {
-    this._navCtrl.push('overtraining-questionaire');
+    this.navCtrl.push('overtraining-questionaire');
   }
 
   public viewExerciseGuidelines(): void {
-    this._navCtrl.push('exercise-guidelines', { constitution: this._userProfile.constitution })
+    this.navCtrl.push('exercise-guidelines', { constitution: this.userProfile.constitution })
   }
 
   public viewMuscleGroups(): void {
-    this._navCtrl.push('muscle-group-list');
+    this.navCtrl.push('muscle-group-list');
   }
 
   public viewPageInfo(): void {
-    this._navCtrl.push('exercise-info');
+    this.navCtrl.push('exercise-info');
   }
 
   ionViewCanEnter(): Promise<{}> {
     return new Promise((resolve, reject) => {
-      this._afAuth.authState.subscribe((auth: User) => {
+      this.afAuth.authState.subscribe((auth: User) => {
         if (!auth) {
           reject();
-          this._navCtrl.setRoot('registration', {
+          this.navCtrl.setRoot('registration', {
             history: 'exercise'
           });
         }
@@ -268,7 +268,7 @@ export class ExercisePage {
     }
     return new Promise((resolve, reject) => {
       if (this.unsavedChanges) {
-        this._alertCtrl.create({
+        this.alertCtrl.create({
           title: 'Unsaved changes',
           message: 'All your changes will be lost. Are you sure you want to leave?',
           buttons: [
@@ -291,25 +291,25 @@ export class ExercisePage {
   }
 
   ionViewWillEnter(): void {
-    this._authSubscription = this._afAuth.authState.subscribe((auth: User) => {
+    this.authSubscription = this.afAuth.authState.subscribe((auth: User) => {
       if (!!auth) {
-        this._authId = auth.uid;
+        this.authId = auth.uid;
         this.getExercise();
-        this._getTrends();
-        this._userSubscription = this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
-          this._userProfile = u;
+        this.getTrends();
+        this.userSubscription = this.userPvd.getUserProfile$(this.authId).subscribe((u: UserProfile) => {
+          this.userProfile = u;
         });
       }
     }, (err: FirebaseError) => {
-      this._notifyPvd.showError(err.message);
+      this.notifyPvd.showError(err.message);
     })
   }
 
   ionViewWillLeave(): void {
-    this._authSubscription.unsubscribe();
-    this._exerciseSubscription.unsubscribe();
-    this._trendSubscription.unsubscribe();
-    this._userSubscription.unsubscribe();
+    this.authSubscription.unsubscribe();
+    this.exerciseSubscription.unsubscribe();
+    this.trendSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 
 }

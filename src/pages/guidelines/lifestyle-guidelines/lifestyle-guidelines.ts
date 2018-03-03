@@ -21,12 +21,12 @@ export class LifestyleGuidelinesPage {
   public pageSegment: string = 'Vata';
   public singleDosha: boolean = false;
   constructor(
-    // private _navCtrl: NavController, private _params: NavParams
+    // private navCtrl: NavController, private params: NavParams
   ) {
     /*
-    this.constitution = <Constitution>this._params.get('constitution') || new Constitution();
+    this.constitution = <Constitution>this.params.get('constitution') || new Constitution();
     if (!this.constitution.dominantDosha) {
-      this._navCtrl.setRoot('mind-balance');
+      this.navCtrl.setRoot('mind-balance');
     }
     this.pageSegment = this.constitution.dominantDosha;
     if (this.constitution.dominantDosha === 'Vata' || this.constitution.dominantDosha === 'Pitta' || this.constitution.dominantDosha === 'Kapha') {

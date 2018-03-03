@@ -32,12 +32,12 @@ const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
   templateUrl: 'diet.html',
 })
 export class DietPage {
-  private _authId: string;
-  private _authSubscription: Subscription;
-  private _dietSubscription: Subscription;
-  private _trends: Diet[] = [];
-  private _trendSubscription: Subscription;
-  private _userProfile: UserProfile;
+  private authId: string;
+  private authSubscription: Subscription;
+  private dietSubscription: Subscription;
+  private trends: Diet[] = [];
+  private trendSubscription: Subscription;
+  private userProfile: UserProfile;
   public chartColors: ILineChartColors[] = [];
   public chartData: ILineChartEntry[] = [];
   public chartDataSelection: string = 'energy';
@@ -50,11 +50,11 @@ export class DietPage {
   public pageSegment: string = 'today';
   public trendDays: number = 7;
   constructor(
-    private _afAuth: AngularFireAuth,
-    private _dietPvd: DietProvider,
-    private _navCtrl: NavController,
-    private _notifyPvd: NotificationProvider,
-    private _userPvd: UserProfileProvider
+    private afAuth: AngularFireAuth,
+    private dietPvd: DietProvider,
+    private navCtrl: NavController,
+    private notifyPvd: NotificationProvider,
+    private userPvd: UserProfileProvider
   ) {
     this.chartColors.push({
       backgroundColor: 'rgb(255, 255, 255)',
@@ -72,88 +72,88 @@ export class DietPage {
     );
   }
 
-  private _getTrends(): void {
-    this._trendSubscription = this._dietPvd.getTrends$(this._authId, +this.trendDays).subscribe(
+  private getTrends(): void {
+    this.trendSubscription = this.dietPvd.getTrends$(this.authId, +this.trendDays).subscribe(
       (trends: Diet[] = []) => {
         this.chartLabels = [...trends.map((t: Diet) => t.date)];
-        this._trends = [...trends];
+        this.trends = [...trends];
         this.chartData = [{
-          data: [...this._trends.map((d: Diet) => d.nourishment.energy.value)],
+          data: [...this.trends.map((d: Diet) => d.nourishment.energy.value)],
           label: 'Energy intake'
         }];
       },
       (err: FirebaseError) => {
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.showError(err.message);
       }
     );
   }
 
   public addMeal(): void {
-    this._navCtrl.push('meal-details', {
-      authId: this._authId,
+    this.navCtrl.push('meal-details', {
+      authId: this.authId,
       id: this.diet.meals.length,
       diet: this.diet,
-      trends: this._trends
+      trends: this.trends
     });
   }
 
   public changeChartData(): void {
     this.chartData = [{
-      data: [...this._trends.map((d: Diet) => d.nourishment[this.chartDataSelection].value)],
+      data: [...this.trends.map((d: Diet) => d.nourishment[this.chartDataSelection].value)],
       label: `${this.diet.nourishment[this.chartDataSelection].name} intake`
     }];
   }
 
   public changeTrendDays(): void {
-    this._dietPvd.changeTrendDays(+this.trendDays || 1);
+    this.dietPvd.changeTrendDays(+this.trendDays || 1);
   }
 
   public editMeal(idx: number): void {
-    this._navCtrl.push('meal-details', {
-      authId: this._authId,
+    this.navCtrl.push('meal-details', {
+      authId: this.authId,
       id: idx + 1,
       mealIdx: idx,
       diet: this.diet,
-      trends: this._trends
+      trends: this.trends
     });
   }
 
   public getDiet(): void {
-    this._notifyPvd.showLoading();
-    if (this._dietSubscription) {
-      this._dietSubscription.unsubscribe();
+    this.notifyPvd.showLoading();
+    if (this.dietSubscription) {
+      this.dietSubscription.unsubscribe();
     }
-    this._dietSubscription = this._dietPvd.getDiet$(this._authId, this.dietDate).subscribe((s: Diet) => {
+    this.dietSubscription = this.dietPvd.getDiet$(this.authId, this.dietDate).subscribe((s: Diet) => {
       if (!!s && s['$value'] !== null) {
         this.diet = Object.assign({}, s);
         this.diet.meals = this.diet.meals || [];
         this.nutrients = Object.keys(this.diet.nourishment);
-        this._notifyPvd.closeLoading();
+        this.notifyPvd.closeLoading();
       }
       this.diet.date = this.dietDate;
-      this._dietPvd.calculateRequirement(this._authId, this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight, this.diet.date)
+      this.dietPvd.calculateRequirement(this.authId, this.userProfile.age, this.userProfile.fitness.bmr, this.userProfile.constitution, this.userProfile.gender, this.userProfile.isLactating, this.userProfile.isPregnant, this.userProfile.measurements.weight, this.diet.date)
         .then((r: NutritionalValues) => {
-          this.diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
+          this.diet.nourishmentAchieved = this.dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
         })
         .catch((err: string) => {
-          this._notifyPvd.showError(err);
+          this.notifyPvd.showError(err);
         });
     }, (err: FirebaseError) => {
-      this._notifyPvd.closeLoading();
-      this._notifyPvd.showError(err.message);
+      this.notifyPvd.closeLoading();
+      this.notifyPvd.showError(err.message);
     });
   }
 
   public viewPageInfo(): void {
-    this._navCtrl.push('diet-info');
+    this.navCtrl.push('diet-info');
   }
 
   ionViewCanEnter(): Promise<{}> {
     return new Promise((resolve, reject) => {
-      this._afAuth.authState.subscribe((auth: User) => {
+      this.afAuth.authState.subscribe((auth: User) => {
         if (!auth) {
           reject();
-          this._navCtrl.setRoot('registration', {
+          this.navCtrl.setRoot('registration', {
             history: 'diet'
           });
         }
@@ -165,51 +165,51 @@ export class DietPage {
   }
 
   ionViewWillEnter(): void {
-    this._notifyPvd.showLoading();
-    this._authSubscription = this._afAuth.authState.subscribe((auth: User) => {
+    this.notifyPvd.showLoading();
+    this.authSubscription = this.afAuth.authState.subscribe((auth: User) => {
       if (!!auth) {
-        this._authId = auth.uid;
+        this.authId = auth.uid;
 
         // Update requirements according to exercise changes
-        const userSubscription: Subscription = this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
+        const userSubscription: Subscription = this.userPvd.getUserProfile$(this.authId).subscribe((u: UserProfile) => {
           if (!!u && u['$value'] !== null) {
-            this._userProfile = Object.assign({}, u);
+            this.userProfile = Object.assign({}, u);
             userSubscription.unsubscribe();
           }
-          this._dietSubscription = this._dietPvd.getDiet$(this._authId, this.dietDate).subscribe((s: Diet) => {
+          this.dietSubscription = this.dietPvd.getDiet$(this.authId, this.dietDate).subscribe((s: Diet) => {
             if (!!s && s['$value'] !== null) {
               this.diet = Object.assign({}, s);
               this.diet.meals = this.diet.meals || [];
-              this._dietPvd.calculateRequirement(this._authId, u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight, this.diet.date)
+              this.dietPvd.calculateRequirement(this.authId, u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight, this.diet.date)
                 .then((r: NutritionalValues) => {
-                  this.diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
+                  this.diet.nourishmentAchieved = this.dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
                 })
                 .catch((err: string) => {
-                  this._notifyPvd.showError(err);
+                  this.notifyPvd.showError(err);
                 });
               this.nutrients = Object.keys(this.diet.nourishment);
-              this._notifyPvd.closeLoading();
+              this.notifyPvd.closeLoading();
             }
           }, (err: FirebaseError) => {
-            this._notifyPvd.closeLoading();
-            this._notifyPvd.showError(err.message);
+            this.notifyPvd.closeLoading();
+            this.notifyPvd.showError(err.message);
           });
-          this._getTrends();
+          this.getTrends();
         }, (err: FirebaseError) => {
-          this._notifyPvd.closeLoading();
-          this._notifyPvd.showError(err.message);
+          this.notifyPvd.closeLoading();
+          this.notifyPvd.showError(err.message);
         });
       }
     }, (err: FirebaseError) => {
-      this._notifyPvd.closeLoading();
-      this._notifyPvd.showError(err.message);
+      this.notifyPvd.closeLoading();
+      this.notifyPvd.showError(err.message);
     });
   }
 
   ionViewWillLeave(): void {
-    this._authSubscription.unsubscribe();
-    this._dietSubscription.unsubscribe();
-    this._trendSubscription.unsubscribe();
+    this.authSubscription.unsubscribe();
+    this.dietSubscription.unsubscribe();
+    this.trendSubscription.unsubscribe();
   }
 
 }

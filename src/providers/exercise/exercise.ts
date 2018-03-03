@@ -19,18 +19,18 @@ const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 
 @Injectable()
 export class ExerciseProvider {
-  private _activities$: FirebaseListObservable<ActivityCategory[]>;
-  private _muscleGroupExercises$: FirebaseListObservable<IMuscleGroup[]>;
-  private _trendDaysSubject: Subject<any> = new Subject();
+  private activities$: FirebaseListObservable<ActivityCategory[]>;
+  private muscleGroupExercises$: FirebaseListObservable<IMuscleGroup[]>;
+  private trendDaysSubject: Subject<any> = new Subject();
   constructor(
-    private _db: AngularFireDatabase
+    private db: AngularFireDatabase
   ) {
-    this._activities$ = this._db.list('/activities', {
+    this.activities$ = this.db.list('/activities', {
       query: {
         orderByChild: 'name'
       }
     });
-    this._muscleGroupExercises$ = this._db.list('/muscle-group-exercises', {
+    this.muscleGroupExercises$ = this.db.list('/muscle-group-exercises', {
       query: {
         orderByChild: 'name'
       }
@@ -42,28 +42,28 @@ export class ExerciseProvider {
   }
 
   public changeTrendDays(days: number): void {
-    this._trendDaysSubject.next(days);
+    this.trendDaysSubject.next(days);
   }
 
   public getActivities$(): FirebaseListObservable<ActivityCategory[]> {
-    return this._activities$;
+    return this.activities$;
   }
 
   public getExercise$(authId: string, date?: string): FirebaseObjectObservable<Exercise> {
-    return this._db.object(`/${authId}/exercise/${date || CURRENT_DAY}`);
+    return this.db.object(`/${authId}/exercise/${date || CURRENT_DAY}`);
   }
 
   public getMuscleGroupExercises$(): FirebaseListObservable<IMuscleGroup[]> {
-    return this._muscleGroupExercises$;
+    return this.muscleGroupExercises$;
   }
 
   public getTrends$(authId: string, days?: number): FirebaseListObservable<Exercise[]> {
     setTimeout(() => {
       this.changeTrendDays(days);
     });
-    return this._db.list(`/${authId}/trends/exercise/`, {
+    return this.db.list(`/${authId}/trends/exercise/`, {
       query: {
-        limitToLast: this._trendDaysSubject
+        limitToLast: this.trendDaysSubject
       }
     });
   }
@@ -72,11 +72,11 @@ export class ExerciseProvider {
     return new Promise((resolve, reject) => {
       const trend: Exercise = trends.find((e: Exercise) => e.date === exercise.date);
       if (trend) {
-        this._db.list(`/${authId}/trends/exercise/`).update(trend['$key'], exercise);
+        this.db.list(`/${authId}/trends/exercise/`).update(trend['$key'], exercise);
       } else {
-        this._db.list(`/${authId}/trends/exercise/`).push(exercise);
+        this.db.list(`/${authId}/trends/exercise/`).push(exercise);
       }
-      this._db.object(`/${authId}/exercise/${exercise.date}`).set(exercise).then(() => {
+      this.db.object(`/${authId}/exercise/${exercise.date}`).set(exercise).then(() => {
         resolve();
       }).catch((err: FirebaseError) => reject(err));
     });

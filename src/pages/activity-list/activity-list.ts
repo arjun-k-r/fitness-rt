@@ -28,16 +28,16 @@ import { ExerciseProvider, NotificationProvider } from '../../providers';
   templateUrl: 'activity-list.html'
 })
 export class ActivityListPage {
-  private _activitySubscription: Subscription;
+  private activitySubscription: Subscription;
   public activityLimit: number = 50;
   public activityCategories: ActivityCategory[];
   public activitySearchQuery: string = '';
   public selectedActivities: Activity[] = [];
   constructor(
-    private _alertCtrl: AlertController,
-    private _exercisePvd: ExerciseProvider,
-    private _notifyPvd: NotificationProvider,
-    private _viewCtrl: ViewController
+    private alertCtrl: AlertController,
+    private exercisePvd: ExerciseProvider,
+    private notifyPvd: NotificationProvider,
+    private viewCtrl: ViewController
   ) { }
 
   public clearSearchActivities(evenet: string): void {
@@ -45,7 +45,7 @@ export class ActivityListPage {
   }
 
   public done(): void {
-    this._viewCtrl.dismiss(this.selectedActivities);
+    this.viewCtrl.dismiss(this.selectedActivities);
   }
 
   public loadMoreActivities(ev: InfiniteScroll) {
@@ -56,7 +56,7 @@ export class ActivityListPage {
   public selectActivity(activity: Activity, activityCategory: ActivityCategory, checkBox: HTMLInputElement): void {
     const idx: number = this.selectedActivities.findIndex((a: Activity) => a.name === activity.name);
     if (idx === -1 || !!checkBox.checked) {
-      this._alertCtrl.create({
+      this.alertCtrl.create({
         title: 'Duration',
         subTitle: `How much ${activityCategory.name}, ${activity.name} did you perform?`,
         inputs: [
@@ -96,17 +96,17 @@ export class ActivityListPage {
   }
 
   ionViewWillEnter(): void {
-    this._notifyPvd.showLoading();
-    this._activitySubscription = this._exercisePvd.getActivities$().subscribe((ac: ActivityCategory[]) => {
+    this.notifyPvd.showLoading();
+    this.activitySubscription = this.exercisePvd.getActivities$().subscribe((ac: ActivityCategory[]) => {
       this.activityCategories = [...ac];
-      this._notifyPvd.closeLoading();
+      this.notifyPvd.closeLoading();
     }, (err: FirebaseError) => {
-      this._notifyPvd.closeLoading();
-      this._notifyPvd.showError(err.message);
+      this.notifyPvd.closeLoading();
+      this.notifyPvd.showError(err.message);
     });
   }
 
   ionViewWillLeave(): void {
-    this._activitySubscription.unsubscribe();
+    this.activitySubscription.unsubscribe();
   }
 }

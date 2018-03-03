@@ -18,10 +18,10 @@ import { Constitution } from '../../../models';
 })
 export class ExerciseGuidelinesPage {
   public constitution: Constitution;
-  constructor(private _navCtrl: NavController, private _params: NavParams) {
-    this.constitution = <Constitution>this._params.get('constitution') || new Constitution();
+  constructor(private navCtrl: NavController, private params: NavParams) {
+    this.constitution = <Constitution>this.params.get('constitution') || new Constitution();
     if (!this.constitution.dominantDosha) {
-      this._navCtrl.setRoot('exercise');
+      this.navCtrl.setRoot('exercise');
     }
   }
 

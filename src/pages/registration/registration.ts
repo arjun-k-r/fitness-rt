@@ -24,17 +24,17 @@ import { NotificationProvider } from '../../providers';
   templateUrl: 'registration.html'
 })
 export class RegistrationPage {
-  private _history: string;
-  private _tabBarElement: any;
+  private history: string;
+  private tabBarElement: any;
   public registrationForm: FormGroup;
   constructor(
-    private _afAuth: AngularFireAuth,
-    private _navCtrl: NavController,
-    private _notifyPvd: NotificationProvider,
-    private _params: NavParams
+    private afAuth: AngularFireAuth,
+    private navCtrl: NavController,
+    private notifyPvd: NotificationProvider,
+    private params: NavParams
   ) {
-    this._tabBarElement = document.querySelector('.tabbar.show-tabbar');
-    this._history = this._params.get('history');
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+    this.history = this.params.get('history');
     this.registrationForm = new FormGroup({
       email:  new FormControl('', [Validators.required, Validators.email]),
       name: new FormControl('', [Validators.required, Validators.pattern(/[A-Za-z]+(\s[A-Za-z]+)?$/)]),
@@ -44,14 +44,14 @@ export class RegistrationPage {
   }
 
   public login(): void {
-    this._navCtrl.setRoot('login', {
-      history: this._history
+    this.navCtrl.setRoot('login', {
+      history: this.history
     })
   }
 
   public register(): void {
-    this._notifyPvd.showLoading();
-    this._afAuth.auth.createUserWithEmailAndPassword(
+    this.notifyPvd.showLoading();
+    this.afAuth.auth.createUserWithEmailAndPassword(
       this.registrationForm.get('email').value.trim(),
       this.registrationForm.get('password').value.trim()
     )
@@ -60,19 +60,19 @@ export class RegistrationPage {
           displayName: this.registrationForm.get('name').value.trim(),
           photoURL: ''
         }).then(() => {
-          this._notifyPvd.closeLoading();
-          if (!!this._history) {
-            this._navCtrl.setRoot(this._history);
+          this.notifyPvd.closeLoading();
+          if (!!this.history) {
+            this.navCtrl.setRoot(this.history);
           } else {
-            this._navCtrl.setRoot('profile');
+            this.navCtrl.setRoot('profile');
           }
         }).catch((err: FirebaseError) => {
-          this._notifyPvd.closeLoading();
-          this._notifyPvd.showError(err.message);
+          this.notifyPvd.closeLoading();
+          this.notifyPvd.showError(err.message);
         });
       }).catch((err: FirebaseError) => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showError(err.message);
       });
   }
 }

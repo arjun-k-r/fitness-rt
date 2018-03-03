@@ -16,7 +16,7 @@ import { NotificationProvider } from '../../providers';
 })
 export class StressQuestionairePage {
   public stressForm: FormGroup;
-  constructor(private _notifyPvd: NotificationProvider) {
+  constructor(private notifyPvd: NotificationProvider) {
     this.stressForm = new FormGroup({
       mood: new FormControl('', [Validators.required]),
       overwhelm: new FormControl('', Validators.required),
@@ -56,6 +56,6 @@ export class StressQuestionairePage {
     }
 
     const stress: number = stressScore * 100 / 23;
-    this._notifyPvd.showInfo(`You are ${(stress).toFixed(2)}% stressed. ${stress > 50 ? 'You should take time to relax, disconnect, and cool down' : 'You are not stressed, but you should pay attention to your lifestyle if something is bothering you!'}`)
+    this.notifyPvd.showInfo(`You are ${(stress).toFixed(2)}% stressed. ${stress > 50 ? 'You should take time to relax, disconnect, and cool down' : 'You are not stressed, but you should pay attention to your lifestyle if something is bothering you!'}`)
   }
 }

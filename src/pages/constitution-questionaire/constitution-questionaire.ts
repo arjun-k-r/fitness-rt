@@ -20,19 +20,19 @@ import { FirebaseError } from 'firebase/app';
 export class ConstitutionQuestionairePage {
   public constitution: Constitution;
   constructor(
-    private _navCtrl: NavController,
-    private _notifyPvd: NotificationProvider,
-    private _params: NavParams,
-    private _userPvd: UserProfileProvider
+    private navCtrl: NavController,
+    private notifyPvd: NotificationProvider,
+    private params: NavParams,
+    private userPvd: UserProfileProvider
   ) {
-    this.constitution = <Constitution>this._params.get('constitution') || new Constitution();
+    this.constitution = <Constitution>this.params.get('constitution') || new Constitution();
     if (!this.constitution.dominantDosha) {
-      this._navCtrl.setRoot('profile');
+      this.navCtrl.setRoot('profile');
     }
   }
 
   public calculateResults(): void {
-    this._notifyPvd.showLoading();
+    this.notifyPvd.showLoading();
     this.constitution.vata.body.total = 0;
     this.constitution.pitta.body.total = 0;
     this.constitution.kapha.body.total = 0;
@@ -120,13 +120,13 @@ export class ConstitutionQuestionairePage {
       }
     }
 
-    this._userPvd.saveConstitution(this._params.get('authId'), this.constitution)
+    this.userPvd.saveConstitution(this.params.get('authId'), this.constitution)
       .then(() => {
-        this._notifyPvd.closeLoading();
-        this._navCtrl.pop();
+        this.notifyPvd.closeLoading();
+        this.navCtrl.pop();
       }).catch((err: FirebaseError) => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showError(err.message);
       })
   }
 }

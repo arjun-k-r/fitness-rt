@@ -40,31 +40,31 @@ export const FOOD_GROUPS: string[] = [
 
 @Injectable()
 export class FoodProvider {
-  private _foodGroupSubject: Subject<string> = new Subject();
-  private _foods$: FirebaseListObservable<Food[]>;
+  private foodGroupSubject: Subject<string> = new Subject();
+  private foods$: FirebaseListObservable<Food[]>;
   constructor(
-    private _db: AngularFireDatabase
+    private db: AngularFireDatabase
   ) {
-    this._foods$ = this._db.list('/foods/usda', {
+    this.foods$ = this.db.list('/foods/usda', {
       query: {
         orderByChild: 'group',
-        equalTo: this._foodGroupSubject
+        equalTo: this.foodGroupSubject
       }
     });
   }
 
   public changeFoodGroup(group: string): void {
-    this._foodGroupSubject.next(group);
+    this.foodGroupSubject.next(group);
   }
 
   public getMyFoods$(authId: string, group: string): FirebaseListObservable<Food[]> {
     setTimeout(() => {
       this.changeFoodGroup(group);
     });
-    return this._db.list(`/${authId}/foods`, {
+    return this.db.list(`/${authId}/foods`, {
       query: {
         orderByChild: 'group',
-        equalTo: this._foodGroupSubject
+        equalTo: this.foodGroupSubject
       }
     });
   }
@@ -73,18 +73,18 @@ export class FoodProvider {
     setTimeout(() => {
       this.changeFoodGroup(group);
     });
-    return this._foods$;
+    return this.foods$;
   }
 
   public removeFood(authId: string, food: Food): Promise<void> {
-    return this._db.list(`/${authId}/foods`).remove(food['$key']);
+    return this.db.list(`/${authId}/foods`).remove(food['$key']);
   }
 
   public saveFood(authId: string, food: Food): any {
     if ('$key' in food) {
-      return this._db.list(`/${authId}/foods`).update(food['$key'], food);
+      return this.db.list(`/${authId}/foods`).update(food['$key'], food);
     } else {
-      return this._db.list(`/${authId}/foods`).push(food);
+      return this.db.list(`/${authId}/foods`).push(food);
     }
   }
 }

@@ -11,8 +11,27 @@ export class FitnessProvider {
   /**
    * Nes, B.M, et al. HRMax formula
    */
-  private _calculateHRMax(age: number): number {
+  private calculateHRMax(age: number): number {
     return Math.round(211 - (0.64 * age));
+  }
+
+  private calculateFatPercentage(age: number, gender: string, height: number, hips: number, iliac: number, waist: number, weight: number): number {
+    if (gender === 'male') {
+      return (0.57914807 * waist) + (0.25189114 * hips) + (0.21366088 * iliac) - (0.35595404 * weight * 2.20462262 * 0.4535923704) - 47.371817
+    } else if (gender === 'female') {
+      return (495 / (1.168297 - (0.002824 * waist) + (0.0000122098 * Math.pow(waist, 2)) - (0.000733128 * hips) + (0.000510477 * height) - (0.000216161 * age))) - 450;
+    }
+  }
+
+  /**
+   * The U.S. Navy Body fat percentage formula
+   */
+  private calculateFatPercentageUSNavy(age: number, gender: string, height: number, hips: number, neck: number, waist: number, weight: number): number {
+    if (gender === 'male') {
+      return +(495 / (1.0324 - 0.19077 * Math.log10(Math.abs(waist - neck)) + 0.15456 * Math.log10(height)) - 450).toFixed(2);
+    } else if (gender === 'female') {
+      return +(495 / (1.29579 - 0.35004 * Math.log10(Math.abs(waist + hips - neck)) + 0.221 * Math.log10(height)) - 450).toFixed(2);
+    }
   }
 
   /**
@@ -26,17 +45,8 @@ export class FitnessProvider {
     }
   }
 
-  /**
-   * The U.S. Navy Body fat percentage formula
-   */
-  public calculateBodyFat(age: number, gender: string, height: number, hips: number, neck: number, waist: number, weight: number): BodyFat {
-    let bodyFat: number;
-    if (gender === 'male') {
-      bodyFat = +(495 / (1.0324 - 0.19077 * Math.log10(Math.abs(waist - neck)) + 0.15456 * Math.log10(height)) - 450).toFixed(2);
-    } else if (gender === 'female') {
-      bodyFat = +(495 / (1.29579 - 0.35004 * Math.log10(Math.abs(waist + hips - neck)) + 0.221 * Math.log10(height)) - 450).toFixed(2);
-    }
-
+  public calculateBodyFat(age: number, gender: string, height: number, hips: number, iliac: number, waist: number, weight: number): BodyFat {
+    const bodyFat: number = this.calculateFatPercentage(age, gender, height, hips, iliac, waist, weight);;
     const fatMass: number = +(bodyFat / 100 * +weight).toFixed(2);
     const muscleMass: number = weight - fatMass;
     let idealBodyFat: number;
@@ -154,7 +164,7 @@ export class FitnessProvider {
   * Calculates the heart The Karvonen method
   */
   public calculateHeartRate(age: number, hrRest: number): HeartRate {
-    const hrMax: number = this._calculateHRMax(age);
+    const hrMax: number = this.calculateHRMax(age);
     return new HeartRate(hrMax, Math.round(0.85 * (hrMax - hrRest) + hrRest), Math.round(0.5 * (hrMax - hrRest) + hrRest));
   }
 }

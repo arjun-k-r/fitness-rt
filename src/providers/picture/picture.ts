@@ -18,46 +18,46 @@ import { Observer } from 'rxjs/Observer';
 
 @Injectable()
 export class PictureProvider {
-  private _cameraOpts: CameraOptions;
-  private _captureDataUrl: string;
-  private _imagePickerOpts: ImagePickerOptions;
-  private _pictureObserver: Observer<string>;
-  private _uploadTask: firebase.storage.UploadTask;
+  private cameraOpts: CameraOptions;
+  private captureDataUrl: string;
+  private imagePickerOpts: ImagePickerOptions;
+  private pictureObserver: Observer<string>;
+  private uploadTask: firebase.storage.UploadTask;
   constructor(
-    private _camera: Camera,
-    private _fb: FirebaseApp,
-    private _imagePicker: ImagePicker
+    private camera: Camera,
+    private fb: FirebaseApp,
+    private imagePicker: ImagePicker
   ) {
-    this._cameraOpts = {
+    this.cameraOpts = {
       allowEdit: true,
       quality: 100,
-      destinationType: _camera.DestinationType.DATA_URL,
-      encodingType: _camera.EncodingType.JPEG,
-      mediaType: _camera.MediaType.PICTURE,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
       saveToPhotoAlbum: true
     };
 
-    this._imagePickerOpts = {
+    this.imagePickerOpts = {
       maximumImagesCount: 1
     };
   }
 
   public cancelUpload(): void {
-    this._uploadTask.cancel();
-    this._pictureObserver.complete();
+    this.uploadTask.cancel();
+    this.pictureObserver.complete();
   }
 
   public chooseImage(): Promise<string> {
-    return new Promise((resolve, reject) => this._imagePicker.getPictures(this._imagePickerOpts).then((results: Array<string>) => resolve(results[0]), (err: Error) => reject(err)));
+    return new Promise((resolve, reject) => this.imagePicker.getPictures(this.imagePickerOpts).then((results: Array<string>) => resolve(results[0]), (err: Error) => reject(err)));
   }
 
   public takePhoto(): Promise<string> {
     return new Promise((resolve, reject) => {
-      this._camera.getPicture(this._cameraOpts).then((imageData: ImageData) => {
+      this.camera.getPicture(this.cameraOpts).then((imageData: ImageData) => {
         // imageData is either a base64 encoded string or a file URI
         // If it's base64:
-        this._captureDataUrl = `data:image/jpeg;base64,${imageData}`;
-        resolve(this._captureDataUrl);
+        this.captureDataUrl = `data:image/jpeg;base64,${imageData}`;
+        resolve(this.captureDataUrl);
       }, (err: Error) => reject(err));
     });
   }
@@ -68,16 +68,16 @@ export class PictureProvider {
      */
     let progress: number;
     return new Observable((observer: Observer<string | number>) => {
-      const imageStorage: firebase.storage.Reference = this._fb.storage().ref().child(`${authId}/images`);
-      this._uploadTask = img ? imageStorage.child(`${pathName}/${img.name}`).put(img) : imageStorage.child(`${pathName}/${moment().format('DDMMYYHHmmss')}.jpg`).putString(this._captureDataUrl, firebase.storage.StringFormat.DATA_URL);
-      this._pictureObserver = observer;
-      this._uploadTask.catch((err: Error) => observer.error(err));
-      this._uploadTask.on('state_changed', (snapshot: firebase.storage.UploadTaskSnapshot) => {
+      const imageStorage: firebase.storage.Reference = this.fb.storage().ref().child(`${authId}/images`);
+      this.uploadTask = img ? imageStorage.child(`${pathName}/${img.name}`).put(img) : imageStorage.child(`${pathName}/${moment().format('DDMMYYHHmmss')}.jpg`).putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL);
+      this.pictureObserver = observer;
+      this.uploadTask.catch((err: Error) => observer.error(err));
+      this.uploadTask.on('state_changed', (snapshot: firebase.storage.UploadTaskSnapshot) => {
         progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         observer.next(progress);
       }, (err: Error) => observer.error(err),
         () => {
-          observer.next(this._uploadTask.snapshot.downloadURL);
+          observer.next(this.uploadTask.snapshot.downloadURL);
           observer.complete()
         });
     });

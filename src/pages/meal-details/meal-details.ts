@@ -35,38 +35,38 @@ import { DietProvider, NotificationProvider, UserProfileProvider } from '../../p
   templateUrl: 'meal-details.html',
 })
 export class MealDetailsPage {
-  private _authId: string;
-  private _diet: Diet;
-  private _mealIdx: number;
-  private _trends: Diet[];
-  private _userProfile: UserProfile;
-  private _userSubscription: Subscription;
+  private authId: string;
+  private diet: Diet;
+  private mealIdx: number;
+  private trends: Diet[];
+  private userProfile: UserProfile;
+  private userSubscription: Subscription;
   public meal: Meal;
   public unsavedChanges: boolean = false;
   constructor(
-    private _actionSheetCtrl: ActionSheetController,
-    private _alertCtrl: AlertController,
-    private _dietPvd: DietProvider,
-    private _modalCtrl: ModalController,
-    private _navCtrl: NavController,
-    private _notifyPvd: NotificationProvider,
-    private _params: NavParams,
-    private _userPvd: UserProfileProvider
+    private actionSheetCtrl: ActionSheetController,
+    private alertCtrl: AlertController,
+    private dietPvd: DietProvider,
+    private modalCtrl: ModalController,
+    private navCtrl: NavController,
+    private notifyPvd: NotificationProvider,
+    private params: NavParams,
+    private userPvd: UserProfileProvider
   ) {
-    this._authId = this._params.get('authId') || '';
-    this._diet = <Diet>this._params.get('diet') || new Diet('', [], null, null);
-    this._diet.meals = this._diet.meals || [];
-    this._mealIdx = this._params.get('mealIdx') === undefined ? this._diet.meals.length : <number>this._params.get('mealIdx');
-    this._trends = <Diet[]>this._params.get('trends') || [];
-    this.meal = Object.assign({}, this._diet.meals[this._mealIdx] || new Meal([], new NutritionalValues(), '', 0, 0, moment().format('HH:mm')));
+    this.authId = this.params.get('authId') || '';
+    this.diet = <Diet>this.params.get('diet') || new Diet('', [], null, null);
+    this.diet.meals = this.diet.meals || [];
+    this.mealIdx = this.params.get('mealIdx') === undefined ? this.diet.meals.length : <number>this.params.get('mealIdx');
+    this.trends = <Diet[]>this.params.get('trends') || [];
+    this.meal = Object.assign({}, this.diet.meals[this.mealIdx] || new Meal([], new NutritionalValues(), '', 0, 0, moment().format('HH:mm')));
     this.meal.foods = this.meal.foods || [];
-    if (!this._authId) {
-      this._navCtrl.setRoot('diet');
+    if (!this.authId) {
+      this.navCtrl.setRoot('diet');
     }
   }
 
-  private _changeQuantity(food: Food): void {
-    this._alertCtrl.create({
+  private changeQuantity(food: Food): void {
+    this.alertCtrl.create({
       title: 'Quantity',
       subTitle: `How much ${food.name} do you want to eat?`,
       inputs: [
@@ -85,35 +85,35 @@ export class MealDetailsPage {
           text: 'Done',
           handler: (data: { quantity: string }) => {
             food.quantity = +data.quantity;
-            this._updateMeal();
+            this.updateMeal();
           }
         }
       ]
     }).present();
   }
 
-  private _removeFood(idx: number): void {
+  private removeFood(idx: number): void {
     this.meal.foods = [...this.meal.foods.slice(0, idx), ...this.meal.foods.slice(idx + 1)];
-    this._updateMeal();
+    this.updateMeal();
   }
 
-  private _updateMeal(): void {
+  private updateMeal(): void {
     this.changeMade();
-    this.meal.nourishment = this._dietPvd.calculateNourishment(this.meal.foods, true);
+    this.meal.nourishment = this.dietPvd.calculateNourishment(this.meal.foods, true);
     this.meal.quantity = this.meal.foods.reduce((quantity: number, food: Food) => quantity + food.quantity, 0);
-    this._diet.meals = [...this._diet.meals.slice(0, this._mealIdx), this.meal, ...this._diet.meals.slice(this._mealIdx + 1)];
-    this._diet.nourishment = this._dietPvd.calculateNourishment(this._diet.meals);
-    this._dietPvd.calculateRequirement(this._authId, this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight, this._diet.date)
+    this.diet.meals = [...this.diet.meals.slice(0, this.mealIdx), this.meal, ...this.diet.meals.slice(this.mealIdx + 1)];
+    this.diet.nourishment = this.dietPvd.calculateNourishment(this.diet.meals);
+    this.dietPvd.calculateRequirement(this.authId, this.userProfile.age, this.userProfile.fitness.bmr, this.userProfile.constitution, this.userProfile.gender, this.userProfile.isLactating, this.userProfile.isPregnant, this.userProfile.measurements.weight, this.diet.date)
       .then((r: NutritionalValues) => {
-        this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
+        this.diet.nourishmentAchieved = this.dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
       })
       .catch((err: FirebaseError) => {
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.showError(err.message);
       });
   }
 
   public addFood(): void {
-    const foodListModal: Modal = this._modalCtrl.create('food-list', { authId: this._authId });
+    const foodListModal: Modal = this.modalCtrl.create('food-list', { authId: this.authId });
     foodListModal.present();
     foodListModal.onDidDismiss((foods: (Food | Meal)[]) => {
       if (!!foods && !!foods.length) {
@@ -136,13 +136,13 @@ export class MealDetailsPage {
           });
           this.meal.foods = [...this.meal.foods, ...[].concat(...selectedFoods)];
         }
-        this._updateMeal();
+        this.updateMeal();
       }
     });
   }
 
   public addToFavorites(): void {
-    this._alertCtrl.create({
+    this.alertCtrl.create({
       title: 'Favorite meal',
       subTitle: 'What is the name of this nutritious meal?',
       inputs: [
@@ -162,16 +162,16 @@ export class MealDetailsPage {
           handler: (data: { name: string }) => {
             this.meal.name = data.name;
             delete this.meal.key;
-            this._notifyPvd.showLoading();
-            this._dietPvd.saveFavoriteMeal(this._authId, this.meal)
+            this.notifyPvd.showLoading();
+            this.dietPvd.saveFavoriteMeal(this.authId, this.meal)
               .then((key: string) => {
-                this._notifyPvd.closeLoading();
-                this._notifyPvd.showInfo('Meal added to favorites successfully!');
+                this.notifyPvd.closeLoading();
+                this.notifyPvd.showInfo('Meal added to favorites successfully!');
                 this.meal.key = key;
               })
               .catch((err: FirebaseError) => {
-                this._notifyPvd.closeLoading();
-                this._notifyPvd.showError(err.message);
+                this.notifyPvd.closeLoading();
+                this.notifyPvd.showError(err.message);
               });
           }
         }
@@ -180,18 +180,18 @@ export class MealDetailsPage {
   }
 
   public changeFood(idx: number): void {
-    this._actionSheetCtrl.create({
+    this.actionSheetCtrl.create({
       title: 'Change food',
       buttons: [
         {
           text: 'Change quantity',
           handler: () => {
-            this._changeQuantity(this.meal.foods[idx]);
+            this.changeQuantity(this.meal.foods[idx]);
           }
         }, {
           text: 'Remove it',
           handler: () => {
-            this._removeFood(idx);
+            this.removeFood(idx);
           }
         }, {
           text: 'Cancel',
@@ -206,56 +206,56 @@ export class MealDetailsPage {
   }
 
   public removeFavoriteMeal(): void {
-    this._dietPvd.removeFavoriteMeal(this._authId, this.meal)
+    this.dietPvd.removeFavoriteMeal(this.authId, this.meal)
       .then(() => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showInfo('Meal removed from favorites successfully!');
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showInfo('Meal removed from favorites successfully!');
         delete this.meal.name;
         delete this.meal.key;
       })
       .catch((err: FirebaseError) => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showError(err.message);
       });
   }
 
   public removeMeal(): void {
-    this._notifyPvd.showLoading();
-    this._diet.meals = [...this._diet.meals.slice(0, this._mealIdx), ...this._diet.meals.slice(this._mealIdx + 1)];
-    this._diet.nourishment = this._dietPvd.calculateNourishment(this._diet.meals);
-    this._dietPvd.calculateRequirement(this._authId, this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight, this._diet.date)
+    this.notifyPvd.showLoading();
+    this.diet.meals = [...this.diet.meals.slice(0, this.mealIdx), ...this.diet.meals.slice(this.mealIdx + 1)];
+    this.diet.nourishment = this.dietPvd.calculateNourishment(this.diet.meals);
+    this.dietPvd.calculateRequirement(this.authId, this.userProfile.age, this.userProfile.fitness.bmr, this.userProfile.constitution, this.userProfile.gender, this.userProfile.isLactating, this.userProfile.isPregnant, this.userProfile.measurements.weight, this.diet.date)
       .then((r: NutritionalValues) => {
-        this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
-        this._dietPvd.saveDiet(this._authId, this._diet, this._trends)
+        this.diet.nourishmentAchieved = this.dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
+        this.dietPvd.saveDiet(this.authId, this.diet, this.trends)
           .then(() => {
-            this._notifyPvd.closeLoading();
-            this._notifyPvd.showInfo('Meal removed successfully!');
-            this._navCtrl.pop();
+            this.notifyPvd.closeLoading();
+            this.notifyPvd.showInfo('Meal removed successfully!');
+            this.navCtrl.pop();
           })
           .catch((err: FirebaseError) => {
-            this._notifyPvd.closeLoading();
-            this._notifyPvd.showError(err.message);
+            this.notifyPvd.closeLoading();
+            this.notifyPvd.showError(err.message);
           });
       })
       .catch((err: FirebaseError) => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showError(err.message);
       });
   }
 
   public saveMeal(): void {
-    this._notifyPvd.showLoading();
+    this.notifyPvd.showLoading();
     if (!this.meal.name) {
       delete this.meal.name;
     }
     if (!this.meal.key) {
       delete this.meal.key;
     }
-    this._dietPvd.calculateRequirement(this._authId, this._userProfile.age, this._userProfile.fitness.bmr, this._userProfile.constitution, this._userProfile.gender, this._userProfile.isLactating, this._userProfile.isPregnant, this._userProfile.measurements.weight, this._diet.date)
+    this.dietPvd.calculateRequirement(this.authId, this.userProfile.age, this.userProfile.fitness.bmr, this.userProfile.constitution, this.userProfile.gender, this.userProfile.isLactating, this.userProfile.isPregnant, this.userProfile.measurements.weight, this.diet.date)
       .then((r: NutritionalValues) => {
-        this._diet.nourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this._diet.nourishment, r);
-        this._diet.meals[this._mealIdx] = this.meal;
-        this._diet.meals.sort((m1: Meal, m2: Meal) => {
+        this.diet.nourishmentAchieved = this.dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
+        this.diet.meals[this.mealIdx] = this.meal;
+        this.diet.meals.sort((m1: Meal, m2: Meal) => {
           if (m1.hour > m2.hour) {
             return 1;
           }
@@ -266,29 +266,29 @@ export class MealDetailsPage {
 
           return 0;
         });
-        this._dietPvd.saveDiet(this._authId, this._diet, this._trends)
+        this.dietPvd.saveDiet(this.authId, this.diet, this.trends)
           .then(() => {
-            this._notifyPvd.closeLoading();
-            this._notifyPvd.showInfo('Diet saved successfully!');
-            this._navCtrl.pop();
+            this.notifyPvd.closeLoading();
+            this.notifyPvd.showInfo('Diet saved successfully!');
+            this.navCtrl.pop();
           })
           .catch((err: FirebaseError) => {
-            this._notifyPvd.closeLoading();
-            this._notifyPvd.showError(err.message);
+            this.notifyPvd.closeLoading();
+            this.notifyPvd.showError(err.message);
           })
       })
       .catch((err: FirebaseError) => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showError(err.message);
       });
   }
 
   public takeHungerTest(): void {
-    this._navCtrl.push('hunger-questionaire', { constitution: this._userProfile.constitution })
+    this.navCtrl.push('hunger-questionaire', { constitution: this.userProfile.constitution })
   }
 
   public viewFoodGuidelines(): void {
-    this._navCtrl.push('food-guidelines', { constitution: this._userProfile.constitution })
+    this.navCtrl.push('food-guidelines', { constitution: this.userProfile.constitution })
   }
 
   ionViewCanLEave(): boolean | Promise<{}> {
@@ -297,7 +297,7 @@ export class MealDetailsPage {
     }
     return new Promise((resolve, reject) => {
       if (this.unsavedChanges) {
-        this._alertCtrl.create({
+        this.alertCtrl.create({
           title: 'Unsaved changes',
           message: 'All your changes will be lost. Are you sure you want to leave?',
           buttons: [
@@ -320,14 +320,14 @@ export class MealDetailsPage {
   }
 
   ionViewWillEnter(): void {
-    this._userSubscription = this._userPvd.getUserProfile$(this._authId).subscribe((u: UserProfile) => {
-      this._userProfile = u;
+    this.userSubscription = this.userPvd.getUserProfile$(this.authId).subscribe((u: UserProfile) => {
+      this.userProfile = u;
     }, (err: FirebaseError) => {
-      this._notifyPvd.showError(err.message);
+      this.notifyPvd.showError(err.message);
     });
   }
 
   ionViewWillLeave(): void {
-    this._userSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 }

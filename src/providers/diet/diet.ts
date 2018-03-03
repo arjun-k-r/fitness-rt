@@ -22,13 +22,13 @@ const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 
 @Injectable()
 export class DietProvider {
-  private _trendDaysSubject: Subject<any> = new Subject();
+  private trendDaysSubject: Subject<any> = new Subject();
   constructor(
-    private _db: AngularFireDatabase,
-    private _exercisePvd: ExerciseProvider
+    private db: AngularFireDatabase,
+    private exercisePvd: ExerciseProvider
   ) { }
 
-  private _calculateAlaRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateAlaRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       return 13;
     } else if (pregnant) {
@@ -68,7 +68,7 @@ export class DietProvider {
 
   /**
    * Redundant for now
-  private _calculateBiotinRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateBiotinRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       return 35;
     } else if (pregnant) {
@@ -95,7 +95,7 @@ export class DietProvider {
   }
   */
 
-  private _calculateCalciumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateCalciumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 1300;
@@ -151,7 +151,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateCarbRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
+  private calculateCarbRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
     switch (constitution) {
       case 'Vata-Pitta-Kapha':
         return (intenseExercise ? 0.5 : 0.4) * energyConsumption / 4;
@@ -178,7 +178,7 @@ export class DietProvider {
 
   /**
    * Redundant for now
-  private _calculateChlorideRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateChlorideRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 2.3;
@@ -235,7 +235,7 @@ export class DietProvider {
   }
   */
 
-  private _calculateCholineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateCholineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 550;
@@ -293,7 +293,7 @@ export class DietProvider {
 
   /**
    * Redundant for now
-  private _calculateChromiumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateChromiumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 44;
@@ -350,7 +350,7 @@ export class DietProvider {
   }
   */
 
-  private _calculateVitaminB12Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateVitaminB12Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 2.8;
@@ -406,7 +406,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateCopperRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateCopperRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 1300;
@@ -462,7 +462,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateFatRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
+  private calculateFatRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
     switch (constitution) {
       case 'Vata-Pitta-Kapha':
         return (intenseExercise ? 0.18 : 0.33) * energyConsumption / 4;
@@ -487,7 +487,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateFiberRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateFiberRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 29;
@@ -543,7 +543,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateVitaminB9Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateVitaminB9Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 500;
@@ -599,7 +599,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateHistidineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
+  private calculateHistidineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
     if (lactating) {
       if (age <= 18) {
         return 0.019 * weight;
@@ -657,7 +657,7 @@ export class DietProvider {
 
   /**
    * Redundant for now
-  private _calculateIodineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateIodineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 290;
@@ -714,7 +714,7 @@ export class DietProvider {
   }
   */
 
-  private _calculateIronRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateIronRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 10;
@@ -770,7 +770,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateIsoleucineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
+  private calculateIsoleucineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
     if (lactating) {
       if (age <= 18) {
         return 0.03 * weight;
@@ -826,7 +826,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateLaRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateLaRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       return 13;
     } else if (pregnant) {
@@ -864,7 +864,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateLeucineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
+  private calculateLeucineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
     if (lactating) {
       if (age <= 18) {
         return 0.062 * weight;
@@ -920,7 +920,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateLysineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
+  private calculateLysineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
     if (lactating) {
       if (age <= 18) {
         return 0.052 * weight;
@@ -976,7 +976,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateMagnesiumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateMagnesiumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 360;
@@ -1036,7 +1036,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateManganeseRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateManganeseRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 2.6;
@@ -1092,7 +1092,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateMethionineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
+  private calculateMethionineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
     if (lactating) {
       if (age <= 18) {
         return 0.026 * weight;
@@ -1150,7 +1150,7 @@ export class DietProvider {
 
   /**
    * Redundant for now
-  private _calculateMolybdenumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateMolybdenumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 50;
@@ -1207,7 +1207,7 @@ export class DietProvider {
   }
   */
 
-  private _calculateVitaminB3Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateVitaminB3Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 17;
@@ -1263,7 +1263,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateVitaminB5Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateVitaminB5Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 7;
@@ -1319,7 +1319,7 @@ export class DietProvider {
     }
   }
 
-  private _calculatePhenylalanineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
+  private calculatePhenylalanineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
     if (lactating) {
       if (age <= 18) {
         return 0.051 * weight;
@@ -1375,7 +1375,7 @@ export class DietProvider {
     }
   }
 
-  private _calculatePhosphorusRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculatePhosphorusRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 1250;
@@ -1431,7 +1431,7 @@ export class DietProvider {
     }
   }
 
-  private _calculatePotassiumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculatePotassiumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 5100;
@@ -1487,7 +1487,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateProteinRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
+  private calculateProteinRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
     switch (constitution) {
       case 'Vata-Pitta-Kapha':
         return (intenseExercise ? 0.32 : 0.27) * energyConsumption / 4;
@@ -1512,7 +1512,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateVitaminB6Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateVitaminB6Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 2;
@@ -1568,7 +1568,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateVitaminB2Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateVitaminB2Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 1.6;
@@ -1624,7 +1624,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateSeleniumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateSeleniumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 70;
@@ -1680,7 +1680,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateSodiumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateSodiumRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 1500;
@@ -1736,7 +1736,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateSugarsRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
+  private calculateSugarsRequirement(energyConsumption: number, intenseExercise: boolean, constitution: string): number {
     switch (constitution) {
       case 'Vata-Pitta-Kapha':
         return (intenseExercise ? 0.25 : 0.2) * energyConsumption / 4;
@@ -1761,7 +1761,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateVitaminB1Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateVitaminB1Requirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 1.4;
@@ -1817,7 +1817,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateThreonineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
+  private calculateThreonineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
     if (lactating) {
       if (age <= 18) {
         return 0.03 * weight;
@@ -1873,11 +1873,11 @@ export class DietProvider {
     }
   }
 
-  private _calculateTransFatRequirement(): number {
+  private calculateTransFatRequirement(): number {
     return 1;
   }
 
-  private _calculateTryptophanRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
+  private calculateTryptophanRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
     if (lactating) {
       if (age <= 18) {
         return 0.009 * weight;
@@ -1933,7 +1933,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateValineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
+  private calculateValineRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean, weight: number): number {
     if (lactating) {
       if (age <= 18) {
         return 0.035 * weight;
@@ -1989,7 +1989,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateVitaminARequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateVitaminARequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 1200;
@@ -2045,7 +2045,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateVitaminCRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateVitaminCRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 115;
@@ -2106,7 +2106,7 @@ export class DietProvider {
    * The ability decreases with climate/weather, skin pigmentation, age, and weight
    * http://health.howstuffworks.com/wellness/food-nutrition/vitamin-supplements/how-much-vitamin-d-from-sun1.htm
    */
-  private _calculateVitaminDRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateVitaminDRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 5;
@@ -2162,7 +2162,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateVitaminERequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateVitaminERequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 19;
@@ -2218,7 +2218,7 @@ export class DietProvider {
     }
   }
 
-  private _calculateVitaminKRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateVitaminKRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 75;
@@ -2274,11 +2274,11 @@ export class DietProvider {
     }
   }
 
-  private _calculateWater(intenseExercise: boolean, weight: number): number {
+  private calculateWater(intenseExercise: boolean, weight: number): number {
     return weight * 28.4 * (intenseExercise ? 1.5 : 1);
   }
 
-  private _calculateZincRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
+  private calculateZincRequirement(age: number, gender: string, lactating: boolean, pregnant: boolean): number {
     if (lactating) {
       if (age <= 18) {
         return 13;
@@ -2375,7 +2375,7 @@ export class DietProvider {
   ): Promise<NutritionalValues> {
     date = date || CURRENT_DAY;
     return new Promise((resolve, reject) => {
-      const subscription: Subscription = this._exercisePvd.getExercise$(authId, date).subscribe(
+      const subscription: Subscription = this.exercisePvd.getExercise$(authId, date).subscribe(
         (e: Exercise) => {
           let intenseExercise: boolean = false,
             energyConsumption: number = bmr;
@@ -2390,47 +2390,47 @@ export class DietProvider {
           subscription.unsubscribe();
           resolve(new NutritionalValues(
             energyConsumption,
-            this._calculateWater(intenseExercise, weight),
-            this._calculateProteinRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
-            this._calculateCarbRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
-            this._calculateFiberRequirement(age, gender, lactating, pregnant),
-            this._calculateSugarsRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
-            this._calculateFatRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
-            this._calculateTransFatRequirement(),
-            this._calculateAlaRequirement(age, gender, lactating, pregnant),
-            this._calculateLaRequirement(age, gender, lactating, pregnant),
-            this._calculateHistidineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-            this._calculateIsoleucineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-            this._calculateLeucineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-            this._calculateLysineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-            this._calculateMethionineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-            this._calculatePhenylalanineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-            this._calculateThreonineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-            this._calculateTryptophanRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-            this._calculateValineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
-            this._calculateCalciumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateCopperRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateIronRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateMagnesiumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateManganeseRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculatePhosphorusRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculatePotassiumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateSeleniumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateSodiumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateZincRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateVitaminARequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateVitaminB1Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateVitaminB2Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateVitaminB3Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateVitaminB5Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateVitaminB6Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateVitaminB9Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateVitaminB12Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateCholineRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateVitaminCRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateVitaminDRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateVitaminERequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
-            this._calculateVitaminKRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2)
+            this.calculateWater(intenseExercise, weight),
+            this.calculateProteinRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
+            this.calculateCarbRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
+            this.calculateFiberRequirement(age, gender, lactating, pregnant),
+            this.calculateSugarsRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
+            this.calculateFatRequirement(energyConsumption, intenseExercise, constitution.dominantDosha),
+            this.calculateTransFatRequirement(),
+            this.calculateAlaRequirement(age, gender, lactating, pregnant),
+            this.calculateLaRequirement(age, gender, lactating, pregnant),
+            this.calculateHistidineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+            this.calculateIsoleucineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+            this.calculateLeucineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+            this.calculateLysineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+            this.calculateMethionineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+            this.calculatePhenylalanineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+            this.calculateThreonineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+            this.calculateTryptophanRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+            this.calculateValineRequirement(age, gender, lactating, pregnant, weight) * (intenseExercise ? 3 : 2),
+            this.calculateCalciumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateCopperRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateIronRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateMagnesiumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateManganeseRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculatePhosphorusRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculatePotassiumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateSeleniumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateSodiumRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateZincRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateVitaminARequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateVitaminB1Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateVitaminB2Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateVitaminB3Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateVitaminB5Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateVitaminB6Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateVitaminB9Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateVitaminB12Requirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateCholineRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateVitaminCRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateVitaminDRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateVitaminERequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2),
+            this.calculateVitaminKRequirement(age, gender, lactating, pregnant) * (intenseExercise ? 3 : 2)
           ));
         },
         (err: FirebaseError) => {
@@ -2441,40 +2441,40 @@ export class DietProvider {
   }
 
   public changeTrendDays(days: number): void {
-    this._trendDaysSubject.next(days);
+    this.trendDaysSubject.next(days);
   }
 
   public getDiet$(authId: string, date?: string): FirebaseObjectObservable<Diet> {
-    return this._db.object(`/${authId}/diet/${date || CURRENT_DAY}`);
+    return this.db.object(`/${authId}/diet/${date || CURRENT_DAY}`);
   }
 
   public getFavoriteMeals$(authId: string): FirebaseListObservable<Meal[]> {
-    return this._db.list(`/${authId}/meals/`);
+    return this.db.list(`/${authId}/meals/`);
   }
 
   public getTrends$(authId: string, days?: number): FirebaseListObservable<Diet[]> {
     setTimeout(() => {
       this.changeTrendDays(days);
     });
-    return this._db.list(`/${authId}/trends/diet/`, {
+    return this.db.list(`/${authId}/trends/diet/`, {
       query: {
-        limitToLast: this._trendDaysSubject
+        limitToLast: this.trendDaysSubject
       }
     });
   }
 
   public removeFavoriteMeal(authId: string, meal: Meal): Promise<void> {
-    return this._db.list(`/${authId}/meals/`).remove(meal.key)
+    return this.db.list(`/${authId}/meals/`).remove(meal.key)
   }
 
   public saveFavoriteMeal(authId: string, meal: Meal): Promise<{}> {
     return new Promise((resolve, reject) => {
       if ('key' in meal) {
-        this._db.list(`/${authId}/meals/`).update(meal.key, meal).then(() => {
+        this.db.list(`/${authId}/meals/`).update(meal.key, meal).then(() => {
           resolve();
         }).catch((err: FirebaseError) => reject(err));
       } else {
-        resolve(this._db.list(`/${authId}/meals/`).push(meal).key);
+        resolve(this.db.list(`/${authId}/meals/`).push(meal).key);
       }
     })
   }
@@ -2483,11 +2483,11 @@ export class DietProvider {
     return new Promise((resolve, reject) => {
       const trend: Diet = trends.find((d: Diet) => d.date === diet.date);
       if (trend) {
-        this._db.list(`/${authId}/trends/diet/`).update(trend['$key'], diet);
+        this.db.list(`/${authId}/trends/diet/`).update(trend['$key'], diet);
       } else {
-        this._db.list(`/${authId}/trends/diet/`).push(diet);
+        this.db.list(`/${authId}/trends/diet/`).push(diet);
       }
-      this._db.object(`/${authId}/diet/${diet.date}`).set(diet).then(() => {
+      this.db.object(`/${authId}/diet/${diet.date}`).set(diet).then(() => {
         resolve();
       }).catch((err: FirebaseError) => reject(err));
     });

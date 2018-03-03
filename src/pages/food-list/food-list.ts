@@ -31,11 +31,11 @@ import { DietProvider, FOOD_GROUPS, FoodProvider, NotificationProvider } from '.
   templateUrl: 'food-list.html'
 })
 export class FoodListPage {
-  private _authId: string;
-  private _foodSubscription: Subscription;
-  private _nutrients: { key: string, name: string }[];
-  private _mealSubscription: Subscription;
-  private _usdaFoodSubscription: Subscription;
+  private authId: string;
+  private foodSubscription: Subscription;
+  private nutrients: { key: string, name: string }[];
+  private mealSubscription: Subscription;
+  private usdaFoodSubscription: Subscription;
   public foodLimit: number = 50;
   public foods: Food[];
   public foodPageSegmet: string = 'foods';
@@ -50,18 +50,18 @@ export class FoodListPage {
   public usdaFoodLimit: number = 50;
   public usdaFoodSearchQuery: string = '';
   constructor(
-    private _actionSheetCtrl: ActionSheetController,
-    private _alertCtrl: AlertController,
-    private _dietPvd: DietProvider,
-    private _foodPvd: FoodProvider,
-    private _modalCtrl: ModalController,
-    private _notifyPvd: NotificationProvider,
-    private _params: NavParams,
-    private _viewCtrl: ViewController
+    private actionSheetCtrl: ActionSheetController,
+    private alertCtrl: AlertController,
+    private dietPvd: DietProvider,
+    private foodPvd: FoodProvider,
+    private modalCtrl: ModalController,
+    private notifyPvd: NotificationProvider,
+    private params: NavParams,
+    private viewCtrl: ViewController
   ) {
-    this._authId = <string>this._params.get('authId');
+    this.authId = <string>this.params.get('authId');
     const food: Food = new Food('', '', '', new NutritionalValues(), 0, '');
-    this._nutrients = Object.keys(food.nourishment).map((nutrientKey: string) => {
+    this.nutrients = Object.keys(food.nourishment).map((nutrientKey: string) => {
       return {
         key: nutrientKey,
         name: food.nourishment[nutrientKey].name
@@ -69,9 +69,9 @@ export class FoodListPage {
     });
   }
 
-  private _selectFood(food: Food | Meal, checkBox: HTMLInputElement, idx: number): void {
+  private selectFood(food: Food | Meal, checkBox: HTMLInputElement, idx: number): void {
     if (idx === -1 || checkBox.checked === true) {
-      this._alertCtrl.create({
+      this.alertCtrl.create({
         title: 'Quantity',
         subTitle: `How much ${food.name} do you want to eat?`,
         inputs: [
@@ -110,8 +110,8 @@ export class FoodListPage {
     }
   }
 
-  private _selectGroup(): void {
-    this._alertCtrl.create({
+  private selectGroup(): void {
+    this.alertCtrl.create({
       title: 'Filter foods by group',
       subTitle: 'Select a food group',
       inputs: [...FOOD_GROUPS.map((group: string) => {
@@ -129,19 +129,19 @@ export class FoodListPage {
             this.selectedGroup = data;
             this.selectedNutrient = '';
             this.clearSearchUsdaFoods();
-            this._foodPvd.changeFoodGroup(this.selectedGroup);
-            this._notifyPvd.showLoading();
+            this.foodPvd.changeFoodGroup(this.selectedGroup);
+            this.notifyPvd.showLoading();
           }
         }
       ]
     }).present();
   }
 
-  private _selectNutrient(): void {
-    this._alertCtrl.create({
+  private selectNutrient(): void {
+    this.alertCtrl.create({
       title: 'Filter foods by nutrients',
       subTitle: 'Select a nutrient',
-      inputs: [...this._nutrients.map((nutrient: { key: string, name: string }) => {
+      inputs: [...this.nutrients.map((nutrient: { key: string, name: string }) => {
         return {
           type: 'radio',
           label: nutrient.name,
@@ -162,7 +162,7 @@ export class FoodListPage {
 
   public addFood(): void {
     const newFood: Food = new Food('', '', '', new NutritionalValues(), 0, '');
-    this._modalCtrl.create('food-details', { authId: this._authId, food: newFood, id: newFood.name }).present();
+    this.modalCtrl.create('food-details', { authId: this.authId, food: newFood, id: newFood.name }).present();
   }
 
   public clearSearchFoods(): void {
@@ -178,48 +178,48 @@ export class FoodListPage {
   }
 
   public dismiss(): void {
-    this._viewCtrl.dismiss();
+    this.viewCtrl.dismiss();
   }
 
   public doneSelecting(): void {
-    this._viewCtrl.dismiss(this.selectedFoods);
+    this.viewCtrl.dismiss(this.selectedFoods);
   }
 
   public getFoods(): void {
-    if (!this._foodSubscription || (this._foodSubscription && this._foodSubscription.closed)) {
-      this._notifyPvd.showLoading();
-      this._foodSubscription = this._foodPvd.getMyFoods$(this._authId, this.selectedGroup).subscribe((foods: Food[]) => {
+    if (!this.foodSubscription || (this.foodSubscription && this.foodSubscription.closed)) {
+      this.notifyPvd.showLoading();
+      this.foodSubscription = this.foodPvd.getMyFoods$(this.authId, this.selectedGroup).subscribe((foods: Food[]) => {
         this.foods = [...foods];
-        this._notifyPvd.closeLoading()
+        this.notifyPvd.closeLoading()
       }, (err: FirebaseError) => {
-        this._notifyPvd.closeLoading()
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading()
+        this.notifyPvd.showError(err.message);
       });
     }
   }
 
   public getMeals(): void {
-    if (!this._mealSubscription || (this._mealSubscription && this._mealSubscription.closed)) {
-      this._notifyPvd.showLoading();
-      this._mealSubscription = this._dietPvd.getFavoriteMeals$(this._authId).subscribe((meals: Meal[]) => {
+    if (!this.mealSubscription || (this.mealSubscription && this.mealSubscription.closed)) {
+      this.notifyPvd.showLoading();
+      this.mealSubscription = this.dietPvd.getFavoriteMeals$(this.authId).subscribe((meals: Meal[]) => {
         this.meals = [...meals];
-        this._notifyPvd.closeLoading()
+        this.notifyPvd.closeLoading()
       }, (err: FirebaseError) => {
-        this._notifyPvd.closeLoading()
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading()
+        this.notifyPvd.showError(err.message);
       });
     }
   }
 
   public getUSDAFoods(): void {
-    if (!this._usdaFoodSubscription || (this._usdaFoodSubscription && this._usdaFoodSubscription.closed)) {
-      this._notifyPvd.showLoading();
-      this._usdaFoodSubscription = this._foodPvd.getUSDAFoods$(this.selectedGroup).subscribe((foods: Food[]) => {
+    if (!this.usdaFoodSubscription || (this.usdaFoodSubscription && this.usdaFoodSubscription.closed)) {
+      this.notifyPvd.showLoading();
+      this.usdaFoodSubscription = this.foodPvd.getUSDAFoods$(this.selectedGroup).subscribe((foods: Food[]) => {
         this.usdaFoods = [...foods];
-        this._notifyPvd.closeLoading()
+        this.notifyPvd.closeLoading()
       }, (err: FirebaseError) => {
-        this._notifyPvd.closeLoading()
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading()
+        this.notifyPvd.showError(err.message);
       });
     }
   }
@@ -242,7 +242,7 @@ export class FoodListPage {
   public selectMeal(meal: Meal, checkBox: HTMLInputElement): void {
     const idx: number = this.selectedFoods.indexOf(meal);
     if (idx === -1 || !!checkBox.checked) {
-      this._alertCtrl.create({
+      this.alertCtrl.create({
         title: 'Servings',
         subTitle: `How much ${meal.name} do you want to eat?`,
         inputs: [
@@ -280,18 +280,18 @@ export class FoodListPage {
   }
 
   public showFilter(): void {
-    this._actionSheetCtrl.create({
+    this.actionSheetCtrl.create({
       title: 'Food list options',
       buttons: [
         {
           text: 'Filter by food group',
           handler: () => {
-            this._selectGroup();
+            this.selectGroup();
           }
         }, {
           text: 'Sort by nutrients',
           handler: () => {
-            this._selectNutrient();
+            this.selectNutrient();
           }
         }, {
           text: 'Cancel',
@@ -306,7 +306,7 @@ export class FoodListPage {
     if (idx !== -1) {
       checkBox.checked = true;
     }
-    this._actionSheetCtrl.create({
+    this.actionSheetCtrl.create({
       title: 'What to do with this food?',
       buttons: [
         {
@@ -315,12 +315,12 @@ export class FoodListPage {
             if (idx === -1) {
               checkBox.checked = false;
             }
-            this._modalCtrl.create('food-details', { authId: this._authId, food: food, id: food.name }).present();
+            this.modalCtrl.create('food-details', { authId: this.authId, food: food, id: food.name }).present();
           }
         }, {
           text: idx === -1 ? 'Select it' : 'Change servings',
           handler: () => {
-            this._selectFood(food, checkBox, idx);
+            this.selectFood(food, checkBox, idx);
           }
         }, {
           text: 'Cancel',
@@ -340,8 +340,8 @@ export class FoodListPage {
   }
 
   ionViewWillLeave(): void {
-    this._foodSubscription.unsubscribe();
-    this._mealSubscription && this._mealSubscription.unsubscribe();
-    this._usdaFoodSubscription && this._usdaFoodSubscription.unsubscribe();
+    this.foodSubscription.unsubscribe();
+    this.mealSubscription && this.mealSubscription.unsubscribe();
+    this.usdaFoodSubscription && this.usdaFoodSubscription.unsubscribe();
   }
 }

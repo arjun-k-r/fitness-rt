@@ -22,10 +22,10 @@ import { MindBalanceProvider } from '../../providers';
 })
 export class EmotionsListPage {
   public emotions$: FirebaseListObservable<IEmotion[]>;
-  constructor(private _mindBalancePvd: MindBalanceProvider) {}
+  constructor(private mindBalancePvd: MindBalanceProvider) {}
 
   ionViewWillEnter(): void {
-    this.emotions$ = this._mindBalancePvd.getEmotions$();
+    this.emotions$ = this.mindBalancePvd.getEmotions$();
   }
 
 }

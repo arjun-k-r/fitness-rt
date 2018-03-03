@@ -6,7 +6,7 @@ export class BodyMeasurements {
     public chest: number,
     public height: number,
     public hips: number,
-    public neck: number,
+    public iliac: number,
     public restingHeartRate: number,
     public waist: number,
     public weight: number
@@ -31,7 +31,7 @@ export class FitnessTrend {
     public date: string,
     public heightMeasurement: number,
     public hipsMeasurement: number,
-    public neckMeasurement: number,
+    public iliacMeasurement: number,
     public restingHeartRateMeasurement: number,
     public waistMeasurement,
     public weightMeasurement: number

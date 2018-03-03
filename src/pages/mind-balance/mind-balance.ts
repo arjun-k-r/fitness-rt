@@ -32,11 +32,11 @@ const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
   templateUrl: 'mind-balance.html'
 })
 export class MindBalancePage {
-  private _authId: string;
-  private _authSubscription: Subscription;
-  private _mindBalanceSubscription: Subscription;
-  private _trends: MindBalance[] = [];
-  private _trendSubscription: Subscription;
+  private authId: string;
+  private authSubscription: Subscription;
+  private mindBalanceSubscription: Subscription;
+  private trends: MindBalance[] = [];
+  private trendSubscription: Subscription;
   public chartColors: ILineChartColors[] = [];
   public chartData: ILineChartEntry[] = [];
   public chartDataSelection: string = 'stress';
@@ -49,11 +49,11 @@ export class MindBalancePage {
   public trendDays: number = 7;
   public unsavedChanges: boolean = false;
   constructor(
-    private _afAuth: AngularFireAuth,
-    private _alertCtrl: AlertController,
-    private _navCtrl: NavController,
-    private _notifyPvd: NotificationProvider,
-    private _mindBalancePvd: MindBalanceProvider
+    private afAuth: AngularFireAuth,
+    private alertCtrl: AlertController,
+    private navCtrl: NavController,
+    private notifyPvd: NotificationProvider,
+    private mindBalancePvd: MindBalanceProvider
   ) {
     this.chartColors.push({
       backgroundColor: 'rgb(255, 255, 255)',
@@ -66,18 +66,18 @@ export class MindBalancePage {
     this.mindBalance = new MindBalance(CURRENT_DAY, '', '', 0, '');
   }
 
-  private _getTrends(): void {
-    this._trendSubscription = this._mindBalancePvd.getTrends$(this._authId, +this.trendDays).subscribe(
+  private getTrends(): void {
+    this.trendSubscription = this.mindBalancePvd.getTrends$(this.authId, +this.trendDays).subscribe(
       (trends: MindBalance[] = []) => {
         this.chartLabels = [...trends.map((t: MindBalance) => t.date)];
-        this._trends = [...trends];
+        this.trends = [...trends];
         this.chartData = [{
-          data: [...this._trends.map((m: MindBalance) => m.stress)],
+          data: [...this.trends.map((m: MindBalance) => m.stress)],
           label: 'Stress levels'
         }];
       },
       (err: FirebaseError) => {
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.showError(err.message);
       }
     );
   }
@@ -86,7 +86,7 @@ export class MindBalancePage {
     switch (this.chartDataSelection) {
       case 'stress':
         this.chartData = [{
-          data: [...this._trends.map((m: MindBalance) => m.stress)],
+          data: [...this.trends.map((m: MindBalance) => m.stress)],
           label: 'Stress levels'
         }];
         break;
@@ -101,64 +101,64 @@ export class MindBalancePage {
   }
 
   public changeTrendDays(): void {
-    this._mindBalancePvd.changeTrendDays(+this.trendDays || 1);
+    this.mindBalancePvd.changeTrendDays(+this.trendDays || 1);
   }
 
   public getMindBalance(): void {
-    this._notifyPvd.showLoading();
-    if (this._mindBalanceSubscription) {
-      this._mindBalanceSubscription.unsubscribe();
+    this.notifyPvd.showLoading();
+    if (this.mindBalanceSubscription) {
+      this.mindBalanceSubscription.unsubscribe();
     }
-    this._mindBalanceSubscription = this._mindBalancePvd.getMindBalance$(this._authId, this.mindBalanceDate).subscribe((m: MindBalance) => {
+    this.mindBalanceSubscription = this.mindBalancePvd.getMindBalance$(this.authId, this.mindBalanceDate).subscribe((m: MindBalance) => {
       if (!!m && m['$value'] !== null) {
         this.mindBalance = Object.assign({}, m);
-        this._notifyPvd.closeLoading();
+        this.notifyPvd.closeLoading();
       }
       this.mindBalance.date = this.mindBalanceDate;
     }, (err: FirebaseError) => {
-      this._notifyPvd.closeLoading();
-      this._notifyPvd.showError(err.message);
+      this.notifyPvd.closeLoading();
+      this.notifyPvd.showError(err.message);
     });
   }
 
   public save(): void {
-    this._notifyPvd.showLoading();
-    this._mindBalancePvd.saveMindBalance(this._authId, this.mindBalance, this._trends)
+    this.notifyPvd.showLoading();
+    this.mindBalancePvd.saveMindBalance(this.authId, this.mindBalance, this.trends)
       .then(() => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showInfo('Mind balance saved successfully!');
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showInfo('Mind balance saved successfully!');
       }).catch((err: FirebaseError) => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showError(err.message);
       })
   }
 
   public takeStressTest(): void {
-    this._navCtrl.push('stress-questionaire');
+    this.navCtrl.push('stress-questionaire');
   }
 
   public takeVikrutiTest(): void {
-    this._navCtrl.push('vikruti-questionaire');
+    this.navCtrl.push('vikruti-questionaire');
   }
 
   public viewEmotions(): void {
-    this._navCtrl.push('emotions-list');
+    this.navCtrl.push('emotions-list');
   }
 
   public viewLifestyleGuidelines(): void {
-    this._navCtrl.push('lifestyle-guidelines');
+    this.navCtrl.push('lifestyle-guidelines');
   }
 
   public viewPageInfo(): void {
-    this._navCtrl.push('mind-balance-info');
+    this.navCtrl.push('mind-balance-info');
   }
 
   ionViewCanEnter(): Promise<{}> {
     return new Promise((resolve, reject) => {
-      this._afAuth.authState.subscribe((auth: User) => {
+      this.afAuth.authState.subscribe((auth: User) => {
         if (!auth) {
           reject();
-          this._navCtrl.setRoot('registration', {
+          this.navCtrl.setRoot('registration', {
             history: 'mind-balance'
           });
         }
@@ -175,7 +175,7 @@ export class MindBalancePage {
     }
     return new Promise((resolve, reject) => {
       if (this.unsavedChanges) {
-        this._alertCtrl.create({
+        this.alertCtrl.create({
           title: 'Unsaved changes',
           message: 'All your changes will be lost. Are you sure you want to leave?',
           buttons: [
@@ -198,20 +198,20 @@ export class MindBalancePage {
   }
 
   ionViewWillEnter(): void {
-    this._authSubscription = this._afAuth.authState.subscribe((auth: User) => {
+    this.authSubscription = this.afAuth.authState.subscribe((auth: User) => {
       if (!!auth) {
-        this._authId = auth.uid;
+        this.authId = auth.uid;
         this.getMindBalance();
-        this._getTrends();
+        this.getTrends();
       }
     }, (err: FirebaseError) => {
-      this._notifyPvd.showError(err.message);
+      this.notifyPvd.showError(err.message);
     })
   }
 
   ionViewWillLeave(): void {
-    this._authSubscription.unsubscribe();
-    this._mindBalanceSubscription.unsubscribe();
-    this._trendSubscription.unsubscribe();
+    this.authSubscription.unsubscribe();
+    this.mindBalanceSubscription.unsubscribe();
+    this.trendSubscription.unsubscribe();
   }
 }

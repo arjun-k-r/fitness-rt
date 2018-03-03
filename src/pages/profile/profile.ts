@@ -44,12 +44,12 @@ import { FitnessProvider, NotificationProvider, PictureProvider, UserProfileProv
 })
 export class ProfilePage {
   @ViewChild('fileInput') fileInput;
-  private _authId: string;
-  private _authSubscription: Subscription;
-  private _formInit: boolean;
-  private _profileFormSubscription: Subscription;
-  private _trends: FitnessTrend[];
-  private _trendSubscription: Subscription;
+  private authId: string;
+  private authSubscription: Subscription;
+  private formInit: boolean;
+  private profileFormSubscription: Subscription;
+  private trends: FitnessTrend[];
+  private trendSubscription: Subscription;
   public chartColors: ILineChartColors[] = [];
   public chartData: ILineChartEntry[] = [];
   public chartDataSelection: string = 'bodyFat';
@@ -62,15 +62,15 @@ export class ProfilePage {
   public userInfo: UserInfo;
   public userProfile: UserProfile;
   constructor(
-    private _actionSheetCtrl: ActionSheetController,
-    private _afAuth: AngularFireAuth,
-    private _alertCtrl: AlertController,
-    private _fitPvd: FitnessProvider,
-    private _navCtrl: NavController,
-    private _notifyPvd: NotificationProvider,
-    private _picPvd: PictureProvider,
-    private _toastCtrl: ToastController,
-    private _userPvd: UserProfileProvider
+    private actionSheetCtrl: ActionSheetController,
+    private afAuth: AngularFireAuth,
+    private alertCtrl: AlertController,
+    private fitPvd: FitnessProvider,
+    private navCtrl: NavController,
+    private notifyPvd: NotificationProvider,
+    private picPvd: PictureProvider,
+    private toastCtrl: ToastController,
+    private userPvd: UserProfileProvider
   ) {
     this.chartColors.push({
       backgroundColor: 'rgb(255, 255, 255)',
@@ -88,7 +88,7 @@ export class ProfilePage {
       hipsMeasurement: new FormControl('', [Validators.required]),
       isLactating: new FormControl(''),
       isPregnant: new FormControl(''),
-      neckMeasurement: new FormControl('', [Validators.required]),
+      iliacMeasurement: new FormControl('', [Validators.required]),
       restingHeartRateMeasurement: new FormControl('', [Validators.required]),
       waistMeasurement: new FormControl('', [Validators.required]),
       weightMeasurement: new FormControl('', [Validators.required])
@@ -104,32 +104,32 @@ export class ProfilePage {
     );
   }
 
-  private _calculateFitness(): void {
+  private calculateFitness(): void {
     const { age, gender, measurements } = this.userProfile;
-    const bodyFat: BodyFat = this._fitPvd.calculateBodyFat(+age, gender, +measurements.height, +measurements.hips, +measurements.neck, +measurements.waist, +measurements.weight);
-    const bmr: number = this._fitPvd.calculateBmr(+age, gender, +measurements.height, +measurements.weight);
-    const bodyShape: string = this._fitPvd.calculateBodyShape(+measurements.chest, gender, +measurements.hips, +measurements.waist);
-    const idealWaist: string = this._fitPvd.calculateIdealWaist(+age, gender, +measurements.height);
-    const idealWeight: string = this._fitPvd.calculateIdealWeight(+age, gender, +measurements.height);
-    const heartRate: HeartRate = this._fitPvd.calculateHeartRate(+age, +measurements.restingHeartRate);
+    const bodyFat: BodyFat = this.fitPvd.calculateBodyFat(+age, gender, +measurements.height, +measurements.hips, +measurements.iliac, +measurements.waist, +measurements.weight);
+    const bmr: number = this.fitPvd.calculateBmr(+age, gender, +measurements.height, +measurements.weight);
+    const bodyShape: string = this.fitPvd.calculateBodyShape(+measurements.chest, gender, +measurements.hips, +measurements.waist);
+    const idealWaist: string = this.fitPvd.calculateIdealWaist(+age, gender, +measurements.height);
+    const idealWeight: string = this.fitPvd.calculateIdealWeight(+age, gender, +measurements.height);
+    const heartRate: HeartRate = this.fitPvd.calculateHeartRate(+age, +measurements.restingHeartRate);
     this.userProfile.fitness = new Fitness(bmr, bodyFat, bodyShape, heartRate, idealWaist, idealWeight);
   }
 
-  private _chooseImage(): void {
-    this._picPvd.chooseImage().then((photoUri: string) => {
+  private chooseImage(): void {
+    this.picPvd.chooseImage().then((photoUri: string) => {
       this.userInfo.photoURL = photoUri;
       this.uploadImage();
     }).catch((err: Error) => {
-      this._notifyPvd.showError(err.message);
+      this.notifyPvd.showError(err.message);
     });
   }
 
-  private _getProfile(): void {
-    this._notifyPvd.showLoading();
-    this._userPvd.getUserProfile$(this._authId).subscribe((up: UserProfile) => {
+  private getProfile(): void {
+    this.notifyPvd.showLoading();
+    this.userPvd.getUserProfile$(this.authId).subscribe((up: UserProfile) => {
       if (!!up && up['$value'] !== null) {
         this.userProfile = Object.assign({}, up);
-        this._formInit = true;
+        this.formInit = true;
         this.profileForm.controls['age'].patchValue(this.userProfile.age);
         this.profileForm.controls['chestMeasurement'].patchValue(this.userProfile.measurements.chest);
         this.profileForm.controls['gender'].patchValue(this.userProfile.gender);
@@ -137,46 +137,46 @@ export class ProfilePage {
         this.profileForm.controls['hipsMeasurement'].patchValue(this.userProfile.measurements.hips);
         this.profileForm.controls['isLactating'].patchValue(this.userProfile.isLactating);
         this.profileForm.controls['isPregnant'].patchValue(this.userProfile.isPregnant);
-        this.profileForm.controls['neckMeasurement'].patchValue(this.userProfile.measurements.neck);
+        this.profileForm.controls['iliacMeasurement'].patchValue(this.userProfile.measurements.iliac);
         this.profileForm.controls['restingHeartRateMeasurement'].patchValue(this.userProfile.measurements.restingHeartRate);
         this.profileForm.controls['waistMeasurement'].patchValue(this.userProfile.measurements.waist);
         this.profileForm.controls['weightMeasurement'].patchValue(this.userProfile.measurements.weight);
-        this._formInit = false;
-        this._notifyPvd.closeLoading();
+        this.formInit = false;
+        this.notifyPvd.closeLoading();
       }
     }, (err: FirebaseError) => {
-      this._notifyPvd.showError(err.message);
-      this._notifyPvd.closeLoading();
+      this.notifyPvd.showError(err.message);
+      this.notifyPvd.closeLoading();
     });
   }
 
-  private _getTrends(): void {
-    this._trendSubscription = this._userPvd.getTrends$(this._authId, +this.trendDays).subscribe(
+  private getTrends(): void {
+    this.trendSubscription = this.userPvd.getTrends$(this.authId, +this.trendDays).subscribe(
       (trends: FitnessTrend[] = []) => {
         this.chartLabels = [...trends.map((t: FitnessTrend) => t.date)];
-        this._trends = [...trends];
+        this.trends = [...trends];
         this.chartData = [{
-          data: [...this._trends.map((t: FitnessTrend) => t.bodyFat)],
+          data: [...this.trends.map((t: FitnessTrend) => t.bodyFat)],
           label: 'Body fat percentage'
         }];
       },
       (err: FirebaseError) => {
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.showError(err.message);
       }
     );
   }
 
-  private _takePhoto(): void {
-    this._picPvd.takePhoto().then((photoUri: string) => {
+  private takePhoto(): void {
+    this.picPvd.takePhoto().then((photoUri: string) => {
       this.userInfo.photoURL = photoUri;
       this.uploadImage();
     }).catch((err: Error) => {
-      this._notifyPvd.showError(err.message);
+      this.notifyPvd.showError(err.message);
     });
   }
 
-  private _watchFormChanges(): void {
-    this._profileFormSubscription = this.profileForm.valueChanges.subscribe(
+  private watchFormChanges(): void {
+    this.profileFormSubscription = this.profileForm.valueChanges.subscribe(
       (c: {
         age: number,
         chestMeasurement: number,
@@ -185,21 +185,21 @@ export class ProfilePage {
         hipsMeasurement: number,
         isLactating: number,
         isPregnant: number,
-        neckMeasurement: number,
+        iliacMeasurement: number,
         restingHeartRateMeasurement: number,
         waistMeasurement: number,
         weightMeasurement: number
       }) => {
-        if (this.profileForm.valid && !this._formInit) {
+        if (this.profileForm.valid && !this.formInit) {
           this.unsavedChanges = true;
           this.userProfile = Object.assign({}, this.userProfile, {
             age: c.age,
             gender: c.gender,
             isLactating: c.isLactating,
             isPregnant: c.isPregnant,
-            measurements: new BodyMeasurements(c.chestMeasurement, c.heightMeasurement, c.hipsMeasurement, c.neckMeasurement, c.restingHeartRateMeasurement, c.waistMeasurement, c.weightMeasurement)
+            measurements: new BodyMeasurements(c.chestMeasurement, c.heightMeasurement, c.hipsMeasurement, c.iliacMeasurement, c.restingHeartRateMeasurement, c.waistMeasurement, c.weightMeasurement)
           });
-          this._calculateFitness();
+          this.calculateFitness();
         }
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)
@@ -210,56 +210,56 @@ export class ProfilePage {
     switch (this.chartDataSelection) {
       case 'bodyFat':
         this.chartData = [{
-          data: [...this._trends.map((t: FitnessTrend) => t.bodyFat)],
+          data: [...this.trends.map((t: FitnessTrend) => t.bodyFat)],
           label: 'Body fat percentage'
         }];
         break;
 
       case 'chestMEasurement':
         this.chartData = [{
-          data: [...this._trends.map((t: FitnessTrend) => t.chestMEasurement)],
+          data: [...this.trends.map((t: FitnessTrend) => t.chestMEasurement)],
           label: 'Chest'
         }];
         break;
 
       case 'heightMeasurement':
         this.chartData = [{
-          data: [...this._trends.map((t: FitnessTrend) => t.heightMeasurement)],
+          data: [...this.trends.map((t: FitnessTrend) => t.heightMeasurement)],
           label: 'Height'
         }];
         break;
 
       case 'heightMeasurement':
         this.chartData = [{
-          data: [...this._trends.map((t: FitnessTrend) => t.hipsMeasurement)],
+          data: [...this.trends.map((t: FitnessTrend) => t.hipsMeasurement)],
           label: 'Hips'
         }];
         break;
 
-      case 'neckMeasurement':
+      case 'iliacMeasurement':
         this.chartData = [{
-          data: [...this._trends.map((t: FitnessTrend) => t.neckMeasurement)],
-          label: 'Neck'
+          data: [...this.trends.map((t: FitnessTrend) => t.iliacMeasurement)],
+          label: 'Iliac'
         }];
         break;
 
       case 'restingHeartRateMeasurement':
         this.chartData = [{
-          data: [...this._trends.map((t: FitnessTrend) => t.restingHeartRateMeasurement)],
+          data: [...this.trends.map((t: FitnessTrend) => t.restingHeartRateMeasurement)],
           label: 'Resting heart rate'
         }];
         break;
 
       case 'waistMeasurement':
         this.chartData = [{
-          data: [...this._trends.map((t: FitnessTrend) => t.waistMeasurement)],
+          data: [...this.trends.map((t: FitnessTrend) => t.waistMeasurement)],
           label: 'Waist'
         }];
         break;
 
       case 'weightMeasurement':
         this.chartData = [{
-          data: [...this._trends.map((t: FitnessTrend) => t.weightMeasurement)],
+          data: [...this.trends.map((t: FitnessTrend) => t.weightMeasurement)],
           label: 'Weight'
         }];
         break;
@@ -272,18 +272,18 @@ export class ProfilePage {
 
   public changeImage(): void {
     if (Camera['installed']()) {
-      this._actionSheetCtrl.create({
+      this.actionSheetCtrl.create({
         title: 'Change image',
         buttons: [
           {
             text: 'Take photo',
             handler: () => {
-              this._takePhoto();
+              this.takePhoto();
             }
           }, {
             text: 'Choose image',
             handler: () => {
-              this._chooseImage();
+              this.chooseImage();
             }
           }, {
             text: 'Cancel',
@@ -297,7 +297,7 @@ export class ProfilePage {
   }
 
   public changeTrendDays(): void {
-    this._userPvd.changeTrendDays(+this.trendDays || 1);
+    this.userPvd.changeTrendDays(+this.trendDays || 1);
   }
 
   public processWebImage(event): void {
@@ -310,26 +310,26 @@ export class ProfilePage {
   }
 
   public save(): void {
-    this._notifyPvd.showLoading();
-    this._calculateFitness();
-    this._userPvd.saveUserProfile(this._authId, this._trends, this.userProfile)
+    this.notifyPvd.showLoading();
+    this.calculateFitness();
+    this.userPvd.saveUserProfile(this.authId, this.trends, this.userProfile)
       .then(() => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showInfo('Profile saved successfully!');
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showInfo('Profile saved successfully!');
       }).catch((err: FirebaseError) => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showError(err.message);
       })
   }
 
   public takeConstitutionTest(): void {
-    this._navCtrl.push('constitution-questionaire', { authId: this._authId, constitution: this.userProfile.constitution })
+    this.navCtrl.push('constitution-questionaire', { authId: this.authId, constitution: this.userProfile.constitution })
   }
 
   public uploadImage(file?: File): void {
     let canceledUpload: boolean = false,
       uploadComplete: boolean = false;
-    const toast: Toast = this._toastCtrl.create({
+    const toast: Toast = this.toastCtrl.create({
       closeButtonText: 'Cancel',
       message: 'Uploading ... 0%',
       position: 'bottom',
@@ -340,20 +340,20 @@ export class ProfilePage {
     toast.onWillDismiss(() => {
       if (!uploadComplete) {
         canceledUpload = true;
-        this._picPvd.cancelUpload();
+        this.picPvd.cancelUpload();
       }
     });
 
-    this._picPvd.uploadImage(this._authId, 'photos', file).subscribe((data: string | number) => {
+    this.picPvd.uploadImage(this.authId, 'photos', file).subscribe((data: string | number) => {
       if (typeof data === 'number') {
         toast.setMessage(`Uploading ... ${data}%`);
       } else {
         this.userInfo.photoURL = data;
-        this._afAuth.auth.currentUser.updateProfile({
+        this.afAuth.auth.currentUser.updateProfile({
           displayName: this.userInfo.displayName,
           photoURL: this.userInfo.photoURL
         }).catch((err: FirebaseError) => {
-          this._notifyPvd.showError(err.message);
+          this.notifyPvd.showError(err.message);
         });
       }
     }, (err: FirebaseError) => {
@@ -365,24 +365,24 @@ export class ProfilePage {
           if (toast) {
             toast.dismiss();
           }
-          this._notifyPvd.showInfo('Upload complete!');
-          this._notifyPvd.showInfo('Upload complete!');
+          this.notifyPvd.showInfo('Upload complete!');
+          this.notifyPvd.showInfo('Upload complete!');
         } else {
-          this._notifyPvd.showInfo('Upload canceled!');
+          this.notifyPvd.showInfo('Upload canceled!');
         }
       });
   }
 
   public viewPageInfo(): void {
-    this._navCtrl.push('profile-info');
+    this.navCtrl.push('profile-info');
   }
 
   ionViewCanEnter(): Promise<{}> {
     return new Promise((resolve, reject) => {
-      this._afAuth.authState.subscribe((auth: User) => {
+      this.afAuth.authState.subscribe((auth: User) => {
         if (!auth) {
           reject();
-          this._navCtrl.setRoot('registration', {
+          this.navCtrl.setRoot('registration', {
             history: 'profile'
           });
         }
@@ -399,7 +399,7 @@ export class ProfilePage {
     }
     return new Promise((resolve, reject) => {
       if (this.unsavedChanges) {
-        this._alertCtrl.create({
+        this.alertCtrl.create({
           title: 'Unsaved changes',
           message: 'All your changes will be lost. Are you sure you want to leave?',
           buttons: [
@@ -418,16 +418,16 @@ export class ProfilePage {
           ]
         });
       } else if (this.profileForm.invalid) {
-        this._notifyPvd.showError('Please complete all the fields. They are required throughout the application');
+        this.notifyPvd.showError('Please complete all the fields. They are required throughout the application');
       }
     });
   }
 
   ionViewWillEnter(): void {
-    this._authSubscription = this._afAuth.authState.subscribe((auth: User) => {
+    this.authSubscription = this.afAuth.authState.subscribe((auth: User) => {
       if (!!auth) {
-        this._authId = auth.uid;
-        const { displayName, email, phoneNumber, photoURL, providerId, uid } = this._afAuth.auth.currentUser;
+        this.authId = auth.uid;
+        const { displayName, email, phoneNumber, photoURL, providerId, uid } = this.afAuth.auth.currentUser;
         this.userInfo = {
           displayName,
           email,
@@ -437,18 +437,18 @@ export class ProfilePage {
           uid
         };
 
-        this._getProfile();
-        this._getTrends();
-        this._watchFormChanges();
+        this.getProfile();
+        this.getTrends();
+        this.watchFormChanges();
       }
     }, (err: FirebaseError) => {
-      this._notifyPvd.showError(err.message);
+      this.notifyPvd.showError(err.message);
     })
   }
 
   ionViewWillLeave(): void {
-    this._authSubscription.unsubscribe();
-    this._profileFormSubscription.unsubscribe();
-    this._trendSubscription.unsubscribe();
+    this.authSubscription.unsubscribe();
+    this.profileFormSubscription.unsubscribe();
+    this.trendSubscription.unsubscribe();
   }
 }

@@ -23,15 +23,15 @@ import { NotificationProvider } from '../../providers';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  private _history: string;
+  private history: string;
   public loginForm: FormGroup;
   constructor(
-    private _afAuth: AngularFireAuth,
-    private _navCtrl: NavController,
-    private _notifyPvd: NotificationProvider,
-    private _params: NavParams
+    private afAuth: AngularFireAuth,
+    private navCtrl: NavController,
+    private notifyPvd: NotificationProvider,
+    private params: NavParams
   ) {
-    this._history = this._params.get('history');
+    this.history = this.params.get('history');
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required)
@@ -39,33 +39,33 @@ export class LoginPage {
   }
 
   public forgotPassword(): void {
-    this._navCtrl.setRoot('forgot-password', {
-      history: this._history
+    this.navCtrl.setRoot('forgot-password', {
+      history: this.history
     })
   }
 
   public login(): void {
-    this._notifyPvd.showLoading();
-    this._afAuth.auth.signInWithEmailAndPassword(
+    this.notifyPvd.showLoading();
+    this.afAuth.auth.signInWithEmailAndPassword(
       this.loginForm.get('email').value.trim(),
       this.loginForm.get('password').value.trim()
     )
       .then((user: User) => {
-        this._notifyPvd.closeLoading();
-        if (this._history) {
-          this._navCtrl.setRoot(this._history);
+        this.notifyPvd.closeLoading();
+        if (this.history) {
+          this.navCtrl.setRoot(this.history);
         } else {
-          this._navCtrl.setRoot('profile');
+          this.navCtrl.setRoot('profile');
         }
       }).catch((err: FirebaseError) => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showError(err.message);
       });
   }
 
   public register(): void {
-    this._navCtrl.setRoot('registration', {
-      history: this._history
+    this.navCtrl.setRoot('registration', {
+      history: this.history
     })
   }
 }

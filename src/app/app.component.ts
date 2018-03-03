@@ -27,29 +27,29 @@ interface IPageLink {
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) _nav: Nav;
-  private _authSubscription: Subscription;
+  @ViewChild(Nav) nav: Nav;
+  private authSubscription: Subscription;
   public auth: User;
   public currentPage: IPageLink;
   public pages: Array<IPageLink>;
   public rootPage: string = 'registration';
   constructor(
-    private _afAuth: AngularFireAuth,
-    private _autostart: Autostart,
-    private _backgroundMode: BackgroundMode,
-    private _platform: Platform,
-    private _statusBar: StatusBar,
-    private _splashScreen: SplashScreen
+    private afAuth: AngularFireAuth,
+    private autostart: Autostart,
+    private backgroundMode: BackgroundMode,
+    private platform: Platform,
+    private statusBar: StatusBar,
+    private splashScreen: SplashScreen
   ) {
-    this._initializeApp();
+    this.initializeApp();
   }
 
-  private _initializeApp(): void {
-    this._platform.ready().then(() => {
-      this._statusBar.styleDefault();
-      this._splashScreen.hide();
-      this._backgroundMode.enable();
-      this._autostart.enable();
+  private initializeApp(): void {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+      this.backgroundMode.enable();
+      this.autostart.enable();
       this.pages = [
         { component: 'profile', icon: 'person', title: 'Profile' },
         { component: 'mind-balance', icon: 'compass', title: 'Mind balance' },
@@ -61,7 +61,7 @@ export class MyApp {
         // { component: 'blood-pressure', icon: 'pulse', title: 'Blood pressure' },
         // { component: 'blood-sugar', icon: 'heart', title: 'Blood sugar' }
       ];
-      this._authSubscription = this._afAuth.authState.subscribe((auth: User) => {
+      this.authSubscription = this.afAuth.authState.subscribe((auth: User) => {
         if (!!auth) {
           this.auth = auth;
         }
@@ -71,7 +71,7 @@ export class MyApp {
 
   public openPage(page: IPageLink): void {
     this.currentPage = page;
-    this._nav.setRoot(page.component);
+    this.nav.setRoot(page.component);
   }
   
 }

@@ -16,7 +16,7 @@ import { NotificationProvider } from '../../providers';
 })
 export class OvertrainingQuestionairePage {
   public overtrainingForm: FormGroup;
-  constructor(private _notifyPvd: NotificationProvider) {
+  constructor(private notifyPvd: NotificationProvider) {
     this.overtrainingForm = new FormGroup({
       heartRate: new FormControl('', [Validators.required]),
       infections: new FormControl('', Validators.required),
@@ -53,6 +53,6 @@ export class OvertrainingQuestionairePage {
     }
 
     const overtraining: number = overtrainingScore * 100 / 23;
-    this._notifyPvd.showInfo(`You are ${(overtraining).toFixed(2)}% overtraining. ${overtraining > 50 ? 'You should take a break and recover' : 'You are not overtraining, but always pay attention to your sleep, diet, and exercise!'}`)
+    this.notifyPvd.showInfo(`You are ${(overtraining).toFixed(2)}% overtraining. ${overtraining > 50 ? 'You should take a break and recover' : 'You are not overtraining, but always pay attention to your sleep, diet, and exercise!'}`)
   }
 }

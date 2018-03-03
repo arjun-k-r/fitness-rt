@@ -16,7 +16,7 @@ import { NotificationProvider } from '../../providers';
 })
 export class VikrutiQuestionairePage {
   public vikrutiForm: FormGroup;
-  constructor(private _notifyPvd: NotificationProvider) {
+  constructor(private notifyPvd: NotificationProvider) {
     this.vikrutiForm = new FormGroup({
       appearance: new FormControl('', [Validators.required]),
       weight: new FormControl('', Validators.required),
@@ -81,6 +81,6 @@ export class VikrutiQuestionairePage {
       vikruti = 'Kapha';
     }
 
-    this._notifyPvd.showInfo(`Your vikruti is: ${vataVikruti.toFixed(2)}% vata, ${pittaVikruti.toFixed(2)}% pitta, ${kaphaVikruti.toFixed(2)}% kapha. ${vikruti}} is your current dominant dosha`)
+    this.notifyPvd.showInfo(`Your vikruti is: ${vataVikruti.toFixed(2)}% vata, ${pittaVikruti.toFixed(2)}% pitta, ${kaphaVikruti.toFixed(2)}% kapha. ${vikruti}} is your current dominant dosha`)
   }
 }

@@ -10,18 +10,18 @@ import {
 
 @Injectable()
 export class NotificationProvider {
-  private _loader: Loading;
-  constructor(private _loadCtrl: LoadingController, private _toastCtrl: ToastController) { }
+  private loader: Loading;
+  constructor(private loadCtrl: LoadingController, private toastCtrl: ToastController) { }
 
   public closeLoading(): void {
-    if (this._loader) {
-      this._loader.dismiss();
-      delete this._loader;
+    if (this.loader) {
+      this.loader.dismiss();
+      delete this.loader;
     }
   }
 
   public showError(message: string): void {
-    this._toastCtrl.create({
+    this.toastCtrl.create({
       closeButtonText: 'GOT IT!',
       cssClass: 'alert-message',
       dismissOnPageChange: true,
@@ -32,7 +32,7 @@ export class NotificationProvider {
   }
 
   public showInfo(message: string, duration?: number): void {
-    this._toastCtrl.create({
+    this.toastCtrl.create({
       closeButtonText: 'GREAT!',
       dismissOnPageChange: true,
       duration: duration || 5000,
@@ -42,12 +42,12 @@ export class NotificationProvider {
   }
 
   public showLoading(): void {
-    this._loader = this._loadCtrl.create({
+    this.loader = this.loadCtrl.create({
       content: 'Please wait...',
       duration: 5000,
       spinner: 'crescent'
     });
-    this._loader.present();
+    this.loader.present();
   }
 
 }

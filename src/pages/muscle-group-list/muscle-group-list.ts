@@ -20,17 +20,17 @@ import { FirebaseListObservable } from 'angularfire2/database-deprecated';
 export class MuscleGroupListPage {
   public muscleGroups$: FirebaseListObservable<IMuscleGroup[]>;
   constructor(
-    private _exercisePvd: ExerciseProvider,
-    private _navCtrl: NavController
+    private exercisePvd: ExerciseProvider,
+    private navCtrl: NavController
   ) {
   }
 
   public openDetails(exercise: MuscleExercise): void {
-    this._navCtrl.push('muscle-exercise-details', { exercise });
+    this.navCtrl.push('muscle-exercise-details', { exercise });
   }
 
   ionViewWillEnter(): void {
-    this.muscleGroups$ = this._exercisePvd.getMuscleGroupExercises$();
+    this.muscleGroups$ = this.exercisePvd.getMuscleGroupExercises$();
   }
 
 }

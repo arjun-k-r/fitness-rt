@@ -17,17 +17,17 @@ import { IEmotion, MindBalance } from '../../models';
 const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 @Injectable()
 export class MindBalanceProvider {
-  private _trendDaysSubject: Subject<any> = new Subject();
+  private trendDaysSubject: Subject<any> = new Subject();
   constructor(
-    private _db: AngularFireDatabase
+    private db: AngularFireDatabase
   ) { }
 
   public changeTrendDays(days: number): void {
-    this._trendDaysSubject.next(days);
+    this.trendDaysSubject.next(days);
   }
 
   public getEmotions$(): FirebaseListObservable<IEmotion[]> {
-    return this._db.list('emotions', {
+    return this.db.list('emotions', {
       query: {
         orderByChild: name
       }
@@ -35,16 +35,16 @@ export class MindBalanceProvider {
   }
 
   public getMindBalance$(authId: string, date?: string): FirebaseObjectObservable<MindBalance> {
-    return this._db.object(`/${authId}/mind-balance/${date || CURRENT_DAY}`);
+    return this.db.object(`/${authId}/mind-balance/${date || CURRENT_DAY}`);
   }
 
   public getTrends$(authId: string, days?: number): FirebaseListObservable<MindBalance[]> {
     setTimeout(() => {
       this.changeTrendDays(days);
     });
-    return this._db.list(`/${authId}/trends/mind-balance/`, {
+    return this.db.list(`/${authId}/trends/mind-balance/`, {
       query: {
-        limitToLast: this._trendDaysSubject
+        limitToLast: this.trendDaysSubject
       }
     });
   }
@@ -53,11 +53,11 @@ export class MindBalanceProvider {
     return new Promise((resolve, reject) => {
       const trend: MindBalance = trends.find((mb: MindBalance) => mb.date === mindBalance.date);
       if (trend) {
-        this._db.list(`/${authId}/trends/mind-balance/`).update(trend['$key'], mindBalance);
+        this.db.list(`/${authId}/trends/mind-balance/`).update(trend['$key'], mindBalance);
       } else {
-        this._db.list(`/${authId}/trends/mind-balance/`).push(mindBalance);
+        this.db.list(`/${authId}/trends/mind-balance/`).push(mindBalance);
       }
-      this._db.object(`/${authId}/mind-balance/${mindBalance.date}`).set(mindBalance).then(() => {
+      this.db.object(`/${authId}/mind-balance/${mindBalance.date}`).set(mindBalance).then(() => {
         resolve();
       }).catch((err: FirebaseError) => reject(err));
     });

@@ -28,7 +28,7 @@ import { DietProvider, FOOD_GROUPS, FoodProvider, NotificationProvider, UserProf
   templateUrl: 'food-details.html'
 })
 export class FoodDetailsPage {
-  private _foodFormSubscription: Subscription;
+  private foodFormSubscription: Subscription;
   public authId: string;
   public editMode: boolean = false;
   public food: Food;
@@ -36,20 +36,20 @@ export class FoodDetailsPage {
   public foodGroups: string[] = [...FOOD_GROUPS];
   public foodNourishmentAchieved: NutritionalValues;
   constructor(
-    private _dietPvd: DietProvider,
-    private _foodPvd: FoodProvider,
-    private _notifyPvd: NotificationProvider,
-    private _params: NavParams,
-    private _userPvd: UserProfileProvider,
-    private _viewCtrl: ViewController
+    private dietPvd: DietProvider,
+    private foodPvd: FoodProvider,
+    private notifyPvd: NotificationProvider,
+    private params: NavParams,
+    private userPvd: UserProfileProvider,
+    private viewCtrl: ViewController
   ) {
-    this.authId = <string>this._params.get('authId');
-    this.food = <Food>this._params.get('food');
+    this.authId = <string>this.params.get('authId');
+    this.food = <Food>this.params.get('food');
     this.editMode = !this.food['$key'];
-    this._initFoodForm();
+    this.initFoodForm();
   }
 
-  private _initFoodForm(): void {
+  private initFoodForm(): void {
     this.foodForm = new FormGroup({
       group: new FormControl(this.food.group, [Validators.required]),
       name: new FormControl(this.food.name, [Validators.required]),
@@ -99,19 +99,19 @@ export class FoodDetailsPage {
     });
   }
 
-  private _calculateAchievedNourishment(): void {
-    this._userPvd.getUserProfile$(this.authId).subscribe((u: UserProfile) => {
-      this._dietPvd.calculateRequirement(this.authId, u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
+  private calculateAchievedNourishment(): void {
+    this.userPvd.getUserProfile$(this.authId).subscribe((u: UserProfile) => {
+      this.dietPvd.calculateRequirement(this.authId, u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
         .then((r: NutritionalValues) => {
-          this.foodNourishmentAchieved = this._dietPvd.calculateNourishmentFromRequirement(this.food.nourishment, r);
+          this.foodNourishmentAchieved = this.dietPvd.calculateNourishmentFromRequirement(this.food.nourishment, r);
         })
     }, (err: Error) => {
-      this._notifyPvd.showError(err.message);
+      this.notifyPvd.showError(err.message);
     });
   }
 
-  private _watchFormChanges(): void {
-    this._foodFormSubscription = this.foodForm.valueChanges.subscribe(
+  private watchFormChanges(): void {
+    this.foodFormSubscription = this.foodForm.valueChanges.subscribe(
       changes => {
         if (this.foodForm.valid) {
           for (let key in changes) {
@@ -129,37 +129,37 @@ export class FoodDetailsPage {
   }
 
   public addToAvoidList(): void {
-    this._notifyPvd.showLoading();
+    this.notifyPvd.showLoading();
     this.food.toAvoid = true;
     this.food.isFavorite = false;
-    this._foodPvd.saveFood(this.authId, this.food)
+    this.foodPvd.saveFood(this.authId, this.food)
       .then(() => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showInfo('Food added to avoid list!');
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showInfo('Food added to avoid list!');
       })
       .catch((err: FirebaseError) => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showError(err.message);
       });
   }
 
   public addToFavorites(): void {
-    this._notifyPvd.showLoading();
+    this.notifyPvd.showLoading();
     this.food.toAvoid = false;
     this.food.isFavorite = true;
-    this._foodPvd.saveFood(this.authId, this.food)
+    this.foodPvd.saveFood(this.authId, this.food)
       .then(() => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showInfo('Food added to favorites!');
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showInfo('Food added to favorites!');
       })
       .catch((err: FirebaseError) => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showError(err.message);
       });
   }
 
   public dismiss(): void {
-    this._viewCtrl.dismiss();
+    this.viewCtrl.dismiss();
   }
 
   public edit(): void {
@@ -167,41 +167,41 @@ export class FoodDetailsPage {
   }
 
   public remove(): void {
-    this._notifyPvd.showLoading();
-    this._foodPvd.removeFood(this.authId, this.food)
+    this.notifyPvd.showLoading();
+    this.foodPvd.removeFood(this.authId, this.food)
       .then(() => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showInfo('Food removed successfully!');
-        this._viewCtrl.dismiss();
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showInfo('Food removed successfully!');
+        this.viewCtrl.dismiss();
       })
       .catch((err: FirebaseError) => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showError(err.message);
       });
   }
 
   public save(): void {
-    this._notifyPvd.showLoading();
+    this.notifyPvd.showLoading();
     this.food.isFavorite = false;
     this.food.toAvoid = false;
-    this._foodPvd.saveFood(this.authId, this.food)
+    this.foodPvd.saveFood(this.authId, this.food)
       .then(() => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showInfo('Food saved successfully!');
-        this._viewCtrl.dismiss();
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showInfo('Food saved successfully!');
+        this.viewCtrl.dismiss();
       })
       .catch((err: FirebaseError) => {
-        this._notifyPvd.closeLoading();
-        this._notifyPvd.showError(err.message);
+        this.notifyPvd.closeLoading();
+        this.notifyPvd.showError(err.message);
       });
   }
 
   ionViewWillEnter(): void {
-    this._watchFormChanges();
-    this._calculateAchievedNourishment();
+    this.watchFormChanges();
+    this.calculateAchievedNourishment();
   }
 
   ionViewWillLeave(): void {
-    this._foodFormSubscription.unsubscribe();
+    this.foodFormSubscription.unsubscribe();
   }
 }

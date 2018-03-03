@@ -16,7 +16,7 @@ import { NotificationProvider } from '../../providers';
 })
 export class HungerQuestionairePage {
   public hungerForm: FormGroup;
-  constructor(private _notifyPvd: NotificationProvider) {
+  constructor(private notifyPvd: NotificationProvider) {
     this.hungerForm = new FormGroup({
       mealTime: new FormControl('', [Validators.required]),
       mealPlace: new FormControl('', Validators.required),
@@ -48,7 +48,7 @@ export class HungerQuestionairePage {
     }
 
     const hungry: number = hungerScore * 100 / 14;
-    this._notifyPvd.showInfo(`You are ${(hungry).toFixed(2)}% hungry. ${hungry > 75 ? 'You are definetly hungry and should eat something' : "You are not actually hungry and shouldn't eat right now"}`)
+    this.notifyPvd.showInfo(`You are ${(hungry).toFixed(2)}% hungry. ${hungry > 75 ? 'You are definetly hungry and should eat something' : "You are not actually hungry and shouldn't eat right now"}`)
   }
 
 }

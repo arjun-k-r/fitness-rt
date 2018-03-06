@@ -72,14 +72,12 @@ export class WorkoutEditPage {
 
   public addInterval(): void {
     const newInterval: Interval = new Interval(0, '', 0, 0);
-    const modal: Modal = this.modalCtrl.create('interval-edit', { interval: newInterval, id: newInterval.name }, {
-      enableBackdropDismiss: false
-    });
+    const modal: Modal = this.modalCtrl.create('interval-edit', { interval: newInterval, id: newInterval.name });
     modal.present();
     modal.onWillDismiss((data: Interval) => {
       if (!!data) {
         this.unsavedChanges = true;
-        this.workout.intervals.push(data);
+        this.workout.intervals = [...this.workout.intervals, data];
       }
     });
   }
@@ -90,20 +88,18 @@ export class WorkoutEditPage {
 
   public editInterval(idx: number): void {
     const interval: Interval = this.workout.intervals[idx];
-    const modal: Modal = this.modalCtrl.create('interval-edit', { interval, id: interval.name }, {
-      enableBackdropDismiss: false
-    });
+    const modal: Modal = this.modalCtrl.create('interval-edit', { interval, id: interval.name });
     modal.present();
     modal.onWillDismiss((data: Interval) => {
       if (!!data) {
         this.unsavedChanges = true;
-        this.workout.intervals[idx] = Object.assign({}, data);
+        this.workout.intervals = [...this.workout.intervals.slice(0, idx), data, ...this.workout.intervals.slice(idx + 1)];
       }
     });
   }
 
   public removeInterval(idx: number): void {
-    this.workout.intervals.splice(idx, 1);
+    this.workout.intervals = [...this.workout.intervals.slice(0, idx), ...this.workout.intervals.slice(idx + 1)];
   }
 
   public removeWorkout(): void {

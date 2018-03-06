@@ -7,21 +7,58 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="activityPageSegmet">
+      <ion-segment-button value="activities">
+        Activities
+      </ion-segment-button>
+      <ion-segment-button (click)="getWorkouts()" value="workouts">
+        My workouts
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-  <ion-searchbar debounce="2000" (ionCancel)="clearSearchActivities($event)" [(ngModel)]="activitySearchQuery" placeholder="Search activities"
-    role="search">
-  </ion-searchbar>
-  <ion-item-group *ngFor="let activityCategory of activityCategories | activityFilter: activitySearchQuery | limit: activityLimit ; let i = index">
-    <ion-item-divider>{{ activityCategory.name }}</ion-item-divider>
-    <ion-item *ngFor="let activity of activityCategory.activities | sort: 'name': 'asc'">
-      <ion-label text-wrap>{{ activity.name }}</ion-label>
-      <ion-checkbox #checkBox (click)="selectActivity(activity, activityCategory, checkBox)"></ion-checkbox>
-    </ion-item>
-  </ion-item-group>
-  <ion-infinite-scroll (ionInfinite)="loadMoreActivities($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  <ion-fab bottom *ngIf="activityPageSegmet === 'workouts'" right>
+    <button (click)="addWorkout()" color="primary" ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <div [ngSwitch]="activityPageSegmet">
+    <div *ngSwitchCase="'activites'">
+      <ion-searchbar debounce="2000" (ionCancel)="clearSearchActivities($event)" [(ngModel)]="activitySearchQuery" placeholder="Search activities"
+        role="search">
+      </ion-searchbar>
+      <ion-item-group *ngFor="let activityCategory of activityCategories | activityFilter: activitySearchQuery | limit: activityLimit; let i = index">
+        <ion-item-divider>{{ activityCategory.name }}</ion-item-divider>
+        <ion-item *ngFor="let activity of activityCategory.activities | sort: 'name': 'asc'">
+          <ion-label text-wrap>{{ activity.name }}</ion-label>
+          <ion-checkbox #checkBox (click)="selectActivity(activity, activityCategory, checkBox)"></ion-checkbox>
+        </ion-item>
+      </ion-item-group>
+      <ion-infinite-scroll (ionInfinite)="loadMoreActivities($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+
+    <div *ngSwitchCase="'workouts'">
+      <ion-searchbar debounce="2000" (ionCancel)="clearSearchWorkouts($event)" [(ngModel)]="workoutSearchQuery" placeholder="Search workouts">
+      </ion-searchbar>
+      <ion-list>
+        <ion-item *ngFor="let workout of workouts | search: workoutSearchQuery | limit: workoutLimit">
+          <ion-label text-wrap>{{ workout.name }}</ion-label>
+          <ion-checkbox #checkBox (click)="showOptions(workout, checkBox)"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+      <div *ngIf="workouts?.length === 0" class="no-elements">
+        <ion-icon class="no-elements__icon" name="restaurant"></ion-icon>
+        <h2 class="no-elements__message">You have no workouts</h2>
+      </div>
+      <ion-infinite-scroll (ionInfinite)="loadMoreWorkouts($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </div>
 </ion-content>

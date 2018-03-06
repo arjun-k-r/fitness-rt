@@ -4,7 +4,7 @@ import { IonicPageModule } from 'ionic-angular';
 
 import { ActivityListPage } from './activity-list';
 import { ActivityFilterPipeModule, LimitPipeModule, SortByPipeModule } from '../../pipes';
-import { ExerciseProviderModule } from '../../providers';
+import { PhysicalActivityProviderModule } from '../../providers';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { ExerciseProviderModule } from '../../providers';
   ],
   imports: [
     IonicPageModule.forChild(ActivityListPage),
-    ExerciseProviderModule,
+    PhysicalActivityProviderModule,
     ActivityFilterPipeModule,
     LimitPipeModule,
     SortByPipeModule

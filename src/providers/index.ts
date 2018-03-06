@@ -1,7 +1,7 @@
 export { DietProvider } from './diet/diet';
 export { DietProviderModule } from './diet/diet.module';
-export { ExerciseProvider } from './exercise/exercise';
-export { ExerciseProviderModule } from './exercise/exercise.module';
+export { PhysicalActivityProvider } from './physical-activity/physical-activity';
+export { PhysicalActivityProviderModule } from './physical-activity/physical-activity.module';
 export { FitnessProvider } from './fitness/fitness';
 export { FitnessProviderModule } from './fitness/fitness.module';
 export { FOOD_GROUPS, FoodProvider } from './food/food';

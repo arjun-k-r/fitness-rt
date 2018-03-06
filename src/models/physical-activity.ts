@@ -15,13 +15,22 @@ export class Activity {
     ) { }
 }
 
-export class Exercise {
+export class PhysicalActivityLog {
     constructor(
         public activities: Activity[],
         public date: string,
         public duration: number,
         public energyBurn: number,
         public notes: string
+    ) { }
+}
+
+export class Interval {
+    constructor(
+        public duration: number,
+        public name: string,
+        public reps: number,
+        public sets: number
     ) { }
 }
 
@@ -40,4 +49,13 @@ export class MuscleExercise {
 export interface IMuscleGroup {
     group: string;
     exercises: MuscleExercise[];
+}
+
+export class Workout {
+    constructor(
+        public duration: number,
+        public energyBurn: number,
+        public intervals: Interval[],
+        public name: string
+    ) { }
 }

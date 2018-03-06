@@ -13,12 +13,12 @@ import { FirebaseError } from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Activity, ActivityCategory, Exercise, IMuscleGroup } from '../../models';
+import { Activity, ActivityCategory, IMuscleGroup, PhysicalActivityLog, Workout } from '../../models';
 
 const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 
 @Injectable()
-export class ExerciseProvider {
+export class PhysicalActivityProvider {
   private activities$: FirebaseListObservable<ActivityCategory[]>;
   private muscleGroupExercises$: FirebaseListObservable<IMuscleGroup[]>;
   private trendDaysSubject: Subject<any> = new Subject();
@@ -30,6 +30,7 @@ export class ExerciseProvider {
         orderByChild: 'name'
       }
     });
+
     this.muscleGroupExercises$ = this.db.list('/muscle-group-exercises', {
       query: {
         orderByChild: 'name'
@@ -49,37 +50,55 @@ export class ExerciseProvider {
     return this.activities$;
   }
 
-  public getExercise$(authId: string, date?: string): FirebaseObjectObservable<Exercise> {
-    return this.db.object(`/${authId}/exercise/${date || CURRENT_DAY}`);
+  public getPhysicalActivityLog$(authId: string, date?: string): FirebaseObjectObservable<PhysicalActivityLog> {
+    return this.db.object(`/${authId}/physical-activity-log/${date || CURRENT_DAY}`);
   }
 
   public getMuscleGroupExercises$(): FirebaseListObservable<IMuscleGroup[]> {
     return this.muscleGroupExercises$;
   }
 
-  public getTrends$(authId: string, days?: number): FirebaseListObservable<Exercise[]> {
+  public getTrends$(authId: string, days?: number): FirebaseListObservable<PhysicalActivityLog[]> {
     setTimeout(() => {
       this.changeTrendDays(days);
     });
-    return this.db.list(`/${authId}/trends/exercise/`, {
+    return this.db.list(`/${authId}/trends/physical-activity-log/`, {
       query: {
         limitToLast: this.trendDaysSubject
       }
     });
   }
 
-  public saveExercise(authId: string, exercise: Exercise, trends: Exercise[]): Promise<{}> {
+  public getWorkouts$(authId: string): FirebaseListObservable<Workout[]> {
+    return this.db.list(`/${authId}/workouts`);
+  }
+
+  public savePhysicalActivityLog(authId: string, physicalActivityLog: PhysicalActivityLog, trends: PhysicalActivityLog[]): Promise<{}> {
     return new Promise((resolve, reject) => {
-      const trend: Exercise = trends.find((e: Exercise) => e.date === exercise.date);
+      const trend: PhysicalActivityLog = trends.find((e: PhysicalActivityLog) => e.date === physicalActivityLog.date);
       if (trend) {
-        this.db.list(`/${authId}/trends/exercise/`).update(trend['$key'], exercise);
+        this.db.list(`/${authId}/trends/physical-activity-log/`).update(trend['$key'], physicalActivityLog);
       } else {
-        this.db.list(`/${authId}/trends/exercise/`).push(exercise);
+        this.db.list(`/${authId}/trends/physical-activity-log/`).push(physicalActivityLog);
       }
-      this.db.object(`/${authId}/exercise/${exercise.date}`).set(exercise).then(() => {
+      this.db.object(`/${authId}/physical-activity-log/${physicalActivityLog.date}`).set(physicalActivityLog).then(() => {
         resolve();
       }).catch((err: FirebaseError) => reject(err));
     });
+  }
+  
+  public saveWorkout$(authId: string, workout: Workout): Promise<{}> {
+    return new Promise((resolve, reject) => {
+      if ('$key' in workout) {
+        this.db.list(`/${authId}/workouts/`).update(workout['$key'], workout).then(() => {
+          resolve();
+        }).catch((err: FirebaseError) => reject(err));
+      } else {
+        this.db.list(`/${authId}/workouts/`).push(workout).then(() => {
+          resolve();
+        });
+      }
+    })
   }
 
 }

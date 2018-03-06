@@ -5,19 +5,19 @@ import { MaterialIconsModule } from 'ionic2-material-icons';
 
 import { ChartsModule } from 'ng2-charts';
 
-import { ExercisePage } from './exercise';
-import { ExerciseProviderModule, UserProfileProviderModule } from '../../providers';
+import { PhysicalActivityPage } from './physical-activity';
+import { PhysicalActivityProviderModule, UserProfileProviderModule } from '../../providers';
 
 @NgModule({
   declarations: [
-    ExercisePage,
+    PhysicalActivityPage,
   ],
   imports: [
-    IonicPageModule.forChild(ExercisePage),
+    IonicPageModule.forChild(PhysicalActivityPage),
     ChartsModule,
-    ExerciseProviderModule,
+    PhysicalActivityProviderModule,
     MaterialIconsModule,
     UserProfileProviderModule
   ],
 })
-export class ExercisePageModule {}
+export class PhysicalActivityPageModule {}

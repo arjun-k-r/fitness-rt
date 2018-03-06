@@ -9,6 +9,8 @@ import {
   AlertController,
   IonicPage,
   InfiniteScroll,
+  ModalController,
+  NavParams,
   ViewController
 } from 'ionic-angular';
 
@@ -16,10 +18,10 @@ import {
 import { FirebaseError } from 'firebase/app';
 
 // Models
-import { Activity, ActivityCategory } from '../../models';
+import { Activity, ActivityCategory, Workout } from '../../models';
 
 // Providers
-import { ExerciseProvider, NotificationProvider } from '../../providers';
+import { PhysicalActivityProvider, NotificationProvider } from '../../providers';
 
 @IonicPage({
   name: 'activity-list'
@@ -29,27 +31,67 @@ import { ExerciseProvider, NotificationProvider } from '../../providers';
 })
 export class ActivityListPage {
   private activitySubscription: Subscription;
+  private authId: string;
+  private workoutSubscription: Subscription;
   public activityLimit: number = 50;
   public activityCategories: ActivityCategory[];
   public activitySearchQuery: string = '';
-  public selectedActivities: Activity[] = [];
+  public selectedActivities: (Activity | Workout)[] = [];
+  public workoutLimit: number = 50;
+  public workouts: Workout[];
+  public workoutSearchQuery: string = '';
   constructor(
     private alertCtrl: AlertController,
-    private exercisePvd: ExerciseProvider,
+    private modalCtrl: ModalController,
+    private physicalActivityPvd: PhysicalActivityProvider,
+    private params: NavParams,
     private notifyPvd: NotificationProvider,
     private viewCtrl: ViewController
-  ) { }
+  ) {
+    this.authId = this.params.get('authId');
+  }
+
+  public addWorkout(): void {
+    const newWorkout: Workout = new Workout(0, 0, [], '');
+    this.modalCtrl.create('workout-edit', { authId: this.authId, workout: newWorkout, id: newWorkout.name }).present();
+  }
 
   public clearSearchActivities(evenet: string): void {
     this.activitySearchQuery = '';
+  }
+
+  public clearSearchWorkouts(): void {
+    this.workoutSearchQuery = '';
+  }
+
+  public editWorkout(workout: Workout): void {
+    this.modalCtrl.create('workout-edit', { authId: this.authId, workout, id: workout.name }).present();
   }
 
   public done(): void {
     this.viewCtrl.dismiss(this.selectedActivities);
   }
 
+  public getWorkouts(): void {
+    if (!this.workoutSubscription || (this.workoutSubscription && this.workoutSubscription.closed)) {
+      this.notifyPvd.showLoading();
+      this.workoutSubscription = this.physicalActivityPvd.getWorkouts$(this.authId).subscribe((workouts: Workout[]) => {
+        this.workouts = [...workouts];
+        this.notifyPvd.closeLoading()
+      }, (err: FirebaseError) => {
+        this.notifyPvd.closeLoading()
+        this.notifyPvd.showError(err.message);
+      });
+    }
+  }
+
   public loadMoreActivities(ev: InfiniteScroll) {
     this.activityLimit += 50;
+    setTimeout(() => ev.complete(), 1000);
+  }
+
+  public loadMoreWorkouts(ev: InfiniteScroll) {
+    this.workoutLimit += 50;
     setTimeout(() => ev.complete(), 1000);
   }
 
@@ -95,9 +137,18 @@ export class ActivityListPage {
     }
   }
 
+  public selectWorkout(workout: Workout): void {
+    const idx: number = this.selectedActivities.indexOf(workout);
+    if (idx !== -1) {
+      this.selectedActivities = [...this.selectedActivities.slice(0, idx), ...this.selectedActivities.slice(idx + 1)];
+    } else {
+      this.selectedActivities = [...this.selectedActivities, workout];
+    }
+  }
+
   ionViewWillEnter(): void {
     this.notifyPvd.showLoading();
-    this.activitySubscription = this.exercisePvd.getActivities$().subscribe((ac: ActivityCategory[]) => {
+    this.activitySubscription = this.physicalActivityPvd.getActivities$().subscribe((ac: ActivityCategory[]) => {
       this.activityCategories = [...ac];
       this.notifyPvd.closeLoading();
     }, (err: FirebaseError) => {

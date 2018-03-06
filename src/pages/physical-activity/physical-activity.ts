@@ -22,24 +22,24 @@ import { FirebaseError, User } from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Activity, Exercise, ILineChartColors, ILineChartEntry, UserProfile } from '../../models';
+import { Activity, ILineChartColors, ILineChartEntry, PhysicalActivityLog, UserProfile } from '../../models';
 
 // Providers
-import { ExerciseProvider, NotificationProvider, UserProfileProvider } from '../../providers';
+import { PhysicalActivityProvider, NotificationProvider, UserProfileProvider } from '../../providers';
 
 const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 
 @IonicPage({
-  name: 'exercise'
+  name: 'physical-activity'
 })
 @Component({
-  templateUrl: 'exercise.html',
+  templateUrl: 'physical-activity.html',
 })
-export class ExercisePage {
+export class PhysicalActivityPage {
   private authId: string;
   private authSubscription: Subscription;
-  private exerciseSubscription: Subscription;
-  private trends: Exercise[] = [];
+  private physicalActivityLogSubscription: Subscription;
+  private trends: PhysicalActivityLog[] = [];
   private trendSubscription: Subscription;
   private userProfile: UserProfile;
   private userSubscription: Subscription;
@@ -48,8 +48,8 @@ export class ExercisePage {
   public chartDataSelection: string = 'energyBurn';
   public chartLabels: string[] = [];
   public chartOpts: any = { responsive: true };
-  public exercise: Exercise;
-  public exerciseDate: string = CURRENT_DAY;
+  public physicalActivityLog: PhysicalActivityLog;
+  public physicalActivityLogDate: string = CURRENT_DAY;
   public maxDateSelection: string = CURRENT_DAY;
   public pageSegment: string = 'today';
   public trendDays: number = 7;
@@ -58,7 +58,7 @@ export class ExercisePage {
     private actionSheetCtrl: ActionSheetController,
     private afAuth: AngularFireAuth,
     private alertCtrl: AlertController,
-    private exercisePvd: ExerciseProvider,
+    private physicalActivityPvd: PhysicalActivityProvider,
     private modalCtrl: ModalController,
     private navCtrl: NavController,
     private notifyPvd: NotificationProvider,
@@ -72,7 +72,7 @@ export class ExercisePage {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: '#4dd87b'
     });
-    this.exercise = new Exercise(
+    this.physicalActivityLog = new PhysicalActivityLog(
       [],
       CURRENT_DAY,
       0,
@@ -101,8 +101,8 @@ export class ExercisePage {
           text: 'Done',
           handler: (data: { duration: string }) => {
             activity.duration = +data.duration;
-            activity.energyBurn = this.exercisePvd.calculateActivityEnergyBurn(activity, this.userProfile.measurements.weight)
-            this.updateExercise();
+            activity.energyBurn = this.physicalActivityPvd.calculateActivityEnergyBurn(activity, this.userProfile.measurements.weight)
+            this.updatePhysicalActivityLog();
           }
         }
       ]
@@ -110,17 +110,17 @@ export class ExercisePage {
   }
 
   private removeActivity(idx: number): void {
-    this.exercise.activities = [...this.exercise.activities.slice(0, idx), ...this.exercise.activities.slice(idx + 1)];
-    this.updateExercise();
+    this.physicalActivityLog.activities = [...this.physicalActivityLog.activities.slice(0, idx), ...this.physicalActivityLog.activities.slice(idx + 1)];
+    this.updatePhysicalActivityLog();
   }
 
   private getTrends(): void {
-    this.trendSubscription = this.exercisePvd.getTrends$(this.authId, +this.trendDays).subscribe(
-      (trends: Exercise[] = []) => {
-        this.chartLabels = [...trends.map((t: Exercise) => t.date)];
+    this.trendSubscription = this.physicalActivityPvd.getTrends$(this.authId, +this.trendDays).subscribe(
+      (trends: PhysicalActivityLog[] = []) => {
+        this.chartLabels = [...trends.map((t: PhysicalActivityLog) => t.date)];
         this.trends = [...trends];
         this.chartData = [{
-          data: [...this.trends.map((e: Exercise) => e.energyBurn)],
+          data: [...this.trends.map((e: PhysicalActivityLog) => e.energyBurn)],
           label: 'Energy burn'
         }];
       },
@@ -130,10 +130,10 @@ export class ExercisePage {
     );
   }
 
-  private updateExercise(): void {
+  private updatePhysicalActivityLog(): void {
     this.changeMade();
-    this.exercise.duration = this.exercise.activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.duration, 0);
-    this.exercise.energyBurn = this.exercise.activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.energyBurn, 0);
+    this.physicalActivityLog.duration = this.physicalActivityLog.activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.duration, 0);
+    this.physicalActivityLog.energyBurn = this.physicalActivityLog.activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.energyBurn, 0);
   }
 
   public addActivity(): void {
@@ -141,9 +141,9 @@ export class ExercisePage {
     activityListModal.present();
     activityListModal.onDidDismiss((activities: Activity[]) => {
       if (!!activities && !!activities.length) {
-        activities.forEach((a: Activity) => a.energyBurn = this.exercisePvd.calculateActivityEnergyBurn(a, this.userProfile.measurements.weight))
-        this.exercise.activities = [...this.exercise.activities, ...activities];
-        this.updateExercise();
+        activities.forEach((a: Activity) => a.energyBurn = this.physicalActivityPvd.calculateActivityEnergyBurn(a, this.userProfile.measurements.weight))
+        this.physicalActivityLog.activities = [...this.physicalActivityLog.activities, ...activities];
+        this.updatePhysicalActivityLog();
       }
     });
   }
@@ -155,7 +155,7 @@ export class ExercisePage {
         {
           text: 'Change duration',
           handler: () => {
-            this.changeDuration(this.exercise.activities[idx]);
+            this.changeDuration(this.physicalActivityLog.activities[idx]);
           }
         }, {
           text: 'Remove it',
@@ -174,14 +174,14 @@ export class ExercisePage {
     switch (this.chartDataSelection) {
       case 'energyBurn':
         this.chartData = [{
-          data: [...this.trends.map((e: Exercise) => e.energyBurn)],
+          data: [...this.trends.map((e: PhysicalActivityLog) => e.energyBurn)],
           label: 'Energy Burn'
         }];
         break;
 
       case 'duration':
         this.chartData = [{
-          data: [...this.trends.map((e: Exercise) => e.duration)],
+          data: [...this.trends.map((e: PhysicalActivityLog) => e.duration)],
           label: 'Duration'
         }];
         break;
@@ -197,21 +197,21 @@ export class ExercisePage {
   }
 
   public changeTrendDays(): void {
-    this.exercisePvd.changeTrendDays(+this.trendDays || 1);
+    this.physicalActivityPvd.changeTrendDays(+this.trendDays || 1);
   }
 
-  public getExercise(): void {
+  public getPhysicalActivityLog(): void {
     this.notifyPvd.showLoading();
-    if (this.exerciseSubscription) {
-      this.exerciseSubscription.unsubscribe();
+    if (this.physicalActivityLogSubscription) {
+      this.physicalActivityLogSubscription.unsubscribe();
     }
-    this.exerciseSubscription = this.exercisePvd.getExercise$(this.authId, this.exerciseDate).subscribe((e: Exercise) => {
+    this.physicalActivityLogSubscription = this.physicalActivityPvd.getPhysicalActivityLog$(this.authId, this.physicalActivityLogDate).subscribe((e: PhysicalActivityLog) => {
       if (!!e && e['$value'] !== null) {
-        this.exercise = Object.assign({}, e);
-        this.exercise.activities = this.exercise.activities || [];
+        this.physicalActivityLog = Object.assign({}, e);
+        this.physicalActivityLog.activities = this.physicalActivityLog.activities || [];
         this.notifyPvd.closeLoading();
       }
-      this.exercise.date = this.exerciseDate;
+      this.physicalActivityLog.date = this.physicalActivityLogDate;
     }, (err: FirebaseError) => {
       this.notifyPvd.closeLoading();
       this.notifyPvd.showError(err.message);
@@ -220,10 +220,10 @@ export class ExercisePage {
 
   public save(): void {
     this.notifyPvd.showLoading();
-    this.exercisePvd.saveExercise(this.authId, this.exercise, this.trends)
+    this.physicalActivityPvd.savePhysicalActivityLog(this.authId, this.physicalActivityLog, this.trends)
       .then(() => {
         this.notifyPvd.closeLoading();
-        this.notifyPvd.showInfo('Exercise saved successfully!');
+        this.notifyPvd.showInfo('PhysicalActivityLog saved successfully!');
       }).catch((err: FirebaseError) => {
         this.notifyPvd.closeLoading();
         this.notifyPvd.showError(err.message);
@@ -234,8 +234,8 @@ export class ExercisePage {
     this.navCtrl.push('overtraining-questionaire');
   }
 
-  public viewExerciseGuidelines(): void {
-    this.navCtrl.push('exercise-guidelines', { constitution: this.userProfile.constitution })
+  public viewPhysicalActivityLogGuidelines(): void {
+    this.navCtrl.push('physicalActivityLog-guidelines', { constitution: this.userProfile.constitution })
   }
 
   public viewMuscleGroups(): void {
@@ -243,7 +243,7 @@ export class ExercisePage {
   }
 
   public viewPageInfo(): void {
-    this.navCtrl.push('exercise-info');
+    this.navCtrl.push('physicalActivityLog-info');
   }
 
   ionViewCanEnter(): Promise<{}> {
@@ -252,7 +252,7 @@ export class ExercisePage {
         if (!auth) {
           reject();
           this.navCtrl.setRoot('registration', {
-            history: 'exercise'
+            history: 'physicalActivityLog'
           });
         }
         resolve();
@@ -294,7 +294,7 @@ export class ExercisePage {
     this.authSubscription = this.afAuth.authState.subscribe((auth: User) => {
       if (!!auth) {
         this.authId = auth.uid;
-        this.getExercise();
+        this.getPhysicalActivityLog();
         this.getTrends();
         this.userSubscription = this.userPvd.getUserProfile$(this.authId).subscribe((u: UserProfile) => {
           this.userProfile = u;
@@ -307,7 +307,7 @@ export class ExercisePage {
 
   ionViewWillLeave(): void {
     this.authSubscription.unsubscribe();
-    this.exerciseSubscription.unsubscribe();
+    this.physicalActivityLogSubscription.unsubscribe();
     this.trendSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
   }

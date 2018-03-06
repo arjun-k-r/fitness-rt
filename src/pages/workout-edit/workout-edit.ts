@@ -122,7 +122,7 @@ export class WorkoutEditPage {
   }
 
   public saveWorkout(): void {
-    this.workout.duration = this.physicalActivityPvd.calculateDuration(this.workout);
+    // this.workout.duration = this.physicalActivityPvd.calculateDuration(this.workout);
     this.physicalActivityPvd.saveWorkout(this.authId, this.workout)
       .then(() => {
         this.notifyPvd.showInfo('Workout saved successfully');

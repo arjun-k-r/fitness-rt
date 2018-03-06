@@ -73,6 +73,10 @@ export class PhysicalActivityProvider {
     return this.db.list(`/${authId}/workouts`);
   }
 
+  public removeWorkout(authId: string, workout: Workout): Promise<void> {
+    return this.db.list(`/${authId}/workouts/`).remove(workout['$key']);
+  }
+
   public savePhysicalActivityLog(authId: string, physicalActivityLog: PhysicalActivityLog, trends: PhysicalActivityLog[]): Promise<{}> {
     return new Promise((resolve, reject) => {
       const trend: PhysicalActivityLog = trends.find((e: PhysicalActivityLog) => e.date === physicalActivityLog.date);
@@ -87,7 +91,7 @@ export class PhysicalActivityProvider {
     });
   }
   
-  public saveWorkout$(authId: string, workout: Workout): Promise<{}> {
+  public saveWorkout(authId: string, workout: Workout): Promise<{}> {
     return new Promise((resolve, reject) => {
       if ('$key' in workout) {
         this.db.list(`/${authId}/workouts/`).update(workout['$key'], workout).then(() => {

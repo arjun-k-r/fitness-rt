@@ -5,13 +5,13 @@ import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 
 @IonicPage({
-  name: 'exercise-info',
-  segment: 'exercise/info'
+  name: 'physical-activity-info',
+  segment: 'physical-activity/info'
 })
 @Component({
-  templateUrl: 'exercise-info.html',
+  templateUrl: 'physical-activity-info.html',
 })
-export class ExerciseInfoPage {
+export class PhysicalActivityInfoPage {
   constructor() {
   }
 }

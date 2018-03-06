@@ -35,6 +35,7 @@ export class ActivityListPage {
   private workoutSubscription: Subscription;
   public activityLimit: number = 50;
   public activityCategories: ActivityCategory[];
+  public activityPageSegmet: string = 'activities';
   public activitySearchQuery: string = '';
   public selectedActivities: (Activity | Workout)[] = [];
   public workoutLimit: number = 50;

@@ -223,7 +223,7 @@ export class PhysicalActivityPage {
     this.physicalActivityPvd.savePhysicalActivityLog(this.authId, this.physicalActivityLog, this.trends)
       .then(() => {
         this.notifyPvd.closeLoading();
-        this.notifyPvd.showInfo('PhysicalActivityLog saved successfully!');
+        this.notifyPvd.showInfo('Physical activity log saved successfully!');
       }).catch((err: FirebaseError) => {
         this.notifyPvd.closeLoading();
         this.notifyPvd.showError(err.message);
@@ -235,7 +235,7 @@ export class PhysicalActivityPage {
   }
 
   public viewPhysicalActivityLogGuidelines(): void {
-    this.navCtrl.push('physicalActivityLog-guidelines', { constitution: this.userProfile.constitution })
+    this.navCtrl.push('physical-activity-guidelines', { constitution: this.userProfile.constitution })
   }
 
   public viewMuscleGroups(): void {
@@ -243,7 +243,7 @@ export class PhysicalActivityPage {
   }
 
   public viewPageInfo(): void {
-    this.navCtrl.push('physicalActivityLog-info');
+    this.navCtrl.push('physical-activity-info');
   }
 
   ionViewCanEnter(): Promise<{}> {
@@ -252,7 +252,7 @@ export class PhysicalActivityPage {
         if (!auth) {
           reject();
           this.navCtrl.setRoot('registration', {
-            history: 'physicalActivityLog'
+            history: 'physical-activity'
           });
         }
         resolve();

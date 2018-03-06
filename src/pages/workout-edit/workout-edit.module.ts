@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
+
 import { IonicPageModule } from 'ionic-angular';
+
 import { WorkoutEditPage } from './workout-edit';
+import { PhysicalActivityProviderModule } from '../../providers';
 
 @NgModule({
   declarations: [
@@ -8,6 +11,7 @@ import { WorkoutEditPage } from './workout-edit';
   ],
   imports: [
     IonicPageModule.forChild(WorkoutEditPage),
+    PhysicalActivityProviderModule
   ],
 })
 export class WorkoutEditPageModule {}

@@ -37,11 +37,11 @@
       <ion-list>
         <ion-item>
           <ion-label>Date</ion-label>
-          <ion-datetime displayFormat="YYYY-MM-DD" (ionChange)="getExercise()" [max]="maxDateSelection" min="2018" [(ngModel)]="exerciseDate"
+          <ion-datetime displayFormat="YYYY-MM-DD" (ionChange)="getPhysicalActivityLog()" [max]="maxDateSelection" min="2018" [(ngModel)]="physicalActivityLogDate"
             pickerFormat="YYYY-MM-DD"></ion-datetime>
         </ion-item>
         <ion-list-header>Activities</ion-list-header>
-        <button (click)="changeActivity(i)" detail-push ion-item *ngFor="let activity of exercise.activities; let i = index">
+        <button (click)="changeActivity(i)" detail-push ion-item *ngFor="let activity of physicalActivityLog.activities; let i = index">
           <ion-icon color="primary" item-start name="create"></ion-icon>
           <h2 text-wrap>{{ activity.category }}, {{ activity.name }}</h2>
           <p>{{ activity.duration }} mins</p>
@@ -49,7 +49,7 @@
         </button>
         <ion-item>
           <h2 text-wrap>Total activities</h2>
-          <p item-content>{{ exercise.activities.length }} activities</p>
+          <p item-content>{{ physicalActivityLog.activities.length }} activities</p>
         </ion-item>
         <button (click)="viewMuscleGroups()" ion-item>
           <ion-icon color="primary" item-start md-name="fitness_center"></ion-icon>
@@ -58,9 +58,9 @@
             <ion-icon name="arrow-forward"></ion-icon>
           </ion-note>
         </button>
-        <button (click)="viewExerciseGuidelines()" ion-item>
+        <button (click)="viewPhysicalActivityLogGuidelines()" ion-item>
           <ion-icon color="primary" item-start name="book"></ion-icon>
-          <h2>Exercise guidelines</h2>
+          <h2>Physical activity guidelines</h2>
           <ion-note item-right>
             <ion-icon name="arrow-forward"></ion-icon>
           </ion-note>
@@ -68,16 +68,16 @@
         <ion-list-header>Review</ion-list-header>
         <ion-item>
           <h2>Duration</h2>
-          <ion-note item-right>{{ exercise.duration }} mins</ion-note>
+          <ion-note item-right>{{ physicalActivityLog.duration }} mins</ion-note>
         </ion-item>
         <ion-item>
           <h2>Energy burn</h2>
-          <ion-note item-right>{{ exercise.energyBurn }} kcal</ion-note>
+          <ion-note item-right>{{ physicalActivityLog.energyBurn }} kcal</ion-note>
         </ion-item>
         <ion-item>
           <ion-icon color="primary" item-start name="clipboard"></ion-icon>
           <ion-label fixed>Notes</ion-label>
-          <ion-textarea (ionChange)="changeMade()" [(ngModel)]="exercise.notes" placeholder="i.e. I felt very confident and energized after working out" type="text" wrap="hard"></ion-textarea>
+          <ion-textarea (ionChange)="changeMade()" [(ngModel)]="physicalActivityLog.notes" placeholder="i.e. I felt very confident and energized after working out" type="text" wrap="hard"></ion-textarea>
         </ion-item>
         <button (click)="takeOvertrainingTest()" ion-item>
           <ion-icon color="primary" item-start name="battery-dead"></ion-icon>
@@ -96,7 +96,7 @@
           <ion-input (ionChange)="changeTrendDays()" [(ngModel)]="trendDays" type="number"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Exercise data</ion-label>
+          <ion-label>PhysicalActivityLog data</ion-label>
           <ion-select (ionChange)="changeChartData()" [(ngModel)]="chartDataSelection">
             <ion-option value="duration">Duration</ion-option>
             <ion-option value="energyBurn">Energy burn</ion-option>

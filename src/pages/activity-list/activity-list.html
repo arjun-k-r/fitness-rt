@@ -27,7 +27,7 @@
     </button>
   </ion-fab>
   <div [ngSwitch]="activityPageSegmet">
-    <div *ngSwitchCase="'activites'">
+    <div *ngSwitchCase="'activities'">
       <ion-searchbar debounce="2000" (ionCancel)="clearSearchActivities($event)" [(ngModel)]="activitySearchQuery" placeholder="Search activities"
         role="search">
       </ion-searchbar>
@@ -53,7 +53,7 @@
         </ion-item>
       </ion-list>
       <div *ngIf="workouts?.length === 0" class="no-elements">
-        <ion-icon class="no-elements__icon" name="restaurant"></ion-icon>
+        <ion-icon class="no-elements__icon" md-name="fitness_center"></ion-icon>
         <h2 class="no-elements__message">You have no workouts</h2>
       </div>
       <ion-infinite-scroll (ionInfinite)="loadMoreWorkouts($event)">

@@ -1,18 +1,36 @@
-<!--
-  Generated template for the IntervalEditPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>IntervalEdit</ion-title>
+    <ion-title>{{ interval.name || 'Interval edit' }}</ion-title>
+    <ion-buttons end>
+      <button (click)="done()" [disabled]="intervalForm.invalid" icon-only ion-button padding-right>
+        <ion-icon name="done-all"></ion-icon>
+      </button>
+      <button (click)="cancel()" icon-only ion-button padding-right>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-
-</ion-content>
+  <form [formGroup]="intervalForm">
+    <ion-list>
+      <ion-item>
+        <ion-label floating text-wrap>Interval name*</ion-label>
+        <ion-input formControlName="name" required type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating text-wrap>Duration (min/set)*</ion-label>
+        <ion-input formControlName="duration" required type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating text-wrap>Repetitions*</ion-label>
+        <ion-input formControlName="reps" required type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating text-wrap>Sets (rounds)*</ion-label>
+        <ion-input formControlName="sets" required type="number"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>

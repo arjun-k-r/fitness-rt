@@ -10,8 +10,8 @@ import {
   IonicPage,
   Modal,
   ModalController,
-  NavController,
-  NavParams
+  NavParams,
+  ViewController
 } from 'ionic-angular';
 
 // Firebase
@@ -37,19 +37,14 @@ export class WorkoutEditPage {
   public workoutForm: FormGroup;
   constructor(
     private modalCtrl: ModalController,
-    private navCtrl: NavController,
     private notifyPvd: NotificationProvider,
     private params: NavParams,
-    private physicalActivityPvd: PhysicalActivityProvider
+    private physicalActivityPvd: PhysicalActivityProvider,
+    private viewCtrl: ViewController
   ) {
     this.authId = this.params.get('authId');
     this.workout = <Workout>this.params.get('workout');
-    if (!this.workout) {
-      this.navCtrl.setRoot('workout-list');
-    }
-    this.workout = this.workout || new Workout(0, 0, [], '');
     this.workoutForm = new FormGroup({
-      duration: new FormControl(this.workout.duration, [Validators.required]),
       energyBurn: new FormControl(this.workout.energyBurn, [Validators.required]),
       name: new FormControl(this.workout.name, [Validators.required])
     });
@@ -59,7 +54,6 @@ export class WorkoutEditPage {
   private watchFormChanges(): void {
     this.workoutFormSubscription = this.workoutForm.valueChanges.subscribe(
       (c: {
-        duration: string,
         energyBurn: string,
         name: string
       }) => {
@@ -67,7 +61,6 @@ export class WorkoutEditPage {
           this.unsavedChanges = true;
           this.workout = Object.assign({}, this.workout, {
             '$key': this.workout['$key'],
-            duration: +c.duration,
             energyBurn: +c.energyBurn,
             name: c.name
           });
@@ -89,6 +82,10 @@ export class WorkoutEditPage {
         this.workout.intervals.push(data);
       }
     });
+  }
+
+  public cancel(): void {
+    this.viewCtrl.dismiss();
   }
 
   public editInterval(idx: number): void {
@@ -113,24 +110,24 @@ export class WorkoutEditPage {
     this.physicalActivityPvd.removeWorkout(this.authId, this.workout)
       .then(() => {
         this.notifyPvd.showInfo('Workout removed successfully');
-        this.navCtrl.pop();
+        this.viewCtrl.dismiss();
       })
       .catch((err: FirebaseError) => {
         this.notifyPvd.showError(err.message);
-        this.navCtrl.pop();
+        this.viewCtrl.dismiss();
       });
   }
 
   public saveWorkout(): void {
-    // this.workout.duration = this.physicalActivityPvd.calculateDuration(this.workout);
+    this.workout.duration = this.workout.intervals.reduce((acc, curr: Interval) => acc += curr.duration * curr.sets, 0);
     this.physicalActivityPvd.saveWorkout(this.authId, this.workout)
       .then(() => {
         this.notifyPvd.showInfo('Workout saved successfully');
-        this.navCtrl.pop();
+        this.viewCtrl.dismiss();
       })
       .catch((err: FirebaseError) => {
         this.notifyPvd.showError(err.message);
-        this.navCtrl.pop();
+        this.viewCtrl.dismiss();
       });
   }
 

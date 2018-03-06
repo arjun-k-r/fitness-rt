@@ -11,17 +11,17 @@ import {
 import { Constitution } from '../../../models';
 
 @IonicPage({
-  name: 'exercise-guidelines'
+  name: 'physical-activity-guidelines'
 })
 @Component({
-  templateUrl: 'exercise-guidelines.html',
+  templateUrl: 'physical-activity-guidelines.html',
 })
-export class ExerciseGuidelinesPage {
+export class PhysicalActivityGuidelinesPage {
   public constitution: Constitution;
   constructor(private navCtrl: NavController, private params: NavParams) {
     this.constitution = <Constitution>this.params.get('constitution') || new Constitution();
     if (!this.constitution.dominantDosha) {
-      this.navCtrl.setRoot('exercise');
+      this.navCtrl.setRoot('physical-activity');
     }
   }
 

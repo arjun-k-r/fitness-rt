@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 
 import { IonicPageModule } from 'ionic-angular';
+import { MaterialIconsModule } from 'ionic2-material-icons';
 
 import { ActivityListPage } from './activity-list';
-import { ActivityFilterPipeModule, LimitPipeModule, SortByPipeModule } from '../../pipes';
+import { ActivityFilterPipeModule, LimitPipeModule, SearchPipeModule, SortByPipeModule } from '../../pipes';
 import { PhysicalActivityProviderModule } from '../../providers';
 
 @NgModule({
@@ -15,6 +16,8 @@ import { PhysicalActivityProviderModule } from '../../providers';
     PhysicalActivityProviderModule,
     ActivityFilterPipeModule,
     LimitPipeModule,
+    MaterialIconsModule,
+    SearchPipeModule,
     SortByPipeModule
   ],
 })

@@ -1,25 +1,73 @@
+// Angular
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-/**
- * Generated class for the IntervalEditPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+// Rxjs
+import { Subscription } from 'rxjs/Subscription';
 
-@IonicPage()
+// Ionic
+import {
+  IonicPage,
+  Modal,
+  ModalController,
+  NavParams,
+  ViewController
+} from 'ionic-angular';
+
+// Models
+import { Interval } from '../../models';
+
+@IonicPage({
+  name: 'interval-edit'
+})
 @Component({
-  selector: 'page-interval-edit',
   templateUrl: 'interval-edit.html',
 })
 export class IntervalEditPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private intervalFormSubscription: Subscription;
+  public interval: Interval;
+  public intervalForm: FormGroup;
+  constructor(
+    private modalCtrl: ModalController,
+    private params: NavParams,
+    private viewCtrl: ViewController
+  ) {
+    this.interval = <Interval>this.params.get('interval');
+    this.intervalForm = new FormGroup({
+      duration: new FormControl(this.interval.duration, [Validators.required]),
+      name: new FormControl(this.interval.name, [Validators.required]),
+      reps: new FormControl(this.interval.reps, [Validators.required]),
+      sets: new FormControl(this.interval.sets, [Validators.required])
+    });
+    this.watchFormChanges();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad IntervalEditPage');
+  private watchFormChanges(): void {
+    this.intervalFormSubscription = this.intervalForm.valueChanges.subscribe(
+      (c: {
+        duration: string,
+        name: string,
+        reps: string,
+        sets: string
+      }) => {
+        if (this.intervalForm.valid) {
+          this.interval = Object.assign({}, this.interval, {
+            duration: +c.duration,
+            name: +c.name,
+            reps: +c.reps,
+            sets: +c.sets
+          });
+        }
+      },
+      (err: Error) => console.error(`Error fetching form changes: ${err}`)
+    )
   }
 
+  public cancel(): void {
+    this.viewCtrl.dismiss();
+  }
+
+  public done(): void {
+    this.viewCtrl.dismiss(this.interval);
+  }
 }

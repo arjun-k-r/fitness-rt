@@ -47,10 +47,23 @@
       <ion-searchbar debounce="2000" (ionCancel)="clearSearchWorkouts($event)" [(ngModel)]="workoutSearchQuery" placeholder="Search workouts">
       </ion-searchbar>
       <ion-list>
-        <ion-item *ngFor="let workout of workouts | search: workoutSearchQuery | limit: workoutLimit">
-          <ion-label text-wrap>{{ workout.name }}</ion-label>
-          <ion-checkbox #checkBox (click)="showOptions(workout, checkBox)"></ion-checkbox>
-        </ion-item>
+        <ion-item-sliding *ngFor="let workout of workouts | search: workoutSearchQuery | limit: workoutLimit">
+          <ion-item>
+            <ion-label text-wrap>{{ workout.name }}</ion-label>
+            <ion-checkbox #checkBox (click)="selectWorkout(workout, checkBox)"></ion-checkbox>
+            <ion-note item-right>
+              Slide left
+            </ion-note>
+          </ion-item>
+          <ion-item-options side="right">
+            <button (click)="editWorkout(workout)" clear icon-only ion-button>
+              <ion-icon name="create"></ion-icon>
+            </button>
+            <button (click)="removeWorkout(workout)" clear icon-only ion-button>
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
       </ion-list>
       <div *ngIf="workouts?.length === 0" class="no-elements">
         <ion-icon class="no-elements__icon" md-name="fitness_center"></ion-icon>

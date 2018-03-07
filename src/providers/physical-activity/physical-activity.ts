@@ -43,7 +43,11 @@ export class PhysicalActivityProvider {
   }
 
   public calculateWorkoutDuration(workout: Workout): number {
-    return workout.intervals.reduce((acc, curr: Interval) => acc += (curr.duration + curr.rest) * curr.sets, 0) / 60;
+    return Math.round(workout.intervals.reduce((acc, curr: Interval) => acc += (curr.duration + curr.rest) * curr.sets, 0) / 60);
+  }
+
+  public calculateWorkoutMet(workout: Workout, weight: number): number {
+    return workout.energyBurn / (weight * workout.duration / 60);
   }
 
   public changeTrendDays(days: number): void {
@@ -94,7 +98,7 @@ export class PhysicalActivityProvider {
       }).catch((err: FirebaseError) => reject(err));
     });
   }
-  
+
   public saveWorkout(authId: string, workout: Workout): Promise<{}> {
     return new Promise((resolve, reject) => {
       if ('$key' in workout) {

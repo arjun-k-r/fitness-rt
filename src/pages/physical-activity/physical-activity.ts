@@ -22,7 +22,7 @@ import { FirebaseError, User } from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Activity, ILineChartColors, ILineChartEntry, PhysicalActivityLog, UserProfile } from '../../models';
+import { Activity, ILineChartColors, ILineChartEntry, PhysicalActivityLog, UserProfile, Workout } from '../../models';
 
 // Providers
 import { PhysicalActivityProvider, NotificationProvider, UserProfileProvider } from '../../providers';
@@ -132,16 +132,18 @@ export class PhysicalActivityPage {
 
   private updatePhysicalActivityLog(): void {
     this.changeMade();
-    this.physicalActivityLog.duration = this.physicalActivityLog.activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.duration, 0);
-    this.physicalActivityLog.energyBurn = this.physicalActivityLog.activities.reduce((acc: number, currActivity: Activity) => acc += currActivity.energyBurn, 0);
+    this.physicalActivityLog.duration = this.physicalActivityLog.activities.reduce((acc: number, currActivity: Activity | Workout) => acc += currActivity.duration, 0);
+    this.physicalActivityLog.energyBurn = this.physicalActivityLog.activities.reduce((acc: number, currActivity: Activity | Workout) => acc += currActivity.energyBurn, 0);
   }
 
   public addActivity(): void {
-    const activityListModal: Modal = this.modalCtrl.create('activity-list', { authId: this.authId });
+    const activityListModal: Modal = this.modalCtrl.create('activity-list', { authId: this.authId, userWeight: this.userProfile.measurements.weight });
     activityListModal.present();
     activityListModal.onDidDismiss((activities: Activity[]) => {
       if (!!activities && !!activities.length) {
-        activities.forEach((a: Activity) => a.energyBurn = this.physicalActivityPvd.calculateActivityEnergyBurn(a, this.userProfile.measurements.weight))
+        activities.forEach((a: Activity) => {
+          a.energyBurn = this.physicalActivityPvd.calculateActivityEnergyBurn(a, this.userProfile.measurements.weight)
+        })
         this.physicalActivityLog.activities = [...this.physicalActivityLog.activities, ...activities];
         this.updatePhysicalActivityLog();
       }

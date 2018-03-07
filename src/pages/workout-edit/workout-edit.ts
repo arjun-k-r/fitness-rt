@@ -31,6 +31,7 @@ import { NotificationProvider, PhysicalActivityProvider } from '../../providers'
 })
 export class WorkoutEditPage {
   private authId: string;
+  private userWeight: number;
   private workoutFormSubscription: Subscription;
   public unsavedChanges: boolean = false;
   public workout: Workout;
@@ -43,6 +44,7 @@ export class WorkoutEditPage {
     private viewCtrl: ViewController
   ) {
     this.authId = this.params.get('authId');
+    this.userWeight = <number>this.params.get('userWeight')
     this.workout = <Workout>this.params.get('workout');
     this.workoutForm = new FormGroup({
       energyBurn: new FormControl(this.workout.energyBurn, [Validators.required]),
@@ -101,6 +103,7 @@ export class WorkoutEditPage {
       if (!!data) {
         this.unsavedChanges = true;
         this.workout.intervals = [...this.workout.intervals.slice(0, idx), data, ...this.workout.intervals.slice(idx + 1)];
+        this.workout.duration = this.physicalActivityPvd.calculateWorkoutDuration(this.workout);
       }
     });
   }
@@ -122,6 +125,7 @@ export class WorkoutEditPage {
   }
 
   public saveWorkout(): void {
+    this.workout.met = this.physicalActivityPvd.calculateWorkoutMet(this.workout, this.userWeight);
     this.physicalActivityPvd.saveWorkout(this.authId, this.workout)
       .then(() => {
         this.notifyPvd.showInfo('Workout saved successfully');

@@ -58,6 +58,7 @@ export class Workout {
         public duration: number,
         public energyBurn: number,
         public intervals: Interval[],
+        public met: number,
         public name: string
     ) { }
 }

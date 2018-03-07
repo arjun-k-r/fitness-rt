@@ -32,6 +32,7 @@ import { PhysicalActivityProvider, NotificationProvider } from '../../providers'
 export class ActivityListPage {
   private activitySubscription: Subscription;
   private authId: string;
+  private userWeight: number;
   private workoutSubscription: Subscription;
   public activityLimit: number = 50;
   public activityCategories: ActivityCategory[];
@@ -50,11 +51,12 @@ export class ActivityListPage {
     private viewCtrl: ViewController
   ) {
     this.authId = this.params.get('authId');
+    this.userWeight = <number>this.params.get('userWeight')
   }
 
   public addWorkout(): void {
-    const newWorkout: Workout = new Workout(0, 0, [], '');
-    this.modalCtrl.create('workout-edit', { authId: this.authId, workout: newWorkout, id: newWorkout.name }).present();
+    const newWorkout: Workout = new Workout(0, 0, [], 0, '');
+    this.modalCtrl.create('workout-edit', { authId: this.authId, workout: newWorkout, id: newWorkout.name, userWeight: this.userWeight }).present();
   }
 
   public clearSearchActivities(evenet: string): void {
@@ -66,7 +68,7 @@ export class ActivityListPage {
   }
 
   public editWorkout(workout: Workout): void {
-    this.modalCtrl.create('workout-edit', { authId: this.authId, workout, id: workout.name }).present();
+    this.modalCtrl.create('workout-edit', { authId: this.authId, workout, id: workout.name, userWeight: this.userWeight }).present();
   }
 
   public done(): void {
@@ -94,6 +96,18 @@ export class ActivityListPage {
   public loadMoreWorkouts(ev: InfiniteScroll) {
     this.workoutLimit += 50;
     setTimeout(() => ev.complete(), 1000);
+  }
+
+  public removeWorkout(workout: Workout): void {
+    this.physicalActivityPvd.removeWorkout(this.authId, workout)
+      .then(() => {
+        this.notifyPvd.showInfo('Workout removed successfully');
+        this.viewCtrl.dismiss();
+      })
+      .catch((err: FirebaseError) => {
+        this.notifyPvd.showError(err.message);
+        this.viewCtrl.dismiss();
+      });
   }
 
   public selectActivity(activity: Activity, activityCategory: ActivityCategory, checkBox: HTMLInputElement): void {

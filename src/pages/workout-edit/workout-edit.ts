@@ -59,11 +59,17 @@ export class WorkoutEditPage {
       }) => {
         if (this.workoutForm.valid) {
           this.unsavedChanges = true;
+          let key: string;
+          if ('$key' in this.workout) {
+            key = this.workout['$key'];
+          }
           this.workout = Object.assign({}, this.workout, {
-            '$key': this.workout['$key'],
             energyBurn: +c.energyBurn,
             name: c.name
           });
+          if (key) {
+            this.workout['$key'];
+          }
         }
       },
       (err: Error) => console.error(`Error fetching form changes: ${err}`)
@@ -71,13 +77,14 @@ export class WorkoutEditPage {
   }
 
   public addInterval(): void {
-    const newInterval: Interval = new Interval(0, '', 0, 0);
+    const newInterval: Interval = new Interval(0, '', 0, 0, 0, 0);
     const modal: Modal = this.modalCtrl.create('interval-edit', { interval: newInterval, id: newInterval.name });
     modal.present();
-    modal.onWillDismiss((data: Interval) => {
+    modal.onDidDismiss((data: Interval) => {
       if (!!data) {
         this.unsavedChanges = true;
         this.workout.intervals = [...this.workout.intervals, data];
+        this.workout.duration = this.physicalActivityPvd.calculateWorkoutDuration(this.workout);
       }
     });
   }
@@ -90,7 +97,7 @@ export class WorkoutEditPage {
     const interval: Interval = this.workout.intervals[idx];
     const modal: Modal = this.modalCtrl.create('interval-edit', { interval, id: interval.name });
     modal.present();
-    modal.onWillDismiss((data: Interval) => {
+    modal.onDidDismiss((data: Interval) => {
       if (!!data) {
         this.unsavedChanges = true;
         this.workout.intervals = [...this.workout.intervals.slice(0, idx), data, ...this.workout.intervals.slice(idx + 1)];
@@ -115,7 +122,6 @@ export class WorkoutEditPage {
   }
 
   public saveWorkout(): void {
-    this.workout.duration = this.workout.intervals.reduce((acc, curr: Interval) => acc += curr.duration * curr.sets, 0);
     this.physicalActivityPvd.saveWorkout(this.authId, this.workout)
       .then(() => {
         this.notifyPvd.showInfo('Workout saved successfully');

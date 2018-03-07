@@ -36,7 +36,7 @@
       <button (click)="editInterval(i)" ion-item>
         <ion-icon color="primary" item-start name="stopwatch"></ion-icon>
         <h2>{{ interval.name }}</h2>
-        <p>{{ interval.duration }}</p>
+        <p>{{ interval.duration }} seconds</p>
         <ion-note item-right>
           Slide left
         </ion-note>
@@ -47,6 +47,10 @@
         </button>
       </ion-item-options>
     </ion-item-sliding>
+    <ion-item>
+      <h2 text-wrap>Total duration</h2>
+      <p item-content>{{ workout.duration }} minutes</p>
+    </ion-item>
   </ion-list>
   <ion-fab bottom right>
     <button (click)="addInterval()" color="primary" ion-fab>

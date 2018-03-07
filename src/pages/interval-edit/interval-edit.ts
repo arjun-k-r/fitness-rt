@@ -37,7 +37,9 @@ export class IntervalEditPage {
       duration: new FormControl(this.interval.duration, [Validators.required]),
       name: new FormControl(this.interval.name, [Validators.required]),
       reps: new FormControl(this.interval.reps, [Validators.required]),
-      sets: new FormControl(this.interval.sets, [Validators.required])
+      rest: new FormControl(this.interval.rest, [Validators.required]),
+      sets: new FormControl(this.interval.sets, [Validators.required]),
+      weight: new FormControl(this.interval.weight, [Validators.required])
     });
     this.watchFormChanges();
   }
@@ -48,14 +50,18 @@ export class IntervalEditPage {
         duration: string,
         name: string,
         reps: string,
-        sets: string
+        rest: string,
+        sets: string,
+        weight: string
       }) => {
         if (this.intervalForm.valid) {
           this.interval = Object.assign({}, this.interval, {
             duration: +c.duration,
-            name: +c.name,
+            name: c.name,
             reps: +c.reps,
-            sets: +c.sets
+            rest: +c.rest,
+            sets: +c.sets,
+            weight: +c.weight
           });
         }
       },

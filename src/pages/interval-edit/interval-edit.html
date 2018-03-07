@@ -21,16 +21,24 @@
         <ion-input formControlName="name" required type="text"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating text-wrap>Duration (min/set)*</ion-label>
+        <ion-label floating text-wrap>Duration (sec/set)*</ion-label>
         <ion-input formControlName="duration" required type="number"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating text-wrap>Repetitions*</ion-label>
+        <ion-label floating text-wrap>Repetitions (per set)*</ion-label>
         <ion-input formControlName="reps" required type="number"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating text-wrap>Sets (rounds)*</ion-label>
+        <ion-label floating text-wrap>Rest (sec)*</ion-label>
+        <ion-input formControlName="rest" required type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating text-wrap>Sets*</ion-label>
         <ion-input formControlName="sets" required type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating text-wrap>Weight (kg/set)*</ion-label>
+        <ion-input formControlName="weight" required type="number"></ion-input>
       </ion-item>
     </ion-list>
   </form>

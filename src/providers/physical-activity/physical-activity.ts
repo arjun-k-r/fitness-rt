@@ -13,7 +13,7 @@ import { FirebaseError } from 'firebase/app';
 import * as moment from 'moment';
 
 // Models
-import { Activity, ActivityCategory, IMuscleGroup, PhysicalActivityLog, Workout } from '../../models';
+import { Activity, ActivityCategory, IMuscleGroup, Interval, PhysicalActivityLog, Workout } from '../../models';
 
 const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
 
@@ -40,6 +40,10 @@ export class PhysicalActivityProvider {
 
   public calculateActivityEnergyBurn(activity: Activity, weight: number): number {
     return Math.round(activity.met * weight * activity.duration / 60);
+  }
+
+  public calculateWorkoutDuration(workout: Workout): number {
+    return workout.intervals.reduce((acc, curr: Interval) => acc += (curr.duration + curr.rest) * curr.sets, 0) / 60;
   }
 
   public changeTrendDays(days: number): void {

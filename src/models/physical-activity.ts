@@ -30,7 +30,9 @@ export class Interval {
         public duration: number,
         public name: string,
         public reps: number,
-        public sets: number
+        public rest: number,
+        public sets: number,
+        public weight: number
     ) { }
 }
 

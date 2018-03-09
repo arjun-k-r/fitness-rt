@@ -1301,47 +1301,65 @@
         "image": "",
         "name": "Close-grip lat pull-downs",
         "instructions": [
-          ""
+          "Sit and face the machine with knees positioned under the pads",
+          "Inhale and bring the handle to the sternum while expanding the chest and leaning slightly back with the torso",
+          "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
-          ""
+          "Teres major",
+          "Latissimus dorsi",
+          "Brachialis",
+          "Brachioardialis",
+          "Biceps brachii"
         ],
-        "comments": [],
-        "warnings": [
-          ""
-        ]
+        "comments": [
+          "This exercise develops the latissimus dorsi and teres major",
+          "When the shoulder blades come together, the trapezius and the posterior deltoid contract",
+          "As with every pulling exercise, the biceps brachii and brachialis contract, and when the palms face each other, the brachioradialis comes into play"
+        ],
+        "warnings": []
       },
       {
         "image": "",
         "name": "Straight-arm lat pull-downs",
         "instructions": [
-          ""
+          "Stand and face the machine with feet slightly apart; grip the bar with an overhand grip, arms extended and shoulder-width apart; fix the back and contract the abdominal core",
+          "Inhale and bring the bar to the thighs, keeping the arms extended (elbows can be slightly bent)",
+          "Exhale at the end of the movement"
         ],
-        "variations": [
-          ""
-        ],
+        "variations": [],
         "muscles": [
-          ""
+          "Teres major",
+          "Latissimus dorsi",
+          "Triceps brachii, long head"
         ],
-        "comments": [],
-        "warnings": [
-          ""
-        ]
+        "comments": [
+          "This exercise, which works the latissimus dorsi, strengthens the teres major and the long head of the triceps, which stabilizes the arm-trunk hinge",
+          "Many swim coaches use this exercise to develop a powerful crawl stroke"
+        ],
+        "warnings": []
       },
       {
         "image": "",
         "name": "Seated rows",
         "instructions": [
-          ""
+          "Sit facing the machine, feet resting on the foot pad and the torso bent forward",
+          "Inhale and bring the handle to the base of the sternum by straightening the back and pulling the elbows back as far as possible",
+          "Exhale at the end of the movement and return smoothly to the initial position"
         ],
         "variations": [
           ""
         ],
         "muscles": [
-          ""
+          "Teres major",
+          "Latissimus dorsi",
+          "Rhomboid major",
+          "Trapezius",
+          "Posterior deltoid",
+          "Trapezius",
+          "Erector spinae, under the thoracolumbar fascia",
+          "Brachioardialis"
         ],
         "comments": [],
         "warnings": [

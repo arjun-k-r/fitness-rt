@@ -207,13 +207,19 @@ export class PhysicalActivityPage {
     if (this.physicalActivityLogSubscription) {
       this.physicalActivityLogSubscription.unsubscribe();
     }
+    this.physicalActivityLog = new PhysicalActivityLog(
+      [],
+      this.physicalActivityLogDate,
+      0,
+      0,
+      ''
+    );
     this.physicalActivityLogSubscription = this.physicalActivityPvd.getPhysicalActivityLog$(this.authId, this.physicalActivityLogDate).subscribe((e: PhysicalActivityLog) => {
       if (!!e && e['$value'] !== null) {
         this.physicalActivityLog = Object.assign({}, e);
         this.physicalActivityLog.activities = this.physicalActivityLog.activities || [];
         this.notifyPvd.closeLoading();
       }
-      this.physicalActivityLog.date = this.physicalActivityLogDate;
     }, (err: FirebaseError) => {
       this.notifyPvd.closeLoading();
       this.notifyPvd.showError(err.message);

@@ -123,6 +123,12 @@ export class DietPage {
     if (this.dietSubscription) {
       this.dietSubscription.unsubscribe();
     }
+    this.diet = new Diet(
+      this.dietDate,
+      [],
+      new NutritionalValues(),
+      new NutritionalValues()
+    );
     this.dietSubscription = this.dietPvd.getDiet$(this.authId, this.dietDate).subscribe((s: Diet) => {
       if (!!s && s['$value'] !== null) {
         this.diet = Object.assign({}, s);
@@ -130,7 +136,6 @@ export class DietPage {
         this.nutrients = Object.keys(this.diet.nourishment);
         this.notifyPvd.closeLoading();
       }
-      this.diet.date = this.dietDate;
       this.dietPvd.calculateRequirement(this.authId, this.userProfile.age, this.userProfile.fitness.bmr, this.userProfile.constitution, this.userProfile.gender, this.userProfile.isLactating, this.userProfile.isPregnant, this.userProfile.measurements.weight, this.diet.date)
         .then((r: NutritionalValues) => {
           this.diet.nourishmentAchieved = this.dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);

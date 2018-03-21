@@ -45,7 +45,8 @@ export class DietPage {
   public chartOpts: any = { responsive: true };
   public diet: Diet;
   public dietDate: string = CURRENT_DAY;
-  public maxDateSelection: string = CURRENT_DAY;
+  public maxDateSelection: string = moment().add(1, 'years').format('YYYY-MM-DD');
+  public minDateSelection: string = moment().subtract(1, 'years').format('YYYY-MM-DD');
   public nutrients: string[];
   public pageSegment: string = 'today';
   public trendDays: number = 7;

@@ -33,7 +33,7 @@
         <ion-item>
           <ion-icon color="primary" item-start name="calendar"></ion-icon>
           <ion-label>Date</ion-label>
-          <ion-datetime displayFormat="YYYY-MM-DD" (ionChange)="getMindBalance()" [max]="maxDateSelection" min="2018" [(ngModel)]="mindBalanceDate"
+          <ion-datetime displayFormat="YYYY-MM-DD" (ionChange)="getMindBalance()" [max]="maxDateSelection" [min]="minDateSelection" [(ngModel)]="mindBalanceDate"
             pickerFormat="YYYY-MM-DD"></ion-datetime>
         </ion-item>
         <ion-item>

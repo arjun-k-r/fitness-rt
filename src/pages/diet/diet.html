@@ -34,7 +34,7 @@
       <ion-list no-lines>
         <ion-item>
           <ion-label>Date</ion-label>
-          <ion-datetime displayFormat="YYYY-MM-DD" (ionChange)="getDiet()" [max]="maxDateSelection" min="2018" [(ngModel)]="dietDate"
+          <ion-datetime displayFormat="YYYY-MM-DD" (ionChange)="getDiet()" [max]="maxDateSelection" [min]="minDateSelection" [(ngModel)]="dietDate"
             pickerFormat="YYYY-MM-DD"></ion-datetime>
         </ion-item>
         <ion-list-header>Meals</ion-list-header>

@@ -50,7 +50,8 @@ export class PhysicalActivityPage {
   public chartOpts: any = { responsive: true };
   public physicalActivityLog: PhysicalActivityLog;
   public physicalActivityLogDate: string = CURRENT_DAY;
-  public maxDateSelection: string = CURRENT_DAY;
+  public maxDateSelection: string = moment().add(1, 'years').format('YYYY-MM-DD');
+  public minDateSelection: string = moment().subtract(1, 'years').format('YYYY-MM-DD');
   public pageSegment: string = 'today';
   public trendDays: number = 7;
   public unsavedChanges: boolean = false;

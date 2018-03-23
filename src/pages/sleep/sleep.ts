@@ -25,6 +25,7 @@ import { ILineChartColors, ILineChartEntry, Sleep, UserProfile } from '../../mod
 import { NotificationProvider, SleepProvider, UserProfileProvider } from '../../providers';
 
 const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
+
 @IonicPage({
   name: 'sleep'
 })
@@ -43,7 +44,8 @@ export class SleepPage {
   public chartLabels: string[] = [];
   public chartOpts: any = { responsive: true };
   public idealSleep: string;
-  public maxDateSelection: string = CURRENT_DAY;
+  public maxDateSelection: string = moment().add(1, 'years').format('YYYY-MM-DD');
+  public minDateSelection: string = moment().subtract(1, 'years').format('YYYY-MM-DD');
   public pageSegment: string = 'today';
   public sleep: Sleep;
   public sleepDate: string = CURRENT_DAY;

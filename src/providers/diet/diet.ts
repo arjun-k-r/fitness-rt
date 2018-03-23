@@ -465,25 +465,25 @@ export class DietProvider {
   private calculateFatRequirement(energyConsumption: number, intensePhysicalActivity: boolean, constitution: string): number {
     switch (constitution) {
       case 'Vata-Pitta-Kapha':
-        return (intensePhysicalActivity ? 0.18 : 0.33) * energyConsumption / 4;
+        return (intensePhysicalActivity ? 0.18 : 0.33) * energyConsumption / 9;
 
       case 'Vata-Pitta':
-        return (intensePhysicalActivity ? 0.15 : 0.3) * energyConsumption / 4;
+        return (intensePhysicalActivity ? 0.15 : 0.3) * energyConsumption / 9;
 
       case 'Pitta-Kapha':
-        return (intensePhysicalActivity ? 0.22 : 0.37) * energyConsumption / 4;
+        return (intensePhysicalActivity ? 0.22 : 0.37) * energyConsumption / 9;
 
       case 'Vata-Kapha':
-        return (intensePhysicalActivity ? 0.17 : 0.32) * energyConsumption / 4;
+        return (intensePhysicalActivity ? 0.17 : 0.32) * energyConsumption / 9;
 
       case 'Kapha':
-        return (intensePhysicalActivity ? 0.25 : 0.4) * energyConsumption / 4;
+        return (intensePhysicalActivity ? 0.25 : 0.4) * energyConsumption / 9;
 
       case 'Vata':
-        return (intensePhysicalActivity ? 0.1 : 0.25) * energyConsumption / 4;
+        return (intensePhysicalActivity ? 0.1 : 0.25) * energyConsumption / 9;
 
       case 'Pitta':
-        return (intensePhysicalActivity ? 0.2 : 0.35) * energyConsumption / 4;
+        return (intensePhysicalActivity ? 0.2 : 0.35) * energyConsumption / 9;
     }
   }
 

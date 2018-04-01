@@ -2368,6 +2368,7 @@ export class DietProvider {
     bmr: number,
     constitution: Constitution,
     gender: string,
+    goal: number,
     lactating: boolean,
     pregnant: boolean,
     weight: number,
@@ -2385,7 +2386,7 @@ export class DietProvider {
                 intensePhysicalActivity = true;
               }
             });
-            energyConsumption += e.energyBurn;
+            energyConsumption = (energyConsumption + e.energyBurn) * goal;
           }
           subscription.unsubscribe();
           resolve(new NutritionalValues(

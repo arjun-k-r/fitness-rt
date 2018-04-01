@@ -103,7 +103,7 @@ export class MealDetailsPage {
     this.meal.quantity = this.meal.foods.reduce((quantity: number, food: Food) => quantity + food.quantity, 0);
     this.diet.meals = [...this.diet.meals.slice(0, this.mealIdx), this.meal, ...this.diet.meals.slice(this.mealIdx + 1)];
     this.diet.nourishment = this.dietPvd.calculateNourishment(this.diet.meals);
-    this.dietPvd.calculateRequirement(this.authId, this.userProfile.age, this.userProfile.fitness.bmr, this.userProfile.constitution, this.userProfile.gender, this.userProfile.isLactating, this.userProfile.isPregnant, this.userProfile.measurements.weight, this.diet.date)
+    this.dietPvd.calculateRequirement(this.authId, this.userProfile.age, this.userProfile.fitness.bmr, this.userProfile.constitution, this.userProfile.gender, this.userProfile.fitness.goal, this.userProfile.isLactating, this.userProfile.isPregnant, this.userProfile.measurements.weight, this.diet.date)
       .then((r: NutritionalValues) => {
         this.diet.nourishmentAchieved = this.dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
       })
@@ -223,7 +223,7 @@ export class MealDetailsPage {
     this.notifyPvd.showLoading();
     this.diet.meals = [...this.diet.meals.slice(0, this.mealIdx), ...this.diet.meals.slice(this.mealIdx + 1)];
     this.diet.nourishment = this.dietPvd.calculateNourishment(this.diet.meals);
-    this.dietPvd.calculateRequirement(this.authId, this.userProfile.age, this.userProfile.fitness.bmr, this.userProfile.constitution, this.userProfile.gender, this.userProfile.isLactating, this.userProfile.isPregnant, this.userProfile.measurements.weight, this.diet.date)
+    this.dietPvd.calculateRequirement(this.authId, this.userProfile.age, this.userProfile.fitness.bmr, this.userProfile.constitution, this.userProfile.gender, this.userProfile.fitness.goal, this.userProfile.isLactating, this.userProfile.isPregnant, this.userProfile.measurements.weight, this.diet.date)
       .then((r: NutritionalValues) => {
         this.diet.nourishmentAchieved = this.dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
         this.dietPvd.saveDiet(this.authId, this.diet, this.trends)
@@ -251,7 +251,7 @@ export class MealDetailsPage {
     if (!this.meal.key) {
       delete this.meal.key;
     }
-    this.dietPvd.calculateRequirement(this.authId, this.userProfile.age, this.userProfile.fitness.bmr, this.userProfile.constitution, this.userProfile.gender, this.userProfile.isLactating, this.userProfile.isPregnant, this.userProfile.measurements.weight, this.diet.date)
+    this.dietPvd.calculateRequirement(this.authId, this.userProfile.age, this.userProfile.fitness.bmr, this.userProfile.constitution, this.userProfile.gender, this.userProfile.fitness.goal, this.userProfile.isLactating, this.userProfile.isPregnant, this.userProfile.measurements.weight, this.diet.date)
       .then((r: NutritionalValues) => {
         this.diet.nourishmentAchieved = this.dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
         this.diet.meals[this.mealIdx] = this.meal;

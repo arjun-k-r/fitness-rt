@@ -18,6 +18,7 @@ export class Fitness {
       public bmr: number,
       public bodyFatPercentage: BodyFat,
       public bodyShape: string,
+      public goal: number,
       public heartRate: HeartRate,
       public idealWaist: string,
       public idealWeight: string,

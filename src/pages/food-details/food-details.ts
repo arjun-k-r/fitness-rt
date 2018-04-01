@@ -101,7 +101,7 @@ export class FoodDetailsPage {
 
   private calculateAchievedNourishment(): void {
     this.userPvd.getUserProfile$(this.authId).subscribe((u: UserProfile) => {
-      this.dietPvd.calculateRequirement(this.authId, u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight)
+      this.dietPvd.calculateRequirement(this.authId, u.age, u.fitness.bmr, u.constitution, u.gender, u.fitness.goal, u.isLactating, u.isPregnant, u.measurements.weight)
         .then((r: NutritionalValues) => {
           this.foodNourishmentAchieved = this.dietPvd.calculateNourishmentFromRequirement(this.food.nourishment, r);
         })

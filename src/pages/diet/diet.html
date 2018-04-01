@@ -1,11 +1,15 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button
+            menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Diet</ion-title>
     <ion-buttons end>
-      <button (click)="viewPageInfo()" icon ion-button padding-right>
+      <button (click)="viewPageInfo()"
+              icon
+              ion-button
+              padding-right>
         <ion-icon name="information-circle"></ion-icon>
       </button>
     </ion-buttons>
@@ -24,8 +28,12 @@
 
 
 <ion-content>
-  <ion-fab bottom *ngIf="pageSegment === 'today'" right>
-    <button (click)="addMeal()" color="primary" ion-fab>
+  <ion-fab bottom
+           *ngIf="pageSegment === 'today'"
+           right>
+    <button (click)="addMeal()"
+            color="primary"
+            ion-fab>
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
@@ -34,12 +42,21 @@
       <ion-list no-lines>
         <ion-item>
           <ion-label>Date</ion-label>
-          <ion-datetime displayFormat="YYYY-MM-DD" (ionChange)="getDiet()" [max]="maxDateSelection" [min]="minDateSelection" [(ngModel)]="dietDate"
-            pickerFormat="YYYY-MM-DD"></ion-datetime>
+          <ion-datetime displayFormat="YYYY-MM-DD"
+                        (ionChange)="getDiet()"
+                        [max]="maxDateSelection"
+                        [min]="minDateSelection"
+                        [(ngModel)]="dietDate"
+                        pickerFormat="YYYY-MM-DD"></ion-datetime>
         </ion-item>
         <ion-list-header>Meals</ion-list-header>
-        <button (click)="editMeal(i)" detail-push ion-item *ngFor="let meal of diet.meals; let i = index">
-          <ion-icon color="primary" item-start name="restaurant"></ion-icon>
+        <button (click)="editMeal(i)"
+                detail-push
+                ion-item
+                *ngFor="let meal of diet.meals; let i = index">
+          <ion-icon color="primary"
+                    item-start
+                    name="restaurant"></ion-icon>
           <h2>{{ meal.hour }}</h2>
           <ion-note item-right>
             <ion-icon name="arrow-forward"></ion-icon>
@@ -350,18 +367,28 @@
         <ion-list-header>Chart settings</ion-list-header>
         <ion-item>
           <ion-label fixed>Trend days</ion-label>
-          <ion-input (ionChange)="changeTrendDays()" [(ngModel)]="trendDays" type="number"></ion-input>
+          <ion-input (ionChange)="changeTrendDays()"
+                     [(ngModel)]="trendDays"
+                     type="number"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Nutrition data</ion-label>
-          <ion-select [(ngModel)]="chartDataSelection" (ionChange)="changeChartData()">
-            <ion-option *ngFor="let nutrient of nutrients" [value]="nutrient">{{diet?.nourishment[nutrient].name}}</ion-option>
+          <ion-select [(ngModel)]="chartDataSelection"
+                      (ionChange)="changeChartData()">
+            <ion-option *ngFor="let nutrient of nutrients"
+                        [value]="nutrient">{{diet?.nourishment[nutrient].name}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-list-header>Chart</ion-list-header>
       </ion-list>
-      <canvas baseChart class="chart" [chartType]="'line'" [colors]="chartColors" [datasets]="chartData" [labels]="chartLabels"
-        [legend]="true" [options]="chartOpts">
+      <canvas baseChart
+              class="chart"
+              [chartType]="'line'"
+              [colors]="chartColors"
+              [datasets]="chartData"
+              [labels]="chartLabels"
+              [legend]="true"
+              [options]="chartOpts">
       </canvas>
     </div>
   </div>

@@ -84,6 +84,7 @@ export class ProfilePage {
       age: new FormControl('', [Validators.required]),
       chestMeasurement: new FormControl('', [Validators.required]),
       gender: new FormControl(null, [Validators.required]),
+      goal: new FormControl(1, [Validators.required]),
       heightMeasurement: new FormControl('', [Validators.required]),
       hipsMeasurement: new FormControl('', [Validators.required]),
       isLactating: new FormControl(''),
@@ -96,7 +97,7 @@ export class ProfilePage {
     this.userProfile = new UserProfile(
       0,
       new Constitution(),
-      new Fitness(0, new BodyFat('', 0, 0, 0, 0), '', new HeartRate(0, 0, 0), '', ''),
+      new Fitness(0, new BodyFat('', 0, 0, 0, 0), '', 1, new HeartRate(0, 0, 0), '', ''),
       '',
       false,
       false,
@@ -112,7 +113,8 @@ export class ProfilePage {
     const idealWaist: string = this.fitPvd.calculateIdealWaist(+age, gender, +measurements.height);
     const idealWeight: string = this.fitPvd.calculateIdealWeight(+age, gender, +measurements.height);
     const heartRate: HeartRate = this.fitPvd.calculateHeartRate(+age, +measurements.restingHeartRate);
-    this.userProfile.fitness = new Fitness(bmr, bodyFat, bodyShape, heartRate, idealWaist, idealWeight);
+    console.log(this.userProfile.fitness.goal)
+    this.userProfile.fitness = new Fitness(bmr, bodyFat, bodyShape, this.userProfile.fitness.goal, heartRate, idealWaist, idealWeight);
   }
 
   private chooseImage(): void {
@@ -133,6 +135,7 @@ export class ProfilePage {
         this.profileForm.controls['age'].patchValue(this.userProfile.age);
         this.profileForm.controls['chestMeasurement'].patchValue(this.userProfile.measurements.chest);
         this.profileForm.controls['gender'].patchValue(this.userProfile.gender);
+        this.profileForm.controls['goal'].patchValue(this.userProfile.fitness.goal);
         this.profileForm.controls['heightMeasurement'].patchValue(this.userProfile.measurements.height);
         this.profileForm.controls['hipsMeasurement'].patchValue(this.userProfile.measurements.hips);
         this.profileForm.controls['isLactating'].patchValue(this.userProfile.isLactating);
@@ -181,6 +184,7 @@ export class ProfilePage {
         age: number,
         chestMeasurement: number,
         gender: number,
+        goal: number,
         heightMeasurement: number,
         hipsMeasurement: number,
         isLactating: number,
@@ -298,6 +302,10 @@ export class ProfilePage {
 
   public changeTrendDays(): void {
     this.userPvd.changeTrendDays(+this.trendDays || 1);
+  }
+
+  public onChange(): void {
+    this.unsavedChanges = true;
   }
 
   public processWebImage(event): void {

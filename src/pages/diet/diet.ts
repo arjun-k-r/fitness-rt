@@ -32,12 +32,6 @@ const CURRENT_DAY: string = moment().format('YYYY-MM-DD');
   templateUrl: 'diet.html',
 })
 export class DietPage {
-  private authId: string;
-  private authSubscription: Subscription;
-  private dietSubscription: Subscription;
-  private trends: Diet[] = [];
-  private trendSubscription: Subscription;
-  private userProfile: UserProfile;
   public chartColors: ILineChartColors[] = [];
   public chartData: ILineChartEntry[] = [];
   public chartDataSelection: string = 'energy';
@@ -45,11 +39,18 @@ export class DietPage {
   public chartOpts: any = { responsive: true };
   public diet: Diet;
   public dietDate: string = CURRENT_DAY;
+  public goal: number = 1;
   public maxDateSelection: string = moment().add(1, 'years').format('YYYY-MM-DD');
   public minDateSelection: string = moment().subtract(1, 'years').format('YYYY-MM-DD');
   public nutrients: string[];
   public pageSegment: string = 'today';
   public trendDays: number = 7;
+  private authId: string;
+  private authSubscription: Subscription;
+  private dietSubscription: Subscription;
+  private trends: Diet[] = [];
+  private trendSubscription: Subscription;
+  private userProfile: UserProfile;
   constructor(
     private afAuth: AngularFireAuth,
     private dietPvd: DietProvider,
@@ -70,22 +71,6 @@ export class DietPage {
       [],
       new NutritionalValues(),
       new NutritionalValues()
-    );
-  }
-
-  private getTrends(): void {
-    this.trendSubscription = this.dietPvd.getTrends$(this.authId, +this.trendDays).subscribe(
-      (trends: Diet[] = []) => {
-        this.chartLabels = [...trends.map((t: Diet) => t.date)];
-        this.trends = [...trends];
-        this.chartData = [{
-          data: [...this.trends.map((d: Diet) => d.nourishment.energy.value)],
-          label: 'Energy intake'
-        }];
-      },
-      (err: FirebaseError) => {
-        this.notifyPvd.showError(err.message);
-      }
     );
   }
 
@@ -137,13 +122,7 @@ export class DietPage {
         this.nutrients = Object.keys(this.diet.nourishment);
         this.notifyPvd.closeLoading();
       }
-      this.dietPvd.calculateRequirement(this.authId, this.userProfile.age, this.userProfile.fitness.bmr, this.userProfile.constitution, this.userProfile.gender, this.userProfile.isLactating, this.userProfile.isPregnant, this.userProfile.measurements.weight, this.diet.date)
-        .then((r: NutritionalValues) => {
-          this.diet.nourishmentAchieved = this.dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
-        })
-        .catch((err: string) => {
-          this.notifyPvd.showError(err);
-        });
+      this.calculateRequirements();
     }, (err: FirebaseError) => {
       this.notifyPvd.closeLoading();
       this.notifyPvd.showError(err.message);
@@ -186,13 +165,7 @@ export class DietPage {
             if (!!s && s['$value'] !== null) {
               this.diet = Object.assign({}, s);
               this.diet.meals = this.diet.meals || [];
-              this.dietPvd.calculateRequirement(this.authId, u.age, u.fitness.bmr, u.constitution, u.gender, u.isLactating, u.isPregnant, u.measurements.weight, this.diet.date)
-                .then((r: NutritionalValues) => {
-                  this.diet.nourishmentAchieved = this.dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
-                })
-                .catch((err: string) => {
-                  this.notifyPvd.showError(err);
-                });
+              this.calculateRequirements();
               this.nutrients = Object.keys(this.diet.nourishment);
               this.notifyPvd.closeLoading();
             }
@@ -216,6 +189,32 @@ export class DietPage {
     this.authSubscription.unsubscribe();
     this.dietSubscription.unsubscribe();
     this.trendSubscription.unsubscribe();
+  }
+
+  private calculateRequirements(): void {
+    this.dietPvd.calculateRequirement(this.authId, this.userProfile.age, this.userProfile.fitness.bmr, this.userProfile.constitution, this.userProfile.gender, this.userProfile.fitness.goal, this.userProfile.isLactating, this.userProfile.isPregnant, this.userProfile.measurements.weight, this.diet.date)
+      .then((r: NutritionalValues) => {
+        this.diet.nourishmentAchieved = this.dietPvd.calculateNourishmentFromRequirement(this.diet.nourishment, r);
+      })
+      .catch((err: string) => {
+        this.notifyPvd.showError(err);
+      });
+  }
+
+  private getTrends(): void {
+    this.trendSubscription = this.dietPvd.getTrends$(this.authId, +this.trendDays).subscribe(
+      (trends: Diet[] = []) => {
+        this.chartLabels = [...trends.map((t: Diet) => t.date)];
+        this.trends = [...trends];
+        this.chartData = [{
+          data: [...this.trends.map((d: Diet) => d.nourishment.energy.value)],
+          label: 'Energy intake'
+        }];
+      },
+      (err: FirebaseError) => {
+        this.notifyPvd.showError(err.message);
+      }
+    );
   }
 
 }

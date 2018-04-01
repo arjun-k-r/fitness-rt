@@ -113,7 +113,6 @@ export class ProfilePage {
     const idealWaist: string = this.fitPvd.calculateIdealWaist(+age, gender, +measurements.height);
     const idealWeight: string = this.fitPvd.calculateIdealWeight(+age, gender, +measurements.height);
     const heartRate: HeartRate = this.fitPvd.calculateHeartRate(+age, +measurements.restingHeartRate);
-    console.log(this.userProfile.fitness.goal)
     this.userProfile.fitness = new Fitness(bmr, bodyFat, bodyShape, this.userProfile.fitness.goal, heartRate, idealWaist, idealWeight);
   }
 
